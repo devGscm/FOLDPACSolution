@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		553883AF1FBE976100FCE39F /* Product.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 553883AE1FBE976100FCE39F /* Product.storyboard */; };
 		55FA782A1FBDAB6700583A80 /* Material.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA78241FBDAB2B00583A80 /* Material.framework */; };
 		55FA782B1FBDAB6700583A80 /* Material.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA78241FBDAB2B00583A80 /* Material.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		55FA782C1FBDAB6C00583A80 /* Motion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA78261FBDAB4700583A80 /* Motion.framework */; };
@@ -79,6 +80,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		553883AE1FBE976100FCE39F /* Product.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Product.storyboard; sourceTree = "<group>"; };
 		55FA78201FBDAAA800583A80 /* FontAwesome.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FontAwesome.framework; path = Carthage/Build/iOS/FontAwesome.framework; sourceTree = "<group>"; };
 		55FA78241FBDAB2B00583A80 /* Material.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Material.framework; path = Carthage/Build/iOS/Material.framework; sourceTree = "<group>"; };
 		55FA78261FBDAB4700583A80 /* Motion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Motion.framework; path = Carthage/Build/iOS/Motion.framework; sourceTree = "<group>"; };
@@ -145,6 +147,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		553883AD1FBE96CD00FCE39F /* Product */ = {
+			isa = PBXGroup;
+			children = (
+				55FA78511FBDAD1D00583A80 /* ProductMountViewController.swift */,
+				553883AE1FBE976100FCE39F /* Product.storyboard */,
+			);
+			path = Product;
+			sourceTree = "<group>";
+		};
 		55FA78321FBDACC600583A80 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +228,7 @@
 		96E4941E1FB1A78500D1E2C1 /* RRPPClient */ = {
 			isa = PBXGroup;
 			children = (
+				553883AD1FBE96CD00FCE39F /* Product */,
 				55FA78571FBDB06F00583A80 /* Extension */,
 				55FA78411FBDAD0B00583A80 /* Main */,
 				55FA783C1FBDACFC00583A80 /* Images */,
@@ -228,7 +240,6 @@
 				96E494211FB1A78500D1E2C1 /* ViewController.swift */,
 				96E494261FB1A78500D1E2C1 /* Assets.xcassets */,
 				96E494281FB1A78500D1E2C1 /* LaunchScreen.storyboard */,
-				55FA78511FBDAD1D00583A80 /* ProductMountViewController.swift */,
 				96E4942B1FB1A78500D1E2C1 /* Info.plist */,
 			);
 			path = RRPPClient;
@@ -369,6 +380,7 @@
 				55FA78541FBDAD6200583A80 /* Main.storyboard in Resources */,
 				96E4942A1FB1A78500D1E2C1 /* LaunchScreen.storyboard in Resources */,
 				55FA783F1FBDACFD00583A80 /* login.png in Resources */,
+				553883AF1FBE976100FCE39F /* Product.storyboard in Resources */,
 				96E494271FB1A78500D1E2C1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

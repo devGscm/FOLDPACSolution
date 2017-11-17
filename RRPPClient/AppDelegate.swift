@@ -38,11 +38,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	var window: UIWindow?
 	
 	lazy var mClsLeftController: LeftViewController = {
-		return UIStoryboard.viewController(identifier: "LeftViewController") as! LeftViewController
+		return UIStoryboard.viewController(strIdentifier: "LeftViewController") as! LeftViewController
 	}()
 	
 	lazy var mClsRootController: RootViewController = {
-		return UIStoryboard.viewController(identifier: "RootViewController") as! RootViewController
+		return UIStoryboard.viewController(strIdentifier: "RootViewController") as! RootViewController
 	}()
 	
 	

@@ -15,10 +15,12 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	@IBOutlet weak var tvMenu: UITableView!
 	@IBOutlet weak var mIvLogo: UIImageView!
 	
+	@IBOutlet weak var btnLogout: UIButton!
 	var mLstMenuData:Array<MenuItem> = Array<MenuItem>()
 
+	
 	lazy var clsProductMountViewController: ProductMountViewController = {
-		return UIStoryboard.viewController(identifier: "ProductMountViewController") as! ProductMountViewController
+		return UIStoryboard.viewController(strStoryBoardName: "Product", strIdentifier: "ProductMountViewController") as! ProductMountViewController
 	}()
 	
 	open override func viewDidLoad()
@@ -31,6 +33,12 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			print("CORPID:\(strCorpId)")
 		}
 
+		if let strCustType = AppContext.sharedManager.getUserInfo().getCustType()
+		{
+			print("strCustType:\(strCustType)")
+		}
+
+		
 		if("moramcnt" == AppContext.sharedManager.getUserInfo().getCorpId())
 		{
 			print("Moram")
@@ -111,6 +119,15 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			print("is selected");
 		}
 		
+	}
+	
+	@IBAction func onLogoutClicked(_ sender: Any)
+	{
+		print(" LeftViewCOntroller.onLogoutClicked")
+		AppContext.sharedManager.doLogout();
+	
+		//DispatchQueue.main.async {};
+		self.performSegue(withIdentifier: "segLogout", sender: self)
 	}
 	
 	public func closeNavigationDrawer(result: Bool)

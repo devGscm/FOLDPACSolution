@@ -28,8 +28,8 @@ class LoginViewController: UIViewController
 
 		view.sendSubview(toBack: ivBackground)
 		
-		let swAutoLogin = Switch(state: .off, style: .light, size: .small)
-		swAutoLogin.delegate = self
+		//let swAutoLogin = Switch(state: .off, style: .light, size: .small)
+		//swAutoLogin.delegate = self
 		
 		//mClsProgressBar = ProgressDialog(delegate: self)
 		//mClsProgressBar.SetDialogBackground(UIColor.white)
@@ -78,7 +78,7 @@ class LoginViewController: UIViewController
 			return;
 		}
 
-		
+		print("objMe.swAutoLogin.isOn:\(swAutoLogin.isOn)")
 		let objMe = self
 		var acController = UIAlertController(title: "RRPP", message: "3G 및 LTE 네트워크 사용시 가입하신 요금제에 따라 비용이 과금됩니다.", preferredStyle: UIAlertControllerStyle.alert)
 		let aaOkAction = UIAlertAction(title: "확인", style: UIAlertActionStyle.default) { (self) in
