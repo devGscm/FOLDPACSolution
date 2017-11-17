@@ -1,0 +1,18 @@
+{
+  "Mac" : [
+
+  ],
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ],
+  "commitish" : "1.2.5",
+  "iOS" : [
+    {
+      "name" : "Motion",
+      "hash" : "35a3291b8475ee7fdbcd79cf4046a3b1667e3e9acc41cffb7ea4c58d186cd068"
+    }
+  ]
+}
