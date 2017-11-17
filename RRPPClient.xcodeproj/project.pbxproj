@@ -340,7 +340,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 96E494171FB1A78500D1E2C1 /* Build configuration list for PBXProject " RRPPClient" */;
+			buildConfigurationList = 96E494171FB1A78500D1E2C1 /* Build configuration list for PBXProject "RRPPClient" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -589,7 +589,7 @@
 				);
 				INFOPLIST_FILE = RRPPClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.logisall.rrpp.RRPPAppSolution;
+				PRODUCT_BUNDLE_IDENTIFIER = com.logisall.rrpp.RRPPClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -607,7 +607,7 @@
 				);
 				INFOPLIST_FILE = RRPPClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.logisall.rrpp.RRPPAppSolution;
+				PRODUCT_BUNDLE_IDENTIFIER = com.logisall.rrpp.RRPPClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -683,7 +683,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		96E494171FB1A78500D1E2C1 /* Build configuration list for PBXProject " RRPPClient" */ = {
+		96E494171FB1A78500D1E2C1 /* Build configuration list for PBXProject "RRPPClient" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				96E494421FB1A78500D1E2C1 /* Debug */,
