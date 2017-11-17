@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import RRPPAppSolution
+@testable import RRPPClient
 
 class RRPPClientTests: XCTestCase {
     

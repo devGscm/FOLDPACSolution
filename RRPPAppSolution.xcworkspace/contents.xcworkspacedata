@@ -5,6 +5,6 @@
       location = "group:Mosaic.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group: RRPPAppSolution.xcodeproj">
+      location = "group:/Users/moramcnt/Projects/RRPPSolutions/02.Solutions/RRPPSolution/ RRPPClient.xcodeproj">
    </FileRef>
 </Workspace>
