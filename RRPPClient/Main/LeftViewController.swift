@@ -126,7 +126,9 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		print(" LeftViewCOntroller.onLogoutClicked")
 		AppContext.sharedManager.doLogout();
 	
+		
 		//DispatchQueue.main.async {};
+		navigationDrawerController?.closeLeftView()
 		self.performSegue(withIdentifier: "segLogout", sender: self)
 	}
 	

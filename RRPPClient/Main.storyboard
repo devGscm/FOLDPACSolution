@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -131,14 +132,19 @@ CA
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="52V-w5-bUG">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="52V-w5-bUG">
                                                     <rect key="frame" x="15" y="0.0" width="345" height="44"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="52V-w5-bUG" firstAttribute="leading" secondItem="RWh-tk-A5M" secondAttribute="leadingMargin" constant="-1" id="D6E-sa-cOh"/>
+                                                <constraint firstItem="52V-w5-bUG" firstAttribute="top" secondItem="RWh-tk-A5M" secondAttribute="top" id="Joi-u8-GYP"/>
+                                                <constraint firstItem="52V-w5-bUG" firstAttribute="centerY" secondItem="RWh-tk-A5M" secondAttribute="centerY" id="qfy-UH-aqc"/>
+                                                <constraint firstItem="52V-w5-bUG" firstAttribute="centerX" secondItem="RWh-tk-A5M" secondAttribute="centerX" id="rw8-xp-4zV"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="lblMenuName" destination="52V-w5-bUG" id="q8s-Sg-CLX"/>
@@ -157,9 +163,10 @@ CA
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cBC-nu-tFG">
-                                <rect key="frame" x="257" y="35" width="66" height="30"/>
+                            <button opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cBC-nu-tFG">
+                                <rect key="frame" x="300" y="35" width="60" height="25"/>
                                 <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                 <state key="normal" title="Logout">
                                     <color key="titleColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
@@ -171,7 +178,8 @@ CA
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="abS-8P-WcY" firstAttribute="trailing" secondItem="cBC-nu-tFG" secondAttribute="trailing" constant="70" id="JHM-hc-y9S"/>
+                            <constraint firstItem="cBC-nu-tFG" firstAttribute="top" secondItem="abS-8P-WcY" secondAttribute="top" constant="15" id="2Om-Zb-Dbp"/>
+                            <constraint firstItem="abS-8P-WcY" firstAttribute="trailing" secondItem="cBC-nu-tFG" secondAttribute="trailing" constant="52" id="ILr-FX-Wfp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="abS-8P-WcY"/>
                     </view>
@@ -183,7 +191,7 @@ CA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S25-L1-Gus" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-313" y="-575"/>
+            <point key="canvasLocation" x="-314.39999999999998" y="-575.26236881559225"/>
         </scene>
         <!--Product Mount View Controller-->
         <scene sceneID="Zqd-16-3w3">
