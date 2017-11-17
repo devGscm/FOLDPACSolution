@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Mosaic.xcodeproj">
+      location = "group:RRPPClient.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:/Users/moramcnt/Projects/RRPPSolutions/02.Solutions/RRPPSolution/ RRPPClient.xcodeproj">
+      location = "group:Mosaic.xcodeproj">
    </FileRef>
 </Workspace>
