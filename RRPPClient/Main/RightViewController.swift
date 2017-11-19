@@ -1,60 +1,59 @@
-/*
- * Copyright (C) 2015 - 2017, Daniel Dahan and CosmicMind, Inc. <http://cosmicmind.com>.
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *	*	Redistributions of source code must retain the above copyright notice, this
- *		list of conditions and the following disclaimer.
- *
- *	*	Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation
- *		and/or other materials provided with the distribution.
- *
- *	*	Neither the name of CosmicMind nor the names of its
- *		contributors may be used to endorse or promote products derived from
- *		this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
- * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 import UIKit
 import Material
 
-class RightViewController: UIViewController {
-    fileprivate var rootButton: FlatButton!
-    
-    open override func viewDidLoad() {
+class RightViewController: UITableViewController {
+	
+	@IBOutlet weak var swRfidBeep: UISwitch!	// RFID 효과음
+	@IBOutlet weak var btnRfidMask: UIButton!	// RFID 마스크
+	
+	open override func viewDidLoad()
+	{
         super.viewDidLoad()
-        view.backgroundColor = Color.blue.base
-        
-        prepareRootButton()
+        //view.backgroundColor = Color.blue.base
+		
+		self.swRfidBeep.isOn = UserDefaults.standard.bool(forKey: Constants.RFID_BEEP_ENABLED_KEY)
+		
+		var strRfidMask = UserDefaults.standard.string(forKey: Constants.RFID_MASK_KEY)
+		if(strRfidMask == "")
+		{
+			strRfidMask = "3312"
+		}
+		self.btnRfidMask.setTitle(strRfidMask, for: .normal)
     }
+	
+	// RFID 효과음
+	@IBAction func onRfidBeepChanged(_ sender: UISwitch)
+	{
+		let boolBeepEnabled = sender.isOn
+		UserDefaults.standard.set(boolBeepEnabled, forKey: Constants.RFID_BEEP_ENABLED_KEY)
+		UserDefaults.standard.synchronize()
+	}
+	
+	
+	// RFID 마스크
+	@IBAction func onRfidMaskClicked(_ sender: Any)
+	{
+		let acDialog = UIAlertController(title: nil, message: "RFID 마스크", preferredStyle: .alert)
+		acDialog.addTextField() {
+			$0.text = self.btnRfidMask.titleLabel?.text;
+		}
+		acDialog.addAction(UIAlertAction(title: "Cancel", style: .default) { (_) in
+		})
+		acDialog.addAction(UIAlertAction(title: "OK", style: .default) { (_) in
+			let strValue = acDialog.textFields?[0].text
+			UserDefaults.standard.setValue(strValue, forKey: Constants.RFID_MASK_KEY)
+			UserDefaults.standard.synchronize()
+			self.btnRfidMask.setTitle(strValue, for: .normal)
+		})
+		self.present(acDialog, animated: false, completion: nil)
+	}
 }
 
-extension RightViewController {
-    fileprivate func prepareRootButton() {
-        rootButton = FlatButton(title: "Root VC", titleColor: .white)
-        rootButton.pulseColor = .white
-        rootButton.addTarget(self, action: #selector(handleRootButton), for: .touchUpInside)
-        
-        view.layout(rootButton).horizontally().center()
-    }
-}
-
-extension RightViewController {
+extension RightViewController
+{
     @objc
-    fileprivate func handleRootButton() {
+    fileprivate func handleRootButton()
+	{
         toolbarController?.transition(to: RootViewController(), completion: closeNavigationDrawer)
     }
     

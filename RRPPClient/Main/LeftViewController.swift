@@ -6,8 +6,8 @@ import FontAwesome
 
 class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
-	struct MenuItem {
-		let menuIcon : UIImage?
+	struct MenuItem
+	{
 		let menuId : String
 		let menuName : String
 	}
@@ -62,24 +62,22 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	public func makeMenuItem() -> Void
 	{
 		let strCustType = AppContext.sharedManager.getUserInfo().getCustType()
-		print(" CustType:\(strCustType)")
+		//print(" CustType:\(strCustType)")
 		if(strCustType == "ISS")
 		{
-			mLstMenuData.append(MenuItem(menuIcon: Icon.cm.play, menuId: "TagSupply", menuName: "납품등록(RFID)"))
-			mLstMenuData.append(MenuItem(menuIcon: Icon.cm.play, menuId: "RfidInspect", menuName: "RFID태그검수"))
-			mLstMenuData.append(MenuItem(menuIcon: Icon.cm.play, menuId: "RfidInspect", menuName: "이력추적"))
+			mLstMenuData.append(MenuItem(menuId: "TagSupply", menuName: "납품등록(RFID)"))
+			mLstMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "RFID태그검수"))
+			mLstMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "이력추적"))
 		}
 		else if(strCustType == "MGR")
 		{
-			mLstMenuData.append(MenuItem(menuIcon: Icon.cm.play, menuId: "TagSupply", menuName: "납품등록(RFID)"))
-			mLstMenuData.append(MenuItem(menuIcon: Icon.cm.play, menuId: "ProductMount", menuName: "자산등록"))
-			mLstMenuData.append(MenuItem(menuIcon: Icon.cm.play, menuId: "RfidInspect", menuName: "RFID태그검수"))
-			mLstMenuData.append(MenuItem(menuIcon: Icon.cm.play, menuId: "RfidInspect", menuName: "이력추적"))
-		
+			mLstMenuData.append(MenuItem(menuId: "TagSupply", menuName: "납품등록(RFID)"))
+			mLstMenuData.append(MenuItem(menuId: "ProductMount", menuName: "자산등록"))
+			mLstMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "RFID태그검수"))
+			mLstMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "이력추적"))
 		}
 		tvMenu?.reloadData()
 	}
-	
 	
 	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
