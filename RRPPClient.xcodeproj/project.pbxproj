@@ -186,6 +186,7 @@
 		55FA78411FBDAD0B00583A80 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				55FA78531FBDAD6200583A80 /* Main.storyboard */,
 				55FA78421FBDAD0B00583A80 /* AppNavigationDrawerController.swift */,
 				55FA78431FBDAD0B00583A80 /* AppToolbarController.swift */,
 				55FA78441FBDAD0B00583A80 /* LeftMenuItem.swift */,
@@ -236,7 +237,6 @@
 				55FA78321FBDACC600583A80 /* Common */,
 				96E4941F1FB1A78500D1E2C1 /* AppDelegate.swift */,
 				55FA78551FBDAD7E00583A80 /* AppContext.swift */,
-				55FA78531FBDAD6200583A80 /* Main.storyboard */,
 				96E494211FB1A78500D1E2C1 /* ViewController.swift */,
 				96E494261FB1A78500D1E2C1 /* Assets.xcassets */,
 				96E494281FB1A78500D1E2C1 /* LaunchScreen.storyboard */,
