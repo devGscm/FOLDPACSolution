@@ -67,6 +67,7 @@ class RightViewController: UITableViewController
 		self.btnRfidPower.setTitle(strRfidPower, for: .normal)
 		print("@@@@@@ RFID POWER:\(strRfidPower)")
 
+		/*
 extension RightViewController {
     fileprivate func prepareRootButton() {
         rootButton = FlatButton(title: "Root VC", titleColor: .white)
@@ -74,6 +75,7 @@ extension RightViewController {
         rootButton.addTarget(self, action: #selector(handleRootButton), for: .touchUpInside)
         
         view.layout(rootButton).horizontally().center()
+		*/
     }
 	
 	
