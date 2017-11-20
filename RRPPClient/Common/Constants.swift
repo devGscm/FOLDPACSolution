@@ -26,4 +26,6 @@ class Constants
 	static let RFID_MASK_KEY							= "rfidMask"						/**< RFID 마스크 */
 	static let BRANCH_SELECTION_KEY						= "branchSelectionDialog"		/**< 거점 선택 */
 	static let RFID_POWER_KEY							= "rfidPower"						/**< RFID 파워 */
+	
+	static let WEB_SVC_URL 								= "http://192.168.0.213:8080"	/**< 서비스 URL */
 }
