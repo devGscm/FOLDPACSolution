@@ -40,14 +40,13 @@ class RightViewController: UITableViewController
 	@IBOutlet weak var swRfidBeep: UISwitch!	// RFID 효과음
 	@IBOutlet weak var btnRfidMask: UIButton!	// RFID 마스크
 	@IBOutlet weak var btnRfidPower: UIButton!
-	
+
 	open override func viewDidLoad()
 	{
         super.viewDidLoad()
         //view.backgroundColor = Color.blue.base
 		
 		self.swRfidBeep.isOn = UserDefaults.standard.bool(forKey: Constants.RFID_BEEP_ENABLED_KEY)
-		
 		// RFID 리더기
 		mLstRfidReader.append(RfidReaderDialog.RfidReader(mIntType: 0, mStrName: "Swing U"))
 		mLstRfidReader.append(RfidReaderDialog.RfidReader(mIntType: 1, mStrName: "AT288"))
@@ -66,16 +65,6 @@ class RightViewController: UITableViewController
 		let strRfidPower = UserDefaults.standard.string(forKey: Constants.RFID_POWER_KEY) ?? "0"
 		self.btnRfidPower.setTitle(strRfidPower, for: .normal)
 		print("@@@@@@ RFID POWER:\(strRfidPower)")
-
-		/*
-extension RightViewController {
-    fileprivate func prepareRootButton() {
-        rootButton = FlatButton(title: "Root VC", titleColor: .white)
-        rootButton.pulseColor = .white
-        rootButton.addTarget(self, action: #selector(handleRootButton), for: .touchUpInside)
-        
-        view.layout(rootButton).horizontally().center()
-		*/
     }
 	
 	

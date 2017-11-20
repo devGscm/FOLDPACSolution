@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		550334BE1FC2E0B700ABE965 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 550334BD1FC2E0B700ABE965 /* Main.storyboard */; };
 		553BCF891FC2B03500BE39C1 /* RfidReaderDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553BCF881FC2B03500BE39C1 /* RfidReaderDialog.swift */; };
 		553BCF8B1FC2DC3B00BE39C1 /* SliderDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553BCF8A1FC2DC3B00BE39C1 /* SliderDialog.swift */; };
+		55CE291E1FC2F5C100EE929F /* Product.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55CE291C1FC2F5C100EE929F /* Product.storyboard */; };
+		55CE291F1FC2F5C100EE929F /* ProductMountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CE291D1FC2F5C100EE929F /* ProductMountViewController.swift */; };
 		55FA782A1FBDAB6700583A80 /* Material.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA78241FBDAB2B00583A80 /* Material.framework */; };
 		55FA782B1FBDAB6700583A80 /* Material.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA78241FBDAB2B00583A80 /* Material.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		55FA782C1FBDAB6C00583A80 /* Motion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA78261FBDAB4700583A80 /* Motion.framework */; };
@@ -29,8 +32,6 @@
 		55FA784B1FBDAD0B00583A80 /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78451FBDAD0B00583A80 /* LeftViewController.swift */; };
 		55FA784C1FBDAD0B00583A80 /* RightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78461FBDAD0B00583A80 /* RightViewController.swift */; };
 		55FA784D1FBDAD0B00583A80 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78471FBDAD0B00583A80 /* RootViewController.swift */; };
-		55FA78521FBDAD1D00583A80 /* ProductMountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78511FBDAD1D00583A80 /* ProductMountViewController.swift */; };
-		55FA78541FBDAD6200583A80 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55FA78531FBDAD6200583A80 /* Main.storyboard */; };
 		55FA78561FBDAD7E00583A80 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78551FBDAD7E00583A80 /* AppContext.swift */; };
 		55FA78591FBDB06F00583A80 /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78581FBDB06F00583A80 /* UIStoryboard.swift */; };
 		968611EC1FBD585C000FE288 /* SWXMLHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 968611DD1FBD564C000FE288 /* SWXMLHash.framework */; };
@@ -81,8 +82,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		550334BD1FC2E0B700ABE965 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		553BCF881FC2B03500BE39C1 /* RfidReaderDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RfidReaderDialog.swift; sourceTree = "<group>"; };
 		553BCF8A1FC2DC3B00BE39C1 /* SliderDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderDialog.swift; sourceTree = "<group>"; };
+		55CE291C1FC2F5C100EE929F /* Product.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Product.storyboard; path = RRPPClient/Product/Product.storyboard; sourceTree = SOURCE_ROOT; };
+		55CE291D1FC2F5C100EE929F /* ProductMountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProductMountViewController.swift; path = RRPPClient/Product/ProductMountViewController.swift; sourceTree = SOURCE_ROOT; };
 		55FA78201FBDAAA800583A80 /* FontAwesome.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FontAwesome.framework; path = Carthage/Build/iOS/FontAwesome.framework; sourceTree = "<group>"; };
 		55FA78241FBDAB2B00583A80 /* Material.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Material.framework; path = Carthage/Build/iOS/Material.framework; sourceTree = "<group>"; };
 		55FA78261FBDAB4700583A80 /* Motion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Motion.framework; path = Carthage/Build/iOS/Motion.framework; sourceTree = "<group>"; };
@@ -99,8 +103,6 @@
 		55FA78451FBDAD0B00583A80 /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
 		55FA78461FBDAD0B00583A80 /* RightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightViewController.swift; sourceTree = "<group>"; };
 		55FA78471FBDAD0B00583A80 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
-		55FA78511FBDAD1D00583A80 /* ProductMountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductMountViewController.swift; sourceTree = "<group>"; };
-		55FA78531FBDAD6200583A80 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		55FA78551FBDAD7E00583A80 /* AppContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
 		55FA78581FBDB06F00583A80 /* UIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboard.swift; sourceTree = "<group>"; };
 		968611DD1FBD564C000FE288 /* SWXMLHash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SWXMLHash.framework; path = Carthage/Build/iOS/SWXMLHash.framework; sourceTree = "<group>"; };
@@ -149,6 +151,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		55CE291B1FC2F57C00EE929F /* Product */ = {
+			isa = PBXGroup;
+			children = (
+				55CE291C1FC2F5C100EE929F /* Product.storyboard */,
+				55CE291D1FC2F5C100EE929F /* ProductMountViewController.swift */,
+			);
+			name = Product;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		55FA78321FBDACC600583A80 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +192,7 @@
 		55FA78411FBDAD0B00583A80 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				550334BD1FC2E0B700ABE965 /* Main.storyboard */,
 				55FA78421FBDAD0B00583A80 /* AppNavigationDrawerController.swift */,
 				55FA78431FBDAD0B00583A80 /* AppToolbarController.swift */,
 				55FA78441FBDAD0B00583A80 /* LeftMenuItem.swift */,
@@ -223,6 +236,7 @@
 		96E4941E1FB1A78500D1E2C1 /* RRPPClient */ = {
 			isa = PBXGroup;
 			children = (
+				55CE291B1FC2F57C00EE929F /* Product */,
 				55FA78571FBDB06F00583A80 /* Extension */,
 				55FA78411FBDAD0B00583A80 /* Main */,
 				55FA783C1FBDACFC00583A80 /* Images */,
@@ -230,11 +244,9 @@
 				55FA78321FBDACC600583A80 /* Common */,
 				96E4941F1FB1A78500D1E2C1 /* AppDelegate.swift */,
 				55FA78551FBDAD7E00583A80 /* AppContext.swift */,
-				55FA78531FBDAD6200583A80 /* Main.storyboard */,
 				96E494211FB1A78500D1E2C1 /* ViewController.swift */,
 				96E494261FB1A78500D1E2C1 /* Assets.xcassets */,
 				96E494281FB1A78500D1E2C1 /* LaunchScreen.storyboard */,
-				55FA78511FBDAD1D00583A80 /* ProductMountViewController.swift */,
 				96E4942B1FB1A78500D1E2C1 /* Info.plist */,
 			);
 			path = RRPPClient;
@@ -372,9 +384,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				55FA78401FBDACFD00583A80 /* pallet.png in Resources */,
-				55FA78541FBDAD6200583A80 /* Main.storyboard in Resources */,
 				96E4942A1FB1A78500D1E2C1 /* LaunchScreen.storyboard in Resources */,
+				550334BE1FC2E0B700ABE965 /* Main.storyboard in Resources */,
 				55FA783F1FBDACFD00583A80 /* login.png in Resources */,
+				55CE291E1FC2F5C100EE929F /* Product.storyboard in Resources */,
 				96E494271FB1A78500D1E2C1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -424,11 +437,11 @@
 				96E494201FB1A78500D1E2C1 /* AppDelegate.swift in Sources */,
 				55FA784C1FBDAD0B00583A80 /* RightViewController.swift in Sources */,
 				55FA78591FBDB06F00583A80 /* UIStoryboard.swift in Sources */,
+				55CE291F1FC2F5C100EE929F /* ProductMountViewController.swift in Sources */,
 				55FA784B1FBDAD0B00583A80 /* LeftViewController.swift in Sources */,
 				553BCF8B1FC2DC3B00BE39C1 /* SliderDialog.swift in Sources */,
 				55FA78481FBDAD0B00583A80 /* AppNavigationDrawerController.swift in Sources */,
 				55FA783A1FBDACE300583A80 /* LoginViewController.swift in Sources */,
-				55FA78521FBDAD1D00583A80 /* ProductMountViewController.swift in Sources */,
 				55FA78491FBDAD0B00583A80 /* AppToolbarController.swift in Sources */,
 				553BCF891FC2B03500BE39C1 /* RfidReaderDialog.swift in Sources */,
 				55FA783B1FBDACE300583A80 /* UserInfo.swift in Sources */,

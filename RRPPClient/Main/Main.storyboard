@@ -348,10 +348,10 @@ CA
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="btnRfidMask" destination="5kX-Dy-FUf" id="9Gk-Kq-i7k"/>
-                        <outlet property="btnRfidPower" destination="QC2-23-yqp" id="cYq-YO-Qwx"/>
-                        <outlet property="btnRfidReader" destination="Kh7-9M-Rik" id="EsG-Hy-uLk"/>
-                        <outlet property="swRfidBeep" destination="ZOf-Mh-OmG" id="FBf-7W-Wz8"/>
+                        <outlet property="btnRfidMask" destination="5kX-Dy-FUf" id="shK-tQ-Ug7"/>
+                        <outlet property="btnRfidPower" destination="QC2-23-yqp" id="5Rm-oR-MM9"/>
+                        <outlet property="btnRfidReader" destination="Kh7-9M-Rik" id="fX5-mF-fwp"/>
+                        <outlet property="swRfidBeep" destination="ZOf-Mh-OmG" id="EKd-hl-3FW"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fEG-Vc-wz7" userLabel="First Responder" sceneMemberID="firstResponder"/>

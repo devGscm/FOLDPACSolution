@@ -19,7 +19,7 @@ class Constants
 	static let RFID_READER_TYPE_ARETE					= 4	/**< RFID 리더기 : ARETE */
 	
 	static let LANDSCAPE_SCREEN_ENABLED_KEY				= "landscapeScreenEnabled"		/**< 화면 가로/세로 보기 키*/
-	static let RFID_READER_KEY						= "rfidReader"				/**< RFID 리더기 */
+	static let RFID_READER_KEY							= "rfidReader"				/**< RFID 리더기 */
 	static let IDENTIFICATION_SYSTEM_LIST_KEY			= "identificationSystemList"		/**< 식별체계*/
 	static let BLUETOOTH_SELECTION_KEY					= "bluetoothSelectionDialog"		/**< 블루투스 장치 선택 */
 	static let RFID_BEEP_ENABLED_KEY					= "rfidBeepEnabled"				/**< 비프음 */
