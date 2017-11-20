@@ -1,12 +1,16 @@
 import UIKit
 import Material
 
-class RightViewController: UITableViewController {
+
+class RightViewController: UITableViewController
+{
+	var mLstRfidReader:Array<RfidReaderDialog.RfidReader> = Array<RfidReaderDialog.RfidReader>()
 	
+	@IBOutlet weak var btnRfidReader: UIButton!
 	@IBOutlet weak var swRfidBeep: UISwitch!	// RFID 효과음
 	@IBOutlet weak var btnRfidMask: UIButton!	// RFID 마스크
-	
 	@IBOutlet weak var btnRfidPower: UIButton!
+	
 	open override func viewDidLoad()
 	{
         super.viewDidLoad()
@@ -14,15 +18,48 @@ class RightViewController: UITableViewController {
 		
 		self.swRfidBeep.isOn = UserDefaults.standard.bool(forKey: Constants.RFID_BEEP_ENABLED_KEY)
 		
-		var strRfidMask = UserDefaults.standard.string(forKey: Constants.RFID_MASK_KEY) ?? "3312"
+		// RFID 리더기
+		mLstRfidReader.append(RfidReaderDialog.RfidReader(mIntType: 0, mStrName: "Swing U"))
+		mLstRfidReader.append(RfidReaderDialog.RfidReader(mIntType: 1, mStrName: "AT288"))
+		
+		let intRfidReader = UserDefaults.standard.integer(forKey: Constants.RFID_READER_KEY)
+		let strRfidReaderName = mLstRfidReader[intRfidReader].mStrName
+		print("@@@@@@ RFID READER:\(intRfidReader)")
+		self.btnRfidReader.setTitle(strRfidReaderName, for: .normal)
+		
+		// RFID 마스크
+		let strRfidMask = UserDefaults.standard.string(forKey: Constants.RFID_MASK_KEY) ?? "3312"
 		print("@@@@@@ RFID MASK:\(strRfidMask)")
 		self.btnRfidMask.setTitle(strRfidMask, for: .normal)
 		
-		var strRfidPower = UserDefaults.standard.string(forKey: Constants.RFID_POWER_KEY) ?? "0"
+		// RFID Power
+		let strRfidPower = UserDefaults.standard.string(forKey: Constants.RFID_POWER_KEY) ?? "0"
 		self.btnRfidPower.setTitle(strRfidPower, for: .normal)
 		print("@@@@@@ RFID POWER:\(strRfidPower)")
 
     }
+	
+	
+	@IBAction func onRfidReaderClicked(_ sender: Any)
+	{
+		let clsReaderDialog = RfidReaderDialog()
+		clsReaderDialog.loadData(lstRfidReader: mLstRfidReader)
+
+		let acDialog = UIAlertController(title:nil, message:"RFID 리더기", preferredStyle: .alert)
+		acDialog.setValue(clsReaderDialog, forKeyPath: "contentViewController")
+		
+		acDialog.addAction(UIAlertAction(title: "Cancel", style: .default) { (_) in
+		})
+		let aaOkAction = UIAlertAction(title: "OK", style: .default) { (_) in
+			let intReaderType = clsReaderDialog.selectedRow.mIntType
+			let strRaderName = clsReaderDialog.selectedRow.mStrName
+			UserDefaults.standard.setValue(intReaderType, forKey: Constants.RFID_READER_KEY)
+			UserDefaults.standard.synchronize()
+			self.btnRfidReader.setTitle(strRaderName, for: .normal)
+		}
+		acDialog.addAction(aaOkAction)
+		self.present(acDialog, animated: true)
+	}
 	
 	// RFID 효과음
 	@IBAction func onRfidBeepChanged(_ sender: UISwitch)
@@ -75,8 +112,7 @@ class RightViewController: UITableViewController {
 		acDialog.addAction(aaOkAction)
 		
 		self.present(acDialog, animated: false)
-	}
-	
+	}	
 }
 
 extension RightViewController

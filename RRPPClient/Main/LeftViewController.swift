@@ -8,8 +8,8 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 {
 	struct MenuItem
 	{
-		let menuId : String
-		let menuName : String
+		let mStrMenuId : String
+		let mStrMenuName : String
 	}
 	
 	@IBOutlet weak var tvMenu: UITableView!
@@ -65,16 +65,16 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		//print(" CustType:\(strCustType)")
 		if(strCustType == "ISS")
 		{
-			mLstMenuData.append(MenuItem(menuId: "TagSupply", menuName: "납품등록(RFID)"))
-			mLstMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "RFID태그검수"))
-			mLstMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "이력추적"))
+			mLstMenuData.append(MenuItem(mStrMenuId: "TagSupply", mStrMenuName: "납품등록(RFID)"))
+			mLstMenuData.append(MenuItem(mStrMenuId: "RfidInspect", mStrMenuName: "RFID태그검수"))
+			mLstMenuData.append(MenuItem(mStrMenuId: "RfidInspect", mStrMenuName: "이력추적"))
 		}
 		else if(strCustType == "MGR")
 		{
-			mLstMenuData.append(MenuItem(menuId: "TagSupply", menuName: "납품등록(RFID)"))
-			mLstMenuData.append(MenuItem(menuId: "ProductMount", menuName: "자산등록"))
-			mLstMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "RFID태그검수"))
-			mLstMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "이력추적"))
+			mLstMenuData.append(MenuItem(mStrMenuId: "TagSupply", mStrMenuName: "납품등록(RFID)"))
+			mLstMenuData.append(MenuItem(mStrMenuId: "ProductMount", mStrMenuName: "자산등록"))
+			mLstMenuData.append(MenuItem(mStrMenuId: "RfidInspect", mStrMenuName: "RFID태그검수"))
+			mLstMenuData.append(MenuItem(mStrMenuId: "RfidInspect", mStrMenuName: "이력추적"))
 		}
 		tvMenu?.reloadData()
 	}
@@ -91,7 +91,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		
 		
 		objCell.lblMenuName.font = UIFont.fontAwesome(ofSize: 14)
-		objCell.lblMenuName.text = "\(String.fontAwesomeIcon(name: .chevronCircleRight)) \(strtMenuItem.menuName )"
+		objCell.lblMenuName.text = "\(String.fontAwesomeIcon(name: .chevronCircleRight)) \(strtMenuItem.mStrMenuName )"
 		return objCell
 	}
 
@@ -100,7 +100,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	{
 		let strtMenuItem  = mLstMenuData[indexPath.row]
 		
-		print("strtMenuItem.menuId:\(strtMenuItem.menuId)")
+		print("strtMenuItem.menuId:\(strtMenuItem.mStrMenuId)")
 		
 		switch (indexPath.row)
 		{
