@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		553883AF1FBE976100FCE39F /* Product.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 553883AE1FBE976100FCE39F /* Product.storyboard */; };
+		553BCF851FC2609600BE39C1 /* SliderDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553BCF841FC2609600BE39C1 /* SliderDialog.swift */; };
+		553BCF871FC26E5100BE39C1 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553BCF861FC26E5100BE39C1 /* String.swift */; };
 		55FA782A1FBDAB6700583A80 /* Material.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA78241FBDAB2B00583A80 /* Material.framework */; };
 		55FA782B1FBDAB6700583A80 /* Material.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA78241FBDAB2B00583A80 /* Material.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		55FA782C1FBDAB6C00583A80 /* Motion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA78261FBDAB4700583A80 /* Motion.framework */; };
@@ -81,6 +83,8 @@
 
 /* Begin PBXFileReference section */
 		553883AE1FBE976100FCE39F /* Product.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Product.storyboard; sourceTree = "<group>"; };
+		553BCF841FC2609600BE39C1 /* SliderDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderDialog.swift; sourceTree = "<group>"; };
+		553BCF861FC26E5100BE39C1 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		55FA78201FBDAAA800583A80 /* FontAwesome.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FontAwesome.framework; path = Carthage/Build/iOS/FontAwesome.framework; sourceTree = "<group>"; };
 		55FA78241FBDAB2B00583A80 /* Material.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Material.framework; path = Carthage/Build/iOS/Material.framework; sourceTree = "<group>"; };
 		55FA78261FBDAB4700583A80 /* Motion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Motion.framework; path = Carthage/Build/iOS/Motion.framework; sourceTree = "<group>"; };
@@ -161,6 +165,7 @@
 			children = (
 				55FA78331FBDACC600583A80 /* Constants.swift */,
 				55FA78341FBDACC600583A80 /* ProgressDialog.swift */,
+				553BCF841FC2609600BE39C1 /* SliderDialog.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -201,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				55FA78581FBDB06F00583A80 /* UIStoryboard.swift */,
+				553BCF861FC26E5100BE39C1 /* String.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -423,6 +429,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				553BCF851FC2609600BE39C1 /* SliderDialog.swift in Sources */,
 				55FA78361FBDACC600583A80 /* ProgressDialog.swift in Sources */,
 				55FA78561FBDAD7E00583A80 /* AppContext.swift in Sources */,
 				96E494221FB1A78500D1E2C1 /* ViewController.swift in Sources */,
@@ -436,6 +443,7 @@
 				55FA78521FBDAD1D00583A80 /* ProductMountViewController.swift in Sources */,
 				55FA78491FBDAD0B00583A80 /* AppToolbarController.swift in Sources */,
 				55FA783B1FBDACE300583A80 /* UserInfo.swift in Sources */,
+				553BCF871FC26E5100BE39C1 /* String.swift in Sources */,
 				55FA78351FBDACC600583A80 /* Constants.swift in Sources */,
 				55FA784A1FBDAD0B00583A80 /* LeftMenuItem.swift in Sources */,
 			);

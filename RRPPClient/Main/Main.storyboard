@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8FU-Ku-gwW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zz2-SN-mXq">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -29,13 +29,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="1zp-c6-HPt"/>
                     </view>
+                    <navigationItem key="navigationItem" id="dLk-io-rWN"/>
                     <connections>
                         <segue destination="DV3-pj-IDf" kind="presentation" identifier="segLogin" id="Kyx-m7-K39"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5an-MS-0fP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-487" y="-221"/>
+            <point key="canvasLocation" x="-148" y="-221.73913043478262"/>
         </scene>
         <!--로그인-->
         <scene sceneID="LM4-TV-X01">
@@ -101,7 +102,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3i8-mV-jGj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="380" y="-222"/>
+            <point key="canvasLocation" x="719.20000000000005" y="-222.63868065967017"/>
         </scene>
         <!--좌측메뉴-->
         <scene sceneID="MD5-Qn-Sxr">
@@ -290,6 +291,33 @@ CA
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0EH-VS-ttj" id="4Xa-WQ-tVx">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="RFID Power" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ky-tm-3bG">
+                                                    <rect key="frame" x="16" y="11" width="107" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QC2-23-yqp">
+                                                    <rect key="frame" x="271" y="7" width="88" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <connections>
+                                                        <action selector="onRfidPowerClicked:" destination="nJr-NP-3rZ" eventType="touchUpInside" id="9Rl-pG-iDu"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="aB4-sz-G5G">
+                                        <rect key="frame" x="0.0" y="132" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aB4-sz-G5G" id="a5u-Ft-ife">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -302,6 +330,7 @@ CA
                     </tableView>
                     <connections>
                         <outlet property="btnRfidMask" destination="5kX-Dy-FUf" id="9Gk-Kq-i7k"/>
+                        <outlet property="btnRfidPower" destination="QC2-23-yqp" id="cYq-YO-Qwx"/>
                         <outlet property="swRfidBeep" destination="ZOf-Mh-OmG" id="FBf-7W-Wz8"/>
                     </connections>
                 </tableViewController>
@@ -309,12 +338,30 @@ CA
             </objects>
             <point key="canvasLocation" x="229.59999999999999" y="-982.75862068965523"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="FFM-wp-9pm">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zz2-SN-mXq" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="RT8-Em-kVF">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8FU-Ku-gwW" kind="relationship" relationship="rootViewController" id="Nea-Gp-fIx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R1B-tO-ZCK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-924" y="-223"/>
+        </scene>
     </scenes>
     <resources>
         <image name="login.png" width="783" height="475"/>
         <image name="pallet.png" width="600" height="366"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="UEE-4x-1jJ"/>
+        <segue reference="Kyx-m7-K39"/>
     </inferredMetricsTieBreakers>
 </document>

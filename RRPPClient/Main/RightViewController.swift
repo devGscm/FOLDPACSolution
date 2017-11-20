@@ -6,6 +6,7 @@ class RightViewController: UITableViewController {
 	@IBOutlet weak var swRfidBeep: UISwitch!	// RFID 효과음
 	@IBOutlet weak var btnRfidMask: UIButton!	// RFID 마스크
 	
+	@IBOutlet weak var btnRfidPower: UIButton!
 	open override func viewDidLoad()
 	{
         super.viewDidLoad()
@@ -13,12 +14,14 @@ class RightViewController: UITableViewController {
 		
 		self.swRfidBeep.isOn = UserDefaults.standard.bool(forKey: Constants.RFID_BEEP_ENABLED_KEY)
 		
-		var strRfidMask = UserDefaults.standard.string(forKey: Constants.RFID_MASK_KEY)
-		if(strRfidMask == "")
-		{
-			strRfidMask = "3312"
-		}
+		var strRfidMask = UserDefaults.standard.string(forKey: Constants.RFID_MASK_KEY) ?? "3312"
+		print("@@@@@@ RFID MASK:\(strRfidMask)")
 		self.btnRfidMask.setTitle(strRfidMask, for: .normal)
+		
+		var strRfidPower = UserDefaults.standard.string(forKey: Constants.RFID_POWER_KEY) ?? "0"
+		self.btnRfidPower.setTitle(strRfidPower, for: .normal)
+		print("@@@@@@ RFID POWER:\(strRfidPower)")
+
     }
 	
 	// RFID 효과음
@@ -47,6 +50,33 @@ class RightViewController: UITableViewController {
 		})
 		self.present(acDialog, animated: false, completion: nil)
 	}
+	
+	@IBAction func onRfidPowerClicked(_ sender: Any) {
+		
+		let clsSliderDialog = SliderDialog()
+		
+		let acDialog = UIAlertController(title:nil, message: "RFID Power", preferredStyle: .alert)
+		
+		// 컨트롤 뷰 컨트롤러를 알림창에 등록한다.
+		acDialog.setValue(clsSliderDialog, forKeyPath: "contentViewController")
+		
+		// 슬라이더에 값을 넣어준다.
+		var intRfidPower = (self.btnRfidPower.titleLabel?.text as! NSString).integerValue
+		clsSliderDialog.sliderValue = intRfidPower
+		
+		// OK 버튼을 추가한다.
+		let aaOkAction = UIAlertAction(title: "OK", style: .default) { (_) in
+			let intValue = Int(clsSliderDialog.sliderValue)
+			UserDefaults.standard.setValue(intValue, forKey: Constants.RFID_POWER_KEY)
+			UserDefaults.standard.synchronize()
+			self.btnRfidPower.setTitle("\(intValue)", for: .normal)
+			print(">>> sliderValue = \(intValue)")
+		}
+		acDialog.addAction(aaOkAction)
+		
+		self.present(acDialog, animated: false)
+	}
+	
 }
 
 extension RightViewController
