@@ -26,6 +26,11 @@ class AppContext
 		mClsUserInfo.setCustType(strCustType: "")
 	}
 	
+	func getUserInfo() -> UserInfo
+	{
+		return mClsUserInfo
+	}
+	
 	func setAuthenticated(boolAuthenticated : Bool)
 	{
 		mBoolAuthenticated = boolAuthenticated
@@ -36,26 +41,11 @@ class AppContext
 		return mBoolAuthenticated
 	}
 	
-	func doLogout()
-	{
-		if(mClsUserInfo.getAutoLogin() == true)
-		{
-			
-		}
-		else
-		{
-			setAuthenticated(boolAuthenticated: false)
-			mClsUserInfo.setCorpId(strCorpId: "")
-			mClsUserInfo.setUserId(strUserId: "")
-			
-		}
-	}
 	
-	func getUserInfo() -> UserInfo
+	func doTest()
 	{
-		return mClsUserInfo
+		print("@@@@ AppContext.doTest()")
 	}
-	
 	
 	
 }

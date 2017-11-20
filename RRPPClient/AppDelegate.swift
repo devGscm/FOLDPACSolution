@@ -38,26 +38,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	var window: UIWindow?
 	
 	lazy var mClsLeftController: LeftViewController = {
-		return UIStoryboard.viewController(strIdentifier: "LeftViewController") as! LeftViewController
+		return UIStoryboard.viewController(identifier: "LeftViewController") as! LeftViewController
 	}()
 	
 	lazy var mClsRootController: RootViewController = {
-		return UIStoryboard.viewController(strIdentifier: "RootViewController") as! RootViewController
+		return UIStoryboard.viewController(identifier: "RootViewController") as! RootViewController
 	}()
 	
-	lazy var mClsRightController: RightViewController = {
-		return UIStoryboard.viewController(strIdentifier: "RightViewController") as! RightViewController
-	}()
 	
 	func applicationDidFinishLaunching(_ application: UIApplication)
 	{
+		
 		//let appToolbarController = AppToolbarController(rootViewController: RootViewController())
 		//let leftViewController = LeftViewController()
-		//let rightViewController = RightViewController()
+		
+		
 		let clsAappToolbarController = AppToolbarController(rootViewController: mClsRootController)
+		let rightViewController = RightViewController()
 		
 		window = UIWindow(frame: Screen.bounds)
-		window!.rootViewController = AppNavigationDrawerController(rootViewController: clsAappToolbarController, leftViewController: mClsLeftController, rightViewController: mClsRightController)
+		window!.rootViewController = AppNavigationDrawerController(rootViewController: clsAappToolbarController, leftViewController: mClsLeftController, rightViewController: rightViewController)
 		window!.makeKeyAndVisible()
 		
 	}

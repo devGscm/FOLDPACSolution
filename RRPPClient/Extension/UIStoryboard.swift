@@ -10,14 +10,8 @@ import UIKit
 
 extension UIStoryboard
 {
-	class func viewController(strIdentifier: String) -> UIViewController
+	class func viewController(identifier: String) -> UIViewController
 	{
-		return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: strIdentifier)
+		return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: identifier)
 	}
-
-	class func viewController(strStoryBoardName: String, strIdentifier: String) -> UIViewController
-	{
-		return UIStoryboard(name: strStoryBoardName, bundle: nil).instantiateViewController(withIdentifier: strIdentifier)
-	}
-	
 }

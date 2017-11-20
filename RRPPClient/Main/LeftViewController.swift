@@ -15,30 +15,22 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	@IBOutlet weak var tvMenu: UITableView!
 	@IBOutlet weak var mIvLogo: UIImageView!
 	
-	@IBOutlet weak var btnLogout: UIButton!
 	var mLstMenuData:Array<MenuItem> = Array<MenuItem>()
 
-	
 	lazy var clsProductMountViewController: ProductMountViewController = {
-		return UIStoryboard.viewController(strStoryBoardName: "Product", strIdentifier: "ProductMountViewController") as! ProductMountViewController
+		return UIStoryboard.viewController(identifier: "ProductMountViewController") as! ProductMountViewController
 	}()
 	
 	open override func viewDidLoad()
 	{
         super.viewDidLoad()
-        //view.backgroundColor = Color.blue.base
+        view.backgroundColor = Color.blue.base
 		
 		if let strCorpId = AppContext.sharedManager.getUserInfo().getCorpId()
 		{
 			print("CORPID:\(strCorpId)")
 		}
 
-		if let strCustType = AppContext.sharedManager.getUserInfo().getCustType()
-		{
-			print("strCustType:\(strCustType)")
-		}
-
-		
 		if("moramcnt" == AppContext.sharedManager.getUserInfo().getCorpId())
 		{
 			print("Moram")
@@ -62,7 +54,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	public func makeMenuItem() -> Void
 	{
 		let strCustType = AppContext.sharedManager.getUserInfo().getCustType()
-		//print(" CustType:\(strCustType)")
+		print(" CustType:\(strCustType)")
 		if(strCustType == "ISS")
 		{
 			mLstMenuData.append(MenuItem(mStrMenuId: "TagSupply", mStrMenuName: "납품등록(RFID)"))
@@ -78,6 +70,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		}
 		tvMenu?.reloadData()
 	}
+	
 	
 	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
@@ -117,17 +110,6 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			print("is selected");
 		}
 		
-	}
-	
-	@IBAction func onLogoutClicked(_ sender: Any)
-	{
-		print(" LeftViewCOntroller.onLogoutClicked")
-		AppContext.sharedManager.doLogout();
-	
-		
-		//DispatchQueue.main.async {};
-		navigationDrawerController?.closeLeftView()
-		self.performSegue(withIdentifier: "segLogout", sender: self)
 	}
 	
 	public func closeNavigationDrawer(result: Bool)

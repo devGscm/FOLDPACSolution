@@ -27,10 +27,6 @@ class RootViewController: UIViewController
 			self.performSegue(withIdentifier: "segLogin", sender: self)
 		}
 	}
-	func doTest()
-	{
-		self.dismiss(animated: true, completion: nil)
-	}
 }
 
 extension RootViewController
@@ -41,7 +37,7 @@ extension RootViewController
         }
         
         tc.toolbar.title = "RRPP TRA"
-        tc.toolbar.detail = "RRPP Trade & Tracking & Traceability Platform"
+        tc.toolbar.detail = "Build Beautiful Software"
     }
 }
 
