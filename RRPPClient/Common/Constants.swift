@@ -11,4 +11,6 @@ import Foundation
 class Constants
 {
 	static let DATE_SEARCH_DISTANCE = 7
+	
+	static let WEB_SVC_URL = "http://192.168.0.213:8080"
 }
