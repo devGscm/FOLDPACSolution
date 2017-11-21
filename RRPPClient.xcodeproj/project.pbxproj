@@ -147,6 +147,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		55F385C91FC3B6A40043F1A3 /* Product */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Product;
+			sourceTree = "<group>";
+		};
 		55FA78321FBDACC600583A80 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,6 +229,7 @@
 		96E4941E1FB1A78500D1E2C1 /* RRPPClient */ = {
 			isa = PBXGroup;
 			children = (
+				55F385C91FC3B6A40043F1A3 /* Product */,
 				55FA78571FBDB06F00583A80 /* Extension */,
 				55FA78411FBDAD0B00583A80 /* Main */,
 				55FA783C1FBDACFC00583A80 /* Images */,
