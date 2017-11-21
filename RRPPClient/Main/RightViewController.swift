@@ -126,7 +126,9 @@ class RightViewController: UITableViewController
 		acDialog.setValue(clsSliderDialog, forKeyPath: "contentViewController")
 		
 		// 슬라이더에 값을 넣어준다.
-		var intRfidPower = (self.btnRfidPower.titleLabel?.text as! NSString).integerValue
+		
+		let intRfidPower = Int(self.btnRfidPower.titleLabel?.text ?? "0")!
+		//let intRfidPower = (self.btnRfidPower.titleLabel?.text as! NSString).integerValue
 		clsSliderDialog.sliderValue = intRfidPower
 		
 		// OK 버튼을 추가한다.
