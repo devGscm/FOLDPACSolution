@@ -56,14 +56,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 		//let appToolbarController = AppToolbarController(rootViewController: RootViewController())
 		//let leftViewController = LeftViewController()
 		//let rightViewController = RightViewController()
-		/*
+
 		let clsAappToolbarController = AppToolbarController(rootViewController: mClsRootController)
 
 		
 		window = UIWindow(frame: Screen.bounds)
 		window!.rootViewController = AppNavigationDrawerController(rootViewController: clsAappToolbarController, leftViewController: mClsLeftController, rightViewController: mClsRightController)
 		window!.makeKeyAndVisible()
-		*/
 		
 	}
 }
