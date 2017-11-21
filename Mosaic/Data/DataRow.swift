@@ -253,7 +253,8 @@ public class DataRow : NSObject, NSCopying
     {
         do {
             let value = try get(name: name)
-            return String(describing: value)
+            //return String(describing: value)
+			return value as? String ?? ""
         } catch DataError.indexValeError {
             return nil
         } catch {
