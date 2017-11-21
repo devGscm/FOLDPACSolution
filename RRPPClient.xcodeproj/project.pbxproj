@@ -10,6 +10,7 @@
 		550334BE1FC2E0B700ABE965 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 550334BD1FC2E0B700ABE965 /* Main.storyboard */; };
 		553BCF891FC2B03500BE39C1 /* RfidReaderDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553BCF881FC2B03500BE39C1 /* RfidReaderDialog.swift */; };
 		553BCF8B1FC2DC3B00BE39C1 /* SliderDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553BCF8A1FC2DC3B00BE39C1 /* SliderDialog.swift */; };
+		55F385CB1FC3B6F40043F1A3 /* Product.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55F385CA1FC3B6F40043F1A3 /* Product.storyboard */; };
 		55FA782A1FBDAB6700583A80 /* Material.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA78241FBDAB2B00583A80 /* Material.framework */; };
 		55FA782B1FBDAB6700583A80 /* Material.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA78241FBDAB2B00583A80 /* Material.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		55FA782C1FBDAB6C00583A80 /* Motion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA78261FBDAB4700583A80 /* Motion.framework */; };
@@ -83,6 +84,7 @@
 		550334BD1FC2E0B700ABE965 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		553BCF881FC2B03500BE39C1 /* RfidReaderDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RfidReaderDialog.swift; sourceTree = "<group>"; };
 		553BCF8A1FC2DC3B00BE39C1 /* SliderDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderDialog.swift; sourceTree = "<group>"; };
+		55F385CA1FC3B6F40043F1A3 /* Product.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Product.storyboard; sourceTree = "<group>"; };
 		55FA78201FBDAAA800583A80 /* FontAwesome.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FontAwesome.framework; path = Carthage/Build/iOS/FontAwesome.framework; sourceTree = "<group>"; };
 		55FA78241FBDAB2B00583A80 /* Material.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Material.framework; path = Carthage/Build/iOS/Material.framework; sourceTree = "<group>"; };
 		55FA78261FBDAB4700583A80 /* Motion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Motion.framework; path = Carthage/Build/iOS/Motion.framework; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 		55F385C91FC3B6A40043F1A3 /* Product */ = {
 			isa = PBXGroup;
 			children = (
+				55F385CA1FC3B6F40043F1A3 /* Product.storyboard */,
 			);
 			path = Product;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 				96E4942A1FB1A78500D1E2C1 /* LaunchScreen.storyboard in Resources */,
 				550334BE1FC2E0B700ABE965 /* Main.storyboard in Resources */,
 				55FA783F1FBDACFD00583A80 /* login.png in Resources */,
+				55F385CB1FC3B6F40043F1A3 /* Product.storyboard in Resources */,
 				96E494271FB1A78500D1E2C1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
