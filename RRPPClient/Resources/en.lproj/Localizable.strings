@@ -5,3 +5,556 @@
   Created by MORAMCNT on 2017. 11. 21..
   Copyright © 2017년 MORAMCNT. All rights reserved.
 */
+
+
+/* 어플설정 시작 */
+"app_name" = "RRPP";
+
+/* 어플설정 끝*/
+
+/*액티비티 제목 시작 */
+"title_user_login" = "Log in";
+"title_client_config" = "Setting";
+"title_device_scan_dialog" = "Search Reader";
+"title_branch_search_dialog" = "Search Loc.";
+"title_tag_supply" = "RFID Tag Deliv.";
+"title_tag_supply_detail_view" = "RFID Tag Delivery List";
+"title_tag_order_search" = "Deliv. History";
+"title_product_mount" = "Asset Registration";
+"title_product_package" = "Batch Creation";
+"title_product_package_cancel" = "Batch Cancel";
+"title_product_order_search" = "P/O List (RRPP)";
+"title_product_package_search" = "Batch List";
+"title_sale_in" = "Receving by S/O";
+"title_sale_in_exp" = "Receving by S/O";
+"title_sale_out" = "Shipping by S/O";
+"title_sale_out_rdc" = "Shipping by S/O";
+"title_common_sale_out" = "Shipping";
+
+"title_move_in" = "Receving by T/O";
+"title_move_out" = "Shipping by T/O";
+"title_resale_in" = "Receving by R/O";
+"title_out_cancel" = "Shipping Cancle";
+"title_in_cancel" = "Receving Cancle";
+"title_easy_shipment" = "Unit Load Shipping";
+"title_easy_shipment_exp" = "Unit Load Shipping";
+
+"title_easy_ship_cust_search" = "Buyer List";
+"title_sale_out_search" = "Invoice List";
+"title_sale_in_search" = "Invoice List";
+"title_resale_in_search" = "R/O List";
+"title_rfid_inspect" = "RFID Inspection";
+"title_rfid_reader" = "RFID Reader";
+"title_stock_review" = "Physical Count";
+"title_stock_review_search" = "Physical Count List";
+"title_event_clean" = "Cleaning";	
+"title_event_select_store" = "Grading/Storaging";
+"title_event_destory" = "Disposal";
+"title_event_noread" = "Disposal(Non-Reading)";
+"title_rfid_tracking_service" = "RFID Tracking Service";
+/*액티비티 제목 끝 */
+
+/*옵션메뉴 시작 */
+"omenu_main_menu" = "Main Menu";
+"omenu_client_config" = "Setting";
+"omenu_logout" = "Log Out";
+"omenu_new_login" = "Login(New)";
+/*옵션메뉴 끝 */
+
+
+/* 공통 시작 */
+"common_error" = "Error";
+"common_confirm" = "Confirm";    
+"common_cancel" = "Cancel";
+"common_close" = "Close";
+"common_clear_all" = "Clear(Reading)";
+"common_task_init" = "Clear(Task)";
+"common_find" = "Find";
+"common_search" = "Search";
+"common_search_condition" = "Condition(Search)";
+"common_check_all" = "All(Check)";
+"common_delete" = "Delete";
+"common_send" = "Send";
+"common_complete_send" = "Send(Complete)";
+"common_save" = "Save";
+"common_selection" = "Select";
+"common_barcode_search" = "Barcode";
+"common_confirm_work_Init" = "Do you want to clear this work?";
+"common_confirm_delete" = "Do you want to delete all data?";
+"common_success_delete" = "Successfully been deleted.";
+"common_no_data_delete" = "There is no data to delete.";
+"common_no_data_send" = "There is no data to send.";
+"common_check_data_transferred" = "Data was incorrect. Please try again.";
+"common_no_data_send_try_again" = "There is no data to send. Please try again.";
+"common_success_sent" = "Successfully been sended.";
+"common_success_modified" = "Successfully been modified.";
+"common_error_occur_modification_try_again" = "An error has occurred. Please try again.";
+"common_not_connect_server_try_again" = "Server unreachable. Please try again.";
+"common_checksum_error" = "An check sum error has occurred.";
+"common_data_length_error" = "An data size error has occurred.";
+"common_unknown_error" = "An Unknown error has occurred.";
+"common_connection_timed_out" = "Connection to server timed out.";
+"common_server_connection_timed_out" = "Connection to server timed out.";
+"common_select_data_deleted" = "Please select the data to be deleted.";
+"common_error_occurred_data_search" = "An error occurred during data retrieval.";
+"common_no_code_inform" = "No code information";
+"common_update" = "update";
+"common_update_version" = "The latest version came out. Do you want to update now?";
+"common_not_load_data_from_server" = "You can not load data from a server. Please try again later.";
+"common_auth_error" = "Auth Error";
+"common_auth_fail_check_id_passwd" = "Authentication failed.\nPlease check your ID and password are used.";
+"common_want_quit" = "Are you sure you want to quit?";
+"common_login_diff_user_id" = "Would you like to sign in with a different user id?";
+"common_not_able_communicate" = "Environment is not able to communicate";	
+"common_progressbar_init" = "Initializing…";
+"common_progressbar_loading" = "Loading…";
+"common_progressbar_rfid_connecting" = "connecting to the reader.";	
+"common_progressbar_sending" = "Seding…";
+"common_progressbar_loading_basedata" = "The basis of the received data from the server.";
+"common_user_name" = "Worker";
+"common_branch" = "Location";
+"common_customer" = "Customer";
+"common_check_the_date" = "Please check the date.";
+"common_remark" = "Memo";
+"common_no_data_for_barcode" = "There is no data for the bar code.";
+"common_sign" = "Signature";
+"common_color_picker" = "Color";	
+"common_clear" = "Clear";
+"common_eraser" = "Erase";
+/* 공통 끝*/	
+
+/* 로그인 시작 */
+"login_mobile_id" = "Reader ID";
+"login_user_id" = "User ID";
+"login_password" = "Password";
+"login_autologin" = "login(Auto)";
+"login_button" = "Login";
+"login_input_id" = "Please enter your user ID.";
+"login_input_passwd" = "Please enter your user Passward.";
+"login_notify_network_cost" = "This cost will be charged according to the network using your subscription plan.";
+/* 로그인 끝*/	
+
+/* 리턴 메시지 시작 */
+"return_message_enter_your_user_id" = "Please enter your user ID.";
+"return_message_enter_your_password" = "Please enter your user Passward.";
+"return_message_verify_login_info" = "Please verify your login information again.";
+"return_message_disabled_user" = "The disabled users.";
+"return_message_upis_user_not_able_use" = "UPIS users will not be able to use it.";
+/* 리턴 메시지 끝 */
+
+
+/* RFID 시작 */
+"rfid_reader_swing_u" = "Swing U";
+"rfid_reader_at288" = "AT288";
+"rfid_reader_ajantech" = "AjanTech";
+"rfid_reader_arete" = "AretePop(Audio)";    
+"rfid_reader_none" = "None";
+"rfid_reader_connect" = "Connect(Reader)";
+"rfid_reader_close" = "Close(Reader)";
+"rfid_asset_name" = "Item No.";
+"rfid_serial_no" = "Serial No.";
+"rfid_epc_code" = "EPC Code";
+"rfid_epc_urn" = "EPC URN";
+"rfid_read_count" = "Count";
+"rfid_read_time" = "Time";
+"rfid_result" = "Result";
+"rfid_tag_count" = "Reading Qty";
+"rfid_tag_quantity" = "EA";	
+"rfid_event_code" = "Biz Step";	
+"rfid_reader_no_device_id" = "There is no device ID of the reader. Please enter your mobile phone number on the reader information management web screen.";
+"rfid_send" = "Send";
+"rfid_save" = "Save";
+"rfid_inspect" = "Inspection";
+"rfid_pallet_mount" = "Tagging(RFID)";
+"rfid_send_error_try_again" = "Due to the error it can not be transmitted the RFID data. Please try again later.";
+"rfid_save_error_try_again" = "Due to the error it can not be saved the RFID data. Please try again later.";
+"rfid_no_selected_bluetooth_select_config" = "There is no selected Bluetooth device Select the Bluetooth device from the configuration.";
+"rfid_no_selected_bluetooth" = "There is no selected Bluetooth device.";
+"rfid_please_enable_bluetooth" = "Please turn on Bluetooth.";
+"rfid_connected_reader" = "It is connected to the RFID reader.";
+"rfid_connecting_reader" = "It is connecting to the RFID reader.";
+"rfid_not_connect_reader" = "You can not connect to the RFID reader.";
+"rfid_reader_not_connected" = "RFID reader is not connected.";
+"rfid_connection_terminated" = "The connection has been terminated.";
+"rfid_unregistered_unit" = "business systems available Put in the phone number of the terminal to the registration number.";
+"rfid_event_not_set_select_config" = "RFID event has not been set. Choose Preferences from the RFID events.";
+"rfid_no_selected_readers" = "There is no selected reader. Please select the reader in the user management.";
+/* RFID 종료 */
+
+/* RFID 최종이력 시작 */
+"location_unit_id" = "Reader ID";
+"location_unit_name" = "Reader"; 
+"location_trace_date" = "Event Time";
+"location_epc_urn" = "EPC URN";
+"location_epc_code" = "EPC Code";
+"location_tag_id" = "TID";
+"location_event_type" = "Biz Step";	
+"location_total_cnt" = "Cnt(Total)";
+"location_cnt" = "Cnt";
+"location_search_condition" = "Condition(Search)";
+"location_search" = "Search";
+/* RFID 최종이력 종료 */
+
+/* 생산정보 시작 */
+"product_year_month_day" = "Year/Month/Day";
+"product_attach_date" = "Tagging Time";
+"product_maker_name" = "Mfr";
+"product_count" = "Qty";
+"product_percent" = "Utiliaztion Rate";
+"product_graph" = "Graph";
+"product_chart" = "Chart";
+"product_start_year" = "Year(Start)";
+"product_end_year" = "Year(End)";
+"product_start_month" = "Month(Start)";
+"product_end_month" = "Month(End)";
+"product_date" = "Date";
+"product_year_error" = "Start Year can not be bigger than End Year";
+"product_month_error" = "Start Month can not be bigger than End Month";
+"product_day_error" = "Start Date can not be bigger than End Date";
+"product_more_data" = "No have Grid Data.";
+/* 생산정보 끝 */	
+
+/*환경설정 시작 */
+"preference_basic_settings" = "Settings(Basic)";
+"preference_landscape_screen_enabled_title" = "Length View";
+"preference_landscape_screen_enabled_summaryOn" = "Change the screen to landscape mode when you move your phone.";
+"preference_landscape_screen_enabled_summaryOff" = "The phone does not change the screen to landscape mode when you move.";
+"preference_rfid_reader_setting" = "Setting(RFID)";
+"preference_report_settings" = "Send(RFID)";
+"preference_rfid_reader" = "Reader(RFID)";
+
+"preference_rfid_reader_summary" = "Select the desired RFID readers.";
+"preference_bluetooth_selection" = "Bluetooth device selection";
+"preference_bluetooth_selection_summary" = "Select the Bluetooth device.";
+"preference_rfid_event" = "Event(RFID)";
+"preference_rfid_event_summary" = "Select RFID events.";
+"preference_rfid_mask" = "Mask(RFID)";
+"preference_rfid_mask_summary" = "The only leading EPC code that corresponds to the mask.";
+"preference_rfid_beep_enabled_title" = "Beep";
+"preference_rfid_beep_enabled_soundOn" = "When reading an RFID tag, the effects will occur.";
+"preference_rfid_beep_enabled_soundOff" = "When reading an RFID tag , the effects will not occur.";
+"preference_not_support_bluetooth" = "It does not support bluetooth device because you can not use this feature.";
+"preference_failure_not_stored_event_code" = "Due to the failure it can not be stored in the event code.";   		
+
+"preference_device_scanning" = "Scanning Device…";
+"preference_select_device" = "Please select the devices to be connected.";
+"preference_none_paired" = "There is no paired device.";
+"preference_none_found" = "There is no device was found.";
+"preference_paired_devices" = "Paired device";
+"preference_other_devices" = "Other devices that can use";
+"preference_button_scan" = "Scan(Reader)";
+"preference_branch_key" = "Location ID";    
+"preference_branch_name" = "Location";
+"preference_branch_cust_name" = "Customer";
+"preference_branch_selection" = "Company";
+"preference_branch_selection_summary" = "Select a Location.";
+"preference_barcode_setting" = "Setting(Barcode)";
+"preference_rfid_power" = "RFID Power";
+"preference_rfid_power_summary" = "RF 세기를 설정합니다.";
+/* 환경설정 끝 */
+
+
+/* 추적서비스 시작*/
+"track_branch_name" = "Location";		
+"track_process_date" = "Reading Time";
+"track_event_name" = "Event";	
+"track_prev_trace_date" = "Start Time";
+"track_next_trace_date" = "End Time";  
+"track_diff_trace_date" = "Dwell Time";
+"track_move_trace_date" = "Tranp. L/T"; 	/* Tranportation L/T */
+"track_recycle_cnt" = "Trip";			
+/* 추적서비스 종료  */
+
+
+/* 처리결과 시작*/
+/* 
+ "proc_result_error_not_exist_tag" = "EPC codes have not been issued it can not be processed.";
+ "proc_result_error_tag_already_processed" = "The tags have already been processed.";
+ "proc_result_error_unknown_exception" = "Unable to process due to an exception.";
+ 
+ "proc_result_error_already_mounted_tag" = "Can not be processed there are tags that have already been mounted";
+ "proc_result_error_abnormal_tag" = "Abnormal tag could not be treated there.Check the state of the tag.";
+ "proc_result_error_not_exist_tag_location_seq" = "The tag location number does not exist.";
+ "proc_result_error_not_mounted" = "The tag is not attached.";
+ "proc_result_error_duplicated_within_a_day" = "The same treatment in the same position within 24 hours was caused by redundancy.";
+ 
+ */
+"proc_result_error_inspect_tag_issue" = "Can not be inspect because it is a issuing tag";
+"proc_result_error_inspect_tag_encoding_fail" = "Encoding failed inspection because I can not be tagged.";
+"proc_result_error_inspect_tag_insert_success" = "A tag attached properly.";
+"proc_result_error_inspect_tag_insert_fail" = "Pallet insert fails because the inspection can not be tagged.";
+"proc_result_error_inspect_tag_discard" = "Tags can not be discarded because inspection.";
+"proc_result_error_inspect_unknown_exception" = "You will be able to inspect an unknown error.";
+"proc_result_error_inspect_not_registered_data" = "EPC code is not registered in the server.";	
+/* 처리결과 끝*/
+
+/* RFID 구매 시작*/
+"rfid_order_id" = "P/O No.";
+"rfid_order_id_selection" = "P/O Select";
+"rfid_order_date" = "P/O Date";
+"rfid_order_req_cnt" = "P/O Qty";
+"rfid_order_cust_name" = "Buyer";
+"rfid_asset_epc_name" = "Item No.";
+"rfid_prod_cust_name" = "Supplier";
+"rfid_order_branch_name" = "Dest. Com.";
+"rfid_order_addr" = "Dest. Address";
+"rfid_work_date" = "Deliv. Date";
+"rfid_work_remark" = "Memo";
+"rfid_enter_your_order_no" = "Please enter your P/O No.";
+"rfid_enter_your_delivery_date" = "Please enter your delivery date.";
+"rfid_order_state_name" = "P/O Status";
+/* RFID 구매 끝*/
+
+/* 제작 시작 */
+"make_order_id" = "P/O No.";
+"make_order_id_selection" = "P/O Select";
+"make_lot_id" = "Lot No.";
+"make_remark" = "Memo";
+"make_enter_your_order_no" = "Please enter your P/O No.";
+"make_enter_your_lot_no" = "Please enter Lot No.";
+"make_cannot_handle_amount_greater_qty" = "You can not handle this amount is greater than the quantity ordered.";
+"make_asset_type" = "Item No.";
+"make_prod_grade" = "Grade";
+"make_pack_name" = "Batch Name";
+"make_select_asset_Type" = "Please select the Item No.";
+"make_select_product_grade" = "Please select a grade.";
+"make_enter_the_package_no" = "Please enter the Batch No.";
+"make_enter_the_package_name" = "Please enter the Batch name.";
+"make_pack_date" = "Batch Date";
+"make_pack_id" = "Batch No.";
+"make_pack_id_selection" = "Batch Select";
+"make_prod_grade_name" = "Grade";
+"make_prod_asset_epc_name" = "Item No.";	
+/* 제작 끝 */
+
+/* 주문 시작 */
+"sale_work_id" = "Invoice No.";
+"sale_work_id_selection" = "Invoice Select";
+"sale_deli_date" = "ETD";
+"sale_assign_count" = "Shipping Qty";
+"sale_deli_branch_name" = "Dest. Loc.";
+"sale_order_addr" = "Dest. Address";
+"sale_prod_asset_epc_name" = "Item No.";
+"sale_prod_grade_name" = "Grade";
+"sale_order_cust_name" = "Seller";
+"sale_in_cust_name" = "Dest. Com.";
+"sale_out_cancel_order_cust_name" = "Seller";
+"sale_move_cust_sname" = "Dest. Com.";
+"sale_move_cust_name" = "T/O Req. Com.";
+"sale_driver_name" = "Deliv. Man";
+"sale_veh_name" = "Vehicle No.";
+"sale_proc_count" = "Shipped Qty";
+"sale_enter_your_work_id" = "Please enter the invoice number.";
+"sale_can_not_processed_because_completed_assigned_quantity" = "Can not processed because completing the assigned quantity.";
+"sale_same_processing_qty_work_assing_qty" = "The Shipping Qty and Shipped Qty must be the same in order to complete the transfer.";
+"sale_same_processing_qty_work_require_qty" = "The Shipping Qty and Receiving Qty must be the same in order to complete the transfer.";
+"sale_order_req_date" = "ETA";
+"sale_release_cust_name" = "Dprt. Com.";
+"sale_release_branch_name" = "Dprt. Loc.";
+"sale_order_req_count" = "Shipping Qty";
+"sale_worker_name" = "Receiver Name";
+"sale_expected_count" = "Receiving Qty";
+"sale_noread_count" = "Non-Reading Qty";
+"sale_unrecognized_qty_can_enter_ony_numbers" = "Non-Reading Qty can enter ony numbers.";
+"resale_order_id" = "Receipt No.";
+"resale_order_req_count" = "Receiving Qty";
+"resale_cust_name" = "Customer";
+/* "resale_driver_name" = "Deliv. Man"; */
+"resale_worker_name" = "Receiver Name";
+"sale_enter_your_resale_order_id" = "Please enter the Receipt No.";
+"sale_work_date" = "Shipping Date";
+"resale_work_date" = "Shipping Date";
+"sale_type_name" = "Type";
+"resale_type_name" = "Type";
+"easy_transfer_date" = "Shipping Date";
+"easy_transfer_cust_id" = "Dprt. Com.";
+"easy_transfer_type" = "Ship Type";
+"easy_cust_key" = "Customer ID";
+"easy_parent_cust_name" = "Alliance Com.";    
+"easy_cust_name" = "Customer";
+"easy_cust_selection" = "Select";
+"easy_prod_asset" = "Asset";
+"easy_select_transfer_type" = "Please enter the Ship Type";
+"easy_select_transfer_cust_id" = "Please enter the Dprt.Com.";		
+"easy_to_branch_selection" = "Please enter the Dest.Com.";
+"easy_select_to_branch_id" = "Please select the Dest.Com.";
+/* 주문 끝 */
+
+/* 재고 시작 */
+"stock_review_id" = "Count No.";
+"stock_review_req_date" = "Count Req. Date";
+"stock_prod_asset_epc_name" = "Item No.";
+"stock_old_stock_cnt" = "Book Stock Amount";
+"stock_review_id_selection" = "Count No. Select";
+"stock_real_stock_count" = "Counted Amount";
+"stock_old_stock_count" = "Book Stock Amount";
+"stock_enter_your_review_id" = "Please enter the Count No.";
+"stock_can_not_processed_because_different_pallet" = "It can not be processed because of different pallet type";
+/* 재고 끝 */
+
+/* 이벤트 시작 */
+"event_select_grade" = "Grade(Select)";
+/* 이벤트 끝 */
+
+/* 바코드 시작 */
+"button_ok" = "OK";
+"button_restart" = "Re-Scan";
+"button_selection" = "Select";
+"msg_bulk_mode_scanned" = "multiple Scan: barcode scanned and saved";
+"msg_camera_framework_bug" = "the Android camera encountered a problem. You may need to restart the device.";
+"msg_default_format" = "Format";
+"msg_default_meta" = "Metadata";
+"msg_default_mms_subject" = "Hi";
+"msg_default_status" = "Place a barcode inside the viewfinder rectangle to scan it.";
+"msg_default_time" = "Time";
+"msg_default_type" = "Type";
+
+"msg_intent_failed" = "the requested application could not be launched. The barcode contents may be invalid.";
+"preferences_auto_focus_title" = "Use auto focus";	
+"preferences_front_light_auto" = "AutO";
+"preferences_front_light_off" = "OFF";
+"preferences_front_light_on" = "ON";
+"preferences_front_light_summary" = "Improves scanning in low light on some phones, but may cause glare. Does not work on all phones.";
+"preferences_front_light_title" = "Use front light";
+"preferences_play_beep_title" = "Beep";
+"preferences_vibrate_title" = "Vibrate";
+"result_text" = "Found plain text";
+/* 바코드 끝 */
+
+
+
+
+/* Ver2.0.0 */
+/* 통합 화면 시작 */
+"return_message_not_attach_unit" = "Please check if the available reader is registered.";
+
+"title_combine_out_search" = "Invoice List";
+"title_combine_in_search" = "Invoice List";
+"title_work_process_detail_view" = "Detail View";
+
+"title_easy_cust_search" = "Client Com. List";		
+"title_easy_cust_selection" = "Select Client Com.";
+
+"title_work_out_delivery" = "Shipped";
+"title_work_out_release" = "Goods Shipping";	
+"title_work_in_warehouse" = "Received";
+
+"title_work_in_move_return" = "Movement/Receving by R/O";	
+"title_work_in_delivery" = "Receiving of Deliv.";
+"title_work_in_gather" = "Receiving of Return";
+
+"title_work_out_product" = "Goods Mapping";		
+"title_work_in_cust_search" = "Dprt. Com.";
+"title_work_out_cust_search" = "Dest. Com.";
+
+"combine_work_type" = "Type";
+"combine_work_type_out" = "Deliv.";	
+"combine_work_type_move" = "Movement";	
+
+"combine_assign_out" = "Shipped Schedule";
+"combine_assign_out_count" = "Shipped Schedule Qty";
+"combine_process_count" = "Processing Qty.";
+
+"combine_remain_count" = "Untreated Qty";
+"combine_select_work_type" = "Please select Type.";
+"combine_out_date" = "Shipped Schedule Date";
+"combine_cust_out_addr" = "Dest. Com. Address";
+
+
+"combine_assign_in_count" = "Received Schedule Qty";
+"combine_cust_in_addr" = "Dprt. Com. Address";	
+
+"combine_assign_in" = "Received Schedule";
+"resale_release_cust_name" = "Repurchaser";
+"resale_driver_name" = "Repurchaser Name";	
+
+"easy_process_exist_message" = "The temporary saved data will be erased. Do you want to exit?";
+"common_detail_view" = "Detail";
+"common_temporarily_save" = "Temporary Save";
+
+"common_branch_name" = "Location";
+"preference_branch_id" = "Location ID";
+"msg_select_sale_work_id" = "No Invoice No. found.";
+
+
+"msg_no_selected_branch_cust_type" = "Please select Location from the setting";	
+"msg_no_selected_out_cust" = "Please select Dest. Com.";
+"msg_no_selected_in_cust" = "Please select Dprt. Com.";
+
+"msg_no_temporary_saved_data" = "There is no temporary saved data.";
+"msg_exist_temporary_saved_data" = "There is a temporary saved data.";
+
+"common_search_period" = "Term";
+"common_grid_no" = "No.";
+"common_order_number" = "Instruction No.";
+"common_asset_type" = "Item No.";
+
+"title_work_inout_cancel" = "Receiving&amp;Shipping Cancel";
+"common_select_all" = "Total";
+"easy_process_trade_chit" = "Statement No.";
+
+
+"easy_cust_company_all" = "All Alliance Com.";
+"easy_cust_company_except_logisall" = "Exclude LogisALL";
+"easy_cust_division_pmk" = "Mfr";
+
+"easy_cust_division_rpc" = "Depot";	
+"easy_cust_division_exp" = "Customer";
+"easy_cust_division_imp" = "Real Customer";
+
+"title_easy_in_search" = "Invoice List";	
+"msg_search_date_difference_between" = "Please set the period within three days.";
+"msg_search_date_exceeded_limit" = "Data can not be inquired before 7 days. Please reset the period.";
+"msg_search_date_error" = "Please check the date";
+
+"combine_cancel_base_branch_name" = "Customer";
+"combine_cancel_inout_branch_name" = "Dest./Dprt. Com.";	
+
+"title_work_history_search" = "Job History";
+
+/* 작업내역 시작*/
+"work_history_trace_date" = "Event Date";
+"work_history_asset_epc_name" = "Item No.";
+"work_history_event_name" = "Event";
+"work_history_event_count" = "Qty";
+"work_history_branch_name" = "Customer";
+"work_history_select_envent_code" = "Please select Event Type.";
+/* 작업내역 종료  */
+
+"title_work_sale_a" = "Shipped A";
+"title_work_sale_b" = "Shipped B";
+"title_work_sale_c" = "Shipped C";
+"title_work_resale_a" = "Received A";
+"title_work_resale_b" = "Received B";	
+
+"preference_identification_system_setting" = "Set Identification";
+"preference_identification_system_summary" = "Please select Identification.";
+"preference_identification_system" = "Goods Identification";	
+
+"identification_system_itf14" = "ITF-14";
+"identification_system_agqr" = "Farm-QR Code";
+
+"common_read_itf14" = "Barcode";
+"common_read_aqgr" = "QR Code";
+"common_read_rfid" = "RFID Tag";
+
+"common_product_code" = "Goods Code";
+"common_product_name" = "Goods Name";
+
+"msg_no_selected_serial_no" = "Please select Serial No.";
+"msg_inspect_prod_name_error_try_again" = "An error occurred. Please try again later.";
+
+"msg_enter_vehicle_number" = "Please enter Vehicle No.";
+"title_prod_mapping_info" = "Goods Info.";
+"title_prod_insert_direct" = "Add Goods";
+
+"msg_enter_product_code" = "Please enter Goods Code.";
+"msg_error_product_code" = "Error Goods Code.";
+"msg_processing_qty_work_require_qty" = "Estimated Qty exceeded. Please check it.";
+
+"msg_error_need_work_complete_force" = "Already processed Pallet exists. Are you sure you want to process the Pallet except that?"; 
+"msg_error_unregistered_product" = "No Goods Info.";
+"msg_charged_service" = "It's a paid service. Please confirm service contract.";
+/* 통합 화면 끝 */
+
+
