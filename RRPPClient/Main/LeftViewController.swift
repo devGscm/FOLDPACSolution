@@ -18,10 +18,9 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	@IBOutlet weak var btnLogout: UIButton!
 	var mLstMenuData:Array<MenuItem> = Array<MenuItem>()
 
-	/*
 	lazy var clsProductMountViewController: ProductMountViewController = {
 		return UIStoryboard.viewController(strStoryBoardName: "Product", strIdentifier: "ProductMountViewController") as! ProductMountViewController
-	}() */
+	}()
 	
 	open override func viewDidLoad()
 	{
@@ -111,7 +110,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		case 1:
 			
 			//navigationDrawerController?.transition(to: clsProductMountViewController, completion: closeNavigationDrawer)
-//ㅛ			toolbarController?.transition(to: clsProductMountViewController, completion: closeNavigationDrawer)
+			toolbarController?.transition(to: clsProductMountViewController, completion: closeNavigationDrawer)
 			break;
 			
 		default:
