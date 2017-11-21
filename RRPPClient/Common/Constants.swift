@@ -27,5 +27,5 @@ class Constants
 	static let BRANCH_SELECTION_KEY						= "branchSelectionDialog"		/**< 거점 선택 */
 	static let RFID_POWER_KEY							= "rfidPower"						/**< RFID 파워 */
 	
-	static let WEB_SVC_URL 								= "http://rrpp.moramcnt.com"	/**< 서비스 URL */
+	static let WEB_SVC_URL 								= "http://upis.moramcnt.com"	/**< 서비스 URL */
 }

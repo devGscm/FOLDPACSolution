@@ -13,8 +13,8 @@ class RfidReaderDialog: UITableViewController
 {
 	struct RfidReader
 	{
-		let mIntType : Int
-		let mStrName : String
+		let readerType : Int
+		let readerName : String
 	}
 
 	var selectedRow : RfidReader {
@@ -56,9 +56,7 @@ class RfidReaderDialog: UITableViewController
 		let tvcCell = UITableViewCell()
 		let strtRfidReader = mLstRfidReader[indexPath.row]
 		tvcCell.textLabel?.font = UIFont.fontAwesome(ofSize: 13)
-		tvcCell.textLabel!.text = "\(String.fontAwesomeIcon(name: .bolt)) \(strtRfidReader.mStrName )"
+		tvcCell.textLabel!.text = "\(String.fontAwesomeIcon(name: .bolt)) \(strtRfidReader.readerName )"
 		return tvcCell
 	}
-	
-
 }

@@ -61,7 +61,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	public func makeMenuItem() -> Void
 	{
 		let strCustType = AppContext.sharedManager.getUserInfo().getCustType()
-		print(" CustType:\(strCustType)")
+		//print(" CustType:\(strCustType)")
 		if(strCustType == "ISS")
 		{
 			mLstMenuData.append(MenuItem(menuIcon: Icon.cm.play, menuId: "TagSupply", menuName: "납품등록(RFID)"))
@@ -74,7 +74,6 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			mLstMenuData.append(MenuItem(menuIcon: Icon.cm.play, menuId: "ProductMount", menuName: "자산등록"))
 			mLstMenuData.append(MenuItem(menuIcon: Icon.cm.play, menuId: "RfidInspect", menuName: "RFID태그검수"))
 			mLstMenuData.append(MenuItem(menuIcon: Icon.cm.play, menuId: "RfidInspect", menuName: "이력추적"))
-			
 		}
 		tvMenu?.reloadData()
 	}

@@ -48,11 +48,11 @@ class RightViewController: UITableViewController
 		
 		self.swRfidBeep.isOn = UserDefaults.standard.bool(forKey: Constants.RFID_BEEP_ENABLED_KEY)
 		// RFID 리더기
-		mLstRfidReader.append(RfidReaderDialog.RfidReader(mIntType: 0, mStrName: "Swing U"))
-		mLstRfidReader.append(RfidReaderDialog.RfidReader(mIntType: 1, mStrName: "AT288"))
+		mLstRfidReader.append(RfidReaderDialog.RfidReader(readerType: 0, readerName: "Swing U"))
+		mLstRfidReader.append(RfidReaderDialog.RfidReader(readerType: 1, readerName: "AT288"))
 		
 		let intRfidReader = UserDefaults.standard.integer(forKey: Constants.RFID_READER_KEY)
-		let strRfidReaderName = mLstRfidReader[intRfidReader].mStrName
+		let strRfidReaderName = mLstRfidReader[intRfidReader].readerName
 		print("@@@@@@ RFID READER:\(intRfidReader)")
 		self.btnRfidReader.setTitle(strRfidReaderName, for: .normal)
 		
@@ -79,8 +79,8 @@ class RightViewController: UITableViewController
 		acDialog.addAction(UIAlertAction(title: "Cancel", style: .default) { (_) in
 		})
 		let aaOkAction = UIAlertAction(title: "OK", style: .default) { (_) in
-			let intReaderType = clsReaderDialog.selectedRow.mIntType
-			let strRaderName = clsReaderDialog.selectedRow.mStrName
+			let intReaderType = clsReaderDialog.selectedRow.readerType
+			let strRaderName = clsReaderDialog.selectedRow.readerName
 			UserDefaults.standard.setValue(intReaderType, forKey: Constants.RFID_READER_KEY)
 			UserDefaults.standard.synchronize()
 			self.btnRfidReader.setTitle(strRaderName, for: .normal)
