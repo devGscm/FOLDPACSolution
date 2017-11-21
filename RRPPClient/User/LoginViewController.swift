@@ -70,12 +70,13 @@ class LoginViewController: UIViewController
 		
 		if(strUserId?.isEmpty == true)
 		{
-			showLoginErrorDialog(strTitle: "에러", strMessage: "사용자ID를 입력하시기 바랍니다.")
+			showLoginErrorDialog(strTitle: NSLocalizedString("common_error", comment: "에러"), strMessage: NSLocalizedString("login_input_id", comment: "사용자 ID입력"))
 			return
 		}
 		if(strPasswd?.isEmpty == true)
 		{
-			showLoginErrorDialog(strTitle: "에러", strMessage: "비밀번호를 입력하시기 바랍니다.")
+			//common_confirm
+			showLoginErrorDialog(strTitle: NSLocalizedString("common_error", comment: "에러"), strMessage: NSLocalizedString("login_input_passwd", comment: "비밀번호 입력"))
 			return
 		}
 		
