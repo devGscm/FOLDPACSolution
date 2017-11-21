@@ -34,6 +34,7 @@
 		55FA784D1FBDAD0B00583A80 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78471FBDAD0B00583A80 /* RootViewController.swift */; };
 		55FA78561FBDAD7E00583A80 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78551FBDAD7E00583A80 /* AppContext.swift */; };
 		55FA78591FBDB06F00583A80 /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78581FBDB06F00583A80 /* UIStoryboard.swift */; };
+		967A9C441FC3BE8D00B6A9D1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 967A9C461FC3BE8D00B6A9D1 /* Localizable.strings */; };
 		968611EC1FBD585C000FE288 /* SWXMLHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 968611DD1FBD564C000FE288 /* SWXMLHash.framework */; };
 		968611ED1FBD585C000FE288 /* SWXMLHash.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 968611DD1FBD564C000FE288 /* SWXMLHash.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		96D279C91FBE5E4D004B848F /* Mosaic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96D279C81FBE5E4D004B848F /* Mosaic.framework */; };
@@ -105,6 +106,8 @@
 		55FA78471FBDAD0B00583A80 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		55FA78551FBDAD7E00583A80 /* AppContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
 		55FA78581FBDB06F00583A80 /* UIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboard.swift; sourceTree = "<group>"; };
+		967A9C451FC3BE8D00B6A9D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		967A9C471FC3BE9500B6A9D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		968611DD1FBD564C000FE288 /* SWXMLHash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SWXMLHash.framework; path = Carthage/Build/iOS/SWXMLHash.framework; sourceTree = "<group>"; };
 		96D279C81FBE5E4D004B848F /* Mosaic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mosaic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E4941C1FB1A78500D1E2C1 /*  RRPPClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = " RRPPClient.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -211,6 +214,14 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		967A9C411FC3BE4E00B6A9D1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				967A9C461FC3BE8D00B6A9D1 /* Localizable.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		96E494131FB1A78500D1E2C1 = {
 			isa = PBXGroup;
 			children = (
@@ -235,6 +246,7 @@
 		96E4941E1FB1A78500D1E2C1 /* RRPPClient */ = {
 			isa = PBXGroup;
 			children = (
+				967A9C411FC3BE4E00B6A9D1 /* Resources */,
 				55F385C91FC3B6A40043F1A3 /* Product */,
 				55FA78571FBDB06F00583A80 /* Extension */,
 				55FA78411FBDAD0B00583A80 /* Main */,
@@ -385,6 +397,7 @@
 				55FA78401FBDACFD00583A80 /* pallet.png in Resources */,
 				96E4942A1FB1A78500D1E2C1 /* LaunchScreen.storyboard in Resources */,
 				550334BE1FC2E0B700ABE965 /* Main.storyboard in Resources */,
+				967A9C441FC3BE8D00B6A9D1 /* Localizable.strings in Resources */,
 				55FA783F1FBDACFD00583A80 /* login.png in Resources */,
 				55F385CB1FC3B6F40043F1A3 /* Product.storyboard in Resources */,
 				96E494271FB1A78500D1E2C1 /* Assets.xcassets in Resources */,
@@ -480,6 +493,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		967A9C461FC3BE8D00B6A9D1 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				967A9C451FC3BE8D00B6A9D1 /* en */,
+				967A9C471FC3BE9500B6A9D1 /* Base */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		96E494281FB1A78500D1E2C1 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
