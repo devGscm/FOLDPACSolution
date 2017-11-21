@@ -1,0 +1,57 @@
+
+/* Class = "UILabel"; text = "자동로그인"; ObjectID = "14w-fA-wng"; */
+"14w-fA-wng.text" = "자동로그인";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "52V-w5-bUG"; */
+"52V-w5-bUG.text" = "Label";
+
+/* Class = "UILabel"; text = "RFID Power"; ObjectID = "5Ky-tm-3bG"; */
+"5Ky-tm-3bG.text" = "RFID Power";
+
+/* Class = "UIButton"; normalTitle = "3312"; ObjectID = "5kX-Dy-FUf"; */
+"5kX-Dy-FUf.normalTitle" = "3312";
+
+/* Class = "UILabel"; text = "RRPP"; ObjectID = "BaM-pA-0xc"; */
+"BaM-pA-0xc.text" = "RRPP";
+
+/* Class = "UIViewController"; title = "로그인"; ObjectID = "DV3-pj-IDf"; */
+"DV3-pj-IDf.title" = "로그인";
+
+/* Class = "UILabel"; text = "RFID 마스크"; ObjectID = "JVY-Ik-LGT"; */
+"JVY-Ik-LGT.text" = "RFID 마스크";
+
+/* Class = "UIButton"; normalTitle = "Swing U"; ObjectID = "Kh7-9M-Rik"; */
+"Kh7-9M-Rik.normalTitle" = "Swing U";
+
+/* Class = "UIViewController"; title = "좌측메뉴"; ObjectID = "L1y-RK-ShF"; */
+"L1y-RK-ShF.title" = "좌측메뉴";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "QC2-23-yqp"; */
+"QC2-23-yqp.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "RRPP Trade & Tracking & Traceability Platform"; ObjectID = "Vrw-qa-6Mu"; */
+"Vrw-qa-6Mu.text" = "RRPP Trade & Tracking & Traceability Platform";
+
+/* Class = "UILabel"; text = "효과음"; ObjectID = "a3t-Jc-5mX"; */
+"a3t-Jc-5mX.text" = "효과음";
+
+/* Class = "UILabel"; text = "루트"; ObjectID = "aIO-S3-54Z"; */
+"aIO-S3-54Z.text" = "루트";
+
+/* Class = "UIButton"; normalTitle = "Logout"; ObjectID = "cBC-nu-tFG"; */
+"cBC-nu-tFG.normalTitle" = "Logout";
+
+/* Class = "UITextField"; placeholder = "User ID"; ObjectID = "dSH-Ur-tIs"; */
+"dSH-Ur-tIs.placeholder" = "User ID";
+
+/* Class = "UIButton"; normalTitle = "Login"; ObjectID = "hmt-6X-bkx"; */
+"hmt-6X-bkx.normalTitle" = "Login";
+
+/* Class = "UITableViewController"; title = "오른쪽메뉴"; ObjectID = "nJr-NP-3rZ"; */
+"nJr-NP-3rZ.title" = "오른쪽메뉴";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "nek-0T-h2J"; */
+"nek-0T-h2J.placeholder" = "Password";
+
+/* Class = "UILabel"; text = "RFID 리더기"; ObjectID = "qg4-yk-QUn"; */
+"qg4-yk-QUn.text" = "RFID 리더기";

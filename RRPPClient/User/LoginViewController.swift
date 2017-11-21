@@ -38,8 +38,8 @@ class LoginViewController: UIViewController
 		//mClsProgressBar.Show(true, strMessage:"Loading...")
 		
 		btnLogin.titleLabel?.font = UIFont.fontAwesome(ofSize:18)
-		let strLogin:String? = String.fontAwesomeIcon(name:.lock) + " 로그인"
-		btnLogin.setTitle(strLogin, for: .normal)
+		//let strLogin:String? = String.fontAwesomeIcon(name:.lock) + " 로그인"
+		//btnLogin.setTitle(strLogin, for: .normal)
 	}
 	
 	
@@ -70,12 +70,13 @@ class LoginViewController: UIViewController
 		
 		if(strUserId?.isEmpty == true)
 		{
-			showLoginErrorDialog(strTitle: "에러", strMessage: "사용자ID를 입력하시기 바랍니다.")
+			showLoginErrorDialog(strTitle: NSLocalizedString("common_error", comment: "에러"), strMessage: NSLocalizedString("login_input_id", comment: "사용자 ID입력"))
 			return
 		}
 		if(strPasswd?.isEmpty == true)
 		{
-			showLoginErrorDialog(strTitle: "에러", strMessage: "비밀번호를 입력하시기 바랍니다.")
+			//common_confirm
+			showLoginErrorDialog(strTitle: NSLocalizedString("common_error", comment: "에러"), strMessage: NSLocalizedString("login_input_passwd", comment: "비밀번호 입력"))
 			return
 		}
 		
@@ -87,11 +88,15 @@ class LoginViewController: UIViewController
 								loginCompletionHandler:
 			{ (login, loginError) in
 				if let error = loginError {
-					objMe.showLoginErrorDialog(strTitle: "에러", strMessage:  error.localizedDescription)
+					DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // in half a second...
+						self.showLoginErrorDialog(strTitle: NSLocalizedString("common_error", comment: "에러"), strMessage: "Login Error Reason:" + String(error.localizedDescription) )
+					}
 					return
 				}
 				guard let login = login else {
-					print("에러 데이터가 없음")
+					DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // in half a second...
+						self.showLoginErrorDialog(strTitle: NSLocalizedString("common_error", comment: "에러"), strMessage: "Return doesn't  Value")
+					}
 					return
 				}
 				// 성공
@@ -105,8 +110,10 @@ class LoginViewController: UIViewController
 						{
 							if(unitId.isEmpty == true)
 							{
-								//TODO : 다국어 처리
-								objMe.showLoginErrorDialog(strTitle: "알림", strMessage: "선택된 리더기기 없습니다.")
+								DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // in half a second...
+									self.showLoginErrorDialog(strTitle: NSLocalizedString("common_error", comment: "에러"),
+															  strMessage: NSLocalizedString("rfid_reader_no_device_id", comment: "선택된 리더기가 없습니다."))
+								}
 								return
 							}
 						}
@@ -152,13 +159,31 @@ class LoginViewController: UIViewController
 					else
 					{
 						//TODO 다국어 처리되면 메세지에 따라서 처리
-						DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // in half a second...
-							self.showLoginErrorDialog(strTitle: "알림", strMessage: "인증오류가 발생하였습니다. 오류코드:" + String(returnCode))
+						var rtnMessage : String = ""
+						switch returnCode
+						{
+							case ReturnCodeType.RETURN_CODE_NOT_ATTACH_UNIT.rawValue :
+								rtnMessage = NSLocalizedString("return_message_not_attach_unit", comment: "사용가능한 리더기정보 등록여부를 확인하여 주십시오. ")
+							case ReturnCodeType.RETURN_CODE_ENTER_USER_ID.rawValue :
+								rtnMessage = NSLocalizedString("return_message_enter_your_user_id", comment: "아이디를 입력하여 주십시오. ")
+							case ReturnCodeType.RETURN_CODE_ENTER_PASSWORD.rawValue :
+								rtnMessage = NSLocalizedString("return_message_enter_your_password", comment: "패스워드를 입력하여 주십시오. ")
+							case ReturnCodeType.RETURN_CODE_VERIFY_LOGIN_INFO.rawValue :
+								rtnMessage = NSLocalizedString("return_message_verify_login_info", comment: "로그인 정보를 다시 확인하여 주십시오.")
+							case ReturnCodeType.RETURN_CODE_DISABLED_USER.rawValue :
+								rtnMessage = NSLocalizedString("return_message_disabled_user", comment: "사용 중지된 사용자입니다. ")
+							case ReturnCodeType.RETURN_CODE_NOT_RRPP_USER.rawValue :
+								rtnMessage = NSLocalizedString("return_message_upis_user_not_able_use", comment: "RRPP 사용자가 아님 ")
+							case ReturnCodeType.RETURN_CODE_PK_VIOLATION.rawValue :
+								//TODO: 다국어 정의
+								rtnMessage = "중복키 오류"
+							default :
+								rtnMessage = "알수없는 오류코드발생"
 						}
-						
-						//						DispatchQueue.global(qos: .userInitiated).async{
-						//							self.showLoginErrorDialog(strTitle: "알림", strMessage: "인증오류가 발생하였습니다. 오류코드:" + String(returnCode))
-						//						}
+						DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // in half a second...
+							self.showLoginErrorDialog(strTitle: NSLocalizedString("common_error", comment: "에러"),
+													  strMessage: rtnMessage)
+						}
 						return
 					}
 				}

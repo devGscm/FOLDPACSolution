@@ -1,0 +1,554 @@
+/* 
+  Localizable.strings
+  RRPPClient
+
+  Created by MORAMCNT on 2017. 11. 21..
+  Copyright © 2017년 MORAMCNT. All rights reserved.
+*/
+
+
+/* 어플설정 시작 */
+"app_name" = "RRPP";
+/* 어플설정 끝*/
+
+/*액티비티 제목 시작 */
+"title_user_login" = "登录";
+"title_client_config" = "环境设定";
+"title_device_scan_dialog" = "搜索装置";
+"title_branch_search_dialog" = "搜索据点";
+"title_tag_supply" = "交货登陆(RFID)";
+"title_tag_supply_detail_view" = "交货登陆名单";
+"title_tag_order_search" = "交货明细查询(RFID)";
+"title_product_mount" = "品目登陆";
+"title_product_package" = "Batch登录";
+"title_product_package_cancel" = "Batch取消";
+"title_product_order_search" = "购买订单查询";
+"title_product_package_search" = "Batch查询";
+"title_sale_in" = "销售入库";
+"title_sale_in_exp" = "销售入库";
+"title_sale_out" = "销售出库";
+"title_sale_out_rdc" = "销售出库";
+"title_common_sale_out" = "出库";
+
+"title_move_in" = "移动入库";
+"title_move_out" = "移动出库";
+"title_resale_in" = "返还入库";
+"title_out_cancel" = "出库取消";
+"title_in_cancel" = "入库取消";
+"title_easy_shipment" = "单元装载出库";
+"title_easy_shipment_exp" = "单元装载出库";
+"title_easy_ship_cust_search" = "购买处查询";
+"title_sale_out_search" = "货单查询";
+"title_sale_in_search" = "货单查询";
+"title_resale_in_search" = "返还订单查询";
+"title_rfid_inspect" = "RFID标签验收";
+"title_rfid_reader" = "RFID读卡器";
+"title_stock_review" = "在库盘点";
+"title_stock_review_search" = "在库盘点查询";
+"title_event_clean" = "清洗";
+"title_event_select_store" = "筛选/保管";
+"title_event_destory" = "报废";
+"title_event_noread" = "未识别报废";
+"title_rfid_tracking_service" = "追踪服务";
+
+/*액티비티 제목 끝 */
+
+/*옵션메뉴 시작 */
+"omenu_main_menu" = "主菜单";
+"omenu_client_config" = "环境设定";
+"omenu_logout" = "退出";
+"omenu_new_login" = "新登录";
+/*옵션메뉴 끝 */
+
+
+/* 공통 시작 */
+"common_error" = "错误";
+"common_confirm" = "确认";
+"common_cancel" = "取消";
+"common_close" = "关闭";
+"common_clear_all" = "初始化";
+"common_task_init" = "作业初始化";
+"common_find" = "查找";
+"common_search" = "搜索";
+"common_search_condition" = "搜索条件";
+"common_check_all" = "全选";
+"common_delete" = "删除";
+"common_send" = "传输";
+"common_complete_send" = "传输完成";
+"common_save" = "保存";
+"common_selection" = "选择";
+"common_barcode_search" = "二维码";
+"common_confirm_work_Init" = "现在的作业是否进行初始化";
+"common_confirm_delete" = "是否删除全部数据？";
+"common_success_delete" = "成功删除";
+"common_no_data_delete" = "没有要删除的数据";
+"common_no_data_send" = "没有要传输的数据";
+"common_check_data_transferred" = "请确认要传输的数据";
+"common_no_data_send_try_again" = "没有要传输的数据。请稍候重试";
+"common_success_sent" = "已传输成功";
+"common_success_modified" = "已修改成功";
+"common_error_occur_modification_try_again" = "修改中发生错误。请稍候重试";
+"common_not_connect_server_try_again" = "无法连接处理器。请稍候重试";
+"common_checksum_error" = "由于校验发生错误，传输失败";
+"common_data_length_error" = "由于数据长度不符，传输失败";
+"common_unknown_error" = "发生未知错误，传输失败";
+"common_connection_timed_out" = "连接超时";
+"common_server_connection_timed_out" = "通信处理器连接超时";
+"common_select_data_deleted" = "请选择要删除的数据";
+"common_error_occurred_data_search" = "搜索数据中发生错误";
+"common_no_code_inform" = "没有编码信息";
+"common_update" = "更新";
+"common_update_version" = "不能从处理器得到数据，请稍后重试。";
+"common_not_load_data_from_server" = "不能从处理器得到数据，请稍后重试。";
+"common_auth_error" = "认证错误";
+"common_auth_fail_check_id_passwd" = "认证失败。\n请确认使用中的ID和密码";
+"common_want_quit" = "是否结束？";
+"common_login_diff_user_id" = "是否使用别的帐号登录？";
+"common_not_able_communicate" = "无法通信的环境";
+"common_progressbar_init" = "初始化中";
+"common_progressbar_loading" = "等待中";
+"common_progressbar_rfid_connecting" = "与读卡器连接中";
+"common_progressbar_sending" = "传输中";
+"common_progressbar_loading_basedata" = "正在从处理器中获取基础数据";
+"common_user_name" = "作业人";
+"common_branch" = "据点";
+"common_customer" = "客户";
+"common_check_the_date" = "请确认日期";
+"common_remark" = "处理记录";
+"common_no_data_for_barcode" = "相应的二维码中没有相应的数据";
+"common_sign" = "签字";
+"common_color_picker" = "颜色";
+"common_clear" = "初始化";
+"common_eraser" = "去除";
+/* 공통 끝*/
+
+/* 로그인 시작 */
+"login_mobile_id" = "读卡器ID";
+"login_user_id" = "User ID";
+"login_password" = "密码";
+"login_autologin" = "自动登录";
+"login_button" = "登录";
+"login_input_id" = "请输入使用者ID";
+"login_input_passwd" = "请输入密码";
+"login_notify_network_cost" = "使用3G和LTE网络时会产生通信费用";
+/* 로그인 끝*/
+
+/* 리턴 메시지 시작 */
+"return_message_enter_your_user_id" = "请输入帐号";
+"return_message_enter_your_password" = "请输入密码";
+"return_message_verify_login_info" = "请重新确认登录信息";
+"return_message_disabled_user" = "停止使用或被删除的使用者。请向管理者咨询";
+"return_message_upis_user_not_able_use" = "UPIS使用者不可使用";
+/* 리턴 메시지 끝 */
+
+/* RFID 시작 */
+"rfid_reader_swing_u" = "Swing U";
+"rfid_reader_at288" = "AT288";
+"rfid_reader_ajantech" = "AjanTech";
+"rfid_reader_arete" = "AretePop(Audio)";
+"rfid_reader_none" = "未说明";
+"rfid_reader_connect" = "连接";
+"rfid_reader_close" = "结束";
+"rfid_asset_name" = "品目";
+"rfid_serial_no" = "序号";
+"rfid_epc_code" = "EPC Code";
+"rfid_epc_urn" = "EPC URN";
+"rfid_read_count" = "查询次数";
+"rfid_read_time" = "查询时间";
+"rfid_result" = "处理结果";
+"rfid_tag_count" = "识别数量";
+"rfid_tag_quantity" = "个";
+"rfid_event_code" = "活动类型";
+"rfid_reader_no_device_id" = "没有读卡器的装置ID。请在网页画面的读卡器信息管理中输入移动电话号码";
+"rfid_send" = "RFID传输";
+"rfid_save" = "RFID保存";
+"rfid_inspect" = "检验";
+"rfid_pallet_mount" = "托盘安装";
+"rfid_send_error_try_again" = "发生错误不能传输RFID数据。请稍后重试";
+"rfid_save_error_try_again" = "发生错误RFID数据不能保存，请稍后重试";
+"rfid_no_selected_bluetooth_select_config" = "没有可选择的蓝牙设备。请在环境设定中选择蓝牙设备";
+"rfid_no_selected_bluetooth" = "没有可选择的蓝牙设备";
+"rfid_please_enable_bluetooth" = "请打开蓝牙";
+"rfid_connected_reader" = "已连接RFID读卡器";
+"rfid_connecting_reader" = "正在与RFID读卡器连接";
+"rfid_not_connect_reader" = "无法与RFID读卡器连接";
+"rfid_reader_not_connected" = "RFID读卡器不能连接";
+"rfid_connection_terminated" = "连接结束";
+"rfid_unregistered_unit" = "此设备为没有登录的读卡器。请在业务系统的读卡器信息管理画面中将相应设备的电话号码作为登录电话号码登录后方可使用";
+"rfid_event_not_set_select_config" = "未设定RFID活动。请在环境设定中选择RFID活动";
+"rfid_no_selected_readers" = "没有选择的读卡器。请在使用者管理中选择读卡器";
+/* RFID 종료 */
+
+
+/* RFID 최종이력 시작 */
+"location_unit_id" = "读卡器ID";
+"location_unit_name" = "读卡器名";
+"location_trace_date" = "活动时间";
+"location_epc_urn" = "EPC URN";
+"location_epc_code" = "EPC Code";
+"location_tag_id" = "TID";
+"location_event_type" = "活动类型";
+"location_total_cnt" = "总查询件数";
+"location_cnt" = "件";
+"location_search_condition" = "搜索条件";
+"location_search" = "搜索";
+/* RFID 최종이력 종료 */
+
+/* 생산정보 시작 */
+"product_year_month_day" = "年/月/日";
+"product_attach_date" = "安装时间";
+"product_maker_name" = "生产商";
+"product_count" = "数量";
+"product_percent" = "开工率";
+"product_graph" = "图表";
+"product_chart" = "图表基准";
+"product_start_year" = "起始年度";
+"product_end_year" = "结束年度";
+"product_start_month" = "起始月份";
+"product_end_month" = "结束月份";
+"product_date" = "日期";
+"product_year_error" = "起始年度不能在结束年度后";
+"product_month_error" = "起始月份不能再结束月份后";
+"product_day_error" = "起始日期不能再结束日期后";
+"product_more_data" = "无数据";
+/* 생산정보 끝 */
+
+/*환경설정 시작 */
+"preference_basic_settings" = "基础设定";
+"preference_landscape_screen_enabled_title" = "横向查看模式";
+"preference_landscape_screen_enabled_summaryOn" = "转动手机时变更为横向查看(Landscape Mode)模式画面";
+"preference_landscape_screen_enabled_summaryOff" = "转动手机时不能变更为横向查看(Landscape Mode)模式画面";
+"preference_rfid_reader_setting" = "RFID设定";
+"preference_report_settings" = "RFID传输";
+"preference_rfid_reader" = "RFID读卡器";
+"preference_rfid_reader_summary" = "请选择需要的RFID读卡器";
+"preference_bluetooth_selection" = "选择蓝牙设备";
+"preference_bluetooth_selection_summary" = "选择蓝牙设备";
+"preference_rfid_event" = "RFID活动";
+"preference_rfid_event_summary" = "选择RFID活动";
+"preference_rfid_mask" = "RFID Mask";
+"preference_rfid_mask_summary" = "对应于该掩模的唯一领先EPC代码。";
+"preference_rfid_beep_enabled_title" = "效果音";
+"preference_rfid_beep_enabled_soundOn" = "读取RFID标签时，会产生效果音";
+"preference_rfid_beep_enabled_soundOff" = "读取RFID标签时，不会产生效果音";
+"preference_not_support_bluetooth" = "此设备不支持蓝牙，不能使用此功能";
+"preference_failure_not_stored_event_code" = "因发生错误不能保存活动编码";
+"preference_device_scanning" = "设备扫描中...";
+"preference_select_device" = "请选择要连接的设备";
+"preference_none_paired" = "没有可配对的设备";
+"preference_none_found" = "没有发现设备";
+"preference_paired_devices" = "配对的设备";
+"preference_other_devices" = "可利用的其他设备";
+"preference_button_scan" = "设备扫描";
+"preference_branch_key" = "据点ID";
+"preference_branch_name" = "据点名";
+"preference_branch_cust_name" = "客户名";
+"preference_branch_selection" = "据点选择";
+"preference_branch_selection_summary" = "选择据点";
+"preference_barcode_setting" = "二维码设定";
+"preference_rfid_power" = "RFID Power";
+"preference_rfid_power_summary" = "RF 세기를 설정합니다.";
+/* 환경설정 끝 */
+
+
+/* 추적서비스 시작*/
+"track_branch_name" = "据点名";
+"track_process_date" = "处理日起";
+"track_event_name" = "活动类型";
+"track_prev_trace_date" = "起始时间";
+"track_next_trace_date" = "终止时间";
+"track_diff_trace_date" = "停留时间";
+"track_move_trace_date" = "运输时间";
+"track_recycle_cnt" = "Trip";
+/* 추적서비스 종료  */
+
+
+/* 처리결과 시작*/
+/*
+ "proc_result_error_not_exist_tag" = "발급되지 않은 EPC코드가 있어 처리할 수 없습니다.";
+ "proc_result_error_tag_already_processed" = "이미 처리된 태그입니다.";
+ "proc_result_error_unknown_exception" = "예외로 인하여 처리할 수 없습니다.";
+ 
+ 
+ "proc_result_error_already_mounted_tag" = "이미 장착된 태그가 존재하여 처리할 수 없습니다.";
+ "proc_result_error_abnormal_tag" = "비정상 태그가 존재하여 처리할 수 없습니다. 태그의 상태를 확인하여 주십시오.";
+ "proc_result_error_not_exist_tag_location_seq" = "존재하지 않는 태그위치번호 입니다.";
+ "proc_result_error_not_mounted" = "장착되지 않는 태그입니다.";
+ "proc_result_error_duplicated_within_a_day" = "24시간 이내에 같은 거점에서 같은 처리가 중복으로 발생되었습니다.";
+ */
+
+"proc_result_error_inspect_tag_issue" = "发行中的标签不能检验";
+"proc_result_error_inspect_tag_encoding_fail" = "编码失败的标签不能检验";
+"proc_result_error_inspect_tag_insert_success" = "正常安装的标签";
+"proc_result_error_inspect_tag_insert_fail" = "在托盘中嵌入失败的标签不能检验";
+"proc_result_error_inspect_tag_discard" = "报废的标签不能检验";
+"proc_result_error_inspect_unknown_exception" = "发生未知错误不能检验";
+"proc_result_error_inspect_not_registered_data" = "未在处理器中登录的epc编码";
+
+/* 처리결과 끝*/
+
+/* RFID 구매 시작*/
+"rfid_order_id" = "购买订单号";
+"rfid_order_id_selection" = "订购选择";
+"rfid_order_date" = "订购日";
+"rfid_order_req_cnt" = "订购数量";
+"rfid_order_cust_name" = "购买处";
+"rfid_asset_epc_name" = "品目";
+"rfid_prod_cust_name" = "供应处";
+"rfid_order_branch_name" = "配送处";
+"rfid_order_addr" = "配送位置";
+"rfid_work_date" = "交货日";
+"rfid_work_remark" = "记录";
+"rfid_enter_your_order_no" = "请输入订单号";
+"rfid_enter_your_delivery_date" = "请输入交货日期";
+"rfid_order_state_name" = "订单状态";
+/* RFID 구매 끝*/
+
+/* 제작 시작 */
+"make_order_id" = "购买订单号";
+"make_order_id_selection" = "选择订单";
+"make_lot_id" = "Lot号";
+"make_remark" = "记录";
+"make_enter_your_order_no" = "请输入订单号";
+"make_enter_your_lot_no" = "请输入Lot号";
+"make_cannot_handle_amount_greater_qty" = "识别数量不能比订单数量多";
+"make_asset_type" = "品目";
+"make_prod_grade" = "等级";
+"make_pack_name" = "Batch名";
+"make_select_asset_Type" = "请选择品目";
+"make_select_product_grade" = "请选择等级";
+"make_enter_the_package_no" = "请输入包装号";
+"make_enter_the_package_name" = "请输入包装名";
+"make_pack_date" = "Batch日期";
+"make_pack_id" = "Batch号";
+"make_pack_id_selection" = "Batch选择";
+"make_prod_grade_name" = "等级";
+"make_prod_asset_epc_name" = "品目";
+/* 제작 끝 */
+
+/* 주문 시작 */
+"sale_work_id" = "货单号";
+"sale_work_id_selection" = "选择货单";
+"sale_deli_date" = "配送预定日";
+"sale_assign_count" = "出库量";
+"sale_deli_branch_name" = "配送据点";
+"sale_order_addr" = "配送地地址";
+"sale_prod_asset_epc_name" = "品目";
+"sale_prod_grade_name" = "等级";
+"sale_order_cust_name" = "销售处";
+"sale_in_cust_name" = "入库处";
+"sale_out_cancel_order_cust_name" = "销售处";
+"sale_move_cust_sname" = "配送放
+";
+"sale_move_cust_name" = "移动订购处
+";
+"sale_driver_name" = "交货人";
+"sale_veh_name" = "车牌号";
+"sale_proc_count" = "作业量";
+"sale_enter_your_work_id" = "请输入货单号";
+"sale_can_not_processed_because_completed_assigned_quantity" = "相应的数量已完成，不能处理";
+"sale_same_processing_qty_work_assing_qty" = "为了完成传输，出库量与作业量必须一致";
+"sale_same_processing_qty_work_require_qty" = "为了完成传输，出库量与作业量必须一致";
+"sale_order_req_date" = "入库预定日";
+"sale_release_cust_name" = "出库处";
+"sale_release_branch_name" = "出库据点";
+"sale_order_req_count" = "出库量";
+"sale_worker_name" = "交接人";
+"sale_expected_count" = "入库量";
+"sale_noread_count" = "未识别数量";
+"sale_unrecognized_qty_can_enter_ony_numbers" = "未识别数量只能用数字输入";
+"resale_order_id" = "入库号";
+"resale_order_req_count" = "入库量";
+"resale_cust_name" = "返还订购处";
+/* "resale_driver_name" = "交货人"; */
+"resale_worker_name" = "交接人";
+"sale_enter_your_resale_order_id" = "请输入入库号";
+"sale_work_date" = "出库日";
+"resale_work_date" = "入库日";
+"sale_type_name" = "区分";
+"resale_type_name" = "区分";
+"easy_transfer_date" = "出库日";
+"easy_transfer_cust_id" = "出库处";
+"easy_transfer_type" = "出库区分";
+"easy_cust_key" = "客户ID";
+"easy_parent_cust_name" = "法人";
+"easy_cust_name" = "客户名";
+"easy_cust_selection" = "客户选择";
+"easy_prod_asset" = "资产";
+"easy_select_transfer_type" = "请选择出库区分";
+"easy_select_transfer_cust_id" = "请选择出库处";
+"easy_to_branch_selection" = "配送处选择";
+"easy_select_to_branch_id" = "请选择配送处";
+/* 주문 끝 */
+
+/* 재고 시작 */
+"stock_review_id" = "在库盘点号";
+"stock_review_req_date" = "在库盘点要求日";
+"stock_prod_asset_epc_name" = "品目";
+"stock_old_stock_cnt" = "电算系统上在库量";
+"stock_review_id_selection" = "盘点号选择";
+"stock_real_stock_count" = "实际在库量";
+"stock_old_stock_count" = "电算系统上在库量";
+"stock_enter_your_review_id" = "请输入在库盘点号";
+"stock_can_not_processed_because_different_pallet" = "存在品目不同的托盘，不能处理";
+/* 재고 끝 */
+
+/* 이벤트 시작 */
+"event_select_grade" = "请选择等级";
+/* 이벤트 끝 */
+
+/* 바코드 시작 */
+"button_ok" = "确认";
+"button_restart" = "重新扫描";
+"button_selection" = "选择";
+"msg_bulk_mode_scanned" = "全面扫描模式：读取二维码后保存";
+"msg_camera_framework_bug" = "机器的相机发生错误。需重新启动机器";
+"msg_default_format" = "格式";
+"msg_default_meta" = "元数据";
+"msg_default_mms_subject" = "您好";
+"msg_default_status" = "请把二维码放在四边形中";
+"msg_default_time" = "时间";
+"msg_default_type" = "结束";
+"msg_intent_failed" = "应用程序未启动。二维码内容可能存在错误";
+"preferences_auto_focus_title" = "使用自动对焦";
+"preferences_front_light_auto" = "自动";
+"preferences_front_light_off" = "OFF";
+"preferences_front_light_on" = "ON";
+"preferences_front_light_summary" = "在提高某些手机的低光扫描，但可能会造成眩光。在所有的手机都不起作用";
+"preferences_front_light_title" = "使用闪光灯";
+"preferences_play_beep_title" = "电子音";
+"preferences_vibrate_title" = "震动";
+"result_text" = "找到短文";
+/* 바코드 끝 */
+
+/* Ver2.0.0 */
+/* 통합 화면 시작 */
+"return_message_not_attach_unit" = "请确认可使用的读取器信息录入与否";
+
+"title_combine_out_search" = "货单查询";
+"title_combine_in_search" = "货单查询";
+"title_work_process_detail_view" = "详细明细";
+
+"title_easy_cust_search" = "客户查询";
+"title_easy_cust_selection" = "客户选择";
+
+"title_work_out_delivery" = "出库";
+"title_work_out_release" = "发货";
+"title_work_in_warehouse" = "入库";
+
+"title_work_in_move_return" = "移动/返还入库";
+"title_work_in_delivery" = "交付入库";
+"title_work_in_gather" = "回收入库";
+
+"title_work_out_product" = "商品mapping";
+"title_work_in_cust_search" = "出库地";
+"title_work_out_cust_search" = "入库地";
+
+"combine_work_type" = "区分";
+"combine_work_type_out" = "交付";
+"combine_work_type_move" = "移动";
+
+"combine_assign_out" = "预计出库";
+"combine_assign_out_count" = "预计出库量";
+"combine_process_count" = "处理量";
+
+"combine_remain_count" = "未处理量";
+"combine_select_work_type" = "请选择区分";
+"combine_out_date" = "预计出库日";
+"combine_cust_out_addr" = "入库处地址";
+
+"combine_assign_in_count" = "预计入库量";
+"combine_cust_in_addr" = "出库地地址";
+
+"combine_assign_in" = "预计入库";
+"resale_release_cust_name" = "返还地";
+"resale_driver_name" = "返还者";
+
+"easy_process_exist_message" = "临时保存的数据会清除，是否终止？";
+"common_detail_view" = "明细";
+"common_temporarily_save" = "临时保存";
+
+
+"common_branch_name" = "据点名";
+"preference_branch_id" = "据点ID";
+"msg_select_sale_work_id" = "没有要查询的货单号";
+
+"msg_no_selected_branch_cust_type" = "没有选择的据点，请在环境设定中选择据点";
+"msg_no_selected_out_cust" = "请选择入库地";
+"msg_no_selected_in_cust" = "请选择出库地";
+
+"msg_no_temporary_saved_data" = "没有临时保存的数据";
+"msg_exist_temporary_saved_data" = "有临时保存的数据";
+
+"common_search_period" = "期间";
+"common_grid_no" = "No.";
+"common_order_number" = "指示号码";
+"common_asset_type" = "类型";
+
+"title_work_inout_cancel" = "出入库取消";
+"common_select_all" = "全部";
+"easy_process_trade_chit" = "传票号";
+
+
+"easy_cust_company_all" = "所有法人";
+"easy_cust_company_except_logisall" = "除去LogisAll ";
+"easy_cust_division_pmk" = "生产地(PMK)";
+
+"easy_cust_division_rpc" = "物流中心(RDC)";
+"easy_cust_division_exp" = "客户(EXP)";
+"easy_cust_division_imp" = "回收地(IMP)";
+
+"title_easy_in_search" = "货单查询";
+"msg_search_date_difference_between" = "最多可查询3天的作业明细，请将期间设定为3日以内";
+"msg_search_date_exceeded_limit" = "无法查询7日以前的数据，请重新设定期间";
+"msg_search_date_error" = "请确定查询日期";
+
+"combine_cancel_base_branch_name" = "客户";
+"combine_cancel_inout_branch_name" = "出入库地";
+
+"title_work_history_search" = "作业明细查询";
+
+/* 작업내역 시작*/
+"work_history_trace_date" = "状态日期";
+"work_history_asset_epc_name" = "类型";
+"work_history_event_name" = "状态";
+"work_history_event_count" = "数量";
+"work_history_branch_name" = "客户";
+"work_history_select_envent_code" = "请选择状态区分";
+/* 작업내역 종료  */
+
+"title_work_sale_a" = "出库A";
+"title_work_sale_b" = "出库B";
+"title_work_sale_c" = "出库C";
+"title_work_resale_a" = "入库A";
+"title_work_resale_b" = "入库B";
+
+"preference_identification_system_setting" = "设定识别体系";
+"preference_identification_system_summary" = "选择识别体系";
+"preference_identification_system" = "商品识别体系";
+
+"identification_system_itf14" = "ITF-14条形码";
+"identification_system_agqr" = "农产品二维码";
+
+"common_read_itf14" = "条形码";
+"common_read_aqgr" = "二维码";
+"common_read_rfid" = "RFID标签";
+
+"common_product_code" = "商品编码";
+"common_product_name" = "商品名";
+
+"msg_no_selected_serial_no" = "请选择认证号码";
+"msg_inspect_prod_name_error_try_again" = "因发送错误无法查询商品名，请稍后再试";
+"msg_enter_vehicle_number" = "请输入车辆号码";
+"title_prod_mapping_info" = "商品信息";
+"title_prod_insert_direct" = "商品增加";
+"msg_enter_product_code" = "请输入商品编码";
+"msg_error_product_code" = "商品编码错误";
+"msg_processing_qty_work_require_qty" = "处理数量不能超过预计数量，请重新确认";
+"msg_error_need_work_complete_force" = "要进行入库处理的托盘中，该据点已经存在入库的托盘。要除去该托盘才能进行入库处理，要继续进行吗？";
+"msg_error_unregistered_product" = "没有商品信息";
+"msg_charged_service" = "It's a paid service. Please confirm service contract.";
+/* 통합 화면 끝 */
+
+
+
