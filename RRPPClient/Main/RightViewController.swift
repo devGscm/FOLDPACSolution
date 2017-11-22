@@ -36,11 +36,15 @@ class RightViewController: UITableViewController
 {
 	var mLstRfidReader:Array<RfidReaderDialog.RfidReader> = Array<RfidReaderDialog.RfidReader>()
 	
+	@IBOutlet weak var btnBranch: UIButton!
 	@IBOutlet weak var btnRfidReader: UIButton!
 	@IBOutlet weak var swRfidBeep: UISwitch!	// RFID 효과음
 	@IBOutlet weak var btnRfidMask: UIButton!	// RFID 마스크
 	@IBOutlet weak var btnRfidPower: UIButton!
 
+	lazy var clsBranchSearchDialog: BranchSearchDialog = {
+		return UIStoryboard.viewController(identifier: "BranchSearchDialog") as! BranchSearchDialog
+	}()
 	open override func viewDidLoad()
 	{
         super.viewDidLoad()
@@ -67,6 +71,38 @@ class RightViewController: UITableViewController
 		print("@@@@@@ RFID POWER:\(strRfidPower)")
     }
 	
+	
+	@IBAction func onBranchClicked(_ sender: Any)
+	{
+		//clsBranchSearchDialog.contentWidth = self.view.frame.width * 1.2
+		clsBranchSearchDialog.contentHeight = self.view.frame.height
+		
+		let acDialog = UIAlertController(title:nil, message:"거점 선택", preferredStyle: .alert)
+		acDialog.setValue(clsBranchSearchDialog, forKeyPath: "contentViewController")
+		let aaOkAction = UIAlertAction(title: "OK", style: .default) { (_) in
+			/*
+			let intReaderType = clsReaderDialog.selectedRow.readerType
+			let strRaderName = clsReaderDialog.selectedRow.readerName
+			UserDefaults.standard.setValue(intReaderType, forKey: Constants.RFID_READER_KEY)
+			UserDefaults.standard.synchronize()
+			self.btnRfidReader.setTitle(strRaderName, for: .normal)
+			*/
+		}
+		acDialog.addAction(aaOkAction)
+		
+		/*
+		var height:NSLayoutConstraint = NSLayoutConstraint(item: acDialog.view,
+														   attribute: NSLayoutAttribute.height,
+														   relatedBy: NSLayoutRelation.equal,
+														   toItem: nil,
+														   attribute: NSLayoutAttribute.notAnAttribute,
+														   multiplier: 1,
+														   constant: self.view.frame.height * 0.9
+		)
+		acDialog.view.addConstraint(height)*/
+		
+		self.present(acDialog, animated: true)
+	}
 	
 	@IBAction func onRfidReaderClicked(_ sender: Any)
 	{

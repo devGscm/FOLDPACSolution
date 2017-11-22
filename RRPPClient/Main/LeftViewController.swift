@@ -19,7 +19,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	var mLstMenuData:Array<MenuItem> = Array<MenuItem>()
 
 	lazy var clsProductMountViewController: ProductMountViewController = {
-		return UIStoryboard.viewController(strStoryBoardName: "Product", strIdentifier: "ProductMountViewController") as! ProductMountViewController
+		return UIStoryboard.viewController(storyBoardName: "Product", identifier: "ProductMountViewController") as! ProductMountViewController
 	}()
 	
 	open override func viewDidLoad()
@@ -48,6 +48,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		mIvLogo.layer.cornerRadius = mIvLogo.frame.height / 2
 		mIvLogo.clipsToBounds = true
 		//  prepareTransitionButton()
+		
 		
 		
 	}
