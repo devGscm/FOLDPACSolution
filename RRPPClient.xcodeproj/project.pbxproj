@@ -39,6 +39,10 @@
 		967A9C4A1FC4003B00B6A9D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 967A9C4C1FC4003B00B6A9D1 /* Main.storyboard */; };
 		968611EC1FBD585C000FE288 /* SWXMLHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 968611DD1FBD564C000FE288 /* SWXMLHash.framework */; };
 		968611ED1FBD585C000FE288 /* SWXMLHash.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 968611DD1FBD564C000FE288 /* SWXMLHash.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		96994C4D1FC5453B00B3A726 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96994C4C1FC5453A00B3A726 /* SQLite.framework */; };
+		96994C4E1FC5455900B3A726 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96994C4C1FC5453A00B3A726 /* SQLite.framework */; };
+		96994C4F1FC5455900B3A726 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 96994C4C1FC5453A00B3A726 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		96994C511FC545DF00B3A726 /* LocalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96994C501FC545DF00B3A726 /* LocalData.swift */; };
 		96D279C91FBE5E4D004B848F /* Mosaic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96D279C81FBE5E4D004B848F /* Mosaic.framework */; };
 		96D279CA1FBE5E4D004B848F /* Mosaic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 96D279C81FBE5E4D004B848F /* Mosaic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		96E494201FB1A78500D1E2C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E4941F1FB1A78500D1E2C1 /* AppDelegate.swift */; };
@@ -72,6 +76,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				96994C4F1FC5455900B3A726 /* SQLite.framework in Embed Frameworks */,
 				96D279CA1FBE5E4D004B848F /* Mosaic.framework in Embed Frameworks */,
 				968611ED1FBD585C000FE288 /* SWXMLHash.framework in Embed Frameworks */,
 				55FA78311FBDAB7800583A80 /* SwiftyJSON.framework in Embed Frameworks */,
@@ -118,6 +123,8 @@
 		967A9C501FC4005300B6A9D1 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/Main.strings; sourceTree = "<group>"; };
 		967A9C521FC4005400B6A9D1 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
 		968611DD1FBD564C000FE288 /* SWXMLHash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SWXMLHash.framework; path = Carthage/Build/iOS/SWXMLHash.framework; sourceTree = "<group>"; };
+		96994C4C1FC5453A00B3A726 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
+		96994C501FC545DF00B3A726 /* LocalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalData.swift; sourceTree = "<group>"; };
 		96D279C81FBE5E4D004B848F /* Mosaic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mosaic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E4941C1FB1A78500D1E2C1 /*  RRPPClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = " RRPPClient.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E4941F1FB1A78500D1E2C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -137,11 +144,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96994C4D1FC5453B00B3A726 /* SQLite.framework in Frameworks */,
 				96D279C91FBE5E4D004B848F /* Mosaic.framework in Frameworks */,
 				968611EC1FBD585C000FE288 /* SWXMLHash.framework in Frameworks */,
 				55FA78301FBDAB7800583A80 /* SwiftyJSON.framework in Frameworks */,
 				55FA782C1FBDAB6C00583A80 /* Motion.framework in Frameworks */,
 				55FA782A1FBDAB6700583A80 /* Material.framework in Frameworks */,
+				96994C4E1FC5455900B3A726 /* SQLite.framework in Frameworks */,
 				55FA782E1FBDAB7300583A80 /* FontAwesome.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -178,6 +187,7 @@
 				553BCF8A1FC2DC3B00BE39C1 /* SliderDialog.swift */,
 				55FA78331FBDACC600583A80 /* Constants.swift */,
 				55FA78341FBDACC600583A80 /* ProgressDialog.swift */,
+				96994C501FC545DF00B3A726 /* LocalData.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -286,6 +296,7 @@
 		96E4944D1FB1A81F00D1E2C1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				96994C4C1FC5453A00B3A726 /* SQLite.framework */,
 				55FA78281FBDAB5800583A80 /* SwiftyJSON.framework */,
 				55FA78261FBDAB4700583A80 /* Motion.framework */,
 				55FA78241FBDAB2B00583A80 /* Material.framework */,
@@ -466,6 +477,7 @@
 				55F385CD1FC3B73B0043F1A3 /* ProductMountViewController.swift in Sources */,
 				55FA784B1FBDAD0B00583A80 /* LeftViewController.swift in Sources */,
 				553BCF8B1FC2DC3B00BE39C1 /* SliderDialog.swift in Sources */,
+				96994C511FC545DF00B3A726 /* LocalData.swift in Sources */,
 				55FA78481FBDAD0B00583A80 /* AppNavigationDrawerController.swift in Sources */,
 				55FA783A1FBDACE300583A80 /* LoginViewController.swift in Sources */,
 				55FA78491FBDAD0B00583A80 /* AppToolbarController.swift in Sources */,

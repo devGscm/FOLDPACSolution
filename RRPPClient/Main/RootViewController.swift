@@ -20,7 +20,8 @@ class RootViewController: UIViewController
 		if(AppContext.sharedManager.getUserInfo().getAutoLogin() == true || AppContext.sharedManager.getAuthenticated() == true)
 		{
 				print("로그인 성공")
-			
+				var localData = LocalData.shared
+				localData.versionCheck(remoteDbUserInfo: AppContext.sharedManager.getUserInfo().getEncryptId()!)
 		}
 		else
 		{

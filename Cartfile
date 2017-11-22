@@ -2,3 +2,4 @@ github "drmohundro/SWXMLHash" ~> 4.0
 github "CosmicMind/Material"
 github "SwiftyJSON/SwiftyJSON"
 github "thii/FontAwesome.swift"
+github "stephencelis/SQLite.swift" ~> 0.11.4
