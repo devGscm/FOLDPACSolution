@@ -311,7 +311,7 @@ public class QueryMaker : NSObject, NSCopying
                 {
                     do {
                         let value = try dataRow.get(name: clsColumn.Id)
-                        strData = String(describing: value)
+                        strData = value as? String ?? ""
                     } catch DataError.indexValeError {
                         strData = ""
                     } catch {
@@ -389,7 +389,7 @@ public class QueryMaker : NSObject, NSCopying
                 {
                     do {
                         let value = try dataRow.get(name: clsColumn.Id)
-                        strData = String(describing: value)
+                        strData = value as? String ?? ""
                     } catch DataError.indexValeError {
                         strData = ""
                     } catch {
@@ -451,7 +451,7 @@ public class QueryMaker : NSObject, NSCopying
                 {
                     do {
                         let value = try dataRow.get(name: clsColumn.Id)
-                        strData = String(describing: value)
+                        strData = value as? String ?? ""
                     } catch DataError.indexValeError {
                         strData = ""
                     } catch {
