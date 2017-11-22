@@ -281,24 +281,23 @@ public class DataRow : NSObject, NSCopying
     /**
      *    이름으로 Column data 얻기...대소문자 구분안함
      */
-    public func getIntValue(name: String) -> Int?
-    {
-        do {
-            let value = try self.get(name: name) as? Int
-            return value
-        } catch DataError.indexValeError {
-            return nil
-        } catch {
-            print("알수없는 오류발생")
-        }
-        return nil
-            
-    }
-    
+//    public func getIntValue(name: String) -> Int?
+//    {
+//        do {
+//            let value = try Int(self.get(name: name) as! String)
+//            return value
+//        } catch DataError.indexValeError {
+//            return nil
+//        } catch {
+//            print("알수없는 오류발생")
+//        }
+//        return nil
+//    }
+	
     public func getInt(name: String) -> Int?
     {
         do {
-            let value = try self.get(name: name) as? Int
+            let value = try Int(self.get(name: name) as! String)
             return value
         } catch DataError.indexValeError {
             return nil
