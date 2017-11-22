@@ -11,7 +11,6 @@ import UIKit
 class BranchSearchItem: UITableViewCell
 {
 	@IBOutlet weak var lblBranchCustType: UILabel!
-	@IBOutlet weak var lblBranchId: UILabel!
 	@IBOutlet weak var lblBranchName: UILabel!
 	@IBOutlet weak var btnSelection: UIButton!
 	
