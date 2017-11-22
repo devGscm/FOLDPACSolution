@@ -209,7 +209,7 @@ public class DataRow : NSObject, NSCopying
     {
         do {
             let value = try get(name: name)
-            return String(describing: value)
+            return value as? String ?? ""
             
         } catch DataError.indexValeError {
             return defaultValue
@@ -252,8 +252,7 @@ public class DataRow : NSObject, NSCopying
     public func getString(name: String) -> String?
     {
         do {
-            let value = try get(name: name)
-            //return String(describing: value)
+            let value = try get(name: name)			
 			return value as? String ?? ""
         } catch DataError.indexValeError {
             return nil
@@ -485,6 +484,8 @@ public class DataRow : NSObject, NSCopying
     public func getChangedRow() -> String
     {
         var resultValue = "<row id='"
+		
+		//value as? String ?? ""
         resultValue.append(String(describing:self.Id))
         resultValue.append("' state='")
         resultValue.append(String(self.State))
@@ -497,7 +498,7 @@ public class DataRow : NSObject, NSCopying
             let name = self.mVecDataRowName[index]
             let value = self.mVecDataRowValue[index]
             resultValue.append("<" + name + ">")
-            resultValue.append(String(describing:value))
+            resultValue.append(value as? String ?? "")
             resultValue.append("</" + name + ">")
         }
         resultValue.append("</row>")
@@ -523,7 +524,7 @@ public class DataRow : NSObject, NSCopying
                 let name = self.mVecDataRowName[index]
                 let value = self.mVecDataRowValue[index]
                 resultValue.append("<" + name + ">")
-                resultValue.append(String(describing:value))
+                resultValue.append(value as? String ?? "")
                 resultValue.append("</" + name + ">")
             }
         }
