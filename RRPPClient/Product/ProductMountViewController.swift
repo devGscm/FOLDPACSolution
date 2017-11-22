@@ -16,7 +16,7 @@ class ProductMountViewController: UIViewController {
 		
 		view.backgroundColor = Color.grey.lighten5
 		
-		//prepareToolbar()
+		prepareToolbar()
 	}
 	
 	override func didReceiveMemoryWarning() {
