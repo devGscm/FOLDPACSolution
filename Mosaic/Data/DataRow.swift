@@ -268,7 +268,7 @@ public class DataRow : NSObject, NSCopying
     public func getIntValue(index: Int)  -> Int?
     {
         do {
-            let value = try self.get(index: index) as? Int
+			let value  = try Int(self.get(index: index) as! String)
             return value
         } catch DataError.indexValeError {
             return nil
@@ -316,7 +316,7 @@ public class DataRow : NSObject, NSCopying
     public func getLong(name: String) -> Int64?
     {
         do {
-            let value = try self.get(name: name) as? Int64
+            let value =  try Long(self.get(name: name) as! String)
             return value
         } catch DataError.indexValeError {
             return nil
@@ -329,7 +329,7 @@ public class DataRow : NSObject, NSCopying
     public func getDouble(name: String) -> Double?
     {
         do {
-            let value = try self.get(name: name) as? Double
+            let value = try Double(self.get(name: name) as! String)
             return value
         } catch DataError.indexValeError {
             return nil
@@ -342,7 +342,7 @@ public class DataRow : NSObject, NSCopying
     public func getFloat(name: String) -> Float?
     {
         do {
-            let value = try self.get(name: name) as? Float
+            let value = try  try Float(self.get(name: name) as! String)
             return value
         } catch DataError.indexValeError {
             return nil
