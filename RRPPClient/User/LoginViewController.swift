@@ -40,8 +40,10 @@ class LoginViewController: UIViewController
 		btnLogin.titleLabel?.font = UIFont.fontAwesome(ofSize:18)
 		//let strLogin:String? = String.fontAwesomeIcon(name:.lock) + " 로그인"
 		//btnLogin.setTitle(strLogin, for: .normal)
+		
+		//Dialog.show(viewController: self, title: "", message: "해보시다.", okTitle:"OK", okHandler: nil)
+
 	}
-	
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()

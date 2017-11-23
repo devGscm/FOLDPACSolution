@@ -1,6 +1,6 @@
 import UIKit
 import Material
-
+import Mosaic
 
 class RightViewController: UITableViewController, DataProtocol
 {
@@ -103,12 +103,12 @@ class RightViewController: UITableViewController, DataProtocol
 		let clsReaderDialog = RfidReaderDialog()
 		clsReaderDialog.loadData(lstRfidReader: mLstRfidReader)
 
-		let acDialog = UIAlertController(title:nil, message:"RFID 리더기", preferredStyle: .alert)
+		let acDialog = UIAlertController(title:nil, message: NSLocalizedString("preference_rfid_reader", comment: "RFID 리더기"), preferredStyle: .alert)
 		acDialog.setValue(clsReaderDialog, forKeyPath: "contentViewController")
 		
-		acDialog.addAction(UIAlertAction(title: "Cancel", style: .default) { (_) in
+		acDialog.addAction(UIAlertAction(title: NSLocalizedString("common_cancel", comment: "취소"), style: .default) { (_) in
 		})
-		let aaOkAction = UIAlertAction(title: "OK", style: .default) { (_) in
+		let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
 			let intReaderType = clsReaderDialog.selectedRow.readerType
 			let strRaderName = clsReaderDialog.selectedRow.readerName
 			UserDefaults.standard.setValue(intReaderType, forKey: Constants.RFID_READER_KEY)
@@ -131,15 +131,15 @@ class RightViewController: UITableViewController, DataProtocol
 	// RFID 마스크
 	@IBAction func onRfidMaskClicked(_ sender: Any)
 	{
-		let acDialog = UIAlertController(title: nil, message: "RFID 마스크", preferredStyle: .alert)
+		let acDialog = UIAlertController(title: nil, message: NSLocalizedString("preference_rfid_mask", comment: "RFID 마스크"), preferredStyle: .alert)
 		acDialog.addTextField() {
 			//$0.text = self.btnRfidMask.titleLabel?.text;
 			let strRfidMask = UserDefaults.standard.string(forKey: Constants.RFID_MASK_KEY) ?? "3312"
 			$0.text = strRfidMask
 		}
-		acDialog.addAction(UIAlertAction(title: "Cancel", style: .default) { (_) in
+		acDialog.addAction(UIAlertAction(title: NSLocalizedString("common_cancel", comment: "취소"), style: .default) { (_) in
 		})
-		acDialog.addAction(UIAlertAction(title: "OK", style: .default) { (_) in
+		acDialog.addAction(UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
 			let strValue = acDialog.textFields?[0].text
 			UserDefaults.standard.setValue(strValue, forKey: Constants.RFID_MASK_KEY)
 			UserDefaults.standard.synchronize()
@@ -148,33 +148,25 @@ class RightViewController: UITableViewController, DataProtocol
 		self.present(acDialog, animated: false, completion: nil)
 	}
 	
-	@IBAction func onRfidPowerClicked(_ sender: Any) {
-		
+	@IBAction func onRfidPowerClicked(_ sender: Any)
+	{
 		let clsSliderDialog = SliderDialog()
-		
-		let acDialog = UIAlertController(title:nil, message: "RFID Power", preferredStyle: .alert)
-		
-		// 컨트롤 뷰 컨트롤러를 알림창에 등록한다.
-		acDialog.setValue(clsSliderDialog, forKeyPath: "contentViewController")
-		
-		// 슬라이더에 값을 넣어준다.
-		
 		let intRfidPower = Int(self.btnRfidPower.titleLabel?.text ?? "0")!
-		//let intRfidPower = (self.btnRfidPower.titleLabel?.text as! NSString).integerValue
+		//print("@@@@@intRfidPower = \(intRfidPower)")
 		clsSliderDialog.sliderValue = intRfidPower
-		
-		// OK 버튼을 추가한다.
-		let aaOkAction = UIAlertAction(title: "OK", style: .default) { (_) in
-			let intValue = Int(clsSliderDialog.sliderValue)
-			UserDefaults.standard.setValue(intValue, forKey: Constants.RFID_POWER_KEY)
-			UserDefaults.standard.synchronize()
-			self.btnRfidPower.setTitle("\(intValue)", for: .normal)
-			print(">>> sliderValue = \(intValue)")
-		}
-		acDialog.addAction(aaOkAction)
-		
-		self.present(acDialog, animated: false)
-	}	
+		Dialog.show(container: self, viewController: clsSliderDialog, title: nil,
+						message: NSLocalizedString("preference_rfid_power", comment: "RFID Power"),
+						okTitle: NSLocalizedString("common_confirm", comment: "확인"),
+						okHandler: { (_) in
+							let intValue = Int(clsSliderDialog.sliderValue)
+							UserDefaults.standard.setValue(intValue, forKey: Constants.RFID_POWER_KEY)
+							UserDefaults.standard.synchronize()
+							self.btnRfidPower.setTitle("\(intValue)", for: .normal)
+							print(">>> sliderValue = \(intValue)")
+						},
+						cancelTitle: NSLocalizedString("common_cancel", comment: "취소"),
+						cancelHandler: nil)
+	}
 }
 
 extension RightViewController {

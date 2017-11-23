@@ -8,6 +8,7 @@
 
 import UIKit
 import Mosaic
+import Material
 
 class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
@@ -144,19 +145,6 @@ class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDe
 					print(" dataColumn Id:" + dataColumn.Id + " Value:" + dataRow.get(name: dataColumn.Id, defaultValue: 0).debugDescription)
 				}
 			}
-			/*
-			for clsDataRow in mClsDataTable.getDataRows()
-			{
-				//let strBranchId  = clsDataRow.getString(name: "branchId")
-			
-			
-				print("  Value:" + clsDataRow.get(name: "branchId", defaultValue: 0).debugDescription)
-			
-			
-				//print("BranchId1:\(strBranchId)")
-
-
-			}*/
 			
 			DispatchQueue.main.async {
 				self.tvBranch?.reloadData()
@@ -177,6 +165,10 @@ class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDe
 		let clsDataRow = mArcDataRows[indexPath.row]
 		objCell.lblBranchCustType.text = clsDataRow.getString(name:"branchCustTypeName")
 		objCell.lblBranchName.text = clsDataRow.getString(name:"branchName")
+		//objCell.btnSelection.image = Icon.cm.check
+		objCell.btnSelection.titleLabel?.font = UIFont.fontAwesome(ofSize: 14)
+		objCell.btnSelection.setTitle(String.fontAwesomeIcon(name:.arrowDown), for: .normal)
+		
 		objCell.btnSelection.tag = indexPath.row
 		objCell.btnSelection.addTarget(self, action: #selector(BranchSearchDialog.onSelectionClicked(_:)), for: .touchUpInside)
 		

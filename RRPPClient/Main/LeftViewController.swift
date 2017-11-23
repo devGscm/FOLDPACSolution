@@ -59,7 +59,6 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	public func makeMenuItem() -> Void
 	{
 		let strCustType = AppContext.sharedManager.getUserInfo().getCustType()
-		//print(" CustType:\(strCustType)")
 		if(strCustType == "ISS")
 		{
 			mArrMenuData.append(MenuItem(menuId: "TagSupply", menuName: "납품등록(RFID)"))
@@ -90,7 +89,6 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		objCell.lblMenuName.text = "\(String.fontAwesomeIcon(name: .chevronCircleRight)) \(strtMenuItem.menuName )"
 		return objCell
 	}
-	
 	
 	public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
 	{
