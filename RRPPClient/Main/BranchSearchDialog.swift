@@ -180,8 +180,8 @@ class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDe
 	{
 		let objCell:BranchSearchItem = tableView.dequeueReusableCell(withIdentifier: "tvcBranchSearchItem", for: indexPath) as! BranchSearchItem
 		let clsDataRow = arcDataRows[indexPath.row]
-		objCell.lblBranchCustType.text = "\(indexPath.row + 1)"
-		//objCell.lblBranchCustType.text = clsDataRow.getString(name:"branchCustTypeName")
+		//objCell.lblBranchCustType.text = "\(indexPath.row + 1)"
+		objCell.lblBranchCustType.text = clsDataRow.getString(name:"branchCustTypeName")
 		objCell.lblBranchName.text = clsDataRow.getString(name:"branchName")
 		objCell.btnSelection.titleLabel?.font = UIFont.fontAwesome(ofSize: 14)
 		objCell.btnSelection.setTitle(String.fontAwesomeIcon(name:.arrowDown), for: .normal)
@@ -200,12 +200,10 @@ class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	@objc func onSelectionClicked(_ sender: UIButton)
 	{
-		
 		let clsDataRow = arcDataRows[sender.tag]
-		
-		let strBranchId = clsDataRow.getString(name:"branchId") ?? ""
-		let strBranchName = clsDataRow.getString(name:"branchName") ?? ""
-		let strtData = ReturnData(returnType: "branchSearch", returnCode: strBranchId, returnMesage: strBranchName)
+		//let strBranchId = clsDataRow.getString(name:"branchId") ?? ""
+		//let strBranchName = clsDataRow.getString(name:"branchName") ?? ""
+		let strtData = ReturnData(returnType: "branchSearch", returnCode: nil, returnMesage: nil, returnRawData: clsDataRow)
 		mPtcDataHandler?.recvData(returnData: strtData)
 		self.dismiss(animated: true, completion: nil)
 		
@@ -213,7 +211,7 @@ class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	@IBAction func onCloseClicked(_ sender: UIButton)
 	{
-		let strtData = ReturnData(returnType: "branchSearch", returnCode: "01", returnMesage: "")
+		let strtData = ReturnData(returnType: "branchSearch", returnCode: "01", returnMesage: nil, returnRawData: nil )
 		
 		mPtcDataHandler?.recvData(returnData: strtData)
 		self.dismiss(animated: true, completion: nil)

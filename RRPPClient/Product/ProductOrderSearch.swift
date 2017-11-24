@@ -52,6 +52,15 @@ class ProductOrderSearch: UIViewController
 		clsDataClient.UserInfo = "xxOxOsU93/PvK/NN7DZmZw=="
 		clsDataClient.UserData = "productService.selectProductOrderList"
 		clsDataClient.removeServiceParam()
+
+		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+		clsDataClient.addServiceParam(paramName: "corpType", value: AppContext.sharedManager.getUserInfo().getCorpType())
+		clsDataClient.addServiceParam(paramName: "branchId", value: AppContext.sharedManager.getUserInfo().getCustType())
+		clsDataClient.addServiceParam(paramName: "branchCustId", value: AppContext.sharedManager.getUserInfo().getBranchCustId())
+		clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
+
+		
+		
 		clsDataClient.addServiceParam(paramName: "corpId", value: "logisallcm")
 		clsDataClient.addServiceParam(paramName: "parentCustId", value: "170627000205")
 		clsDataClient.addServiceParam(paramName: "custType", value: "MGR")

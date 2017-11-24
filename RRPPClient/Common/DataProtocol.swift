@@ -11,8 +11,9 @@ import Foundation
 struct ReturnData
 {
 	let returnType : String
-	let returnCode : String
-	let returnMesage : String
+	let returnCode : String?
+	let returnMesage : String?
+	let returnRawData : NSObject?
 }
 
 protocol DataProtocol
