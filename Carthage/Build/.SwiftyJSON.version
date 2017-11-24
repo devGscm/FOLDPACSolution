@@ -8,20 +8,20 @@
   "watchOS" : [
     {
       "name" : "SwiftyJSON",
-      "hash" : "130f5499c0985c309c420501a387f5557bcc865c92503d7c3ec13dbfa2610b74"
+      "hash" : "877a40a75da635f1cd50942d9fda2daf94b636ba9c58e1d5e94ae44a11f2a88e"
     }
   ],
   "tvOS" : [
     {
       "name" : "SwiftyJSON",
-      "hash" : "a871963e9f9946a5d62477919cb55fde81c8e173df332b5ec6ab87cda82213e4"
+      "hash" : "811eea4ec44aeef2f0b23d47fbc6240a8580e6e1a8c926a5cf1387b00b3ef137"
     }
   ],
   "commitish" : "4.0.0",
   "iOS" : [
     {
       "name" : "SwiftyJSON",
-      "hash" : "80a6899722346ecdffeb59251a6ed2c57e1959f8fa11e1b4945ae7679b7a1486"
+      "hash" : "7c518e88cd48f77bfc8061c7e92c3a8833af14c83c0755fbaf7abfb74d41c74c"
     }
   ]
 }

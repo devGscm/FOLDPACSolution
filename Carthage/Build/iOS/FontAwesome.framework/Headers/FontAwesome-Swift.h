@@ -199,6 +199,24 @@ SWIFT_CLASS("_TtC11FontAwesome24FontAwesomeBarButtonItem")
 
 
 
+@class UIColor;
+@class UIImage;
+
+SWIFT_CLASS("_TtC11FontAwesome20FontAwesomeImageView")
+@interface FontAwesomeImageView : UIImageView
+@property (nonatomic, copy) NSString * _Nonnull cssCode;
+@property (nonatomic, strong) UIColor * _Nonnull imageColor;
+@property (nonatomic, strong) UIColor * _Nonnull imageBackgroundColor;
+- (void)awakeFromNib;
+- (void)prepareForInterfaceBuilder;
+- (nonnull instancetype)initWithImage:(UIImage * _Nullable)image OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithImage:(UIImage * _Nullable)image highlightedImage:(UIImage * _Nullable)highlightedImage OBJC_DESIGNATED_INITIALIZER SWIFT_AVAILABILITY(ios,introduced=3.0);
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+
 
 SWIFT_CLASS("_TtC11FontAwesome27FontAwesomeSegmentedControl")
 @interface FontAwesomeSegmentedControl : UISegmentedControl

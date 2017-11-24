@@ -8,20 +8,20 @@
   "watchOS" : [
     {
       "name" : "SQLite",
-      "hash" : "9a5124f30e7e6ea009dfb42c10d0c3d668f2e4a3f903027c10dbeb9f5ed1e40f"
+      "hash" : "871248e1f3a3d0f402ffbde46e024c863b3469d70388fd20cfc15e105c47c0fe"
     }
   ],
   "tvOS" : [
     {
       "name" : "SQLite",
-      "hash" : "99099daa830095167b88a0af750b66d0664da3acecf20fc7776edd111e3a458e"
+      "hash" : "1627333a9c36da72fa27ef1bedc26d1c702b237139d600ae24df2cf87329337d"
     }
   ],
   "commitish" : "0.11.4",
   "iOS" : [
     {
       "name" : "SQLite",
-      "hash" : "85f6605aef4a3db7e8e13a831eb7a681c522fdaa948b0680c3c26677b597e764"
+      "hash" : "58605f4a3633c8c1877ff198ea76ff6de57889e1966b8ac2a3fe8c37f091a9ab"
     }
   ]
 }
