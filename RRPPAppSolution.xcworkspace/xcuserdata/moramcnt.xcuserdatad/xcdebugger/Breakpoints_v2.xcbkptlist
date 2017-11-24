@@ -2,4 +2,86 @@
 <Bucket
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RRPPClient/Common/LocalData.swift"
+            timestampString = "533196703.121786"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "573"
+            endingLineNumber = "573"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RRPPClient/Common/LocalData.swift"
+            timestampString = "533196703.122285"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "609"
+            endingLineNumber = "609"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RRPPClient/Common/LocalData.swift"
+            timestampString = "533196703.122647"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "612"
+            endingLineNumber = "612"
+            landmarkName = "unknown"
+            landmarkType = "0">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "_RRPPClient.LocalData.(changeNewVersiion in _C4EDB5A649CACD924A92DC9273F41599)(remoteDbUserInfo: Swift.String, corpId: Swift.String, db: SQLite.Connection, updateCode: Swift.String, updateDate: Swift.Int, ref: Swift.Int, bIsInsert: Swift.Bool) -&gt; ()"
+                  moduleName = " RRPPClient"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/moramcnt/Projects/RRPPSolutions/02.Solutions/RRPPSolution/RRPPClient/Common/LocalData.swift"
+                  timestampString = "533120760.045545"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "579"
+                  endingLineNumber = "579"
+                  offsetFromSymbolStart = "8188">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #6 (Swift.Optional&lt;Mosaic.DataTable&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in _RRPPClient.LocalData.(changeNewVersiion in _C4EDB5A649CACD924A92DC9273F41599)(remoteDbUserInfo: Swift.String, corpId: Swift.String, db: SQLite.Connection, updateCode: Swift.String, updateDate: Swift.Int, ref: Swift.Int, bIsInsert: Swift.Bool) -&gt; ()"
+                  moduleName = " RRPPClient"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/moramcnt/Projects/RRPPSolutions/02.Solutions/RRPPSolution/RRPPClient/Common/LocalData.swift"
+                  timestampString = "533120760.049196"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "579"
+                  endingLineNumber = "579"
+                  offsetFromSymbolStart = "8752">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
