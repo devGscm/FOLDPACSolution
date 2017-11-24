@@ -12,7 +12,7 @@ import Material
 
 class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
-
+	
 	@IBOutlet weak var tvBranch: UITableView!
 	@IBOutlet weak var btnClose: UIButton!
 	
@@ -23,36 +23,40 @@ class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	var mArcSearchCondition:Array<ListViewDialog.ListViewItem> = Array<ListViewDialog.ListViewItem>()
 	
-//	var contentWidth : CGFloat {
-//		get
-//		{
-//			return self.preferredContentSize.width
-//		}
-//		set
-//		{
-//			self.preferredContentSize.width = newValue
-//		}
-//	}
-//
-//	var contentHeight : CGFloat {
-//		get
-//		{
-//			return self.preferredContentSize.height
-//		}
-//		set
-//		{
-//			self.preferredContentSize.height = newValue
-//		}
-//	}
+	//	var contentWidth : CGFloat {
+	//		get
+	//		{
+	//			return self.preferredContentSize.width
+	//		}
+	//		set
+	//		{
+	//			self.preferredContentSize.width = newValue
+	//		}
+	//	}
+	//
+	//	var contentHeight : CGFloat {
+	//		get
+	//		{
+	//			return self.preferredContentSize.height
+	//		}
+	//		set
+	//		{
+	//			self.preferredContentSize.height = newValue
+	//		}
+	//	}
 	
-	var mClsDataClient : DataClient!
+	var intPageNo  = 0
+	let intPageSize  = 20
+	var intTotalCount = 0
+	
+	var clsDataClient : DataClient!
 	var mArcDataRows : Array<DataRow> = Array<DataRow>()
 	var mPtcDataHandler : DataProtocol?
 	var mStrSearchCondtion : String?
 	
-    override func viewDidLoad()
+	override func viewDidLoad()
 	{
-        super.viewDidLoad()
+		super.viewDidLoad()
 		initDataClient()
 		initViewControl()
 		
@@ -61,14 +65,13 @@ class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	func initViewControl()
 	{
-		
 		mArcSearchCondition.append(ListViewDialog.ListViewItem(itemCode: "0", itemName: "거점명"))
 		mArcSearchCondition.append(ListViewDialog.ListViewItem(itemCode: "1", itemName: "거점ID"))
 		
 		mStrSearchCondtion = "0"
 		self.btnSearchCondition.setTitle("거점명", for: .normal)
 	}
-
+	
 	
 	@IBAction func onSearchConditionClicked(_ sender: UIButton)
 	{
@@ -78,7 +81,7 @@ class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDe
 		
 		let acDialog = UIAlertController(title:nil, message:"검색조건", preferredStyle: .alert)
 		acDialog.setValue(clsDialog, forKeyPath: "contentViewController")
-
+		
 		let aaOkAction = UIAlertAction(title: "확인", style: .default) { (_) in
 			self.mStrSearchCondtion = clsDialog.selectedRow.itemCode
 			let strItemName = clsDialog.selectedRow.itemName
@@ -90,41 +93,64 @@ class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	@IBAction func onSearchClicked(_ sender: UIButton)
 	{
-
 		doInitSearch()
 	}
 	
 	
 	func initDataClient()
 	{
-		mClsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		//clsDataClient.UserInfo = "xxOxOsU93/PvK/NN7DZmZw=="
+		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+		clsDataClient.UserData = "redis.selectBranchList"
+		clsDataClient.removeServiceParam()
 		
-		mClsDataClient.UserInfo = "xxOxOsU93/PvK/NN7DZmZw=="
-		mClsDataClient.UserData = "redis.selectBranchList"
-		mClsDataClient.removeServiceParam()
-		mClsDataClient.addServiceParam(paramName: "corpId", value: "logisallcm")
-		mClsDataClient.addServiceParam(paramName: "parentCustId", value: "170627000205")
-		mClsDataClient.addServiceParam(paramName: "custType", value: "MGR")
+		//clsDataClient.addServiceParam(paramName: "corpId", value: "logisallcm")
+		//clsDataClient.addServiceParam(paramName: "parentCustId", value: "170627000205")
+		//clsDataClient.addServiceParam(paramName: "custType", value: "MGR")
+		
+		
+		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+		clsDataClient.addServiceParam(paramName: "corpType", value: AppContext.sharedManager.getUserInfo().getCorpType())
+		clsDataClient.addServiceParam(paramName: "custType", value: AppContext.sharedManager.getUserInfo().getCustType())
+		clsDataClient.addServiceParam(paramName: "parentCustId", value: AppContext.sharedManager.getUserInfo().getParentCustId())
+		clsDataClient.addServiceParam(paramName: "branchCustId", value: AppContext.sharedManager.getUserInfo().getBranchCustId())
+		clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
 	}
 	
 	func doInitSearch()
 	{
+		print("doInitSearch()")
+		
+		intPageNo = 0
+		mArcDataRows.removeAll()
+		
 		let strSearchValue = tfSearchValue.text;
 		/*
 		if(strSearchValue?.isEmpty == true)
 		{
-			showLoginErrorDialog(strTitle: NSLocalizedString("common_error", comment: "에러"), strMessage: NSLocalizedString("login_input_id", comment: "사용자 ID입력"))
-			return
+		showLoginErrorDialog(strTitle: NSLocalizedString("common_error", comment: "에러"), strMessage: NSLocalizedString("login_input_id", comment: "사용자 ID입력"))
+		return
 		}*/
-		
-		doSearch(searchValue : strSearchValue)
+		doSearch()
 	}
 	
-	func doSearch(searchValue : String?)
+	func doSearch()
 	{
-		mClsDataClient.addServiceParam(paramName: "searchCondition", value: mStrSearchCondtion!)
-		mClsDataClient.addServiceParam(paramName: "searchValue", value: searchValue!)
-		mClsDataClient.selectData(dataCompletionHandler: {(data, error) in
+		intPageNo += 1
+		let strSearchValue = tfSearchValue.text;
+		print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+		print("doSearch()")
+		print(" intPageNo:\(intPageNo)")
+		print(" mStrSearchCondtion:\(mStrSearchCondtion)")
+		print(" strSearchValue:\(strSearchValue)")
+		print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+		
+		clsDataClient.addServiceParam(paramName: "searchCondition", value: mStrSearchCondtion!)
+		clsDataClient.addServiceParam(paramName: "searchValue", value: strSearchValue!)
+		clsDataClient.addServiceParam(paramName: "pageNo", value: intPageNo)
+		clsDataClient.addServiceParam(paramName: "rowsPerPage", value: intPageSize)
+		clsDataClient.selectData(dataCompletionHandler: {(data, error) in
 			if let error = error {
 				// 에러처리
 				print(error)
@@ -135,43 +161,57 @@ class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDe
 				return
 			}
 			
-			print("####결과값 처리")
-			let dataColumns = clsDataTable.getDataColumns()
-			self.mArcDataRows = clsDataTable.getDataRows()
-			for dataRow in self.mArcDataRows
+			self.intTotalCount = clsDataTable.getDataRows().count
+			
+			print(" - self.intTotalCount : \(self.intTotalCount)")
+			
+			// 서버로 부터 받은 배열데이터를 추가한다.
+			//			for clsDataRow in clsDataTable.getDataRows()
+			//			{
+			//				self.mArcDataRows.append(clsDataRow)
+			//			}
+			
+			//var arcItems = self.mArcDataRows
+			//arcItems.append(contentsOf: clsDataTable.getDataRows())
+			
+			if(self.intTotalCount > 0)
 			{
-				for dataColumn in dataColumns
+				//self.mArcDataRows.append(contentsOf: arcItems)
+				self.mArcDataRows.append(contentsOf: clsDataTable.getDataRows())
+				//print(" - mArcDataRows.count:\(self.mArcDataRows.count)")
+				DispatchQueue.main.async
 				{
-					print(" dataColumn Id:" + dataColumn.Id + " Value:" + dataRow.get(name: dataColumn.Id, defaultValue: 0).debugDescription)
+						self.tvBranch?.reloadData()
 				}
 			}
-			
-			DispatchQueue.main.async {
-				self.tvBranch?.reloadData()
-			}
-			
+			//self.mArcDataRows.append(contentsOf: clsDataTable.getDataRows())
 		})
 	}
 	
-
 	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
-		return mArcDataRows.count
+		return self.mArcDataRows.count
 	}
 	
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
 		let objCell:BranchSearchItem = tableView.dequeueReusableCell(withIdentifier: "tvcBranchSearchItem", for: indexPath) as! BranchSearchItem
 		let clsDataRow = mArcDataRows[indexPath.row]
+		//objCell.lblBranchCustType.text = "\(indexPath.row + 1)"
 		objCell.lblBranchCustType.text = clsDataRow.getString(name:"branchCustTypeName")
 		objCell.lblBranchName.text = clsDataRow.getString(name:"branchName")
-		//objCell.btnSelection.image = Icon.cm.check
 		objCell.btnSelection.titleLabel?.font = UIFont.fontAwesome(ofSize: 14)
 		objCell.btnSelection.setTitle(String.fontAwesomeIcon(name:.arrowDown), for: .normal)
-		
 		objCell.btnSelection.tag = indexPath.row
 		objCell.btnSelection.addTarget(self, action: #selector(BranchSearchDialog.onSelectionClicked(_:)), for: .touchUpInside)
 		
+		//let intTotalCount = self.mArcDataRows.count
+		
+		print("@@@@@@@intTotalCount:\(self.intTotalCount)")
+		if(indexPath.row == (self.mArcDataRows.count - 1) && self.intTotalCount > 0)
+		{
+			doSearch()
+		}
 		return objCell
 	}
 	
@@ -187,12 +227,13 @@ class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDe
 		self.dismiss(animated: true, completion: nil)
 		
 	}
-
+	
 	@IBAction func onCloseClicked(_ sender: UIButton)
 	{
 		let strtData = ReturnData(returnType: "branchSearch", returnCode: "01", returnMesage: "")
-
+		
 		mPtcDataHandler?.recvData(returnData: strtData)
 		self.dismiss(animated: true, completion: nil)
 	}
 }
+
