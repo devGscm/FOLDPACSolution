@@ -442,7 +442,7 @@ public class DataClient
 				{
 					if let responseData = ResponseData(json: responseJSON)
 					{
-						//print(responseJSON)
+						//print("reponseJSON: \(responseJSON)")
 						if( responseData.returnCode! == ReturnCodeType.RETURN_CODE_OK.rawValue)
 						{
 							let dataSourceMgr = DataSourceMgr()
