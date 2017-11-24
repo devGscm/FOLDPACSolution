@@ -12,7 +12,6 @@
 		553BCF8B1FC2DC3B00BE39C1 /* SliderDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553BCF8A1FC2DC3B00BE39C1 /* SliderDialog.swift */; };
 		5564DA761FC5583800A39598 /* ListViewDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5564DA751FC5583800A39598 /* ListViewDialog.swift */; };
 		55ACD66E1FC8020A00A2DC72 /* DataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD66D1FC8020A00A2DC72 /* DataProtocol.swift */; };
-		55ACD6701FC8021200A2DC72 /* ListViewDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD66F1FC8021200A2DC72 /* ListViewDialog.swift */; };
 		55ACD6751FC802BD00A2DC72 /* Product.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55ACD6711FC802BC00A2DC72 /* Product.storyboard */; };
 		55ACD6761FC802BD00A2DC72 /* ProductMountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD6721FC802BC00A2DC72 /* ProductMountViewController.swift */; };
 		55ACD6771FC802BD00A2DC72 /* ProductOrderSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD6731FC802BC00A2DC72 /* ProductOrderSearch.swift */; };
@@ -101,7 +100,6 @@
 		553BCF8A1FC2DC3B00BE39C1 /* SliderDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderDialog.swift; sourceTree = "<group>"; };
 		5564DA751FC5583800A39598 /* ListViewDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewDialog.swift; sourceTree = "<group>"; };
 		55ACD66D1FC8020A00A2DC72 /* DataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProtocol.swift; sourceTree = "<group>"; };
-		55ACD66F1FC8021200A2DC72 /* ListViewDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewDialog.swift; sourceTree = "<group>"; };
 		55ACD6711FC802BC00A2DC72 /* Product.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Product.storyboard; sourceTree = "<group>"; };
 		55ACD6721FC802BC00A2DC72 /* ProductMountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductMountViewController.swift; sourceTree = "<group>"; };
 		55ACD6731FC802BC00A2DC72 /* ProductOrderSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductOrderSearch.swift; sourceTree = "<group>"; };
@@ -207,7 +205,6 @@
 		55FA78321FBDACC600583A80 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				55ACD66F1FC8021200A2DC72 /* ListViewDialog.swift */,
 				55ACD66D1FC8020A00A2DC72 /* DataProtocol.swift */,
 				553BCF8A1FC2DC3B00BE39C1 /* SliderDialog.swift */,
 				55FA78331FBDACC600583A80 /* Constants.swift */,
@@ -507,7 +504,6 @@
 				55FA784B1FBDAD0B00583A80 /* LeftViewController.swift in Sources */,
 				55ACD6761FC802BD00A2DC72 /* ProductMountViewController.swift in Sources */,
 				553BCF8B1FC2DC3B00BE39C1 /* SliderDialog.swift in Sources */,
-				55ACD6701FC8021200A2DC72 /* ListViewDialog.swift in Sources */,
 				96994C511FC545DF00B3A726 /* LocalData.swift in Sources */,
 				55FA78481FBDAD0B00583A80 /* AppNavigationDrawerController.swift in Sources */,
 				55FA783A1FBDACE300583A80 /* LoginViewController.swift in Sources */,
