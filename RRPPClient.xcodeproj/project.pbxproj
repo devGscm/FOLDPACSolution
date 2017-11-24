@@ -7,15 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		551FA9701FC50EF4007C17F7 /* DataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551FA96F1FC50EF4007C17F7 /* DataProtocol.swift */; };
 		553BCF891FC2B03500BE39C1 /* RfidReaderDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553BCF881FC2B03500BE39C1 /* RfidReaderDialog.swift */; };
 		553BCF8B1FC2DC3B00BE39C1 /* SliderDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553BCF8A1FC2DC3B00BE39C1 /* SliderDialog.swift */; };
-		5564DA761FC5583800A39598 /* ListViewDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5564DA751FC5583800A39598 /* ListViewDialog.swift */; };
-		55ACD66E1FC8020A00A2DC72 /* DataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD66D1FC8020A00A2DC72 /* DataProtocol.swift */; };
 		55ACD6751FC802BD00A2DC72 /* Product.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55ACD6711FC802BC00A2DC72 /* Product.storyboard */; };
 		55ACD6761FC802BD00A2DC72 /* ProductMountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD6721FC802BC00A2DC72 /* ProductMountViewController.swift */; };
 		55ACD6771FC802BD00A2DC72 /* ProductOrderSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD6731FC802BC00A2DC72 /* ProductOrderSearch.swift */; };
 		55ACD6781FC802BD00A2DC72 /* ProductOrderSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD6741FC802BC00A2DC72 /* ProductOrderSearchCell.swift */; };
+		55ACD67E1FC804F800A2DC72 /* ListViewDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD67C1FC804F800A2DC72 /* ListViewDialog.swift */; };
+		55ACD6801FC8051900A2DC72 /* DataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD67F1FC8051900A2DC72 /* DataProtocol.swift */; };
 		55F385D41FC3E8130043F1A3 /* BranchSearchDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F385D31FC3E8130043F1A3 /* BranchSearchDialog.swift */; };
 		55F385D61FC409E20043F1A3 /* BranchSearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F385D51FC409E20043F1A3 /* BranchSearchItem.swift */; };
 		55FA782A1FBDAB6700583A80 /* Material.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA78241FBDAB2B00583A80 /* Material.framework */; };
@@ -99,11 +98,12 @@
 		553BCF881FC2B03500BE39C1 /* RfidReaderDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RfidReaderDialog.swift; sourceTree = "<group>"; };
 		553BCF8A1FC2DC3B00BE39C1 /* SliderDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderDialog.swift; sourceTree = "<group>"; };
 		5564DA751FC5583800A39598 /* ListViewDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewDialog.swift; sourceTree = "<group>"; };
-		55ACD66D1FC8020A00A2DC72 /* DataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProtocol.swift; sourceTree = "<group>"; };
 		55ACD6711FC802BC00A2DC72 /* Product.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Product.storyboard; sourceTree = "<group>"; };
 		55ACD6721FC802BC00A2DC72 /* ProductMountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductMountViewController.swift; sourceTree = "<group>"; };
 		55ACD6731FC802BC00A2DC72 /* ProductOrderSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductOrderSearch.swift; sourceTree = "<group>"; };
 		55ACD6741FC802BC00A2DC72 /* ProductOrderSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductOrderSearchCell.swift; sourceTree = "<group>"; };
+		55ACD67C1FC804F800A2DC72 /* ListViewDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewDialog.swift; sourceTree = "<group>"; };
+		55ACD67F1FC8051900A2DC72 /* DataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProtocol.swift; sourceTree = "<group>"; };
 		55F385D31FC3E8130043F1A3 /* BranchSearchDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchSearchDialog.swift; sourceTree = "<group>"; };
 		55F385D51FC409E20043F1A3 /* BranchSearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchSearchItem.swift; sourceTree = "<group>"; };
 		55FA78201FBDAAA800583A80 /* FontAwesome.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FontAwesome.framework; path = Carthage/Build/iOS/FontAwesome.framework; sourceTree = "<group>"; };
@@ -205,7 +205,8 @@
 		55FA78321FBDACC600583A80 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				55ACD66D1FC8020A00A2DC72 /* DataProtocol.swift */,
+				55ACD67F1FC8051900A2DC72 /* DataProtocol.swift */,
+				55ACD67C1FC804F800A2DC72 /* ListViewDialog.swift */,
 				553BCF8A1FC2DC3B00BE39C1 /* SliderDialog.swift */,
 				55FA78331FBDACC600583A80 /* Constants.swift */,
 				55FA78341FBDACC600583A80 /* ProgressDialog.swift */,
@@ -489,17 +490,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55ACD66E1FC8020A00A2DC72 /* DataProtocol.swift in Sources */,
 				55FA78361FBDACC600583A80 /* ProgressDialog.swift in Sources */,
+				55ACD6801FC8051900A2DC72 /* DataProtocol.swift in Sources */,
 				55FA78561FBDAD7E00583A80 /* AppContext.swift in Sources */,
 				96E494221FB1A78500D1E2C1 /* ViewController.swift in Sources */,
 				55FA784D1FBDAD0B00583A80 /* RootViewController.swift in Sources */,
 				96E494201FB1A78500D1E2C1 /* AppDelegate.swift in Sources */,
-				551FA9701FC50EF4007C17F7 /* DataProtocol.swift in Sources */,
 				55F385D41FC3E8130043F1A3 /* BranchSearchDialog.swift in Sources */,
 				55ACD6781FC802BD00A2DC72 /* ProductOrderSearchCell.swift in Sources */,
 				55FA784C1FBDAD0B00583A80 /* RightViewController.swift in Sources */,
-				5564DA761FC5583800A39598 /* ListViewDialog.swift in Sources */,
 				55FA78591FBDB06F00583A80 /* UIStoryboard.swift in Sources */,
 				55FA784B1FBDAD0B00583A80 /* LeftViewController.swift in Sources */,
 				55ACD6761FC802BD00A2DC72 /* ProductMountViewController.swift in Sources */,
@@ -510,6 +509,7 @@
 				55FA78491FBDAD0B00583A80 /* AppToolbarController.swift in Sources */,
 				553BCF891FC2B03500BE39C1 /* RfidReaderDialog.swift in Sources */,
 				55ACD6771FC802BD00A2DC72 /* ProductOrderSearch.swift in Sources */,
+				55ACD67E1FC804F800A2DC72 /* ListViewDialog.swift in Sources */,
 				55FA783B1FBDACE300583A80 /* UserInfo.swift in Sources */,
 				55FA78351FBDACC600583A80 /* Constants.swift in Sources */,
 				55F385D61FC409E20043F1A3 /* BranchSearchItem.swift in Sources */,

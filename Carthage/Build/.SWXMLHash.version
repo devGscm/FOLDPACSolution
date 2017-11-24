@@ -2,26 +2,26 @@
   "Mac" : [
     {
       "name" : "SWXMLHash",
-      "hash" : "61eaa50c1b12f06dee4a67c59ebfeb0158f663bdd15108fd8bc6bcfb63f2f834"
+      "hash" : "f2296e716584314471165beb50985a4f099e964a53726feb93183622b2de4a37"
     }
   ],
   "watchOS" : [
     {
       "name" : "SWXMLHash",
-      "hash" : "adf1d286da2a0af5e616426fabcaf6e359cff49a58df277f0601d71a36a60786"
+      "hash" : "5957b12823c6eb2dbcf8d896461bfe66363bebe94a34969f2ce1ceabc08dc08b"
     }
   ],
   "tvOS" : [
     {
       "name" : "SWXMLHash",
-      "hash" : "b451dfd6e84085ff6d188dd589426cc072becc49581ad356851afb42468284b3"
+      "hash" : "d9a654555ca8764221577de87d85ab8208fdf711435d7a3dff14a40d29b003ee"
     }
   ],
   "commitish" : "4.2.5",
   "iOS" : [
     {
       "name" : "SWXMLHash",
-      "hash" : "7434d31dd838c01eab94445bdc43657c011f6b4f1f8df81d92b57dcf125a5793"
+      "hash" : "8a2f3578961f1dc6a42eca65d4bcb77df9e23d08c65d689e3c19e05a84b41f68"
     }
   ]
 }
