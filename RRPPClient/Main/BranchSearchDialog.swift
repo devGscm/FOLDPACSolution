@@ -48,9 +48,9 @@ class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDe
 	var intPageNo  = 0
 	let intPageSize  = 20
 	var intTotalCount = 0
-	
+	var boolLoading = false
 	var clsDataClient : DataClient!
-	var mArcDataRows : Array<DataRow> = Array<DataRow>()
+	var arcDataRows : Array<DataRow> = Array<DataRow>()
 	var mPtcDataHandler : DataProtocol?
 	var mStrSearchCondtion : String?
 	
@@ -121,10 +121,8 @@ class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDe
 	func doInitSearch()
 	{
 		print("doInitSearch()")
-		
 		intPageNo = 0
-		mArcDataRows.removeAll()
-		
+		arcDataRows.removeAll()
 		let strSearchValue = tfSearchValue.text;
 		/*
 		if(strSearchValue?.isEmpty == true)
@@ -137,15 +135,13 @@ class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	func doSearch()
 	{
+		
 		intPageNo += 1
 		let strSearchValue = tfSearchValue.text;
-		print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-		print("doSearch()")
-		print(" intPageNo:\(intPageNo)")
-		print(" mStrSearchCondtion:\(mStrSearchCondtion)")
-		print(" strSearchValue:\(strSearchValue)")
-		print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-		
+		print("============================================")
+		print("doSearch(), PageNo:\(intPageNo)")
+		print("============================================")
+	
 		clsDataClient.addServiceParam(paramName: "searchCondition", value: mStrSearchCondtion!)
 		clsDataClient.addServiceParam(paramName: "searchValue", value: strSearchValue!)
 		clsDataClient.addServiceParam(paramName: "pageNo", value: intPageNo)
@@ -163,52 +159,39 @@ class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDe
 			
 			self.intTotalCount = clsDataTable.getDataRows().count
 			
-			print(" - self.intTotalCount : \(self.intTotalCount)")
-			
-			// 서버로 부터 받은 배열데이터를 추가한다.
-			//			for clsDataRow in clsDataTable.getDataRows()
-			//			{
-			//				self.mArcDataRows.append(clsDataRow)
-			//			}
-			
-			//var arcItems = self.mArcDataRows
-			//arcItems.append(contentsOf: clsDataTable.getDataRows())
-			
+			print("doSearch(),TotalCount:\(self.intTotalCount)")
+			self.arcDataRows.append(contentsOf: clsDataTable.getDataRows())
 			if(self.intTotalCount > 0)
 			{
-				//self.mArcDataRows.append(contentsOf: arcItems)
-				self.mArcDataRows.append(contentsOf: clsDataTable.getDataRows())
-				//print(" - mArcDataRows.count:\(self.mArcDataRows.count)")
 				DispatchQueue.main.async
 				{
-						self.tvBranch?.reloadData()
+					self.tvBranch?.reloadData()
 				}
 			}
-			//self.mArcDataRows.append(contentsOf: clsDataTable.getDataRows())
 		})
 	}
 	
 	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
-		return self.mArcDataRows.count
+		return self.arcDataRows.count
 	}
 	
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
 		let objCell:BranchSearchItem = tableView.dequeueReusableCell(withIdentifier: "tvcBranchSearchItem", for: indexPath) as! BranchSearchItem
-		let clsDataRow = mArcDataRows[indexPath.row]
-		//objCell.lblBranchCustType.text = "\(indexPath.row + 1)"
-		objCell.lblBranchCustType.text = clsDataRow.getString(name:"branchCustTypeName")
+		let clsDataRow = arcDataRows[indexPath.row]
+		objCell.lblBranchCustType.text = "\(indexPath.row + 1)"
+		//objCell.lblBranchCustType.text = clsDataRow.getString(name:"branchCustTypeName")
 		objCell.lblBranchName.text = clsDataRow.getString(name:"branchName")
 		objCell.btnSelection.titleLabel?.font = UIFont.fontAwesome(ofSize: 14)
 		objCell.btnSelection.setTitle(String.fontAwesomeIcon(name:.arrowDown), for: .normal)
 		objCell.btnSelection.tag = indexPath.row
 		objCell.btnSelection.addTarget(self, action: #selector(BranchSearchDialog.onSelectionClicked(_:)), for: .touchUpInside)
 		
-		//let intTotalCount = self.mArcDataRows.count
+		print("tableView(),TotalCount:\(self.intTotalCount), DataRowCount:\(self.arcDataRows.count )")
 		
-		print("@@@@@@@intTotalCount:\(self.intTotalCount)")
-		if(indexPath.row == (self.mArcDataRows.count - 1) && self.intTotalCount > 0)
+		let intLastCell = self.arcDataRows.count - 1
+		if(indexPath.row == intLastCell)
 		{
 			doSearch()
 		}
@@ -218,7 +201,7 @@ class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDe
 	@objc func onSelectionClicked(_ sender: UIButton)
 	{
 		
-		let clsDataRow = mArcDataRows[sender.tag]
+		let clsDataRow = arcDataRows[sender.tag]
 		
 		let strBranchId = clsDataRow.getString(name:"branchId") ?? ""
 		let strBranchName = clsDataRow.getString(name:"branchName") ?? ""
