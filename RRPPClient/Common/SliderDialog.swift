@@ -13,16 +13,20 @@ class SliderDialog : UIViewController
 {
 	let mLblValue = UILabel()
 	let mSldSlider = UISlider()
+
+	var mIntSliderValue : Int?
 	
 	var sliderValue: Int
 	{
 		get { return Int(self.mSldSlider.value) }
 		set(intValue)
 		{
-			self.mLblValue.text = "\(intValue)"
-			self.mSldSlider.value = Float(intValue)
+			mIntSliderValue = intValue
+			//self.mLblValue.text = "\(intValue)"
+			//self.mSldSlider.value = Float(intValue)
 		}
 	}
+	
 	
 	override func viewDidLoad()
 	{
@@ -41,6 +45,13 @@ class SliderDialog : UIViewController
 		// 뷰 컨트롤러의 콘텐츠 사이즈 지정
 		self.preferredContentSize = CGSize(width: self.mSldSlider.frame.width,
 										   height: self.mLblValue.frame.height + self.mSldSlider.frame.height+10)
+		
+	}
+	
+	override func viewWillAppear(_ animated: Bool)
+	{
+		self.mLblValue.text = "\(mIntSliderValue!)"
+		self.mSldSlider.value = Float(mIntSliderValue!)
 	}
 	
 	@IBAction func onSliderValueChanged(sender: UISlider)

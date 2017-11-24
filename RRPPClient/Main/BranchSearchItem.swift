@@ -7,13 +7,13 @@
 //
 
 import UIKit
+import Material
 
 class BranchSearchItem: UITableViewCell
 {
 	@IBOutlet weak var lblBranchCustType: UILabel!
-	@IBOutlet weak var lblBranchId: UILabel!
 	@IBOutlet weak var lblBranchName: UILabel!
-	@IBOutlet weak var btnSelection: UIButton!
+	@IBOutlet weak var btnSelection: FABButton!
 	
 	override func awakeFromNib() {
         super.awakeFromNib()

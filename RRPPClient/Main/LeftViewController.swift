@@ -7,7 +7,6 @@ import FontAwesome
 class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
 	struct MenuItem {
-		let menuIcon : UIImage?
 		let menuId : String
 		let menuName : String
 	}
@@ -16,11 +15,9 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	@IBOutlet weak var mIvLogo: UIImageView!
 	
 	@IBOutlet weak var btnLogout: UIButton!
-	var mLstMenuData:Array<MenuItem> = Array<MenuItem>()
+	var mArrMenuData:Array<MenuItem> = Array<MenuItem>()
 
-	lazy var clsProductMountViewController: ProductMountViewController = {
-		return UIStoryboard.viewController(storyBoardName: "Product", identifier: "ProductMountViewController") as! ProductMountViewController
-	}()
+
 	
 	open override func viewDidLoad()
 	{
@@ -62,19 +59,18 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	public func makeMenuItem() -> Void
 	{
 		let strCustType = AppContext.sharedManager.getUserInfo().getCustType()
-		//print(" CustType:\(strCustType)")
 		if(strCustType == "ISS")
 		{
-			mLstMenuData.append(MenuItem(menuIcon: Icon.cm.play, menuId: "TagSupply", menuName: "납품등록(RFID)"))
-			mLstMenuData.append(MenuItem(menuIcon: Icon.cm.play, menuId: "RfidInspect", menuName: "RFID태그검수"))
-			mLstMenuData.append(MenuItem(menuIcon: Icon.cm.play, menuId: "RfidInspect", menuName: "이력추적"))
+			mArrMenuData.append(MenuItem(menuId: "TagSupply", menuName: "납품등록(RFID)"))
+			mArrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "RFID태그검수"))
+			mArrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "이력추적"))
 		}
 		else if(strCustType == "MGR")
 		{
-			mLstMenuData.append(MenuItem(menuIcon: Icon.cm.play, menuId: "TagSupply", menuName: "납품등록(RFID)"))
-			mLstMenuData.append(MenuItem(menuIcon: Icon.cm.play, menuId: "ProductMount", menuName: "자산등록"))
-			mLstMenuData.append(MenuItem(menuIcon: Icon.cm.play, menuId: "RfidInspect", menuName: "RFID태그검수"))
-			mLstMenuData.append(MenuItem(menuIcon: Icon.cm.play, menuId: "RfidInspect", menuName: "이력추적"))
+			mArrMenuData.append(MenuItem(menuId: "TagSupply", menuName: "납품등록(RFID)"))
+			mArrMenuData.append(MenuItem(menuId: "ProductMount", menuName: "자산등록"))
+			mArrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "RFID태그검수"))
+			mArrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "이력추적"))
 		}
 		tvMenu?.reloadData()
 	}
@@ -82,35 +78,28 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
-		return mLstMenuData.count
+		return mArrMenuData.count
 	}
 	
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
 		let objCell:LeftMenuItem = tableView.dequeueReusableCell(withIdentifier: "tvcMenuItem", for: indexPath) as! LeftMenuItem
-		let strtMenuItem = mLstMenuData[indexPath.row]
-		
-		
+		let strtMenuItem = mArrMenuData[indexPath.row]
 		objCell.lblMenuName.font = UIFont.fontAwesome(ofSize: 14)
 		objCell.lblMenuName.text = "\(String.fontAwesomeIcon(name: .chevronCircleRight)) \(strtMenuItem.menuName )"
 		return objCell
 	}
 	
-	
 	public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
 	{
-		let strtMenuItem  = mLstMenuData[indexPath.row]
-		
-		print("strtMenuItem.menuId:\(strtMenuItem.menuId)")
-		
-		switch (indexPath.row)
+		let strtMenuItem  = mArrMenuData[indexPath.row]
+		switch (strtMenuItem.menuId)
 		{
-			//case 0:
-		//break;
-		case 1:
-			
-			//navigationDrawerController?.transition(to: clsProductMountViewController, completion: closeNavigationDrawer)
-			toolbarController?.transition(to: clsProductMountViewController, completion: closeNavigationDrawer)
+			case "ProductMount" :
+				let clsProductMountViewController: ProductMountViewController = {
+					return UIStoryboard.viewController(storyBoardName: "Product", identifier: "ProductMountViewController") as! ProductMountViewController
+				}()
+				toolbarController?.transition(to: clsProductMountViewController, completion: closeNavigationDrawer)
 			break;
 			
 		default:
@@ -123,9 +112,6 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	{
 		print(" LeftViewCOntroller.onLogoutClicked")
 		AppContext.sharedManager.doLogout();
-		
-		
-		//DispatchQueue.main.async {};
 		navigationDrawerController?.closeLeftView()
 		self.performSegue(withIdentifier: "segLogout", sender: self)
 	}
@@ -136,25 +122,3 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	}
 }
 
-/*
-extension LeftViewController {
-fileprivate func prepareTransitionButton() {
-transitionButton = FlatButton(title: "Transition VC", titleColor: .white)
-transitionButton.pulseColor = .white
-transitionButton.addTarget(self, action: #selector(handleTransitionButton), for: .touchUpInside)
-
-view.layout(transitionButton).horizontally().center()
-}
-}
-
-extension LeftViewController {
-@objc
-fileprivate func handleTransitionButton() {
-toolbarController?.transition(to: TransitionedViewController(), completion: closeNavigationDrawer)
-}
-
-fileprivate func closeNavigationDrawer(result: Bool) {
-navigationDrawerController?.closeLeftView()
-}
-
-*/

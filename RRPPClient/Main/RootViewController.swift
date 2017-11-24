@@ -40,7 +40,7 @@ extension RootViewController
         }
         
         tc.toolbar.title = "RRPP TRA"
-        tc.toolbar.detail = "Build Beautiful Software"
+        tc.toolbar.detail = "RRPP Trade & Tracking & Traceability Platform"
     }
 }
 

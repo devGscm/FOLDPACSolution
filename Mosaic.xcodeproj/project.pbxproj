@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		556C67D81FC668FA00EAF4B7 /* Dialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556C67D71FC668FA00EAF4B7 /* Dialog.swift */; };
 		9641E8B51FB56DBA00E0E422 /* DataColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9641E8B41FB56DBA00E0E422 /* DataColumn.swift */; };
 		967DC3E41FB42C37000265CD /* DataRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967DC3E31FB42C37000265CD /* DataRow.swift */; };
 		96B2A9911FB5836F009E2615 /* DataTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B2A9901FB5836F009E2615 /* DataTable.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		556C67D71FC668FA00EAF4B7 /* Dialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dialog.swift; sourceTree = "<group>"; };
 		9641E8B41FB56DBA00E0E422 /* DataColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataColumn.swift; sourceTree = "<group>"; };
 		967DC3E31FB42C37000265CD /* DataRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRow.swift; sourceTree = "<group>"; };
 		96B2A9901FB5836F009E2615 /* DataTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTable.swift; sourceTree = "<group>"; };
@@ -67,9 +69,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		556C67D61FC668E800EAF4B7 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				556C67D71FC668FA00EAF4B7 /* Dialog.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		96690EB11FBE5CC40008B0EC /* Mosaic */ = {
 			isa = PBXGroup;
 			children = (
+				556C67D61FC668E800EAF4B7 /* UI */,
 				96E494A41FB1B62E00D1E2C1 /* Network */,
 				967DC3E21FB42BD6000265CD /* Data */,
 				96E4948D1FB1B5ED00D1E2C1 /* Mosaic.h */,
@@ -271,6 +282,7 @@
 				9641E8B51FB56DBA00E0E422 /* DataColumn.swift in Sources */,
 				96B2A9951FB5A13C009E2615 /* DataSourceMgr.swift in Sources */,
 				96B6E7711FBC1E80004F85B5 /* QueryMaker.swift in Sources */,
+				556C67D81FC668FA00EAF4B7 /* Dialog.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
