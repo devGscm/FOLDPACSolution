@@ -11,6 +11,8 @@
 		553BCF891FC2B03500BE39C1 /* RfidReaderDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553BCF881FC2B03500BE39C1 /* RfidReaderDialog.swift */; };
 		553BCF8B1FC2DC3B00BE39C1 /* SliderDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553BCF8A1FC2DC3B00BE39C1 /* SliderDialog.swift */; };
 		5564DA761FC5583800A39598 /* ListViewDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5564DA751FC5583800A39598 /* ListViewDialog.swift */; };
+		55ACD66E1FC8020A00A2DC72 /* DataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD66D1FC8020A00A2DC72 /* DataProtocol.swift */; };
+		55ACD6701FC8021200A2DC72 /* ListViewDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD66F1FC8021200A2DC72 /* ListViewDialog.swift */; };
 		55F385CB1FC3B6F40043F1A3 /* Product.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55F385CA1FC3B6F40043F1A3 /* Product.storyboard */; };
 		55F385CD1FC3B73B0043F1A3 /* ProductMountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F385CC1FC3B73B0043F1A3 /* ProductMountViewController.swift */; };
 		55F385D41FC3E8130043F1A3 /* BranchSearchDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F385D31FC3E8130043F1A3 /* BranchSearchDialog.swift */; };
@@ -96,6 +98,8 @@
 		553BCF881FC2B03500BE39C1 /* RfidReaderDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RfidReaderDialog.swift; sourceTree = "<group>"; };
 		553BCF8A1FC2DC3B00BE39C1 /* SliderDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderDialog.swift; sourceTree = "<group>"; };
 		5564DA751FC5583800A39598 /* ListViewDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewDialog.swift; sourceTree = "<group>"; };
+		55ACD66D1FC8020A00A2DC72 /* DataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProtocol.swift; sourceTree = "<group>"; };
+		55ACD66F1FC8021200A2DC72 /* ListViewDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewDialog.swift; sourceTree = "<group>"; };
 		55F385CA1FC3B6F40043F1A3 /* Product.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Product.storyboard; sourceTree = "<group>"; };
 		55F385CC1FC3B73B0043F1A3 /* ProductMountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMountViewController.swift; sourceTree = "<group>"; };
 		55F385D31FC3E8130043F1A3 /* BranchSearchDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchSearchDialog.swift; sourceTree = "<group>"; };
@@ -176,6 +180,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		55ACD66C1FC801A900A2DC72 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				551FA96F1FC50EF4007C17F7 /* DataProtocol.swift */,
+				5564DA751FC5583800A39598 /* ListViewDialog.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		55F385C91FC3B6A40043F1A3 /* Product */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,6 +201,8 @@
 		55FA78321FBDACC600583A80 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				55ACD66F1FC8021200A2DC72 /* ListViewDialog.swift */,
+				55ACD66D1FC8020A00A2DC72 /* DataProtocol.swift */,
 				553BCF8A1FC2DC3B00BE39C1 /* SliderDialog.swift */,
 				55FA78331FBDACC600583A80 /* Constants.swift */,
 				55FA78341FBDACC600583A80 /* ProgressDialog.swift */,
@@ -255,6 +270,7 @@
 				96E494331FB1A78500D1E2C1 /* RRPPClientTests */,
 				96E4941D1FB1A78500D1E2C1 /* Products */,
 				96E4944D1FB1A81F00D1E2C1 /* Frameworks */,
+				55ACD66C1FC801A900A2DC72 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -470,6 +486,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55ACD66E1FC8020A00A2DC72 /* DataProtocol.swift in Sources */,
 				55FA78361FBDACC600583A80 /* ProgressDialog.swift in Sources */,
 				55FA78561FBDAD7E00583A80 /* AppContext.swift in Sources */,
 				96E494221FB1A78500D1E2C1 /* ViewController.swift in Sources */,
@@ -483,6 +500,7 @@
 				55F385CD1FC3B73B0043F1A3 /* ProductMountViewController.swift in Sources */,
 				55FA784B1FBDAD0B00583A80 /* LeftViewController.swift in Sources */,
 				553BCF8B1FC2DC3B00BE39C1 /* SliderDialog.swift in Sources */,
+				55ACD6701FC8021200A2DC72 /* ListViewDialog.swift in Sources */,
 				96994C511FC545DF00B3A726 /* LocalData.swift in Sources */,
 				55FA78481FBDAD0B00583A80 /* AppNavigationDrawerController.swift in Sources */,
 				55FA783A1FBDACE300583A80 /* LoginViewController.swift in Sources */,
