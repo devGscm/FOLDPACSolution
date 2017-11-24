@@ -24,17 +24,6 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		super.viewDidLoad()
 		//view.backgroundColor = Color.blue.base
 		
-		if let strCorpId = AppContext.sharedManager.getUserInfo().getCorpId()
-		{
-			print("CORPID:\(strCorpId)")
-		}
-		
-		if let strCustType = AppContext.sharedManager.getUserInfo().getCustType()
-		{
-			print("strCustType:\(strCustType)")
-		}
-		
-		
 		if("moramcnt" == AppContext.sharedManager.getUserInfo().getCorpId())
 		{
 			print("Moram")

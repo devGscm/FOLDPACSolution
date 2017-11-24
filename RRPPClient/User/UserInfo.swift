@@ -11,8 +11,8 @@ import Foundation
 
 class UserInfo
 {
-
-
+	
+	
 	/**
 	* 자동로그인 여부를 리턴한다.
 	* @return 자동로그인 여부
@@ -23,53 +23,53 @@ class UserInfo
 	* 회사ID 를 리턴한다.
 	* @return 회사ID
 	*/
-	func getCorpId() -> String?			{ return UserDefaults.standard.string(forKey: "corpId") }
+	func getCorpId() -> String			{ return UserDefaults.standard.string(forKey: "corpId") ?? "" }
 	
-
+	
 	/**
 	* 회사구분을 리턴한다.
 	* @return 회사구분
 	*/
-	func getCorpType() -> String?		{ return UserDefaults.standard.string(forKey: "corpType") }
+	func getCorpType() -> String		{ return UserDefaults.standard.string(forKey: "corpType") ?? "" }
 	
 	/**
 	* 사용자ID를 리턴한다.
 	* @return 사용자ID
 	*/
-	func getUserId() -> String?			{ return UserDefaults.standard.string(forKey: "userId") }
+	func getUserId() -> String			{ return UserDefaults.standard.string(forKey: "userId") ?? "" }
 	
 	/**
 	* 패스워드를 리턴한다.
 	* @return 패스워드
 	*/
-	func getPassword() -> String?		{ return UserDefaults.standard.string(forKey: "password") }
+	func getPassword() -> String		{ return UserDefaults.standard.string(forKey: "password") ?? "" }
 	
 	
 	/**
 	* 고객사ID를 리턴한다.
 	* @return 고객사ID
 	*/
-	func getCustId() -> String?			{ return UserDefaults.standard.string(forKey: "custId") }
+	func getCustId() -> String			{ return UserDefaults.standard.string(forKey: "custId") ?? "" }
 	
 	
 	/**
 	* 고객사 구분을 리턴한다.
 	* @return 고객사 구분
 	*/
-	func getCustType() -> String?		{ return UserDefaults.standard.string(forKey: "custType") }
+	func getCustType() -> String		{ return UserDefaults.standard.string(forKey: "custType") ?? "" }
 	
 	
 	/**
 	* 사용자명을 리턴한다.
 	* @return 사용자명
 	*/
-	func getUserName() -> String?		{ return UserDefaults.standard.string(forKey: "userName") }
+	func getUserName() -> String		{ return UserDefaults.standard.string(forKey: "userName") ?? "" }
 	
 	/**
 	* 사용자 암호화 ID를 리턴한다.
 	* @return 사용자 암호화 ID
 	*/
-	func getEncryptId() -> String?		{ return UserDefaults.standard.string(forKey: "encryptId") }
+	func getEncryptId() -> String		{ return UserDefaults.standard.string(forKey: "encryptId") ?? "" }
 	
 	/**
 	* 버전을 리턴한다.
@@ -82,78 +82,78 @@ class UserInfo
 	* 푸시사용여부를 리턴한다.
 	* @return 푸시사용여부
 	*/
-	func getPushUseYn() -> String?		{ return UserDefaults.standard.string(forKey: "pushUseYn") }
+	func getPushUseYn() -> String		{ return UserDefaults.standard.string(forKey: "pushUseYn") ?? "" }
 	
 	/**
 	* 이전 로그인 회사ID를 리턴한다.
 	* @return 이전 로그인 회사ID
 	*/
-	func getPreCorpId() -> String?		{ return UserDefaults.standard.string(forKey: "preCorpId") }
+	func getPreCorpId() -> String		{ return UserDefaults.standard.string(forKey: "preCorpId") ?? "" }
 	
 	/**
 	* 이전 로그인 사용자ID를 리턴한다.
 	* @return 이전 로그인 사용자ID
 	*/
-	func getPreUserId() -> String?		{ return UserDefaults.standard.string(forKey: "preUserId") }
+	func getPreUserId() -> String		{ return UserDefaults.standard.string(forKey: "preUserId") ?? "" }
 	
 	
 	/**
 	* 사용자 언어를 리턴한다.
 	* @return 사용자 언어
 	*/
-	func getUserLang() -> String?		{ return UserDefaults.standard.string(forKey: "userLang") ?? "KR" }
+	func getUserLang() -> String		{ return UserDefaults.standard.string(forKey: "userLang") ?? "KR" }
 	
 	/**
 	* 장치ID를 리턴한다.
 	* @return 장치ID
 	*/
-	func getUnitId() -> String?			{ return UserDefaults.standard.string(forKey: "unitId") }
+	func getUnitId() -> String			{ return UserDefaults.standard.string(forKey: "unitId") ?? "" }
 	
 	
 	/**
 	* 이벤트코드를 리턴한다.
 	* @return 이벤트코드
 	*/
-	func getEventCode() -> String?		{ return UserDefaults.standard.string(forKey: "eventCode") }
+	func getEventCode() -> String		{ return UserDefaults.standard.string(forKey: "eventCode") ?? "" }
 	
 	/**
 	* 거점ID를 리턴한다.
 	* @return 거점ID
 	*/
-	func getBranchId() -> String?		{ return UserDefaults.standard.string(forKey: "branchId") }
+	func getBranchId() -> String		{ return UserDefaults.standard.string(forKey: "branchId") ?? "" }
 	
 	/**
 	* 거점명을 리턴한다.
 	* @return 거점명
 	*/
-	func getBranchName() -> String?		{ return UserDefaults.standard.string(forKey: "branchName") }
+	func getBranchName() -> String		{ return UserDefaults.standard.string(forKey: "branchName") ?? "" }
 	
 	
 	/**
 	* 거점고객사ID를 리턴한다.
 	* @return 거점고객사ID
 	*/
-	func getBranchCustId() -> String?		{ return UserDefaults.standard.string(forKey: "branchCustId") }
+	func getBranchCustId() -> String		{ return UserDefaults.standard.string(forKey: "branchCustId") ?? "" }
 	
 	/**
 	* 거점고객사명을 리턴한다.
 	* @return 거점고객사명
 	*/
-	func getBranchCustName() -> String?		{ return UserDefaults.standard.string(forKey: "branchCustName") }
+	func getBranchCustName() -> String		{ return UserDefaults.standard.string(forKey: "branchCustName") ?? "" }
 	
 	
 	/**
 	* 상위고객사ID을 리턴한다.
 	* @return 상위고객사ID
 	*/
-	func getParentCustId() -> String?		{ return UserDefaults.standard.string(forKey: "parentCustId") }
+	func getParentCustId() -> String		{ return UserDefaults.standard.string(forKey: "parentCustId")  ?? ""}
 	
 	
 	/**
 	* 거점의 고객사 구분을 리턴한다.
 	* @return 거점의 고객사 구분
 	*/
-	func getBranchCustType() -> String?		{ return UserDefaults.standard.string(forKey: "branchCustType") }
+	func getBranchCustType() -> String		{ return UserDefaults.standard.string(forKey: "branchCustType")  ?? ""}
 	
 	
 	/**
@@ -506,5 +506,6 @@ class UserInfo
 	func setInAgreeYn(strInAgreeYn : String)
 	{
 		UserDefaults.standard.set(strInAgreeYn, forKey: "inAgreeYn")
-	}	
+	}
 }
+
