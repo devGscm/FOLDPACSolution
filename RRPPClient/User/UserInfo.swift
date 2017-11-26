@@ -372,18 +372,18 @@ class UserInfo
 	* 거점ID를 설정한다.
 	* @param strBranchId 거점ID
 	*/
-	func setBranchId(strBranchId : String)
+	func setBranchId(branchId : String)
 	{
-		UserDefaults.standard.set(strBranchId, forKey: "branchId")
+		UserDefaults.standard.set(branchId, forKey: "branchId")
 	}
 	
 	/**
 	* 거점명를 설정한다.
 	* @param strBranchName 거점명
 	*/
-	func setBranchName(strBranchName : String)
+	func setBranchName(branchName : String)
 	{
-		UserDefaults.standard.set(strBranchName, forKey: "branchName")
+		UserDefaults.standard.set(branchName, forKey: "branchName")
 	}
 	
 	
@@ -391,18 +391,18 @@ class UserInfo
 	* 거점고객사ID를 설정한다.
 	* @param strBranchCustId 거점고객사ID
 	*/
-	func setBranchCustId(strBranchCustId : String)
+	func setBranchCustId(branchCustId : String)
 	{
-		UserDefaults.standard.set(strBranchCustId, forKey: "branchCustId")
+		UserDefaults.standard.set(branchCustId, forKey: "branchCustId")
 	}
 	
 	/**
 	* 거점고객사명를 설정한다.
 	* @param strBranchCustName 거점고객사명
 	*/
-	func setBranchCustName(strBranchCustName : String)
+	func setBranchCustName(branchCustName : String)
 	{
-		UserDefaults.standard.set(strBranchCustName, forKey: "branchCustName")
+		UserDefaults.standard.set(branchCustName, forKey: "branchCustName")
 	}
 	
 	
@@ -420,9 +420,9 @@ class UserInfo
 	* 거점의 고객사구분을 설정한다.
 	* @param strBranchCustType 거점의 고객사구분
 	*/
-	func setBranchCustType(strBranchCustType : String)
+	func setBranchCustType(branchCustType : String)
 	{
-		UserDefaults.standard.set(strBranchCustType, forKey: "branchCustType")
+		UserDefaults.standard.set(branchCustType, forKey: "branchCustType")
 	}
 	
 	/**
@@ -501,11 +501,11 @@ class UserInfo
 	
 	/**
 	* 입고자동승인여부를 설정한다.
-	* @param strInAgreeYn 입고자동승인여부
+	* @param inAgreeYn 입고자동승인여부
 	*/
-	func setInAgreeYn(strInAgreeYn : String)
+	func setInAgreeYn(inAgreeYn : String)
 	{
-		UserDefaults.standard.set(strInAgreeYn, forKey: "inAgreeYn")
+		UserDefaults.standard.set(inAgreeYn, forKey: "inAgreeYn")
 	}
 }
 
