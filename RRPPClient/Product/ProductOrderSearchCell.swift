@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Material
 
 class ProductOrderSearchCell: UITableViewCell
 {
@@ -16,7 +17,7 @@ class ProductOrderSearchCell: UITableViewCell
 	@IBOutlet weak var lblMakeOrderId: UILabel!
 	@IBOutlet weak var lblProdAssetEpcName: UILabel!
 	@IBOutlet weak var lblOrderAddr: UILabel!
-	@IBOutlet weak var btnSelection: UIButton!
+	@IBOutlet weak var btnSelection: FABButton!
 	
 	override func awakeFromNib()
 	{

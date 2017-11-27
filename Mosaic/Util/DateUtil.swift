@@ -35,6 +35,15 @@ public class DateUtil
 		return dfFormat.string(from: dtLocaleDate!)
 	}
 	
+	public static func getConvertFormatDate(date: String, srcFormat : String, dstFormat : String) -> String
+	{
+		let dfFormat = DateFormatter()
+		dfFormat.dateFormat = srcFormat
+		let dtDate = dfFormat.date(from: date)
+		dfFormat.dateFormat = dstFormat
+		return dfFormat.string(from: dtDate!)
+	}
+	
 	public static func getFormatDate(date: String, dateFormat: String) -> Date
 	{
 		let dfFormat = DateFormatter()

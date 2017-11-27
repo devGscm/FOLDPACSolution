@@ -57,12 +57,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 		//let leftViewController = LeftViewController()
 		//let rightViewController = RightViewController()
 
-		/*
-		let clsAappToolbarController = AppToolbarController(rootViewController: mClsRootController)
-		window = UIWindow(frame: Screen.bounds)
-		window!.rootViewController = AppNavigationDrawerController(rootViewController: clsAappToolbarController, leftViewController: mClsLeftController, rightViewController: mClsRightController)
-		window!.makeKeyAndVisible()
-		*/
+	
+//		let clsAappToolbarController = AppToolbarController(rootViewController: mClsRootController)
+//		window = UIWindow(frame: Screen.bounds)
+//		window!.rootViewController = AppNavigationDrawerController(rootViewController: clsAappToolbarController, leftViewController: mClsLeftController, rightViewController: mClsRightController)
+//		window!.makeKeyAndVisible()
+
 		
 		let clsController: ProductMountViewController = {
 			return UIStoryboard.viewController(storyBoardName:"Product", identifier: "ProductMountViewController") as! ProductMountViewController

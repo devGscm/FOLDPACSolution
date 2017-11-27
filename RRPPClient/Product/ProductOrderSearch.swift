@@ -9,7 +9,7 @@
 import UIKit
 import Mosaic
 
-class ProductOrderSearch: UIViewController
+class ProductOrderSearch: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
 
 	@IBOutlet weak var tvProductOrderSearch: UITableView!
@@ -19,6 +19,9 @@ class ProductOrderSearch: UIViewController
 	@IBOutlet weak var btnStDate: UITextField!
 	@IBOutlet weak var btnEnDate: UITextField!
 	@IBOutlet weak var btnSearch: UIButton!
+	
+	var ptcDataHandler : DataProtocol?
+	
 	let dpPicker = UIDatePicker()
 	
 	var intPageNo  = 0
@@ -57,25 +60,29 @@ class ProductOrderSearch: UIViewController
 		print(" userLang:\(AppContext.sharedManager.getUserInfo().getUserLang())")
 	
 		
-//		clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
-//		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
-//		clsDataClient.UserData = "productService.selectProductOrderList"
-//		clsDataClient.removeServiceParam()
-//		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
-//		clsDataClient.addServiceParam(paramName: "branchId", value: AppContext.sharedManager.getUserInfo().getBranchId())
-//		clsDataClient.addServiceParam(paramName: "branchCustId", value: AppContext.sharedManager.getUserInfo().getBranchCustId())
-//		clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
+		clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+		clsDataClient.SelectUrl = "productService:selectProductOrderList"
+		clsDataClient.removeServiceParam()
+		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+		clsDataClient.addServiceParam(paramName: "branchId", value: AppContext.sharedManager.getUserInfo().getBranchId())
+		clsDataClient.addServiceParam(paramName: "branchCustId", value: AppContext.sharedManager.getUserInfo().getBranchCustId())
+		clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
 
+		/*
 		// 골드라인 당진공장
 		clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = "xxOxOsU93/PvK/NN7DZmZw=="
 		//clsDataClient.UserData = "productService.selectProductOrderList"
-		clsDataClient.SelectUrl = "productService.selectProductOrderList"
+		//clsDataClient.SelectUrl = "productService.selectProductOrderList"
+		clsDataClient.SelectUrl = "productService:selectProductOrderList"
+		
 		clsDataClient.removeServiceParam()
 		clsDataClient.addServiceParam(paramName: "corpId", value: "logisallcm")
 		clsDataClient.addServiceParam(paramName: "branchId", value: "160530000045")
 		clsDataClient.addServiceParam(paramName: "branchCustId", value: "160530000071")
-		clsDataClient.addServiceParam(paramName: "userLang", value: "KR")	
+		clsDataClient.addServiceParam(paramName: "userLang", value: "KR")
+		*/
 	}
 	
 	
@@ -96,6 +103,8 @@ class ProductOrderSearch: UIViewController
 	{
 		do
 		{
+			intPageNo += 1
+			
 			let strLocaleStDate = StrUtil.replace(sourceText: (btnStDate?.text)!, findText: "-", replaceText: "") + "000000"
 			let strLocaleEnDate = StrUtil.replace(sourceText: (btnEnDate?.text)!, findText: "-", replaceText: "") + "235959"
 			
@@ -111,10 +120,16 @@ class ProductOrderSearch: UIViewController
 				Dialog.show(container: self, title: nil, message: NSLocalizedString("msg_search_date_error", comment: "검색일자를 확인해 주세요."))
 				return
 			}
+			
+			print("startOrderDate:\(strLocaleStDate)")
+			print("endOrderDate:\(strLocaleEnDate)")
+			print("pageNo:\(intPageNo)")
+			print("rowPerPage:\(Constants.ROWS_PER_PAGE)")
+			
 			clsDataClient.addServiceParam(paramName: "startOrderDate", value: strLocaleStDate)
 			clsDataClient.addServiceParam(paramName: "endOrderDate", value: strLocaleEnDate)
 			clsDataClient.addServiceParam(paramName: "pageNo", value: intPageNo)
-			clsDataClient.addServiceParam(paramName: "rowPerPage", value: Constants.ROWS_PER_PAGE)
+			clsDataClient.addServiceParam(paramName: "rowsPerPage", value: Constants.ROWS_PER_PAGE)
 			clsDataClient.selectData(dataCompletionHandler: {(data, error) in
 				if let error = error {
 					// 에러처리
@@ -126,8 +141,7 @@ class ProductOrderSearch: UIViewController
 					return
 				}
 				self.arcDataRows.append(contentsOf: clsDataTable.getDataRows())
-				
-				DispatchQueue.main.async { self.tvProductOrderSearch?.reloadData()}
+				DispatchQueue.main.async { self.tvProductOrderSearch?.reloadData() }
 			})
 		}
 		catch let error
@@ -158,9 +172,11 @@ class ProductOrderSearch: UIViewController
 		let clsDataRow = arcDataRows[indexPath.row]
 		
 		let strUtcOrderDate = clsDataRow.getString(name:"orderDate")
+		let strLocaleOrderDate = DateUtil.utcToLocale(utcDate: strUtcOrderDate!, dateFormat: "yyyyMMddHHmmss")
+		let strOrderDate = DateUtil.getConvertFormatDate(date: strLocaleOrderDate, srcFormat: "yyyyMMddHHmmss", dstFormat:"MM-dd")
 		
 		//objCell.lblOrderDate.text = "\(indexPath.row + 1)"
-		objCell.lblOrderDate.text = clsDataRow.getString(name:"orderDate")
+		objCell.lblOrderDate.text = strOrderDate
 		objCell.lblOrderReqCnt.text = clsDataRow.getString(name:"orderReqCnt")
 		objCell.lblOrderCustName.text = clsDataRow.getString(name:"orderCustName")
 		objCell.lblMakeOrderId.text = clsDataRow.getString(name:"makeOrderId")
@@ -170,17 +186,16 @@ class ProductOrderSearch: UIViewController
 		objCell.btnSelection.titleLabel?.font = UIFont.fontAwesome(ofSize: 14)
 		objCell.btnSelection.setTitle(String.fontAwesomeIcon(name:.arrowDown), for: .normal)
 		objCell.btnSelection.tag = indexPath.row
-		//objCell.btnSelection.addTarget(self, action: #selector(BranchSearchDialog.onSelectionClicked(_:)), for: .touchUpInside)
+		objCell.btnSelection.addTarget(self, action: #selector(BranchSearchDialog.onSelectionClicked(_:)), for: .touchUpInside)
 		return objCell
 	}
 	
 	@objc func onSelectionClicked(_ sender: UIButton)
 	{
-//		let clsDataRow = arcDataRows[sender.tag]
-//		let strtData = ReturnData(returnType: "branchSearch", returnCode: nil, returnMesage: nil, returnRawData: clsDataRow)
-//		ptcDataHandler?.recvData(returnData: strtData)
-//
-//		self.dismiss(animated: true, completion: nil)
+		let clsDataRow = arcDataRows[sender.tag]
+		let strtData = ReturnData(returnType: "productOrderSearch", returnCode: nil, returnMesage: nil, returnRawData: clsDataRow)
+		ptcDataHandler?.recvData(returnData: strtData)
+		self.dismiss(animated: true, completion: nil)
 	}
 	
 	@IBAction func onCloseClicked(_ sender: Any)
