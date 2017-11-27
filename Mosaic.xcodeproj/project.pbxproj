@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		554035311FC91F9200A4F2A4 /* StrUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554035301FC91F9200A4F2A4 /* StrUtil.swift */; };
+		554035331FC92C9300A4F2A4 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554035321FC92C9300A4F2A4 /* DateUtil.swift */; };
 		556C67D81FC668FA00EAF4B7 /* Dialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556C67D71FC668FA00EAF4B7 /* Dialog.swift */; };
 		9641E8B51FB56DBA00E0E422 /* DataColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9641E8B41FB56DBA00E0E422 /* DataColumn.swift */; };
 		967DC3E41FB42C37000265CD /* DataRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967DC3E31FB42C37000265CD /* DataRow.swift */; };
@@ -31,6 +33,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		554035301FC91F9200A4F2A4 /* StrUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrUtil.swift; sourceTree = "<group>"; };
+		554035321FC92C9300A4F2A4 /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		556C67D71FC668FA00EAF4B7 /* Dialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dialog.swift; sourceTree = "<group>"; };
 		9641E8B41FB56DBA00E0E422 /* DataColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataColumn.swift; sourceTree = "<group>"; };
 		967DC3E31FB42C37000265CD /* DataRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRow.swift; sourceTree = "<group>"; };
@@ -69,6 +73,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5540352F1FC91F6F00A4F2A4 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				554035301FC91F9200A4F2A4 /* StrUtil.swift */,
+				554035321FC92C9300A4F2A4 /* DateUtil.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		556C67D61FC668E800EAF4B7 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +96,7 @@
 				556C67D61FC668E800EAF4B7 /* UI */,
 				96E494A41FB1B62E00D1E2C1 /* Network */,
 				967DC3E21FB42BD6000265CD /* Data */,
+				5540352F1FC91F6F00A4F2A4 /* Util */,
 				96E4948D1FB1B5ED00D1E2C1 /* Mosaic.h */,
 				96E4948E1FB1B5ED00D1E2C1 /* Info.plist */,
 			);
@@ -282,7 +296,9 @@
 				9641E8B51FB56DBA00E0E422 /* DataColumn.swift in Sources */,
 				96B2A9951FB5A13C009E2615 /* DataSourceMgr.swift in Sources */,
 				96B6E7711FBC1E80004F85B5 /* QueryMaker.swift in Sources */,
+				554035331FC92C9300A4F2A4 /* DateUtil.swift in Sources */,
 				556C67D81FC668FA00EAF4B7 /* Dialog.swift in Sources */,
+				554035311FC91F9200A4F2A4 /* StrUtil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

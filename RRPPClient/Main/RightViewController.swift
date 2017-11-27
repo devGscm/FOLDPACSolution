@@ -51,27 +51,30 @@ class RightViewController: UITableViewController, DataProtocol
 		// 거점 선택
 		if(returnData.returnType == "branchSearch")
 		{
-			let clsDataRow = returnData.returnRawData as! DataRow
-			let strBranchId = clsDataRow.getString(name:"branchId") ?? ""
-			let strBranchName = clsDataRow.getString(name:"branchName") ?? ""
-			let strBranchCustId = clsDataRow.getString(name:"branchCustId") ?? ""
-			let strBranchCustType = clsDataRow.getString(name:"branchCustType") ?? ""
-			let strBranchCustName = clsDataRow.getString(name:"branchCustName") ?? ""
-			let strInAgreeYn = clsDataRow.getString(name:"inAgreeYn") ?? ""
+			if(returnData.returnRawData != nil)
+			{
+				let clsDataRow = returnData.returnRawData as! DataRow
+				let strBranchId = clsDataRow.getString(name:"branchId") ?? ""
+				let strBranchName = clsDataRow.getString(name:"branchName") ?? ""
+				let strBranchCustId = clsDataRow.getString(name:"branchCustId") ?? ""
+				let strBranchCustType = clsDataRow.getString(name:"branchCustType") ?? ""
+				let strBranchCustName = clsDataRow.getString(name:"branchCustName") ?? ""
+				let strInAgreeYn = clsDataRow.getString(name:"inAgreeYn") ?? ""
 			
-			let clsUserInfo = AppContext.sharedManager.getUserInfo()
-			clsUserInfo.setBranchId(branchId: strBranchId)
-			clsUserInfo.setBranchName(branchName: strBranchName)
-			clsUserInfo.setBranchCustId(branchCustId: strBranchCustId)
-			clsUserInfo.setBranchCustType(branchCustType: strBranchCustType)
-			clsUserInfo.setBranchCustName(branchCustName: strBranchCustName)
-			clsUserInfo.setInAgreeYn(inAgreeYn: strInAgreeYn)
+				let clsUserInfo = AppContext.sharedManager.getUserInfo()
+				clsUserInfo.setBranchId(branchId: strBranchId)
+				clsUserInfo.setBranchName(branchName: strBranchName)
+				clsUserInfo.setBranchCustId(branchCustId: strBranchCustId)
+				clsUserInfo.setBranchCustType(branchCustType: strBranchCustType)
+				clsUserInfo.setBranchCustName(branchCustName: strBranchCustName)
+				clsUserInfo.setInAgreeYn(inAgreeYn: strInAgreeYn)
 			
 			
-			print("@@@@@@@@@@@@@ strBranchID:\(strBranchId)" )
-			UserDefaults.standard.setValue(returnData.returnCode, forKey: Constants.BASE_BRANCH_KEY)
-			UserDefaults.standard.synchronize()
-			self.btnBranch.setTitle(returnData.returnCode, for: .normal)
+				print("@@@@@@@@@@@@@ strBranchID:\(strBranchId)" )
+				UserDefaults.standard.setValue(returnData.returnCode, forKey: Constants.BASE_BRANCH_KEY)
+				UserDefaults.standard.synchronize()
+				self.btnBranch.setTitle(returnData.returnCode, for: .normal)
+			}
 		}
 	}
 
@@ -82,7 +85,7 @@ class RightViewController: UITableViewController, DataProtocol
 		{
 			if let clsBranchSearchDialog = segue.destination as? BranchSearchDialog
 			{
-				clsBranchSearchDialog.mPtcDataHandler = self
+				clsBranchSearchDialog.ptcDataHandler = self
 			}
 		}
 	}
