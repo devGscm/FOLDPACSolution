@@ -11,7 +11,7 @@ import Foundation
 
 public class RfidUtil
 {
-
+	
 	/**
 	* 태그정보를 정의한 클래스
 	* @author 모람씨앤티
@@ -230,8 +230,9 @@ public class RfidUtil
 	{
 		case GID_96, SGTIN_96, SSCC_96, SGLN_96, GRAI_96, GIAI_96, DoD_96, Raw
 	}
-
+	
 	
 	
 	
 }
+

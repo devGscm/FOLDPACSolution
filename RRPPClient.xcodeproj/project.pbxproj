@@ -16,6 +16,8 @@
 		55ACD67E1FC804F800A2DC72 /* ListViewDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD67C1FC804F800A2DC72 /* ListViewDialog.swift */; };
 		55ACD6801FC8051900A2DC72 /* DataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD67F1FC8051900A2DC72 /* DataProtocol.swift */; };
 		55B2D80E1FCBF4FA0010E61D /* RfidUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B2D80D1FCBF4FA0010E61D /* RfidUtil.swift */; };
+		55B2D8101FCC0DF40010E61D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B2D80F1FCC0DF40010E61D /* BaseViewController.swift */; };
+		55B2D8121FCC0FAE0010E61D /* BaseRfidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B2D8111FCC0FAE0010E61D /* BaseRfidViewController.swift */; };
 		55F385D41FC3E8130043F1A3 /* BranchSearchDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F385D31FC3E8130043F1A3 /* BranchSearchDialog.swift */; };
 		55F385D61FC409E20043F1A3 /* BranchSearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F385D51FC409E20043F1A3 /* BranchSearchItem.swift */; };
 		55FA782A1FBDAB6700583A80 /* Material.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA78241FBDAB2B00583A80 /* Material.framework */; };
@@ -106,6 +108,8 @@
 		55ACD67C1FC804F800A2DC72 /* ListViewDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewDialog.swift; sourceTree = "<group>"; };
 		55ACD67F1FC8051900A2DC72 /* DataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProtocol.swift; sourceTree = "<group>"; };
 		55B2D80D1FCBF4FA0010E61D /* RfidUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RfidUtil.swift; sourceTree = "<group>"; };
+		55B2D80F1FCC0DF40010E61D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		55B2D8111FCC0FAE0010E61D /* BaseRfidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRfidViewController.swift; sourceTree = "<group>"; };
 		55F385D31FC3E8130043F1A3 /* BranchSearchDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchSearchDialog.swift; sourceTree = "<group>"; };
 		55F385D51FC409E20043F1A3 /* BranchSearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchSearchItem.swift; sourceTree = "<group>"; };
 		55FA78201FBDAAA800583A80 /* FontAwesome.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FontAwesome.framework; path = Carthage/Build/iOS/FontAwesome.framework; sourceTree = "<group>"; };
@@ -197,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				55B2D80D1FCBF4FA0010E61D /* RfidUtil.swift */,
+				55B2D8111FCC0FAE0010E61D /* BaseRfidViewController.swift */,
 			);
 			path = Reader;
 			sourceTree = "<group>";
@@ -221,6 +226,7 @@
 				55FA78331FBDACC600583A80 /* Constants.swift */,
 				55FA78341FBDACC600583A80 /* ProgressDialog.swift */,
 				96994C501FC545DF00B3A726 /* LocalData.swift */,
+				55B2D80F1FCC0DF40010E61D /* BaseViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -514,6 +520,7 @@
 				55FA78591FBDB06F00583A80 /* UIStoryboard.swift in Sources */,
 				55FA784B1FBDAD0B00583A80 /* LeftViewController.swift in Sources */,
 				55ACD6761FC802BD00A2DC72 /* ProductMountViewController.swift in Sources */,
+				55B2D8121FCC0FAE0010E61D /* BaseRfidViewController.swift in Sources */,
 				553BCF8B1FC2DC3B00BE39C1 /* SliderDialog.swift in Sources */,
 				96994C511FC545DF00B3A726 /* LocalData.swift in Sources */,
 				55FA78481FBDAD0B00583A80 /* AppNavigationDrawerController.swift in Sources */,
@@ -523,6 +530,7 @@
 				55ACD6771FC802BD00A2DC72 /* ProductOrderSearch.swift in Sources */,
 				55ACD67E1FC804F800A2DC72 /* ListViewDialog.swift in Sources */,
 				55FA783B1FBDACE300583A80 /* UserInfo.swift in Sources */,
+				55B2D8101FCC0DF40010E61D /* BaseViewController.swift in Sources */,
 				55FA78351FBDACC600583A80 /* Constants.swift in Sources */,
 				55F385D61FC409E20043F1A3 /* BranchSearchItem.swift in Sources */,
 				55FA784A1FBDAD0B00583A80 /* LeftMenuItem.swift in Sources */,

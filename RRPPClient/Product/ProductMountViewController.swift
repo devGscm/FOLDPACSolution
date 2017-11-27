@@ -10,7 +10,7 @@ import UIKit
 import Material
 import Mosaic
 
-class ProductMountViewController: UIViewController, DataProtocol
+class ProductMountViewController: BaseRfidViewController, DataProtocol
 {
 	@IBOutlet weak var lblReaderName: UILabel!
 	@IBOutlet weak var lblBranchInfo: UILabel!
@@ -22,6 +22,9 @@ class ProductMountViewController: UIViewController, DataProtocol
 	@IBOutlet weak var lblOrderCount: UILabel!
 	@IBOutlet weak var lblMakeLotId: UITextField!
 	
+	var arrAssetInfo: Array<AssetInfo> = Array<AssetInfo>()
+	
+	
 	var strMakeOrderId: String?
 	var intOrderWorkCnt: Int = 0
 	var intOrderReqCnt: Int = 0
@@ -31,11 +34,24 @@ class ProductMountViewController: UIViewController, DataProtocol
 	
 	override func viewDidLoad()
 	{
+		print("=========================================")
+		print("*ProductMountViewController.viewDidLoad()")
+		print("=========================================")
 		super.viewDidLoad()
 		//view.backgroundColor = Color.grey.lighten5
 		prepareToolbar()
+		super.initRfid()
+		
 		initViewControl()
+		initAssetInfo()
 	}
+	
+//	override func viewDidUnload()
+//	{
+//		print("=========================================")
+//		print("*ProductMountViewController.viewDidUnload()")
+//		print("=========================================")
+//	}
 	
 
 	// View관련 컨트롤을 초기화한다.
@@ -95,20 +111,23 @@ class ProductMountViewController: UIViewController, DataProtocol
 		
 		// TODO  : test
 		
+		//let strtTagInfo1 = RfidUtil.TagInfo()
+
 		let clsTagInfo1 = RfidUtil.TagInfo()
 		clsTagInfo1.setYymm(strYymm: "1506")
 		clsTagInfo1.setSeqNo(strSeqNo: "68")
 		clsTagInfo1.setEpcCode(strEpcCode: "3312D58E4581004000000044")
 		clsTagInfo1.setEpcUrn(strEpcUrn: "grai:0.95100043.1025.68")
-		clsTagInfo1.setAssetEpc(strAssetEpc: "951000431025")
+		clsTagInfo1.setCorpEpc(strCorpEpc: "951000438")
+		clsTagInfo1.setAssetEpc(strAssetEpc: "1025")
 		getRfidData(clsTagInfo: clsTagInfo1)
 
 		let clsTagInfo2 = RfidUtil.TagInfo()
 		clsTagInfo2.setYymm(strYymm: "1506")
 		clsTagInfo2.setSeqNo(strSeqNo: "69")
 		clsTagInfo2.setEpcCode(strEpcCode: "3312D58E4581004000000045")
-		clsTagInfo2.setEpcUrn(strEpcUrn: "grai:0.95100043.1025.69")
-		clsTagInfo2.setAssetEpc(strAssetEpc: "951000431025")
+		clsTagInfo2.setCorpEpc(strCorpEpc: "951000438")
+		clsTagInfo2.setAssetEpc(strAssetEpc: "1025")
 		getRfidData(clsTagInfo: clsTagInfo2)
 
 		let clsTagInfo3 = RfidUtil.TagInfo()
@@ -116,9 +135,10 @@ class ProductMountViewController: UIViewController, DataProtocol
 		clsTagInfo3.setSeqNo(strSeqNo: "70")
 		clsTagInfo3.setEpcCode(strEpcCode: "3312D58E4581004000000046")
 		clsTagInfo3.setEpcUrn(strEpcUrn: "grai:0.95100043.1025.70")
-		clsTagInfo3.setAssetEpc(strAssetEpc: "951000431025")
+		clsTagInfo3.setCorpEpc(strCorpEpc: "951000438")
+		clsTagInfo3.setAssetEpc(strAssetEpc: "1025")
 		getRfidData(clsTagInfo: clsTagInfo3)
-		
+	
 		
 	}
 	
@@ -136,8 +156,22 @@ class ProductMountViewController: UIViewController, DataProtocol
 	
 	func getRfidData( clsTagInfo : RfidUtil.TagInfo)
 	{
+		var strAssetName: String?
 		if(clsTagInfo != nil)
 		{
+			
+			let strAssetEpc = "\(clsTagInfo.getCorpEpc())\(clsTagInfo.getAssetEpc())"	// 회사EPC코드 + 자산EPC코드
+			
+			/*
+			if(strAssetEpc != nil)
+			{
+				strAssetName =
+			}*/
+			
+			for clsAssetInfo in arrAssetInfo
+			{
+				print("@@@@@clsAssetInfo.assetEpc:\(clsAssetInfo.assetEpc)")
+			}
 			
 		}
 	}
@@ -162,6 +196,18 @@ class ProductMountViewController: UIViewController, DataProtocol
 		self.lblOrderCount.text = ""
 		self.lblMakeLotId.text = ""
 
+	}
+	
+	func initAssetInfo()
+	{
+		arrAssetInfo = LocalData.shared.getAssetInfo(searchValue: nil)
+		
+		/*
+		for clsAssetInfo in arrAssetInfo
+		{
+			print("@@@@@clsAssetInfo.assetEpc:\(clsAssetInfo.assetEpc)")
+		} */
+		
 	}
 }
 extension ProductMountViewController

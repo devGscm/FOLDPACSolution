@@ -83,15 +83,17 @@ class RootViewController: UIViewController
 //					}
 //			})
 //
-//			print("로그인 성공")
-//			let localData = LocalData.shared
-//			localData.RemoteDbEnncryptId = AppContext.sharedManager.getUserInfo().getEncryptId()
-//			localData.CorpId = AppContext.sharedManager.getUserInfo().getCorpId()
-//			localData.versionCheck()
+			print("로그인 성공")
+			let localData = LocalData.shared
+			localData.RemoteDbEnncryptId = AppContext.sharedManager.getUserInfo().getEncryptId()
+			localData.CorpId = AppContext.sharedManager.getUserInfo().getCorpId()
+			localData.versionCheck()
 			
-			print("=============================================")
-			print(" UserName : \( AppContext.sharedManager.getUserInfo().getUserName() )")
-			print("=============================================")
+			
+			
+			//print("=============================================")
+			//print(" UserName : \( AppContext.sharedManager.getUserInfo().getUserName() )")
+			//print("=============================================")
 			
 		}
 		else
