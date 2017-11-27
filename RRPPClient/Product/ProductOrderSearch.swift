@@ -69,6 +69,8 @@ class ProductOrderSearch: UIViewController, UITableViewDataSource, UITableViewDe
 		clsDataClient.addServiceParam(paramName: "branchCustId", value: AppContext.sharedManager.getUserInfo().getBranchCustId())
 		clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
 
+		
+	
 		/*
 		// 골드라인 당진공장
 		clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
@@ -175,7 +177,7 @@ class ProductOrderSearch: UIViewController, UITableViewDataSource, UITableViewDe
 		let strLocaleOrderDate = DateUtil.utcToLocale(utcDate: strUtcOrderDate!, dateFormat: "yyyyMMddHHmmss")
 		let strOrderDate = DateUtil.getConvertFormatDate(date: strLocaleOrderDate, srcFormat: "yyyyMMddHHmmss", dstFormat:"MM-dd")
 		
-		//objCell.lblOrderDate.text = "\(indexPath.row + 1)"
+		//objCell.lblOrderDate.text = "\(indexPath.row + 1)
 		objCell.lblOrderDate.text = strOrderDate
 		objCell.lblOrderReqCnt.text = clsDataRow.getString(name:"orderReqCnt")
 		objCell.lblOrderCustName.text = clsDataRow.getString(name:"orderCustName")
