@@ -18,7 +18,7 @@ class ViewController: UIViewController {
         //#########################################
         // 1. Login 호출
         //#########################################
-        let dataClient = Mosaic.DataClient(url: "http://192.168.0.213:8080")
+        let dataClient = Mosaic.DataClient(url: Constants.WEB_SVC_URL)
         dataClient.loginService(userId : "rp11", passwd : "1111", mobileId : "01053567314",
                               loginCompletionHandler:
                               { (login, error) in
