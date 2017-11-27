@@ -150,8 +150,11 @@ public class DataClient
 	let mStrPathLogin = "/websvc/loginService.json"
 	let mStrPathData = "/websvc/dataService/data.json"
 	
-	var mStrServiceUrlSelect = "dataService:selectWsList"
-	var mStrServiceUrlUrlExecute = "dataService:executeWsData"
+	let mDefaultServiceUrlSelect = "dataService:selectWsList"
+	let mDefaultServiceUrlExecute = "dataService:executeWsData"
+	
+	var mStrServiceUrlSelect = ""
+	var mStrServiceUrlExecute = ""
 	
 	var mStrWebSvcLocation : String
 	
@@ -187,8 +190,8 @@ public class DataClient
 	}
 	
 	public var ExecuteUrl: String {
-		set { mStrServiceUrlUrlExecute = newValue }
-		get {return mStrServiceUrlUrlExecute }
+		set { mStrServiceUrlExecute = newValue }
+		get {return mStrServiceUrlExecute }
 	}
 	
 	public var SelectUrl: String {
@@ -290,15 +293,22 @@ public class DataClient
 		dicParam["userinfo"] = strUserInfo
 		print("strUserInfo!!" + strUserInfo)
 		
-		guard let strUserData = self.mStrUserData , !strUserData.isEmpty else
+		if let strUserData = self.mStrUserData , strUserData.isEmpty == false
 		{
-			let error = BackendError.paramError(reason: "요청 비즈니스 서비스정보[UserData]가 없습니다.")
-			dataCompletionHandler(nil, error)
-			return
+			dicParam["userdata"] = strUserData
 		}
-		dicParam["userdata"] = strUserData
 		
-		var strServiceUrl = self.mStrServiceUrlSelect
+		var strServiceUrl : String = ""
+		if (mStrServiceUrlSelect.isEmpty == true)
+		{
+			strServiceUrl = self.mDefaultServiceUrlSelect
+		}
+		else
+		{
+			strServiceUrl = self.mStrServiceUrlSelect
+		}
+		
+		
 		strServiceUrl.append("?")
 		for (key, value) in self.mMapParam
 		{
@@ -371,7 +381,7 @@ public class DataClient
 	public func selectData(dataCompletionHandler: @escaping (DataTable?, Error?) -> Void) -> Void
 	{
 		var dicParam : [String: String] = ["usertype" : "2", "mode" : "R"]
-		guard let strUserInfo = self.mStrUsreInfo, !strUserInfo.isEmpty else
+		guard let strUserInfo = self.mStrUsreInfo, strUserInfo.isEmpty == false else
 		{
 			let error = BackendError.paramError(reason: "인증정보[UserInfo]가 없습니다.")
 			dataCompletionHandler(nil, error)
@@ -380,15 +390,28 @@ public class DataClient
 		dicParam["userinfo"] = strUserInfo
 		print("strUserInfo!!" + strUserInfo)
 		
-		guard let strUserData = self.mStrUserData , !strUserData.isEmpty else
+//		guard let strUserData = self.mStrUserData , !strUserData.isEmpty else
+//		{
+//			let error = BackendError.paramError(reason: "요청 비즈니스 서비스정보[UserData]가 없습니다.")
+//			dataCompletionHandler(nil, error)
+//			return
+//		}
+//		dicParam["userdata"] = strUserData
+		if let strUserData = self.mStrUserData , strUserData.isEmpty == false
 		{
-			let error = BackendError.paramError(reason: "요청 비즈니스 서비스정보[UserData]가 없습니다.")
-			dataCompletionHandler(nil, error)
-			return
+			dicParam["userdata"] = strUserData
 		}
-		dicParam["userdata"] = strUserData
 		
-		var strServiceUrl = self.mStrServiceUrlSelect
+		var strServiceUrl : String = ""
+		if (mStrServiceUrlSelect.isEmpty == true)
+		{
+			strServiceUrl = self.mDefaultServiceUrlSelect
+		}
+		else
+		{
+			strServiceUrl = self.mStrServiceUrlSelect
+		}
+		
 		strServiceUrl.append("?")
 		for (key, value) in self.mMapParam
 		{
@@ -504,7 +527,16 @@ public class DataClient
 		}
 		dicParam["mode"] = mode
 		
-		var strServiceUrl = self.mStrServiceUrlUrlExecute
+		var strServiceUrl : String = ""
+		if (mStrServiceUrlSelect.isEmpty == true)
+		{
+			strServiceUrl = self.mDefaultServiceUrlExecute
+		}
+		else
+		{
+			strServiceUrl = self.mStrServiceUrlExecute
+		}
+		
 		strServiceUrl.append("?")
 		for (key, value) in self.mMapParam
 		{
