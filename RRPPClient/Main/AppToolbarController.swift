@@ -46,7 +46,8 @@ class AppToolbarController: ToolbarController {
     }
 }
 
-extension AppToolbarController {
+extension AppToolbarController
+{
     fileprivate func prepareMenuButton() {
         menuButton = IconButton(image: Icon.cm.menu)
         menuButton.addTarget(self, action: #selector(handleMenuButton), for: .touchUpInside)
@@ -73,6 +74,8 @@ extension AppToolbarController {
         toolbar.leftViews = [menuButton]
         //yomile toolbar.rightViews = [switchControl, moreButton]
 		toolbar.rightViews = [ moreButton]
+		
+		//toolbar.backgroundColor = Color.blue.base
 		
     }
 }

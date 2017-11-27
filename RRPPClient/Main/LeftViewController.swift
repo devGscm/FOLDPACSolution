@@ -24,11 +24,6 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		super.viewDidLoad()
 		//view.backgroundColor = Color.blue.base
 		
-		if("moramcnt" == AppContext.sharedManager.getUserInfo().getCorpId())
-		{
-			print("Moram")
-		}
-		
 		//mIvLogo.layer.borderWidth = 1
 		mIvLogo.layer.masksToBounds = false
 		mIvLogo.layer.cornerRadius = mIvLogo.frame.height / 2
@@ -48,6 +43,10 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	public func makeMenuItem() -> Void
 	{
 		let strCustType = AppContext.sharedManager.getUserInfo().getCustType()
+		print("=============================================")
+		print(" strCustType : \( AppContext.sharedManager.getUserInfo().getCustType() )")
+		print("=============================================")
+		
 		if(strCustType == "ISS")
 		{
 			mArrMenuData.append(MenuItem(menuId: "TagSupply", menuName: "납품등록(RFID)"))

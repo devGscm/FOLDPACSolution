@@ -98,12 +98,15 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Hzt-aL-K6B">
                                                 <rect key="frame" x="0.0" y="32" width="371" height="30"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="nH2-7C-rHd">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="nH2-7C-rHd">
                                                         <rect key="frame" x="0.0" y="0.0" width="238" height="30"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DKg-6V-Lfy">
-                                                                <rect key="frame" x="0.0" y="0.0" width="94.5" height="30"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="78" height="30"/>
                                                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="30" id="YE5-Y5-oBJ"/>
+                                                                </constraints>
                                                                 <state key="normal" title="주문선택">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
@@ -112,19 +115,16 @@
                                                                     <segue destination="8bc-8U-ray" kind="presentation" identifier="segProductOrderSearch" modalPresentationStyle="overCurrentContext" id="EAj-QB-e95"/>
                                                                 </connections>
                                                             </button>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wkV-LY-NpW">
-                                                                <rect key="frame" x="96.5" y="0.0" width="64.5" height="30"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wkV-LY-NpW">
+                                                                <rect key="frame" x="80" y="0.0" width="78" height="30"/>
                                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ark-Fh-eBd">
-                                                                <rect key="frame" x="163" y="0.0" width="75" height="30"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ark-Fh-eBd">
+                                                                <rect key="frame" x="160" y="0.0" width="78" height="30"/>
                                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="75" id="L0m-ji-s2O"/>
-                                                                </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -299,9 +299,12 @@
                     <connections>
                         <outlet property="btnMakeOrderId" destination="DKg-6V-Lfy" id="Q3U-xN-Xr8"/>
                         <outlet property="btnRfidReader" destination="tvD-Va-na2" id="mpe-92-lUS"/>
+                        <outlet property="lblBranchInfo" destination="jrq-1w-FyR" id="WGu-7L-I5r"/>
                         <outlet property="lblMakeLotId" destination="wOM-vy-3qF" id="j8N-Hx-NPU"/>
                         <outlet property="lblOrderCount" destination="Ark-Fh-eBd" id="U6x-CT-jlP"/>
                         <outlet property="lblOrderCustName" destination="wkV-LY-NpW" id="TKE-Yu-aNJ"/>
+                        <outlet property="lblReaderName" destination="w1J-cO-rN4" id="Kb5-fI-V2l"/>
+                        <outlet property="lblUserName" destination="Ql5-h4-QWc" id="sGY-RT-BqW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uDt-fE-tfe" userLabel="First Responder" sceneMemberID="firstResponder"/>

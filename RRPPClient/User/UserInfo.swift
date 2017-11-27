@@ -286,11 +286,11 @@ class UserInfo
 	
 	/**
 	* 고객사구분을 설정한다.
-	* @param strCustType 고객사구분
+	* @param custType 고객사구분
 	*/
-	func setCustType(strCustType : String)
+	func setCustType(custType : String)
 	{
-		UserDefaults.standard.set(strCustType, forKey: "custType")
+		UserDefaults.standard.set(custType, forKey: "custType")
 	}
 	
 	/**

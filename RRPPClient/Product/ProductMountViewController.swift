@@ -12,7 +12,9 @@ import Mosaic
 
 class ProductMountViewController: UIViewController, DataProtocol
 {
-
+	@IBOutlet weak var lblReaderName: UILabel!
+	@IBOutlet weak var lblBranchInfo: UILabel!
+	@IBOutlet weak var lblUserName: UILabel!
 	@IBOutlet weak var btnRfidReader: UIButton!
 
 	@IBOutlet weak var btnMakeOrderId: UIButton!
@@ -30,25 +32,24 @@ class ProductMountViewController: UIViewController, DataProtocol
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
-		
-		view.backgroundColor = Color.grey.lighten5
-		
-	// For Test
+		//view.backgroundColor = Color.grey.lighten5
+		prepareToolbar()
+		initViewControl()
+	}
+	
+
+	// View관련 컨트롤을 초기화한다.
+	func initViewControl()
+	{
+		// For Test
 		AppContext.sharedManager.getUserInfo().setEncryptId(strEncryptId: "xxOxOsU93/PvK/NN7DZmZw==")
 		AppContext.sharedManager.getUserInfo().setCorpId(strCorpId: "logisallcm")
 		AppContext.sharedManager.getUserInfo().setBranchId(branchId: "160530000045")
 		AppContext.sharedManager.getUserInfo().setBranchCustId(branchCustId: "160530000071")
 		AppContext.sharedManager.getUserInfo().setUserLang(strUserLang: "KR")
-		
-		
-		prepareToolbar()
+	
 	}
 	
-	override func didReceiveMemoryWarning()
-	{
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
-	}
 	
 	// Segue로 파라미터 넘기면 반드시 prepare를 타기 때문에 여기서 DataProtocol을 세팅하는걸로 함
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -91,6 +92,34 @@ class ProductMountViewController: UIViewController, DataProtocol
 	
 	@IBAction func onRfidReaderClicked(_ sender: UIButton)
 	{
+		
+		// TODO  : test
+		
+		let clsTagInfo1 = RfidUtil.TagInfo()
+		clsTagInfo1.setYymm(strYymm: "1506")
+		clsTagInfo1.setSeqNo(strSeqNo: "68")
+		clsTagInfo1.setEpcCode(strEpcCode: "3312D58E4581004000000044")
+		clsTagInfo1.setEpcUrn(strEpcUrn: "grai:0.95100043.1025.68")
+		clsTagInfo1.setAssetEpc(strAssetEpc: "951000431025")
+		getRfidData(clsTagInfo: clsTagInfo1)
+
+		let clsTagInfo2 = RfidUtil.TagInfo()
+		clsTagInfo2.setYymm(strYymm: "1506")
+		clsTagInfo2.setSeqNo(strSeqNo: "69")
+		clsTagInfo2.setEpcCode(strEpcCode: "3312D58E4581004000000045")
+		clsTagInfo2.setEpcUrn(strEpcUrn: "grai:0.95100043.1025.69")
+		clsTagInfo2.setAssetEpc(strAssetEpc: "951000431025")
+		getRfidData(clsTagInfo: clsTagInfo2)
+
+		let clsTagInfo3 = RfidUtil.TagInfo()
+		clsTagInfo3.setYymm(strYymm: "1506")
+		clsTagInfo3.setSeqNo(strSeqNo: "70")
+		clsTagInfo3.setEpcCode(strEpcCode: "3312D58E4581004000000046")
+		clsTagInfo3.setEpcUrn(strEpcUrn: "grai:0.95100043.1025.70")
+		clsTagInfo3.setAssetEpc(strAssetEpc: "951000431025")
+		getRfidData(clsTagInfo: clsTagInfo3)
+		
+		
 	}
 	
 	// 주문선택
@@ -99,7 +128,21 @@ class ProductMountViewController: UIViewController, DataProtocol
 		self.performSegue(withIdentifier: "segProductOrderSearch", sender: self)
 	}
 
+	// 데이터를 clear한다.
 	func clearTagData()
+	{
+		
+	}
+	
+	func getRfidData( clsTagInfo : RfidUtil.TagInfo)
+	{
+		if(clsTagInfo != nil)
+		{
+			
+		}
+	}
+	
+	func sendData(strMakeOrderid: String, strMakeLotId: String, strWorkerName: String, strRemark: String)
 	{
 		
 	}

@@ -123,12 +123,12 @@ class LoginViewController: UIViewController
 						clsUserInfo.setAutoLogin(boolAutoLogin: objMe.swAutoLogin.isOn)    // 자동로그인 여부
 						
 						clsUserInfo.setCorpId(strCorpId: login.corpId!)
-						clsUserInfo.setCustType(strCustType: login.corpType!)
+						//clsUserInfo.setCustType(custType: login.corpType!)
 						clsUserInfo.setUserId(strUserId: strUserId!)
 						clsUserInfo.setUserName(strUserName: login.userName ?? "")
 						clsUserInfo.setPassword(strPassword: strPasswd!)
 						clsUserInfo.setCustId(strCustId: login.custId ?? "")
-						clsUserInfo.setCustType(strCustType: login.custType ?? "")
+						clsUserInfo.setCustType(custType: login.custType ?? "")
 						clsUserInfo.setEncryptId(strEncryptId: login.encryptId!)
 						if let version = login.version
 						{
