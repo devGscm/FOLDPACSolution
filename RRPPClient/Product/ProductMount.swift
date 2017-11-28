@@ -10,7 +10,7 @@ import UIKit
 import Material
 import Mosaic
 
-class ProductMount: BaseRfidViewController, DataProtocol
+class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, DataProtocol
 {
 	@IBOutlet weak var tvProductMount: UITableView!
 	@IBOutlet weak var lblReaderName: UILabel!
@@ -280,6 +280,8 @@ class ProductMount: BaseRfidViewController, DataProtocol
 				
 			}
 		}
+		
+		DispatchQueue.main.async { self.tvProductMount?.reloadData() }
 	}
 	
 	func sendData(strMakeOrderid: String, strMakeLotId: String, strWorkerName: String, strRemark: String)

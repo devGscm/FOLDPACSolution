@@ -37,7 +37,8 @@ class AppToolbarController: ToolbarController
     fileprivate var switchControl: Switch!
     fileprivate var moreButton: IconButton!
     
-    override func prepare() {
+    override func prepare()
+	{
         super.prepare()
         prepareMenuButton()
       // yomile, prepareSwitch()
@@ -74,6 +75,7 @@ extension AppToolbarController
         statusBarStyle = .lightContent
         // Access the statusBar.
 		//statusBar.backgroundColor = Color.green.base
+		statusBar.backgroundColor = Color.blue.base
     }
     
     fileprivate func prepareToolbar()
