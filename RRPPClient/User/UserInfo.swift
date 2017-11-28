@@ -286,11 +286,11 @@ class UserInfo
 	
 	/**
 	* 고객사구분을 설정한다.
-	* @param strCustType 고객사구분
+	* @param custType 고객사구분
 	*/
-	func setCustType(strCustType : String)
+	func setCustType(custType : String)
 	{
-		UserDefaults.standard.set(strCustType, forKey: "custType")
+		UserDefaults.standard.set(custType, forKey: "custType")
 	}
 	
 	/**
@@ -493,9 +493,9 @@ class UserInfo
 	* 날짜 검색 구간을 설정한다.
 	* @param intDateDistance 날짜 검색 구간
 	*/
-	func setDateDistance(intDateDistance : Int)
+	func setDateDistance(dateDistance : Int)
 	{
-		UserDefaults.standard.set(intDateDistance, forKey: "dateDistance")
+		UserDefaults.standard.set(dateDistance, forKey: "dateDistance")
 	}
 	
 	

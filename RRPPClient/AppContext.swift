@@ -21,9 +21,11 @@ class AppContext
 	//static let sharedManager = AppContext()
 	init()
 	{
+		print("============================")
 		print("AppContext init")
+		print("============================")
 		mClsUserInfo = UserInfo()
-		mClsUserInfo.setCustType(strCustType: "")
+		//mClsUserInfo.setCustType(strCustType: "")
 	}
 	
 	func setAuthenticated(boolAuthenticated : Bool)

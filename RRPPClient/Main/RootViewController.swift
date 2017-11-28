@@ -54,7 +54,7 @@ class RootViewController: UIViewController
 //						}
 //					}
 //			})
-			
+//			
 //			dataClient.UserInfo = "xxOxOsU93/PvK/NN7DZmZw=="
 //			dataClient.SelectUrl = ""
 //			dataClient.UserData = "redis.selectBranchList"
@@ -94,6 +94,10 @@ class RootViewController: UIViewController
 			
 			
 			
+			//print("=============================================")
+			//print(" UserName : \( AppContext.sharedManager.getUserInfo().getUserName() )")
+			//print("=============================================")
+			
 		}
 		else
 		{
@@ -104,13 +108,15 @@ class RootViewController: UIViewController
 
 extension RootViewController
 {
-    fileprivate func prepareToolbar() {
-        guard let tc = toolbarController else {
+    fileprivate func prepareToolbar()
+	{
+        guard let tc = toolbarController else
+		{
             return
         }
-        
-        tc.toolbar.title = "RRPP TRA"
-        tc.toolbar.detail = "RRPP Trade & Tracking & Traceability Platform"
+		
+        tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
+        tc.toolbar.detail = NSLocalizedString("title_root", comment: "RRPP Trade & Tracking & Traceability Platform") 
     }
 }
 

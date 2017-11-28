@@ -7,18 +7,26 @@
 //
 
 import UIKit
+import Material
 
-class ProductOrderSearchCell: UITableViewCell {
-
-    override func awakeFromNib() {
+class ProductOrderSearchCell: UITableViewCell
+{
+	@IBOutlet weak var lblOrderDate: UILabel!
+	@IBOutlet weak var lblOrderReqCnt: UILabel!
+	@IBOutlet weak var lblOrderCustName: UILabel!
+	@IBOutlet weak var lblMakeOrderId: UILabel!
+	@IBOutlet weak var lblProdAssetEpcName: UILabel!
+	@IBOutlet weak var lblOrderAddr: UILabel!
+	@IBOutlet weak var btnSelection: FABButton!
+	
+	override func awakeFromNib()
+	{
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
 
 }
