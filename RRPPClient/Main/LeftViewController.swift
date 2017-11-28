@@ -51,14 +51,14 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		{
 			mArrMenuData.append(MenuItem(menuId: "TagSupply", menuName: "납품등록(RFID)"))
 			mArrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "RFID태그검수"))
-			mArrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "이력추적"))
+			mArrMenuData.append(MenuItem(menuId: "RfidTrackingService", menuName: "이력추적"))
 		}
 		else if(strCustType == "MGR")
 		{
 			mArrMenuData.append(MenuItem(menuId: "TagSupply", menuName: "납품등록(RFID)"))
-			mArrMenuData.append(MenuItem(menuId: "ProductMount", menuName: "자산등록"))
+			mArrMenuData.append(MenuItem(menuId: "ProductMount", menuName: NSLocalizedString("title_product_mount", comment: "자산등록")))
 			mArrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "RFID태그검수"))
-			mArrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "이력추적"))
+			mArrMenuData.append(MenuItem(menuId: "RfidTrackingService", menuName: "이력추적"))
 		}
 		tvMenu?.reloadData()
 	}
@@ -84,12 +84,17 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		switch (strtMenuItem.menuId)
 		{
 			case "ProductMount" :
-				let clsProductMountViewController: ProductMountViewController = {
-					return UIStoryboard.viewController(storyBoardName: "Product", identifier: "ProductMountViewController") as! ProductMountViewController
+				let clsController: ProductMount = {
+					return UIStoryboard.viewController(storyBoardName: "Product", identifier: "ProductMount") as! ProductMount
 				}()
-				toolbarController?.transition(to: clsProductMountViewController, completion: closeNavigationDrawer)
+				toolbarController?.transition(to: clsController, completion: closeNavigationDrawer)
 			break;
-			
+			case "RfidInspect" :
+				let clsController: RfidInspect = {
+				return UIStoryboard.viewController(storyBoardName: "Tag", identifier: "RfidInspect") as! RfidInspect
+				}()
+				toolbarController?.transition(to: clsController, completion: closeNavigationDrawer)
+
 		default:
 			print("is selected");
 		}

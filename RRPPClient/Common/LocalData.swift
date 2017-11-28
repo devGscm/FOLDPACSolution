@@ -689,6 +689,12 @@ class LocalData {
 	/// 원격 Db와 버전체크 버전체크후, 데이터를 가져와서 동기화
 	public func versionCheck() -> Void
 	{
+
+		print("=============================================")
+		print("*LocalData.versionCheck")
+		print("=============================================")
+		
+		
 		if(self.mRemoteDbEnncryptId.isEmpty)
 		{
 			//TODO:: 공통로그및 공통 Exception 처리

@@ -31,7 +31,8 @@
 import UIKit
 import Material
 
-class AppToolbarController: ToolbarController {
+class AppToolbarController: ToolbarController
+{
     fileprivate var menuButton: IconButton!
     fileprivate var switchControl: Switch!
     fileprivate var moreButton: IconButton!
@@ -48,35 +49,40 @@ class AppToolbarController: ToolbarController {
 
 extension AppToolbarController
 {
-    fileprivate func prepareMenuButton() {
+    fileprivate func prepareMenuButton()
+	{
         menuButton = IconButton(image: Icon.cm.menu)
+		menuButton.tintColor = Color.white
         menuButton.addTarget(self, action: #selector(handleMenuButton), for: .touchUpInside)
     }
     
-    fileprivate func prepareSwitch() {
+    fileprivate func prepareSwitch()
+	{
         switchControl = Switch(state: .off, style: .light, size: .small)
     }
     
-    fileprivate func prepareMoreButton() {
+    fileprivate func prepareMoreButton()
+	{
         //moreButton = IconButton(image: Icon.cm.moreVertical)
 		moreButton = IconButton(image: Icon.cm.settings)
+		moreButton.tintColor = Color.white
         moreButton.addTarget(self, action: #selector(handleMoreButton), for: .touchUpInside)
     }
     
-    fileprivate func prepareStatusBar() {
+    fileprivate func prepareStatusBar()
+	{
         statusBarStyle = .lightContent
-        
         // Access the statusBar.
-//        statusBar.backgroundColor = Color.green.base
+		//statusBar.backgroundColor = Color.green.base
     }
     
-    fileprivate func prepareToolbar() {
-        toolbar.leftViews = [menuButton]
-        //yomile toolbar.rightViews = [switchControl, moreButton]
+    fileprivate func prepareToolbar()
+	{
+		toolbar.leftViews = [menuButton]
+		//yomile toolbar.rightViews = [switchControl, moreButton]
 		toolbar.rightViews = [ moreButton]
-		
-		//toolbar.backgroundColor = Color.blue.base
-		
+		toolbar.backgroundColor = Color.blue.base
+
     }
 }
 

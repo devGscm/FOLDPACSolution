@@ -9,10 +9,11 @@
 
 /* 어플설정 시작 */
 "app_name" = "RRPP";
-
+"app_title" = "RRPP TRA";
 /* 어플설정 끝*/
 
 /*액티비티 제목 시작 */
+"title_root" = "RRPP Trade @ Tracking @ Traceability Platform";
 "title_user_login" = "Log in";
 "title_client_config" = "Setting";
 "title_device_scan_dialog" = "Search Reader";

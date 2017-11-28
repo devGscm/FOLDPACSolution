@@ -11,6 +11,7 @@ import Foundation
 
 public class RfidUtil
 {
+
 	
 	/**
 	* 태그정보를 정의한 클래스
@@ -20,19 +21,27 @@ public class RfidUtil
 	public class TagInfo
 	{
 		var mEnuEncoding: Encodings?		/**< 인코딩 종류			*/
-		var mStrEpcUrn: String?			/**< EPC URN		*/
+		var mStrEpcUrn: String?				/**< EPC URN		*/
 		var mStrEpcCode: String?			/**< EPC 코드			*/
 		var mStrCorpEpc: String?			/**< 기업EPC코드		*/
-		var mStrAssetEpc: String?		/**< 자산EPC코드		*/
-		var mStrItem: String?			/**< 상품				*/
-		var mStrSerialNo: String?		/**< 시리얼번호(제조업체 + 제조년 + 제조월 + 순차번호 로 구성) */
-		var mStrLocation: String?		/**< 위치				*/
-		var mStrProdCode: String?		/**< 상품코드			*/
-		var mStrProdName: String?		/**< 상품명			*/
+		var mStrAssetEpc: String?			/**< 자산EPC코드		*/
+		
+		var mStrItem: String?				/**< 상품				*/
+		var mStrSerialNo: String?			/**< 시리얼번호(제조업체 + 제조년 + 제조월 + 순차번호 로 구성) */
+		var mStrLocation: String?			/**< 위치				*/
+		var mStrProdCode: String?			/**< 상품코드			*/
+		var mStrProdName: String?			/**< 상품명			*/
 		var mStrProdReadCnt: String?		/**< 인식수량			*/
 		var mStrCustEpc: String?			/**< 고객사EPC			*/
-		var mStrYymm: String?			/**< 발행연월 			*/
-		var mStrSeqNo: String?			/**< 발행순번			*/
+		var mStrYymm: String?				/**< 발행연월 			*/
+		var mStrSeqNo: String?				/**< 발행순번			*/
+		
+		
+		
+		var mStrAssetName: String?			/**< 자산EPC명 */
+		var mBoolNewTag : Bool?
+		var mIntReadCount = 0				/**< 조회수 */
+		var mStrReadTime : String?
 		
 		init()
 		{
@@ -41,6 +50,7 @@ public class RfidUtil
 			mStrEpcCode		= nil
 			mStrCorpEpc		= nil
 			mStrAssetEpc	= nil
+			
 			mStrItem		= nil
 			mStrSerialNo	= nil
 			mStrLocation	= nil
@@ -50,91 +60,108 @@ public class RfidUtil
 			mStrCustEpc		= nil
 			mStrYymm		= nil
 			mStrSeqNo		= nil
+			
+			mStrAssetName	= nil
+			mBoolNewTag		= false
+			mIntReadCount	= 0
+			mStrReadTime	= nil
 		}
 		
 		/**
 		* 인코딩 종류를 리턴한다.
 		* @return
 		*/
-		public func getEncoding() -> Encodings?			{ return mEnuEncoding			}
+		public func getEncoding() -> Encodings			{ return mEnuEncoding ?? Encodings.GRAI_96			}
 		
 		/**
 		* EPC URN를 리턴한다.
 		* @return
 		*/
-		public func getEpcUrn() -> String?				{ return mStrEpcUrn!			}
+		public func getEpcUrn() -> String				{ return mStrEpcUrn ?? ""			}
 		
 		/**
 		* EPC 코드를 리턴한다.
 		* @return
 		*/
-		public func getEpcCode() -> String?				{ return mStrEpcCode			}
+		public func getEpcCode() -> String				{ return mStrEpcCode ?? ""			}
 		
 		/**
 		* 기업EPC코드를 리턴한다.
 		* @return
 		*/
-		public func getCorpEpc() -> String?				{ return mStrCorpEpc			}
+		public func getCorpEpc() -> String				{ return mStrCorpEpc ?? ""			}
 		
 		/**
 		* 자산EPC코드를 리턴한다.
 		* @return
 		*/
-		public func getAssetEpc() -> String?			{ return mStrAssetEpc			}
+		public func getAssetEpc() -> String			{ return mStrAssetEpc ?? ""			}
+		
 		
 		/**
 		* 상품을 리턴한다.
 		* @return
 		*/
-		public func getItem() -> String?					{ return mStrItem				}
+		public func getItem() -> String					{ return mStrItem ?? ""			}
 		
 		/**
 		* 시리얼번호를 리턴한다.
 		* @return
 		*/
-		public func getSerialNo() -> String?			{ return mStrSerialNo			}
+		public func getSerialNo() -> String			{ return mStrSerialNo ?? ""			}
 		
 		/**
 		* 위치를 리턴한다.
 		* @return
 		*/
-		public func getLocation() -> String?				{ return mStrLocation			}
+		public func getLocation() -> String				{ return mStrLocation ?? ""			}
 		
 		/**
 		* 상품코드를 리턴한다.
 		* @return
 		*/
-		public func getProdCode() -> String?		{ return mStrProdCode		}
+		public func getProdCode() -> String		{ return mStrProdCode ?? ""		}
 		
 		/**
 		* 상품명을 리턴한다.
 		* @return
 		*/
-		public func getProdName() -> String?		{ return mStrProdName		}
+		public func getProdName() -> String		{ return mStrProdName ?? ""		}
 		
 		/**
 		* 상품명을 리턴한다.
 		* @return
 		*/
-		public func getProdReadCnt() -> String?		{ return mStrProdReadCnt		}
+		public func getProdReadCnt() -> String		{ return mStrProdReadCnt ?? ""		}
 		
 		/**
 		* 고객사EPC를 리턴한다.
 		* @return
 		*/
-		public func getCustEpc() -> String?				{ return mStrCustEpc			}
+		public func getCustEpc() -> String				{ return mStrCustEpc ?? ""			}
 		
 		/**
 		* 발행연월을 리턴한다.
 		* @return
 		*/
-		public func getYymm() -> String?				{ return mStrYymm				}
+		public func getYymm() -> String				{ return mStrYymm ?? ""				}
 		
 		/**
 		* 발행순번을 리턴한다.
 		* @return
 		*/
-		public func getSeqNo() -> String?				{ return mStrSeqNo				}
+		public func getSeqNo() -> String				{ return mStrSeqNo ?? ""				}
+		
+		
+		
+		
+		
+		// 자산명을 리턴한다.
+		public func getAssetName() -> String 		{ return mStrAssetName ?? "" }
+		public func getNewTag() -> Bool 			{ return mBoolNewTag ?? false }
+		public func getReadCount() -> Int			{ return mIntReadCount 	}
+		public func getReadTime() -> String 		{ return mStrReadTime ?? "" }
+		
 		
 		/**
 		* 인코딩 종류를 설정한다.
@@ -164,8 +191,9 @@ public class RfidUtil
 		* 자산EPC코드를 설정한다.
 		* @param strAssetEpc 자산EPC코드
 		*/
-		public func setAssetEpc( strAssetEpc: String)		{ self.mStrAssetEpc		= strAssetEpc		}
+		public func setAssetEpc( assetEpc: String)		{ self.mStrAssetEpc		= assetEpc		}
 		
+
 		/**
 		* 상품을 설정한다.
 		* @param strItem 상품
@@ -219,6 +247,15 @@ public class RfidUtil
 		* @param strSeqNo 발행순번
 		*/
 		public func setSeqNo(strSeqNo: String)				{ self.mStrSeqNo		= strSeqNo			}
+		
+		
+		
+		
+		
+		public func setAssetName( assetName: String)	{ self.mStrAssetName = assetName }
+		public func setNewTag(newTag: Bool)				{ self.mBoolNewTag = newTag }
+		public func setReadCount(readCount: Int)		{ self.mIntReadCount = readCount }
+		public func setReadTime(readTime: String)		{ self.mStrReadTime = readTime }
 	}
 	
 	/**

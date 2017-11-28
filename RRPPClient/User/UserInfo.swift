@@ -493,9 +493,9 @@ class UserInfo
 	* 날짜 검색 구간을 설정한다.
 	* @param intDateDistance 날짜 검색 구간
 	*/
-	func setDateDistance(intDateDistance : Int)
+	func setDateDistance(dateDistance : Int)
 	{
-		UserDefaults.standard.set(intDateDistance, forKey: "dateDistance")
+		UserDefaults.standard.set(dateDistance, forKey: "dateDistance")
 	}
 	
 	
