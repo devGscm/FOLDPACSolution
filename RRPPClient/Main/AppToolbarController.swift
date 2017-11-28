@@ -54,6 +54,9 @@ extension AppToolbarController
 	{
         menuButton = IconButton(image: Icon.cm.menu)
 		menuButton.tintColor = Color.white
+		menuButton.pulseColor = .white
+		//starButton = IconButton(image: Icon.cm.star, tintColor: .white)
+		
         menuButton.addTarget(self, action: #selector(handleMenuButton), for: .touchUpInside)
     }
     
@@ -75,7 +78,8 @@ extension AppToolbarController
         statusBarStyle = .lightContent
         // Access the statusBar.
 		//statusBar.backgroundColor = Color.green.base
-		statusBar.backgroundColor = Color.blue.base
+		statusBar.backgroundColor = Color.blue.darken3
+		//statusBar.backgroundColor = Color.blue.base
     }
     
     fileprivate func prepareToolbar()
@@ -84,7 +88,7 @@ extension AppToolbarController
 		//yomile toolbar.rightViews = [switchControl, moreButton]
 		toolbar.rightViews = [ moreButton]
 		toolbar.backgroundColor = Color.blue.base
-
+		toolbar.titleLabel.textColor = Color.white
     }
 }
 

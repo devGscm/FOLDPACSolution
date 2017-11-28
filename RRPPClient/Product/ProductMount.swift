@@ -321,7 +321,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		objCell.lblReadCount.text = "\(clsTagInfo.getReadCount())"
 		
 		objCell.btnDetail.titleLabel?.font = UIFont.fontAwesome(ofSize: 14)
-		objCell.btnDetail.setTitle(String.fontAwesomeIcon(name:.arrowDown), for: .normal)
+		objCell.btnDetail.setTitle(String.fontAwesomeIcon(name: .listAlt), for: .normal)
 		objCell.btnDetail.tag = indexPath.row
 		//objCell.btnDetail.addTarget(self, action: #selector(BranchSearchDialog.onSelectionClicked(_:)), for: .touchUpInside)
 		return objCell

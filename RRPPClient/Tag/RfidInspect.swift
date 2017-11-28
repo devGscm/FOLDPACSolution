@@ -10,10 +10,12 @@ import UIKit
 
 class RfidInspect: UIViewController
 {
-
+	
     override func viewDidLoad()
 	{
         super.viewDidLoad()
+		
+		//vwCard.layer.
     }
 
 }
