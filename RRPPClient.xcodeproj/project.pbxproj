@@ -41,6 +41,12 @@
 		55FA78591FBDB06F00583A80 /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78581FBDB06F00583A80 /* UIStoryboard.swift */; };
 		967A9C441FC3BE8D00B6A9D1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 967A9C461FC3BE8D00B6A9D1 /* Localizable.strings */; };
 		967A9C4A1FC4003B00B6A9D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 967A9C4C1FC4003B00B6A9D1 /* Main.storyboard */; };
+		9680BE851FCBD91D002838A4 /* BLEDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 9680BE7C1FCBD91C002838A4 /* BLEDevice.m */; };
+		9680BE861FCBD91D002838A4 /* SwingApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 9680BE7D1FCBD91C002838A4 /* SwingApi.m */; };
+		9680BE871FCBD91D002838A4 /* SwingDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 9680BE7F1FCBD91C002838A4 /* SwingDevice.m */; };
+		9680BE881FCBD91D002838A4 /* SwingProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 9680BE801FCBD91C002838A4 /* SwingProtocol.m */; };
+		9680BE891FCBD91D002838A4 /* BLEUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 9680BE821FCBD91D002838A4 /* BLEUtility.m */; };
+		9680BE8C1FCBD9D4002838A4 /* RfidSwing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9680BE8B1FCBD9D4002838A4 /* RfidSwing.swift */; };
 		968611EC1FBD585C000FE288 /* SWXMLHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 968611DD1FBD564C000FE288 /* SWXMLHash.framework */; };
 		968611ED1FBD585C000FE288 /* SWXMLHash.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 968611DD1FBD564C000FE288 /* SWXMLHash.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		96994C4D1FC5453B00B3A726 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96994C4C1FC5453A00B3A726 /* SQLite.framework */; };
@@ -132,6 +138,18 @@
 		967A9C4E1FC4004A00B6A9D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		967A9C501FC4005300B6A9D1 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/Main.strings; sourceTree = "<group>"; };
 		967A9C521FC4005400B6A9D1 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
+		9680BE731FCBD7DC002838A4 /*  RRPPClient-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = " RRPPClient-Bridging-Header.h"; sourceTree = "<group>"; };
+		9680BE7A1FCBD91B002838A4 /* BLEDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEDevice.h; sourceTree = "<group>"; };
+		9680BE7B1FCBD91C002838A4 /* SwingApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwingApi.h; sourceTree = "<group>"; };
+		9680BE7C1FCBD91C002838A4 /* BLEDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEDevice.m; sourceTree = "<group>"; };
+		9680BE7D1FCBD91C002838A4 /* SwingApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwingApi.m; sourceTree = "<group>"; };
+		9680BE7E1FCBD91C002838A4 /* SwingDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwingDevice.h; sourceTree = "<group>"; };
+		9680BE7F1FCBD91C002838A4 /* SwingDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwingDevice.m; sourceTree = "<group>"; };
+		9680BE801FCBD91C002838A4 /* SwingProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwingProtocol.m; sourceTree = "<group>"; };
+		9680BE811FCBD91C002838A4 /* BLEUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEUtility.h; sourceTree = "<group>"; };
+		9680BE821FCBD91D002838A4 /* BLEUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEUtility.m; sourceTree = "<group>"; };
+		9680BE841FCBD91D002838A4 /* SwingProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwingProtocol.h; sourceTree = "<group>"; };
+		9680BE8B1FCBD9D4002838A4 /* RfidSwing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RfidSwing.swift; sourceTree = "<group>"; };
 		968611DD1FBD564C000FE288 /* SWXMLHash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SWXMLHash.framework; path = Carthage/Build/iOS/SWXMLHash.framework; sourceTree = "<group>"; };
 		96994C4C1FC5453A00B3A726 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
 		96994C501FC545DF00B3A726 /* LocalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalData.swift; sourceTree = "<group>"; };
@@ -266,6 +284,25 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		9680BE721FCBD7AD002838A4 /* Rfid */ = {
+			isa = PBXGroup;
+			children = (
+				9680BE7A1FCBD91B002838A4 /* BLEDevice.h */,
+				9680BE7C1FCBD91C002838A4 /* BLEDevice.m */,
+				9680BE811FCBD91C002838A4 /* BLEUtility.h */,
+				9680BE821FCBD91D002838A4 /* BLEUtility.m */,
+				9680BE7B1FCBD91C002838A4 /* SwingApi.h */,
+				9680BE7D1FCBD91C002838A4 /* SwingApi.m */,
+				9680BE7E1FCBD91C002838A4 /* SwingDevice.h */,
+				9680BE7F1FCBD91C002838A4 /* SwingDevice.m */,
+				9680BE841FCBD91D002838A4 /* SwingProtocol.h */,
+				9680BE801FCBD91C002838A4 /* SwingProtocol.m */,
+				9680BE731FCBD7DC002838A4 /*  RRPPClient-Bridging-Header.h */,
+				9680BE8B1FCBD9D4002838A4 /* RfidSwing.swift */,
+			);
+			path = Rfid;
+			sourceTree = "<group>";
+		};
 		96E494131FB1A78500D1E2C1 = {
 			isa = PBXGroup;
 			children = (
@@ -291,6 +328,7 @@
 		96E4941E1FB1A78500D1E2C1 /* RRPPClient */ = {
 			isa = PBXGroup;
 			children = (
+				9680BE721FCBD7AD002838A4 /* Rfid */,
 				967A9C411FC3BE4E00B6A9D1 /* Resources */,
 				55F385C91FC3B6A40043F1A3 /* Product */,
 				55FA78571FBDB06F00583A80 /* Extension */,
@@ -401,6 +439,7 @@
 				TargetAttributes = {
 					96E4941B1FB1A78500D1E2C1 = {
 						CreatedOnToolsVersion = 9.1;
+						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 					};
 					96E4942F1FB1A78500D1E2C1 = {
@@ -490,20 +529,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9680BE881FCBD91D002838A4 /* SwingProtocol.m in Sources */,
 				55FA78361FBDACC600583A80 /* ProgressDialog.swift in Sources */,
 				55ACD6801FC8051900A2DC72 /* DataProtocol.swift in Sources */,
 				55FA78561FBDAD7E00583A80 /* AppContext.swift in Sources */,
 				96E494221FB1A78500D1E2C1 /* ViewController.swift in Sources */,
 				55FA784D1FBDAD0B00583A80 /* RootViewController.swift in Sources */,
 				96E494201FB1A78500D1E2C1 /* AppDelegate.swift in Sources */,
+				9680BE8C1FCBD9D4002838A4 /* RfidSwing.swift in Sources */,
 				55F385D41FC3E8130043F1A3 /* BranchSearchDialog.swift in Sources */,
 				55ACD6781FC802BD00A2DC72 /* ProductOrderSearchCell.swift in Sources */,
 				55FA784C1FBDAD0B00583A80 /* RightViewController.swift in Sources */,
+				9680BE861FCBD91D002838A4 /* SwingApi.m in Sources */,
 				55FA78591FBDB06F00583A80 /* UIStoryboard.swift in Sources */,
+				9680BE891FCBD91D002838A4 /* BLEUtility.m in Sources */,
 				55FA784B1FBDAD0B00583A80 /* LeftViewController.swift in Sources */,
+				9680BE851FCBD91D002838A4 /* BLEDevice.m in Sources */,
 				55ACD6761FC802BD00A2DC72 /* ProductMountViewController.swift in Sources */,
 				553BCF8B1FC2DC3B00BE39C1 /* SliderDialog.swift in Sources */,
 				96994C511FC545DF00B3A726 /* LocalData.swift in Sources */,
+				9680BE871FCBD91D002838A4 /* SwingDevice.m in Sources */,
 				55FA78481FBDAD0B00583A80 /* AppNavigationDrawerController.swift in Sources */,
 				55FA783A1FBDACE300583A80 /* LoginViewController.swift in Sources */,
 				55FA78491FBDAD0B00583A80 /* AppToolbarController.swift in Sources */,
@@ -693,6 +738,7 @@
 		96E494451FB1A78500D1E2C1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 98XQB8NK39;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -703,6 +749,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.logisall.rrpp.RRPPClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RRPPClient/Rfid/ RRPPClient-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -711,6 +759,7 @@
 		96E494461FB1A78500D1E2C1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 98XQB8NK39;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -721,6 +770,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.logisall.rrpp.RRPPClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RRPPClient/Rfid/ RRPPClient-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

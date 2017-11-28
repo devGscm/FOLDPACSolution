@@ -4,7 +4,6 @@ import Mosaic
 
 class RootViewController: UIViewController
 {
-	
     open override func viewDidLoad()
 	{
 		print("@@@@@@@@@@@@@@@@@@@@")
@@ -12,7 +11,7 @@ class RootViewController: UIViewController
 		print("@@@@@@@@@@@@@@@@@@@@")
         super.viewDidLoad()
         view.backgroundColor = Color.grey.lighten5
-        
+		
         prepareToolbar()
     }
 	
@@ -20,6 +19,10 @@ class RootViewController: UIViewController
 	{
 		if(AppContext.sharedManager.getUserInfo().getAutoLogin() == true || AppContext.sharedManager.getAuthenticated() == true)
 		{
+			
+			let rfid =  RfidSwing()
+			rfid.doConnectRfid()
+			
 //			let dataClient = Mosaic.DataClient(url: Constants.WEB_SVC_URL)
 //			dataClient.UserInfo = "xxOxOsU93/PvK/NN7DZmZw=="
 //			dataClient.SelectUrl = "productService:selectProductOrderList"
@@ -83,11 +86,11 @@ class RootViewController: UIViewController
 //					}
 //			})		
 		
-			print("로그인 성공")
-			let localData = LocalData.shared
-			localData.RemoteDbEnncryptId = AppContext.sharedManager.getUserInfo().getEncryptId()
-			localData.CorpId = AppContext.sharedManager.getUserInfo().getCorpId()
-			localData.versionCheck()
+//			print("로그인 성공")
+//			let localData = LocalData.shared
+//			localData.RemoteDbEnncryptId = AppContext.sharedManager.getUserInfo().getEncryptId()
+//			localData.CorpId = AppContext.sharedManager.getUserInfo().getCorpId()
+//			localData.versionCheck()
 			
 			
 			
