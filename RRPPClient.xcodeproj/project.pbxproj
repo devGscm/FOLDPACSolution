@@ -9,19 +9,19 @@
 /* Begin PBXBuildFile section */
 		553BCF891FC2B03500BE39C1 /* RfidReaderDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553BCF881FC2B03500BE39C1 /* RfidReaderDialog.swift */; };
 		553BCF8B1FC2DC3B00BE39C1 /* SliderDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553BCF8A1FC2DC3B00BE39C1 /* SliderDialog.swift */; };
-		553F42EB1FCCDD5B006784AF /* RfidInspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F42EA1FCCDD5B006784AF /* RfidInspect.swift */; };
-		553F42ED1FCCDDC6006784AF /* Tag.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 553F42EC1FCCDDC6006784AF /* Tag.storyboard */; };
 		553F42EE1FCCE94C006784AF /* Product.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 553F42F01FCCE94C006784AF /* Product.storyboard */; };
-		553F42F81FCD4A27006784AF /* ProductMountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F42F71FCD4A27006784AF /* ProductMountCell.swift */; };
 		553F42FA1FCD4E8E006784AF /* ProductMount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F42F91FCD4E8E006784AF /* ProductMount.swift */; };
 		553F43111FCD747D006784AF /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F43101FCD747D006784AF /* UIView.swift */; };
 		55ACD6771FC802BD00A2DC72 /* ProductOrderSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD6731FC802BC00A2DC72 /* ProductOrderSearch.swift */; };
 		55ACD6781FC802BD00A2DC72 /* ProductOrderSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD6741FC802BC00A2DC72 /* ProductOrderSearchCell.swift */; };
 		55ACD67E1FC804F800A2DC72 /* ListViewDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD67C1FC804F800A2DC72 /* ListViewDialog.swift */; };
 		55ACD6801FC8051900A2DC72 /* DataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD67F1FC8051900A2DC72 /* DataProtocol.swift */; };
-		55B2D80E1FCBF4FA0010E61D /* RfidUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B2D80D1FCBF4FA0010E61D /* RfidUtil.swift */; };
 		55B2D8101FCC0DF40010E61D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B2D80F1FCC0DF40010E61D /* BaseViewController.swift */; };
-		55B2D8121FCC0FAE0010E61D /* BaseRfidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B2D8111FCC0FAE0010E61D /* BaseRfidViewController.swift */; };
+		55B302C21FCE323B00BDCCB1 /* BaseRfidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B302C01FCE323A00BDCCB1 /* BaseRfidViewController.swift */; };
+		55B302C31FCE323B00BDCCB1 /* RfidUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B302C11FCE323A00BDCCB1 /* RfidUtil.swift */; };
+		55B302C71FCE32A600BDCCB1 /* RfidInspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B302C51FCE32A600BDCCB1 /* RfidInspect.swift */; };
+		55B302C81FCE32A600BDCCB1 /* Tag.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55B302C61FCE32A600BDCCB1 /* Tag.storyboard */; };
+		55B302CA1FCE339400BDCCB1 /* ProductMountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B302C91FCE339400BDCCB1 /* ProductMountCell.swift */; };
 		55F385D41FC3E8130043F1A3 /* BranchSearchDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F385D31FC3E8130043F1A3 /* BranchSearchDialog.swift */; };
 		55F385D61FC409E20043F1A3 /* BranchSearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F385D51FC409E20043F1A3 /* BranchSearchItem.swift */; };
 		55FA782A1FBDAB6700583A80 /* Material.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA78241FBDAB2B00583A80 /* Material.framework */; };
@@ -116,7 +116,6 @@
 		553F42F21FCCE959006784AF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Product.strings; sourceTree = "<group>"; };
 		553F42F41FCCE959006784AF /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/Product.strings; sourceTree = "<group>"; };
 		553F42F61FCCE95B006784AF /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Product.strings; sourceTree = "<group>"; };
-		553F42F71FCD4A27006784AF /* ProductMountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMountCell.swift; sourceTree = "<group>"; };
 		553F42F91FCD4E8E006784AF /* ProductMount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMount.swift; sourceTree = "<group>"; };
 		553F43101FCD747D006784AF /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		5564DA751FC5583800A39598 /* ListViewDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewDialog.swift; sourceTree = "<group>"; };
@@ -126,7 +125,11 @@
 		55ACD67F1FC8051900A2DC72 /* DataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProtocol.swift; sourceTree = "<group>"; };
 		55B2D80D1FCBF4FA0010E61D /* RfidUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RfidUtil.swift; sourceTree = "<group>"; };
 		55B2D80F1FCC0DF40010E61D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		55B2D8111FCC0FAE0010E61D /* BaseRfidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRfidViewController.swift; sourceTree = "<group>"; };
+		55B302C01FCE323A00BDCCB1 /* BaseRfidViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseRfidViewController.swift; sourceTree = "<group>"; };
+		55B302C11FCE323A00BDCCB1 /* RfidUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RfidUtil.swift; sourceTree = "<group>"; };
+		55B302C51FCE32A600BDCCB1 /* RfidInspect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RfidInspect.swift; sourceTree = "<group>"; };
+		55B302C61FCE32A600BDCCB1 /* Tag.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tag.storyboard; sourceTree = "<group>"; };
+		55B302C91FCE339400BDCCB1 /* ProductMountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductMountCell.swift; sourceTree = "<group>"; };
 		55F385D31FC3E8130043F1A3 /* BranchSearchDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchSearchDialog.swift; sourceTree = "<group>"; };
 		55F385D51FC409E20043F1A3 /* BranchSearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchSearchItem.swift; sourceTree = "<group>"; };
 		55FA78201FBDAAA800583A80 /* FontAwesome.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FontAwesome.framework; path = Carthage/Build/iOS/FontAwesome.framework; sourceTree = "<group>"; };
@@ -217,39 +220,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		553F42E91FCCDD03006784AF /* Tag */ = {
-			isa = PBXGroup;
-			children = (
-				553F42EA1FCCDD5B006784AF /* RfidInspect.swift */,
-				553F42EC1FCCDDC6006784AF /* Tag.storyboard */,
-			);
-			path = Tag;
-			sourceTree = "<group>";
-		};
 		55ACD66C1FC801A900A2DC72 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
 				551FA96F1FC50EF4007C17F7 /* DataProtocol.swift */,
 				5564DA751FC5583800A39598 /* ListViewDialog.swift */,
+				55B2D80D1FCBF4FA0010E61D /* RfidUtil.swift */,
+				553F42EA1FCCDD5B006784AF /* RfidInspect.swift */,
+				553F42EC1FCCDDC6006784AF /* Tag.storyboard */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
-		55B2D80C1FCBF4C40010E61D /* Reader */ = {
+		55B302BF1FCE323A00BDCCB1 /* Reader */ = {
 			isa = PBXGroup;
 			children = (
-				55B2D80D1FCBF4FA0010E61D /* RfidUtil.swift */,
-				55B2D8111FCC0FAE0010E61D /* BaseRfidViewController.swift */,
+				55B302C01FCE323A00BDCCB1 /* BaseRfidViewController.swift */,
+				55B302C11FCE323A00BDCCB1 /* RfidUtil.swift */,
 			);
 			path = Reader;
+			sourceTree = "<group>";
+		};
+		55B302C41FCE32A600BDCCB1 /* Tag */ = {
+			isa = PBXGroup;
+			children = (
+				55B302C51FCE32A600BDCCB1 /* RfidInspect.swift */,
+				55B302C61FCE32A600BDCCB1 /* Tag.storyboard */,
+			);
+			path = Tag;
 			sourceTree = "<group>";
 		};
 		55F385C91FC3B6A40043F1A3 /* Product */ = {
 			isa = PBXGroup;
 			children = (
+				55B302C91FCE339400BDCCB1 /* ProductMountCell.swift */,
 				553F42F01FCCE94C006784AF /* Product.storyboard */,
 				553F42F91FCD4E8E006784AF /* ProductMount.swift */,
-				553F42F71FCD4A27006784AF /* ProductMountCell.swift */,
 				55ACD6731FC802BC00A2DC72 /* ProductOrderSearch.swift */,
 				55ACD6741FC802BC00A2DC72 /* ProductOrderSearchCell.swift */,
 			);
@@ -366,6 +372,8 @@
 		96E4941E1FB1A78500D1E2C1 /* RRPPClient */ = {
 			isa = PBXGroup;
 			children = (
+				55B302C41FCE32A600BDCCB1 /* Tag */,
+				55B302BF1FCE323A00BDCCB1 /* Reader */,
 				9680BE721FCBD7AD002838A4 /* Rfid */,
 				967A9C411FC3BE4E00B6A9D1 /* Resources */,
 				55F385C91FC3B6A40043F1A3 /* Product */,
@@ -520,7 +528,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55FA78401FBDACFD00583A80 /* pallet.png in Resources */,
-				553F42ED1FCCDDC6006784AF /* Tag.storyboard in Resources */,
+				55B302C81FCE32A600BDCCB1 /* Tag.storyboard in Resources */,
 				96E4942A1FB1A78500D1E2C1 /* LaunchScreen.storyboard in Resources */,
 				553F42EE1FCCE94C006784AF /* Product.storyboard in Resources */,
 				967A9C4A1FC4003B00B6A9D1 /* Main.storyboard in Resources */,
@@ -570,11 +578,10 @@
 			files = (
 				9680BE881FCBD91D002838A4 /* SwingProtocol.m in Sources */,
 				55FA78361FBDACC600583A80 /* ProgressDialog.swift in Sources */,
-				55B2D80E1FCBF4FA0010E61D /* RfidUtil.swift in Sources */,
 				55ACD6801FC8051900A2DC72 /* DataProtocol.swift in Sources */,
 				55FA78561FBDAD7E00583A80 /* AppContext.swift in Sources */,
 				96E494221FB1A78500D1E2C1 /* ViewController.swift in Sources */,
-				553F42EB1FCCDD5B006784AF /* RfidInspect.swift in Sources */,
+				55B302C21FCE323B00BDCCB1 /* BaseRfidViewController.swift in Sources */,
 				55FA784D1FBDAD0B00583A80 /* RootViewController.swift in Sources */,
 				96E494201FB1A78500D1E2C1 /* AppDelegate.swift in Sources */,
 				9680BE8C1FCBD9D4002838A4 /* RfidSwing.swift in Sources */,
@@ -587,11 +594,13 @@
 				9680BE891FCBD91D002838A4 /* BLEUtility.m in Sources */,
 				55FA784B1FBDAD0B00583A80 /* LeftViewController.swift in Sources */,
 				9680BE851FCBD91D002838A4 /* BLEDevice.m in Sources */,
-				55ACD6761FC802BD00A2DC72 /* ProductMountViewController.swift in Sources */,
+				55B302C71FCE32A600BDCCB1 /* RfidInspect.swift in Sources */,
 				553BCF8B1FC2DC3B00BE39C1 /* SliderDialog.swift in Sources */,
 				96994C511FC545DF00B3A726 /* LocalData.swift in Sources */,
+				55B302CA1FCE339400BDCCB1 /* ProductMountCell.swift in Sources */,
 				9680BE871FCBD91D002838A4 /* SwingDevice.m in Sources */,
 				55FA78481FBDAD0B00583A80 /* AppNavigationDrawerController.swift in Sources */,
+				55B302C31FCE323B00BDCCB1 /* RfidUtil.swift in Sources */,
 				55FA783A1FBDACE300583A80 /* LoginViewController.swift in Sources */,
 				55FA78491FBDAD0B00583A80 /* AppToolbarController.swift in Sources */,
 				553BCF891FC2B03500BE39C1 /* RfidReaderDialog.swift in Sources */,
