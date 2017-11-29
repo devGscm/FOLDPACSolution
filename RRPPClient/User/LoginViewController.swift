@@ -195,7 +195,7 @@ class LoginViewController: UIViewController
 	
 	private func showLoginErrorDialog(strTitle:String, strMessage:String)
 	{
-		var acController = UIAlertController(title: strTitle, message: strMessage, preferredStyle: UIAlertControllerStyle.alert)
+		let acController = UIAlertController(title: strTitle, message: strMessage, preferredStyle: UIAlertControllerStyle.alert)
 		let aaOkAction = UIAlertAction(title: "확인", style: UIAlertActionStyle.default, handler: nil)
 		acController.addAction(aaOkAction)
 		self.present(acController, animated: true, completion: nil)

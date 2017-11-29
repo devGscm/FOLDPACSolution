@@ -22,6 +22,9 @@
 		55B302C71FCE32A600BDCCB1 /* RfidInspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B302C51FCE32A600BDCCB1 /* RfidInspect.swift */; };
 		55B302C81FCE32A600BDCCB1 /* Tag.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55B302C61FCE32A600BDCCB1 /* Tag.storyboard */; };
 		55B302CA1FCE339400BDCCB1 /* ProductMountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B302C91FCE339400BDCCB1 /* ProductMountCell.swift */; };
+		55C00A921FCE96E400ED5165 /* TagDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C00A911FCE96E400ED5165 /* TagDetailCell.swift */; };
+		55ECF5DC1FCE89B70021F786 /* Common.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55ECF5DB1FCE89B70021F786 /* Common.storyboard */; };
+		55ECF5DE1FCE8BC40021F786 /* TagDetailList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ECF5DD1FCE8BC40021F786 /* TagDetailList.swift */; };
 		55F385D41FC3E8130043F1A3 /* BranchSearchDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F385D31FC3E8130043F1A3 /* BranchSearchDialog.swift */; };
 		55F385D61FC409E20043F1A3 /* BranchSearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F385D51FC409E20043F1A3 /* BranchSearchItem.swift */; };
 		55FA782A1FBDAB6700583A80 /* Material.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA78241FBDAB2B00583A80 /* Material.framework */; };
@@ -69,6 +72,7 @@
 		96E494271FB1A78500D1E2C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96E494261FB1A78500D1E2C1 /* Assets.xcassets */; };
 		96E4942A1FB1A78500D1E2C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96E494281FB1A78500D1E2C1 /* LaunchScreen.storyboard */; };
 		96E494351FB1A78500D1E2C1 /* RRPPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E494341FB1A78500D1E2C1 /* RRPPClientTests.swift */; };
+		B0B7C3811FCE7B3300A9C1B3 /* IdentificationSystemDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B7C3801FCE7B3300A9C1B3 /* IdentificationSystemDialog.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +136,9 @@
 		55B302C51FCE32A600BDCCB1 /* RfidInspect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RfidInspect.swift; sourceTree = "<group>"; };
 		55B302C61FCE32A600BDCCB1 /* Tag.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tag.storyboard; sourceTree = "<group>"; };
 		55B302C91FCE339400BDCCB1 /* ProductMountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductMountCell.swift; sourceTree = "<group>"; };
+		55C00A911FCE96E400ED5165 /* TagDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagDetailCell.swift; sourceTree = "<group>"; };
+		55ECF5DB1FCE89B70021F786 /* Common.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Common.storyboard; sourceTree = "<group>"; };
+		55ECF5DD1FCE8BC40021F786 /* TagDetailList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagDetailList.swift; sourceTree = "<group>"; };
 		55F385D31FC3E8130043F1A3 /* BranchSearchDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchSearchDialog.swift; sourceTree = "<group>"; };
 		55F385D51FC409E20043F1A3 /* BranchSearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchSearchItem.swift; sourceTree = "<group>"; };
 		55FA78201FBDAAA800583A80 /* FontAwesome.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FontAwesome.framework; path = Carthage/Build/iOS/FontAwesome.framework; sourceTree = "<group>"; };
@@ -189,6 +196,7 @@
 		96E494361FB1A78500D1E2C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96E4943B1FB1A78500D1E2C1 /*  RRPPClientUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = " RRPPClientUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E4944F1FB1A81F00D1E2C1 /* moramframework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = moramframework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0B7C3801FCE7B3300A9C1B3 /* IdentificationSystemDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentificationSystemDialog.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,6 +278,7 @@
 		55FA78321FBDACC600583A80 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				55ECF5DB1FCE89B70021F786 /* Common.storyboard */,
 				55ACD67F1FC8051900A2DC72 /* DataProtocol.swift */,
 				55ACD67C1FC804F800A2DC72 /* ListViewDialog.swift */,
 				553BCF8A1FC2DC3B00BE39C1 /* SliderDialog.swift */,
@@ -277,6 +286,8 @@
 				55FA78341FBDACC600583A80 /* ProgressDialog.swift */,
 				96994C501FC545DF00B3A726 /* LocalData.swift */,
 				55B2D80F1FCC0DF40010E61D /* BaseViewController.swift */,
+				55ECF5DD1FCE8BC40021F786 /* TagDetailList.swift */,
+				55C00A911FCE96E400ED5165 /* TagDetailCell.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -312,6 +323,7 @@
 				553BCF881FC2B03500BE39C1 /* RfidReaderDialog.swift */,
 				55F385D31FC3E8130043F1A3 /* BranchSearchDialog.swift */,
 				55F385D51FC409E20043F1A3 /* BranchSearchItem.swift */,
+				B0B7C3801FCE7B3300A9C1B3 /* IdentificationSystemDialog.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -544,6 +556,7 @@
 				55FA78401FBDACFD00583A80 /* pallet.png in Resources */,
 				55B302C81FCE32A600BDCCB1 /* Tag.storyboard in Resources */,
 				96E4942A1FB1A78500D1E2C1 /* LaunchScreen.storyboard in Resources */,
+				55ECF5DC1FCE89B70021F786 /* Common.storyboard in Resources */,
 				553F42EE1FCCE94C006784AF /* Product.storyboard in Resources */,
 				967A9C4A1FC4003B00B6A9D1 /* Main.storyboard in Resources */,
 				967A9C441FC3BE8D00B6A9D1 /* Localizable.strings in Resources */,
@@ -606,6 +619,7 @@
 				9680BE861FCBD91D002838A4 /* SwingApi.m in Sources */,
 				55FA78591FBDB06F00583A80 /* UIStoryboard.swift in Sources */,
 				9680BE891FCBD91D002838A4 /* BLEUtility.m in Sources */,
+				55C00A921FCE96E400ED5165 /* TagDetailCell.swift in Sources */,
 				55FA784B1FBDAD0B00583A80 /* LeftViewController.swift in Sources */,
 				9680BE851FCBD91D002838A4 /* BLEDevice.m in Sources */,
 				9618F0E41FCE34B600F376B7 /* TestPorg.swift in Sources */,
@@ -615,6 +629,7 @@
 				9618F0E61FCE83D300F376B7 /* TagCell.swift in Sources */,
 				55B302CA1FCE339400BDCCB1 /* ProductMountCell.swift in Sources */,
 				9680BE871FCBD91D002838A4 /* SwingDevice.m in Sources */,
+				55ECF5DE1FCE8BC40021F786 /* TagDetailList.swift in Sources */,
 				55FA78481FBDAD0B00583A80 /* AppNavigationDrawerController.swift in Sources */,
 				55B302C31FCE323B00BDCCB1 /* RfidUtil.swift in Sources */,
 				55FA783A1FBDACE300583A80 /* LoginViewController.swift in Sources */,
@@ -625,6 +640,7 @@
 				55FA783B1FBDACE300583A80 /* UserInfo.swift in Sources */,
 				55B2D8101FCC0DF40010E61D /* BaseViewController.swift in Sources */,
 				55FA78351FBDACC600583A80 /* Constants.swift in Sources */,
+				B0B7C3811FCE7B3300A9C1B3 /* IdentificationSystemDialog.swift in Sources */,
 				55F385D61FC409E20043F1A3 /* BranchSearchItem.swift in Sources */,
 				553F42FA1FCD4E8E006784AF /* ProductMount.swift in Sources */,
 				55FA784A1FBDAD0B00583A80 /* LeftMenuItem.swift in Sources */,

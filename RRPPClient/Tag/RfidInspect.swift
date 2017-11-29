@@ -17,7 +17,7 @@ class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	var arrTagList			: Array<String> = Array<String>()
 	
     override func viewDidLoad()
-	{
+    {
         super.viewDidLoad()
 		self.initRfid()
 		self.delegate = self as ReaderResponseProtocol

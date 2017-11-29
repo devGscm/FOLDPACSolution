@@ -103,53 +103,48 @@ class ProductOrderSearch: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	func doSearch()
 	{
-		do
+
+		intPageNo += 1
+		
+		let strLocaleStDate = StrUtil.replace(sourceText: (btnStDate?.text)!, findText: "-", replaceText: "") + "000000"
+		let strLocaleEnDate = StrUtil.replace(sourceText: (btnEnDate?.text)!, findText: "-", replaceText: "") + "235959"
+		
+		print("strLocaleStDate:\(strLocaleStDate)")
+		print("strLocaleEnDate:\(strLocaleEnDate)")
+		
+		
+		let dtLocaleStDate = DateUtil.getFormatDate(date: strLocaleStDate, dateFormat:"yyyyMMddHHmmss")
+		let dtLocaleEnDate = DateUtil.getFormatDate(date: strLocaleEnDate, dateFormat:"yyyyMMddHHmmss")
+		
+		if(dtLocaleStDate.timeIntervalSince1970 > dtLocaleEnDate.timeIntervalSince1970)
 		{
-			intPageNo += 1
-			
-			let strLocaleStDate = StrUtil.replace(sourceText: (btnStDate?.text)!, findText: "-", replaceText: "") + "000000"
-			let strLocaleEnDate = StrUtil.replace(sourceText: (btnEnDate?.text)!, findText: "-", replaceText: "") + "235959"
-			
-			print("strLocaleStDate:\(strLocaleStDate)")
-			print("strLocaleEnDate:\(strLocaleEnDate)")
-			
-			
-			let dtLocaleStDate = DateUtil.getFormatDate(date: strLocaleStDate, dateFormat:"yyyyMMddHHmmss")
-			let dtLocaleEnDate = DateUtil.getFormatDate(date: strLocaleEnDate, dateFormat:"yyyyMMddHHmmss")
-			
-			if(dtLocaleStDate.timeIntervalSince1970 > dtLocaleEnDate.timeIntervalSince1970)
-			{
-				Dialog.show(container: self, title: nil, message: NSLocalizedString("msg_search_date_error", comment: "검색일자를 확인해 주세요."))
+			Dialog.show(container: self, title: nil, message: NSLocalizedString("msg_search_date_error", comment: "검색일자를 확인해 주세요."))
+			return
+		}
+		
+		print("startOrderDate:\(strLocaleStDate)")
+		print("endOrderDate:\(strLocaleEnDate)")
+		print("pageNo:\(intPageNo)")
+		print("rowPerPage:\(Constants.ROWS_PER_PAGE)")
+		
+		clsDataClient.addServiceParam(paramName: "startOrderDate", value: strLocaleStDate)
+		clsDataClient.addServiceParam(paramName: "endOrderDate", value: strLocaleEnDate)
+		clsDataClient.addServiceParam(paramName: "pageNo", value: intPageNo)
+		clsDataClient.addServiceParam(paramName: "rowsPerPage", value: Constants.ROWS_PER_PAGE)
+		clsDataClient.selectData(dataCompletionHandler: {(data, error) in
+			if let error = error {
+				// 에러처리
+				print(error)
 				return
 			}
-			
-			print("startOrderDate:\(strLocaleStDate)")
-			print("endOrderDate:\(strLocaleEnDate)")
-			print("pageNo:\(intPageNo)")
-			print("rowPerPage:\(Constants.ROWS_PER_PAGE)")
-			
-			clsDataClient.addServiceParam(paramName: "startOrderDate", value: strLocaleStDate)
-			clsDataClient.addServiceParam(paramName: "endOrderDate", value: strLocaleEnDate)
-			clsDataClient.addServiceParam(paramName: "pageNo", value: intPageNo)
-			clsDataClient.addServiceParam(paramName: "rowsPerPage", value: Constants.ROWS_PER_PAGE)
-			clsDataClient.selectData(dataCompletionHandler: {(data, error) in
-				if let error = error {
-					// 에러처리
-					print(error)
-					return
-				}
-				guard let clsDataTable = data else {
-					print("에러 데이터가 없음")
-					return
-				}
-				self.arcDataRows.append(contentsOf: clsDataTable.getDataRows())
-				DispatchQueue.main.async { self.tvProductOrderSearch?.reloadData() }
-			})
-		}
-		catch let error
-		{
-			print("*ProductOrderSearch.doSearch() Exception :" + error.localizedDescription)
-		}
+			guard let clsDataTable = data else {
+				print("에러 데이터가 없음")
+				return
+			}
+			self.arcDataRows.append(contentsOf: clsDataTable.getDataRows())
+			DispatchQueue.main.async { self.tvProductOrderSearch?.reloadData() }
+		})
+
 	}
 	
 	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
@@ -188,7 +183,7 @@ class ProductOrderSearch: UIViewController, UITableViewDataSource, UITableViewDe
 		objCell.btnSelection.titleLabel?.font = UIFont.fontAwesome(ofSize: 14)
 		objCell.btnSelection.setTitle(String.fontAwesomeIcon(name:.arrowDown), for: .normal)
 		objCell.btnSelection.tag = indexPath.row
-		objCell.btnSelection.addTarget(self, action: #selector(BranchSearchDialog.onSelectionClicked(_:)), for: .touchUpInside)
+		objCell.btnSelection.addTarget(self, action: #selector(onSelectionClicked(_:)), for: .touchUpInside)
 		return objCell
 	}
 	
