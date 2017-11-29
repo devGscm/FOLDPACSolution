@@ -68,6 +68,7 @@
 		96E494271FB1A78500D1E2C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96E494261FB1A78500D1E2C1 /* Assets.xcassets */; };
 		96E4942A1FB1A78500D1E2C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96E494281FB1A78500D1E2C1 /* LaunchScreen.storyboard */; };
 		96E494351FB1A78500D1E2C1 /* RRPPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E494341FB1A78500D1E2C1 /* RRPPClientTests.swift */; };
+		B0B7C3811FCE7B3300A9C1B3 /* IdentificationSystemDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B7C3801FCE7B3300A9C1B3 /* IdentificationSystemDialog.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -187,6 +188,7 @@
 		96E494361FB1A78500D1E2C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96E4943B1FB1A78500D1E2C1 /*  RRPPClientUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = " RRPPClientUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E4944F1FB1A81F00D1E2C1 /* moramframework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = moramframework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0B7C3801FCE7B3300A9C1B3 /* IdentificationSystemDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentificationSystemDialog.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -309,6 +311,7 @@
 				553BCF881FC2B03500BE39C1 /* RfidReaderDialog.swift */,
 				55F385D31FC3E8130043F1A3 /* BranchSearchDialog.swift */,
 				55F385D51FC409E20043F1A3 /* BranchSearchItem.swift */,
+				B0B7C3801FCE7B3300A9C1B3 /* IdentificationSystemDialog.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -621,6 +624,7 @@
 				55FA783B1FBDACE300583A80 /* UserInfo.swift in Sources */,
 				55B2D8101FCC0DF40010E61D /* BaseViewController.swift in Sources */,
 				55FA78351FBDACC600583A80 /* Constants.swift in Sources */,
+				B0B7C3811FCE7B3300A9C1B3 /* IdentificationSystemDialog.swift in Sources */,
 				55F385D61FC409E20043F1A3 /* BranchSearchItem.swift in Sources */,
 				553F42FA1FCD4E8E006784AF /* ProductMount.swift in Sources */,
 				55FA784A1FBDAD0B00583A80 /* LeftMenuItem.swift in Sources */,
