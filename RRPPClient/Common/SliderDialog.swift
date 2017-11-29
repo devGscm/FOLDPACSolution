@@ -50,8 +50,11 @@ class SliderDialog : UIViewController
 	
 	override func viewWillAppear(_ animated: Bool)
 	{
-		self.mLblValue.text = "\(mIntSliderValue!)"
-		self.mSldSlider.value = Float(mIntSliderValue!)
+		if let silderVaue = mIntSliderValue
+		{
+			self.mLblValue.text = "\(silderVaue)"
+			self.mSldSlider.value = Float(silderVaue)
+		}
 	}
 	
 	@IBAction func onSliderValueChanged(sender: UISlider)

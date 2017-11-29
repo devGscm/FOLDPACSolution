@@ -47,6 +47,7 @@
 		55FA78561FBDAD7E00583A80 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78551FBDAD7E00583A80 /* AppContext.swift */; };
 		55FA78591FBDB06F00583A80 /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78581FBDB06F00583A80 /* UIStoryboard.swift */; };
 		9618F0E41FCE34B600F376B7 /* TestPorg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9618F0E31FCE34B600F376B7 /* TestPorg.swift */; };
+		9618F0E61FCE83D300F376B7 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9618F0E51FCE83D300F376B7 /* TagCell.swift */; };
 		967A9C441FC3BE8D00B6A9D1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 967A9C461FC3BE8D00B6A9D1 /* Localizable.strings */; };
 		967A9C4A1FC4003B00B6A9D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 967A9C4C1FC4003B00B6A9D1 /* Main.storyboard */; };
 		9680BE851FCBD91D002838A4 /* BLEDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 9680BE7C1FCBD91C002838A4 /* BLEDevice.m */; };
@@ -152,6 +153,7 @@
 		55FA78551FBDAD7E00583A80 /* AppContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
 		55FA78581FBDB06F00583A80 /* UIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboard.swift; sourceTree = "<group>"; };
 		9618F0E31FCE34B600F376B7 /* TestPorg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPorg.swift; sourceTree = "<group>"; };
+		9618F0E51FCE83D300F376B7 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
 		967A9C451FC3BE8D00B6A9D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		967A9C471FC3BE9500B6A9D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		967A9C481FC3C57500B6A9D1 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 			children = (
 				55B302C51FCE32A600BDCCB1 /* RfidInspect.swift */,
 				55B302C61FCE32A600BDCCB1 /* Tag.storyboard */,
+				9618F0E51FCE83D300F376B7 /* TagCell.swift */,
 			);
 			path = Tag;
 			sourceTree = "<group>";
@@ -609,6 +612,7 @@
 				55B302C71FCE32A600BDCCB1 /* RfidInspect.swift in Sources */,
 				553BCF8B1FC2DC3B00BE39C1 /* SliderDialog.swift in Sources */,
 				96994C511FC545DF00B3A726 /* LocalData.swift in Sources */,
+				9618F0E61FCE83D300F376B7 /* TagCell.swift in Sources */,
 				55B302CA1FCE339400BDCCB1 /* ProductMountCell.swift in Sources */,
 				9680BE871FCBD91D002838A4 /* SwingDevice.m in Sources */,
 				55FA78481FBDAD0B00583A80 /* AppNavigationDrawerController.swift in Sources */,
