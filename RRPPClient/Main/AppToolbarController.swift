@@ -79,6 +79,14 @@ extension AppToolbarController
         // Access the statusBar.
 		//statusBar.backgroundColor = Color.green.base
 		statusBar.backgroundColor = Color.blue.darken3
+		
+		
+		
+		
+		
+		//print("@@@@@@HEX:\(Color.blue.darken3.toHexString) ")
+		
+		//UIColor(red: 21/255, green: 101/255, blue: 192/255, alpha: 1)
 		//statusBar.backgroundColor = Color.blue.base
     }
     
@@ -90,6 +98,24 @@ extension AppToolbarController
 		toolbar.backgroundColor = Color.blue.base
 		toolbar.titleLabel.textColor = Color.white
     }
+}
+
+extension UIColor {
+	var toHexString: String {
+		var r: CGFloat = 0
+		var g: CGFloat = 0
+		var b: CGFloat = 0
+		var a: CGFloat = 0
+		
+		self.getRed(&r, green: &g, blue: &b, alpha: &a)
+		
+		return String(
+			format: "%02X%02X%02X",
+			Int(r * 0xff),
+			Int(g * 0xff),
+			Int(b * 0xff)
+		)
+	}
 }
 
 extension AppToolbarController {
