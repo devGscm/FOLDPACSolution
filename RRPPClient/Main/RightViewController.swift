@@ -5,17 +5,17 @@ import Mosaic
 class RightViewController: UITableViewController, DataProtocol
 {
 	var mLstRfidReader:Array<RfidReaderDialog.RfidReader> = Array<RfidReaderDialog.RfidReader>()
-	
+    var mLstIdentificationSystem:Array<IdentificationSystemDialog.IdentificationSystem> = Array<IdentificationSystemDialog.IdentificationSystem>()
+    
 	@IBOutlet weak var btnBranch: UIButton!
 	@IBOutlet weak var btnRfidReader: UIButton!
-	@IBOutlet weak var swRfidBeep: UISwitch!	// RFID 효과음
-	@IBOutlet weak var btnRfidMask: UIButton!	// RFID 마스크
+	@IBOutlet weak var swRfidBeep: UISwitch!	                //RFID 효과음
+	@IBOutlet weak var btnRfidMask: UIButton!	                //RFID 마스크
 	@IBOutlet weak var btnRfidPower: UIButton!
 
-	lazy var clsBranchSearchDialog: BranchSearchDialog = {
-		return UIStoryboard.viewController(identifier: "BranchSearchDialog") as! BranchSearchDialog
-	}()
-	open override func viewDidLoad()
+    @IBOutlet weak var btnIdentificationSystem: UIButton! //상품식별체계
+    
+    open override func viewDidLoad()
 	{
         super.viewDidLoad()
         //view.backgroundColor = Color.blue.base
@@ -25,7 +25,23 @@ class RightViewController: UITableViewController, DataProtocol
 		//print("@@@@@@ Branch : \(strBranch)")
 		self.btnBranch.setTitle(strBranch, for: .normal)
 		
+        
+        //상품식별체계
+        mLstIdentificationSystem.append(IdentificationSystemDialog.IdentificationSystem(IdentificationSystemType: 0, IdentificationSystemName: "ITF-14 바코드"))
+        mLstIdentificationSystem.append(IdentificationSystemDialog.IdentificationSystem(IdentificationSystemType: 1, IdentificationSystemName: "농산물 QR코드"))
+
+        let intIdentificationSystem = UserDefaults.standard.integer(forKey: Constants.IDENTIFICATION_SYSTEM_LIST_KEY)
+        let strIdentificationSystemName = mLstIdentificationSystem[intIdentificationSystem].IdentificationSystemName
+        
+        print("@@@@@@ ID-SYSTEM:\(intIdentificationSystem)")
+        self.btnIdentificationSystem.setTitle(strIdentificationSystemName, for: .normal)
+
+        
+        
+        
+        //효과음
 		self.swRfidBeep.isOn = UserDefaults.standard.bool(forKey: Constants.RFID_BEEP_ENABLED_KEY)
+        
 		// RFID 리더기
 		mLstRfidReader.append(RfidReaderDialog.RfidReader(readerType: 0, readerName: "Swing U"))
 		mLstRfidReader.append(RfidReaderDialog.RfidReader(readerType: 1, readerName: "AT288"))
@@ -120,6 +136,31 @@ class RightViewController: UITableViewController, DataProtocol
 		self.present(acDialog, animated: true)
 	}
 	*/
+    
+    //상품식별체계
+    @IBAction func onIdentificationSystemClicked(_ sender: UIButton) {
+        print("테스트입니다.")
+        
+        let clsIdentificationSystemDialog = IdentificationSystemDialog()
+        clsIdentificationSystemDialog.loadData(lstIdentificationSystem: mLstIdentificationSystem)
+        
+        let acDialog = UIAlertController(title:nil, message: NSLocalizedString("preference_rfid_reader", comment: "RFID 리더기"), preferredStyle: .alert)
+        acDialog.setValue(clsIdentificationSystemDialog, forKeyPath: "contentViewController")
+        
+        acDialog.addAction(UIAlertAction(title: NSLocalizedString("common_cancel", comment: "취소"), style: .default) { (_) in
+        })
+        let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
+            let intReaderType = clsIdentificationSystemDialog.selectedRow.IdentificationSystemType
+            let strRaderName = clsIdentificationSystemDialog.selectedRow.IdentificationSystemName
+            UserDefaults.standard.setValue(intReaderType, forKey: Constants.RFID_READER_KEY)
+            UserDefaults.standard.synchronize()
+            self.btnRfidReader.setTitle(strRaderName, for: .normal)
+        }
+        acDialog.addAction(aaOkAction)
+        self.present(acDialog, animated: true)
+    }
+    
+    
 	@IBAction func onRfidReaderClicked(_ sender: Any)
 	{
 		let clsReaderDialog = RfidReaderDialog()
