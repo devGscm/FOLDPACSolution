@@ -13,7 +13,7 @@
     BOOL _bReadyToWrite;
 }
 
-@property(strong, nonatomic) NSString* identifier;//<-UUID
+@property(strong, nonatomic) NSString* identifier; ///< UUID
 @property(strong, nonatomic) NSString* name;
 @property(strong, nonatomic) NSString* macaddress;
 @property(assign, nonatomic, readonly) BOOL bReadyToWrite;

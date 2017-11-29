@@ -103,7 +103,7 @@ class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDe
 		
 		//boolInitSearch = true
 		
-		let strSearchValue = tfSearchValue.text;
+		//let strSearchValue = tfSearchValue.text;
 		/*
 		if(strSearchValue?.isEmpty == true)
 		{

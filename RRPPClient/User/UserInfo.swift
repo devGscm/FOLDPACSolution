@@ -207,7 +207,7 @@ class UserInfo
 	* 날짜 검색 구간을 리턴한다.
 	* @return 날짜 검색 구간
 	*/
-	func getDateDistance() -> Int		{ return UserDefaults.standard.integer(forKey: "dateDistance") ?? Constants.DATE_SEARCH_DISTANCE }
+	func getDateDistance() -> Int		{ return UserDefaults.standard.integer(forKey: "dateDistance") }
 	
 	
 	/**

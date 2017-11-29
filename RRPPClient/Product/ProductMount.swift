@@ -110,6 +110,13 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 				clsDialog.ptcDataHandler = self
 			}
 		}
+		else if(segue.identifier == "segTagDetailList")
+		{
+			if let clsDialog = segue.destination as? TagDetailList
+			{
+				clsDialog.loadData(arcTagInfo : arrDetailTagRows)
+			}
+		}
 	}
 	
 	// 팝업 다이얼로그로 부터 데이터 수신
@@ -190,96 +197,95 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 	
 	func getRfidData( clsTagInfo : RfidUtil.TagInfo)
 	{
-		if(clsTagInfo != nil)
+
+		let strCurReadTime = DateUtil.getDate(dateFormat: "yyyyMMddHHmmss")
+		
+		let strSerialNo = clsTagInfo.getSerialNo()
+		let strAssetEpc = "\(clsTagInfo.getCorpEpc())\(clsTagInfo.getAssetEpc())"	// 회사EPC코드 + 자산EPC코드
+			
+		//------------------------------------------------
+		clsTagInfo.setAssetEpc(assetEpc: strAssetEpc)
+		if(clsTagInfo.getAssetEpc().isEmpty == false)
 		{
-			let strCurReadTime = DateUtil.getDate(dateFormat: "yyyyMMddHHmmss")
-			
-			let strSerialNo = clsTagInfo.getSerialNo()
-			let strAssetEpc = "\(clsTagInfo.getCorpEpc())\(clsTagInfo.getAssetEpc())"	// 회사EPC코드 + 자산EPC코드
-			
-			//------------------------------------------------
-			clsTagInfo.setAssetEpc(assetEpc: strAssetEpc)
-			if(clsTagInfo.getAssetEpc().isEmpty == false)
+			guard let strAssetName = super.getAssetName(strAsset: strAssetEpc) as? String
+				else
 			{
-				guard let strAssetName = super.getAssetName(strAsset: strAssetEpc) as? String
-					else
-				{
-					return
-				}
-				clsTagInfo.setAssetName(assetName : strAssetName)
-				print("@@@@@@@@ AssetName2:\(clsTagInfo.getAssetName() )")
+				return
 			}
-			clsTagInfo.setNewTag(newTag : true)
-			clsTagInfo.setReadCount(readCount: 1)
-			clsTagInfo.setReadTime(readTime: strCurReadTime)
-			//------------------------------------------------
-			
-			var boolValidAsset = false
-			var boolFindSerialNoOverlap = false
-			var boolFindAssetTypeOverlap = false
-			for clsAssetInfo in super.getAssetList()
+			clsTagInfo.setAssetName(assetName : strAssetName)
+			print("@@@@@@@@ AssetName2:\(clsTagInfo.getAssetName() )")
+		}
+		clsTagInfo.setNewTag(newTag : true)
+		clsTagInfo.setReadCount(readCount: 1)
+		clsTagInfo.setReadTime(readTime: strCurReadTime)
+		//------------------------------------------------
+		
+		var boolValidAsset = false
+		var boolFindSerialNoOverlap = false
+		var boolFindAssetTypeOverlap = false
+		for clsAssetInfo in super.getAssetList()
+		{
+			print("@@@@@clsAssetInfo.assetEpc:\(clsAssetInfo.assetEpc)")
+			if(clsAssetInfo.assetEpc == strAssetEpc)
 			{
-				print("@@@@@clsAssetInfo.assetEpc:\(clsAssetInfo.assetEpc)")
-				if(clsAssetInfo.assetEpc == strAssetEpc)
+				// 자산코드에 등록되어 있는 경우
+				boolValidAsset = true
+				break;
+			}
+		}
+		print(" 자산코드:\(strAssetEpc), ExistAssetInfo:\(boolValidAsset)")
+		if(boolValidAsset == true)
+		{
+			// Detail 다이얼로그 전달용 태그 리스트
+			for clsTagInfo in arrDetailTagRows
+			{
+				// 같은 시리얼번호가 있는지 체크
+				if(clsTagInfo.getSerialNo() == strSerialNo)
 				{
-					// 자산코드에 등록되어 있는 경우
-					boolValidAsset = true
+					boolFindSerialNoOverlap = true
 					break;
 				}
 			}
-			print(" 자산코드:\(strAssetEpc), ExistAssetInfo:\(boolValidAsset)")
-			if(boolValidAsset == true)
+			
+			// 시리얼번호가 중복이 안되어 있다면
+			if(boolFindSerialNoOverlap == false)
 			{
-				// Detail 다이얼로그 전달용 태그 리스트
-				for clsTagInfo in arrDetailTagRows
+				// 상세보기용 배열에 추가
+				arrDetailTagRows.append(clsTagInfo)
+				
+				for clsTagInfo in arrMasterTagRows
 				{
-					// 같은 시리얼번호가 있는지 체크
-					if(clsTagInfo.getSerialNo() == strSerialNo)
+					// 같은 자산유형이 있다면 자산유형별로 조회수 증가
+					if(clsTagInfo.getAssetEpc() == strAssetEpc)
 					{
-						boolFindSerialNoOverlap = true
+						boolFindAssetTypeOverlap = true
+						let intCurReadCount = clsTagInfo.getReadCount()
+						clsTagInfo.setReadCount(readCount: (intCurReadCount + 1))
 						break;
 					}
 				}
 				
-				// 시리얼번호가 중복이 안되어 있다면
-				if(boolFindSerialNoOverlap == false)
+				// 마스터용 배열에 추가
+				if(boolFindAssetTypeOverlap == false)
 				{
-					// 상세보기용 배열에 추가
-					arrDetailTagRows.append(clsTagInfo)
-					
-					for clsTagInfo in arrMasterTagRows
-					{
-						// 같은 자산유형이 있다면 자산유형별로 조회수 증가
-						if(clsTagInfo.getAssetEpc() == strAssetEpc)
-						{
-							boolFindAssetTypeOverlap = true
-							let intCurReadCount = clsTagInfo.getReadCount()
-							clsTagInfo.setReadCount(readCount: (intCurReadCount + 1))
-							break;
-						}
-					}
-					
-					// 마스터용 배열에 추가
-					if(boolFindAssetTypeOverlap == false)
-					{
-						arrMasterTagRows.append(clsTagInfo)
-					}
-					
-					let intCurDataSize = arrDetailTagRows.count
-					
-					// 발주번호가 있는 경무만 "처리수량/발주수량"을 처리한다.
-					
-					print("@@@@@@strMakeOrderId:\(strMakeOrderId)")
-					
-					if(strMakeOrderId.isEmpty == false)
-					{
-						intCurOrderWorkCnt = intOrderWorkCnt + intCurDataSize
-						lblOrderCount.text = "\(intCurOrderWorkCnt)/\(intOrderReqCnt)"
-					}
+					arrMasterTagRows.append(clsTagInfo)
 				}
 				
+				let intCurDataSize = arrDetailTagRows.count
+				
+				// 발주번호가 있는 경무만 "처리수량/발주수량"을 처리한다.
+				
+				print("@@@@@@strMakeOrderId:\(strMakeOrderId)")
+				
+				if(strMakeOrderId.isEmpty == false)
+				{
+					intCurOrderWorkCnt = intOrderWorkCnt + intCurDataSize
+					lblOrderCount.text = "\(intCurOrderWorkCnt)/\(intOrderReqCnt)"
+				}
 			}
+			
 		}
+	
 		
 		DispatchQueue.main.async { self.tvProductMount?.reloadData() }
 	}
@@ -323,8 +329,14 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		objCell.btnDetail.titleLabel?.font = UIFont.fontAwesome(ofSize: 14)
 		objCell.btnDetail.setTitle(String.fontAwesomeIcon(name: .listAlt), for: .normal)
 		objCell.btnDetail.tag = indexPath.row
-		//objCell.btnDetail.addTarget(self, action: #selector(BranchSearchDialog.onSelectionClicked(_:)), for: .touchUpInside)
+		objCell.btnDetail.addTarget(self, action: #selector(onSelectionClicked(_:)), for: .touchUpInside)
 		return objCell
+	}
+	
+	
+	@objc func onSelectionClicked(_ sender: UIButton)
+	{
+		self.performSegue(withIdentifier: "segTagDetailList", sender: self)
 	}
 }
 
