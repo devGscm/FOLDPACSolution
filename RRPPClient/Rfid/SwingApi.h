@@ -17,8 +17,6 @@
 [""] *	@brief	Invoked whenever the central manager's state has been updated.
 [""] *
 [""] *	@param 	bleSupported 	Boolean
-[""] *
-[""] *	@return	void
 [""] */
 -(void)bleDidUpdateState:(BOOL)bleSupported;
 
@@ -26,8 +24,6 @@
 [""] *	@brief	Invoked whenever the Device has been Discovered.
 [""] *
 [""] *	@param 	dev 	DFBlunoDevice
-[""] *
-[""] *	@return	void
 [""] */
 -(void)didDiscoverDevice:(SwingDevice*)dev;
 
@@ -35,8 +31,6 @@
 [""] *	@brief	Invoked whenever the Device is ready to communicate.
 [""] *
 [""] *	@param 	dev 	DFBlunoDevice
-[""] *
-[""] *	@return	void
 [""] */
 -(void)readyToCommunicate:(SwingDevice*)dev;
 
@@ -45,7 +39,6 @@
 [""] *
 [""] *	@param 	dev 	DFBlunoDevice
 [""] *
-[""] *	@return	void
 [""] */
 -(void)didDisconnectDevice:(SwingDevice*)dev;
 
@@ -53,8 +46,6 @@
 [""] *	@brief	Invoked whenever the data has been written to the BLE Device.
 [""] *
 [""] *	@param 	dev 	DFBlunoDevice
-[""] *
-[""] *	@return	void
 [""] */
 -(void)didWriteData:(SwingDevice*)dev;
 
@@ -64,7 +55,6 @@
 [""] *	@param 	data 	Data
 [""] *	@param 	dev 	DFBlunoDevice
 [""] *
-[""] *	@return	void
 [""] */
 -(void)didReceiveData:(NSData*)data Device:(SwingDevice*)dev;
 
@@ -75,8 +65,6 @@
 [""] *	@brief	Invoked whenever the Device has been Discovered.
 [""] *
 [""] *	@param 	dev 	DFBlunoDevice
-[""] *
-[""] *	@return	void
 [""] */
 -(void)didconnectedDevice:(SwingDevice*)dev;
 
@@ -98,19 +86,16 @@
 /**
 [""] *	@brief	Scan the Swing device
 [""] *
-[""] *	@return	void
 [""] */
 - (void)scan;
 /**
 [""] *	@brief	Stop scanning
 [""] *
-[""] *	@return	void
 [""] */
 - (void)stop;
 /**
 [""] *	@brief	Clear the list of the discovered device
 [""] *
-[""] *	@return	void
 [""] */
 - (void)clear;
 /**
@@ -118,7 +103,6 @@
 [""] *
 [""] *	@param 	dev 	Swing
 [""] *
-[""] *	@return	void
 [""] */
 - (void)connectToDevice:(SwingDevice*)dev;
 
@@ -127,7 +111,6 @@
 [""] *
 [""] *	@param 	dev 	SwingService
 [""] *
-[""] *	@return	void
 [""] */
 - (void)disconnectToDevice:(SwingDevice*)dev;
 
@@ -137,17 +120,12 @@
 [""] *	@param 	data 	Daya
 [""] *	@param 	dev 	SwingService
 [""] *
-[""] *	@return	void
 [""] */
 - (void)writeDataToDevice:(NSData*)data Device:(SwingDevice*)dev;
 
 /**
 [""] *	@brief	Write the data to the device
 [""] *
-[""] *	@param 	data 	Daya
-[""] *	@param 	dev 	SwingService
-[""] *
-[""] *	@return	void
 [""] */
 - (NSString *)writeDataToDevice:(NSString*)uuid;
 

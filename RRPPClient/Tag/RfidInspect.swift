@@ -10,17 +10,11 @@ import UIKit
 
 class RfidInspect: UIViewController
 {
-    @IBOutlet weak var btnOk: UIButton!
-
     override func viewDidLoad()
     {
         super.viewDidLoad()
     }
 	
-	@IBAction func onOkClicked(_ sender: UIButton) {
-		
-		
-	}
 }
 
 extension RfidInspect
