@@ -7,20 +7,36 @@
 //
 
 import UIKit
+import Material
 
 class BaseViewController : UIViewController
 {
 
 	func initController()
 	{
-		
+		print("*BaseViewController.initController()")
+		//prepareSnackbar()
 	}
 	
 	func releaseController()
 	{
-		
+		print("*BaseViewController.releaseController()")
 	}
 	
-
+	func showSnackbar(message : String)
+	{
+		showSnackbar(message: message, visibleDelay: 0, hiddenDelay: 2)
+	}
+	func showSnackbar(message : String, visibleDelay: TimeInterval, hiddenDelay: TimeInterval)
+	{
+		guard let clsController = snackbarController else {
+			return
+		}
+		clsController.snackbar.text = message
+		_ = clsController.animate(snackbar: .visible, delay: visibleDelay)
+		_ = clsController.animate(snackbar: .hidden, delay: hiddenDelay)
+	}
 }
+
+
 

@@ -12,6 +12,7 @@
 		553F42EE1FCCE94C006784AF /* Product.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 553F42F01FCCE94C006784AF /* Product.storyboard */; };
 		553F42FA1FCD4E8E006784AF /* ProductMount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F42F91FCD4E8E006784AF /* ProductMount.swift */; };
 		553F43111FCD747D006784AF /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F43101FCD747D006784AF /* UIView.swift */; };
+		5571CDE31FCF98E600F88B97 /* AppSnackbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5571CDE21FCF98E600F88B97 /* AppSnackbarController.swift */; };
 		55ACD6771FC802BD00A2DC72 /* ProductOrderSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD6731FC802BC00A2DC72 /* ProductOrderSearch.swift */; };
 		55ACD6781FC802BD00A2DC72 /* ProductOrderSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD6741FC802BC00A2DC72 /* ProductOrderSearchCell.swift */; };
 		55ACD67E1FC804F800A2DC72 /* ListViewDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD67C1FC804F800A2DC72 /* ListViewDialog.swift */; };
@@ -94,7 +95,7 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		968611E71FBD56D0000FE288 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
@@ -124,6 +125,7 @@
 		553F42F91FCD4E8E006784AF /* ProductMount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMount.swift; sourceTree = "<group>"; };
 		553F43101FCD747D006784AF /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		5564DA751FC5583800A39598 /* ListViewDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewDialog.swift; sourceTree = "<group>"; };
+		5571CDE21FCF98E600F88B97 /* AppSnackbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSnackbarController.swift; sourceTree = "<group>"; };
 		55ACD6731FC802BC00A2DC72 /* ProductOrderSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductOrderSearch.swift; sourceTree = "<group>"; };
 		55ACD6741FC802BC00A2DC72 /* ProductOrderSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductOrderSearchCell.swift; sourceTree = "<group>"; };
 		55ACD67C1FC804F800A2DC72 /* ListViewDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewDialog.swift; sourceTree = "<group>"; };
@@ -264,8 +266,8 @@
 		55F385C91FC3B6A40043F1A3 /* Product */ = {
 			isa = PBXGroup;
 			children = (
-				55B302C91FCE339400BDCCB1 /* ProductMountCell.swift */,
 				553F42F01FCCE94C006784AF /* Product.storyboard */,
+				55B302C91FCE339400BDCCB1 /* ProductMountCell.swift */,
 				553F42F91FCD4E8E006784AF /* ProductMount.swift */,
 				55ACD6731FC802BC00A2DC72 /* ProductOrderSearch.swift */,
 				55ACD6741FC802BC00A2DC72 /* ProductOrderSearchCell.swift */,
@@ -322,6 +324,7 @@
 				55F385D31FC3E8130043F1A3 /* BranchSearchDialog.swift */,
 				55F385D51FC409E20043F1A3 /* BranchSearchItem.swift */,
 				B0B7C3801FCE7B3300A9C1B3 /* IdentificationSystemDialog.swift */,
+				5571CDE21FCF98E600F88B97 /* AppSnackbarController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -631,6 +634,7 @@
 				55FA78481FBDAD0B00583A80 /* AppNavigationDrawerController.swift in Sources */,
 				55B302C31FCE323B00BDCCB1 /* RfidUtil.swift in Sources */,
 				55FA783A1FBDACE300583A80 /* LoginViewController.swift in Sources */,
+				5571CDE31FCF98E600F88B97 /* AppSnackbarController.swift in Sources */,
 				55FA78491FBDAD0B00583A80 /* AppToolbarController.swift in Sources */,
 				553BCF891FC2B03500BE39C1 /* RfidReaderDialog.swift in Sources */,
 				55ACD6771FC802BD00A2DC72 /* ProductOrderSearch.swift in Sources */,
@@ -772,6 +776,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -823,6 +828,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
@@ -841,6 +847,7 @@
 				);
 				INFOPLIST_FILE = RRPPClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.logisall.rrpp.RRPPClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "RRPPClient/Rfid/ RRPPClient-Bridging-Header.h";
