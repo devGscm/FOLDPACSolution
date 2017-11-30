@@ -62,7 +62,6 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		print("=========================================")
 		
 		super.viewDidAppear(animated)
-		
 	}
 	
 	override func viewWillDisappear(_ animated: Bool)
@@ -80,6 +79,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		print("*ProductMount.viewDidDisappear()")
 		print("=========================================")
 		
+		super.destoryRfid()
 		super.viewDidDisappear(animated)
 		
 	}
@@ -362,14 +362,32 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		objCell.btnDetail.titleLabel?.font = UIFont.fontAwesome(ofSize: 14)
 		objCell.btnDetail.setTitle(String.fontAwesomeIcon(name: .listAlt), for: .normal)
 		objCell.btnDetail.tag = indexPath.row
-		objCell.btnDetail.addTarget(self, action: #selector(onSelectionClicked(_:)), for: .touchUpInside)
+		objCell.btnDetail.addTarget(self, action: #selector(onTagListClicked(_:)), for: .touchUpInside)
 		return objCell
 	}
 	
-	
-	@objc func onSelectionClicked(_ sender: UIButton)
+	// RFID 태그 목록 보기
+	@objc func onTagListClicked(_ sender: UIButton)
 	{
 		self.performSegue(withIdentifier: "segTagDetailList", sender: self)
+	}
+	
+	// 초기화
+	@IBAction func onClearAllClicked(_ sender: UIButton)
+	{
+		Dialog.show(container: self, viewController: nil,
+			title: NSLocalizedString("common_delete", comment: "삭제"),
+			message: NSLocalizedString("common_confirm_delete", comment: "전체 데이터를 삭제하시겠습니까?"),
+			okTitle: NSLocalizedString("common_confirm", comment: "확인"),
+			okHandler: { (_) in
+				self.clearTagData()
+				super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
+			},
+			cancelTitle: NSLocalizedString("common_cancel", comment: "확인"), cancelHandler: nil)
+	}
+	
+	// 전송
+	@IBAction func onSendClicked(_ sender: UIButton) {
 	}
 }
 
@@ -385,6 +403,9 @@ extension ProductMount
 		tc.toolbar.detail = NSLocalizedString("title_product_mount", comment: "자산등록")
 	}
 }
+
+
+
 
 
 

@@ -293,6 +293,9 @@
                                                 <real key="value" value="4"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onClearAllClicked:" destination="C6l-Ql-b6m" eventType="touchUpInside" id="fzW-Ej-2L3"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TBA-eq-jGT">
                                         <rect key="frame" x="208.5" y="0.0" width="158.5" height="30"/>
@@ -305,6 +308,9 @@
                                                 <real key="value" value="4"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onSendClicked:" destination="C6l-Ql-b6m" eventType="touchUpInside" id="cxo-uB-tNe"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>

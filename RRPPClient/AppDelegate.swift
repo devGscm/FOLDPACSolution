@@ -52,23 +52,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 	
 	func applicationDidFinishLaunching(_ application: UIApplication)
 	{
-		
 		//let appToolbarController = AppToolbarController(rootViewController: RootViewController())
 		//let leftViewController = LeftViewController()
 		//let rightViewController = RightViewController()
 
-	
-//		let clsAappToolbarController = AppToolbarController(rootViewController: mClsRootController)
-//		window = UIWindow(frame: Screen.bounds)
-//		window!.rootViewController = AppNavigationDrawerController(rootViewController: clsAappToolbarController, leftViewController: mClsLeftController, rightViewController: mClsRightController)
-//		window!.makeKeyAndVisible()
-
-		let clsController: RfidInspect = {
-			return UIStoryboard.viewController(storyBoardName:"Tag", identifier: "RfidInspect") as! RfidInspect
-		}()
+		let clsAppToolbarController = AppToolbarController(rootViewController: mClsRootController)
+		let clsAppSnackbarController = AppSnackbarController(rootViewController: clsAppToolbarController)
+		
 		window = UIWindow(frame: Screen.bounds)
-		window!.rootViewController = clsController
+		window!.rootViewController = AppNavigationDrawerController(rootViewController: clsAppSnackbarController, leftViewController: mClsLeftController, rightViewController: mClsRightController)
 		window!.makeKeyAndVisible()
+
+//		let clsController: RfidInspect = {
+//			return UIStoryboard.viewController(storyBoardName:"Tag", identifier: "RfidInspect") as! RfidInspect
+//		}()
+//		window = UIWindow(frame: Screen.bounds)
+//		window!.rootViewController = clsController
+//		window!.makeKeyAndVisible()
 		
 	}
 }

@@ -1385,6 +1385,7 @@ SWIFT_CLASS("_TtC8Material20NavigationController")
 /// A Boolean value that indicates whether to push the item on to the stack or not.
 /// True is yes, false is no.
 - (BOOL)navigationBar:(UINavigationBar * _Nonnull)navigationBar shouldPushItem:(UINavigationItem * _Nonnull)item SWIFT_WARN_UNUSED_RESULT;
+- (void)navigationBar:(UINavigationBar * _Nonnull)navigationBar didPopItem:(UINavigationItem * _Nonnull)item;
 @end
 
 
@@ -2420,14 +2421,24 @@ SWIFT_CLASS_NAMED("ToolbarController")
 
 
 @interface UIView (SWIFT_EXTENSION(Material))
+/// A property that accesses the backing layer’s shadow
+@property (nonatomic, strong) UIColor * _Nullable shadowColor;
+/// A property that accesses the layer.borderColor property.
+@property (nonatomic, strong) UIColor * _Nullable borderColor;
+/// HeightPreset value.
+@property (nonatomic) enum HeightPreset heightPreset;
 /// A property that manages the overall shape for the object. If either the
 /// width or height property is set, the other will be automatically adjusted
 /// to maintain the shape of the object.
 @property (nonatomic) enum ShapePreset shapePreset;
+/// A preset value for Depth.
+@property (nonatomic) enum DepthPreset depthPreset;
 /// Enables automatic shadowPath sizing.
 @property (nonatomic) BOOL isShadowPathAutoSizing;
 /// A property that sets the cornerRadius of the backing layer.
 @property (nonatomic) enum CornerRadiusPreset cornerRadiusPreset;
+/// A preset property to set the borderWidth.
+@property (nonatomic) enum BorderWidthPreset borderWidthPreset;
 @end
 
 

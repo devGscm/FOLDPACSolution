@@ -23,6 +23,10 @@ class RootViewController: UIViewController
 			let rfid =  RfidSwing()
 			rfid.doConnectRfid()
 			
+			//prepareSnackbar()
+			//animateSnackbar()
+			//scheduleAnimation()
+			
 //			let dataClient = Mosaic.DataClient(url: Constants.WEB_SVC_URL)
 //			dataClient.UserInfo = "xxOxOsU93/PvK/NN7DZmZw=="
 //			dataClient.SelectUrl = "productService:selectProductOrderList"
@@ -120,3 +124,30 @@ extension RootViewController
     }
 }
 
+
+extension RootViewController {
+	
+	fileprivate func prepareSnackbar() {
+		guard let snackbar = snackbarController?.snackbar else {
+			return
+		}
+		
+		snackbar.text = "Reminder saved."
+	}
+	
+	fileprivate func scheduleAnimation() {
+		Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(animateSnackbar), userInfo: nil, repeats: true)
+	}
+}
+
+extension RootViewController {
+	@objc
+	fileprivate func animateSnackbar() {
+		guard let sc = snackbarController else {
+			return
+		}
+		
+		_ = sc.animate(snackbar: .visible, delay: 1)
+		_ = sc.animate(snackbar: .hidden, delay: 4)
+	}
+}
