@@ -114,7 +114,20 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		{
 			if let clsDialog = segue.destination as? TagDetailList
 			{
-				clsDialog.loadData(arcTagInfo : arrDetailTagRows)
+				if let btnDetail = sender as? UIButton
+				{
+					let clsTagInfo = arrMasterTagRows[btnDetail.tag]
+
+					// 해당 자산코드만 필터링하여 배열을 재생성하여 전달
+					let arrData = arrDetailTagRows.filter({ (clsData) -> Bool in
+						if(clsData.getAssetEpc() == clsTagInfo.getAssetEpc())
+						{
+							return true
+						}
+						return false
+					})
+					clsDialog.loadData(  arcTagInfo : arrData)
+				}
 			}
 		}
 	}
@@ -154,31 +167,50 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		
 		// TODO  : test
 		let clsTagInfo1 = RfidUtil.TagInfo()
-		clsTagInfo1.setYymm(strYymm: "1506")
-		clsTagInfo1.setSeqNo(strSeqNo: "68")
-		clsTagInfo1.setEpcCode(strEpcCode: "3312D58E4581004000000044")
-		clsTagInfo1.setEpcUrn(strEpcUrn: "grai:0.95100027.1028.190010")
-		clsTagInfo1.setCorpEpc(strCorpEpc: "95100027")
-		clsTagInfo1.setAssetEpc(assetEpc: "1027")
+		clsTagInfo1.setYymm(strYymm: "1705")
+		clsTagInfo1.setSeqNo(strSeqNo: "170005")
+		clsTagInfo1.setEpcCode(strEpcCode: "3312D58E4581004000029815")
+		clsTagInfo1.setEpcUrn(strEpcUrn: "grai:0.95100043.1025.170005")
+		clsTagInfo1.setSerialNo(strSerialNo: "170005")
+		clsTagInfo1.setCorpEpc(strCorpEpc: "95100043")
+		clsTagInfo1.setAssetEpc(assetEpc: "1025")
 		getRfidData(clsTagInfo: clsTagInfo1)
 		
+		
+		
+		
 		let clsTagInfo2 = RfidUtil.TagInfo()
-		clsTagInfo2.setYymm(strYymm: "1506")
-		clsTagInfo2.setSeqNo(strSeqNo: "69")
-		clsTagInfo2.setEpcCode(strEpcCode: "3312D58E4581004000000045")
-		clsTagInfo1.setEpcUrn(strEpcUrn: "grai:0.95100027.1028.190010")
-		clsTagInfo2.setCorpEpc(strCorpEpc: "95100027")
-		clsTagInfo2.setAssetEpc(assetEpc: "1027")
+		clsTagInfo2.setYymm(strYymm: "1705")
+		clsTagInfo2.setSeqNo(strSeqNo: "170004")
+		clsTagInfo2.setEpcCode(strEpcCode: "3312D58E4581004000029814")
+		clsTagInfo2.setEpcUrn(strEpcUrn: "grai:0.95100043.1025.170004")
+		clsTagInfo2.setSerialNo(strSerialNo: "170004")
+		clsTagInfo2.setCorpEpc(strCorpEpc: "95100043")
+		clsTagInfo2.setAssetEpc(assetEpc: "1025")
 		getRfidData(clsTagInfo: clsTagInfo2)
 		
+		
+		
+		
 		let clsTagInfo3 = RfidUtil.TagInfo()
-		clsTagInfo3.setYymm(strYymm: "1506")
-		clsTagInfo3.setSeqNo(strSeqNo: "70")
-		clsTagInfo3.setEpcCode(strEpcCode: "3312D58E4581004000000046")
-		clsTagInfo1.setEpcUrn(strEpcUrn: "grai:0.95100027.1028.190010")
+		clsTagInfo3.setYymm(strYymm: "1607")
+		clsTagInfo3.setSeqNo(strSeqNo: "6002")
+		clsTagInfo3.setEpcCode(strEpcCode: "3312D58E3D81004000001772")
+		clsTagInfo3.setEpcUrn(strEpcUrn: "grai:0.95100027.1025.6002")
+		clsTagInfo3.setSerialNo(strSerialNo: "6002")
 		clsTagInfo3.setCorpEpc(strCorpEpc: "95100027")
-		clsTagInfo3.setAssetEpc(assetEpc: "1027")
+		clsTagInfo3.setAssetEpc(assetEpc: "1025")
 		getRfidData(clsTagInfo: clsTagInfo3)
+		
+		let clsTagInfo4 = RfidUtil.TagInfo()
+		clsTagInfo4.setYymm(strYymm: "1607")
+		clsTagInfo4.setSeqNo(strSeqNo: "6001")
+		clsTagInfo4.setEpcCode(strEpcCode: "3312D58E3D81004000001771")
+		clsTagInfo4.setEpcUrn(strEpcUrn: "grai:0.95100027.1025.6001")
+		clsTagInfo4.setSerialNo(strSerialNo: "6001")
+		clsTagInfo4.setCorpEpc(strCorpEpc: "95100027")
+		clsTagInfo4.setAssetEpc(assetEpc: "1025")
+		getRfidData(clsTagInfo: clsTagInfo4)
 		
 		
 	}
@@ -229,6 +261,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 			if(clsAssetInfo.assetEpc == strAssetEpc)
 			{
 				// 자산코드에 등록되어 있는 경우
+				print(" 동일한 자산코드 존재")
 				boolValidAsset = true
 				break;
 			}
@@ -242,6 +275,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 				// 같은 시리얼번호가 있는지 체크
 				if(clsTagInfo.getSerialNo() == strSerialNo)
 				{
+					print(" 동일한 시리얼번호 존재")
 					boolFindSerialNoOverlap = true
 					break;
 				}
