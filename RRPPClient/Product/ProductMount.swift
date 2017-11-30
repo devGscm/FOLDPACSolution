@@ -43,7 +43,6 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		//view.backgroundColor = Color.grey.lighten5
 		prepareToolbar()
 		super.initRfid()
-		
 		initViewControl()
 	}
 	

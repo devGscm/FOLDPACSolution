@@ -43,7 +43,6 @@ public class RfidSwing :  NSObject, SwingProtocolProtocol
 	override init()
 	{
 		self.tagLists = [String]()
-		
 		super.init()
 		print("init");
 		

@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RRPPClient/Rfid/RfidSwing.swift"
-            timestampString = "533610510.238244"
+            timestampString = "533713126.605923"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "swing_didDiscover(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RRPPClient/Rfid/SwingApi.m"
-            timestampString = "533616342.915912"
+            timestampString = "533713126.60606"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "107"
@@ -122,12 +122,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RRPPClient/Reader/BaseRfidViewController.swift"
-            timestampString = "533640904.06416"
+            timestampString = "533713644.731283"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "readerIsConnected()"
+            startingLineNumber = "252"
+            endingLineNumber = "252"
+            landmarkName = "BaseRfidViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RRPPClient/Reader/BaseRfidViewController.swift"
+            timestampString = "533713644.731709"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
+            landmarkName = "swing_ready(toCommunicate:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
