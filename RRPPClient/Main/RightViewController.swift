@@ -139,22 +139,20 @@ class RightViewController: UITableViewController, DataProtocol
     
     //상품식별체계
     @IBAction func onIdentificationSystemClicked(_ sender: UIButton) {
-        print("테스트입니다.")
-        
         let clsIdentificationSystemDialog = IdentificationSystemDialog()
         clsIdentificationSystemDialog.loadData(lstIdentificationSystem: mLstIdentificationSystem)
         
-        let acDialog = UIAlertController(title:nil, message: NSLocalizedString("preference_rfid_reader", comment: "RFID 리더기"), preferredStyle: .alert)
+        let acDialog = UIAlertController(title:nil, message: NSLocalizedString("preference_identification_system", comment: "상품식별체계"), preferredStyle: .alert)
         acDialog.setValue(clsIdentificationSystemDialog, forKeyPath: "contentViewController")
         
         acDialog.addAction(UIAlertAction(title: NSLocalizedString("common_cancel", comment: "취소"), style: .default) { (_) in
         })
         let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
-            let intReaderType = clsIdentificationSystemDialog.selectedRow.IdentificationSystemType
-            let strRaderName = clsIdentificationSystemDialog.selectedRow.IdentificationSystemName
-            UserDefaults.standard.setValue(intReaderType, forKey: Constants.RFID_READER_KEY)
+            let intIdentificationSystemType = clsIdentificationSystemDialog.selectedRow.IdentificationSystemType
+            let strIdentificationSystemName = clsIdentificationSystemDialog.selectedRow.IdentificationSystemName
+            UserDefaults.standard.setValue(intIdentificationSystemType, forKey: Constants.IDENTIFICATION_SYSTEM_LIST_KEY)
             UserDefaults.standard.synchronize()
-            self.btnRfidReader.setTitle(strRaderName, for: .normal)
+            self.btnIdentificationSystem.setTitle(strIdentificationSystemName, for: .normal)
         }
         acDialog.addAction(aaOkAction)
         self.present(acDialog, animated: true)
