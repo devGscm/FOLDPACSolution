@@ -21,19 +21,19 @@ public class DataColumn : NSObject, NSCopying
     private var mBoolCanXlsExport: Bool      = true
     private var mStrTitle: String            = ""
     
-    override init()
+    public override init()
     {
         super.init()
     }
     
     
-    init(id: String)
+    public init(id: String)
     {
         self.mStrId = id
         super.init()
     }
     
-    init(id: String, type: String, size : String, keyColumn: Bool, updateColumn: Bool, autoIncrement: Bool, canXlsExport: Bool, title: String)
+	public init(id: String, type: String, size : String, keyColumn: Bool, updateColumn: Bool, autoIncrement: Bool, canXlsExport: Bool, title: String)
     {
         self.mStrId                  = id
         self.mStrType                = type
@@ -45,7 +45,7 @@ public class DataColumn : NSObject, NSCopying
         self.mStrTitle               = title
     }
     
-    init(id: String, type: String, size : String, keyColumn: String, updateColumn: String, autoIncrement: String, canXlsExport: String, title: String)
+    public init(id: String, type: String, size : String, keyColumn: String, updateColumn: String, autoIncrement: String, canXlsExport: String, title: String)
     {
         self.mStrId                  = id
         self.mStrType                = type

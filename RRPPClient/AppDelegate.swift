@@ -62,6 +62,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 		window = UIWindow(frame: Screen.bounds)
 		window!.rootViewController = AppNavigationDrawerController(rootViewController: clsAppSnackbarController, leftViewController: mClsLeftController, rightViewController: mClsRightController)
 		window!.makeKeyAndVisible()
+		
+		//mClsRightController.show(clsAppSnackbarController, sender: nil)
 
 //		let clsController: RfidInspect = {
 //			return UIStoryboard.viewController(storyBoardName:"Tag", identifier: "RfidInspect") as! RfidInspect

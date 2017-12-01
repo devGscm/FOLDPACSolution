@@ -17,7 +17,11 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	@IBOutlet weak var btnLogout: UIButton!
 	var mArrMenuData:Array<MenuItem> = Array<MenuItem>()
 
+	lazy var clsProductMount: ProductMount = {
+		return UIStoryboard.viewController(storyBoardName: "Product", identifier: "ProductMount") as! ProductMount
+	}()
 
+	
 	
 	open override func viewDidLoad()
 	{
@@ -84,12 +88,13 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		switch (strtMenuItem.menuId)
 		{
 			case "ProductMount" :
-				let clsController: ProductMount = {
-					return UIStoryboard.viewController(storyBoardName: "Product", identifier: "ProductMount") as! ProductMount
-				}()
-				toolbarController?.transition(to: clsController, completion: closeNavigationDrawer)
+//				let clsController: ProductMount = {
+//					return UIStoryboard.viewController(storyBoardName: "Product", identifier: "ProductMount") as! ProductMount
+//				}()
+				toolbarController?.transition(to: clsProductMount, completion: closeNavigationDrawer)
 			break;
 			case "RfidInspect" :
+			
 				let clsController: RfidInspect = {
 				return UIStoryboard.viewController(storyBoardName: "Tag", identifier: "RfidInspect") as! RfidInspect
 				}()

@@ -35,6 +35,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 	var arrTagRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
 	
 	var clsIndicator : ProgressIndicator?
+	var clsDataClient : DataClient!
 	
 	override func viewDidLoad()
 	{
@@ -361,14 +362,87 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		print("workerName:\(workerName)")
 		print("remark:\(remark)")
 		print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-		print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 		
 		clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
 		
-		DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-			self.clsIndicator?.hide()
-		}
+//		DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//			self.clsIndicator?.hide()
+//		}
+		
+		clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+		clsDataClient.ExecuteUrl = "mountService:executeMountData"
+		clsDataClient.removeServiceParam()
+		clsDataClient.addServiceParam(paramName: "makeOrderId", value: makeOrderId)
+		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+		clsDataClient.addServiceParam(paramName: "userId", value: AppContext.sharedManager.getUserInfo().getUserId())
+		clsDataClient.addServiceParam(paramName: "unitId", value: AppContext.sharedManager.getUserInfo().getUnitId())
+		clsDataClient.addServiceParam(paramName: "branchId", value: AppContext.sharedManager.getUserInfo().getBranchId())
+		clsDataClient.addServiceParam(paramName: "branchCustId", value: AppContext.sharedManager.getUserInfo().getBranchCustId())
+		clsDataClient.addServiceParam(paramName: "makeLotId", value: makeLotId)
+		clsDataClient.addServiceParam(paramName: "workerName", value: workerName)
+		clsDataClient.addServiceParam(paramName: "remark", value: remark)
+		
+		let clsDataTable : DataTable = DataTable()
+		clsDataTable.Id = "TAG_MOUNT"
+		clsDataTable.addDataColumn(dataColumn: DataColumn(id: "epcCode", type: "String", size: "0", keyColumn: false, updateColumn: true, autoIncrement: false, canXlsExport: false, title: ""))
 
+		for clsInfo in self.arrTagRows
+		{
+			if(self.strProdAssetEpc != clsInfo.getAssetEpc())
+			{
+				clsIndicator!.hide()
+				
+				Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("stock_can_not_processed_because_different_pallet", comment: "품목이 다른 파렛트가 있어 처리 할 수 없습니다."))
+				return
+			}
+		
+			let clsDataRow : DataRow = DataRow()
+			clsDataRow.State = DataRow.DATA_ROW_STATE_ADDED
+			clsDataRow.addRow(value: clsInfo.getEpcUrn())
+			clsDataTable.addDataRow(dataRow: clsDataRow)
+		}
+		clsDataClient.executeData(dataTable: clsDataTable, dataCompletionHandler: { (data, error) in
+			
+		
+			self.clsIndicator!.hide()
+			
+			if let error = error {
+					// 에러처리
+					print(error)
+					return
+				}
+				guard let clsResultDataTable = data else {
+					print("에러 데이터가 없음")
+					return
+				}
+				
+				print("####결과값 처리")
+				let clsResultDataRows = clsResultDataTable.getDataRows()
+				if(clsResultDataRows.count > 0)
+				{
+					let clsDataRow = clsResultDataRows[0]
+					let strResultCode = clsDataRow.getString(name: "resultCode")
+					
+					print(" -strResultCode:\(strResultCode!)")
+					if(Constants.PROC_RESULT_SUCCESS == strResultCode)
+					{
+						self.clearTagData()
+						self.clearUserInterfaceData()
+						
+						let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
+						self.showSnackbar(message: strMsg)
+					}
+					else
+					{
+						// TODO : getProcMsgName
+						//let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
+						
+						//self.showSnackbar(message: NSLocalizedString("c", comment: "품목이 다른 파렛트가 있어 처리 할 수 없습니다."))
+					}
+				}
+			
+		})
 		
 	}
 	
