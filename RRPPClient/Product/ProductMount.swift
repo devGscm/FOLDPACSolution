@@ -10,7 +10,8 @@ import UIKit
 import Material
 import Mosaic
 
-class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, DataProtocol 
+class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, ReaderResponseDelegate,
+	DataProtocol
 {
 	@IBOutlet weak var tvProductMount: UITableView!
 	@IBOutlet weak var lblReaderName: UILabel!
@@ -31,8 +32,24 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 	var strProdAssetEpc: String?
 	var intCurOrderWorkCnt: Int = 0
 	
-	var arrAssetRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
-	var arrTagRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
+	var arrMasterTagRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
+	var arrDetailTagRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
+	
+	override func viewDidLoad()
+	{
+		print("=========================================")
+		print("*ProductMount.viewDidLoad()")
+		print("=========================================")
+		super.viewDidLoad()
+		//view.backgroundColor = Color.grey.lighten5
+		prepareToolbar()
+		
+		//TODO:: 전역객체에서 등록된 리더기정보를 가져온다.
+		let devId  = "D32F0010-8DB8-856F-A8DF-85B3D00CF26A"
+		self.initRfid(.SWING, id:  devId, delegateReder:  self as ReaderResponseDelegate )
+		
+		initViewControl()
+	}
 	
 	var clsIndicator : ProgressIndicator?
 	var clsDataClient : DataClient!
@@ -554,6 +571,13 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		})
 		self.present(acDialog, animated: true, completion: nil)
 		
+	}
+	
+	//
+	///ReaderResponseDelegate 의 필수구현처리
+	//
+	func didReadTagList(_ tagId: String) {
+		print(tagId)
 	}
 }
 

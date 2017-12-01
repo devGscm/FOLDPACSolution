@@ -23,12 +23,7 @@ class RootViewController: BaseViewController
 	{
 	
 		if(AppContext.sharedManager.getUserInfo().getAutoLogin() == true || AppContext.sharedManager.getAuthenticated() == true)
-		{
-			
-			let rfid =  RfidSwing()
-			rfid.doConnectRfid()
-			
-			showSnackbar(message: "스네이크바 테스트입니다.")
+		{			
 			//prepareSnackbar()
 			//animateSnackbar()
 			//scheduleAnimation()

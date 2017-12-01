@@ -50,6 +50,8 @@
 		55FA784D1FBDAD0B00583A80 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78471FBDAD0B00583A80 /* RootViewController.swift */; };
 		55FA78561FBDAD7E00583A80 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78551FBDAD7E00583A80 /* AppContext.swift */; };
 		55FA78591FBDB06F00583A80 /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78581FBDB06F00583A80 /* UIStoryboard.swift */; };
+		960224421FD0DBCD00DE7C65 /* SwingReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960224411FD0DBCD00DE7C65 /* SwingReader.swift */; };
+		960224441FD0F3E400DE7C65 /* AT288Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960224431FD0F3E400DE7C65 /* AT288Reader.swift */; };
 		9618F0E41FCE34B600F376B7 /* TestPorg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9618F0E31FCE34B600F376B7 /* TestPorg.swift */; };
 		9618F0E61FCE83D300F376B7 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9618F0E51FCE83D300F376B7 /* TagCell.swift */; };
 		967A9C441FC3BE8D00B6A9D1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 967A9C461FC3BE8D00B6A9D1 /* Localizable.strings */; };
@@ -160,6 +162,8 @@
 		55FA78471FBDAD0B00583A80 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		55FA78551FBDAD7E00583A80 /* AppContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
 		55FA78581FBDB06F00583A80 /* UIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboard.swift; sourceTree = "<group>"; };
+		960224411FD0DBCD00DE7C65 /* SwingReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwingReader.swift; sourceTree = "<group>"; };
+		960224431FD0F3E400DE7C65 /* AT288Reader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AT288Reader.swift; sourceTree = "<group>"; };
 		9618F0E31FCE34B600F376B7 /* TestPorg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPorg.swift; sourceTree = "<group>"; };
 		9618F0E51FCE83D300F376B7 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
 		967A9C451FC3BE8D00B6A9D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -170,7 +174,7 @@
 		967A9C4E1FC4004A00B6A9D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		967A9C501FC4005300B6A9D1 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/Main.strings; sourceTree = "<group>"; };
 		967A9C521FC4005400B6A9D1 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
-		9680BE731FCBD7DC002838A4 /*  RRPPClient-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = " RRPPClient-Bridging-Header.h"; sourceTree = "<group>"; };
+		9680BE731FCBD7DC002838A4 /* RRPPClient-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RRPPClient-Bridging-Header.h"; sourceTree = "<group>"; };
 		9680BE7A1FCBD91B002838A4 /* BLEDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEDevice.h; sourceTree = "<group>"; };
 		9680BE7B1FCBD91C002838A4 /* SwingApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwingApi.h; sourceTree = "<group>"; };
 		9680BE7C1FCBD91C002838A4 /* BLEDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEDevice.m; sourceTree = "<group>"; };
@@ -247,6 +251,8 @@
 		55B302BF1FCE323A00BDCCB1 /* Reader */ = {
 			isa = PBXGroup;
 			children = (
+				9602243F1FD0D19D00DE7C65 /* Swing */,
+				960224401FD0D21E00DE7C65 /* AT288 */,
 				55B302C01FCE323A00BDCCB1 /* BaseRfidViewController.swift */,
 				55B302C11FCE323A00BDCCB1 /* RfidUtil.swift */,
 			);
@@ -338,6 +344,32 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		9602243F1FD0D19D00DE7C65 /* Swing */ = {
+			isa = PBXGroup;
+			children = (
+				9680BE7A1FCBD91B002838A4 /* BLEDevice.h */,
+				9680BE7C1FCBD91C002838A4 /* BLEDevice.m */,
+				9680BE811FCBD91C002838A4 /* BLEUtility.h */,
+				9680BE821FCBD91D002838A4 /* BLEUtility.m */,
+				9680BE7B1FCBD91C002838A4 /* SwingApi.h */,
+				9680BE7D1FCBD91C002838A4 /* SwingApi.m */,
+				9680BE7E1FCBD91C002838A4 /* SwingDevice.h */,
+				9680BE7F1FCBD91C002838A4 /* SwingDevice.m */,
+				9680BE841FCBD91D002838A4 /* SwingProtocol.h */,
+				9680BE801FCBD91C002838A4 /* SwingProtocol.m */,
+				960224411FD0DBCD00DE7C65 /* SwingReader.swift */,
+			);
+			path = Swing;
+			sourceTree = "<group>";
+		};
+		960224401FD0D21E00DE7C65 /* AT288 */ = {
+			isa = PBXGroup;
+			children = (
+				960224431FD0F3E400DE7C65 /* AT288Reader.swift */,
+			);
+			path = AT288;
+			sourceTree = "<group>";
+		};
 		9618F0E21FCE348A00F376B7 /* Test */ = {
 			isa = PBXGroup;
 			children = (
@@ -357,17 +389,6 @@
 		9680BE721FCBD7AD002838A4 /* Rfid */ = {
 			isa = PBXGroup;
 			children = (
-				9680BE7A1FCBD91B002838A4 /* BLEDevice.h */,
-				9680BE7C1FCBD91C002838A4 /* BLEDevice.m */,
-				9680BE811FCBD91C002838A4 /* BLEUtility.h */,
-				9680BE821FCBD91D002838A4 /* BLEUtility.m */,
-				9680BE7B1FCBD91C002838A4 /* SwingApi.h */,
-				9680BE7D1FCBD91C002838A4 /* SwingApi.m */,
-				9680BE7E1FCBD91C002838A4 /* SwingDevice.h */,
-				9680BE7F1FCBD91C002838A4 /* SwingDevice.m */,
-				9680BE841FCBD91D002838A4 /* SwingProtocol.h */,
-				9680BE801FCBD91C002838A4 /* SwingProtocol.m */,
-				9680BE731FCBD7DC002838A4 /*  RRPPClient-Bridging-Header.h */,
 				9680BE8B1FCBD9D4002838A4 /* RfidSwing.swift */,
 			);
 			path = Rfid;
@@ -414,6 +435,7 @@
 				96E494211FB1A78500D1E2C1 /* ViewController.swift */,
 				96E494261FB1A78500D1E2C1 /* Assets.xcassets */,
 				96E494281FB1A78500D1E2C1 /* LaunchScreen.storyboard */,
+				9680BE731FCBD7DC002838A4 /* RRPPClient-Bridging-Header.h */,
 				96E4942B1FB1A78500D1E2C1 /* Info.plist */,
 			);
 			path = RRPPClient;
@@ -638,9 +660,11 @@
 				55FA78491FBDAD0B00583A80 /* AppToolbarController.swift in Sources */,
 				553BCF891FC2B03500BE39C1 /* RfidReaderDialog.swift in Sources */,
 				55ACD6771FC802BD00A2DC72 /* ProductOrderSearch.swift in Sources */,
+				960224441FD0F3E400DE7C65 /* AT288Reader.swift in Sources */,
 				55ACD67E1FC804F800A2DC72 /* ListViewDialog.swift in Sources */,
 				55FA783B1FBDACE300583A80 /* UserInfo.swift in Sources */,
 				55B2D8101FCC0DF40010E61D /* BaseViewController.swift in Sources */,
+				960224421FD0DBCD00DE7C65 /* SwingReader.swift in Sources */,
 				55FA78351FBDACC600583A80 /* Constants.swift in Sources */,
 				B0B7C3811FCE7B3300A9C1B3 /* IdentificationSystemDialog.swift in Sources */,
 				55F385D61FC409E20043F1A3 /* BranchSearchItem.swift in Sources */,
@@ -850,7 +874,7 @@
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.logisall.rrpp.RRPPClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "RRPPClient/Rfid/ RRPPClient-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "RRPPClient/RRPPClient-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -871,7 +895,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.logisall.rrpp.RRPPClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "RRPPClient/Rfid/ RRPPClient-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "RRPPClient/RRPPClient-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
