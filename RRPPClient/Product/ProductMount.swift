@@ -265,7 +265,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		clsTagInfo.setAssetEpc(assetEpc: strAssetEpc)
 		if(clsTagInfo.getAssetEpc().isEmpty == false)
 		{
-			guard let strAssetName = super.getAssetName(strAsset: strAssetEpc) as? String
+			guard let strAssetName = super.getAssetName(assetEpc: strAssetEpc) as? String
 				else
 			{
 				return

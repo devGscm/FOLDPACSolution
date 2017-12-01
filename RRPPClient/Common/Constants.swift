@@ -55,4 +55,13 @@ class Constants
 	static let PROC_RESULT_ERROR_INSPECT_TAG_ERROR_EXISTS			= "96"	/**< 처리결과 : 오류가 있는 태그가 존재합니다.**/
 	static let PROC_RESULT_ERROR_INSPECT_UNKNOWN_EXCEPTION			= "97"	/**< 처리결과 : 알수없는 에러로 검수할수 없습니다.**/
 	static let PROC_RESULT_ERROR_INSPECT_NOT_REGISTERED_DATA		= "99"	/**< 처리결과 : 서버에 등록되지 않은 EPC코드 입니다. */
+	
+	
+	//=====================================================================================
+	// 사용자 언어
+	//-------------------------------------------------------------------------------------
+	static let USER_LANG_KR										= "KR"		/**< 한국어	*/
+	static let USER_LANG_EN										= "EN"		/**< 영어		*/
+	static let USER_LANG_CH										= "CH"		/**< 중국어	*/
+	//==============================================================================
 }

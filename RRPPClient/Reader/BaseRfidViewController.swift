@@ -223,7 +223,7 @@ class BaseRfidViewController : BaseViewController
 		arrReSaleType.removeAll()		
 	}
 	
-	func getAssetName(strAsset : String) -> String
+	func getAssetName(assetEpc : String) -> String
 	{
 		var strAssetName  = ""
 		if(arrAssetInfo.isEmpty == false)
@@ -231,7 +231,7 @@ class BaseRfidViewController : BaseViewController
 			for clsAssetInfo in arrAssetInfo
 			{
 				print("----- asetEpc:\(clsAssetInfo.assetEpc)")
-				if(clsAssetInfo.assetEpc == strAsset)
+				if(clsAssetInfo.assetEpc == assetEpc)
 				{
 					strAssetName = clsAssetInfo.assetName
 					print("----- strAssetName:\(strAssetName)")
@@ -245,6 +245,81 @@ class BaseRfidViewController : BaseViewController
 	func getAssetList() -> Array<AssetInfo>
 	{
 		return arrAssetInfo
+	}
+	
+	func getProcMsgName( userLang: String, commCode: String) -> String
+	{
+		var strProcMsgName = ""
+		for clsInfo in arrProcMsgInfo
+		{
+			if(clsInfo.commCode == commCode)
+			{
+				if(Constants.USER_LANG_CH == userLang)
+				{
+					strProcMsgName = clsInfo.commNameCh
+				}
+				else if(Constants.USER_LANG_EN == userLang)
+				{
+					strProcMsgName = clsInfo.commNameEn
+				}
+				else
+				{
+					strProcMsgName = clsInfo.commNameKr
+				}
+				break
+			}
+		}
+		return strProcMsgName
+	}
+	
+	func getSaleTypeName(userLang: String, commCode: String) -> String
+	{
+		var strSaleTypeName = ""
+		for clsInfo in arrSaleType
+		{
+			if(clsInfo.commCode == commCode)
+			{
+				if(Constants.USER_LANG_CH == userLang)
+				{
+					strSaleTypeName = clsInfo.commNameCh
+				}
+				else if(Constants.USER_LANG_EN == userLang)
+				{
+					strSaleTypeName = clsInfo.commNameEn
+				}
+				else
+				{
+					strSaleTypeName = clsInfo.commNameKr
+				}
+				break
+			}
+		}
+		return strSaleTypeName
+	}
+	
+	func getReSaleTypeName(userLang: String, commCode: String) -> String
+	{
+		var strReSaleTypeName = ""
+		for clsInfo in arrReSaleType
+		{
+			if(clsInfo.commCode == commCode)
+			{
+				if(Constants.USER_LANG_CH == userLang)
+				{
+					strReSaleTypeName = clsInfo.commNameCh
+				}
+				else if(Constants.USER_LANG_EN == userLang)
+				{
+					strReSaleTypeName = clsInfo.commNameEn
+				}
+				else
+				{
+					strReSaleTypeName = clsInfo.commNameKr
+				}
+				break
+			}
+		}
+		return strReSaleTypeName
 	}
 	
 	//접속가능한 Reader기를 찾기를 시작한다
