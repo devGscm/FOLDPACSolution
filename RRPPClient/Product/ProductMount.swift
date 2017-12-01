@@ -100,8 +100,17 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		AppContext.sharedManager.getUserInfo().setUserLang(strUserLang: "KR")
 		
 		
+//		clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
+//									  indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.")
+		
+		// 취소가능하도록 수정
 		clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
-									  indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.")
+										 indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.",
+			cancelable: true, cancelHandler: { (_) in
+				
+				print("@@@@@@ 취소함@@@@@")
+		})
+
 		clsIndicator?.show()
 		DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
 			self.clsIndicator?.hide()

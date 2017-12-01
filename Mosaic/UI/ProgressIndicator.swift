@@ -22,38 +22,28 @@ public class ProgressIndicator: UIView
 	var lblMessage : UILabel?
 	
 	var aivIndicator = UIActivityIndicatorView()
+
+	var onCancelHandler : ((ProgressIndicator) -> Void)
 	
-	public init(view : UIView, backgroundColor: UIColor, indicatorColor: Int, message : String)
+	public convenience init(view : UIView, backgroundColor: UIColor, indicatorColor: Int, message : String)
+	{
+		self.init(view: view, backgroundColor: backgroundColor, indicatorColor: indicatorColor, message: message, cancelable: false, cancelHandler: { (_) in })
+	}
+
+	
+	public init(view : UIView, backgroundColor: UIColor, indicatorColor: Int, message : String, cancelable: Bool, cancelHandler: @escaping (ProgressIndicator) -> Void)
 	{
 		self.indicatorColor = indicatorColor
 		self.ucBackgroundColor = backgroundColor
 		self.strMessage = message
+		self.onCancelHandler = cancelHandler
+		
 		super.init(frame: CGRect(x: 0, y: 0, width: view.frame.maxX, height: view.frame.maxY))
 		self.backgroundColor = getUIColorFromHex(rgbValue : 0x000000, alpha: 0.3)
 		view.addSubview(self)
 		
 		vwContainer.center = view.center
 		vwContainer.frame = CGRect(x: view.frame.midX - 150, y: view.frame.midY - 25 , width: 300, height: 50)
-		initControl()
-	}
-	
-	convenience init(view : UIView)
-	{
-		self.init(view: view, backgroundColor: UIColor.brown, indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "Loading..")
-	}
-	
-	convenience init(view : UIView, messsage:String)
-	{
-		self.init(view: view, backgroundColor: UIColor.brown, indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: messsage)
-	}
-	
-	required public init?(coder aDecoder: NSCoder)
-	{
-		fatalError("init(coder:) has not been implemented")
-	}
-	
-	func initControl()
-	{
 		vwLoading.frame = vwContainer.bounds
 		
 		if(self.indicatorColor == ProgressIndicator.INDICATOR_COLOR_GRAY)
@@ -68,7 +58,6 @@ public class ProgressIndicator: UIView
 		aivIndicator.hidesWhenStopped = true
 		aivIndicator.frame = CGRect(x: vwContainer.bounds.origin.x + 6, y: 0, width: 20, height: 50)
 		
-		
 		lblMessage = UILabel(frame:CGRect(x: vwContainer.bounds.origin.x + 30, y: 0, width: vwContainer.bounds.width - (vwContainer.bounds.origin.x + 35), height: 50))
 		lblMessage?.text = strMessage
 		lblMessage?.adjustsFontSizeToFitWidth = true
@@ -80,7 +69,37 @@ public class ProgressIndicator: UIView
 		vwLoading.addSubview(aivIndicator)
 		vwLoading.addSubview(lblMessage!)
 		vwContainer.addSubview(vwLoading)
+
+		if(cancelable == true)
+		{
+			let tgrRecognizer = UITapGestureRecognizer(target: self, action: #selector(onLoadingClicked))
+			vwLoading.addGestureRecognizer(tgrRecognizer)
+		}
 	}
+	
+	@objc func onLoadingClicked(sender: UITapGestureRecognizer)
+	{
+		print("onLoadingClicked")
+		self.hide()
+		onCancelHandler(self)
+	}
+	
+	convenience init(view : UIView)
+	{
+		self.init(view: view, backgroundColor: UIColor.brown, indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "Loading..", cancelable: false, cancelHandler: { (_) in })
+	}
+	
+	convenience init(view : UIView, messsage:String)
+	{
+		self.init(view: view, backgroundColor: UIColor.brown, indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: messsage, cancelable: false, cancelHandler: { (_) in })
+	}
+	
+	required public init?(coder aDecoder: NSCoder)
+	{
+		fatalError("init(coder:) has not been implemented")
+	}
+	
+
 	
 	public func show(message : String)
 	{
@@ -104,7 +123,12 @@ public class ProgressIndicator: UIView
 		{
 			aivIndicator.stopAnimating()
 			vwContainer.removeFromSuperview()
-			self.isHidden = true
+			
+			//self.isHidden = true
+			// 트랜지션 효과
+			UIView.transition(with: self, duration: 0.5, options: .transitionCrossDissolve, animations: {
+				self.isHidden = true
+			}, completion: nil)
 		}
 	}
 	
