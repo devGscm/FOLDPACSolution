@@ -22,11 +22,6 @@ class RootViewController: BaseViewController
 	override func viewDidAppear(_ animated: Bool)
 	{
 	
-		DispatchQueue.main.async {
-			//mClsRightController.show(self, sender:nil)
-		}
-		
-		
 		if(AppContext.sharedManager.getUserInfo().getAutoLogin() == true || AppContext.sharedManager.getAuthenticated() == true)
 		{
 			

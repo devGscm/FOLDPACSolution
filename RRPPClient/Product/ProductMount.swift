@@ -10,7 +10,7 @@ import UIKit
 import Material
 import Mosaic
 
-class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, DataProtocol
+class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, DataProtocol 
 {
 	@IBOutlet weak var tvProductMount: UITableView!
 	@IBOutlet weak var lblReaderName: UILabel!
@@ -36,27 +36,17 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 	
 	var clsIndicator : ProgressIndicator?
 	var clsDataClient : DataClient!
-	
-	override func viewDidLoad()
-	{
-		print("=========================================")
-		print("*ProductMount.viewDidLoad()")
-		print("=========================================")
-		super.viewDidLoad()
-		//view.backgroundColor = Color.grey.lighten5
-		prepareToolbar()
-		super.initRfid()
-		
-		initViewControl()
-	}
-	
+
+
 	override func viewWillAppear(_ animated: Bool)
 	{
 		print("=========================================")
 		print("*ProductMount.viewWillAppear()")
 		print("=========================================")
-		
 		super.viewWillAppear(animated)
+		prepareToolbar()
+		super.initRfid()
+		initViewControl()
 	}
 	
 	override func viewDidAppear(_ animated: Bool)
