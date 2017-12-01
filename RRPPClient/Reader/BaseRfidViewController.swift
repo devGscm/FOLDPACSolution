@@ -37,11 +37,6 @@ protocol ReaderProtocol : class {
 	init(deviceId : String ,  delegate : ReaderResponseDelegate?)
 	
 	/**
-	* 리더기를 체크한다. (블루투스 가능여부도 판단)
-	*/
-	func checkReader()
-	
-	/**
 	* 리더기에 연결한다.
 	*/
 	func connect()
@@ -76,6 +71,16 @@ protocol ReaderProtocol : class {
 	////////////////////////////////////////////////////
 	// 여기서 부터 optional protocol 설정
 	////////////////////////////////////////////////////
+	/**
+	* 연결가능 리더기 스켄 시작
+	*/
+	@objc optional  func startReaderScan()
+	
+	/**
+	* 연결가능 리더기 스켄 종료
+	*/
+	@objc optional  func stopReaderScan()
+	
 	/**
 	* 인벤토리 모드를 설정한다.
 	* @param intMode 모드
@@ -243,9 +248,9 @@ class BaseRfidViewController : BaseViewController
 	}
 	
 	//접속가능한 Reader기를 찾기를 시작한다
-	func checkReader()
+	func startReaderScan()
 	{
-		self.reader!.checkReader()
+		self.reader!.startReaderScan?()
 	}
 	
 	
