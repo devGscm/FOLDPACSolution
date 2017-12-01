@@ -11,11 +11,9 @@ import Material
 
 class BaseViewController : UIViewController
 {
-
 	func initController()
 	{
 		print("*BaseViewController.initController()")
-		//prepareSnackbar()
 	}
 	
 	func releaseController()

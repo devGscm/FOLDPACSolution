@@ -34,6 +34,8 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 	var arrMasterTagRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
 	var arrDetailTagRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
 	
+	var clsIndicator : ProgressIndicator?
+	
 	override func viewDidLoad()
 	{
 		print("=========================================")
@@ -97,6 +99,13 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		AppContext.sharedManager.getUserInfo().setBranchCustId(branchCustId: "160530000071")
 		AppContext.sharedManager.getUserInfo().setUserLang(strUserLang: "KR")
 		
+		
+		clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
+									  indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.")
+		clsIndicator?.start()
+		DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+			self.clsIndicator?.stop()
+		}
 	}
 	
 	
@@ -117,7 +126,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 				if let btnDetail = sender as? UIButton
 				{
 					let clsTagInfo = arrMasterTagRows[btnDetail.tag]
-
+					
 					// 해당 자산코드만 필터링하여 배열을 재생성하여 전달
 					let arrData = arrDetailTagRows.filter({ (clsData) -> Bool in
 						if(clsData.getAssetEpc() == clsTagInfo.getAssetEpc())
@@ -229,12 +238,10 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 	
 	func getRfidData( clsTagInfo : RfidUtil.TagInfo)
 	{
-
 		let strCurReadTime = DateUtil.getDate(dateFormat: "yyyyMMddHHmmss")
-		
 		let strSerialNo = clsTagInfo.getSerialNo()
 		let strAssetEpc = "\(clsTagInfo.getCorpEpc())\(clsTagInfo.getAssetEpc())"	// 회사EPC코드 + 자산EPC코드
-			
+		
 		//------------------------------------------------
 		clsTagInfo.setAssetEpc(assetEpc: strAssetEpc)
 		if(clsTagInfo.getAssetEpc().isEmpty == false)
@@ -319,7 +326,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 			}
 			
 		}
-	
+		
 		
 		DispatchQueue.main.async { self.tvProductMount?.reloadData() }
 	}
@@ -354,6 +361,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 	
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
+		//let cell : UITableViewCell = UITableViewCell(style: <#T##UITableViewCellStyle#>, reuseIdentifier: <#T##String?#>)
 		let objCell:ProductMountCell = tableView.dequeueReusableCell(withIdentifier: "tvcProductMount", for: indexPath) as! ProductMountCell
 		let clsTagInfo = arrMasterTagRows[indexPath.row]
 		
@@ -376,19 +384,52 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 	// 초기화
 	@IBAction func onClearAllClicked(_ sender: UIButton)
 	{
-		Dialog.show(container: self, viewController: nil,
-			title: NSLocalizedString("common_delete", comment: "삭제"),
-			message: NSLocalizedString("common_confirm_delete", comment: "전체 데이터를 삭제하시겠습니까?"),
-			okTitle: NSLocalizedString("common_confirm", comment: "확인"),
-			okHandler: { (_) in
-				self.clearTagData()
-				super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
-			},
-			cancelTitle: NSLocalizedString("common_cancel", comment: "확인"), cancelHandler: nil)
+		clsIndicator!.start()
+		DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+			self.clsIndicator!.stop()
+		}
+
+		
+		//	print("onClearAllClciked@@@@@@@@@@@")
+		//super.hideIndicator()
+		
+		
+		//showActivityIndicator(self.view)
+		//aivIndicator.stopAnimating()
+		//
+		//		Dialog.show(container: self, viewController: nil,
+		//			title: NSLocalizedString("common_delete", comment: "삭제"),
+		//			message: NSLocalizedString("common_confirm_delete", comment: "전체 데이터를 삭제하시겠습니까?"),
+		//			okTitle: NSLocalizedString("common_confirm", comment: "확인"),
+		//			okHandler: { (_) in
+		//				self.clearTagData()
+		//				super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
+		//			},
+		//			cancelTitle: NSLocalizedString("common_cancel", comment: "확인"), cancelHandler: nil)
+		//
+		//
 	}
 	
 	// 전송
-	@IBAction func onSendClicked(_ sender: UIButton) {
+	@IBAction func onSendClicked(_ sender: UIButton)
+	{
+		print("- UnitID:\(AppContext.sharedManager.getUserInfo().getUnitId())")
+		
+		if(AppContext.sharedManager.getUserInfo().getUnitId().isEmpty == true)
+		{
+			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("rfid_reader_no_device_id", comment: "리더기의 장치ID가 없습니다.웹화면의 리더기정보관리에서 모바일전화번호를  입력하여주십시오."))
+			return
+		}
+		if(arrDetailTagRows.count == 0)
+		{
+			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("common_no_data_send", comment: "전송할 데이터가 없습니다."))
+			return
+		}
+		
+		
+		
+		
+		
 	}
 }
 

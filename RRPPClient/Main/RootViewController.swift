@@ -2,7 +2,7 @@ import UIKit
 import Material
 import Mosaic
 
-class RootViewController: UIViewController
+class RootViewController: BaseViewController
 {
     open override func viewDidLoad()
 	{
@@ -23,6 +23,7 @@ class RootViewController: UIViewController
 			let rfid =  RfidSwing()
 			rfid.doConnectRfid()
 			
+			showSnackbar(message: "스네이크바 테스트입니다.")
 			//prepareSnackbar()
 			//animateSnackbar()
 			//scheduleAnimation()
@@ -124,30 +125,3 @@ extension RootViewController
     }
 }
 
-
-extension RootViewController {
-	
-	fileprivate func prepareSnackbar() {
-		guard let snackbar = snackbarController?.snackbar else {
-			return
-		}
-		
-		snackbar.text = "Reminder saved."
-	}
-	
-	fileprivate func scheduleAnimation() {
-		Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(animateSnackbar), userInfo: nil, repeats: true)
-	}
-}
-
-extension RootViewController {
-	@objc
-	fileprivate func animateSnackbar() {
-		guard let sc = snackbarController else {
-			return
-		}
-		
-		_ = sc.animate(snackbar: .visible, delay: 1)
-		_ = sc.animate(snackbar: .hidden, delay: 4)
-	}
-}
