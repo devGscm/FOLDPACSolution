@@ -24,9 +24,7 @@ class RootViewController: BaseViewController
 	
 		if(AppContext.sharedManager.getUserInfo().getAutoLogin() == true || AppContext.sharedManager.getAuthenticated() == true)
 		{			
-			//prepareSnackbar()
-			//animateSnackbar()
-			//scheduleAnimation()
+			showSnackbar(message: "스네이크바 테스트입니다.")
 			
 //			let dataClient = Mosaic.DataClient(url: Constants.WEB_SVC_URL)
 //			dataClient.UserInfo = "xxOxOsU93/PvK/NN7DZmZw=="
