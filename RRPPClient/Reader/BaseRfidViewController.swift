@@ -8,10 +8,18 @@
 
 import UIKit
 
-struct RederDevInfo {
-	var id : String
-	var name : String
+public struct RederDevInfo {
+	var id : NSString
+	var name : NSString
+	var macAddr : NSString
 }
+
+public class Devinfo<T> {
+	let unbox: T
+	init(_ value: T) {
+		self.unbox = value
+	} }
+
 
 /// 지원되는 리더기 종류(현재 SWING만 지원)
 enum ReaderType {
@@ -26,7 +34,11 @@ public protocol ReaderResponseDelegate : class {
 	
 	 @objc optional func didReaderConnected()
 	
-	 @objc optional func didReaderDisConnected()	
+	 @objc optional func didReaderDisConnected()
+	
+	///optional로 프로토콜 설계시 구조체 파라메터를 사용할 수 없다.
+	@objc optional func didReaderScanList(id:String, name: String, macAddr: String)
+	
 }
 
 /// 리더기 공통 프로토콜 선언

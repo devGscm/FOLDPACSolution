@@ -118,6 +118,7 @@ public class SwingReader : NSObject, ReaderProtocol, SwingProtocolProtocol
 	
 	public func swing_didDiscover(_ dev: SwingDevice!) {
 		print("######Swing_didDiscoverDevice!!!")
+		self.delegate?.didReaderScanList?(id: dev.identifier, name: dev.name, macAddr: dev.macaddress)
 	}
 	
 	
@@ -151,5 +152,6 @@ public class SwingReader : NSObject, ReaderProtocol, SwingProtocolProtocol
 		print("Swing_didDisconnectDevice!!!")
 		self.delegate?.didReaderDisConnected?()
 	}
+	
 }
 
