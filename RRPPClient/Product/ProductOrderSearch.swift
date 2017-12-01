@@ -9,7 +9,7 @@
 import UIKit
 import Mosaic
 
-class ProductOrderSearch: UIViewController, UITableViewDataSource, UITableViewDelegate
+class ProductOrderSearch: BaseViewController, UITableViewDataSource, UITableViewDelegate
 {
 
 	@IBOutlet weak var tvProductOrderSearch: UITableView!

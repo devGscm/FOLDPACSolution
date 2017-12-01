@@ -246,15 +246,22 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eqd-oJ-beM" customClass="FABButton" customModule="Material">
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eqd-oJ-beM">
                                                             <rect key="frame" x="322" y="6" width="30" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                            <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <state key="normal" title="상세">
                                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </state>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
                                                                     <color key="value" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <integer key="value" value="15"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                    <real key="value" value="0.0"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                             <connections>
@@ -331,11 +338,11 @@
                         <outlet property="btnMakeOrderId" destination="DKg-6V-Lfy" id="Q3U-xN-Xr8"/>
                         <outlet property="btnRfidReader" destination="tvD-Va-na2" id="mpe-92-lUS"/>
                         <outlet property="lblBranchInfo" destination="jrq-1w-FyR" id="WGu-7L-I5r"/>
-                        <outlet property="lblMakeLotId" destination="wOM-vy-3qF" id="j8N-Hx-NPU"/>
                         <outlet property="lblOrderCount" destination="Ark-Fh-eBd" id="U6x-CT-jlP"/>
                         <outlet property="lblOrderCustName" destination="wkV-LY-NpW" id="TKE-Yu-aNJ"/>
                         <outlet property="lblReaderName" destination="w1J-cO-rN4" id="Kb5-fI-V2l"/>
                         <outlet property="lblUserName" destination="Ql5-h4-QWc" id="sGY-RT-BqW"/>
+                        <outlet property="tfMakeLotId" destination="wOM-vy-3qF" id="WBJ-6j-UYv"/>
                         <outlet property="tvProductMount" destination="yfX-cX-oxs" id="Dfp-vB-8E4"/>
                     </connections>
                 </viewController>
@@ -589,16 +596,19 @@
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tMA-KS-gyg" customClass="FABButton" customModule="Material">
-                                                                    <rect key="frame" x="315" y="7" width="28" height="26"/>
+                                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tMA-KS-gyg">
+                                                                    <rect key="frame" x="315" y="6" width="30" height="30"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                                                    <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <state key="normal" title="선택">
                                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     </state>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
                                                                             <color key="value" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="15"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </button>

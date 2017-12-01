@@ -16,8 +16,6 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	@IBOutlet weak var btnLogout: UIButton!
 	var mArrMenuData:Array<MenuItem> = Array<MenuItem>()
-
-
 	
 	open override func viewDidLoad()
 	{
@@ -92,7 +90,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			break;
 			case "RfidInspect" :
 				let clsController: RfidInspect = {
-				return UIStoryboard.viewController(storyBoardName: "Tag", identifier: "RfidInspect") as! RfidInspect
+					return UIStoryboard.viewController(storyBoardName: "Tag", identifier: "RfidInspect") as! RfidInspect
 				}()
 				toolbarController?.transition(to: clsController, completion: closeNavigationDrawer)
 

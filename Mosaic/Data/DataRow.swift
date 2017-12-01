@@ -31,7 +31,7 @@ public class DataRow : NSObject, NSCopying
     private var mVecDataRowName : [String]
     private var mVecDataRowValue : [Any]
     
-    override init()
+    public override init()
     {
         mIntId = 0
         self.mIntState       = DataRow.DATA_ROW_STATE_UNCHANGED

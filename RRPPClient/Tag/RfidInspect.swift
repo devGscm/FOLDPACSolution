@@ -113,6 +113,13 @@ class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 		return objCell
 	}
 	
+	func viewDidRelease()
+	{
+		print("=========================================")
+		print("*RfidInspect.viewDidRelease()")
+		print("=========================================")
+	}
+	
 }
 
 

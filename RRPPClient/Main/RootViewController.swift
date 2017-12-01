@@ -2,8 +2,12 @@ import UIKit
 import Material
 import Mosaic
 
-class RootViewController: UIViewController
+class RootViewController: BaseViewController
 {
+	lazy var mClsRightController: RightViewController = {
+		return UIStoryboard.viewController(identifier: "RightViewController") as! RightViewController
+	}()
+	
     open override func viewDidLoad()
 	{
 		print("@@@@@@@@@@@@@@@@@@@@")
@@ -17,6 +21,7 @@ class RootViewController: UIViewController
 	
 	override func viewDidAppear(_ animated: Bool)
 	{
+	
 		if(AppContext.sharedManager.getUserInfo().getAutoLogin() == true || AppContext.sharedManager.getAuthenticated() == true)
 		{			
 			//prepareSnackbar()
@@ -120,30 +125,3 @@ extension RootViewController
     }
 }
 
-
-extension RootViewController {
-	
-	fileprivate func prepareSnackbar() {
-		guard let snackbar = snackbarController?.snackbar else {
-			return
-		}
-		
-		snackbar.text = "Reminder saved."
-	}
-	
-	fileprivate func scheduleAnimation() {
-		Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(animateSnackbar), userInfo: nil, repeats: true)
-	}
-}
-
-extension RootViewController {
-	@objc
-	fileprivate func animateSnackbar() {
-		guard let sc = snackbarController else {
-			return
-		}
-		
-		_ = sc.animate(snackbar: .visible, delay: 1)
-		_ = sc.animate(snackbar: .hidden, delay: 4)
-	}
-}
