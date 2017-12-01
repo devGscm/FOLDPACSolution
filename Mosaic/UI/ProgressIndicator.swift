@@ -19,6 +19,7 @@ public class ProgressIndicator: UIView
 	var strMessage: String
 	var vwLoading = UIView()
 	var vwContainer = UIView()
+	var lblMessage : UILabel?
 	
 	var aivIndicator = UIActivityIndicatorView()
 	
@@ -68,20 +69,26 @@ public class ProgressIndicator: UIView
 		aivIndicator.frame = CGRect(x: vwContainer.bounds.origin.x + 6, y: 0, width: 20, height: 50)
 		
 		
-		let lblMessage = UILabel(frame:CGRect(x: vwContainer.bounds.origin.x + 30, y: 0, width: vwContainer.bounds.width - (vwContainer.bounds.origin.x + 35), height: 50))
-		lblMessage.text = strMessage
-		lblMessage.adjustsFontSizeToFitWidth = true
-		lblMessage.textColor = UIColor.white
+		lblMessage = UILabel(frame:CGRect(x: vwContainer.bounds.origin.x + 30, y: 0, width: vwContainer.bounds.width - (vwContainer.bounds.origin.x + 35), height: 50))
+		lblMessage?.text = strMessage
+		lblMessage?.adjustsFontSizeToFitWidth = true
+		lblMessage?.textColor = UIColor.white
 		
 		vwLoading.layer.cornerRadius = 15
 		vwLoading.backgroundColor = ucBackgroundColor
 		vwLoading.alpha = 0.8
 		vwLoading.addSubview(aivIndicator)
-		vwLoading.addSubview(lblMessage)
+		vwLoading.addSubview(lblMessage!)
 		vwContainer.addSubview(vwLoading)
 	}
 	
-	public func start()
+	public func show(message : String)
+	{
+		self.lblMessage?.text = message
+		self.show()
+	}
+	
+	public func show()
 	{
 		if self.subviews.contains(vwContainer) == false
 		{
@@ -91,7 +98,7 @@ public class ProgressIndicator: UIView
 		}
 	}
 	
-	public func stop()
+	public func hide()
 	{
 		if self.subviews.contains(vwContainer) == true
 		{

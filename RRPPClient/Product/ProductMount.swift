@@ -21,8 +21,8 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 	@IBOutlet weak var btnMakeOrderId: UIButton!
 	@IBOutlet weak var lblOrderCustName: UILabel!
 	@IBOutlet weak var lblOrderCount: UILabel!
-	@IBOutlet weak var lblMakeLotId: UITextField!
-	
+		
+	@IBOutlet weak var tfMakeLotId: UITextField!
 	
 	
 	var strMakeOrderId: String = ""
@@ -31,8 +31,8 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 	var strProdAssetEpc: String?
 	var intCurOrderWorkCnt: Int = 0
 	
-	var arrMasterTagRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
-	var arrDetailTagRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
+	var arrAssetRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
+	var arrTagRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
 	
 	var clsIndicator : ProgressIndicator?
 	
@@ -102,9 +102,9 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		
 		clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
 									  indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.")
-		clsIndicator?.start()
+		clsIndicator?.show()
 		DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-			self.clsIndicator?.stop()
+			self.clsIndicator?.hide()
 		}
 	}
 	
@@ -125,10 +125,10 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 			{
 				if let btnDetail = sender as? UIButton
 				{
-					let clsTagInfo = arrMasterTagRows[btnDetail.tag]
+					let clsTagInfo = arrAssetRows[btnDetail.tag]
 					
 					// 해당 자산코드만 필터링하여 배열을 재생성하여 전달
-					let arrData = arrDetailTagRows.filter({ (clsData) -> Bool in
+					let arrData = arrTagRows.filter({ (clsData) -> Bool in
 						if(clsData.getAssetEpc() == clsTagInfo.getAssetEpc())
 						{
 							return true
@@ -233,6 +233,19 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 	// 데이터를 clear한다.
 	func clearTagData()
 	{
+		arrTagRows.removeAll()
+		arrAssetRows.removeAll()
+		
+		tvProductMount?.reloadData()
+		
+		self.intCurOrderWorkCnt = self.intOrderWorkCnt
+		if(lblOrderCustName.text?.isEmpty == false)
+		{
+			lblOrderCount?.text = "\(self.intCurOrderWorkCnt)/\(self.intOrderReqCnt)"
+		}
+		
+		// TODO : 나중에 구현할 사항
+		//super.clear항nventory()
 		
 	}
 	
@@ -277,7 +290,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		if(boolValidAsset == true)
 		{
 			// Detail 다이얼로그 전달용 태그 리스트
-			for clsTagInfo in arrDetailTagRows
+			for clsTagInfo in arrTagRows
 			{
 				// 같은 시리얼번호가 있는지 체크
 				if(clsTagInfo.getSerialNo() == strSerialNo)
@@ -292,9 +305,9 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 			if(boolFindSerialNoOverlap == false)
 			{
 				// 상세보기용 배열에 추가
-				arrDetailTagRows.append(clsTagInfo)
+				arrTagRows.append(clsTagInfo)
 				
-				for clsTagInfo in arrMasterTagRows
+				for clsTagInfo in arrAssetRows
 				{
 					// 같은 자산유형이 있다면 자산유형별로 조회수 증가
 					if(clsTagInfo.getAssetEpc() == strAssetEpc)
@@ -309,10 +322,10 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 				// 마스터용 배열에 추가
 				if(boolFindAssetTypeOverlap == false)
 				{
-					arrMasterTagRows.append(clsTagInfo)
+					arrAssetRows.append(clsTagInfo)
 				}
 				
-				let intCurDataSize = arrDetailTagRows.count
+				let intCurDataSize = arrTagRows.count
 				
 				// 발주번호가 있는 경무만 "처리수량/발주수량"을 처리한다.
 				
@@ -331,8 +344,22 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		DispatchQueue.main.async { self.tvProductMount?.reloadData() }
 	}
 	
-	func sendData(strMakeOrderid: String, strMakeLotId: String, strWorkerName: String, strRemark: String)
+	func sendData(makeOrderId: String, makeLotId: String, workerName: String, remark: String)
 	{
+		print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+		print("makeOrderId:\(makeOrderId)")
+		print("makeLotId:\(makeLotId)")
+		print("workerName:\(workerName)")
+		print("remark:\(remark)")
+		print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+		print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+		
+		clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
+		
+		DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+			self.clsIndicator?.hide()
+		}
+
 		
 	}
 	
@@ -343,27 +370,27 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		intOrderReqCnt	= 0
 		
 		strMakeOrderId	= ""
-		strProdAssetEpc = nil
+		strProdAssetEpc = ""
 		
 		
 		self.btnMakeOrderId.setTitle("", for: .normal)
 		self.lblOrderCustName.text = ""
 		self.lblOrderCount.text = ""
-		self.lblMakeLotId.text = ""
+		self.tfMakeLotId.text = ""
 		
 	}
 	
 	
 	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
-		return self.arrMasterTagRows.count
+		return self.arrAssetRows.count
 	}
 	
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
 		//let cell : UITableViewCell = UITableViewCell(style: <#T##UITableViewCellStyle#>, reuseIdentifier: <#T##String?#>)
 		let objCell:ProductMountCell = tableView.dequeueReusableCell(withIdentifier: "tvcProductMount", for: indexPath) as! ProductMountCell
-		let clsTagInfo = arrMasterTagRows[indexPath.row]
+		let clsTagInfo = arrAssetRows[indexPath.row]
 		
 		objCell.lblAssetName.text = clsTagInfo.getAssetName()
 		objCell.lblReadCount.text = "\(clsTagInfo.getReadCount())"
@@ -384,30 +411,16 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 	// 초기화
 	@IBAction func onClearAllClicked(_ sender: UIButton)
 	{
-		clsIndicator!.start()
-		DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-			self.clsIndicator!.stop()
-		}
-
-		
-		//	print("onClearAllClciked@@@@@@@@@@@")
-		//super.hideIndicator()
-		
-		
-		//showActivityIndicator(self.view)
-		//aivIndicator.stopAnimating()
-		//
-		//		Dialog.show(container: self, viewController: nil,
-		//			title: NSLocalizedString("common_delete", comment: "삭제"),
-		//			message: NSLocalizedString("common_confirm_delete", comment: "전체 데이터를 삭제하시겠습니까?"),
-		//			okTitle: NSLocalizedString("common_confirm", comment: "확인"),
-		//			okHandler: { (_) in
-		//				self.clearTagData()
-		//				super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
-		//			},
-		//			cancelTitle: NSLocalizedString("common_cancel", comment: "확인"), cancelHandler: nil)
-		//
-		//
+	
+		Dialog.show(container: self, viewController: nil,
+			title: NSLocalizedString("common_delete", comment: "삭제"),
+			message: NSLocalizedString("common_confirm_delete", comment: "전체 데이터를 삭제하시겠습니까?"),
+			okTitle: NSLocalizedString("common_confirm", comment: "확인"),
+			okHandler: { (_) in
+				self.clearTagData()
+				super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
+			},
+			cancelTitle: NSLocalizedString("common_cancel", comment: "확인"), cancelHandler: nil)
 	}
 	
 	// 전송
@@ -420,15 +433,53 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("rfid_reader_no_device_id", comment: "리더기의 장치ID가 없습니다.웹화면의 리더기정보관리에서 모바일전화번호를  입력하여주십시오."))
 			return
 		}
-		if(arrDetailTagRows.count == 0)
+		if(arrTagRows.count == 0)
 		{
 			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("common_no_data_send", comment: "전송할 데이터가 없습니다."))
 			return
 		}
 		
+		let strMakeOrderId = btnMakeOrderId.titleLabel?.text
+		if(strMakeOrderId?.isEmpty == true)
+		{
+			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("make_enter_your_order_no", comment: "발주번호를 입력하여 주십시오."))
+			return
+		}
+		
+		let strMakeLotId = tfMakeLotId?.text
+		if(strMakeLotId?.isEmpty == true)
+		{
+			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("make_enter_your_lot_no", comment: "LOT 번호를 입력하여 주십시오."))
+			return
+		}
+		
+		let intTagCount = 0
+		let intCurWorkCount = self.intOrderWorkCnt + intTagCount // 기제작수량과 현재 인식한 태그 수량
+		
+		// 발주수량보다 크면
+		if(intCurWorkCount > self.intOrderReqCnt)
+		{
+			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("make_cannot_handle_amount_greater_qty", comment: "인식수량이 발주 수량보다 많을수는 없습니다."))
+			return
+		}
 		
 		
-		
+		let acDialog = UIAlertController(title: NSLocalizedString("common_confirm", comment: "확인"), message: nil, preferredStyle: .alert)
+		acDialog.addTextField() {
+			$0.placeholder = NSLocalizedString("make_remark", comment: "확인")
+		}
+		acDialog.addAction(UIAlertAction(title: NSLocalizedString("common_cancel", comment: "취소"), style: .default) { (_) in
+			acDialog.textFields?[0].text = ""
+		})
+		acDialog.addAction(UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
+			
+			let strMakeOrderId = self.btnMakeOrderId?.titleLabel?.text
+			let strMakeLotId = self.tfMakeLotId?.text
+			let strWorkerName = self.lblUserName?.text
+			let strRemark = acDialog.textFields?[0].text
+			self.sendData(makeOrderId: strMakeOrderId!, makeLotId: strMakeLotId!, workerName: strWorkerName!, remark: strRemark!)
+		})
+		self.present(acDialog, animated: true, completion: nil)
 		
 	}
 }
@@ -445,9 +496,3 @@ extension ProductMount
 		tc.toolbar.detail = NSLocalizedString("title_product_mount", comment: "자산등록")
 	}
 }
-
-
-
-
-
-
