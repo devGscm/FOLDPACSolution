@@ -8,8 +8,20 @@
 
 import UIKit
 
+struct RederDevInfo {
+	var id : String
+	var name : String
+}
+
+/// 지원되는 리더기 종류(현재 SWING만 지원)
+enum ReaderType {
+	case SWING
+	case AT288
+}
+
+/// 리더기 공통 응답프로토콜 선언
 @objc
-protocol ReaderResponseProtocol : class {
+public protocol ReaderResponseDelegate : class {
 	func didReadTagList( _ tagId : String)
 	
 	 @objc optional func didReaderConnected()
@@ -17,7 +29,129 @@ protocol ReaderResponseProtocol : class {
 	 @objc optional func didReaderDisConnected()	
 }
 
-class BaseRfidViewController : BaseViewController, SwingProtocolProtocol
+/// 리더기 공통 프로토콜 선언
+@objc
+protocol ReaderProtocol : class {
+	
+	/// 초기화 는 항상 리더기 식별자와 이벤트를 전파할 delegate로 한다
+	init(deviceId : String ,  delegate : ReaderResponseDelegate?)
+	
+	/**
+	* 리더기를 체크한다. (블루투스 가능여부도 판단)
+	*/
+	func checkReader()
+	
+	/**
+	* 리더기에 연결한다.
+	*/
+	func connect()
+	
+	/**
+	* 리더기에서 연결을 종료한다.
+	*/
+	func close()
+	
+	/**
+	* 읽기를 시작한다.
+	*/
+	func startRead()
+	
+	/**
+	* 읽기를 종료한다.
+	*/
+	func stopRead()
+	
+	/**
+	* 연결되었는지 여부를 리턴한다.
+	* @return 연결되었는지여부
+	*/
+	func isConnected() -> Bool
+	
+	/**
+	* 리더기 초기화
+	*/
+	func initReader()
+	
+	
+	////////////////////////////////////////////////////
+	// 여기서 부터 optional protocol 설정
+	////////////////////////////////////////////////////
+	/**
+	* 인벤토리 모드를 설정한다.
+	* @param intMode 모드
+	*/
+	@objc optional  func setInventoryMode(_ mode: Int)
+	
+	/**
+	* 인벤토리를 초기화한다.
+	*/
+	@objc optional func clearInventory()
+	
+	
+	/**
+	* 리더기 소멸
+	*/
+	@objc optional func  destroyReader()
+	
+	/**
+	* 리더기 볼륨 컨트롤 - 스윙센서
+	* @return boolean
+	*/
+	@objc optional func setReaderVolumeControl(mode: Int,  level: Int) -> Bool
+	
+	/**
+	* 리더기 RF파워를 리턴한다.
+	*/
+	@objc optional func getRFPowerControl() -> Int
+	
+	/**
+	* 리더기 RF파워 컨트롤 - 스윙센서
+	*/
+	@objc optional func  setRFPowerControl(_ attenuation : Int)
+	
+//	/**
+//	* 센서태그의 UID를 리턴한다
+//	*/
+//	String getRFIDTagUid();
+//
+//	/**
+//	* 센서태그의 데이터를 리턴한다
+//	*/
+//	String getRFIDTagData();
+	
+	/**
+	* 리더기 볼륨 컨트롤 - 스윙센서
+	* @return boolean
+	*/
+	@objc optional func   readerTempDataSync(_ blLarge_memory : Bool)
+	
+	/**
+	* 리더기 모드 컨트롤 - 스윙센서
+	* @return boolean
+	*/
+	@objc optional func   setReaderModeControl(_ mode : Int);
+	
+	/**
+	* 리더기의 태그리포트[A],[N]모드를 컨트롤한다.
+	* @return boolean
+	*/
+	@objc optional func  setTagReportModeControl(_ mode : Int)
+	
+	/**
+	* 리더기의 모드변경(RFID/QR코드)에 대한 비프음
+	*/
+	@objc optional func playBeepReadModeChange()
+	
+//	/**
+//	* 리더기 연결여부 확인
+//	*/
+//	boolean isReaderConnected();
+//	
+}
+
+
+/// BaseRfidViewController 클래스 구현시작
+class BaseRfidViewController : BaseViewController
 {
 	var arrAssetInfo	: Array<AssetInfo> = Array<AssetInfo>()
 	var arrProcMsgInfo	: Array<CodeInfo> = Array<CodeInfo>()
@@ -27,25 +161,23 @@ class BaseRfidViewController : BaseViewController, SwingProtocolProtocol
 	//해당 클레스를 참조하는 서브클래스에서 이벤트 수신을 위하여
 	//응답 프로토클을 정의 기존 네톰에서 정의한 이벤트를 수신하면
 	//해당 프로토콜의 정의한 이벤트로 다시 재전송 즉  네톰이벤트 ---> 신규정의이벤트
-	weak var mDelegate: ReaderResponseProtocol?
+	weak var delegateReder: ReaderResponseDelegate?
+	var reader : ReaderProtocol?
 	
-	public var delegate: ReaderResponseProtocol? {
-		set { self.mDelegate = newValue }
-		get {return mDelegate }
-	}
-		
-	func initRfid()
+	func initRfid(_ type : ReaderType, id : String,	delegateReder : ReaderResponseDelegate?)
 	{
 		super.initController()
+		switch type
+		{
+			case .SWING :
+				self.reader = SwingReader(deviceId : id ,  delegate: delegateReder)
+			
+			case .AT288 :
+				self.reader = AT288Reader(deviceId : id ,  delegate: delegateReder)
+		}
+		
 		//자산코드 및 기타 공통코드를 LocalDB에서 가져옮
 		initCodeInfo()
-		
-		if let swing : SwingProtocol  = SwingProtocol.sharedInstace() as? SwingProtocol
-		{
-			swing.delegate = self as SwingProtocolProtocol
-			//Android 소스에서 퍼포먼스 향상을 위해 스켄을 멈춤
-			//swing.swingapi.stop()
-		}
 	}
 	
 	func destoryRfid()
@@ -111,151 +243,34 @@ class BaseRfidViewController : BaseViewController, SwingProtocolProtocol
 	}
 	
 	//접속가능한 Reader기를 찾기를 시작한다
-	func startSearchConnectableReader()
+	func checkReader()
 	{
-		if let swing : SwingProtocol  = SwingProtocol.sharedInstace() as? SwingProtocol
-		{
-			swing.swingapi.scan()
-		}
+		self.reader!.checkReader()
 	}
 	
-	//접속가능한 Reader기를 찾기를 중지한다
-	func stopSearchConnectableReader()
-	{
-		if let swing : SwingProtocol  = SwingProtocol.sharedInstace() as? SwingProtocol
-		{
-			swing.swingapi.stop()
-		}
-	}
 	
-	func readerIsConnected() -> Bool
+	func isConnected() -> Bool
 	{
-		if let swing : SwingProtocol  = SwingProtocol.sharedInstace() as? SwingProtocol
-		{
-			return swing.isSwingrederConnected()
-		}
-		return false
+		return self.reader!.isConnected()
 	}
 	
 	func readerConnect()
 	{
-		if let swing : SwingProtocol  = SwingProtocol.sharedInstace() as? SwingProtocol
-		{
-			//TODO:: 환경설정에서 선택된 정보를 리더기를 가저온다
-			let dev : SwingDevice = SwingDevice()
-			dev.identifier = "D32F0010-8DB8-856F-A8DF-85B3D00CF26A"
-			
-			//Android 소스에서 퍼포먼스 향상을 위해 스켄을 멈춤
-			//swing.swingapi.stop()
-			
-			//연결여부 체크후, 연결이안되어 있을경우 연결하려고 하였으나
-			//내부적인 연결여부 isSwingrederConnected() 가 재대로 처리
-			//안되는것 같다 따라서 무조건 연결처리
-			swing.swingapi.connect(to:  dev)
-			//			if(swing.isSwingrederConnected() == false)
-			//			{
-			//				//swing.swingapi.connect(to:  dev)
-			//			}
-		}
+		self.reader!.connect()
 	}
 	
 	func readerDisConnect()
 	{
-		//TODO:: 환경설정에서 선택된 정보를 리더기를 가저온다
-		if let swing : SwingProtocol  = SwingProtocol.sharedInstace() as? SwingProtocol
-		{
-			if(swing.isSwingrederConnected())
-			{
-				let dev : SwingDevice = SwingDevice()
-				dev.identifier = "D32F0010-8DB8-856F-A8DF-85B3D00CF26A"
-				swing.swingapi.disconnect(to: dev)
-			}
-		}
+		self.reader!.close()
 	}
 	
 	func startRead()
 	{
-		if let swing : SwingProtocol  = SwingProtocol.sharedInstace() as? SwingProtocol
-		{
-			if(swing.isSwingrederConnected())
-			{
-				//소스와 비슷하게 리더기설정
-				swing.swing_set_inventory_mode(0)
-				swing.swing_clear_inventory()
-				//태그를 읽기 시작한다
-				swing.swing_readStart()
-			}
-		}
+		self.reader!.startRead()
 	}
 	
 	func stopRead()
 	{
-		if let swing : SwingProtocol  = SwingProtocol.sharedInstace() as? SwingProtocol
-		{
-			if(swing.isSwingrederConnected())
-			{
-				swing.swing_readStop()
-			}
-		}
+		self.reader!.stopRead()
 	}
-
-	
-	///////////////////////////////////////
-	/// 여기서부터 RFID Swing Reader Protocal Start
-	////////////////////////////////////////
-	public func swing_Response_TagList(_ value: String!) {
-		var trimedData = value.trimmingCharacters(in: .whitespacesAndNewlines)
-		trimedData = trimedData.replacingOccurrences(of: ">T", with: "")
-		trimedData = trimedData.replacingOccurrences(of: ">J", with: "")
-		self.mDelegate!.didReadTagList(trimedData )
-	}
-	
-	public func readerStatus() -> Bool {
-		print("readerStatus")
-		return true
-	}
-	
-	public func reciveData(_ result: String!) {
-		print("reciveData")
-	}
-	
-	public func swing_didDiscover(_ dev: SwingDevice!) {
-		print("######3Swing_didDiscoverDevice!!!")
-	}
-	
-	
-	/// 네톰에서 구현을 안함 즉  Swing_readyToCommunicate가 호출이 되지 않음
-	/// - Parameter dev: <#dev description#>
-	public func swing_didconnectedDevice(_ dev: SwingDevice!) {
-		print("Swing_didconnectedDevice!!!")
-	}
-	
-	public func swing_ready ( toCommunicate dev: SwingDevice!) {
-		print("Swing_readyToCommunicate!!!")
-		
-		//연결이 되면 바로 리더기를 읽을 수 있도록 초기화
-		//소스와 비슷하게 리더기설정
-		if let swing : SwingProtocol  = SwingProtocol.sharedInstace() as? SwingProtocol
-		{
-			swing.swing_set_inventory_mode(0)
-			swing.swing_clear_inventory()
-			swing.swing_readStart()
-			print("##############swing is connected \(swing.isSwingrederConnected())");
-			
-		}
-		
-		self.mDelegate!.didReaderConnected?()
-	}
-	
-	
-	/// 리더기 연결종료, 리더기에서도 연결종료를 시키면 해당 이벤트가 발생
-	///
-	/// - Parameter dev: <#dev description#>
-	public func swing_didDisconnectDevice(_ dev: SwingDevice!) {
-		print("Swing_didDisconnectDevice!!!")
-		self.mDelegate!.didReaderDisConnected?()
-	}
-	
-
-
 }

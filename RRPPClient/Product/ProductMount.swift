@@ -10,7 +10,8 @@ import UIKit
 import Material
 import Mosaic
 
-class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, DataProtocol
+class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, ReaderResponseDelegate,
+	DataProtocol
 {
 	@IBOutlet weak var tvProductMount: UITableView!
 	@IBOutlet weak var lblReaderName: UILabel!
@@ -42,7 +43,11 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		super.viewDidLoad()
 		//view.backgroundColor = Color.grey.lighten5
 		prepareToolbar()
-		super.initRfid()
+		
+		//TODO:: 전역객체에서 등록된 리더기정보를 가져온다.
+		let devId  = "D32F0010-8DB8-856F-A8DF-85B3D00CF26A"
+		self.initRfid(.SWING, id:  devId, delegateReder:  self as ReaderResponseDelegate )
+		
 		initViewControl()
 	}
 	
@@ -388,6 +393,13 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 	
 	// 전송
 	@IBAction func onSendClicked(_ sender: UIButton) {
+	}
+	
+	//
+	///ReaderResponseDelegate 의 필수구현처리
+	//
+	func didReadTagList(_ tagId: String) {
+		print(tagId)
 	}
 }
 

@@ -18,11 +18,7 @@ class RootViewController: UIViewController
 	override func viewDidAppear(_ animated: Bool)
 	{
 		if(AppContext.sharedManager.getUserInfo().getAutoLogin() == true || AppContext.sharedManager.getAuthenticated() == true)
-		{
-			
-			let rfid =  RfidSwing()
-			rfid.doConnectRfid()
-			
+		{			
 			//prepareSnackbar()
 			//animateSnackbar()
 			//scheduleAnimation()

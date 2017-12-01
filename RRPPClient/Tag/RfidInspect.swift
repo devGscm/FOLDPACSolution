@@ -9,7 +9,7 @@
 import UIKit
 import Mosaic
 
-class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, ReaderResponseProtocol
+class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, ReaderResponseDelegate
 {
 	@IBOutlet weak var txtCount: UITextField!
 	@IBOutlet weak var tvTagList: UITableView!
@@ -18,10 +18,21 @@ class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	
     override func viewDidLoad()
     {
-        super.viewDidLoad()
-		self.initRfid()
-		self.delegate = self as ReaderResponseProtocol
+		print("###############################")
+		print("##### viewDidLoad() ######")
+		print("###############################")
+		super.viewDidLoad()
+		
+		// 오른쪽 토클메뉴 강제로 띄위기
+		//navigationDrawerController?.toggleRightView()
+		
+		//TODO:: 전역객체에서 등록된 리더기정보를 가져온다.
+		let devId  = "D32F0010-8DB8-856F-A8DF-85B3D00CF26A"
+		self.initRfid(.SWING, id:  devId, delegateReder:  self as ReaderResponseDelegate )
+		//self.initRfid(.AT288, id:  devId, delegateReder:  self as ReaderResponseDelegate )
     }
+	
+	
 	
 	@IBAction func readerConnectClicked(_ sender: Any) {
 		self.readerConnect()
@@ -33,7 +44,7 @@ class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	
 	@IBAction func readerReadStartClicked(_ sender: Any) {
 		//연결여부 확인후 알럿메세지
-		if(self.readerIsConnected() == false)
+		if(self.isConnected() == false)
 		{
 			let clsSliderDialog = SliderDialog()
 			let objMe = self
@@ -56,7 +67,7 @@ class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	
 	@IBAction func readerReadEndClicked(_ sender: Any) {
 		//연결여부 확인후 알럿메세지
-		if(self.readerIsConnected() == false)
+		if(self.isConnected() == false)
 		{
 			let clsSliderDialog = SliderDialog()
 			let objMe = self
@@ -87,22 +98,6 @@ class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 		}
 	}
 	
-//	override public func swing_Response_TagList(_ value: String!)
-//	{
-//		var trimedData = value.trimmingCharacters(in: .whitespacesAndNewlines)
-//		trimedData = trimedData.replacingOccurrences(of: ">T", with: "")
-//		trimedData = trimedData.replacingOccurrences(of: ">J", with: "")
-//		if(self.arrTagList.contains(trimedData) == false)
-//		{
-//			self.arrTagList.append(trimedData)
-//		}
-//
-//		let objMe = self
-//		DispatchQueue.main.async {
-//			self.txtCount.text = "\(objMe.arrTagList.count)"
-//			self.tvTagList?.reloadData()
-//		}
-//	}
 	
 	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
