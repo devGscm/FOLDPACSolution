@@ -1,32 +1,48 @@
 //
-//  ProductOrderSearch.swift
+//  HistorySearch.swift
 //   RRPPClient
 //
-//  Created by 이용민 on 2017. 11. 24..
+//  Created by 이용민 on 2017. 12. 2..
 //  Copyright © 2017년 MORAMCNT. All rights reserved.
 //
 
 import UIKit
 import Mosaic
 
-class ProductOrderSearch: BaseViewController, UITableViewDataSource, UITableViewDelegate
+class HistorySearch: BaseViewController, UITableViewDataSource, UITableViewDelegate
 {
+	
+	@IBOutlet weak var lblUserName: UILabel!
+	@IBOutlet weak var lblBranchInfo: UILabel!
 
-	@IBOutlet weak var tvProductOrderSearch: UITableView!
-	var tfCurControl : UITextField!
-	
-	@IBOutlet weak var btnClose: UIBarButtonItem!
-	@IBOutlet weak var btnStDate: UITextField!
-	@IBOutlet weak var btnEnDate: UITextField!
+	@IBOutlet weak var tfStDate: UITextField!
+	@IBOutlet weak var tfEnDate: UITextField!
+
+	@IBOutlet weak var btnEventCode: UIButton!
 	@IBOutlet weak var btnSearch: UIButton!
+	@IBOutlet weak var tvHistorySearch: UITableView!
 	
-	var ptcDataHandler : DataProtocol?
+	var tfCurControl : UITextField!
+	var dpPicker : UIDatePicker!
 	
-	var dpPicker: UIDatePicker!
+	
+	
 	var intPageNo  = 0
 	var clsDataClient : DataClient!
 	var arcDataRows : Array<DataRow> = Array<DataRow>()
 
+
+    override func viewDidLoad()
+	{
+        super.viewDidLoad()
+    }
+
+    override func didReceiveMemoryWarning()
+	{
+        super.didReceiveMemoryWarning()
+    }
+	
+	
 	override func viewWillAppear(_ animated: Bool)
 	{
 		super.viewWillAppear(animated)
@@ -46,9 +62,7 @@ class ProductOrderSearch: BaseViewController, UITableViewDataSource, UITableView
 		
 		super.releaseController()
 		super.viewDidDisappear(animated)
-		
 	}
-	
 	
 	func initViewControl()
 	{
@@ -56,47 +70,24 @@ class ProductOrderSearch: BaseViewController, UITableViewDataSource, UITableView
 		let dtCurDate = Date()
 		let dfFormat = DateFormatter()
 		dfFormat.dateFormat = "yyyy-MM-dd"
-		btnEnDate.text = dfFormat.string(from: dtCurDate)
+		tfEnDate.text = dfFormat.string(from: dtCurDate)
 		
 		let intDateDistance = AppContext.sharedManager.getUserInfo().getDateDistance()
 		let dtStDate = Calendar.current.date(byAdding: .day, value: -intDateDistance, to: dtCurDate)
-		btnStDate.text = dfFormat.string(from: dtStDate!)
+		tfStDate.text = dfFormat.string(from: dtStDate!)
 	}
 	
 	func initDataClient()
 	{
-		print(" EncId:\(AppContext.sharedManager.getUserInfo().getEncryptId())")
-		print(" corpId:\(AppContext.sharedManager.getUserInfo().getCorpId())")
-		print(" branchId:\(AppContext.sharedManager.getUserInfo().getBranchId())")
-		print(" branchCustId:\(AppContext.sharedManager.getUserInfo().getBranchCustId())")
-		print(" userLang:\(AppContext.sharedManager.getUserInfo().getUserLang())")
-	
-		
 		clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
-		clsDataClient.SelectUrl = "productService:selectProductOrderList"
+		clsDataClient.SelectUrl = "stockService:selectWorkHistoryist"
 		clsDataClient.removeServiceParam()
 		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+		//clsDataClient.addServiceParam(paramName: "userId", value: AppContext.sharedManager.getUserInfo().getUserId())
 		clsDataClient.addServiceParam(paramName: "branchId", value: AppContext.sharedManager.getUserInfo().getBranchId())
 		clsDataClient.addServiceParam(paramName: "branchCustId", value: AppContext.sharedManager.getUserInfo().getBranchCustId())
 		clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
-
-		
-	
-		/*
-		// 골드라인 당진공장
-		clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
-		clsDataClient.UserInfo = "xxOxOsU93/PvK/NN7DZmZw=="
-		//clsDataClient.UserData = "productService.selectProductOrderList"
-		//clsDataClient.SelectUrl = "productService.selectProductOrderList"
-		clsDataClient.SelectUrl = "productService:selectProductOrderList"
-		
-		clsDataClient.removeServiceParam()
-		clsDataClient.addServiceParam(paramName: "corpId", value: "logisallcm")
-		clsDataClient.addServiceParam(paramName: "branchId", value: "160530000045")
-		clsDataClient.addServiceParam(paramName: "branchCustId", value: "160530000071")
-		clsDataClient.addServiceParam(paramName: "userLang", value: "KR")
-		*/
 	}
 	
 	
@@ -115,11 +106,11 @@ class ProductOrderSearch: BaseViewController, UITableViewDataSource, UITableView
 	
 	func doSearch()
 	{
-
+		
 		intPageNo += 1
 		
-		let strLocaleStDate = StrUtil.replace(sourceText: (btnStDate?.text)!, findText: "-", replaceText: "") + "000000"
-		let strLocaleEnDate = StrUtil.replace(sourceText: (btnEnDate?.text)!, findText: "-", replaceText: "") + "235959"
+		let strLocaleStDate = StrUtil.replace(sourceText: (tfStDate?.text)!, findText: "-", replaceText: "") + "000000"
+		let strLocaleEnDate = StrUtil.replace(sourceText: (tfEnDate?.text)!, findText: "-", replaceText: "") + "235959"
 		
 		print("strLocaleStDate:\(strLocaleStDate)")
 		print("strLocaleEnDate:\(strLocaleEnDate)")
@@ -139,8 +130,8 @@ class ProductOrderSearch: BaseViewController, UITableViewDataSource, UITableView
 		print("pageNo:\(intPageNo)")
 		print("rowPerPage:\(Constants.ROWS_PER_PAGE)")
 		
-		clsDataClient.addServiceParam(paramName: "startOrderDate", value: strLocaleStDate)
-		clsDataClient.addServiceParam(paramName: "endOrderDate", value: strLocaleEnDate)
+		clsDataClient.addServiceParam(paramName: "startTraceDate", value: strLocaleStDate)
+		clsDataClient.addServiceParam(paramName: "endTraceDate", value: strLocaleEnDate)
 		clsDataClient.addServiceParam(paramName: "pageNo", value: intPageNo)
 		clsDataClient.addServiceParam(paramName: "rowsPerPage", value: Constants.ROWS_PER_PAGE)
 		clsDataClient.selectData(dataCompletionHandler: {(data, error) in
@@ -154,9 +145,9 @@ class ProductOrderSearch: BaseViewController, UITableViewDataSource, UITableView
 				return
 			}
 			self.arcDataRows.append(contentsOf: clsDataTable.getDataRows())
-			DispatchQueue.main.async { self.tvProductOrderSearch?.reloadData() }
+			DispatchQueue.main.async { self.tvHistorySearch?.reloadData() }
 		})
-
+		
 	}
 	
 	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
@@ -169,7 +160,7 @@ class ProductOrderSearch: BaseViewController, UITableViewDataSource, UITableView
 			doSearch()
 		}
 	}
-
+	
 	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
 		return self.arcDataRows.count
@@ -177,56 +168,35 @@ class ProductOrderSearch: BaseViewController, UITableViewDataSource, UITableView
 	
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
-		let objCell:ProductOrderSearchCell = tableView.dequeueReusableCell(withIdentifier: "tvcProductOrderSearchCell", for: indexPath) as! ProductOrderSearchCell
+		let objCell:HistorySearchCell = tableView.dequeueReusableCell(withIdentifier: "tvcHistorySearchCell", for: indexPath) as! HistorySearchCell
 		let clsDataRow = arcDataRows[indexPath.row]
 		
-		let strUtcOrderDate = clsDataRow.getString(name:"orderDate")
-		let strLocaleOrderDate = DateUtil.utcToLocale(utcDate: strUtcOrderDate!, dateFormat: "yyyyMMddHHmmss")
-		let strOrderDate = DateUtil.getConvertFormatDate(date: strLocaleOrderDate, srcFormat: "yyyyMMddHHmmss", dstFormat:"MM-dd")
-		
-		//objCell.lblOrderDate.text = "\(indexPath.row + 1)
-		objCell.lblOrderDate.text = strOrderDate
-		objCell.lblOrderReqCnt.text = clsDataRow.getString(name:"orderReqCnt")
-		objCell.lblOrderCustName.text = clsDataRow.getString(name:"orderCustName")
-		objCell.lblMakeOrderId.text = clsDataRow.getString(name:"makeOrderId")
-		objCell.lblProdAssetEpcName.text = clsDataRow.getString(name:"prodAssetEpcName")
-		objCell.lblOrderAddr.text = clsDataRow.getString(name:"oderAddr")
-		
-		objCell.btnSelection.titleLabel?.font = UIFont.fontAwesome(ofSize: 14)
-		objCell.btnSelection.setTitle(String.fontAwesomeIcon(name:.arrowDown), for: .normal)
-		objCell.btnSelection.tag = indexPath.row
-		objCell.btnSelection.addTarget(self, action: #selector(onSelectionClicked(_:)), for: .touchUpInside)
+		let strUtcTraceDate = clsDataRow.getString(name:"traceDate")
+		let strLocaleTraceDate = DateUtil.utcToLocale(utcDate: strUtcTraceDate!, dateFormat: "yyyyMMddHHmmss")
+		let strTraceDate = DateUtil.getConvertFormatDate(date: strLocaleTraceDate, srcFormat: "yyyyMMddHHmmss", dstFormat:"MM-dd HH:mm")
+
+		objCell.lblTraceDate?.text = strTraceDate
+		objCell.lblAssetEpcName?.text = clsDataRow.getString(name:"assetEpcName")
+		objCell.lblEventName?.text = clsDataRow.getString(name:"eventName")
+		objCell.lblEventCount?.text = clsDataRow.getString(name:"eventCnt")
+		objCell.lblBranchName?.text = clsDataRow.getString(name:"branchName")
 		return objCell
-	}
-	
-	@objc func onSelectionClicked(_ sender: UIButton)
-	{
-		let clsDataRow = arcDataRows[sender.tag]
-		let strtData = ReturnData(returnType: "productOrderSearch", returnCode: nil, returnMesage: nil, returnRawData: clsDataRow)
-		ptcDataHandler?.recvData(returnData: strtData)
-		self.dismiss(animated: true, completion: nil)
-	}
-	
-	@IBAction func onCloseClicked(_ sender: Any)
-	{
-		self.dismiss(animated: true, completion: nil)
 	}
 	
 	@IBAction func onStDateClicked(_ sender: UITextField)
 	{
-		createDatePicker(tfDateControl: btnStDate)
-	}
-	@IBAction func onEnDateClicked(_ sender: UITextField)
-	{
-		createDatePicker(tfDateControl: btnEnDate)
+		createDatePicker(tfDateControl: tfStDate)
 	}
 	
-	
+	@IBAction func onEnDateClicked(_ sender: UITextField){
+		createDatePicker(tfDateControl: tfEnDate)
+	}
+
 	func createDatePicker(tfDateControl : UITextField)
 	{
 		print("@@@@@@createDatePicker")
 		tfCurControl = tfDateControl
-
+		
 		dpPicker.locale = Locale(identifier: "ko_KR")
 		dpPicker.datePickerMode = .date
 		

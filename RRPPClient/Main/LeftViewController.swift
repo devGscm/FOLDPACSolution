@@ -54,9 +54,13 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		}
 		else if(strCustType == "MGR")
 		{
+			// 관리회사(MGR)
 			mArrMenuData.append(MenuItem(menuId: "TagSupply", menuName: "납품등록(RFID)"))
 			mArrMenuData.append(MenuItem(menuId: "ProductMount", menuName: NSLocalizedString("title_product_mount", comment: "자산등록")))
 			mArrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "RFID태그검수"))
+			mArrMenuData.append(MenuItem(menuId: "WorkHistorySearch", menuName: NSLocalizedString("title_work_history_search", comment: "작업내역조회")))
+			
+			
 			mArrMenuData.append(MenuItem(menuId: "RfidTrackingService", menuName: "이력추적"))
 		}
 		tvMenu?.reloadData()
@@ -87,15 +91,21 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 					return UIStoryboard.viewController(storyBoardName: "Product", identifier: "ProductMount") as! ProductMount
 				}()
 				toolbarController?.transition(to: clsController, completion: closeNavigationDrawer)
-			break;
+				break
 			case "RfidInspect" :
 				let clsController: RfidInspect = {
 					return UIStoryboard.viewController(storyBoardName: "Tag", identifier: "RfidInspect") as! RfidInspect
 				}()
 				toolbarController?.transition(to: clsController, completion: closeNavigationDrawer)
-
-		default:
-			print("is selected");
+				break
+			case "WorkHistorySearch" :
+				let clsController: HistorySearch = {
+					return UIStoryboard.viewController(storyBoardName: "History", identifier: "HistorySearch") as! HistorySearch
+				}()
+				toolbarController?.transition(to: clsController, completion: closeNavigationDrawer)
+				break
+			default:
+				print("is selected");
 		}
 		
 	}

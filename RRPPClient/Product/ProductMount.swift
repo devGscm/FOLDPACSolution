@@ -13,18 +13,17 @@ import Mosaic
 class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, DataProtocol, ReaderResponseDelegate
 {
 	
-	@IBOutlet weak var tvProductMount: UITableView!
-	@IBOutlet weak var lblReaderName: UILabel!
-	@IBOutlet weak var lblBranchInfo: UILabel!
 	@IBOutlet weak var lblUserName: UILabel!
+	@IBOutlet weak var lblBranchInfo: UILabel!
+	@IBOutlet weak var lblReaderName: UILabel!
 	@IBOutlet weak var btnRfidReader: UIButton!
-	
 	@IBOutlet weak var btnMakeOrderId: UIButton!
 	@IBOutlet weak var lblOrderCustName: UILabel!
 	@IBOutlet weak var lblOrderCount: UILabel!
 		
 	@IBOutlet weak var tfMakeLotId: UITextField!
-	
+	@IBOutlet weak var tvProductMount: UITableView!
+
 	
 	var strMakeOrderId: String = ""
 	var intOrderWorkCnt: Int = 0
@@ -54,29 +53,17 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		initViewControl()
 	}
 	
-	override func viewDidAppear(_ animated: Bool)
-	{
-		print("=========================================")
-		print("*ProductMount.viewDidAppear()")
-		print("=========================================")
-		
-		super.viewDidAppear(animated)
-	}
-	
-	override func viewWillDisappear(_ animated: Bool)
-	{
-		print("=========================================")
-		print("*ProductMount.viewWillDisappear()")
-		print("=========================================")
-		
-		super.viewWillDisappear(animated)
-	}
+
 	
 	override func viewDidDisappear(_ animated: Bool)
 	{
 		print("=========================================")
 		print("*ProductMount.viewDidDisappear()")
 		print("=========================================")
+		arrAssetRows.removeAll()
+		arrTagRows.removeAll()
+		clsIndicator = nil
+		clsDataClient = nil
 		
 		super.destoryRfid()
 		super.viewDidDisappear(animated)
