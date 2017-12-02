@@ -21,11 +21,7 @@ public class AT288Reader : NSObject, ReaderProtocol
 		self.delegate = delegate
 		super.init()
 	}
-	
-	func checkReader() {
-		print("at288  checkReader")
-	}
-	
+		
 	func connect() {
 		print("at288  connect")
 	}

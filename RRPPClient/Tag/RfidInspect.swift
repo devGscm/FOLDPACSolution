@@ -86,6 +86,12 @@ class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 		self.stopRead()
 	}
 	
+	///////////////////////////////////////////////////////////
+	/// ReaderResponseDelegate에서 받는 이벤트 구현 시작
+	//////////////////////////////////////////////////////////
+	
+	/// 테그 데이터 반환
+	/// - Parameter tagId: <#tagId description#>
 	func didReadTagList(_ tagId: String) {
 		if (self.arrTagList.contains(tagId) == false)
 		{
@@ -98,6 +104,13 @@ class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 		}
 	}
 	
+	func didReaderScanList(id: String, name: String, macAddr: String) {
+		print("Bluetooth에서 스캔한 리더기 리스트:  id:\(id), name:\(name), macAddr:\(macAddr)")
+	}
+	
+	///////////////////////////////////////////////////////////
+	/// ReaderResponseDelegate에서 받는 이벤트 구현 종료
+	//////////////////////////////////////////////////////////
 	
 	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{

@@ -25,12 +25,6 @@ public class SwingReader : NSObject, ReaderProtocol, SwingProtocolProtocol
 		
 	}
 	
-	func checkReader() {
-		self.swing.swingapi.scan()
-	}
-	
-	
-	
 	func connect() {
 		let dev : SwingDevice = SwingDevice()
 		//dev.identifier = "D32F0010-8DB8-856F-A8DF-85B3D00CF26A"
@@ -91,6 +85,15 @@ public class SwingReader : NSObject, ReaderProtocol, SwingProtocolProtocol
 		}
 	}
 	
+	func startReaderScan()
+	{
+		self.swing.swingapi.scan()
+	}
+	
+	func stopReaderScan()
+	{
+		self.swing.swingapi.stop()
+	}
 	////////////////////////////////////////////////////////////////////////////
 	/// 여기서 부터 Swing delegate Protocol 구현
 	////////////////////////////////////////////////////////////////////////////
@@ -115,6 +118,7 @@ public class SwingReader : NSObject, ReaderProtocol, SwingProtocolProtocol
 	
 	public func swing_didDiscover(_ dev: SwingDevice!) {
 		print("######Swing_didDiscoverDevice!!!")
+		self.delegate?.didReaderScanList?(id: dev.identifier, name: dev.name, macAddr: dev.macaddress)
 	}
 	
 	
@@ -148,5 +152,6 @@ public class SwingReader : NSObject, ReaderProtocol, SwingProtocolProtocol
 		print("Swing_didDisconnectDevice!!!")
 		self.delegate?.didReaderDisConnected?()
 	}
+	
 }
 

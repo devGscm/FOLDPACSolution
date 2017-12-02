@@ -8,10 +8,18 @@
 
 import UIKit
 
-struct RederDevInfo {
-	var id : String
-	var name : String
+public struct RederDevInfo {
+	var id : NSString
+	var name : NSString
+	var macAddr : NSString
 }
+
+public class Devinfo<T> {
+	let unbox: T
+	init(_ value: T) {
+		self.unbox = value
+	} }
+
 
 /// 지원되는 리더기 종류(현재 SWING만 지원)
 enum ReaderType {
@@ -26,7 +34,11 @@ public protocol ReaderResponseDelegate : class {
 	
 	 @objc optional func didReaderConnected()
 	
-	 @objc optional func didReaderDisConnected()	
+	 @objc optional func didReaderDisConnected()
+	
+	///optional로 프로토콜 설계시 구조체 파라메터를 사용할 수 없다.
+	@objc optional func didReaderScanList(id:String, name: String, macAddr: String)
+	
 }
 
 /// 리더기 공통 프로토콜 선언
@@ -35,11 +47,6 @@ protocol ReaderProtocol : class {
 	
 	/// 초기화 는 항상 리더기 식별자와 이벤트를 전파할 delegate로 한다
 	init(deviceId : String ,  delegate : ReaderResponseDelegate?)
-	
-	/**
-	* 리더기를 체크한다. (블루투스 가능여부도 판단)
-	*/
-	func checkReader()
 	
 	/**
 	* 리더기에 연결한다.
@@ -76,6 +83,16 @@ protocol ReaderProtocol : class {
 	////////////////////////////////////////////////////
 	// 여기서 부터 optional protocol 설정
 	////////////////////////////////////////////////////
+	/**
+	* 연결가능 리더기 스켄 시작
+	*/
+	@objc optional  func startReaderScan()
+	
+	/**
+	* 연결가능 리더기 스켄 종료
+	*/
+	@objc optional  func stopReaderScan()
+	
 	/**
 	* 인벤토리 모드를 설정한다.
 	* @param intMode 모드
@@ -319,9 +336,9 @@ class BaseRfidViewController : BaseViewController
 	
 
 	//접속가능한 Reader기를 찾기를 시작한다
-	func checkReader()
+	func startReaderScan()
 	{
-		self.reader!.checkReader()
+		self.reader!.startReaderScan?()
 	}
 	
 	
