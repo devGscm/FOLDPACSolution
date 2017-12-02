@@ -50,7 +50,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		//TODO:: 전역객체에서 등록된 리더기정보를 가져온다.
 		let devId  = "D32F0010-8DB8-856F-A8DF-85B3D00CF26A"
 		self.initRfid(.SWING, id:  devId, delegateReder:  self as ReaderResponseDelegate )
-		
+
 		initViewControl()
 	}
 	
@@ -96,7 +96,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		AppContext.sharedManager.getUserInfo().setBranchCustId(branchCustId: "160530000071")
 		AppContext.sharedManager.getUserInfo().setUserLang(strUserLang: "KR")
 		
-		
+		/*
 //		clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
 //									  indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.")
 		
@@ -112,6 +112,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
 			self.clsIndicator?.hide()
 		}
+		*/
 	}
 	
 	
@@ -177,8 +178,26 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 	}
 	
 	
+	// 리더기 연결 클릭이벤트
 	@IBAction func onRfidReaderClicked(_ sender: UIButton)
 	{
+		
+		if(sender.isSelected == false)
+		{
+			print(" 리더기 연결")
+			sender.isSelected = true
+			sender.backgroundColor = Color.orange.base
+			sender.tintColor = Color.orange.base
+			sender.setTitle(NSLocalizedString("rfid_reader_close", comment: "종료"), for: .normal)
+		}
+		else
+		{
+			print(" 리더기 종료")
+			sender.isSelected = false
+			sender.backgroundColor = Color.blue.base
+			sender.tintColor = Color.white
+			sender.setTitle(NSLocalizedString("rfid_reader_connect", comment: "연결"), for: .normal)
+		}
 		
 		// TODO  : test
 		let clsTagInfo1 = RfidUtil.TagInfo()
@@ -229,6 +248,8 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		
 		
 	}
+	
+
 	
 	// 주문선택
 	@IBAction func onMakeOrderIdClicked(_ sender: UIButton)
@@ -431,10 +452,8 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 					}
 					else
 					{
-						// TODO : getProcMsgName
-						//let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
-						
-						//self.showSnackbar(message: NSLocalizedString("c", comment: "품목이 다른 파렛트가 있어 처리 할 수 없습니다."))
+						let strMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
+						self.showSnackbar(message: strMsg)
 					}
 				}
 			

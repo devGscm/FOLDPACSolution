@@ -317,6 +317,7 @@ class BaseRfidViewController : BaseViewController
 		return strReSaleTypeName
 	}
 	
+
 	//접속가능한 Reader기를 찾기를 시작한다
 	func checkReader()
 	{

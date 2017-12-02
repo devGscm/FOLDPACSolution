@@ -50,6 +50,8 @@
 		55FA784D1FBDAD0B00583A80 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78471FBDAD0B00583A80 /* RootViewController.swift */; };
 		55FA78561FBDAD7E00583A80 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78551FBDAD7E00583A80 /* AppContext.swift */; };
 		55FA78591FBDB06F00583A80 /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78581FBDB06F00583A80 /* UIStoryboard.swift */; };
+		55FC62A41FD14A41003B7173 /* StockReviewProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FC62A31FD14A41003B7173 /* StockReviewProcess.swift */; };
+		55FC62A61FD14A56003B7173 /* Stock.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55FC62A51FD14A56003B7173 /* Stock.storyboard */; };
 		960224421FD0DBCD00DE7C65 /* SwingReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960224411FD0DBCD00DE7C65 /* SwingReader.swift */; };
 		960224441FD0F3E400DE7C65 /* AT288Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960224431FD0F3E400DE7C65 /* AT288Reader.swift */; };
 		9618F0E41FCE34B600F376B7 /* TestPorg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9618F0E31FCE34B600F376B7 /* TestPorg.swift */; };
@@ -162,6 +164,8 @@
 		55FA78471FBDAD0B00583A80 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		55FA78551FBDAD7E00583A80 /* AppContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
 		55FA78581FBDB06F00583A80 /* UIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboard.swift; sourceTree = "<group>"; };
+		55FC62A31FD14A41003B7173 /* StockReviewProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockReviewProcess.swift; sourceTree = "<group>"; };
+		55FC62A51FD14A56003B7173 /* Stock.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Stock.storyboard; sourceTree = "<group>"; };
 		960224411FD0DBCD00DE7C65 /* SwingReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwingReader.swift; sourceTree = "<group>"; };
 		960224431FD0F3E400DE7C65 /* AT288Reader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AT288Reader.swift; sourceTree = "<group>"; };
 		9618F0E31FCE34B600F376B7 /* TestPorg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPorg.swift; sourceTree = "<group>"; };
@@ -344,6 +348,15 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		55FC62A21FD149EE003B7173 /* Stock */ = {
+			isa = PBXGroup;
+			children = (
+				55FC62A51FD14A56003B7173 /* Stock.storyboard */,
+				55FC62A31FD14A41003B7173 /* StockReviewProcess.swift */,
+			);
+			path = Stock;
+			sourceTree = "<group>";
+		};
 		9602243F1FD0D19D00DE7C65 /* Swing */ = {
 			isa = PBXGroup;
 			children = (
@@ -419,6 +432,7 @@
 		96E4941E1FB1A78500D1E2C1 /* RRPPClient */ = {
 			isa = PBXGroup;
 			children = (
+				55FC62A21FD149EE003B7173 /* Stock */,
 				9618F0E21FCE348A00F376B7 /* Test */,
 				55B302C41FCE32A600BDCCB1 /* Tag */,
 				55B302BF1FCE323A00BDCCB1 /* Reader */,
@@ -585,6 +599,7 @@
 				967A9C441FC3BE8D00B6A9D1 /* Localizable.strings in Resources */,
 				55FA783F1FBDACFD00583A80 /* login.png in Resources */,
 				96E494271FB1A78500D1E2C1 /* Assets.xcassets in Resources */,
+				55FC62A61FD14A56003B7173 /* Stock.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -652,6 +667,7 @@
 				9618F0E61FCE83D300F376B7 /* TagCell.swift in Sources */,
 				55B302CA1FCE339400BDCCB1 /* ProductMountCell.swift in Sources */,
 				9680BE871FCBD91D002838A4 /* SwingDevice.m in Sources */,
+				55FC62A41FD14A41003B7173 /* StockReviewProcess.swift in Sources */,
 				55ECF5DE1FCE8BC40021F786 /* TagDetailList.swift in Sources */,
 				55FA78481FBDAD0B00583A80 /* AppNavigationDrawerController.swift in Sources */,
 				55B302C31FCE323B00BDCCB1 /* RfidUtil.swift in Sources */,

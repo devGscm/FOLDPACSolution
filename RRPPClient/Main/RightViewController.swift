@@ -30,7 +30,7 @@ class RightViewController: UITableViewController, DataProtocol
         mLstIdentificationSystem.append(IdentificationSystemDialog.IdentificationSystem(IdentificationSystemType: 0, IdentificationSystemName: "ITF-14 바코드"))
         mLstIdentificationSystem.append(IdentificationSystemDialog.IdentificationSystem(IdentificationSystemType: 1, IdentificationSystemName: "농산물 QR코드"))
 
-        let intIdentificationSystem = UserDefaults.standard.integer(forKey: Constants.IDENTIFICATION_SYSTEM_LIST_KEY)
+		let intIdentificationSystem = UserDefaults.standard.integer(forKey: Constants.IDENTIFICATION_SYSTEM_LIST_KEY)
         let strIdentificationSystemName = mLstIdentificationSystem[intIdentificationSystem].IdentificationSystemName
         
         print("@@@@@@ ID-SYSTEM:\(intIdentificationSystem)")
@@ -43,10 +43,10 @@ class RightViewController: UITableViewController, DataProtocol
 		self.swRfidBeep.isOn = UserDefaults.standard.bool(forKey: Constants.RFID_BEEP_ENABLED_KEY)
         
 		// RFID 리더기
-		mLstRfidReader.append(RfidReaderDialog.RfidReader(readerType: 0, readerName: "Swing U"))
-		mLstRfidReader.append(RfidReaderDialog.RfidReader(readerType: 1, readerName: "AT288"))
+		mLstRfidReader.append(RfidReaderDialog.RfidReader(readerType: 0, readerName: NSLocalizedString("rfid_reader_swing_u", comment: "Swing U")))
+		mLstRfidReader.append(RfidReaderDialog.RfidReader(readerType: 1, readerName: NSLocalizedString("rfid_reader_at288", comment: "AT288")))
 		
-		let intRfidReader = UserDefaults.standard.integer(forKey: Constants.RFID_READER_KEY)
+		let intRfidReader = UserDefaults.standard.integer(forKey: Constants.RFID_READER_TYPE_KEY)
 		let strRfidReaderName = mLstRfidReader[intRfidReader].readerName
 		//print("@@@@@@ RFID READER:\(intRfidReader)")
 		self.btnRfidReader.setTitle(strRfidReaderName, for: .normal)
@@ -87,9 +87,9 @@ class RightViewController: UITableViewController, DataProtocol
 			
 			
 				print("@@@@@@@@@@@@@ strBranchID:\(strBranchId)" )
-				UserDefaults.standard.setValue(returnData.returnCode, forKey: Constants.BASE_BRANCH_KEY)
+				UserDefaults.standard.setValue(strBranchId, forKey: Constants.BASE_BRANCH_KEY)
 				UserDefaults.standard.synchronize()
-				self.btnBranch.setTitle(returnData.returnCode, for: .normal)
+				self.btnBranch.setTitle(strBranchName, for: .normal)
 			}
 		}
 	}
@@ -172,7 +172,8 @@ class RightViewController: UITableViewController, DataProtocol
 		let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
 			let intReaderType = clsReaderDialog.selectedRow.readerType
 			let strRaderName = clsReaderDialog.selectedRow.readerName
-			UserDefaults.standard.setValue(intReaderType, forKey: Constants.RFID_READER_KEY)
+			UserDefaults.standard.setValue(intReaderType, forKey: Constants.RFID_READER_TYPE_KEY)
+			UserDefaults.standard.setValue(strRaderName, forKey: Constants.RFID_READER_NAME_KEY)
 			UserDefaults.standard.synchronize()
 			self.btnRfidReader.setTitle(strRaderName, for: .normal)
 		}
