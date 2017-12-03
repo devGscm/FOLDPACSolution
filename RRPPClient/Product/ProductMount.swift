@@ -77,11 +77,13 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 	func initViewControl()
 	{
 		// For Test
+		/*
 		AppContext.sharedManager.getUserInfo().setEncryptId(strEncryptId: "xxOxOsU93/PvK/NN7DZmZw==")
 		AppContext.sharedManager.getUserInfo().setCorpId(strCorpId: "logisallcm")
 		AppContext.sharedManager.getUserInfo().setBranchId(branchId: "160530000045")
 		AppContext.sharedManager.getUserInfo().setBranchCustId(branchCustId: "160530000071")
 		AppContext.sharedManager.getUserInfo().setUserLang(strUserLang: "KR")
+*/
 		
 		/*
 //		clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
@@ -100,6 +102,10 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 			self.clsIndicator?.hide()
 		}
 		*/
+		
+		lblUserName.text = AppContext.sharedManager.getUserInfo().getUserName()
+		lblBranchInfo.text = AppContext.sharedManager.getUserInfo().getBranchName()
+		lblReaderName.text = UserDefaults.standard.string(forKey: Constants.RFID_READER_NAME_KEY)
 	}
 	
 	
