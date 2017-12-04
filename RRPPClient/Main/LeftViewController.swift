@@ -58,8 +58,8 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			mArrMenuData.append(MenuItem(menuId: "TagSupply", menuName: "납품등록(RFID)"))
 			mArrMenuData.append(MenuItem(menuId: "ProductMount", menuName: NSLocalizedString("title_product_mount", comment: "자산등록")))
 			mArrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "RFID태그검수"))
+			mArrMenuData.append(MenuItem(menuId: "ProdMappingOut", menuName: NSLocalizedString("title_work_sale_c", comment: "출고C")))
 			mArrMenuData.append(MenuItem(menuId: "WorkHistorySearch", menuName: NSLocalizedString("title_work_history_search", comment: "작업내역조회")))
-			
 			
 			mArrMenuData.append(MenuItem(menuId: "RfidTrackingService", menuName: "이력추적"))
 		}
@@ -98,6 +98,14 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 				}()
 				toolbarController?.transition(to: clsController, completion: closeNavigationDrawer)
 				break
+			
+			case "ProdMappingOut" :
+				let clsController: ProdMappingOut = {
+					return UIStoryboard.viewController(storyBoardName: "ProdMapping", identifier: "ProdMappingOut") as! ProdMappingOut
+				}()
+				toolbarController?.transition(to: clsController, completion: closeNavigationDrawer)
+				break
+			
 			case "WorkHistorySearch" :
 				let clsController: HistorySearch = {
 					return UIStoryboard.viewController(storyBoardName: "History", identifier: "HistorySearch") as! HistorySearch
