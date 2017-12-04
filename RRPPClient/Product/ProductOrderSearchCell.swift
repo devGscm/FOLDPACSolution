@@ -17,7 +17,7 @@ class ProductOrderSearchCell: UITableViewCell
 	@IBOutlet weak var lblMakeOrderId: UILabel!
 	@IBOutlet weak var lblProdAssetEpcName: UILabel!
 	@IBOutlet weak var lblOrderAddr: UILabel!
-	@IBOutlet weak var btnSelection: FABButton!
+	@IBOutlet weak var btnSelection: UIButton!
 	
 	override func awakeFromNib()
 	{

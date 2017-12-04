@@ -17,7 +17,7 @@ public class DataTable : NSObject, NSCopying
     //private var mIntDataHanderType : DataSourceMgr.DATA_HANDLER_AJAX;
     private var mIntDataHanderType : Int = 1
     
-    override init()
+    public override init()
     {
         self.mArlDataColumn = [DataColumn]()
         self.mArlDataRow = [DataRow]()
@@ -26,7 +26,7 @@ public class DataTable : NSObject, NSCopying
         super.init()
     }
     
-    init(id: String)
+    public init(id: String)
     {
         self.mArlDataColumn = [DataColumn]()
         self.mArlDataRow = [DataRow]()
@@ -35,7 +35,7 @@ public class DataTable : NSObject, NSCopying
         super.init()
     }
     
-    init(id: String, tableName: String)
+    public init(id: String, tableName: String)
     {
         self.mArlDataColumn = [DataColumn]()
         self.mArlDataRow = [DataRow]()

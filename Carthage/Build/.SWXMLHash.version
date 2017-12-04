@@ -8,20 +8,20 @@
   "watchOS" : [
     {
       "name" : "SWXMLHash",
-      "hash" : "5957b12823c6eb2dbcf8d896461bfe66363bebe94a34969f2ce1ceabc08dc08b"
+      "hash" : "e948f92c822fa0fe8bc6a2488b341439f98a1cc477e1f5a848e12326e8b99104"
     }
   ],
   "tvOS" : [
     {
       "name" : "SWXMLHash",
-      "hash" : "d9a654555ca8764221577de87d85ab8208fdf711435d7a3dff14a40d29b003ee"
+      "hash" : "eadaaf1cec6277bfab058a97d504485ffb959ef165d5cca61a823458ec107f3a"
     }
   ],
   "commitish" : "4.2.5",
   "iOS" : [
     {
       "name" : "SWXMLHash",
-      "hash" : "8a2f3578961f1dc6a42eca65d4bcb77df9e23d08c65d689e3c19e05a84b41f68"
+      "hash" : "5f0f7039a88fa3b8ed75ca6a98b9ce080eec4e0dff8f7965abf3708fb2cec40d"
     }
   ]
 }

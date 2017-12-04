@@ -2,8 +2,12 @@ import UIKit
 import Material
 import Mosaic
 
-class RootViewController: UIViewController
+class RootViewController: BaseViewController
 {
+	lazy var mClsRightController: RightViewController = {
+		return UIStoryboard.viewController(identifier: "RightViewController") as! RightViewController
+	}()
+	
     open override func viewDidLoad()
 	{
 		print("@@@@@@@@@@@@@@@@@@@@")
@@ -17,11 +21,10 @@ class RootViewController: UIViewController
 	
 	override func viewDidAppear(_ animated: Bool)
 	{
+	
 		if(AppContext.sharedManager.getUserInfo().getAutoLogin() == true || AppContext.sharedManager.getAuthenticated() == true)
-		{
-			
-			let rfid =  RfidSwing()
-			rfid.doConnectRfid()
+		{			
+			showSnackbar(message: "스네이크바 테스트입니다.")
 			
 //			let dataClient = Mosaic.DataClient(url: Constants.WEB_SVC_URL)
 //			dataClient.UserInfo = "xxOxOsU93/PvK/NN7DZmZw=="
@@ -86,11 +89,11 @@ class RootViewController: UIViewController
 //					}
 //			})		
 		
-//			print("로그인 성공")
-//			let localData = LocalData.shared
-//			localData.RemoteDbEnncryptId = AppContext.sharedManager.getUserInfo().getEncryptId()
-//			localData.CorpId = AppContext.sharedManager.getUserInfo().getCorpId()
-//			localData.versionCheck()
+			print("로그인 성공")
+			let localData = LocalData.shared
+			localData.RemoteDbEnncryptId = AppContext.sharedManager.getUserInfo().getEncryptId()
+			localData.CorpId = AppContext.sharedManager.getUserInfo().getCorpId()
+			localData.versionCheck()
 			
 			
 			

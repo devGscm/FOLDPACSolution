@@ -150,8 +150,8 @@
 "rfid_reader_ajantech" = "AjanTech";
 "rfid_reader_arete" = "AretePop(Audio)";    
 "rfid_reader_none" = "None";
-"rfid_reader_connect" = "Connect(Reader)";
-"rfid_reader_close" = "Close(Reader)";
+"rfid_reader_connect" = "Connect";
+"rfid_reader_close" = "Close";
 "rfid_asset_name" = "Item No.";
 "rfid_serial_no" = "Serial No.";
 "rfid_epc_code" = "EPC Code";

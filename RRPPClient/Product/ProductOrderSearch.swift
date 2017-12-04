@@ -9,7 +9,7 @@
 import UIKit
 import Mosaic
 
-class ProductOrderSearch: UIViewController, UITableViewDataSource, UITableViewDelegate
+class ProductOrderSearch: BaseViewController, UITableViewDataSource, UITableViewDelegate
 {
 
 	@IBOutlet weak var tvProductOrderSearch: UITableView!
@@ -22,31 +22,43 @@ class ProductOrderSearch: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	var ptcDataHandler : DataProtocol?
 	
-	let dpPicker = UIDatePicker()
-	
+	var dpPicker: UIDatePicker!
 	var intPageNo  = 0
 	var clsDataClient : DataClient!
 	var arcDataRows : Array<DataRow> = Array<DataRow>()
 
-
-	override func viewDidLoad()
+	override func viewWillAppear(_ animated: Bool)
 	{
-        super.viewDidLoad()
+		super.viewWillAppear(animated)
+		super.initController()
+		
 		initViewControl()
 		initDataClient()
 		doInitSearch()
-    }
-
+	}
+	
+	
+	override func viewDidDisappear(_ animated: Bool)
+	{
+		dpPicker = nil
+		arcDataRows.removeAll()
+		clsDataClient = nil
+		
+		super.releaseController()
+		super.viewDidDisappear(animated)
+		
+	}
+	
+	
 	func initViewControl()
 	{
+		dpPicker = UIDatePicker()
 		let dtCurDate = Date()
 		let dfFormat = DateFormatter()
 		dfFormat.dateFormat = "yyyy-MM-dd"
 		btnEnDate.text = dfFormat.string(from: dtCurDate)
 		
-		//let intDateDistance = AppContext.sharedManager.getUserInfo().getDateDistance()
-		let intDateDistance = 3
-		
+		let intDateDistance = AppContext.sharedManager.getUserInfo().getDateDistance()
 		let dtStDate = Calendar.current.date(byAdding: .day, value: -intDateDistance, to: dtCurDate)
 		btnStDate.text = dfFormat.string(from: dtStDate!)
 	}

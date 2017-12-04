@@ -8,7 +8,166 @@
 
 import UIKit
 
+public struct RederDevInfo {
+	var id : NSString
+	var name : NSString
+	var macAddr : NSString
+}
 
+public class Devinfo<T> {
+	let unbox: T
+	init(_ value: T) {
+		self.unbox = value
+	} }
+
+
+/// 지원되는 리더기 종류(현재 SWING만 지원)
+enum ReaderType {
+	case SWING
+	case AT288
+}
+
+/// 리더기 공통 응답프로토콜 선언
+@objc
+public protocol ReaderResponseDelegate : class {
+	func didReadTagList( _ tagId : String)
+	
+	 @objc optional func didReaderConnected()
+	
+	 @objc optional func didReaderDisConnected()
+	
+	///optional로 프로토콜 설계시 구조체 파라메터를 사용할 수 없다.
+	@objc optional func didReaderScanList(id:String, name: String, macAddr: String)
+	
+}
+
+/// 리더기 공통 프로토콜 선언
+@objc
+protocol ReaderProtocol : class {
+	
+	/// 초기화 는 항상 리더기 식별자와 이벤트를 전파할 delegate로 한다
+	init(deviceId : String ,  delegate : ReaderResponseDelegate?)
+	
+	/**
+	* 리더기에 연결한다.
+	*/
+	func connect()
+	
+	/**
+	* 리더기에서 연결을 종료한다.
+	*/
+	func close()
+	
+	/**
+	* 읽기를 시작한다.
+	*/
+	func startRead()
+	
+	/**
+	* 읽기를 종료한다.
+	*/
+	func stopRead()
+	
+	/**
+	* 연결되었는지 여부를 리턴한다.
+	* @return 연결되었는지여부
+	*/
+	func isConnected() -> Bool
+	
+	/**
+	* 리더기 초기화
+	*/
+	func initReader()
+	
+	
+	////////////////////////////////////////////////////
+	// 여기서 부터 optional protocol 설정
+	////////////////////////////////////////////////////
+	/**
+	* 연결가능 리더기 스켄 시작
+	*/
+	@objc optional  func startReaderScan()
+	
+	/**
+	* 연결가능 리더기 스켄 종료
+	*/
+	@objc optional  func stopReaderScan()
+	
+	/**
+	* 인벤토리 모드를 설정한다.
+	* @param intMode 모드
+	*/
+	@objc optional  func setInventoryMode(_ mode: Int)
+	
+	/**
+	* 인벤토리를 초기화한다.
+	*/
+	@objc optional func clearInventory()
+	
+	
+	/**
+	* 리더기 소멸
+	*/
+	@objc optional func  destroyReader()
+	
+	/**
+	* 리더기 볼륨 컨트롤 - 스윙센서
+	* @return boolean
+	*/
+	@objc optional func setReaderVolumeControl(mode: Int,  level: Int) -> Bool
+	
+	/**
+	* 리더기 RF파워를 리턴한다.
+	*/
+	@objc optional func getRFPowerControl() -> Int
+	
+	/**
+	* 리더기 RF파워 컨트롤 - 스윙센서
+	*/
+	@objc optional func  setRFPowerControl(_ attenuation : Int)
+	
+//	/**
+//	* 센서태그의 UID를 리턴한다
+//	*/
+//	String getRFIDTagUid();
+//
+//	/**
+//	* 센서태그의 데이터를 리턴한다
+//	*/
+//	String getRFIDTagData();
+	
+	/**
+	* 리더기 볼륨 컨트롤 - 스윙센서
+	* @return boolean
+	*/
+	@objc optional func   readerTempDataSync(_ blLarge_memory : Bool)
+	
+	/**
+	* 리더기 모드 컨트롤 - 스윙센서
+	* @return boolean
+	*/
+	@objc optional func   setReaderModeControl(_ mode : Int);
+	
+	/**
+	* 리더기의 태그리포트[A],[N]모드를 컨트롤한다.
+	* @return boolean
+	*/
+	@objc optional func  setTagReportModeControl(_ mode : Int)
+	
+	/**
+	* 리더기의 모드변경(RFID/QR코드)에 대한 비프음
+	*/
+	@objc optional func playBeepReadModeChange()
+	
+//	/**
+//	* 리더기 연결여부 확인
+//	*/
+//	boolean isReaderConnected();
+//	
+}
+
+
+/// BaseRfidViewController 클래스 구현시작
 class BaseRfidViewController : BaseViewController
 {
 	var arrAssetInfo	: Array<AssetInfo> = Array<AssetInfo>()
@@ -16,25 +175,26 @@ class BaseRfidViewController : BaseViewController
 	var arrSaleType		: Array<CodeInfo> = Array<CodeInfo>()
 	var arrReSaleType	: Array<CodeInfo> = Array<CodeInfo>()
 	
-	func initRfid()
+	//해당 클레스를 참조하는 서브클래스에서 이벤트 수신을 위하여
+	//응답 프로토클을 정의 기존 네톰에서 정의한 이벤트를 수신하면
+	//해당 프로토콜의 정의한 이벤트로 다시 재전송 즉  네톰이벤트 ---> 신규정의이벤트
+	weak var delegateReder: ReaderResponseDelegate?
+	var reader : ReaderProtocol?
+	
+	func initRfid(_ type : ReaderType, id : String,	delegateReder : ReaderResponseDelegate?)
 	{
 		super.initController()
+		switch type
+		{
+			case .SWING :
+				self.reader = SwingReader(deviceId : id ,  delegate: delegateReder)
+			
+			case .AT288 :
+				self.reader = AT288Reader(deviceId : id ,  delegate: delegateReder)
+		}
+		
+		//자산코드 및 기타 공통코드를 LocalDB에서 가져옮
 		initCodeInfo()
-	}
-	
-	func startRfid()
-	{
-		
-	}
-	
-	func stopRead()
-	{
-		
-	}
-	
-	func stopRfid()
-	{
-		
 	}
 	
 	func destoryRfid()
@@ -57,7 +217,6 @@ class BaseRfidViewController : BaseViewController
 		var arrDataDistance: Array<CodeInfo> = LocalData.shared.getCodeDetail(fieldValue: "DATE_SEARCH", initCodeName: nil)
 		if(arrDataDistance.count > 0)
 		{
-			
 			let clsInfo = arrDataDistance[0]
 			if(clsInfo.commCode.isEmpty == false)
 			{
@@ -76,7 +235,7 @@ class BaseRfidViewController : BaseViewController
 		arrReSaleType.removeAll()		
 	}
 	
-	func getAssetName(strAsset : String) -> String
+	func getAssetName(assetEpc : String) -> String
 	{
 		var strAssetName  = ""
 		if(arrAssetInfo.isEmpty == false)
@@ -84,7 +243,7 @@ class BaseRfidViewController : BaseViewController
 			for clsAssetInfo in arrAssetInfo
 			{
 				print("----- asetEpc:\(clsAssetInfo.assetEpc)")
-				if(clsAssetInfo.assetEpc == strAsset)
+				if(clsAssetInfo.assetEpc == assetEpc)
 				{
 					strAssetName = clsAssetInfo.assetName
 					print("----- strAssetName:\(strAssetName)")
@@ -95,11 +254,116 @@ class BaseRfidViewController : BaseViewController
 		return strAssetName
 	}
 	
-	
-	
 	func getAssetList() -> Array<AssetInfo>
 	{
 		return arrAssetInfo
 	}
+	
+	func getProcMsgName( userLang: String, commCode: String) -> String
+	{
+		var strProcMsgName = ""
+		for clsInfo in arrProcMsgInfo
+		{
+			if(clsInfo.commCode == commCode)
+			{
+				if(Constants.USER_LANG_CH == userLang)
+				{
+					strProcMsgName = clsInfo.commNameCh
+				}
+				else if(Constants.USER_LANG_EN == userLang)
+				{
+					strProcMsgName = clsInfo.commNameEn
+				}
+				else
+				{
+					strProcMsgName = clsInfo.commNameKr
+				}
+				break
+			}
+		}
+		return strProcMsgName
+	}
+	
+	func getSaleTypeName(userLang: String, commCode: String) -> String
+	{
+		var strSaleTypeName = ""
+		for clsInfo in arrSaleType
+		{
+			if(clsInfo.commCode == commCode)
+			{
+				if(Constants.USER_LANG_CH == userLang)
+				{
+					strSaleTypeName = clsInfo.commNameCh
+				}
+				else if(Constants.USER_LANG_EN == userLang)
+				{
+					strSaleTypeName = clsInfo.commNameEn
+				}
+				else
+				{
+					strSaleTypeName = clsInfo.commNameKr
+				}
+				break
+			}
+		}
+		return strSaleTypeName
+	}
+	
+	func getReSaleTypeName(userLang: String, commCode: String) -> String
+	{
+		var strReSaleTypeName = ""
+		for clsInfo in arrReSaleType
+		{
+			if(clsInfo.commCode == commCode)
+			{
+				if(Constants.USER_LANG_CH == userLang)
+				{
+					strReSaleTypeName = clsInfo.commNameCh
+				}
+				else if(Constants.USER_LANG_EN == userLang)
+				{
+					strReSaleTypeName = clsInfo.commNameEn
+				}
+				else
+				{
+					strReSaleTypeName = clsInfo.commNameKr
+				}
+				break
+			}
+		}
+		return strReSaleTypeName
+	}
+	
 
+	//접속가능한 Reader기를 찾기를 시작한다
+	func startReaderScan()
+	{
+		self.reader!.startReaderScan?()
+	}
+	
+	
+	func isConnected() -> Bool
+	{
+		return self.reader!.isConnected()
+	}
+	
+	func readerConnect()
+	{
+		self.reader!.connect()
+	}
+	
+	func readerDisConnect()
+	{
+		self.reader!.close()
+	}
+	
+	func startRead()
+	{
+		self.reader!.startRead()
+	}
+	
+	func stopRead()
+	{
+		self.reader!.stopRead()
+	}
 }

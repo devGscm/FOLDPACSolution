@@ -13,7 +13,7 @@ class ProductMountCell: UITableViewCell
 {
 	@IBOutlet weak var lblAssetName: UILabel!
 	@IBOutlet weak var lblReadCount: UILabel!
- 	@IBOutlet weak var btnDetail: FABButton!
+ 	@IBOutlet weak var btnDetail: UIButton!
 	
 	override func awakeFromNib()
 	{

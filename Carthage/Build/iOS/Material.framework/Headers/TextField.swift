@@ -350,9 +350,9 @@ open class TextField: UITextField {
                 return
             }
 
-            visibilityIconButton = IconButton(image: Icon.visibility, tintColor: placeholderNormalColor.withAlphaComponent(isSecureTextEntry ? 0.38 : 0.54))
+            visibilityIconButton = IconButton(image: isSecureTextEntry ? Icon.visibility : Icon.visibilityOff, tintColor: placeholderNormalColor.withAlphaComponent(0.54))
             visibilityIconButton!.contentEdgeInsetsPreset = .none
-            visibilityIconButton!.pulseAnimation = .none
+            visibilityIconButton!.pulseAnimation = .centerRadialBeyondBounds
             isSecureTextEntry = true
             clearButtonMode = .never
             rightViewMode = .whileEditing
@@ -643,12 +643,21 @@ fileprivate extension TextField {
     func handleVisibilityIconButton() {
         isSecureTextEntry = !isSecureTextEntry
 
-        if !isSecureTextEntry {
-            super.font = nil
-            font = placeholderLabel.font
-        }
+        UIView.transition(
+            with: (visibilityIconButton?.imageView)!,
+            duration: 0.3,
+            options: .transitionCrossDissolve,
+            animations: { [weak self] in
+                guard let `self` = self else {
+                    return
+                }
 
-        visibilityIconButton?.tintColor = visibilityIconButton?.tintColor.withAlphaComponent(isSecureTextEntry ? 0.38 : 0.54)
+                guard let v = self.visibilityIconButton else {
+                    return
+                }
+
+                v.image = self.isSecureTextEntry ? Icon.visibilityOff?.tint(with: v.tintColor.withAlphaComponent(0.54)) : Icon.visibility?.tint(with: v.tintColor.withAlphaComponent(0.54))
+            })
     }
 }
 

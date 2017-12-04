@@ -785,7 +785,7 @@ class LocalData {
 	/// - Returns: <#return value description#>
 	public func getCodeDetail(fieldValue: String, initCodeName : String?) -> [CodeInfo]
 	{
-		return self.getCodeDetail(fieldValue, nil, nil, nil, nil, nil, fieldValue)
+		return self.getCodeDetail(fieldValue, nil, nil, nil, nil, nil, initCodeName)
 	}
 	
 	/// 공통코드 가져오기
@@ -797,7 +797,7 @@ class LocalData {
 	/// - Returns: <#return value description#>
 	public func getCodeDetail(fieldValue: String, commCode: String?, initCodeName : String?) -> [CodeInfo]
 	{
-		return self.getCodeDetail(fieldValue, commCode, nil, nil, nil, nil, fieldValue)
+		return self.getCodeDetail(fieldValue, commCode, nil, nil, nil, nil, initCodeName)
 	}
 	
 	///  공통코드 가져오기
@@ -810,7 +810,7 @@ class LocalData {
 	/// - Returns: <#return value description#>
 	public func getCodeDetail(fieldValue: String, commCode: String?, viewYn: String, initCodeName : String?) -> [CodeInfo]
 	{
-		return self.getCodeDetail(fieldValue, commCode, nil, nil, nil, viewYn, fieldValue)
+		return self.getCodeDetail(fieldValue, commCode, nil, nil, nil, viewYn, initCodeName)
 	}
 	
 	///  공통코드 가져오기
@@ -882,10 +882,10 @@ class LocalData {
 			}
 			
 			//For debuggig
-//			for tempCodeInfo in codeInfos
-//			{
-//				print(tempCodeInfo)
-//			}
+			for tempCodeInfo in codeInfos
+			{
+				print(tempCodeInfo)
+			}
 			
 			return codeInfos
 		}
