@@ -252,7 +252,7 @@ public class RfidUtil
     
     public func checkHeader(strData: String) -> Encodings
     {
-        let strData = "3312D58E3D8100C000027505"                                        //테스트 입력값(Hex): 3312D58E3D8100C000027505
+        //let strData = "3312D58E3D8100C000027505"                                        //테스트 입력값(Hex): 3312D58E3D8100C000027505
         var strHeaderBinary = String()
         
         //문자열 잘르기
@@ -696,7 +696,7 @@ public class RfidUtil
      */
     public func parseGrai96(enuEncoding: Encodings, strData: String) -> TagInfo
     {
-        print("[2]=>parseGrai96: \(strData)")
+        //print("[2]=>parseGrai96: \(strData)")
         
         //let enuEncoding = RfidUtil.Encodings.GRAI_96                                        //테스트 입력값: GRAI_96
         //let strData = "3312D58E3D8100C000027505"                                            //테스트 입력값: 3312D58E3D8100C000027505
@@ -711,8 +711,8 @@ public class RfidUtil
         
         //바이너리 변환
         let bitString = self.fillLength48(strInput: getSubstringData(strInputString: strData, intIndexStart: 0, intIndexEnd: 11))               //결과: 3312D58E3D81
-            + self.fillLength48(strInput: getSubstringData(strInputString: strData, intIndexStart: 12, intIndexEnd: 23))                        //결과: 00C000027505
-        //결과: 001100110001001011010101100011100011110110000001000000001100000000000000000000100111010100000101
+                        + self.fillLength48(strInput: getSubstringData(strInputString: strData, intIndexStart: 12, intIndexEnd: 23))            //결과: 00C000027505
+                        //결과: 001100110001001011010101100011100011110110000001000000001100000000000000000000100111010100000101
         
         //Partition 변환
         let subStrBitString = getSubstringData(strInputString: bitString, intIndexStart: 11, intIndexEnd: 13)                                   //결과: 100
