@@ -58,6 +58,14 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			mArrMenuData.append(MenuItem(menuId: "TagSupply", menuName: "납품등록(RFID)"))
 			mArrMenuData.append(MenuItem(menuId: "ProductMount", menuName: NSLocalizedString("title_product_mount", comment: "자산등록")))
 			mArrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "RFID태그검수"))
+            
+            let strIdentificationSystem = UserDefaults.standard.string(forKey: Constants.IDENTIFICATION_SYSTEM_LIST_KEY)
+            if(strIdentificationSystem == Constants.IDENTIFICATION_SYSTEM_AGQR)
+            {
+                
+            }
+            
+            //UserDefaults.standard.setValue(intIdentificationSystemType, forKey: Constants.IDENTIFICATION_SYSTEM_LIST_KEY)
 			mArrMenuData.append(MenuItem(menuId: "ProdMappingOut", menuName: NSLocalizedString("title_work_sale_c", comment: "출고C")))
 			mArrMenuData.append(MenuItem(menuId: "WorkHistorySearch", menuName: NSLocalizedString("title_work_history_search", comment: "작업내역조회")))
 			
@@ -100,6 +108,8 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 				break
 			
 			case "ProdMappingOut" :
+                
+                // 출고C(출하)
 				let clsController: ProdMappingOut = {
 					return UIStoryboard.viewController(storyBoardName: "ProdMapping", identifier: "ProdMappingOut") as! ProdMappingOut
 				}()

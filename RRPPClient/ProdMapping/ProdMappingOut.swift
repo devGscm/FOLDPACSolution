@@ -23,14 +23,21 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	
 	
 	@IBOutlet weak var tvProdMappingRfid: UITableView!
-	
 	@IBOutlet weak var tvProdMappingItem: UITableView!
-	
-	var strMakeOrderId: String = ""
-	var intOrderWorkCnt: Int = 0
-	var intOrderReqCnt: Int = 0
-	var strProdAssetEpc: String?
-	var intCurOrderWorkCnt: Int = 0
+
+    var strSaleWorkId	= ""	// 송장번호
+    var strToBranchId	= ""	// 출하거점
+    
+    
+    
+    
+    
+    
+//    var strMakeOrderId: String = ""
+//    var intOrderWorkCnt: Int = 0
+//    var intOrderReqCnt: Int = 0
+//    var strProdAssetEpc: String?
+//    var intCurOrderWorkCnt: Int = 0
 	
 	var arrAssetRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
 	var arrTagRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
@@ -77,6 +84,8 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	// View관련 컨트롤을 초기화한다.
 	func initViewControl()
 	{
+
+        
 		// For Test
 		//		AppContext.sharedManager.getUserInfo().setEncryptId(strEncryptId: "xxOxOsU93/PvK/NN7DZmZw==")
 		//		AppContext.sharedManager.getUserInfo().setCorpId(strCorpId: "logisallcm")
@@ -123,28 +132,21 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	// 팝업 다이얼로그로 부터 데이터 수신
 	func recvData( returnData : ReturnData)
 	{
-		if(returnData.returnType == "productOrderSearch")
+   		if(returnData.returnType == "workOutCustSearch")
 		{
 			if(returnData.returnRawData != nil)
 			{
-				clearUserInterfaceData()
-				
+
+                // 새로운 입고처가 들어오면 기존 데이터를 삭제한다.
+                if(strSaleWorkId.isEmpty == false)
+                {
+                	clearTagData(boolClearScreen: true)
+                }
+                
 				let clsDataRow = returnData.returnRawData as! DataRow
-				strMakeOrderId	= clsDataRow.getString(name: "makeOrderId") ?? ""
-				intOrderWorkCnt	= clsDataRow.getInt(name: "orderWorkCnt") ?? 0
-				intOrderReqCnt	= clsDataRow.getInt(name: "orderReqCnt") ?? 0
-				strProdAssetEpc = clsDataRow.getString(name: "prodAssetEpc")
-				intCurOrderWorkCnt = intOrderWorkCnt
-				
-				print("@@@@@@@@strMakeOrderId=\(strMakeOrderId)")
-				print("@@@@@@@@intOrderWorkCnt=\(intOrderWorkCnt)")
-				
-//				self.btnMakeOrderId.setTitle(strMakeOrderId, for: .normal)
-//				self.lblOrderCustName.text = clsDataRow.getString(name: "orderCustName")
-//				self.lblOrderCount.text = "\(intOrderWorkCnt)/\(intOrderReqCnt)"
-				
-				// 새로운 발주번호가 들어ㅗ면 기존 데이터를 삭제한다.
-				clearTagData()
+                var strCustName = clsDataRow.getString(name: "custName") ?? ""
+				self.strToBranchId	= clsDataRow.getString(name: "branchId") ?? ""
+	        	self.btnWorkOutCustSearch.setTitle(strCustName, for: .normal)
 			}
 		}
 	}
@@ -223,7 +225,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 
 	
 	// 데이터를 clear한다.
-	func clearTagData()
+    func clearTagData( boolClearScreen: Bool)
 	{
 //		arrTagRows.removeAll()
 //		arrAssetRows.removeAll()
@@ -428,6 +430,8 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	
 	func clearUserInterfaceData()
 	{
+        strToBranchId = ""
+        
 //		intOrderWorkCnt	= 0
 //		intCurOrderWorkCnt = 0
 //		intOrderReqCnt	= 0
@@ -495,7 +499,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 					message: NSLocalizedString("common_confirm_delete", comment: "전체 데이터를 삭제하시겠습니까?"),
 					okTitle: NSLocalizedString("common_confirm", comment: "확인"),
 					okHandler: { (_) in
-						self.clearTagData()
+						self.clearTagData(boolClearScreen: true)
 						super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
 					},
 					cancelTitle: NSLocalizedString("common_cancel", comment: "확인"), cancelHandler: nil)
@@ -577,10 +581,22 @@ extension ProdMappingOut
 			return
 		}
 		tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
-		
-		if(AppContext.sharedManager.getUserInfo().getCustType() == "MGR")
-		{
-			tc.toolbar.detail = NSLocalizedString("title_work_sale_c", comment: "출고C")
-		}
+
+        var strType = ""
+        let strIdentificationSystem = UserDefaults.standard.string(forKey: Constants.IDENTIFICATION_SYSTEM_LIST_KEY)
+        if(strIdentificationSystem == Constants.IDENTIFICATION_SYSTEM_AGQR)
+        {
+			strType = NSLocalizedString("identification_system_agqr", comment: "농산물 QR코드")
+        }
+        else
+        {
+            strType = NSLocalizedString("identification_system_itf14", comment: "ITF-14 바코드")
+        }
+        
+        if(AppContext.sharedManager.getUserInfo().getCustType() == "MGR")
+        {
+            tc.toolbar.detail = "\(NSLocalizedString("title_work_sale_c", comment: "출고C")) (\(strType))"
+        }
+        
 	}
 }
