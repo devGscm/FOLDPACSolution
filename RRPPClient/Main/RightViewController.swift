@@ -143,7 +143,7 @@ class RightViewController: UITableViewController, DataProtocol
         let clsIdentificationSystemDialog = IdentificationSystemDialog()
         clsIdentificationSystemDialog.loadData(lstIdentificationSystem: mLstIdentificationSystem)
         
-        let acDialog = UIAlertController(title:nil, message: NSLocalizedString("preference_identification_system", comment: "상품식별체계"), preferredStyle: .alert)
+        let acDialog = UIAlertController(title: NSLocalizedString("preference_identification_system", comment: "상품식별체계"), message:nil, preferredStyle: .alert)
         acDialog.setValue(clsIdentificationSystemDialog, forKeyPath: "contentViewController")
         
         acDialog.addAction(UIAlertAction(title: NSLocalizedString("common_cancel", comment: "취소"), style: .default) { (_) in
@@ -165,7 +165,7 @@ class RightViewController: UITableViewController, DataProtocol
 		let clsReaderDialog = RfidReaderDialog()
 		clsReaderDialog.loadData(lstRfidReader: mLstRfidReader)
 
-		let acDialog = UIAlertController(title:nil, message: NSLocalizedString("preference_rfid_reader", comment: "RFID 리더기"), preferredStyle: .alert)
+		let acDialog = UIAlertController(title: NSLocalizedString("preference_rfid_reader", comment: "RFID 리더기"), message:nil, preferredStyle: .alert)
 		acDialog.setValue(clsReaderDialog, forKeyPath: "contentViewController")
 		
 		acDialog.addAction(UIAlertAction(title: NSLocalizedString("common_cancel", comment: "취소"), style: .default) { (_) in
@@ -194,7 +194,7 @@ class RightViewController: UITableViewController, DataProtocol
 	// RFID 마스크
 	@IBAction func onRfidMaskClicked(_ sender: Any)
 	{
-		let acDialog = UIAlertController(title: nil, message: NSLocalizedString("preference_rfid_mask", comment: "RFID 마스크"), preferredStyle: .alert)
+		let acDialog = UIAlertController(title: NSLocalizedString("preference_rfid_mask", comment: "RFID 마스크"), message: nil, preferredStyle: .alert)
 		acDialog.addTextField() {
 			//$0.text = self.btnRfidMask.titleLabel?.text;
 			let strRfidMask = UserDefaults.standard.string(forKey: Constants.RFID_MASK_KEY) ?? "3312"
