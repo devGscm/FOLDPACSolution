@@ -20,10 +20,10 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 	@IBOutlet weak var btnMakeOrderId: UIButton!
 	@IBOutlet weak var lblOrderCustName: UILabel!
 	@IBOutlet weak var lblOrderCount: UILabel!
-		
+	
 	@IBOutlet weak var tfMakeLotId: UITextField!
 	@IBOutlet weak var tvProductMount: UITableView!
-
+	
 	
 	var strMakeOrderId: String = ""
 	var intOrderWorkCnt: Int = 0
@@ -36,8 +36,8 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 	
 	var clsIndicator : ProgressIndicator?
 	var clsDataClient : DataClient!
-
-
+	
+	
 	override func viewWillAppear(_ animated: Bool)
 	{
 		print("=========================================")
@@ -45,15 +45,15 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		print("=========================================")
 		super.viewWillAppear(animated)
 		prepareToolbar()
-
+		
 		//TODO:: 전역객체에서 등록된 리더기정보를 가져온다.
 		let devId  = "D32F0010-8DB8-856F-A8DF-85B3D00CF26A"
 		self.initRfid(.SWING, id:  devId, delegateReder:  self as ReaderResponseDelegate )
-
+		
 		initViewControl()
 	}
 	
-
+	
 	
 	override func viewDidDisappear(_ animated: Bool)
 	{
@@ -77,29 +77,27 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 	func initViewControl()
 	{
 		// For Test
-		/*
-		AppContext.sharedManager.getUserInfo().setEncryptId(strEncryptId: "xxOxOsU93/PvK/NN7DZmZw==")
-		AppContext.sharedManager.getUserInfo().setCorpId(strCorpId: "logisallcm")
-		AppContext.sharedManager.getUserInfo().setBranchId(branchId: "160530000045")
-		AppContext.sharedManager.getUserInfo().setBranchCustId(branchCustId: "160530000071")
-		AppContext.sharedManager.getUserInfo().setUserLang(strUserLang: "KR")
-*/
+//		AppContext.sharedManager.getUserInfo().setEncryptId(strEncryptId: "xxOxOsU93/PvK/NN7DZmZw==")
+//		AppContext.sharedManager.getUserInfo().setCorpId(strCorpId: "logisallcm")
+//		AppContext.sharedManager.getUserInfo().setBranchId(branchId: "160530000045")
+//		AppContext.sharedManager.getUserInfo().setBranchCustId(branchCustId: "160530000071")
+//		AppContext.sharedManager.getUserInfo().setUserLang(strUserLang: "KR")
 		
 		/*
-//		clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
-//									  indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.")
+		//		clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
+		//									  indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.")
 		
 		// 취소가능하도록 수정
 		clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
-										 indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.",
-			cancelable: true, cancelHandler: { (_) in
-				
-				print("@@@@@@ 취소함@@@@@")
+		indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.",
+		cancelable: true, cancelHandler: { (_) in
+		
+		print("@@@@@@ 취소함@@@@@")
 		})
-
+		
 		clsIndicator?.show()
 		DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-			self.clsIndicator?.hide()
+		self.clsIndicator?.hide()
 		}
 		*/
 		
@@ -242,7 +240,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		
 	}
 	
-
+	
 	
 	// 주문선택
 	@IBAction func onMakeOrderIdClicked(_ sender: UIButton)
@@ -375,9 +373,9 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		
 		clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
 		
-//		DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-//			self.clsIndicator?.hide()
-//		}
+		//		DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+		//			self.clsIndicator?.hide()
+		//		}
 		
 		clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
@@ -396,7 +394,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		let clsDataTable : DataTable = DataTable()
 		clsDataTable.Id = "TAG_MOUNT"
 		clsDataTable.addDataColumn(dataColumn: DataColumn(id: "epcCode", type: "String", size: "0", keyColumn: false, updateColumn: true, autoIncrement: false, canXlsExport: false, title: ""))
-
+		
 		for clsInfo in self.arrTagRows
 		{
 			if(self.strProdAssetEpc != clsInfo.getAssetEpc())
@@ -406,7 +404,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 				Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("stock_can_not_processed_because_different_pallet", comment: "품목이 다른 파렛트가 있어 처리 할 수 없습니다."))
 				return
 			}
-		
+			
 			let clsDataRow : DataRow = DataRow()
 			clsDataRow.State = DataRow.DATA_ROW_STATE_ADDED
 			clsDataRow.addRow(value: clsInfo.getEpcUrn())
@@ -414,41 +412,41 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		}
 		clsDataClient.executeData(dataTable: clsDataTable, dataCompletionHandler: { (data, error) in
 			
-		
+			
 			self.clsIndicator!.hide()
 			
 			if let error = error {
-					// 에러처리
-					print(error)
-					return
-				}
-				guard let clsResultDataTable = data else {
-					print("에러 데이터가 없음")
-					return
-				}
+				// 에러처리
+				print(error)
+				return
+			}
+			guard let clsResultDataTable = data else {
+				print("에러 데이터가 없음")
+				return
+			}
+			
+			print("####결과값 처리")
+			let clsResultDataRows = clsResultDataTable.getDataRows()
+			if(clsResultDataRows.count > 0)
+			{
+				let clsDataRow = clsResultDataRows[0]
+				let strResultCode = clsDataRow.getString(name: "resultCode")
 				
-				print("####결과값 처리")
-				let clsResultDataRows = clsResultDataTable.getDataRows()
-				if(clsResultDataRows.count > 0)
+				print(" -strResultCode:\(strResultCode!)")
+				if(Constants.PROC_RESULT_SUCCESS == strResultCode)
 				{
-					let clsDataRow = clsResultDataRows[0]
-					let strResultCode = clsDataRow.getString(name: "resultCode")
+					self.clearTagData()
+					self.clearUserInterfaceData()
 					
-					print(" -strResultCode:\(strResultCode!)")
-					if(Constants.PROC_RESULT_SUCCESS == strResultCode)
-					{
-						self.clearTagData()
-						self.clearUserInterfaceData()
-						
-						let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
-						self.showSnackbar(message: strMsg)
-					}
-					else
-					{
-						let strMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
-						self.showSnackbar(message: strMsg)
-					}
+					let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
+					self.showSnackbar(message: strMsg)
 				}
+				else
+				{
+					let strMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
+					self.showSnackbar(message: strMsg)
+				}
+			}
 			
 		})
 		
@@ -502,16 +500,16 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 	// 초기화
 	@IBAction func onClearAllClicked(_ sender: UIButton)
 	{
-	
+		
 		Dialog.show(container: self, viewController: nil,
-			title: NSLocalizedString("common_delete", comment: "삭제"),
-			message: NSLocalizedString("common_confirm_delete", comment: "전체 데이터를 삭제하시겠습니까?"),
-			okTitle: NSLocalizedString("common_confirm", comment: "확인"),
-			okHandler: { (_) in
-				self.clearTagData()
-				super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
-			},
-			cancelTitle: NSLocalizedString("common_cancel", comment: "확인"), cancelHandler: nil)
+					title: NSLocalizedString("common_delete", comment: "삭제"),
+					message: NSLocalizedString("common_confirm_delete", comment: "전체 데이터를 삭제하시겠습니까?"),
+					okTitle: NSLocalizedString("common_confirm", comment: "확인"),
+					okHandler: { (_) in
+						self.clearTagData()
+						super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
+		},
+					cancelTitle: NSLocalizedString("common_cancel", comment: "확인"), cancelHandler: nil)
 	}
 	
 	// 전송
@@ -578,7 +576,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 	{
 		
 	}
-
+	
 }
 
 
