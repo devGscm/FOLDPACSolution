@@ -21,8 +21,6 @@ class LoginViewController: UIViewController
 	@IBOutlet weak var btnLogin: UIButton!
 	//@IBOutlet weak var vwAutoLogin: UIView!
 	
-	var mClsProgressBar: ProgressDialog!
-	
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()

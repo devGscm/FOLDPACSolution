@@ -80,25 +80,7 @@ class ProductOrderSearch: BaseViewController, UITableViewDataSource, UITableView
 		clsDataClient.addServiceParam(paramName: "branchId", value: AppContext.sharedManager.getUserInfo().getBranchId())
 		clsDataClient.addServiceParam(paramName: "branchCustId", value: AppContext.sharedManager.getUserInfo().getBranchCustId())
 		clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
-
-		
-	
-		/*
-		// 골드라인 당진공장
-		clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
-		clsDataClient.UserInfo = "xxOxOsU93/PvK/NN7DZmZw=="
-		//clsDataClient.UserData = "productService.selectProductOrderList"
-		//clsDataClient.SelectUrl = "productService.selectProductOrderList"
-		clsDataClient.SelectUrl = "productService:selectProductOrderList"
-		
-		clsDataClient.removeServiceParam()
-		clsDataClient.addServiceParam(paramName: "corpId", value: "logisallcm")
-		clsDataClient.addServiceParam(paramName: "branchId", value: "160530000045")
-		clsDataClient.addServiceParam(paramName: "branchCustId", value: "160530000071")
-		clsDataClient.addServiceParam(paramName: "userLang", value: "KR")
-		*/
 	}
-	
 	
 	@IBAction func onSearchClicked(_ sender: UIButton)
 	{
