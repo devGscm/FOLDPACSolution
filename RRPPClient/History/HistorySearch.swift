@@ -31,6 +31,8 @@ class HistorySearch: BaseViewController, UITableViewDataSource, UITableViewDeleg
 	var clsDataClient : DataClient!
 	var arcDataRows : Array<DataRow> = Array<DataRow>()
 
+	var arcEventCode: Array<ListViewDialog.ListViewItem> = Array<ListViewDialog.ListViewItem>()
+	var strEventCode : String?
 
     override func viewDidLoad()
 	{
@@ -66,6 +68,9 @@ class HistorySearch: BaseViewController, UITableViewDataSource, UITableViewDeleg
 	
 	func initViewControl()
 	{
+		lblUserName.text = AppContext.sharedManager.getUserInfo().getUserName()
+		lblBranchInfo.text = AppContext.sharedManager.getUserInfo().getBranchName()
+		
 		dpPicker = UIDatePicker()
 		let dtCurDate = Date()
 		let dfFormat = DateFormatter()
@@ -75,6 +80,33 @@ class HistorySearch: BaseViewController, UITableViewDataSource, UITableViewDeleg
 		let intDateDistance = AppContext.sharedManager.getUserInfo().getDateDistance()
 		let dtStDate = Calendar.current.date(byAdding: .day, value: -intDateDistance, to: dtCurDate)
 		tfStDate.text = dfFormat.string(from: dtStDate!)
+		
+		makeEventCodeList(userLang: AppContext.sharedManager.getUserInfo().getUserLang())
+		self.strEventCode = ""	
+		//self.btnEventCode.setTitle(NSLocalizedString("common_select_all", comment: "전체"), for: .normal)
+	}
+	
+	func makeEventCodeList(userLang : String)
+	{
+		arcEventCode.append(ListViewDialog.ListViewItem(itemCode: "", itemName: NSLocalizedString("common_select_all", comment: "전체")))
+		let arrEventCode: Array<CodeInfo> = LocalData.shared.getCodeDetail(fieldValue:"EVENT_CODE", commCode:nil, viewYn:"Y", initCodeName:nil)
+		for clsInfo in arrEventCode
+		{
+			var strCommName = ""
+			if(Constants.USER_LANG_CH == userLang)
+			{
+				strCommName = clsInfo.commNameCh
+			}
+			else if(Constants.USER_LANG_EN == userLang)
+			{
+				strCommName = clsInfo.commNameEn
+			}
+			else
+			{
+				strCommName = clsInfo.commNameKr
+			}
+			arcEventCode.append(ListViewDialog.ListViewItem(itemCode: clsInfo.commCode, itemName: strCommName))
+		}
 	}
 	
 	func initDataClient()
@@ -90,6 +122,24 @@ class HistorySearch: BaseViewController, UITableViewDataSource, UITableViewDeleg
 		clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
 	}
 	
+	@IBAction func onEventCodeClicked(_ sender: UIButton)
+	{
+		let clsDialog = ListViewDialog()
+		clsDialog.contentHeight = 150
+		clsDialog.loadData(data: arcEventCode)
+		
+		let acDialog = UIAlertController(title: NSLocalizedString("rfid_event_code", comment: "이벤트구분"), message:nil, preferredStyle: .alert)
+		acDialog.setValue(clsDialog, forKeyPath: "contentViewController")
+		
+		let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
+			self.strEventCode = clsDialog.selectedRow.itemCode
+			let strItemName = clsDialog.selectedRow.itemName
+			self.btnEventCode.setTitle(strItemName, for: .normal)
+		}
+		acDialog.addAction(aaOkAction)
+		self.present(acDialog, animated: true)
+
+	}
 	
 	@IBAction func onSearchClicked(_ sender: UIButton)
 	{
@@ -132,6 +182,8 @@ class HistorySearch: BaseViewController, UITableViewDataSource, UITableViewDeleg
 		
 		clsDataClient.addServiceParam(paramName: "startTraceDate", value: strLocaleStDate)
 		clsDataClient.addServiceParam(paramName: "endTraceDate", value: strLocaleEnDate)
+		clsDataClient.addServiceParam(paramName: "eventCode", value: strEventCode!)
+		
 		clsDataClient.addServiceParam(paramName: "pageNo", value: intPageNo)
 		clsDataClient.addServiceParam(paramName: "rowsPerPage", value: Constants.ROWS_PER_PAGE)
 		clsDataClient.selectData(dataCompletionHandler: {(data, error) in

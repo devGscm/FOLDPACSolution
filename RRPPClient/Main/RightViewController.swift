@@ -106,6 +106,7 @@ class RightViewController: UITableViewController, DataProtocol
 		}
 	}
 	
+	// 거점선택
 	@IBAction func onBranchClicked(_ sender: UIButton)
 	{
 		self.performSegue(withIdentifier: "segBranchSearch", sender: self)
@@ -158,7 +159,7 @@ class RightViewController: UITableViewController, DataProtocol
         self.present(acDialog, animated: true)
     }
     
-    
+    // 리더기 선택
 	@IBAction func onRfidReaderClicked(_ sender: Any)
 	{
 		let clsReaderDialog = RfidReaderDialog()
@@ -231,13 +232,16 @@ class RightViewController: UITableViewController, DataProtocol
 	}
 }
 
-extension RightViewController {
+extension RightViewController
+{
     @objc
-    fileprivate func handleRootButton() {
+    fileprivate func handleRootButton()
+	{
         toolbarController?.transition(to: RootViewController(), completion: closeNavigationDrawer)
     }
     
-    fileprivate func closeNavigationDrawer(result: Bool) {
+    fileprivate func closeNavigationDrawer(result: Bool)
+	{
         navigationDrawerController?.closeRightView()
     }
 }

@@ -56,10 +56,10 @@ class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDe
 		clsDialog.contentHeight = 150
 		clsDialog.loadData(data: mArcSearchCondition)
 		
-		let acDialog = UIAlertController(title:nil, message:"검색조건", preferredStyle: .alert)
+		let acDialog = UIAlertController(title:nil, message: NSLocalizedString("common_search_condition", comment: "검색조건"), preferredStyle: .alert)
 		acDialog.setValue(clsDialog, forKeyPath: "contentViewController")
 		
-		let aaOkAction = UIAlertAction(title: "확인", style: .default) { (_) in
+		let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
 			self.strSearchCondtion = clsDialog.selectedRow.itemCode
 			let strItemName = clsDialog.selectedRow.itemName
 			self.btnSearchCondition.setTitle(strItemName, for: .normal)
