@@ -154,6 +154,7 @@ class LoginViewController: UIViewController
 						
 						AppContext.sharedManager.setAuthenticated(boolAuthenticated: true)
 						objMe.dismiss(animated: true, completion: nil)
+						//toolbarController?
 						return
 					}
 					else

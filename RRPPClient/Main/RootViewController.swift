@@ -96,7 +96,18 @@ class RootViewController: BaseViewController
 			localData.versionCheck()
 			
 			
+			//               01234567890123456789012
+			let strEpcUrn = "grai:0.95100043.1025.62"
+//			
+//		
+			let intIndex = strEpcUrn.range(of: ".", options: .backwards)?.lowerBound
 			
+			let substring2 = strEpcUrn.substring(to: intIndex!)
+			print("=============================================")
+			//print("index:\(intIndex!)")
+			print("index:\(substring2)")
+			print("=============================================")
+//
 			//print("=============================================")
 			//print(" UserName : \( AppContext.sharedManager.getUserInfo().getUserName() )")
 			//print("=============================================")

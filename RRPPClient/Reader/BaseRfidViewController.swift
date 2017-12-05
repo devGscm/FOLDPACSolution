@@ -2,30 +2,52 @@
 //  BaseRfidViewController.swift
 //   RRPPClient
 //
-//  Created by 이용민 on 2017. 11. 27..
+//  Created by MORAMCNT on 2017. 11. 27..
 //  Copyright © 2017년 MORAMCNT. All rights reserved.
 //
 
 import UIKit
 
-public struct RederDevInfo {
-	var id : NSString
-	var name : NSString
-	var macAddr : NSString
+//UserDefaults 에 넣기 위하여  구조체대신 클래스 Array로 선언
+//또한 NSCoding 에대한 프로토콜을 구현해야 된다.
+public class ReaderDevInfo: NSObject, NSCoding {
+	let id: String
+	let name: String
+	let macAddr : String
+	
+	public init(id : String, name: String, macAddr: String) {
+		self.id = id
+		self.name = name
+		self.macAddr = macAddr
+	}
+	public required init(coder decoder: NSCoder) {
+		self.id = decoder.decodeObject(forKey: "id") as? String ?? ""
+		self.name = decoder.decodeObject(forKey: "name") as? String ?? ""
+		self.macAddr = decoder.decodeObject(forKey: "macAddr")  as? String ?? ""
+	}
+	
+	public func encode(with coder: NSCoder) {
+		coder.encode(id, forKey: "id")
+		coder.encode(name, forKey: "name")
+		coder.encode(macAddr, forKey: "macAddr")
+	}
 }
-
-public class Devinfo<T> {
-	let unbox: T
-	init(_ value: T) {
-		self.unbox = value
-	} }
-
 
 /// 지원되는 리더기 종류(현재 SWING만 지원)
-enum ReaderType {
-	case SWING
-	case AT288
+public enum ReaderType : Int
+{
+	case SWING = 0
+	case AT288 = 1
+	public var description: String
+	{
+		if (self.rawValue == 0)
+		{
+			return "Swing"
+		}		
+		return "AT288"
+	}
 }
+
 
 /// 리더기 공통 응답프로토콜 선언
 @objc
@@ -338,32 +360,36 @@ class BaseRfidViewController : BaseViewController
 	//접속가능한 Reader기를 찾기를 시작한다
 	func startReaderScan()
 	{
-		self.reader!.startReaderScan?()
+		self.reader?.startReaderScan?()
 	}
 	
 	
 	func isConnected() -> Bool
 	{
-		return self.reader!.isConnected()
+		if let bIsConnect = self.reader?.isConnected()
+		{
+			return bIsConnect
+		}
+		return false
 	}
 	
 	func readerConnect()
 	{
-		self.reader!.connect()
+		self.reader?.connect()
 	}
 	
 	func readerDisConnect()
 	{
-		self.reader!.close()
+		self.reader?.close()
 	}
 	
 	func startRead()
 	{
-		self.reader!.startRead()
+		self.reader?.startRead()
 	}
 	
 	func stopRead()
 	{
-		self.reader!.stopRead()
+		self.reader?.stopRead()
 	}
 }

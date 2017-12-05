@@ -4,15 +4,15 @@ import Mosaic
 
 class RightViewController: UITableViewController, DataProtocol
 {
-	var mLstRfidReader:Array<RfidReaderDialog.RfidReader> = Array<RfidReaderDialog.RfidReader>()
+	var mLstRfidType:Array<ReaderType> = Array<ReaderType>()
     var mLstIdentificationSystem:Array<IdentificationSystemDialog.IdentificationSystem> = Array<IdentificationSystemDialog.IdentificationSystem>()
     
 	@IBOutlet weak var btnBranch: UIButton!
-	@IBOutlet weak var btnRfidReader: UIButton!
 	@IBOutlet weak var swRfidBeep: UISwitch!	                //RFID 효과음
+	@IBOutlet weak var btnRfidType: UIButton!
+	@IBOutlet weak var btnRfidReader: UIButton!
 	@IBOutlet weak var btnRfidMask: UIButton!	                //RFID 마스크
 	@IBOutlet weak var btnRfidPower: UIButton!
-
     @IBOutlet weak var btnIdentificationSystem: UIButton! //상품식별체계
     
     open override func viewDidLoad()
@@ -36,20 +36,30 @@ class RightViewController: UITableViewController, DataProtocol
         print("@@@@@@ ID-SYSTEM:\(intIdentificationSystem)")
         self.btnIdentificationSystem.setTitle(strIdentificationSystemName, for: .normal)
 
-        
-        
-        
         //효과음
 		self.swRfidBeep.isOn = UserDefaults.standard.bool(forKey: Constants.RFID_BEEP_ENABLED_KEY)
         
-		// RFID 리더기
-		mLstRfidReader.append(RfidReaderDialog.RfidReader(readerType: 0, readerName: NSLocalizedString("rfid_reader_swing_u", comment: "Swing U")))
-		mLstRfidReader.append(RfidReaderDialog.RfidReader(readerType: 1, readerName: NSLocalizedString("rfid_reader_at288", comment: "AT288")))
+		//RFID 장치 타입
+		mLstRfidType.append(.SWING)
+		mLstRfidType.append(.AT288)
+		let readerType = ReaderType(rawValue: UserDefaults.standard.integer(forKey: Constants.RFID_READER_TYPE_KEY))
+		self.btnRfidType.setTitle(readerType?.description ?? NSLocalizedString("button_selection", comment: "선택"), for: .normal)
 		
-		let intRfidReader = UserDefaults.standard.integer(forKey: Constants.RFID_READER_TYPE_KEY)
-		let strRfidReaderName = mLstRfidReader[intRfidReader].readerName
-		//print("@@@@@@ RFID READER:\(intRfidReader)")
-		self.btnRfidReader.setTitle(strRfidReaderName, for: .normal)
+		// RFID 장치 정보
+		// UserDefaults 구조체 정보를 넣기 위해서는 클래스 Array로 선언해야 저장가능하다.
+		if let rederInfoList = UserDefaults.standard.data(forKey: Constants.RFID_READER_INFO_KEY)
+		{
+			if let rederInfoList = NSKeyedUnarchiver.unarchiveObject(with: rederInfoList) as? [ReaderDevInfo]
+			{
+				for rederInfo in rederInfoList
+				{
+					//self.btnRfidReader.setTitle(rederInfo.name, for: .normal)
+					self.btnRfidReader.setTitle(rederInfo.macAddr, for: .normal)
+					//반드시 한건만 있기 때문에 나감
+					break
+				}
+			}
+		}
 		
 		// RFID 마스크
 		let strRfidMask = UserDefaults.standard.string(forKey: Constants.RFID_MASK_KEY) ?? "3312"
@@ -158,25 +168,46 @@ class RightViewController: UITableViewController, DataProtocol
         acDialog.addAction(aaOkAction)
         self.present(acDialog, animated: true)
     }
-    
-    // 리더기 선택
-	@IBAction func onRfidReaderClicked(_ sender: Any)
-	{
-		let clsReaderDialog = RfidReaderDialog()
-		clsReaderDialog.loadData(lstRfidReader: mLstRfidReader)
-
+	
+	//RFID 리더기 (type)
+	@IBAction func onRfidTypeClicked(_ sender: Any) {
+		let clsReaderDialog = RfidTypeDialog()
+		clsReaderDialog.loadData(lstRfidReader: mLstRfidType)
+		
 		let acDialog = UIAlertController(title: NSLocalizedString("preference_rfid_reader", comment: "RFID 리더기"), message:nil, preferredStyle: .alert)
 		acDialog.setValue(clsReaderDialog, forKeyPath: "contentViewController")
 		
 		acDialog.addAction(UIAlertAction(title: NSLocalizedString("common_cancel", comment: "취소"), style: .default) { (_) in
 		})
 		let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
-			let intReaderType = clsReaderDialog.selectedRow.readerType
-			let strRaderName = clsReaderDialog.selectedRow.readerName
-			UserDefaults.standard.setValue(intReaderType, forKey: Constants.RFID_READER_TYPE_KEY)
-			UserDefaults.standard.setValue(strRaderName, forKey: Constants.RFID_READER_NAME_KEY)
+			let readerType = clsReaderDialog.selectedRow
+			UserDefaults.standard.setValue(readerType.rawValue, forKey: Constants.RFID_READER_TYPE_KEY)
 			UserDefaults.standard.synchronize()
-			self.btnRfidReader.setTitle(strRaderName, for: .normal)
+			self.btnRfidType.setTitle(readerType.description, for: .normal)
+		}
+		acDialog.addAction(aaOkAction)
+		self.present(acDialog, animated: true)
+	}
+	
+	// 블루투스 장치선택
+	@IBAction func onRfidReaderClicked(_ sender: Any)
+	{
+		let clsReaderDialog = RfidReaderDialog()
+		let acDialog = UIAlertController(title: NSLocalizedString("preference_rfid_reader", comment: "RFID 리더기"), message:nil, preferredStyle: .alert)
+		acDialog.setValue(clsReaderDialog, forKeyPath: "contentViewController")
+		acDialog.addAction(UIAlertAction(title: NSLocalizedString("common_cancel", comment: "취소"), style: .default) { (_) in
+		})
+		let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
+			if let rederInfo = clsReaderDialog.selectedRow
+			{
+				var rederInfos = [ReaderDevInfo]()
+				rederInfos.append(rederInfo)
+				let encodedData = NSKeyedArchiver.archivedData(withRootObject: rederInfos)
+				UserDefaults.standard.set(encodedData, forKey: Constants.RFID_READER_INFO_KEY)
+				UserDefaults.standard.synchronize()
+				self.btnRfidReader.setTitle(rederInfo.macAddr, for: .normal)
+			}
+			clsReaderDialog.discoverStop()
 		}
 		acDialog.addAction(aaOkAction)
 		self.present(acDialog, animated: true)
@@ -211,6 +242,7 @@ class RightViewController: UITableViewController, DataProtocol
 		self.present(acDialog, animated: false, completion: nil)
 	}
 	
+	//RFID Power
 	@IBAction func onRfidPowerClicked(_ sender: Any)
 	{
 		let clsSliderDialog = SliderDialog()

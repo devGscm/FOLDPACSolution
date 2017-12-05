@@ -499,11 +499,32 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 					message: NSLocalizedString("common_confirm_delete", comment: "전체 데이터를 삭제하시겠습니까?"),
 					okTitle: NSLocalizedString("common_confirm", comment: "확인"),
 					okHandler: { (_) in
-						self.clearTagData(boolClearScreen: true)
-						super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
+						
+						if(self.strSaleWorkId.isEmpty == true)
+						{
+							self.clearTagData(boolClearScreen: true)
+							super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
+						}
+						else
+						{
+							self.doReloadTagList(reoadStatus: Constants.RELOAD_STATE_DEFAULT)
+						}
 					},
 					cancelTitle: NSLocalizedString("common_cancel", comment: "확인"), cancelHandler: nil)
 	}
+	
+	
+	
+	// 작업초기화
+	@IBAction func onWorkInitClick(_ sender: UIButton)
+	{
+	}
+	
+	
+	// 임시저장
+	@IBAction func onTempSaveClick(_ sender: UIButton) {
+	}
+	
 	
 	// 전송
 	@IBAction func onSendClicked(_ sender: UIButton)
@@ -563,6 +584,163 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 //		})
 //		self.present(acDialog, animated: true, completion: nil)
 //
+	}
+	
+	
+	func doReloadTagList(reoadStatus: Int)
+	{
+		
+//		String strEpcUrn 			= null;
+//		String strEpcCode			= null;
+//		String strTraceDate 		= null;
+//		String strProdAssetEpc 		= null;
+//		String strProdAssetEpcName 	= null;
+//		String[] splitValue 		= null;
+//		String strTraceDateFormat	= null;
+//		String strSerialNo 			= null;
+//		String strBarcodeId 		= null;
+//		String strSaleItemSeq		= null;
+//		String strItemCode			= null;
+//		String strItemName			= null;
+//		String strCnt 				= null;
+//		String strVehName			= null;
+//		String strTradeChit			= null;
+		
+		var clsDataTable : DataTable!
+		var clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+		clsDataClient.SelectUrl = "supplyService:selectProdMappingOutTagList" //출고C타입용 (출고A,B타입과 다름)
+		clsDataClient.removeServiceParam()
+		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+		clsDataClient.addServiceParam(paramName: "saleWorkId", value: strSaleWorkId)
+		clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
+		
+		
+		//SimpleDateFormat sdfDateFormat = new SimpleDateFormat ("yyyyMMddHHmmss");
+		//SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		var arcDataRows : Array<DataRow> = Array<DataRow>()
+		do
+		{
+			// 1) 태그데이터 초기화
+			clearTagData(boolClearScreen: false)
+
+			clsDataClient.selectData(dataCompletionHandler: {(data, error) in
+				if let error = error {
+					// 에러처리
+					print(error)
+					return
+				}
+				guard let clsDataTable = data else {
+					print("에러 데이터가 없음")
+					return
+				}
+				
+				// 2) DB에서 리스트 조회값 받음
+				for clsDataRow in clsDataTable.getDataRows()
+				{
+					let strEpcUrn 			= clsDataRow.getString(name: "epcUrn")
+					let strEpcCode			= clsDataRow.getString(name: "epcCode")
+					let strUtcTraceDate 	= clsDataRow.getString(name: "utcTraceDate")
+					let strProdAssetEpc 	= clsDataRow.getString(name: "prodAssetEpc")
+					let strProdAssetEpcName = clsDataRow.getString(name: "prodAssetEpcName")
+					let strBarcodeId 		= clsDataRow.getString(name: "barcodeId")
+					let strSaleItemSeq 		= clsDataRow.getString(name: "saleItemSeq")
+					let strItemCode 		= clsDataRow.getString(name: "itemCode")
+					let strItemName 		= clsDataRow.getString(name: "itemName")
+					let strCnt 				= clsDataRow.getString(name: "cnt")
+					let strTradeChit		= clsDataRow.getString(name: "tradeChit")
+					let strVehName 			= clsDataRow.getString(name: "vehName")
+					
+					// 날짜 포맷 변환
+					let strLocaleTraceDate = DateUtil.utcToLocale(utcDate: strUtcTraceDate!, dateFormat: "yyyyMMddHHmmss")
+					let strTraceDate = DateUtil.getConvertFormatDate(date: strLocaleTraceDate, srcFormat: "yyyyMMddHHmmss", dstFormat:"yyyy-MM-dd HH:mm:ss")
+
+					
+					//데이터 축출
+//					splitValue 		= strEpcUrn.split("\\.");
+//					strSerialNo		= splitValue[3].toString();
+					
+					/*
+					Logger.i("==========================");
+					Logger.i("EPC코드(KEY): " + strEpcCode);
+					Logger.i("EPC-URN: " + strEpcUrn);
+					Logger.i("시리얼번호: " + strSerialNo);
+					Logger.i("유형(코드): " + strProdAssetEpc);
+					Logger.i("유형(이름): " + strProdAssetEpcName);
+					Logger.i("상품SEQ: " + strSaleItemSeq);
+					Logger.i("바코드ID: " + strBarcodeId);
+					Logger.i("상품명: " + strItemName);
+					Logger.i("바코드수량: " + strCnt);
+					*/
+					
+					//마스터-RFID태그정보
+//					ItemInfo clsMastItemInfo = new ItemInfo();
+//					clsMastItemInfo.setEpcCode(strEpcCode);
+//					clsMastItemInfo.setEpcUrn(strEpcUrn);
+//					clsMastItemInfo.setSerialNo(strSerialNo);
+//					clsMastItemInfo.setAssetEpc(strProdAssetEpc);
+//					clsMastItemInfo.setAssetName(strProdAssetEpcName);
+//					clsMastItemInfo.setRowState(Constants.DATA_ROW_STATE_UNCHANGED);
+//					clsMastItemInfo.setReadCount(1);
+//					clsMastItemInfo.setReadTime(strTraceDate);
+//
+//					//슬래이브-상품정보
+//					ItemInfo clsSlaveItemInfo = new ItemInfo();
+//					clsSlaveItemInfo.setEpcCode(strEpcCode);
+//					clsSlaveItemInfo.setSaleItemSeq(strSaleItemSeq);
+//					clsSlaveItemInfo.setProdCode(strBarcodeId);
+//					clsSlaveItemInfo.setProdName(strItemName);
+//					clsSlaveItemInfo.setRowState(Constants.DATA_ROW_STATE_UNCHANGED);
+//					clsSlaveItemInfo.setProdReadCnt(strCnt);
+//					clsSlaveItemInfo.setReadTime(strTraceDate);
+//
+//					//#1.헤시맵 생성
+//					if(mClsProdContainer.containEpcCode(strEpcCode) == false)
+//					{
+//						//#1-1.구조체 수정
+//						if(strEpcCode != null) mClsProdContainer.loadProdEpc(strEpcCode);
+//
+//						//#1-2.마스터 그리스 저장
+//						mLstItemListMasterRows.add(clsMastItemInfo);
+//					}
+//
+//					//#2.아이템 생성-바코드ID가 있는경우
+//					if((strBarcodeId != null)&&(strBarcodeId.equals("") == false))
+//					{
+//						mClsProdContainer.addItem(strEpcCode, clsSlaveItemInfo);
+//
+//						//#3.서브 그리드 저장
+//						mLstItemListSlaveRows.add(clsSlaveItemInfo);
+//					}
+				}
+//				//3)'처리량' 텍스트박스에 표시
+//				mTvProcCount.setText(String.valueOf(mLstItemListMasterRows.size()));
+//
+//				//4)그리드 업데이트
+//				mClsAdapterMaster.notifyDataSetChanged();
+//				mClsAdapterSlave.notifyDataSetChanged();
+//
+//				//5)마지막 마스터 그리드가 선택되게 만들기
+//				mStrSelectedEpcCode = strEpcCode;
+//				mTvSelectedSerialNo.setText(strSerialNo);
+//				mTvSelectedAssetName.setText(strProdAssetEpcName);
+//
+//
+//				showDialogOnThread(getString(R.string.common_confirm), getString(R.string.common_success_delete), 2000);	//성공적으로 삭제가 완료되었습니다.
+	
+			})
+			
+
+			
+
+		}
+		catch let error
+		{
+			print(error.localizedDescription)
+			//if(mViFooterView != null) mViFooterView.setVisibility(View.INVISIBLE);
+			//showToastOnThread(getString(R.string.common_error_occurred_data_search));
+			//Logger.e(StrUtil.trace(e));
+		}
 	}
 	
 	func didReadTagList(_ tagId: String)
