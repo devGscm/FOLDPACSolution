@@ -32,6 +32,10 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
     var arcSaleType : Array<ListViewDialog.ListViewItem> = Array<ListViewDialog.ListViewItem>()
     var strSaleType : String?
     
+    var arcSearchCondition:Array<ListViewDialog.ListViewItem> = Array<ListViewDialog.ListViewItem>()
+    var strSearchCondtion = ""
+    
+    
     //=======================================
     //=====  viewDidLoad()
     //=======================================
@@ -75,6 +79,7 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
     {
         dpPicker = nil
         arcDataRows.removeAll()
+        arcSearchCondition.removeAll()
         clsDataClient = nil
         
         super.releaseController()
@@ -101,6 +106,13 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
         tfStDate.text = dfFormat.string(from: dtStDate!)
         makeEventCodeList(userLang: AppContext.sharedManager.getUserInfo().getUserLang())
         self.strSaleType = ""
+        
+        //셀렉트박스-검색조건
+        arcSearchCondition.append(ListViewDialog.ListViewItem(itemCode: "0", itemName: NSLocalizedString("easy_cust_name", comment: "고객사명")))
+        arcSearchCondition.append(ListViewDialog.ListViewItem(itemCode: "1", itemName: NSLocalizedString("easy_cust_key", comment: "고객사ID")))
+        strSearchCondtion = "0"
+        btnSearchCondition.setTitle(NSLocalizedString("easy_cust_name", comment: "고객사명"), for: .normal)
+        
     }
 
     
@@ -248,7 +260,7 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
     @IBAction func onSaleTypeSelection(_ sender: Any) {
         let clsDialog = ListViewDialog()
         clsDialog.contentHeight = 150
-        clsDialog.loadData(data: arcSaleType)
+        clsDialog.loadData(data: arcSaleType, selectedItem: strSaleType!)
         
         let acDialog = UIAlertController(title: NSLocalizedString("sale_type_name", comment: "입출고 구분"), message:nil, preferredStyle: .alert)
         acDialog.setValue(clsDialog, forKeyPath: "contentViewController")
@@ -270,6 +282,20 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
     //===== 검색 조건
     //=======================================
     @IBAction func onSearchCondition(_ sender: Any) {
+        let clsDialog = ListViewDialog()
+        clsDialog.loadData(data: arcSearchCondition, selectedItem: strSearchCondtion)
+        clsDialog.contentHeight = 150
+        
+        let acDialog = UIAlertController(title: NSLocalizedString("common_search_condition", comment: "검색조건"), message: nil, preferredStyle: .alert)
+        acDialog.setValue(clsDialog, forKeyPath: "contentViewController")
+        
+        let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
+            self.strSearchCondtion = clsDialog.selectedRow.itemCode
+            let strItemName = clsDialog.selectedRow.itemName
+            self.btnSearchCondition.setTitle(strItemName, for: .normal)
+        }
+        acDialog.addAction(aaOkAction)
+        self.present(acDialog, animated: true)
     }
     
     

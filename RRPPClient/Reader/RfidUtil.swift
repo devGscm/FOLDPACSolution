@@ -244,13 +244,14 @@ public class RfidUtil
         public func setReadCount(readCount: Int)                { self.mIntReadCount = readCount }
         public func setReadTime(readTime: String)               { self.mStrReadTime = readTime }
     }
+
     
     public enum Encodings
     {
         case GID_96, SGTIN_96, SSCC_96, SGLN_96, GRAI_96, GIAI_96, DoD_96, Raw
     }
     
-    public func checkHeader(strData: String) -> Encodings
+    public static func checkHeader(strData: String) -> Encodings
     {
         //let strData = "3312D58E3D8100C000027505"                                        //테스트 입력값(Hex): 3312D58E3D8100C000027505
         var strHeaderBinary = String()
@@ -319,7 +320,7 @@ public class RfidUtil
      * @param strData 입력값
      * @return
      */
-    public func parse(strData: String) -> TagInfo
+    public static func parse(strData: String) -> TagInfo
     {
         let strInputData = strData.replacingOccurrences(of: " ", with: "")
         let enuEncoding: Encodings = checkHeader(strData: strInputData)
@@ -329,28 +330,28 @@ public class RfidUtil
         switch(enuEncoding)
         {
         case .GID_96:
-            return parseGid96(enuEncoding: RfidUtil.Encodings.GID_96, strData: strInputData)
+            return RfidUtil.parseGid96(enuEncoding: RfidUtil.Encodings.GID_96, strData: strInputData)
             
         case .SGTIN_96:
-            return parseSgtin96(enuEncoding: RfidUtil.Encodings.SGTIN_96, strData: strInputData)
+            return RfidUtil.parseSgtin96(enuEncoding: RfidUtil.Encodings.SGTIN_96, strData: strInputData)
             
         case .SSCC_96:
-            return parseSscc96(enuEncoding: RfidUtil.Encodings.SSCC_96, strData: strInputData)
+            return RfidUtil.parseSscc96(enuEncoding: RfidUtil.Encodings.SSCC_96, strData: strInputData)
             
         case .SGLN_96:
-            return parseSgln96(enuEncoding: RfidUtil.Encodings.SGLN_96, strData: strInputData)
+            return RfidUtil.parseSgln96(enuEncoding: RfidUtil.Encodings.SGLN_96, strData: strInputData)
             
         case .GRAI_96:
-            return parseGrai96(enuEncoding: RfidUtil.Encodings.GRAI_96, strData: strInputData)
+            return RfidUtil.parseGrai96(enuEncoding: RfidUtil.Encodings.GRAI_96, strData: strInputData)
             
         case .GIAI_96:
-            return parseGiai96(enuEncoding: RfidUtil.Encodings.GIAI_96, strData: strInputData)
+            return RfidUtil.parseGiai96(enuEncoding: RfidUtil.Encodings.GIAI_96, strData: strInputData)
             
         case .DoD_96:
-            return parseDod96(enuEncoding: RfidUtil.Encodings.DoD_96, strData: strInputData)
+            return RfidUtil.parseDod96(enuEncoding: RfidUtil.Encodings.DoD_96, strData: strInputData)
             
         case .Raw:
-            return parseRaw(enuEncoding: RfidUtil.Encodings.Raw, strData: strInputData)
+            return RfidUtil.parseRaw(enuEncoding: RfidUtil.Encodings.Raw, strData: strInputData)
             
         }
     }
@@ -364,7 +365,7 @@ public class RfidUtil
      * @param input 입력값
      * @return
      */
-    public func fillLength48(strInput: String) -> String
+    public static func fillLength48(strInput: String) -> String
     {
         //let strInput: String = "00C000027505"                                         //테스트 입력값(Hex): 00C000027505
         var strInputToBinary = String()
@@ -402,7 +403,7 @@ public class RfidUtil
     /**
      * parseGid96으로 변환한다.
      */
-    public func parseGid96(enuEncoding: Encodings, strData: String) -> TagInfo
+    public static func parseGid96(enuEncoding: Encodings, strData: String) -> TagInfo
     {
         var strEpcUrn = "gid:"
         
@@ -431,7 +432,7 @@ public class RfidUtil
     /**
      * Sgtin96으로 변환한다.
      */
-    public func parseSgtin96(enuEncoding: Encodings, strData: String) -> TagInfo
+    public static func parseSgtin96(enuEncoding: Encodings, strData: String) -> TagInfo
     {
         var strEpcUrn = "sgtin:"
         var strCorpEpc = String()
@@ -520,7 +521,7 @@ public class RfidUtil
     /**
      * Sscc96으로 변환한다.
      */
-    public func parseSscc96(enuEncoding: Encodings, strData: String) -> TagInfo
+    public static func parseSscc96(enuEncoding: Encodings, strData: String) -> TagInfo
     {
         var strEpcUrn = "sscc:"
         var strCorpEpc = String()
@@ -605,7 +606,7 @@ public class RfidUtil
     /**
      * Sgln96으로 변환한다.
      */
-    public func parseSgln96(enuEncoding: Encodings, strData: String) -> TagInfo
+    public static func parseSgln96(enuEncoding: Encodings, strData: String) -> TagInfo
     {
         var strEpcUrn = "sgln:"
         var strCorpEpc = String()
@@ -694,7 +695,7 @@ public class RfidUtil
     /**
      * Grai96으로 변환한다.
      */
-    public func parseGrai96(enuEncoding: Encodings, strData: String) -> TagInfo
+    public static func parseGrai96(enuEncoding: Encodings, strData: String) -> TagInfo
     {
         //print("[2]=>parseGrai96: \(strData)")
         
@@ -796,7 +797,7 @@ public class RfidUtil
     /**
      * parseGiai96으로 변환한다.
      */
-    public func parseGiai96(enuEncoding: Encodings, strData: String) -> TagInfo
+    public static func parseGiai96(enuEncoding: Encodings, strData: String) -> TagInfo
     {
         var strEpcUrn = "giai:"
         var strCorpEpc = String()
@@ -881,7 +882,7 @@ public class RfidUtil
     /**
      * parseDod96으로 변환한다.
      */
-    public func parseDod96(enuEncoding: Encodings, strData: String) -> TagInfo
+    public static func parseDod96(enuEncoding: Encodings, strData: String) -> TagInfo
     {
         var strEpcUrn = "usdod:"
         
@@ -911,7 +912,7 @@ public class RfidUtil
     /**
      * Raw으로 변환한다.
      */
-    public func parseRaw(enuEncoding: Encodings, strData: String) -> TagInfo
+    public static func parseRaw(enuEncoding: Encodings, strData: String) -> TagInfo
     {
         //대문자 변환
         let strEpcUrn =  String(strData.count * 4) + ".x" + strData.uppercased()
@@ -932,7 +933,7 @@ public class RfidUtil
     //=======================================
     //===== 문자열에 0 채우기
     //=======================================
-    public func addPaddingZeros(strInputString: String, intCount: Int) -> String
+    public static func addPaddingZeros(strInputString: String, intCount: Int) -> String
     {
         var strInputData = strInputString
         
@@ -947,7 +948,7 @@ public class RfidUtil
     //=======================================
     //===== 문자열 자르기 메소드
     //=======================================
-    public func getSubstringData(strInputString: String, intIndexStart: Int, intIndexEnd: Int) -> String
+    public static func getSubstringData(strInputString: String, intIndexStart: Int, intIndexEnd: Int) -> String
     {
         var strResultData = String()
         var intStartIndex = 0
@@ -962,6 +963,7 @@ public class RfidUtil
         
         let indexStart = strInputString.index(strInputString.startIndex, offsetBy: intStartIndex)               //시작위치
         let indexEnd = strInputString.index(strInputString.startIndex, offsetBy: intIndexEnd)                   //종료위치
+
         
         if(intIndexEnd <= 0)
         {
