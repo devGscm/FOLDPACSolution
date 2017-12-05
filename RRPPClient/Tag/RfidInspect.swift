@@ -27,9 +27,16 @@ class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 		//navigationDrawerController?.toggleRightView()
 		
 		//TODO:: 전역객체에서 등록된 리더기정보를 가져온다.
-		let devId  = "D32F0010-8DB8-856F-A8DF-85B3D00CF26A"
-		self.initRfid(.SWING, id:  devId, delegateReder:  self as ReaderResponseDelegate )
-		//self.initRfid(.AT288, id:  devId, delegateReder:  self as ReaderResponseDelegate )
+		guard let devId  = AppContext.sharedManager.getUserInfo().getReaderDevId()
+		else
+		{
+			Dialog.show(container: self, title: nil, message: NSLocalizedString("rfid_no_selected_bluetooth_select_config", comment: "선택된 블루투스 장비가 없습니다."))
+			navigationDrawerController?.toggleRightView()
+			return
+		}
+		self.initRfid(AppContext.sharedManager.getUserInfo().getReaderType(),
+					  id:  devId, delegateReder:  self as ReaderResponseDelegate )
+		
     }
 	
 	
@@ -46,16 +53,7 @@ class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 		//연결여부 확인후 알럿메세지
 		if(self.isConnected() == false)
 		{
-			let clsSliderDialog = SliderDialog()
-			let objMe = self
-			Dialog.show(container: self, viewController: clsSliderDialog, title: nil,
-						message: NSLocalizedString("rfid_reader_not_connected", comment: "리더기에 연결되어있지않음"),
-						okTitle: NSLocalizedString("common_confirm", comment: "확인"),
-						okHandler: { (_) in
-							objMe.readerConnect()
-							},
-						cancelTitle: NSLocalizedString("common_cancel", comment: "취소"),
-						cancelHandler: nil)
+			Dialog.show(container: self, title: nil, message: NSLocalizedString("rfid_reader_not_connected", comment: "리더기에 연결되어있지않음"))
 			return
 		}
 		
@@ -69,16 +67,7 @@ class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 		//연결여부 확인후 알럿메세지
 		if(self.isConnected() == false)
 		{
-			let clsSliderDialog = SliderDialog()
-			let objMe = self
-			Dialog.show(container: self, viewController: clsSliderDialog, title: nil,
-						message: NSLocalizedString("rfid_reader_not_connected", comment: "리더기에 연결되어있지않음"),
-						okTitle: NSLocalizedString("common_confirm", comment: "확인"),
-						okHandler: { (_) in
-							objMe.readerConnect()
-			},
-						cancelTitle: NSLocalizedString("common_cancel", comment: "취소"),
-						cancelHandler: nil)
+			Dialog.show(container: self, title: nil, message: NSLocalizedString("rfid_reader_not_connected", comment: "리더기에 연결되어있지않음"))
 			return
 		}
 		
