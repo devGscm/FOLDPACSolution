@@ -375,7 +375,7 @@ CA
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
-                                                        <action selector="onRfidReaderClicked:" destination="nJr-NP-3rZ" eventType="touchUpInside" id="mHJ-bh-Fpj"/>
+                                                        <action selector="onRfidTypeClicked:" destination="nJr-NP-3rZ" eventType="touchUpInside" id="mMi-Xa-s2l"/>
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="RFID 리더기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qg4-yk-QUn">
@@ -409,7 +409,7 @@ CA
                                                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <state key="normal" title="선택"/>
                                                     <connections>
-                                                        <action selector="onRfidReaderClicked:" destination="nJr-NP-3rZ" eventType="touchUpInside" id="BLw-Zn-NaD"/>
+                                                        <action selector="onRfidReaderClicked:" destination="nJr-NP-3rZ" eventType="touchUpInside" id="FT1-eQ-KzZ"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -529,7 +529,8 @@ CA
                         <outlet property="btnIdentificationSystem" destination="K5z-l8-iKa" id="PcV-K9-fGD"/>
                         <outlet property="btnRfidMask" destination="5kX-Dy-FUf" id="shK-tQ-Ug7"/>
                         <outlet property="btnRfidPower" destination="QC2-23-yqp" id="5Rm-oR-MM9"/>
-                        <outlet property="btnRfidReader" destination="Kh7-9M-Rik" id="fX5-mF-fwp"/>
+                        <outlet property="btnRfidReader" destination="j5Q-ed-bEM" id="Ugd-dr-eQb"/>
+                        <outlet property="btnRfidType" destination="Kh7-9M-Rik" id="CPa-cg-KkN"/>
                         <outlet property="swRfidBeep" destination="ZOf-Mh-OmG" id="EKd-hl-3FW"/>
                     </connections>
                 </tableViewController>
@@ -670,7 +671,7 @@ CA
                                         <items>
                                             <navigationItem title="거점선택" id="5ND-Gu-1PE">
                                                 <barButtonItem key="rightBarButtonItem" style="plain" id="kRd-ju-0DW">
-                                                    <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="E4B-kc-PjI">
+                                                    <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="E4B-kc-PjI">
                                                         <rect key="frame" x="314" y="7" width="30" height="30"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
