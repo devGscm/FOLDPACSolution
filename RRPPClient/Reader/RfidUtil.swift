@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import Mosaic
 
 public class RfidUtil
 {
@@ -244,13 +244,14 @@ public class RfidUtil
         public func setReadCount(readCount: Int)                { self.mIntReadCount = readCount }
         public func setReadTime(readTime: String)               { self.mStrReadTime = readTime }
     }
+
     
     public enum Encodings
     {
         case GID_96, SGTIN_96, SSCC_96, SGLN_96, GRAI_96, GIAI_96, DoD_96, Raw
     }
     
-    public func checkHeader(strData: String) -> Encodings
+    public static func checkHeader(strData: String) -> Encodings
     {
         //let strData = "3312D58E3D8100C000027505"                                        //테스트 입력값(Hex): 3312D58E3D8100C000027505
         var strHeaderBinary = String()
@@ -319,39 +320,40 @@ public class RfidUtil
      * @param strData 입력값
      * @return
      */
-    public func parse(strData: String) -> TagInfo
+    public static func parse(strData: String) -> TagInfo
     {
         let strInputData = strData.replacingOccurrences(of: " ", with: "")
         let enuEncoding: Encodings = checkHeader(strData: strInputData)
         
-//        print("[1]=>parse: \(enuEncoding) :: \(strInputData)")
+        print("==== [RfidUtil]=>parse: \(enuEncoding) :: \(strInputData) ====\n")
+        print("===================================================\n")
         
         switch(enuEncoding)
         {
         case .GID_96:
-            return parseGid96(enuEncoding: RfidUtil.Encodings.GID_96, strData: strInputData)
+            return RfidUtil.parseGid96(enuEncoding: RfidUtil.Encodings.GID_96, strData: strInputData)
             
         case .SGTIN_96:
-            return parseSgtin96(enuEncoding: RfidUtil.Encodings.SGTIN_96, strData: strInputData)
+            return RfidUtil.parseSgtin96(enuEncoding: RfidUtil.Encodings.SGTIN_96, strData: strInputData)
             
         case .SSCC_96:
-            return parseSscc96(enuEncoding: RfidUtil.Encodings.SSCC_96, strData: strInputData)
+            return RfidUtil.parseSscc96(enuEncoding: RfidUtil.Encodings.SSCC_96, strData: strInputData)
             
         case .SGLN_96:
-            return parseSgln96(enuEncoding: RfidUtil.Encodings.SGLN_96, strData: strInputData)
+            return RfidUtil.parseSgln96(enuEncoding: RfidUtil.Encodings.SGLN_96, strData: strInputData)
             
         case .GRAI_96:
-            return parseGrai96(enuEncoding: RfidUtil.Encodings.GRAI_96, strData: strInputData)
+            return RfidUtil.parseGrai96(enuEncoding: RfidUtil.Encodings.GRAI_96, strData: strInputData)
             
         case .GIAI_96:
-            return parseGiai96(enuEncoding: RfidUtil.Encodings.GIAI_96, strData: strInputData)
+            return RfidUtil.parseGiai96(enuEncoding: RfidUtil.Encodings.GIAI_96, strData: strInputData)
             
         case .DoD_96:
-            return parseDod96(enuEncoding: RfidUtil.Encodings.DoD_96, strData: strInputData)
+            return RfidUtil.parseDod96(enuEncoding: RfidUtil.Encodings.DoD_96, strData: strInputData)
             
         case .Raw:
-            return parseRaw(enuEncoding: RfidUtil.Encodings.Raw, strData: strInputData)
-            
+            return RfidUtil.parseRaw(enuEncoding: RfidUtil.Encodings.Raw, strData: strInputData)
+
         }
     }
     
@@ -364,7 +366,7 @@ public class RfidUtil
      * @param input 입력값
      * @return
      */
-    public func fillLength48(strInput: String) -> String
+    public static func fillLength48(strInput: String) -> String
     {
         //let strInput: String = "00C000027505"                                         //테스트 입력값(Hex): 00C000027505
         var strInputToBinary = String()
@@ -402,18 +404,18 @@ public class RfidUtil
     /**
      * parseGid96으로 변환한다.
      */
-    public func parseGid96(enuEncoding: Encodings, strData: String) -> TagInfo
+    public static func parseGid96(enuEncoding: Encodings, strData: String) -> TagInfo
     {
         var strEpcUrn = "gid:"
         
         //바이너리 변환
-        let bitString = self.fillLength48(strInput: getSubstringData(strInputString: strData, intIndexStart: 0, intIndexEnd: 11))
-            + self.fillLength48(strInput: getSubstringData(strInputString: strData, intIndexStart: 12, intIndexEnd: 23))
+        let bitString = self.fillLength48(strInput: StrUtil.substring(strInputString: strData, intIndexStart: 0, intIndexEnd: 11))
+            + self.fillLength48(strInput: StrUtil.substring(strInputString: strData, intIndexStart: 12, intIndexEnd: 23))
         
         //EPC-URN 조합
-        strEpcUrn += String(Int(getSubstringData(strInputString: bitString, intIndexStart: 8, intIndexEnd: 36), radix: 2)!) + "."
-            + String(Int(getSubstringData(strInputString: bitString, intIndexStart: 36, intIndexEnd: 59), radix: 2)!) + "."
-            + String(Int(getSubstringData(strInputString: bitString, intIndexStart: 60, intIndexEnd: 95), radix: 2)!)
+        strEpcUrn += String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 8, intIndexEnd: 36), radix: 2)!) + "."
+            + String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 36, intIndexEnd: 59), radix: 2)!) + "."
+            + String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 60, intIndexEnd: 95), radix: 2)!)
         
         //소문자 변환
         strEpcUrn = strEpcUrn.lowercased()
@@ -431,71 +433,74 @@ public class RfidUtil
     /**
      * Sgtin96으로 변환한다.
      */
-    public func parseSgtin96(enuEncoding: Encodings, strData: String) -> TagInfo
+    public static func parseSgtin96(enuEncoding: Encodings, strData: String) -> TagInfo
     {
         var strEpcUrn = "sgtin:"
         var strCorpEpc = String()
         var strItem = String()
         
         //바이너리 변환
-        let bitString = self.fillLength48(strInput: getSubstringData(strInputString: strData, intIndexStart: 0, intIndexEnd: 11))
-            + self.fillLength48(strInput: getSubstringData(strInputString: strData, intIndexStart: 12, intIndexEnd: 23))
+        let bitString = self.fillLength48(strInput: StrUtil.substring(strInputString: strData, intIndexStart: 0, intIndexEnd: 11))
+            + self.fillLength48(strInput: StrUtil.substring(strInputString: strData, intIndexStart: 12, intIndexEnd: 23))
         
         //EPC-URN 조합
-        strEpcUrn += String(Int(getSubstringData(strInputString: bitString, intIndexStart: 8, intIndexEnd: 10), radix: 2)!) + "."
+        strEpcUrn += String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 8, intIndexEnd: 10), radix: 2)!) + "."
         
         //Partition 변환
-        let intPartition: Int? = Int(getSubstringData(strInputString: bitString, intIndexStart: 11, intIndexEnd: 13), radix: 2)
+        let intPartition: Int? = Int(StrUtil.substring(strInputString: bitString, intIndexStart: 11, intIndexEnd: 13), radix: 2)
+        
+        print("==== [RfidUtil]=>parseSgtin96:\(intPartition!) ====\n")
+        print("===================================================\n")
         
         switch(intPartition!)
         {
         case 0:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 53), radix: 2)!)
-            strItem = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 54, intIndexEnd: 57), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 53), radix: 2)!)
+            strItem = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 54, intIndexEnd: 57), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strItem, intCount: 13 - strItem.count - strCorpEpc.count) + "."
-                + String(Int(getSubstringData(strInputString: bitString, intIndexStart: 58, intIndexEnd: 95), radix: 2)!)
+                + String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 58, intIndexEnd: 95), radix: 2)!)
             break;
             
         case 1:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 51), radix: 2)!)
-            strItem = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 51, intIndexEnd: 57), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 51), radix: 2)!)
+            strItem = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 51, intIndexEnd: 57), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strItem, intCount: 13 - strItem.count - strCorpEpc.count) + "."
-                + String(Int(getSubstringData(strInputString: bitString, intIndexStart: 58, intIndexEnd: 95), radix: 2)!)
+                + String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 58, intIndexEnd: 95), radix: 2)!)
             break;
             
         case 2:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 48), radix: 2)!)
-            strItem = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 48, intIndexEnd: 57), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 48), radix: 2)!)
+            strItem = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 48, intIndexEnd: 57), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strItem, intCount: 13 - strItem.count - strCorpEpc.count) + "."
-                + String(Int(getSubstringData(strInputString: bitString, intIndexStart: 58, intIndexEnd: 95), radix: 2)!)
+                + String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 58, intIndexEnd: 95), radix: 2)!)
             break;
             
         case 3:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 44), radix: 2)!)
-            strItem = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 44, intIndexEnd: 57), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 44), radix: 2)!)
+            strItem = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 44, intIndexEnd: 57), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strItem, intCount: 13 - strItem.count - strCorpEpc.count) + "."
-                + String(Int(getSubstringData(strInputString: bitString, intIndexStart: 58, intIndexEnd: 95), radix: 2)!)
+                + String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 58, intIndexEnd: 95), radix: 2)!)
             break;
             
         case 4:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 40), radix: 2)!)
-            strItem = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 41, intIndexEnd: 57), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 40), radix: 2)!)
+            strItem = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 41, intIndexEnd: 57), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strItem, intCount: 13 - strItem.count - strCorpEpc.count) + "."
-                + String(Int(getSubstringData(strInputString: bitString, intIndexStart: 58, intIndexEnd: 95), radix: 2)!)
+                + String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 58, intIndexEnd: 95), radix: 2)!)
             break;
             
         case 5:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 37), radix: 2)!)
-            strItem = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 38, intIndexEnd: 57), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 37), radix: 2)!)
+            strItem = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 38, intIndexEnd: 57), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strItem, intCount: 13 - strItem.count - strCorpEpc.count) + "."
-                + String(Int(getSubstringData(strInputString: bitString, intIndexStart: 58, intIndexEnd: 95), radix: 2)!)
+                + String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 58, intIndexEnd: 95), radix: 2)!)
             break;
             
         case 6:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 34), radix: 2)!)
-            strItem = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 34, intIndexEnd: 57), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 34), radix: 2)!)
+            strItem = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 34, intIndexEnd: 57), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strItem, intCount: 13 - strItem.count - strCorpEpc.count) + "."
-                + String(Int(getSubstringData(strInputString: bitString, intIndexStart: 58, intIndexEnd: 95), radix: 2)!)
+                + String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 58, intIndexEnd: 95), radix: 2)!)
             break;
             
         default:
@@ -520,7 +525,7 @@ public class RfidUtil
     /**
      * Sscc96으로 변환한다.
      */
-    public func parseSscc96(enuEncoding: Encodings, strData: String) -> TagInfo
+    public static func parseSscc96(enuEncoding: Encodings, strData: String) -> TagInfo
     {
         var strEpcUrn = "sscc:"
         var strCorpEpc = String()
@@ -528,58 +533,58 @@ public class RfidUtil
         
         
         //바이너리 변환
-        let bitString = self.fillLength48(strInput: getSubstringData(strInputString: strData, intIndexStart: 0, intIndexEnd: 11))
-            + self.fillLength48(strInput: getSubstringData(strInputString: strData, intIndexStart: 12, intIndexEnd: 23))
+        let bitString = self.fillLength48(strInput: StrUtil.substring(strInputString: strData, intIndexStart: 0, intIndexEnd: 11))
+            + self.fillLength48(strInput: StrUtil.substring(strInputString: strData, intIndexStart: 12, intIndexEnd: 23))
         
         //EPC-URN 조합
-        strEpcUrn += String(Int(getSubstringData(strInputString: bitString, intIndexStart: 8, intIndexEnd: 10), radix: 2)!) + "."
+        strEpcUrn += String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 8, intIndexEnd: 10), radix: 2)!) + "."
         
         //Partition 변환
-        let intPartition: Int? = Int(getSubstringData(strInputString: bitString, intIndexStart: 11, intIndexEnd: 13), radix: 2)
+        let intPartition: Int? = Int(StrUtil.substring(strInputString: bitString, intIndexStart: 11, intIndexEnd: 13), radix: 2)
         
         switch(intPartition!)
         {
         case 0:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 53), radix: 2)!)
-            strSerialNo = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 54, intIndexEnd: 71), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 53), radix: 2)!)
+            strSerialNo = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 54, intIndexEnd: 71), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strSerialNo, intCount: 17 - strSerialNo.count - strCorpEpc.count)
             break;
             
         case 1:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 50), radix: 2)!)
-            strSerialNo = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 51, intIndexEnd: 71), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 50), radix: 2)!)
+            strSerialNo = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 51, intIndexEnd: 71), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strSerialNo, intCount: 17 - strSerialNo.count - strCorpEpc.count)
             break;
             
         case 2:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 48), radix: 2)!)
-            strSerialNo = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 48, intIndexEnd: 72), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 48), radix: 2)!)
+            strSerialNo = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 48, intIndexEnd: 72), radix: 2)!)
             
             
             strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strSerialNo, intCount: 17 - strSerialNo.count - strCorpEpc.count)
             break;
             
         case 3:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 43), radix: 2)!)
-            strSerialNo = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 44, intIndexEnd: 71), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 43), radix: 2)!)
+            strSerialNo = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 44, intIndexEnd: 71), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strSerialNo, intCount: 17 - strSerialNo.count - strCorpEpc.count)
             break;
             
         case 4:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 41), radix: 2)!)
-            strSerialNo = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 41, intIndexEnd: 71), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 41), radix: 2)!)
+            strSerialNo = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 41, intIndexEnd: 71), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strSerialNo, intCount: 17 - strSerialNo.count - strCorpEpc.count)
             break;
             
         case 5:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 37), radix: 2)!)
-            strSerialNo = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 38, intIndexEnd: 71), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 37), radix: 2)!)
+            strSerialNo = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 38, intIndexEnd: 71), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strSerialNo, intCount: 17 - strSerialNo.count - strCorpEpc.count)
             break;
             
         case 6:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 33), radix: 2)!)
-            strSerialNo = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 33, intIndexEnd: 71), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 33), radix: 2)!)
+            strSerialNo = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 33, intIndexEnd: 71), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strSerialNo, intCount: 17 - strSerialNo.count - strCorpEpc.count)
             break;
             
@@ -605,71 +610,71 @@ public class RfidUtil
     /**
      * Sgln96으로 변환한다.
      */
-    public func parseSgln96(enuEncoding: Encodings, strData: String) -> TagInfo
+    public static func parseSgln96(enuEncoding: Encodings, strData: String) -> TagInfo
     {
         var strEpcUrn = "sgln:"
         var strCorpEpc = String()
         var strLocation = String()
         
         //바이너리 변환
-        let bitString = self.fillLength48(strInput: getSubstringData(strInputString: strData, intIndexStart: 0, intIndexEnd: 11))
-            + self.fillLength48(strInput: getSubstringData(strInputString: strData, intIndexStart: 12, intIndexEnd: 23))
+        let bitString = self.fillLength48(strInput: StrUtil.substring(strInputString: strData, intIndexStart: 0, intIndexEnd: 11))
+            + self.fillLength48(strInput: StrUtil.substring(strInputString: strData, intIndexStart: 12, intIndexEnd: 23))
         
         //EPC-URN 조합
-        strEpcUrn += String(Int(getSubstringData(strInputString: bitString, intIndexStart: 8, intIndexEnd: 10), radix: 2)!) + "."
+        strEpcUrn += String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 8, intIndexEnd: 10), radix: 2)!) + "."
         
         //Partition 변환
-        let intPartition: Int? = Int(getSubstringData(strInputString: bitString, intIndexStart: 11, intIndexEnd: 13), radix: 2)
+        let intPartition: Int? = Int(StrUtil.substring(strInputString: bitString, intIndexStart: 11, intIndexEnd: 13), radix: 2)
         
         switch(intPartition!)
         {
         case 0:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 53), radix: 2)!)
-            strLocation = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 54, intIndexEnd: 54), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 53), radix: 2)!)
+            strLocation = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 54, intIndexEnd: 54), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strLocation, intCount: 12 - strLocation.count - strCorpEpc.count) + "."
-                + String(Int(getSubstringData(strInputString: bitString, intIndexStart: 55, intIndexEnd: 95), radix: 2)!)
+                + String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 55, intIndexEnd: 95), radix: 2)!)
             break;
             
         case 1:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 50), radix: 2)!)
-            strLocation = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 51, intIndexEnd: 54), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 50), radix: 2)!)
+            strLocation = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 51, intIndexEnd: 54), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strLocation, intCount: 12 - strLocation.count - strCorpEpc.count) + "."
-                + String(Int(getSubstringData(strInputString: bitString, intIndexStart: 55, intIndexEnd: 95), radix: 2)!)
+                + String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 55, intIndexEnd: 95), radix: 2)!)
             break;
             
         case 2:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 47), radix: 2)!)
-            strLocation = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 48, intIndexEnd: 54), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 47), radix: 2)!)
+            strLocation = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 48, intIndexEnd: 54), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strLocation, intCount: 12 - strLocation.count - strCorpEpc.count) + "."
-                + String(Int(getSubstringData(strInputString: bitString, intIndexStart: 55, intIndexEnd: 95), radix: 2)!)
+                + String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 55, intIndexEnd: 95), radix: 2)!)
             break;
             
         case 3:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 40), radix: 2)!)
-            strLocation = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 41, intIndexEnd: 54), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 40), radix: 2)!)
+            strLocation = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 41, intIndexEnd: 54), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strLocation, intCount: 12 - strLocation.count - strCorpEpc.count) + "."
-                + String(Int(getSubstringData(strInputString: bitString, intIndexStart: 55, intIndexEnd: 95), radix: 2)!)
+                + String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 55, intIndexEnd: 95), radix: 2)!)
             break;
             
         case 4:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 40), radix: 2)!)
-            strLocation = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 41, intIndexEnd: 54), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 40), radix: 2)!)
+            strLocation = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 41, intIndexEnd: 54), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strLocation, intCount: 12 - strLocation.count - strCorpEpc.count) + "."
-                + String(Int(getSubstringData(strInputString: bitString, intIndexStart: 55, intIndexEnd: 95), radix: 2)!)
+                + String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 55, intIndexEnd: 95), radix: 2)!)
             break;
             
         case 5:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 37), radix: 2)!)
-            strLocation = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 38, intIndexEnd: 54), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 37), radix: 2)!)
+            strLocation = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 38, intIndexEnd: 54), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strLocation, intCount: 12 - strLocation.count - strCorpEpc.count) + "."
-                + String(Int(getSubstringData(strInputString: bitString, intIndexStart: 55, intIndexEnd: 95), radix: 2)!)
+                + String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 55, intIndexEnd: 95), radix: 2)!)
             break;
             
         case 6:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 33), radix: 2)!)
-            strLocation = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 34, intIndexEnd: 54), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 33), radix: 2)!)
+            strLocation = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 34, intIndexEnd: 54), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strLocation, intCount: 12 - strLocation.count - strCorpEpc.count) + "."
-                + String(Int(getSubstringData(strInputString: bitString, intIndexStart: 55, intIndexEnd: 95), radix: 2)!)
+                + String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 55, intIndexEnd: 95), radix: 2)!)
             break;
             
         default:
@@ -694,7 +699,7 @@ public class RfidUtil
     /**
      * Grai96으로 변환한다.
      */
-    public func parseGrai96(enuEncoding: Encodings, strData: String) -> TagInfo
+    public static func parseGrai96(enuEncoding: Encodings, strData: String) -> TagInfo
     {
         //print("[2]=>parseGrai96: \(strData)")
         
@@ -710,62 +715,62 @@ public class RfidUtil
         let strIssueSeq = String()
         
         //바이너리 변환
-        let bitString = self.fillLength48(strInput: getSubstringData(strInputString: strData, intIndexStart: 0, intIndexEnd: 11))               //결과: 3312D58E3D81
-                        + self.fillLength48(strInput: getSubstringData(strInputString: strData, intIndexStart: 12, intIndexEnd: 23))            //결과: 00C000027505
+        let bitString = self.fillLength48(strInput: StrUtil.substring(strInputString: strData, intIndexStart: 0, intIndexEnd: 11))               //결과: 3312D58E3D81
+                        + self.fillLength48(strInput: StrUtil.substring(strInputString: strData, intIndexStart: 12, intIndexEnd: 23))            //결과: 00C000027505
                         //결과: 001100110001001011010101100011100011110110000001000000001100000000000000000000100111010100000101
         
         //Partition 변환
-        let subStrBitString = getSubstringData(strInputString: bitString, intIndexStart: 11, intIndexEnd: 13)                                   //결과: 100
+        let subStrBitString = StrUtil.substring(strInputString: bitString, intIndexStart: 11, intIndexEnd: 13)                                   //결과: 100
         let intPartition: Int? = Int(subStrBitString, radix: 2)                                                                                 //결과: 4
         
         switch(intPartition!)
         {
         case 0:
-            strSerialNo = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 58, intIndexEnd: 95), radix: 2)!)
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 53), radix: 2)!)
-            strAssetEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 54, intIndexEnd: 57), radix: 2)!)
+            strSerialNo = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 58, intIndexEnd: 95), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 53), radix: 2)!)
+            strAssetEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 54, intIndexEnd: 57), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strAssetEpc, intCount: 12 - strAssetEpc.count - strCorpEpc.count) + "." + strSerialNo
             break;
             
         case 1:
-            strSerialNo = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 58, intIndexEnd: 95), radix: 2)!)
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 51), radix: 2)!)
-            strAssetEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 51, intIndexEnd: 57), radix: 2)!)
+            strSerialNo = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 58, intIndexEnd: 95), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 51), radix: 2)!)
+            strAssetEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 51, intIndexEnd: 57), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strAssetEpc, intCount: 12 - strAssetEpc.count - strCorpEpc.count) + "." + strSerialNo
             break;
             
         case 2:
-            strSerialNo = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 58, intIndexEnd: 95), radix: 2)!)
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 48), radix: 2)!)
-            strAssetEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 48, intIndexEnd: 57), radix: 2)!)
+            strSerialNo = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 58, intIndexEnd: 95), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 48), radix: 2)!)
+            strAssetEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 48, intIndexEnd: 57), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strAssetEpc, intCount: 12 - strAssetEpc.count - strCorpEpc.count) + "." + strSerialNo
             break;
             
         case 3:
-            strSerialNo = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 58, intIndexEnd: 95), radix: 2)!)
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 44), radix: 2)!)
-            strAssetEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 44, intIndexEnd: 57), radix: 2)!)
+            strSerialNo = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 58, intIndexEnd: 95), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 44), radix: 2)!)
+            strAssetEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 44, intIndexEnd: 57), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strAssetEpc, intCount: 12 - strAssetEpc.count - strCorpEpc.count) + "." + strSerialNo
             break;
             
         case 4:
             //RRPP용
-            strSerialNo = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 58, intIndexEnd: 95), radix: 2)!)               //결과: 161029
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 40), radix: 2)!)                //결과: 95100027
-            strAssetEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 41, intIndexEnd: 57), radix: 2)!)               //결과: 1027
+            strSerialNo = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 58, intIndexEnd: 95), radix: 2)!)               //결과: 161029
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 40), radix: 2)!)                //결과: 95100027
+            strAssetEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 41, intIndexEnd: 57), radix: 2)!)               //결과: 1027
             strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strAssetEpc, intCount: 12 - strAssetEpc.count - strCorpEpc.count)
                 + "." + strSerialNo                                                                                                             //결과: grai:95100027.1027.161029
             break;
             
         case 5:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 37), radix: 2)!)
-            strAssetEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 38, intIndexEnd: 57), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 37), radix: 2)!)
+            strAssetEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 38, intIndexEnd: 57), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strAssetEpc, intCount: 12 - strAssetEpc.count - strCorpEpc.count) + "." + strSerialNo
             break;
             
         case 6:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 34), radix: 2)!)
-            strAssetEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 34, intIndexEnd: 57), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 34), radix: 2)!)
+            strAssetEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 34, intIndexEnd: 57), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strAssetEpc, intCount: 12 - strAssetEpc.count - strCorpEpc.count) + "." + strSerialNo
             break;
             
@@ -796,64 +801,64 @@ public class RfidUtil
     /**
      * parseGiai96으로 변환한다.
      */
-    public func parseGiai96(enuEncoding: Encodings, strData: String) -> TagInfo
+    public static func parseGiai96(enuEncoding: Encodings, strData: String) -> TagInfo
     {
         var strEpcUrn = "giai:"
         var strCorpEpc = String()
         var strAssetRef = String()
         
         //바이너리 변환
-        let bitString = self.fillLength48(strInput: getSubstringData(strInputString: strData, intIndexStart: 0, intIndexEnd: 11))
-            + self.fillLength48(strInput: getSubstringData(strInputString: strData, intIndexStart: 12, intIndexEnd: 23))
+        let bitString = self.fillLength48(strInput: StrUtil.substring(strInputString: strData, intIndexStart: 0, intIndexEnd: 11))
+            + self.fillLength48(strInput: StrUtil.substring(strInputString: strData, intIndexStart: 12, intIndexEnd: 23))
         
         //EPC-URN 조합
-        strEpcUrn += String(Int(getSubstringData(strInputString: bitString, intIndexStart: 8, intIndexEnd: 10), radix: 2)!) + "."
+        strEpcUrn += String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 8, intIndexEnd: 10), radix: 2)!) + "."
         
         //Partition 변환
-        let intPartition: Int? = Int(getSubstringData(strInputString: bitString, intIndexStart: 11, intIndexEnd: 13), radix: 2)
+        let intPartition: Int? = Int(StrUtil.substring(strInputString: bitString, intIndexStart: 11, intIndexEnd: 13), radix: 2)
         
         
         switch(intPartition!)
         {
         case 0:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 53), radix: 2)!)
-            strAssetRef = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 54, intIndexEnd: 95), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 53), radix: 2)!)
+            strAssetRef = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 54, intIndexEnd: 95), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + strAssetRef
             break;
             
         case 1:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 50), radix: 2)!)
-            strAssetRef = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 51, intIndexEnd: 95), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 50), radix: 2)!)
+            strAssetRef = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 51, intIndexEnd: 95), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + strAssetRef
             break;
             
         case 2:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 48), radix: 2)!)
-            strAssetRef = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 48, intIndexEnd: 95), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 48), radix: 2)!)
+            strAssetRef = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 48, intIndexEnd: 95), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + strAssetRef
             break;
             
         case 3:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 43), radix: 2)!)
-            strAssetRef = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 44, intIndexEnd: 95), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 43), radix: 2)!)
+            strAssetRef = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 44, intIndexEnd: 95), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + strAssetRef
             break;
             
         case 4:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 40), radix: 2)!)
-            strAssetRef = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 40, intIndexEnd: 95), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 40), radix: 2)!)
+            strAssetRef = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 40, intIndexEnd: 95), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + strAssetRef
             break;
             
         case 5:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 37), radix: 2)!)
-            strAssetRef = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 38, intIndexEnd: 95), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 37), radix: 2)!)
+            strAssetRef = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 38, intIndexEnd: 95), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + strAssetRef
             break;
             
         case 6:
-            strCorpEpc = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 14, intIndexEnd: 33), radix: 2)!)
-            strAssetRef = String(Int(getSubstringData(strInputString: bitString, intIndexStart: 34, intIndexEnd: 95), radix: 2)!)
+            strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 33), radix: 2)!)
+            strAssetRef = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 34, intIndexEnd: 95), radix: 2)!)
             strEpcUrn += strCorpEpc + "." + strAssetRef
             break;
             
@@ -881,18 +886,18 @@ public class RfidUtil
     /**
      * parseDod96으로 변환한다.
      */
-    public func parseDod96(enuEncoding: Encodings, strData: String) -> TagInfo
+    public static func parseDod96(enuEncoding: Encodings, strData: String) -> TagInfo
     {
         var strEpcUrn = "usdod:"
-        
+
         //바이너리 변환
-        let bitString = self.fillLength48(strInput: getSubstringData(strInputString: strData, intIndexStart: 0, intIndexEnd: 11))
-            + self.fillLength48(strInput: getSubstringData(strInputString: strData, intIndexStart: 12, intIndexEnd: 23))
+        let bitString = self.fillLength48(strInput: StrUtil.substring(strInputString: strData, intIndexStart: 0, intIndexEnd: 11))
+            + self.fillLength48(strInput: StrUtil.substring(strInputString: strData, intIndexStart: 12, intIndexEnd: 23))
         
         //EPC-URN 조합
-        strEpcUrn += String(Int(getSubstringData(strInputString: bitString, intIndexStart: 8, intIndexEnd: 11), radix: 2)!) + "."
-            + String(Int(getSubstringData(strInputString: bitString, intIndexStart: 12, intIndexEnd: 59), radix: 2)!) + "."
-            + String(Int(getSubstringData(strInputString: bitString, intIndexStart: 60, intIndexEnd: 95), radix: 2)!) + "."
+        strEpcUrn += String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 8, intIndexEnd: 11), radix: 2)!) + "."
+            + String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 12, intIndexEnd: 59), radix: 2)!) + "."
+            + String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 60, intIndexEnd: 95), radix: 2)!) + "."
         
         //소문자 변환
         strEpcUrn = strEpcUrn.lowercased()
@@ -911,7 +916,7 @@ public class RfidUtil
     /**
      * Raw으로 변환한다.
      */
-    public func parseRaw(enuEncoding: Encodings, strData: String) -> TagInfo
+    public static func parseRaw(enuEncoding: Encodings, strData: String) -> TagInfo
     {
         //대문자 변환
         let strEpcUrn =  String(strData.count * 4) + ".x" + strData.uppercased()
@@ -926,13 +931,10 @@ public class RfidUtil
     }
     
     
-    
-    
-    
     //=======================================
     //===== 문자열에 0 채우기
     //=======================================
-    public func addPaddingZeros(strInputString: String, intCount: Int) -> String
+    public static func addPaddingZeros(strInputString: String, intCount: Int) -> String
     {
         var strInputData = strInputString
         
@@ -943,35 +945,5 @@ public class RfidUtil
         return strInputData
     }
     
-    
-    //=======================================
-    //===== 문자열 자르기 메소드
-    //=======================================
-    public func getSubstringData(strInputString: String, intIndexStart: Int, intIndexEnd: Int) -> String
-    {
-        var strResultData = String()
-        var intStartIndex = 0
-        
-        intStartIndex = intIndexStart
-        
-        if(intStartIndex <= 0)
-        {
-            intStartIndex = 0                                                                                   //시작위치가 0보다 작으면 '0'
-        }
-        //print("strInputString: \(strInputString)")
-        
-        let indexStart = strInputString.index(strInputString.startIndex, offsetBy: intStartIndex)               //시작위치
-        let indexEnd = strInputString.index(strInputString.startIndex, offsetBy: intIndexEnd)                   //종료위치
-        
-        if(intIndexEnd <= 0)
-        {
-            strResultData = String(strInputString[indexStart...])                                               //#1.시작위치'x' 부터 끝까지
-        }
-        else
-        {
-            strResultData = String(strInputString[indexStart...indexEnd])                                       //#2.시작위치 'x'부터 'x'까지
-        }
-        return strResultData
-    }
 }
 

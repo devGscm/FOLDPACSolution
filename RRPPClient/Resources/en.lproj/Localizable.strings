@@ -490,7 +490,7 @@
 "common_order_number" = "Instruction No.";
 "common_asset_type" = "Item No.";
 
-"title_work_inout_cancel" = "Receiving&amp;Shipping Cancel";
+"title_work_inout_cancel" = "Receiving&Shipping Cancel";
 "common_select_all" = "Total";
 "easy_process_trade_chit" = "Statement No.";
 
