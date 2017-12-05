@@ -9,6 +9,7 @@
 import UIKit
 import Mosaic
 
+
 class HistorySearch: BaseViewController, UITableViewDataSource, UITableViewDelegate
 {
 	
@@ -32,7 +33,7 @@ class HistorySearch: BaseViewController, UITableViewDataSource, UITableViewDeleg
 	var arcDataRows : Array<DataRow> = Array<DataRow>()
 
 	var arcEventCode: Array<ListViewDialog.ListViewItem> = Array<ListViewDialog.ListViewItem>()
-	var strEventCode : String?
+	var strEventCode  = ""
 
     override func viewDidLoad()
 	{
@@ -76,7 +77,7 @@ class HistorySearch: BaseViewController, UITableViewDataSource, UITableViewDeleg
 		let dfFormat = DateFormatter()
 		dfFormat.dateFormat = "yyyy-MM-dd"
 		tfEnDate.text = dfFormat.string(from: dtCurDate)
-		
+
 		let intDateDistance = AppContext.sharedManager.getUserInfo().getDateDistance()
 		let dtStDate = Calendar.current.date(byAdding: .day, value: -intDateDistance, to: dtCurDate)
 		tfStDate.text = dfFormat.string(from: dtStDate!)
@@ -125,8 +126,9 @@ class HistorySearch: BaseViewController, UITableViewDataSource, UITableViewDeleg
 	@IBAction func onEventCodeClicked(_ sender: UIButton)
 	{
 		let clsDialog = ListViewDialog()
-		clsDialog.contentHeight = 150
-		clsDialog.loadData(data: arcEventCode)
+		clsDialog.loadData(data: arcEventCode, selectedItem: strEventCode)
+        clsDialog.contentHeight = 150
+		
 		
 		let acDialog = UIAlertController(title: NSLocalizedString("rfid_event_code", comment: "이벤트구분"), message:nil, preferredStyle: .alert)
 		acDialog.setValue(clsDialog, forKeyPath: "contentViewController")
@@ -182,7 +184,7 @@ class HistorySearch: BaseViewController, UITableViewDataSource, UITableViewDeleg
 		
 		clsDataClient.addServiceParam(paramName: "startTraceDate", value: strLocaleStDate)
 		clsDataClient.addServiceParam(paramName: "endTraceDate", value: strLocaleEnDate)
-		clsDataClient.addServiceParam(paramName: "eventCode", value: strEventCode!)
+		clsDataClient.addServiceParam(paramName: "eventCode", value: strEventCode)
 		
 		clsDataClient.addServiceParam(paramName: "pageNo", value: intPageNo)
 		clsDataClient.addServiceParam(paramName: "rowsPerPage", value: Constants.ROWS_PER_PAGE)

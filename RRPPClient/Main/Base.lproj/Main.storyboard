@@ -535,7 +535,7 @@ CA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fEG-Vc-wz7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="229.59999999999999" y="-982.75862068965523"/>
+            <point key="canvasLocation" x="222" y="-984"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FFM-wp-9pm">
@@ -728,7 +728,7 @@ CA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ixe-y2-8fS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1028" y="-983.65817091454278"/>
+            <point key="canvasLocation" x="1006" y="-985"/>
         </scene>
     </scenes>
     <resources>
