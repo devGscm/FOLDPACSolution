@@ -82,6 +82,9 @@
 		96E494271FB1A78500D1E2C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96E494261FB1A78500D1E2C1 /* Assets.xcassets */; };
 		96E4942A1FB1A78500D1E2C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96E494281FB1A78500D1E2C1 /* LaunchScreen.storyboard */; };
 		96E494351FB1A78500D1E2C1 /* RRPPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E494341FB1A78500D1E2C1 /* RRPPClientTests.swift */; };
+		B060131B1FD5088A00594CCD /* InOutCancel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B060131A1FD5088A00594CCD /* InOutCancel.storyboard */; };
+		B060131D1FD512B900594CCD /* InOutCancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B060131C1FD512B900594CCD /* InOutCancel.swift */; };
+		B060131F1FD529A200594CCD /* InOutCancelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B060131E1FD529A200594CCD /* InOutCancelCell.swift */; };
 		B0B7C3811FCE7B3300A9C1B3 /* IdentificationSystemDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B7C3801FCE7B3300A9C1B3 /* IdentificationSystemDialog.swift */; };
 /* End PBXBuildFile section */
 
@@ -217,6 +220,9 @@
 		96E494361FB1A78500D1E2C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96E4943B1FB1A78500D1E2C1 /*  RRPPClientUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = " RRPPClientUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E4944F1FB1A81F00D1E2C1 /* moramframework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = moramframework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B060131A1FD5088A00594CCD /* InOutCancel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InOutCancel.storyboard; sourceTree = "<group>"; };
+		B060131C1FD512B900594CCD /* InOutCancel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InOutCancel.swift; sourceTree = "<group>"; };
+		B060131E1FD529A200594CCD /* InOutCancelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InOutCancelCell.swift; sourceTree = "<group>"; };
 		B0B7C3801FCE7B3300A9C1B3 /* IdentificationSystemDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentificationSystemDialog.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -464,6 +470,7 @@
 		96E4941E1FB1A78500D1E2C1 /* RRPPClient */ = {
 			isa = PBXGroup;
 			children = (
+				B06013191FD5080F00594CCD /* InOutCancel */,
 				5590A55B1FD4DE65007571D5 /* ProdMapping */,
 				555B98881FD27734006CC14F /* History */,
 				55FC62A21FD149EE003B7173 /* Stock */,
@@ -510,6 +517,16 @@
 				96E4944F1FB1A81F00D1E2C1 /* moramframework.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B06013191FD5080F00594CCD /* InOutCancel */ = {
+			isa = PBXGroup;
+			children = (
+				B060131A1FD5088A00594CCD /* InOutCancel.storyboard */,
+				B060131C1FD512B900594CCD /* InOutCancel.swift */,
+				B060131E1FD529A200594CCD /* InOutCancelCell.swift */,
+			);
+			path = InOutCancel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -635,6 +652,7 @@
 				967A9C441FC3BE8D00B6A9D1 /* Localizable.strings in Resources */,
 				55FA783F1FBDACFD00583A80 /* login.png in Resources */,
 				96E494271FB1A78500D1E2C1 /* Assets.xcassets in Resources */,
+				B060131B1FD5088A00594CCD /* InOutCancel.storyboard in Resources */,
 				55FC62A61FD14A56003B7173 /* Stock.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -677,6 +695,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B060131F1FD529A200594CCD /* InOutCancelCell.swift in Sources */,
 				9680BE881FCBD91D002838A4 /* SwingProtocol.m in Sources */,
 				55FA78361FBDACC600583A80 /* ProgressDialog.swift in Sources */,
 				55ACD6801FC8051900A2DC72 /* DataProtocol.swift in Sources */,
@@ -688,6 +707,7 @@
 				96E494201FB1A78500D1E2C1 /* AppDelegate.swift in Sources */,
 				9680BE8C1FCBD9D4002838A4 /* RfidSwing.swift in Sources */,
 				55F385D41FC3E8130043F1A3 /* BranchSearchDialog.swift in Sources */,
+				B060131D1FD512B900594CCD /* InOutCancel.swift in Sources */,
 				5590A5611FD4E7C1007571D5 /* ProdMappingOutCell.swift in Sources */,
 				55ACD6781FC802BD00A2DC72 /* ProductOrderSearchCell.swift in Sources */,
 				553F43111FCD747D006784AF /* UIView.swift in Sources */,

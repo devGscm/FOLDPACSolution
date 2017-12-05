@@ -60,7 +60,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			mArrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "RFID태그검수"))
 			mArrMenuData.append(MenuItem(menuId: "ProdMappingOut", menuName: NSLocalizedString("title_work_sale_c", comment: "출고C")))
 			mArrMenuData.append(MenuItem(menuId: "WorkHistorySearch", menuName: NSLocalizedString("title_work_history_search", comment: "작업내역조회")))
-			
+            mArrMenuData.append(MenuItem(menuId: "InOutCancel", menuName: NSLocalizedString("title_work_inout_cancel", comment: "입출고취소")))
 			mArrMenuData.append(MenuItem(menuId: "RfidTrackingService", menuName: "이력추적"))
 		}
 		tvMenu?.reloadData()
@@ -84,16 +84,20 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
 	{
 		let strtMenuItem  = mArrMenuData[indexPath.row]
+        
+        print("==== LeftViewController::tableView ====: \(strtMenuItem.menuId)")
 		switch (strtMenuItem.menuId)
 		{
 			case "ProductMount" :
 				let clsController: ProductMount = {
+                    print("==== ProductMount ====")
 					return UIStoryboard.viewController(storyBoardName: "Product", identifier: "ProductMount") as! ProductMount
 				}()
 				toolbarController?.transition(to: clsController, completion: closeNavigationDrawer)
 				break
 			case "RfidInspect" :
 				let clsController: RfidInspect = {
+                    print("==== RfidInspect ====")
 					return UIStoryboard.viewController(storyBoardName: "Tag", identifier: "RfidInspect") as! RfidInspect
 				}()
 				toolbarController?.transition(to: clsController, completion: closeNavigationDrawer)
@@ -101,6 +105,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			
 			case "ProdMappingOut" :
 				let clsController: ProdMappingOut = {
+                    print("==== ProdMappingOut ====")
 					return UIStoryboard.viewController(storyBoardName: "ProdMapping", identifier: "ProdMappingOut") as! ProdMappingOut
 				}()
 				toolbarController?.transition(to: clsController, completion: closeNavigationDrawer)
@@ -108,10 +113,21 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			
 			case "WorkHistorySearch" :
 				let clsController: HistorySearch = {
+                    print("==== WorkHistorySearch ====")
 					return UIStoryboard.viewController(storyBoardName: "History", identifier: "HistorySearch") as! HistorySearch
 				}()
 				toolbarController?.transition(to: clsController, completion: closeNavigationDrawer)
 				break
+
+            //입출고취소
+            case "InOutCancel" :
+                let clsController: InOutCancel = {
+                    print("==== InOutCancel ====")
+                    return UIStoryboard.viewController(storyBoardName: "InOutCancel", identifier: "InOutCancel") as! InOutCancel
+                }()
+                toolbarController?.transition(to: clsController, completion: closeNavigationDrawer)
+                break
+            
 			default:
 				print("is selected");
 		}

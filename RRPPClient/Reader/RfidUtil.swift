@@ -183,7 +183,7 @@ public class RfidUtil
          * 자산EPC코드를 설정한다.
          * @param strAssetEpc 자산EPC코드
          */
-        public func setAssetEpc( strAssetEpc: String)           { self.mStrAssetEpc = strAssetEpc        }
+        public func setAssetEpc( assetEpc: String)           { self.mStrAssetEpc = assetEpc        }
         
         
         /**
@@ -781,7 +781,7 @@ public class RfidUtil
         clsTagInfo.setEpcCode(strEpcCode: strData)
         clsTagInfo.setEncoding(enuEncoding: enuEncoding)
         clsTagInfo.setCorpEpc(strCorpEpc: strCorpEpc)
-        clsTagInfo.setAssetEpc(strAssetEpc: strAssetEpc)
+        clsTagInfo.setAssetEpc(assetEpc: strAssetEpc)
         clsTagInfo.setSerialNo(strSerialNo: strSerialNo)
         clsTagInfo.setEpcUrn(strEpcUrn: strEpcUrn)
         clsTagInfo.setCustEpc(strCustEpc: strCustEpc)
@@ -869,7 +869,7 @@ public class RfidUtil
         clsTagInfo.setEpcCode(strEpcCode: strData)
         clsTagInfo.setEncoding(enuEncoding: enuEncoding)
         clsTagInfo.setCorpEpc(strCorpEpc: strCorpEpc)
-        clsTagInfo.setAssetEpc(strAssetEpc: strAssetRef)
+        clsTagInfo.setAssetEpc(assetEpc: strAssetRef)
         clsTagInfo.setEpcUrn(strEpcUrn: strEpcUrn)
         
         return clsTagInfo
