@@ -353,6 +353,10 @@ class LocalData {
 		do
 		{
 			let dataClient = Mosaic.DataClient(url: Constants.WEB_SVC_URL)
+			
+			//TODO:: 아라의 코드중 self를 objMe로 대체
+			let objMe = self
+			
 			switch updateCode
 			{
 				case "CODE_MAST" :
@@ -384,6 +388,20 @@ class LocalData {
 //								for rows in try db.prepare(self.mTblCodeMast) {
 //									print("mColFieldValue: \(rows[self.mColFieldValue]), mColFieldName: \(rows[self.mColFieldName]), mColRemark: \(rows[self.mColRemark]!)")
 //								}
+								
+								/// 비동기로 처리 되므로 개별적으로 Update
+								if(bIsInsert)
+								{
+									print("insert mobUpdateInfo")
+									try db.run(self.mTblMobUpdateInfo.insert(self.mColUcd <- updateCode, self.mColUdt <- Int64(updateDate),
+																			 self.mColRef <- Int64(ref)))
+								}
+								else{
+									print("update mobUpdateInfo")
+									// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
+									let updateState = self.mTblMobUpdateInfo.where(self.mColUcd == updateCode)
+									try db.run(updateState.update(self.mColUdt <- Int64(updateDate), self.mColRef <- Int64(ref)))
+								}
 							} catch {
 								print("local mobUpdateInfo fail: \(error)")
 							}
@@ -421,6 +439,20 @@ class LocalData {
 							//for rows in try db.prepare(self.mTblCodeMastCorp) {
 							//	print("mColCorpId: \(rows[self.mColCorpId]), mColFieldValue: \(rows[self.mColFieldValue]), mColFieldName: \(rows[self.mColFieldName]), mColRemark: \(rows[self.mColRemark]!)")
 							//	}
+							
+							/// 비동기로 처리 되므로 개별적으로 Update
+							if(bIsInsert)
+							{
+								print("insert mobUpdateInfo")
+								try db.run(self.mTblMobUpdateInfo.insert(self.mColUcd <- updateCode, self.mColUdt <- Int64(updateDate),
+																		 self.mColRef <- Int64(ref)))
+							}
+							else{
+								print("update mobUpdateInfo")
+								// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
+								let updateState = self.mTblMobUpdateInfo.where(self.mColUcd == updateCode)
+								try db.run(updateState.update(self.mColUdt <- Int64(updateDate), self.mColRef <- Int64(ref)))
+							}
 						} catch {
 							print("local mobUpdateInfo fail: \(error)")
 						}
@@ -469,6 +501,20 @@ class LocalData {
 //										mColCommOrder: \(rows[self.mColCommOrder]!), mColViewYn: \(rows[self.mColViewYn]!)
 //										""")
 //								}
+								
+								/// 비동기로 처리 되므로 개별적으로 Update
+								if(bIsInsert)
+								{
+									print("insert mobUpdateInfo")
+									try db.run(self.mTblMobUpdateInfo.insert(self.mColUcd <- updateCode, self.mColUdt <- Int64(updateDate),
+																			 self.mColRef <- Int64(ref)))
+								}
+								else{
+									print("update mobUpdateInfo")
+									// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
+									let updateState = self.mTblMobUpdateInfo.where(self.mColUcd == updateCode)
+									try db.run(updateState.update(self.mColUdt <- Int64(updateDate), self.mColRef <- Int64(ref)))
+								}
 							} catch {
 								print("local mobUpdateInfo fail: \(error)")
 							}
@@ -519,6 +565,21 @@ class LocalData {
 //										mColCommOrder: \(rows[self.mColCommOrder]!)
 //										""")
 //								}
+								
+								/// 비동기로 처리 되므로 개별적으로 Update
+								if(bIsInsert)
+								{
+									print("insert mobUpdateInfo")
+									try db.run(self.mTblMobUpdateInfo.insert(self.mColUcd <- updateCode, self.mColUdt <- Int64(updateDate),
+																			 self.mColRef <- Int64(ref)))
+								}
+								else{
+									print("update mobUpdateInfo")
+									// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
+									let updateState = self.mTblMobUpdateInfo.where(self.mColUcd == updateCode)
+									try db.run(updateState.update(self.mColUdt <- Int64(updateDate), self.mColRef <- Int64(ref)))
+								}
+								
 							} catch {
 								print("local mobUpdateInfo fail: \(error)")
 							}
@@ -564,6 +625,20 @@ class LocalData {
 //											mColCoordX: \(rows[self.mColCoordX]!), 	mColCoordY: \(rows[self.mColCoordY]!)
 //											""")
 //									}
+								
+								/// 비동기로 처리 되므로 개별적으로 Update
+								if(bIsInsert)
+								{
+									print("insert mobUpdateInfo")
+									try db.run(self.mTblMobUpdateInfo.insert(self.mColUcd <- updateCode, self.mColUdt <- Int64(updateDate),
+																			 self.mColRef <- Int64(ref)))
+								}
+								else{
+									print("update mobUpdateInfo")
+									// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
+									let updateState = self.mTblMobUpdateInfo.where(self.mColUcd == updateCode)
+									try db.run(updateState.update(self.mColUdt <- Int64(updateDate), self.mColRef <- Int64(ref)))
+								}
 							} catch {
 								print("local mobUpdateInfo fail: \(error)")
 							}
@@ -607,6 +682,21 @@ class LocalData {
 //										mColAssetName: \(rows[self.mColAssetName]!), mColRemark: \(rows[self.mColRemark]!)
 //										""")
 //								}
+								
+								/// 비동기로 처리 되므로 개별적으로 Update
+								if(bIsInsert)
+								{
+									print("insert mobUpdateInfo")
+									try db.run(self.mTblMobUpdateInfo.insert(self.mColUcd <- updateCode, self.mColUdt <- Int64(updateDate),
+																			 self.mColRef <- Int64(ref)))
+								}
+								else{
+									print("update mobUpdateInfo")
+									// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
+									let updateState = self.mTblMobUpdateInfo.where(self.mColUcd == updateCode)
+									try db.run(updateState.update(self.mColUdt <- Int64(updateDate), self.mColRef <- Int64(ref)))
+								}
+								
 							} catch {
 								print("local mobUpdateInfo fail: \(error)")
 							}
@@ -655,6 +745,23 @@ class LocalData {
 //										mColUseYn: \(rows[self.mColUseYn]!)
 //										""")
 //								}
+								
+								/// 비동기로 처리 되므로 개별적으로 Update
+								if(bIsInsert)
+								{
+									print("insert mobUpdateInfo")
+									try db.run(self.mTblMobUpdateInfo.insert(self.mColUcd <- updateCode, self.mColUdt <- Int64(updateDate),
+																			 self.mColRef <- Int64(ref)))
+								}
+								else{
+									print("update mobUpdateInfo")
+									// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
+									let updateState = self.mTblMobUpdateInfo.where(self.mColUcd == updateCode)
+									try db.run(updateState.update(self.mColUdt <- Int64(updateDate), self.mColRef <- Int64(ref)))
+								}
+
+								
+								
 							} catch {
 								print("local mobUpdateInfo fail: \(error)")
 							}
@@ -662,19 +769,6 @@ class LocalData {
 				default:
 					print(" 업데이트 항목에 대한 구현이 없음. 코드: \(updateCode)")
 			}
-			
-			if(bIsInsert)
-			{
-				print("insert mobUpdateInfo")
-				try db.run(self.mTblMobUpdateInfo.insert(self.mColUcd <- updateCode, self.mColUdt <- Int64(updateDate),
-					self.mColRef <- Int64(ref)))
-			}
-			else{
-				print("update mobUpdateInfo")
-				// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
-				let updateState = self.mTblMobUpdateInfo.where(self.mColUcd == updateCode)
-				try db.run(updateState.update(self.mColUdt <- Int64(updateDate), self.mColRef <- Int64(ref)))
-				}
 			
 			//For Test
 //			for rows in try db.prepare(self.mTblMobUpdateInfo) {

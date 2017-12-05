@@ -67,6 +67,7 @@
 		9680BE881FCBD91D002838A4 /* SwingProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 9680BE801FCBD91C002838A4 /* SwingProtocol.m */; };
 		9680BE891FCBD91D002838A4 /* BLEUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 9680BE821FCBD91D002838A4 /* BLEUtility.m */; };
 		9680BE8C1FCBD9D4002838A4 /* RfidSwing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9680BE8B1FCBD9D4002838A4 /* RfidSwing.swift */; };
+		9683FC0B1FD52357000BA328 /* RfidTypeDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9683FC0A1FD52357000BA328 /* RfidTypeDialog.swift */; };
 		968611EC1FBD585C000FE288 /* SWXMLHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 968611DD1FBD564C000FE288 /* SWXMLHash.framework */; };
 		968611ED1FBD585C000FE288 /* SWXMLHash.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 968611DD1FBD564C000FE288 /* SWXMLHash.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		96994C4D1FC5453B00B3A726 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96994C4C1FC5453A00B3A726 /* SQLite.framework */; };
@@ -196,6 +197,7 @@
 		9680BE821FCBD91D002838A4 /* BLEUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEUtility.m; sourceTree = "<group>"; };
 		9680BE841FCBD91D002838A4 /* SwingProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwingProtocol.h; sourceTree = "<group>"; };
 		9680BE8B1FCBD9D4002838A4 /* RfidSwing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RfidSwing.swift; sourceTree = "<group>"; };
+		9683FC0A1FD52357000BA328 /* RfidTypeDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RfidTypeDialog.swift; sourceTree = "<group>"; };
 		968611DD1FBD564C000FE288 /* SWXMLHash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SWXMLHash.framework; path = Carthage/Build/iOS/SWXMLHash.framework; sourceTree = "<group>"; };
 		96994C4C1FC5453A00B3A726 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
 		96994C501FC545DF00B3A726 /* LocalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalData.swift; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 				55FA78451FBDAD0B00583A80 /* LeftViewController.swift */,
 				55FA78461FBDAD0B00583A80 /* RightViewController.swift */,
 				55FA78471FBDAD0B00583A80 /* RootViewController.swift */,
+				9683FC0A1FD52357000BA328 /* RfidTypeDialog.swift */,
 				553BCF881FC2B03500BE39C1 /* RfidReaderDialog.swift */,
 				55F385D31FC3E8130043F1A3 /* BranchSearchDialog.swift */,
 				55F385D51FC409E20043F1A3 /* BranchSearchItem.swift */,
@@ -665,6 +668,7 @@
 				55FA78561FBDAD7E00583A80 /* AppContext.swift in Sources */,
 				555B988C1FD2776A006CC14F /* HistorySearch.swift in Sources */,
 				96E494221FB1A78500D1E2C1 /* ViewController.swift in Sources */,
+				9683FC0B1FD52357000BA328 /* RfidTypeDialog.swift in Sources */,
 				55B302C21FCE323B00BDCCB1 /* BaseRfidViewController.swift in Sources */,
 				55FA784D1FBDAD0B00583A80 /* RootViewController.swift in Sources */,
 				96E494201FB1A78500D1E2C1 /* AppDelegate.swift in Sources */,

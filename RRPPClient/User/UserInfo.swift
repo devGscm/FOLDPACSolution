@@ -216,7 +216,29 @@ class UserInfo
 	*/
 	func getInAgreeYn() -> String?		{ return UserDefaults.standard.string(forKey: "inAgreeYn") }
 	
+	func getReaderType() -> ReaderType
+	{
+		if let readerType = ReaderType(rawValue: UserDefaults.standard.integer(forKey: Constants.RFID_READER_TYPE_KEY))
+		{
+			return readerType
+		}
+		return .SWING
+	}
 	
+	func getReaderDevId() -> String?
+	{
+		if let rederInfoList = UserDefaults.standard.data(forKey: Constants.RFID_READER_INFO_KEY)
+		{
+			if let rederInfoList = NSKeyedUnarchiver.unarchiveObject(with: rederInfoList) as? [ReaderDevInfo]
+			{
+				for rederInfo in rederInfoList
+				{
+					return rederInfo.id
+				}
+			}
+		}
+		return nil
+	}
 	
 	
 	/**
