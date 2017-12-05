@@ -97,17 +97,17 @@ class RootViewController: BaseViewController
 			
 			
 			//               01234567890123456789012
-//			let strEpcUrn = "grai:0.95100043.1025.62"
+			let strEpcUrn = "grai:0.95100043.1025.62"
 //			
 //		
-//			var intIndex:Int = strEpcUrn.range(of: ".", options: .backwards)?.lowerBound ?? -1
-//			
-//			let substring2 = strEpcUrn.substring(from: intIndex + 1)
-//			print("=============================================")
-//			print("index:\(intIndex!)")
-//			print("index:\(substring2)")
-//			print("=============================================")
-//			
+			let intIndex = strEpcUrn.range(of: ".", options: .backwards)?.lowerBound
+			
+			let substring2 = strEpcUrn.substring(to: intIndex!)
+			print("=============================================")
+			//print("index:\(intIndex!)")
+			print("index:\(substring2)")
+			print("=============================================")
+//
 			//print("=============================================")
 			//print(" UserName : \( AppContext.sharedManager.getUserInfo().getUserName() )")
 			//print("=============================================")
