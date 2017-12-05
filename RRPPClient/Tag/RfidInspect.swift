@@ -14,7 +14,9 @@ class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	@IBOutlet weak var txtCount: UITextField!
 	@IBOutlet weak var tvTagList: UITableView!
 	
-	var arrTagList			: Array<String> = Array<String>()
+    //var arrTagList		: Array<String> = Array<String>()
+    var arrTagList     : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
+
 	
     override func viewDidLoad()
     {
@@ -81,16 +83,22 @@ class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	
 	/// 테그 데이터 반환
 	/// - Parameter tagId: <#tagId description#>
-	func didReadTagList(_ tagId: String) {
-		if (self.arrTagList.contains(tagId) == false)
-		{
-			self.arrTagList.append(tagId)			
-			let objMe = self
-			DispatchQueue.main.async {
-				self.txtCount.text = "\(objMe.arrTagList.count)"
-				self.tvTagList?.reloadData()
-			}
-		}
+	func didReadTagList(_ tagId: String)
+    {
+//        print("==========================================\n")
+//        print("현테스트[1]:==== \(tagId) ===")
+        //print("==========================================\n")
+        
+        let clsTagInfo = RfidUtil.parse(strData: tagId)
+     
+
+        
+        arrTagList.append(clsTagInfo)
+        let objMe = self
+        DispatchQueue.main.async {
+            self.txtCount.text = "\(objMe.arrTagList.count)"
+            self.tvTagList?.reloadData()
+        }
 	}
 	
 	func didReaderScanList(id: String, name: String, macAddr: String) {
@@ -110,7 +118,10 @@ class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	{
 		let objCell : TagCell = tableView.dequeueReusableCell(withIdentifier: "tvcTempTag", for: indexPath) as! TagCell
 		let clsTagInfo = self.arrTagList[indexPath.row]
-		objCell.lblTag.text = clsTagInfo
+        
+        print("현테스트[2]:==== \(clsTagInfo.getEpcUrn()) ===")
+        
+		objCell.lblTag.text = clsTagInfo.getEpcUrn()
 		
 		return objCell
 	}

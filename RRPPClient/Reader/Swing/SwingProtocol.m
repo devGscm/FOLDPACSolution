@@ -7,8 +7,8 @@
 //
 
 #import "SwingProtocol.h"
-
 @implementation SwingProtocol
+
 
 //num InventoryMode _param_inventory_mode = INVENTORY_NORMAL;
 
@@ -219,6 +219,8 @@
         unsigned char cmd = result[1];
         NSString *tempresult = [[NSString alloc] initWithData:buffer encoding:NSUTF8StringEncoding];
         NSLog(@"== 입력 커맨드: %c || 수신 데이터: %@",cmd,tempresult);
+
+
     
     if(result[0]== '>'){
         switch (cmd) {

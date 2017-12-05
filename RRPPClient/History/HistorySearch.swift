@@ -128,8 +128,7 @@ class HistorySearch: BaseViewController, UITableViewDataSource, UITableViewDeleg
 		let clsDialog = ListViewDialog()
 		clsDialog.loadData(data: arcEventCode, selectedItem: strEventCode)
         clsDialog.contentHeight = 150
-		
-		
+				
 		let acDialog = UIAlertController(title: NSLocalizedString("rfid_event_code", comment: "이벤트구분"), message:nil, preferredStyle: .alert)
 		acDialog.setValue(clsDialog, forKeyPath: "contentViewController")
 		

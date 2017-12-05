@@ -269,7 +269,7 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
             self.strSaleType = clsDialog.selectedRow.itemCode
             let strItemName = clsDialog.selectedRow.itemName
 
-            print("self.strSaleType: \(self.strSaleType)")
+            print("self.strSaleType: \(self.strSaleType!)")
             
             self.btnSaleTypeCondition.setTitle(strItemName, for: .normal)
         }
@@ -291,6 +291,7 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
         
         let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
             self.strSearchCondtion = clsDialog.selectedRow.itemCode
+            print("strSearchCondtion: \(self.strSearchCondtion)")
             let strItemName = clsDialog.selectedRow.itemName
             self.btnSearchCondition.setTitle(strItemName, for: .normal)
         }

@@ -68,10 +68,10 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
             
             //UserDefaults.standard.setValue(intIdentificationSystemType, forKey: Constants.IDENTIFICATION_SYSTEM_LIST_KEY)
-			mArrMenuData.append(MenuItem(menuId: "ProdMappingOut", menuName: NSLocalizedString("title_work_sale_c", comment: "출고C")))
-			mArrMenuData.append(MenuItem(menuId: "WorkHistorySearch", menuName: NSLocalizedString("title_work_history_search", comment: "작업내역조회")))
-            mArrMenuData.append(MenuItem(menuId: "InOutCancel", menuName: NSLocalizedString("title_work_inout_cancel", comment: "입출고취소")))
-			mArrMenuData.append(MenuItem(menuId: "RfidTrackingService", menuName: "이력추적"))
+            arrMenuData.append(MenuItem(menuId: "ProdMappingOut", menuName: NSLocalizedString("title_work_sale_c", comment: "출고C")))
+			arrMenuData.append(MenuItem(menuId: "WorkHistorySearch", menuName: NSLocalizedString("title_work_history_search", comment: "작업내역조회")))
+            arrMenuData.append(MenuItem(menuId: "InOutCancel", menuName: NSLocalizedString("title_work_inout_cancel", comment: "입출고취소")))
+			arrMenuData.append(MenuItem(menuId: "RfidTrackingService", menuName: "이력추적"))
 		}
 		tvMenu?.reloadData()
 	}
@@ -93,7 +93,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
 	{
-		let strtMenuItem  = mArrMenuData[indexPath.row]
+        let strtMenuItem  = arrMenuData[indexPath.row]
         
         print("==== LeftViewController::tableView ====: \(strtMenuItem.menuId)")
 		switch (strtMenuItem.menuId)

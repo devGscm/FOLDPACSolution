@@ -94,6 +94,15 @@ struct CustInfo {
 	}
 }
 
+
+struct TagInfo{
+    
+    
+    
+}
+
+
+
 class LocalData {
 	
 	enum SaleResaleType
