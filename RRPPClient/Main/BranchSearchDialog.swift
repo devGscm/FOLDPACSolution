@@ -21,7 +21,7 @@ class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	@IBOutlet weak var btnSearch: UIButton!
 	
-	var mArcSearchCondition:Array<ListViewDialog.ListViewItem> = Array<ListViewDialog.ListViewItem>()
+	var arcSearchCondition:Array<ListViewDialog.ListViewItem> = Array<ListViewDialog.ListViewItem>()
 	
 	
 	var intPageNo  = 0
@@ -30,7 +30,7 @@ class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDe
 	var clsDataClient : DataClient!
 	var arcDataRows : Array<DataRow> = Array<DataRow>()
 	var ptcDataHandler : DataProtocol?
-	var strSearchCondtion : String?
+	var strSearchCondtion = ""
 	
 	override func viewDidLoad()
 	{
@@ -42,9 +42,8 @@ class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	func initViewControl()
 	{
-		mArcSearchCondition.append(ListViewDialog.ListViewItem(itemCode: "0", itemName: "거점명"))
-		mArcSearchCondition.append(ListViewDialog.ListViewItem(itemCode: "1", itemName: "거점ID"))
-		
+		arcSearchCondition.append(ListViewDialog.ListViewItem(itemCode: "0", itemName: "거점명"))
+		arcSearchCondition.append(ListViewDialog.ListViewItem(itemCode: "1", itemName: "거점ID"))
 		strSearchCondtion = "0"
 		self.btnSearchCondition.setTitle("거점명", for: .normal)
 	}
@@ -53,10 +52,10 @@ class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDe
 	@IBAction func onSearchConditionClicked(_ sender: UIButton)
 	{
 		let clsDialog = ListViewDialog()
+        clsDialog.loadData(data: arcSearchCondition, selectedItem: strSearchCondtion)
 		clsDialog.contentHeight = 150
-		clsDialog.loadData(data: mArcSearchCondition)
-		
-		let acDialog = UIAlertController(title:nil, message: NSLocalizedString("common_search_condition", comment: "검색조건"), preferredStyle: .alert)
+        
+		let acDialog = UIAlertController(title: NSLocalizedString("common_search_condition", comment: "검색조건"), message: nil, preferredStyle: .alert)
 		acDialog.setValue(clsDialog, forKeyPath: "contentViewController")
 		
 		let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
@@ -116,13 +115,13 @@ class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDe
 	func doSearch()
 	{
 		intPageNo += 1
-		let strSearchValue = tfSearchValue.text;
+		let strSearchValue = tfSearchValue.text ?? "";
 		print("============================================")
 		print("doSearch(), PageNo:\(intPageNo)")
 		print("============================================")
 		
-		clsDataClient.addServiceParam(paramName: "searchCondition", value: strSearchCondtion!)
-		clsDataClient.addServiceParam(paramName: "searchValue", value: strSearchValue!)
+		clsDataClient.addServiceParam(paramName: "searchCondition", value: strSearchCondtion)
+		clsDataClient.addServiceParam(paramName: "searchValue", value: strSearchValue)
 		clsDataClient.addServiceParam(paramName: "pageNo", value: intPageNo)
 		clsDataClient.addServiceParam(paramName: "rowsPerPage", value: Constants.ROWS_PER_PAGE)
 		clsDataClient.selectData(dataCompletionHandler: {(data, error) in

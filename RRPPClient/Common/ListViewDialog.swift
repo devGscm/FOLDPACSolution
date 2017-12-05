@@ -19,7 +19,7 @@ class ListViewDialog: UITableViewController
 	
 	var selectedRow : ListViewItem {
 		let intSelectedIndex = self.tableView.indexPathForSelectedRow?.row ?? 0
-		return mArcData[intSelectedIndex]
+		return arcData[intSelectedIndex]
 	}
 
 	
@@ -34,40 +34,70 @@ class ListViewDialog: UITableViewController
 		}
 	}
 	
+    var strSelectedItem = ""
+	var arcData:Array<ListViewItem> = Array<ListViewItem>()
 	
-	var mArcData:Array<ListViewItem> = Array<ListViewItem>()
-	
-	func loadData(data:Array<ListViewItem>)
-	{
-		print("@@@@@@@@@@@")
-		print(" ListViewDialog :\(mArcData.count) ")
-		print("@@@@@@@@@@@")
-		print("@@@@@@@@@@@")
-		mArcData = data
-		
-		
-		
-		self.tableView.beginUpdates()
-		self.tableView.insertRows(at: [IndexPath(row: mArcData.count - 1, section: 0)], with: .automatic)
-		self.tableView.endUpdates()
-	}
+//    func loadData(data:Array<ListViewItem>)
+//    {
+//        print("@@@@@@@@@@@")
+//        print(" ListViewDialog :\(arcData.count) ")
+//        print("@@@@@@@@@@@")
+//        arcData = data
+//
+//        self.tableView.beginUpdates()
+//        self.tableView.insertRows(at: [IndexPath(row: arcData.count - 1, section: 0)], with: .automatic)
+//        self.tableView.endUpdates()
+//    }
+    
+    func loadData(data: Array<ListViewItem>, selectedItem: String)
+    {
+        print("@@@@@@@@@@@")
+        print(" ListViewDialog :\(arcData.count) ")
+        print("@@@@@@@@@@@")
+        arcData = data
+        strSelectedItem = selectedItem
+
+        self.tableView.beginUpdates()
+        self.tableView.insertRows(at: [IndexPath(row: arcData.count - 1, section: 0)], with: .automatic)
+        self.tableView.endUpdates()
+    }
 	
 	
 	override func viewDidLoad()
 	{
+        print("@@@@@@@@@@@")
+        print(" ListView viewDidLoad")
+        print("@@@@@@@@@@@")
 		super.viewDidLoad()
 		//self.preferredContentSize.height = 220
 	}
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        
+        if(strSelectedItem.isEmpty == false)
+        {
+            for (index, strtData) in arcData.enumerated()
+            {
+                if(strtData.itemCode == strSelectedItem)
+                {
+                    self.tableView.selectRow(at: IndexPath(row: index, section: 0), animated: true, scrollPosition: .none)
+                    break
+                }
+            }
+        }
+    }
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
-		return mArcData.count
+		return arcData.count
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
 		let tvcCell = UITableViewCell()
-		let strtData = mArcData[indexPath.row]
+		let strtData = arcData[indexPath.row]
 		tvcCell.textLabel?.font = UIFont.fontAwesome(ofSize: 13)
 		tvcCell.textLabel!.text = "\(strtData.itemName )"
 		return tvcCell

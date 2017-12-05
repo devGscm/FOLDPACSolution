@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+// RFID
 class ProdMappingRfidCell: UITableViewCell
 {
 	@IBOutlet weak var lblAssetName: UILabel!
@@ -26,8 +28,14 @@ class ProdMappingRfidCell: UITableViewCell
 }
 
 
+// 상품
 class ProdMappingItemCell: UITableViewCell
 {
+	@IBOutlet weak var lblProdCode: UILabel!
+	@IBOutlet weak var lblProdName: UILabel!
+	@IBOutlet weak var lblProdReadCnt: UILabel!
+	@IBOutlet weak var btnSelection: UIButton!
+	
 	override func awakeFromNib()
 	{
 		super.awakeFromNib()
