@@ -254,6 +254,7 @@ public class RfidUtil
     public static func checkHeader(strData: String) -> Encodings
     {
         //let strData = "3312D58E3D8100C000027505"                                        //테스트 입력값(Hex): 3312D58E3D8100C000027505
+        
         var strHeaderBinary = String()
         
         //문자열 잘르기
@@ -325,8 +326,8 @@ public class RfidUtil
         let strInputData = strData.replacingOccurrences(of: " ", with: "")
         let enuEncoding: Encodings = checkHeader(strData: strInputData)
         
-        print("==== [RfidUtil]=>parse: \(enuEncoding) :: \(strInputData) ====\n")
-        print("===================================================\n")
+        //print("==== [RfidUtil]=>parse: \(enuEncoding) :: \(strInputData) ====\n")
+        //print("===================================================\n")
         
         switch(enuEncoding)
         {
@@ -449,8 +450,8 @@ public class RfidUtil
         //Partition 변환
         let intPartition: Int? = Int(StrUtil.substring(strInputString: bitString, intIndexStart: 11, intIndexEnd: 13), radix: 2)
         
-        print("==== [RfidUtil]=>parseSgtin96:\(intPartition!) ====\n")
-        print("===================================================\n")
+        //print("==== [RfidUtil]=>parseSgtin96:\(intPartition!) ====\n")
+        //print("===================================================\n")
         
         switch(intPartition!)
         {
