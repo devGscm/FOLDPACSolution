@@ -658,10 +658,10 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 			
 					if(strEpcUrn.isEmpty == false)
 					{
-						let intIndex = StrUtil.lastIndexOf(sourceText: strEpcUrn, of: ".") + 1
-						let intLength = StrUtil.getLength(sourceText: strEpcUrn) - intIndex
-						strSerialNo = StrUtil.substr(sourceText: strEpcUrn, startIndex: intIndex, length: intLength)
-						
+                        let intIndex = strEpcUrn.lastIndex(of: ".") + 1
+                        let intLength = strEpcUrn.length - intIndex
+                        
+						strSerialNo = strEpcUrn.substring(intIndex, length: intLength)
 						print("=============================================")
 						print("strSerialNo:\(strSerialNo)")
 						print("=============================================")
