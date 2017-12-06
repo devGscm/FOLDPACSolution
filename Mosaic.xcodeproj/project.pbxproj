@@ -11,6 +11,9 @@
 		554035331FC92C9300A4F2A4 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554035321FC92C9300A4F2A4 /* DateUtil.swift */; };
 		5564CBA61FD0E7F000BBD868 /* ProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5564CBA51FD0E7F000BBD868 /* ProgressIndicator.swift */; };
 		556C67D81FC668FA00EAF4B7 /* Dialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556C67D71FC668FA00EAF4B7 /* Dialog.swift */; };
+		559F39E31FD77330006E5C17 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F39E21FD77330006E5C17 /* String.swift */; };
+		559F39E51FD77414006E5C17 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F39E41FD77414006E5C17 /* UIView.swift */; };
+		559F39E71FD7742A006E5C17 /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F39E61FD7742A006E5C17 /* UIStoryboard.swift */; };
 		9641E8B51FB56DBA00E0E422 /* DataColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9641E8B41FB56DBA00E0E422 /* DataColumn.swift */; };
 		967DC3E41FB42C37000265CD /* DataRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967DC3E31FB42C37000265CD /* DataRow.swift */; };
 		96B2A9911FB5836F009E2615 /* DataTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B2A9901FB5836F009E2615 /* DataTable.swift */; };
@@ -38,6 +41,9 @@
 		554035321FC92C9300A4F2A4 /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		5564CBA51FD0E7F000BBD868 /* ProgressIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressIndicator.swift; sourceTree = "<group>"; };
 		556C67D71FC668FA00EAF4B7 /* Dialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dialog.swift; sourceTree = "<group>"; };
+		559F39E21FD77330006E5C17 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		559F39E41FD77414006E5C17 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		559F39E61FD7742A006E5C17 /* UIStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboard.swift; sourceTree = "<group>"; };
 		9641E8B41FB56DBA00E0E422 /* DataColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataColumn.swift; sourceTree = "<group>"; };
 		967DC3E31FB42C37000265CD /* DataRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRow.swift; sourceTree = "<group>"; };
 		96B2A9901FB5836F009E2615 /* DataTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTable.swift; sourceTree = "<group>"; };
@@ -93,9 +99,20 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		559F39E11FD77315006E5C17 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				559F39E21FD77330006E5C17 /* String.swift */,
+				559F39E41FD77414006E5C17 /* UIView.swift */,
+				559F39E61FD7742A006E5C17 /* UIStoryboard.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		96690EB11FBE5CC40008B0EC /* Mosaic */ = {
 			isa = PBXGroup;
 			children = (
+				559F39E11FD77315006E5C17 /* Extension */,
 				556C67D61FC668E800EAF4B7 /* UI */,
 				96E494A41FB1B62E00D1E2C1 /* Network */,
 				967DC3E21FB42BD6000265CD /* Data */,
@@ -294,8 +311,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				96B2A9911FB5836F009E2615 /* DataTable.swift in Sources */,
+				559F39E31FD77330006E5C17 /* String.swift in Sources */,
 				967DC3E41FB42C37000265CD /* DataRow.swift in Sources */,
 				96B2A9931FB5A0F9009E2615 /* DataClient.swift in Sources */,
+				559F39E51FD77414006E5C17 /* UIView.swift in Sources */,
 				9641E8B51FB56DBA00E0E422 /* DataColumn.swift in Sources */,
 				96B2A9951FB5A13C009E2615 /* DataSourceMgr.swift in Sources */,
 				96B6E7711FBC1E80004F85B5 /* QueryMaker.swift in Sources */,
@@ -303,6 +322,7 @@
 				556C67D81FC668FA00EAF4B7 /* Dialog.swift in Sources */,
 				5564CBA61FD0E7F000BBD868 /* ProgressIndicator.swift in Sources */,
 				554035311FC91F9200A4F2A4 /* StrUtil.swift in Sources */,
+				559F39E71FD7742A006E5C17 /* UIStoryboard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

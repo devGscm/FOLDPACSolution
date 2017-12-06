@@ -597,7 +597,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 //		String strProdAssetEpcName 	= null;
 //		String[] splitValue 		= null;
 //		String strTraceDateFormat	= null;
-//		String strSerialNo 			= null;
+		var strSerialNo 			= ""
 //		String strBarcodeId 		= null;
 //		String strSaleItemSeq		= null;
 //		String strItemCode			= null;
@@ -638,7 +638,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 				// 2) DB에서 리스트 조회값 받음
 				for clsDataRow in clsDataTable.getDataRows()
 				{
-					let strEpcUrn 			= clsDataRow.getString(name: "epcUrn")
+					let strEpcUrn 			= clsDataRow.getString(name: "epcUrn") ?? ""
 					let strEpcCode			= clsDataRow.getString(name: "epcCode")
 					let strUtcTraceDate 	= clsDataRow.getString(name: "utcTraceDate")
 					let strProdAssetEpc 	= clsDataRow.getString(name: "prodAssetEpc")
@@ -655,10 +655,18 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 					let strLocaleTraceDate = DateUtil.utcToLocale(utcDate: strUtcTraceDate!, dateFormat: "yyyyMMddHHmmss")
 					let strTraceDate = DateUtil.getConvertFormatDate(date: strLocaleTraceDate, srcFormat: "yyyyMMddHHmmss", dstFormat:"yyyy-MM-dd HH:mm:ss")
 
-					
+			
+					if(strEpcUrn.isEmpty == false)
+					{
+                        let intIndex = strEpcUrn.lastIndex(of: ".") + 1
+                        let intLength = strEpcUrn.length - intIndex
+                        
+						strSerialNo = strEpcUrn.substring(intIndex, length: intLength)
+						print("=============================================")
+						print("strSerialNo:\(strSerialNo)")
+						print("=============================================")
+					}
 					//데이터 축출
-//					splitValue 		= strEpcUrn.split("\\.");
-//					strSerialNo		= splitValue[3].toString();
 					
 					/*
 					Logger.i("==========================");

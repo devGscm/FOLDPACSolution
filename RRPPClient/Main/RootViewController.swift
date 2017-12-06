@@ -97,17 +97,31 @@ class RootViewController: BaseViewController
 			
 			
 			//               01234567890123456789012
-			let strEpcUrn = "grai:0.95100043.1025.62"
-//			
-//		
-			let intIndex = strEpcUrn.range(of: ".", options: .backwards)?.lowerBound
-			
-			let substring2 = strEpcUrn.substring(to: intIndex!)
-			print("=============================================")
-			//print("index:\(intIndex!)")
-			print("index:\(substring2)")
-			print("=============================================")
+            let strEpcUrn = "grai:0.95100043.1025.62"
+//            let intLength = StrUtil.getLength(sourceText: strEpcUrn)
+//            let intIndex = StrUtil.lastIndexOf(sourceText: strEpcUrn, of: ".") + 1
 //
+//            let intSubLength = intLength - intIndex
+//
+//            let strTest = StrUtil.substr(sourceText: strEpcUrn, startIndex: intIndex, length: intSubLength)
+//
+//            print("=============================================")
+//            print("intLength:\(intLength)")
+//            print("intIndex:\(intIndex)")
+//            print("strTest:\(strTest)")
+//            print("=============================================")
+            
+            let intIndex = strEpcUrn.lastIndex(of: ".") + 1
+            let intLength = strEpcUrn.length - intIndex
+//
+            let strTest = strEpcUrn.substring(intIndex, length: intLength)
+            print("=============================================")
+             print("strEpcUrn.length:\(strEpcUrn.length)")
+            print("intIndex:\(intIndex)")
+            print("strTest:\(strTest)")
+//            print("=============================================")
+            
+
 			//print("=============================================")
 			//print(" UserName : \( AppContext.sharedManager.getUserInfo().getUserName() )")
 			//print("=============================================")
