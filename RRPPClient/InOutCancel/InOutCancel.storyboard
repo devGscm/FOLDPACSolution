@@ -176,7 +176,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="onSearchClicked:" destination="yHe-hz-FQ7" eventType="touchUpInside" id="Ybw-7F-X72"/>
+                                                    <action selector="onSearchClicked:" destination="yHe-hz-FQ7" eventType="touchUpInside" id="LEH-M5-4Nf"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vf6-jh-PmQ">

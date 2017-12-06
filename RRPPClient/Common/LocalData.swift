@@ -94,15 +94,6 @@ struct CustInfo {
 	}
 }
 
-
-struct TagInfo{
-    
-    
-    
-}
-
-
-
 class LocalData {
 	
 	enum SaleResaleType
@@ -985,10 +976,10 @@ class LocalData {
 			}
 			
 			//For debuggig
-			for tempCodeInfo in codeInfos
-			{
-				print(tempCodeInfo)
-			}
+//			for tempCodeInfo in codeInfos
+//			{
+//				print(tempCodeInfo)
+//			}
 			
 			return codeInfos
 		}
