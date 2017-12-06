@@ -85,11 +85,11 @@ class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	/// - Parameter tagId: <#tagId description#>
 	func didReadTagList(_ tagId: String)
     {
-//        print("==========================================\n")
-//        print("현테스트[1]:==== \(tagId) ===")
-        //print("==========================================\n")
-        
-        let clsTagInfo = RfidUtil.parse(strData: tagId)
+        //[1]입력태그: T30003312D58E3D8100C00002BF52
+        //[2]변환태그: 30003312D58E3D8100C00002BF52
+        //[3]strTagIdParse: 3312D58E3D8100C00002BF52
+        let strTagIdParse = StrUtil.substring(strInputString: tagId, intIndexStart: 4, intIndexEnd: 0)
+        let clsTagInfo = RfidUtil.parse(strData: strTagIdParse)
      
 
         
@@ -118,8 +118,6 @@ class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	{
 		let objCell : TagCell = tableView.dequeueReusableCell(withIdentifier: "tvcTempTag", for: indexPath) as! TagCell
 		let clsTagInfo = self.arrTagList[indexPath.row]
-        
-        print("현테스트[2]:==== \(clsTagInfo.getEpcUrn()) ===")
         
 		objCell.lblTag.text = clsTagInfo.getEpcUrn()
 		
