@@ -9,6 +9,7 @@
 import UIKit
 import Material
 import Mosaic
+import Foundation
 
 class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, DataProtocol, ReaderResponseDelegate
 {
@@ -65,6 +66,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
     var strSelectedEpcCode		= ""	/**< 선택된 시리얼의 EPC 코드    */
     var strSelectedProdCode		= ""	/**< 선택된 시리얼의 상품 코드    */
     var intSelectedProdIndex	= 0		/**< 선택된 상품의 인덱스    */
+    var intSelectedIndex		= -1
     
     var clsProdContainer: ProdContainer!
 	
@@ -527,25 +529,131 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		if(tableView == tvProdMappingRfid)
 		{
 			let objCell:ProdMappingRfidCell = tableView.dequeueReusableCell(withIdentifier: "tvcProdMappingRfid", for: indexPath) as! ProdMappingRfidCell
-			//let clsTagInfo = arrAssetRows[indexPath.row]
-		
-//		objCell.lblAssetName.text = clsTagInfo.getAssetName()
-//		objCell.lblReadCount.text = "\(clsTagInfo.getReadCount())"
-//
-//		objCell.btnDetail.titleLabel?.font = UIFont.fontAwesome(ofSize: 14)
-//		objCell.btnDetail.setTitle(String.fontAwesomeIcon(name: .listAlt), for: .normal)
-//		objCell.btnDetail.tag = indexPath.row
-//		objCell.btnDetail.addTarget(self, action: #selector(onTagListClicked(_:)), for: .touchUpInside)
+			let clsTagInfo = arrRfidRows[indexPath.row]
+            objCell.lblAssetName.text = clsTagInfo.getAssetName()
+            objCell.lblSerialNo.text = clsTagInfo.getSerialNo()
+            objCell.btnSelection.titleLabel?.font = UIFont.fontAwesome(ofSize: 14)
+            objCell.btnSelection.setTitle(String.fontAwesomeIcon(name:.arrowDown), for: .normal)
+            objCell.btnSelection.tag = indexPath.row
+            objCell.btnSelection.addTarget(self, action: #selector(onTagSelectionClicked(_:)), for: .touchUpInside)
+			
 			return objCell
 		}
 		else
 		{
 			let objCell:ProdMappingItemCell = tableView.dequeueReusableCell(withIdentifier: "tvcProdMappingItem", for: indexPath) as! ProdMappingItemCell
+            let clsItemInfo = arrItemRows[indexPath.row]
+            objCell.lblProdCode.text = clsItemInfo.getProdCode()
+            objCell.lblProdName.text = clsItemInfo.getProdName()
+			
+            //mClsViewWrapper.tvSaleItemSeq.setText(clsDataRow.getSaleItemSeq());
+            // TODO : 언더라인 확인
+            objCell.lblProdReadCnt.text = clsItemInfo.getProdReadCnt()
+            objCell.lblProdReadCnt.attributedText = NSAttributedString(string: "Text", attributes:  [NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle.rawValue])
+            
+            // TODO : 언더라인 클릭 이벤트
+            /*
+            if(tvAssetProdReadCntSelect != null)
+            {
+                //텍스트에 밑줄
+                SpannableString content = new SpannableString(clsDataRow.getProdReadCnt());
+                
+                content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+                tvAssetProdReadCntSelect.setText(content);
+                
+                tvAssetProdReadCntSelect.setTag(clsDataRow);
+                tvAssetProdReadCntSelect.setOnClickListener(new OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                    {
+                        try
+                    {
+                        mIntSelectedProdIndex = intPosition;    //선택된 인덱스
+                        showDialog(Constants.DIALOG_PROD_INFO);
+                        }
+                        catch(Exception ex)
+                        {
+                        //Logger.i("인식수량 오류: " + ex.getMessage());
+                        }
+                        }
+                });
+            }    */
+            
+
+            objCell.btnSelection.titleLabel?.font = UIFont.fontAwesome(ofSize: 14)
+            objCell.btnSelection.setTitle(String.fontAwesomeIcon(name:.arrowDown), for: .normal)
+            objCell.btnSelection.tag = indexPath.row
+            objCell.btnSelection.addTarget(self, action: #selector(onItemSelectionClicked(_:)), for: .touchUpInside)
 			return objCell
 		}
 		
 	}
-	
+    @objc func onTagSelectionClicked(_ sender: UIButton)
+    {
+        let clsDataRow = arrRfidRows[sender.tag]
+        
+        if(lblSerialNo.text != clsDataRow.getSerialNo())
+        {
+            lblSerialNo.text = clsDataRow.getSerialNo()
+            lblAssetName.text = clsDataRow.getAssetName()
+            strSelectedEpcCode = clsDataRow.getEpcCode()
+            
+            //선택된 인덱스, 색상변경
+			//self.tableView.selectRow(at: IndexPath(row: index, section: 0), animated: true, scrollPosition: .none)
+            //setSelectedIndex(intPosition);
+            
+            //슬래이브-그리드 초기화
+            arrRfidRows.removeAll()
+            
+            
+            //선택된 RFID태그에 대한 바코드리스트
+            if(self.lblSerialNo.text?.isEmpty == false)
+            {
+                let arrItems = clsProdContainer.getItemes(epcCode: strSelectedEpcCode)
+                if(arrItems.count > 0)
+                {
+                    arrItemRows.append(contentsOf: arrItems)
+                }
+            }
+            
+            //슬래이브-그리드 업데이트
+            tvProdMappingRfid.reloadData()
+            
+            //처리량
+            lblProcCount.text = "\(arrItemRows.count)"
+        }
+    }
+    
+    @objc func onItemSelectionClicked(_ sender: UIButton)
+    {
+		let clsDataRow = arrItemRows[sender.tag]
+
+		//헤시맵과 그리드뷰에서 제거
+		var	intRowState = clsProdContainer.deleteItem(epcCode: strSelectedEpcCode, prodCode: clsDataRow.getProdCode(), removeState: Constants.REMOVE_STATE_NORMAL);
+
+		if( intRowState == Constants.DATA_ROW_STATE_ADDED)
+		{
+			arrItemRows.removeAll()
+			arrItemRows.append(contentsOf: clsProdContainer.getItemes(epcCode: strSelectedEpcCode))
+			tvProdMappingItem.reloadData()
+		}
+		else
+		{
+			//델리트
+			let arrItemList = clsProdContainer.getItemes(epcCode: strSelectedEpcCode)
+			for clsItemInfo in arrItemList
+			{
+				if(clsItemInfo.getProdCode() == clsDataRow.getProdCode())
+				{
+					strSelectedProdCode = clsDataRow.getProdCode()    //선택한 상품코드
+					sendDeleteItemInfo(saleItemSeq: clsItemInfo.getSaleItemSeq(), prodCode: strSelectedProdCode)
+					break
+				}
+			}
+		}
+    }
+        
 	// RFID 태그 목록 보기
 	@objc func onTagListClicked(_ sender: UIButton)
 	{
@@ -598,7 +706,10 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	
 	
 	// 임시저장
-	@IBAction func onTempSaveClick(_ sender: UIButton) {
+	@IBAction func onTempSaveClick(_ sender: UIButton)
+	{
+		
+		
 	}
 	
 	
@@ -852,11 +963,10 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
                         //그리드 삭제 및 구조체 삭제
                         DispatchQueue.main.async
                     	{
-                            self.clsProdContainer.deleteItem(epcCode: self.strSelectedEpcCode, prodCode: self.strSelectedProdCode, removeState: Constants.REMOVE_STATE_COMPLETE)
-                            self.arrItemRows.removeAll()
-                            self.arrItemRows.append(contentsOf: self.clsProdContainer.getItemes(epcCode: self.strSelectedEpcCode))
-                            self.tvProdMappingItem.reloadData()
-                            
+							self.clearTagData(boolClearScreen: true)
+							
+							// TODO: 백버튼?
+							//if(mBoolonBackPressed == false)
                             let strMsg = NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다.")
                             self.showSnackbar(message: strMsg)
                         }
@@ -878,7 +988,81 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
         }
     }
     
-    
+	
+	/**
+	* 선택된 상품정보(바코드)를 삭제처리 한다.
+	* @param strSaleItemSeq	상품SEQ
+	* @param strProdCode	바코드
+	*/
+	func sendDeleteItemInfo(saleItemSeq: String, prodCode: String)
+	{
+		do
+		{
+			clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
+			
+			let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+			clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+			clsDataClient.ExecuteUrl = "inOutService:deleteItemInfo"
+			clsDataClient.removeServiceParam()
+			clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+			clsDataClient.addServiceParam(paramName: "itemCode", value: prodCode)
+			clsDataClient.addServiceParam(paramName: "saleItemSeq", value: saleItemSeq)
+			clsDataClient.executeData(dataCompletionHandler: { (data, error) in
+				
+				self.clsIndicator!.hide()
+				
+				if let error = error {
+					// 에러처리
+					print(error)
+					return
+				}
+				guard let clsResultDataTable = data else {
+					print("에러 데이터가 없음")
+					return
+				}
+				
+				print("####결과값 처리")
+				let clsResultDataRows = clsResultDataTable.getDataRows()
+				if(clsResultDataRows.count > 0)
+				{
+					let clsDataRow = clsResultDataRows[0]
+					let strResultCode = clsDataRow.getString(name: "resultCode")
+					
+					print(" -strResultCode:\(strResultCode!)")
+					if(Constants.PROC_RESULT_SUCCESS == strResultCode)
+					{
+						// 삭제성공
+						//그리드 삭제 및 구조체 삭제
+						DispatchQueue.main.async
+						{
+							//그리드 삭제 및 구조체 삭제
+							self.clsProdContainer.deleteItem(epcCode: self.strSelectedEpcCode, prodCode: self.strSelectedProdCode, removeState: Constants.REMOVE_STATE_COMPLETE)
+							self.arrItemRows.removeAll()
+							self.arrItemRows.append(contentsOf: self.clsProdContainer.getItemes(epcCode: self.strSelectedEpcCode))
+							self.tvProdMappingItem.reloadData()
+							
+							let strMsg = NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다.")
+							self.showSnackbar(message: strMsg)
+						}
+					}
+					else
+					{
+						let strMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
+						self.showSnackbar(message: strMsg)
+					}
+				}
+				
+			})
+
+
+		}
+		catch let error
+		{
+			clsIndicator?.hide()
+			super.showSnackbar(message: NSLocalizedString("common_error_occurred_data_search", comment: "데이터 검색중 에러가 발생하였습니다."))
+			print(error.localizedDescription)
+		}
+	}
 	
 	func didReadTagList(_ tagId: String)
 	{
