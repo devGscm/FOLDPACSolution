@@ -75,10 +75,18 @@ class Constants
     static let IDENTIFICATION_SYSTEM_GTIN14 						= "1"	/**< 식별체계 : GTIN-14     	*/
     static let IDENTIFICATION_SYSTEM_AGQR							= "2"	/**< 식별체계 : 농산물 QR코드     */
 	
-	
+    static let DATA_ROW_STATE_UNCHANGED               				= 0     /**< 데이터상태 : 변경 없음 **/
+    static let DATA_ROW_STATE_ADDED                    				= 1     /**< 데이터상태 : 삽입 **/
+    static let DATA_ROW_STATE_MODIFIED                    			= 2     /**< 데이터상태 : 수정 **/
+    static let DATA_ROW_STATE_DELETED                    			= 3     /**< 데이터상태 : 삭제 **/
+
+    
 	static let RELOAD_STATE_DEFAULT									= 0		/**< 리로드상태: 기본 **/
 	static let RELOAD_STATE_TEMPORARY								= 1		/**< 리로드상태: 임시저장 **/
 	static let RELOAD_STATE_COMPLETE								= 2		/**< 리로드상태: 완료저장 **/
+
+    static let REMOVE_STATE_NORMAL                        			= 1		/**< 삭제상태: 기본 **/
+    static let REMOVE_STATE_COMPLETE                    			= 2		/**< 삭제상태: 임시저장 **/
 
 	
 }

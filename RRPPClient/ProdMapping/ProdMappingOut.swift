@@ -21,12 +21,18 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	@IBOutlet weak var btnWorkOutCustSearch: UIButton!
 	
 	
-	
-	@IBOutlet weak var tvProdMappingRfid: UITableView!
+    @IBOutlet weak var tfVehName: UITextField!
+    @IBOutlet weak var lblProcCount: UILabel!
+    @IBOutlet weak var tfTradeChit: UITextField!
+    
+    @IBOutlet weak var lblAssetName: UILabel!
+    @IBOutlet weak var lblSerialNo: UILabel!
+    
+    @IBOutlet weak var tvProdMappingRfid: UITableView!
 	@IBOutlet weak var tvProdMappingItem: UITableView!
 
-    var strSaleWorkId	= ""	// 송장번호
-    var strToBranchId	= ""	// 출하거점
+    //var strSaleWorkId	= ""	// 송장번호
+   
     
     
     
@@ -39,11 +45,28 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 //    var strProdAssetEpc: String?
 //    var intCurOrderWorkCnt: Int = 0
 	
-	var arrAssetRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
-	var arrTagRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
+	//var arrAssetRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
+	//var arrTagRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
 	
 	var clsIndicator : ProgressIndicator?
 	var clsDataClient : DataClient!
+    
+    
+    var arrResultDataRows : Array<DataRow> = Array<DataRow>()
+    
+    var strToBranchId    = ""    // 출하고객사ID
+    
+    //==== Ver2.0.0 ====
+    var strSaleWorkId = ""	/**< 송장번호ID - DB에서 할당받은 */
+    
+    var arrRfidRows : Array<ItemInfo> = Array<ItemInfo>()        /**< 데이터 리스트 - 마스터 ITEM데이터, 그리드 표출용 */
+    var arrItemRows : Array<ItemInfo> = Array<ItemInfo>()        /**< 데이터 리스트 - 슬래이브 ITEM데이터, 그리드 표출용 */
+    
+    var strSelectedEpcCode		= ""	/**< 선택된 시리얼의 EPC 코드    */
+    var strSelectedProdCode		= ""	/**< 선택된 시리얼의 상품 코드    */
+    var intSelectedProdIndex	= 0		/**< 선택된 상품의 인덱스    */
+    
+    var clsProdContainer: ProdContainer!
 	
 	
 	override func viewWillAppear(_ animated: Bool)
@@ -68,8 +91,11 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		print("=========================================")
 		print("*ProductMount.viewDidDisappear()")
 		print("=========================================")
-		arrAssetRows.removeAll()
-		arrTagRows.removeAll()
+        
+        
+		arrResultDataRows.removeAll()
+        
+        
 		clsIndicator = nil
 		clsDataClient = nil
 		
@@ -114,6 +140,10 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		lblUserName.text = AppContext.sharedManager.getUserInfo().getUserName()
 		lblBranchInfo.text = AppContext.sharedManager.getUserInfo().getBranchName()
 		lblReaderName.text = UserDefaults.standard.string(forKey: Constants.RFID_READER_NAME_KEY)
+        
+        lblProcCount.text = "0"
+        
+        clsProdContainer = ProdContainer()
 	}
 	
 	
@@ -222,11 +252,39 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	{
 		self.performSegue(withIdentifier: "segWorkOutCustSearch", sender: self)
 	}
+    
+    // 상품추가
+    @IBAction func onProductAddClicked(_ sender: UIButton)
+    {
+        if(self.lblSerialNo.text?.isEmpty == true)
+        {
+            super.showSnackbar(message: NSLocalizedString("msg_no_selected_serial_no", comment: "시리얼번호를 선택하여 주십시오."))
+            return
+        }
+        
+        // 리더기 읽기 중지
+        
+        //if(super.isReaderConnected() == true)
+        if(super.isConnected() == true)
+        {
+        	stopRead()
+        }
 
-	
+        // TODO : 팝업 열기
+        //showDialog(Constants.DIALOG_PROD_INSERT)
+    }
+    
+
+    // 바코드 버튼
+    @IBAction func onProdBarcodeClicked(_ sender: UIButton)
+    {
+    }
+    
 	// 데이터를 clear한다.
     func clearTagData( boolClearScreen: Bool)
 	{
+        arrResultDataRows.removeAll()
+        
 //		arrTagRows.removeAll()
 //		arrAssetRows.removeAll()
 //
@@ -245,95 +303,97 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	
 	func getRfidData( clsTagInfo : RfidUtil.TagInfo)
 	{
-//		let strCurReadTime = DateUtil.getDate(dateFormat: "yyyyMMddHHmmss")
-//		let strSerialNo = clsTagInfo.getSerialNo()
-//		let strAssetEpc = "\(clsTagInfo.getCorpEpc())\(clsTagInfo.getAssetEpc())"	// 회사EPC코드 + 자산EPC코드
+        let strCurReadTime = DateUtil.getDate(dateFormat: "yyyyMMddHHmmss")
+        let strSerialNo = clsTagInfo.getSerialNo()
+        let strAssetEpc = "\(clsTagInfo.getCorpEpc())\(clsTagInfo.getAssetEpc())"    // 회사EPC코드 + 자산EPC코드
+
+        
+      
+//        //------------------------------------------------
+//        clsTagInfo.setAssetEpc(assetEpc: strAssetEpc)
+//        if(clsTagInfo.getAssetEpc().isEmpty == false)
+//        {
+//            guard let strAssetName = super.getAssetName(assetEpc: strAssetEpc) as? String
+//                else
+//            {
+//                return
+//            }
+//            clsTagInfo.setAssetName(assetName : strAssetName)
+//            print("@@@@@@@@ AssetName2:\(clsTagInfo.getAssetName() )")
+//        }
+//        clsTagInfo.setNewTag(newTag : true)
+//        clsTagInfo.setReadCount(readCount: 1)
+//        clsTagInfo.setReadTime(readTime: strCurReadTime)
+//        //------------------------------------------------
 //
-//		//------------------------------------------------
-//		clsTagInfo.setAssetEpc(assetEpc: strAssetEpc)
-//		if(clsTagInfo.getAssetEpc().isEmpty == false)
-//		{
-//			guard let strAssetName = super.getAssetName(assetEpc: strAssetEpc) as? String
-//				else
-//			{
-//				return
-//			}
-//			clsTagInfo.setAssetName(assetName : strAssetName)
-//			print("@@@@@@@@ AssetName2:\(clsTagInfo.getAssetName() )")
-//		}
-//		clsTagInfo.setNewTag(newTag : true)
-//		clsTagInfo.setReadCount(readCount: 1)
-//		clsTagInfo.setReadTime(readTime: strCurReadTime)
-//		//------------------------------------------------
+//        var boolValidAsset = false
+//        var boolFindSerialNoOverlap = false
+//        var boolFindAssetTypeOverlap = false
+//        for clsAssetInfo in super.getAssetList()
+//        {
+//            print("@@@@@clsAssetInfo.assetEpc:\(clsAssetInfo.assetEpc)")
+//            if(clsAssetInfo.assetEpc == strAssetEpc)
+//            {
+//                // 자산코드에 등록되어 있는 경우
+//                print(" 동일한 자산코드 존재")
+//                boolValidAsset = true
+//                break;
+//            }
+//        }
+//        print(" 자산코드:\(strAssetEpc), ExistAssetInfo:\(boolValidAsset)")
+//        if(boolValidAsset == true)
+//        {
+//            // Detail 다이얼로그 전달용 태그 리스트
+//            for clsTagInfo in arrTagRows
+//            {
+//                // 같은 시리얼번호가 있는지 체크
+//                if(clsTagInfo.getSerialNo() == strSerialNo)
+//                {
+//                    print(" 동일한 시리얼번호 존재")
+//                    boolFindSerialNoOverlap = true
+//                    break;
+//                }
+//            }
 //
-//		var boolValidAsset = false
-//		var boolFindSerialNoOverlap = false
-//		var boolFindAssetTypeOverlap = false
-//		for clsAssetInfo in super.getAssetList()
-//		{
-//			print("@@@@@clsAssetInfo.assetEpc:\(clsAssetInfo.assetEpc)")
-//			if(clsAssetInfo.assetEpc == strAssetEpc)
-//			{
-//				// 자산코드에 등록되어 있는 경우
-//				print(" 동일한 자산코드 존재")
-//				boolValidAsset = true
-//				break;
-//			}
-//		}
-//		print(" 자산코드:\(strAssetEpc), ExistAssetInfo:\(boolValidAsset)")
-//		if(boolValidAsset == true)
-//		{
-//			// Detail 다이얼로그 전달용 태그 리스트
-//			for clsTagInfo in arrTagRows
-//			{
-//				// 같은 시리얼번호가 있는지 체크
-//				if(clsTagInfo.getSerialNo() == strSerialNo)
-//				{
-//					print(" 동일한 시리얼번호 존재")
-//					boolFindSerialNoOverlap = true
-//					break;
-//				}
-//			}
+//            // 시리얼번호가 중복이 안되어 있다면
+//            if(boolFindSerialNoOverlap == false)
+//            {
+//                // 상세보기용 배열에 추가
+//                arrTagRows.append(clsTagInfo)
 //
-//			// 시리얼번호가 중복이 안되어 있다면
-//			if(boolFindSerialNoOverlap == false)
-//			{
-//				// 상세보기용 배열에 추가
-//				arrTagRows.append(clsTagInfo)
+//                for clsTagInfo in arrAssetRows
+//                {
+//                    // 같은 자산유형이 있다면 자산유형별로 조회수 증가
+//                    if(clsTagInfo.getAssetEpc() == strAssetEpc)
+//                    {
+//                        boolFindAssetTypeOverlap = true
+//                        let intCurReadCount = clsTagInfo.getReadCount()
+//                        clsTagInfo.setReadCount(readCount: (intCurReadCount + 1))
+//                        break;
+//                    }
+//                }
+
+//                // 마스터용 배열에 추가
+//                if(boolFindAssetTypeOverlap == false)
+//                {
+//                    arrAssetRows.append(clsTagInfo)
+//                }
 //
-//				for clsTagInfo in arrAssetRows
-//				{
-//					// 같은 자산유형이 있다면 자산유형별로 조회수 증가
-//					if(clsTagInfo.getAssetEpc() == strAssetEpc)
-//					{
-//						boolFindAssetTypeOverlap = true
-//						let intCurReadCount = clsTagInfo.getReadCount()
-//						clsTagInfo.setReadCount(readCount: (intCurReadCount + 1))
-//						break;
-//					}
-//				}
+//                let intCurDataSize = arrTagRows.count
 //
-//				// 마스터용 배열에 추가
-//				if(boolFindAssetTypeOverlap == false)
-//				{
-//					arrAssetRows.append(clsTagInfo)
-//				}
+//                // 발주번호가 있는 경무만 "처리수량/발주수량"을 처리한다.
 //
-//				let intCurDataSize = arrTagRows.count
+//                print("@@@@@@strMakeOrderId:\(strMakeOrderId)")
 //
-//				// 발주번호가 있는 경무만 "처리수량/발주수량"을 처리한다.
+//                if(strMakeOrderId.isEmpty == false)
+//                {
+//                    intCurOrderWorkCnt = intOrderWorkCnt + intCurDataSize
+//                    lblOrderCount.text = "\(intCurOrderWorkCnt)/\(intOrderReqCnt)"
+//                }
+//            }
 //
-//				print("@@@@@@strMakeOrderId:\(strMakeOrderId)")
-//
-//				if(strMakeOrderId.isEmpty == false)
-//				{
-//					intCurOrderWorkCnt = intOrderWorkCnt + intCurDataSize
-//					lblOrderCount.text = "\(intCurOrderWorkCnt)/\(intOrderReqCnt)"
-//				}
-//			}
-//
-//		}
-//
+//        }
+
 		
 		DispatchQueue.main.async { self.tvProdMappingRfid?.reloadData() }
 	}
@@ -452,7 +512,8 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	{
 		if(tableView == tvProdMappingRfid)
 		{
-			return self.arrAssetRows.count
+			//return self.arrAssetRows.count
+            return 0
 		}
 		else
 		{
@@ -466,7 +527,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		if(tableView == tvProdMappingRfid)
 		{
 			let objCell:ProdMappingRfidCell = tableView.dequeueReusableCell(withIdentifier: "tvcProdMappingRfid", for: indexPath) as! ProdMappingRfidCell
-			let clsTagInfo = arrAssetRows[indexPath.row]
+			//let clsTagInfo = arrAssetRows[indexPath.row]
 		
 //		objCell.lblAssetName.text = clsTagInfo.getAssetName()
 //		objCell.lblReadCount.text = "\(clsTagInfo.getReadCount())"
@@ -518,6 +579,21 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	// 작업초기화
 	@IBAction func onWorkInitClick(_ sender: UIButton)
 	{
+        if(strSaleWorkId.isEmpty == true)
+        {
+            Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("msg_no_temporary_saved_data", comment: "임시 저장된 데이터가 없습니다."))
+            return
+        }
+
+        Dialog.show(container: self, viewController: nil,
+                    title: NSLocalizedString("common_task_init", comment: "작업초기화"),
+                    message: NSLocalizedString("common_confirm_work_Init", comment: "현재 작업을 초기화 하시겠습니까 ?"),
+                    okTitle: NSLocalizedString("common_confirm", comment: "확인"),
+                    okHandler: { (_) in
+                        self.sendWorkInitData(saleWorkId: self.strSaleWorkId)
+        			},
+                    cancelTitle: NSLocalizedString("common_cancel", comment: "취소"), cancelHandler: nil)
+
 	}
 	
 	
@@ -591,10 +667,10 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	{
 		
 //		String strEpcUrn 			= null;
-//		String strEpcCode			= null;
+		var strEpcCode				= ""
 //		String strTraceDate 		= null;
 //		String strProdAssetEpc 		= null;
-//		String strProdAssetEpcName 	= null;
+		var strProdAssetEpcName 	= ""
 //		String[] splitValue 		= null;
 //		String strTraceDateFormat	= null;
 		var strSerialNo 			= ""
@@ -608,22 +684,18 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		
 		var clsDataTable : DataTable!
 		var clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
-		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
-		clsDataClient.SelectUrl = "supplyService:selectProdMappingOutTagList" //출고C타입용 (출고A,B타입과 다름)
-		clsDataClient.removeServiceParam()
-		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
-		clsDataClient.addServiceParam(paramName: "saleWorkId", value: strSaleWorkId)
-		clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
-		
-		
-		//SimpleDateFormat sdfDateFormat = new SimpleDateFormat ("yyyyMMddHHmmss");
-		//SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		var arcDataRows : Array<DataRow> = Array<DataRow>()
+
 		do
 		{
 			// 1) 태그데이터 초기화
 			clearTagData(boolClearScreen: false)
 
+            clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+            clsDataClient.SelectUrl = "supplyService:selectProdMappingOutTagList" //출고C타입용 (출고A,B타입과 다름)
+            clsDataClient.removeServiceParam()
+            clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+            clsDataClient.addServiceParam(paramName: "saleWorkId", value: strSaleWorkId)
+            clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
 			clsDataClient.selectData(dataCompletionHandler: {(data, error) in
 				if let error = error {
 					// 에러처리
@@ -639,23 +711,22 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 				for clsDataRow in clsDataTable.getDataRows()
 				{
 					let strEpcUrn 			= clsDataRow.getString(name: "epcUrn") ?? ""
-					let strEpcCode			= clsDataRow.getString(name: "epcCode")
-					let strUtcTraceDate 	= clsDataRow.getString(name: "utcTraceDate")
-					let strProdAssetEpc 	= clsDataRow.getString(name: "prodAssetEpc")
-					let strProdAssetEpcName = clsDataRow.getString(name: "prodAssetEpcName")
-					let strBarcodeId 		= clsDataRow.getString(name: "barcodeId")
-					let strSaleItemSeq 		= clsDataRow.getString(name: "saleItemSeq")
-					let strItemCode 		= clsDataRow.getString(name: "itemCode")
-					let strItemName 		= clsDataRow.getString(name: "itemName")
-					let strCnt 				= clsDataRow.getString(name: "cnt")
-					let strTradeChit		= clsDataRow.getString(name: "tradeChit")
-					let strVehName 			= clsDataRow.getString(name: "vehName")
+					strEpcCode				= clsDataRow.getString(name: "epcCode") ?? ""
+					let strUtcTraceDate 	= clsDataRow.getString(name: "utcTraceDate") ?? ""
+					let strProdAssetEpc 	= clsDataRow.getString(name: "prodAssetEpc") ?? ""
+					strProdAssetEpcName		= clsDataRow.getString(name: "prodAssetEpcName") ?? ""
+					let strBarcodeId 		= clsDataRow.getString(name: "barcodeId") ?? ""
+					let strSaleItemSeq 		= clsDataRow.getString(name: "saleItemSeq") ?? ""
+					//let strItemCode 		= clsDataRow.getString(name: "itemCode") ?? ""
+					let strItemName 		= clsDataRow.getString(name: "itemName") ?? ""
+					let strCnt 				= clsDataRow.getString(name: "cnt") ?? ""
+					//let strTradeChit		= clsDataRow.getString(name: "tradeChit") ?? ""
+					//let strVehName 			= clsDataRow.getString(name: "vehName") ?? ""
 					
 					// 날짜 포맷 변환
-					let strLocaleTraceDate = DateUtil.utcToLocale(utcDate: strUtcTraceDate!, dateFormat: "yyyyMMddHHmmss")
+					let strLocaleTraceDate = DateUtil.utcToLocale(utcDate: strUtcTraceDate, dateFormat: "yyyyMMddHHmmss")
 					let strTraceDate = DateUtil.getConvertFormatDate(date: strLocaleTraceDate, srcFormat: "yyyyMMddHHmmss", dstFormat:"yyyy-MM-dd HH:mm:ss")
 
-			
 					if(strEpcUrn.isEmpty == false)
 					{
                         let intIndex = strEpcUrn.lastIndex(of: ".") + 1
@@ -666,90 +737,148 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 						print("strSerialNo:\(strSerialNo)")
 						print("=============================================")
 					}
-					//데이터 축출
 					
-					/*
-					Logger.i("==========================");
-					Logger.i("EPC코드(KEY): " + strEpcCode);
-					Logger.i("EPC-URN: " + strEpcUrn);
-					Logger.i("시리얼번호: " + strSerialNo);
-					Logger.i("유형(코드): " + strProdAssetEpc);
-					Logger.i("유형(이름): " + strProdAssetEpcName);
-					Logger.i("상품SEQ: " + strSaleItemSeq);
-					Logger.i("바코드ID: " + strBarcodeId);
-					Logger.i("상품명: " + strItemName);
-					Logger.i("바코드수량: " + strCnt);
-					*/
-					
-					//마스터-RFID태그정보
-//					ItemInfo clsMastItemInfo = new ItemInfo();
-//					clsMastItemInfo.setEpcCode(strEpcCode);
-//					clsMastItemInfo.setEpcUrn(strEpcUrn);
-//					clsMastItemInfo.setSerialNo(strSerialNo);
-//					clsMastItemInfo.setAssetEpc(strProdAssetEpc);
-//					clsMastItemInfo.setAssetName(strProdAssetEpcName);
-//					clsMastItemInfo.setRowState(Constants.DATA_ROW_STATE_UNCHANGED);
-//					clsMastItemInfo.setReadCount(1);
-//					clsMastItemInfo.setReadTime(strTraceDate);
-//
-//					//슬래이브-상품정보
-//					ItemInfo clsSlaveItemInfo = new ItemInfo();
-//					clsSlaveItemInfo.setEpcCode(strEpcCode);
-//					clsSlaveItemInfo.setSaleItemSeq(strSaleItemSeq);
-//					clsSlaveItemInfo.setProdCode(strBarcodeId);
-//					clsSlaveItemInfo.setProdName(strItemName);
-//					clsSlaveItemInfo.setRowState(Constants.DATA_ROW_STATE_UNCHANGED);
-//					clsSlaveItemInfo.setProdReadCnt(strCnt);
-//					clsSlaveItemInfo.setReadTime(strTraceDate);
-//
-//					//#1.헤시맵 생성
-//					if(mClsProdContainer.containEpcCode(strEpcCode) == false)
-//					{
-//						//#1-1.구조체 수정
-//						if(strEpcCode != null) mClsProdContainer.loadProdEpc(strEpcCode);
-//
-//						//#1-2.마스터 그리스 저장
-//						mLstItemListMasterRows.add(clsMastItemInfo);
-//					}
-//
-//					//#2.아이템 생성-바코드ID가 있는경우
-//					if((strBarcodeId != null)&&(strBarcodeId.equals("") == false))
-//					{
-//						mClsProdContainer.addItem(strEpcCode, clsSlaveItemInfo);
-//
-//						//#3.서브 그리드 저장
-//						mLstItemListSlaveRows.add(clsSlaveItemInfo);
-//					}
+					// 마스터-RFID태그정보
+                    let clsMastItemInfo = ItemInfo()
+                    clsMastItemInfo.setEpcCode(epcCode: strEpcCode)
+                    clsMastItemInfo.setEpcUrn(epcUrn: strEpcUrn)
+                    clsMastItemInfo.setSerialNo(serialNo: strSerialNo)
+                    clsMastItemInfo.setAssetEpc(assetEpc: strProdAssetEpc)
+                    clsMastItemInfo.setAssetName(assetName: strProdAssetEpcName)
+                    clsMastItemInfo.setRowState(rowState: Constants.DATA_ROW_STATE_UNCHANGED)
+                    clsMastItemInfo.setReadCount(readCount: 1)
+                    clsMastItemInfo.setReadTime(readTime: strTraceDate)
+
+					//슬래이브-상품정보
+                    let clsSlaveItemInfo = ItemInfo()
+                    clsSlaveItemInfo.setEpcCode(epcCode: strEpcCode)
+                    clsSlaveItemInfo.setSaleItemSeq(saleItemSeq: strSaleItemSeq)
+                    clsSlaveItemInfo.setProdCode(prodCode: strBarcodeId)
+                    clsSlaveItemInfo.setProdName(prodName: strItemName)
+                    clsSlaveItemInfo.setRowState(rowState: Constants.DATA_ROW_STATE_UNCHANGED)
+                    clsSlaveItemInfo.setProdReadCnt(prodReadCnt: strCnt)
+                    clsSlaveItemInfo.setReadTime(readTime: strTraceDate)
+
+                    // #1.헤시맵 생성
+                    if(self.clsProdContainer.containEpcCode(epcCode: strEpcCode) == false)
+                    {
+                        // #1-1.구조체 수정
+                        self.clsProdContainer.loadProdEpc(epcCode: strEpcCode)
+
+                        // #1-2.마스터 그리스 저장
+                        self.arrRfidRows.append(clsMastItemInfo)
+                    }
+
+                    // #2.아이템 생성-바코드ID가 있는경우
+                    if(strBarcodeId.isEmpty == false)
+                    {
+                        self.clsProdContainer.addItem(epcCode: strEpcCode, itemInfo: clsSlaveItemInfo)
+                        
+                        //#3.서브 그리드 저장
+                        self.arrItemRows.append(clsSlaveItemInfo)
+                    }
 				}
-//				//3)'처리량' 텍스트박스에 표시
-//				mTvProcCount.setText(String.valueOf(mLstItemListMasterRows.size()));
-//
-//				//4)그리드 업데이트
-//				mClsAdapterMaster.notifyDataSetChanged();
-//				mClsAdapterSlave.notifyDataSetChanged();
-//
-//				//5)마지막 마스터 그리드가 선택되게 만들기
-//				mStrSelectedEpcCode = strEpcCode;
-//				mTvSelectedSerialNo.setText(strSerialNo);
-//				mTvSelectedAssetName.setText(strProdAssetEpcName);
-//
-//
-//				showDialogOnThread(getString(R.string.common_confirm), getString(R.string.common_success_delete), 2000);	//성공적으로 삭제가 완료되었습니다.
-	
-			})
-			
+                
+				// 3)'처리량' 텍스트박스에 표시
+                self.lblProcCount.text = "\(self.arrRfidRows.count)"
+				
 
-			
-
+				// 4)그리드 업데이트
+                self.tvProdMappingRfid?.reloadData()
+                self.tvProdMappingItem?.reloadData()
+         
+                // 5)마지막 마스터 그리드가 선택되게 만들기
+                self.strSelectedEpcCode = strEpcCode
+                
+                self.lblSerialNo?.text = strSerialNo
+                self.lblAssetName?.text = strProdAssetEpcName
+                
+                super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
+    		})
 		}
 		catch let error
 		{
+            super.showSnackbar(message: error.localizedDescription)
 			print(error.localizedDescription)
-			//if(mViFooterView != null) mViFooterView.setVisibility(View.INVISIBLE);
-			//showToastOnThread(getString(R.string.common_error_occurred_data_search));
-			//Logger.e(StrUtil.trace(e));
 		}
 	}
+    
+    func doChangeStatus()
+    {
+        
+    }
+    
+    
+    // 작업초기화 데이터를 전송한다.
+    func sendWorkInitData(saleWorkId : String)
+    {
+		do
+    	{
+            clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
+            
+            let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+            clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+            clsDataClient.ExecuteUrl = "inOutService:executeOutCancelData"
+            clsDataClient.removeServiceParam()
+            clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+            clsDataClient.addServiceParam(paramName: "userId", value: AppContext.sharedManager.getUserInfo().getUserId())
+            clsDataClient.addServiceParam(paramName: "unitId", value: AppContext.sharedManager.getUserInfo().getUnitId())
+            clsDataClient.addServiceParam(paramName: "saleWorkId", value: saleWorkId)
+            clsDataClient.executeData(dataCompletionHandler: { (data, error) in
+
+                self.clsIndicator!.hide()
+                
+                if let error = error {
+                    // 에러처리
+                    print(error)
+                    return
+                }
+                guard let clsResultDataTable = data else {
+                    print("에러 데이터가 없음")
+                    return
+                }
+                
+                print("####결과값 처리")
+                let clsResultDataRows = clsResultDataTable.getDataRows()
+                if(clsResultDataRows.count > 0)
+                {
+                    let clsDataRow = clsResultDataRows[0]
+                    let strResultCode = clsDataRow.getString(name: "resultCode")
+                    
+                    print(" -strResultCode:\(strResultCode!)")
+                    if(Constants.PROC_RESULT_SUCCESS == strResultCode)
+                    {
+                        // 삭제성공
+                        //그리드 삭제 및 구조체 삭제
+                        DispatchQueue.main.async
+                    	{
+                            self.clsProdContainer.deleteItem(epcCode: self.strSelectedEpcCode, prodCode: self.strSelectedProdCode, removeState: Constants.REMOVE_STATE_COMPLETE)
+                            self.arrItemRows.removeAll()
+                            self.arrItemRows.append(contentsOf: self.clsProdContainer.getItemes(epcCode: self.strSelectedEpcCode))
+                            self.tvProdMappingItem.reloadData()
+                            
+                            let strMsg = NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다.")
+                            self.showSnackbar(message: strMsg)
+                        }
+                    }
+                    else
+                    {
+                        let strMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
+                        self.showSnackbar(message: strMsg)
+                    }
+                }
+                
+            })
+        }
+        catch let error
+        {
+			clsIndicator?.hide()
+            super.showSnackbar(message: NSLocalizedString("srfid_save_error_try_again", comment: "에러로 인하여 RFID 데이터를 저장할수 없습니다. 잠시후 다시 시도하여 주십시오."))
+			print(error.localizedDescription)
+        }
+    }
+    
+    
 	
 	func didReadTagList(_ tagId: String)
 	{
