@@ -42,7 +42,7 @@ class AppToolbarController: ToolbarController
         super.prepare()
         prepareMenuButton()
       // yomile, prepareSwitch()
-        prepareMoreButton()
+      //  prepareMoreButton()
         prepareStatusBar()
         prepareToolbar()
     }
@@ -93,8 +93,8 @@ extension AppToolbarController
     fileprivate func prepareToolbar()
 	{
 		toolbar.leftViews = [menuButton]
-		//yomile toolbar.rightViews = [switchControl, moreButton]
-		toolbar.rightViews = [ moreButton]
+		// yomile toolbar.rightViews = [switchControl, moreButton]
+		// yomile toolbar.rightViews = [ moreButton]
 		toolbar.backgroundColor = Color.blue.base
 		toolbar.titleLabel.textColor = Color.white
     }

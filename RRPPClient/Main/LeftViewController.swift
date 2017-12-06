@@ -16,7 +16,12 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	@IBOutlet weak var btnLogout: UIButton!
 	var arrMenuData:Array<MenuItem> = Array<MenuItem>()
-	
+   
+    lazy var clsRootController: RootViewController = {
+        return UIStoryboard.viewController(identifier: "RootViewController") as! RootViewController
+    }()
+
+    
 	open override func viewDidLoad()
 	{
         
@@ -73,6 +78,8 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
             arrMenuData.append(MenuItem(menuId: "InOutCancel", menuName: NSLocalizedString("title_work_inout_cancel", comment: "입출고취소")))
 			arrMenuData.append(MenuItem(menuId: "RfidTrackingService", menuName: "이력추적"))
 		}
+        
+        arrMenuData.append(MenuItem(menuId: "ClientConfig", menuName: NSLocalizedString("title_client_config", comment: "환경설정")))
 		tvMenu?.reloadData()
 	}
 	
@@ -140,6 +147,12 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 toolbarController?.transition(to: clsController, completion: closeNavigationDrawer)
                 break
             
+        	case "ClientConfig" :
+                let clsController: ClientConfig = {
+                    return UIStoryboard.viewController(storyBoardName: "Config", identifier: "ClientConfig") as! ClientConfig
+                }()
+                toolbarController?.transition(to: clsController, completion: closeNavigationDrawer)
+            	break
 			default:
 				print("is selected");
 		}
@@ -151,6 +164,12 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		print(" LeftViewCOntroller.onLogoutClicked")
 		AppContext.sharedManager.doLogout();
 		navigationDrawerController?.closeLeftView()
+        
+        // 로그아웃전에 루트뷰로 전환하여 로그인후 루트뷰가 나오도록 수정
+		toolbarController?.transition(to: clsRootController, completion: closeNavigationDrawer)
+		//self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
+		
+        
 		self.performSegue(withIdentifier: "segLogout", sender: self)
 	}
 	

@@ -97,8 +97,20 @@ class RootViewController: BaseViewController
 			
 			
 			//               01234567890123456789012
-//            let strEpcUrn = "grai:0.95100043.1025.62"
-//
+            let strEpcUrn = "grai:0.95100043.1025.62"
+            let intLength = StrUtil.getLength(sourceText: strEpcUrn)
+            let intIndex = StrUtil.lastIndexOf(sourceText: strEpcUrn, of: ".") + 1
+            
+            let intSubLength = intLength - intIndex
+            
+            let strTest = StrUtil.substr(sourceText: strEpcUrn, startIndex: intIndex, length: intSubLength)
+            
+            print("=============================================")
+            print("intLength:\(intLength)")
+            print("intIndex:\(intIndex)")
+            print("strTest:\(strTest)")
+            print("=============================================")
+            
 //            let intIndex = strEpcUrn.lastIndex(of: ".") + 1
 //            let intLength = strEpcUrn.length - intIndex
 //

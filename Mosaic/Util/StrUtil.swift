@@ -16,6 +16,51 @@ public class StrUtil
                                                options: String.CompareOptions.literal, range: nil)
 	}
     
+
+    public static func indexOf(sourceText: String, findText: String) -> Int?
+    {
+        if let range = sourceText.range(of: findText)
+        {
+            return sourceText.distance(from: sourceText.startIndex, to: range.lowerBound)
+        }
+        return nil
+    }
+    
+    public static func lastIndexRaw(sourceText: String, of str: String, before: Int = 0) -> String.Index?
+    {
+        guard sourceText.count > 0 else
+        {
+            return nil
+        }
+        guard (str.count + before) <= sourceText.count else
+        {
+            return nil
+        }
+        let startRange = sourceText.startIndex..<sourceText.index(sourceText.endIndex, offsetBy: -before)
+        return sourceText.range(of: str, options: String.CompareOptions.backwards, range: startRange, locale: nil)?.lowerBound
+    }
+   
+    public static func lastIndexOf(sourceText: String, of str: String, before: Int = 0) -> Int
+    {
+        guard let index = lastIndexRaw(sourceText: sourceText, of: str, before: before) else
+        {
+            return -1
+        }
+        return sourceText.distance(from: sourceText.startIndex, to: index)
+    }
+    
+    public static func getLength(sourceText: String) -> Int
+    {
+		return sourceText.count
+    }
+    public static func substr(sourceText: String, startIndex: Int, length: Int) -> String
+    {
+        let start = sourceText.index(sourceText.startIndex, offsetBy: startIndex)
+        let end = sourceText.index(sourceText.startIndex, offsetBy: startIndex + length)
+        return String(sourceText[start..<end])
+    }
+
+    
     
     
     //=======================================
