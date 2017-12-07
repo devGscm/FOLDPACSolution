@@ -87,8 +87,11 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		self.initRfid(.SWING, id:  devId, delegateReder:  self as ReaderResponseDelegate )
 		
 		initViewControl()
+		
+		initTestProcess()
 	}
 	
+
 	override func viewWillDisappear(_ animated: Bool)
 	{
 		super.viewWillDisappear(animated)
@@ -511,20 +514,12 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	func clearUserInterfaceData()
 	{
         strToBranchId = ""
-        
-//		intOrderWorkCnt	= 0
-//		intCurOrderWorkCnt = 0
-//		intOrderReqCnt	= 0
-//
-//		strMakeOrderId	= ""
-//		strProdAssetEpc = ""
-//
-//
-//		self.btnMakeOrderId.setTitle("", for: .normal)
-//		self.lblOrderCustName.text = ""
-//		self.lblOrderCount.text = ""
-//		self.tfMakeLotId.text = ""
-//
+		btnWorkOutCustSearch.setTitle(NSLocalizedString("common_selection", comment: "선택"), for: .normal)
+		//처리메모
+		
+		// TODO
+		//final EditText etRemark	 = (EditText)findViewById(R.id.etRemark);
+		//if(etRemark != null) etRemark.setText("");
 	}
 	
 	
@@ -532,18 +527,16 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	{
 		if(tableView == tvProdMappingRfid)
 		{
-			//return self.arrAssetRows.count
-            return 0
+			return self.arrRfidRows.count
 		}
 		else
 		{
-			return 0
+			return self.arrItemRows.count
 		}
 	}
 	
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
-		
 		if(tableView == tvProdMappingRfid)
 		{
 			let objCell:ProdMappingRfidCell = tableView.dequeueReusableCell(withIdentifier: "tvcProdMappingRfid", for: indexPath) as! ProdMappingRfidCell
@@ -554,7 +547,6 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
             objCell.btnSelection.setTitle(String.fontAwesomeIcon(name:.arrowDown), for: .normal)
             objCell.btnSelection.tag = indexPath.row
             objCell.btnSelection.addTarget(self, action: #selector(onTagSelectionClicked(_:)), for: .touchUpInside)
-			
 			return objCell
 		}
 		else
@@ -622,7 +614,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
             //setSelectedIndex(intPosition);
             
             //슬래이브-그리드 초기화
-            arrRfidRows.removeAll()
+            arrItemRows.removeAll()
             
             
             //선택된 RFID태그에 대한 바코드리스트
@@ -636,7 +628,8 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
             }
             
             //슬래이브-그리드 업데이트
-            tvProdMappingRfid.reloadData()
+			tvProdMappingItem.reloadData()
+            
             
             //처리량
             lblProcCount.text = "\(arrItemRows.count)"
@@ -1272,7 +1265,74 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		}
 	}
 
+	func initTestProcess()
+	{
+		let strCurReadTime = DateUtil.getDate(dateFormat: "yyyyMMddHHmmss")
+		
 
+		//#1.일반정보
+		strToBranchId = "170316000142";
+		btnWorkOutCustSearch.setTitle("농협물류센터(안성)", for: UIControlState.normal)
+		tfVehName.text = "붕붕이 3호"
+		tfTradeChit.text = "TR1234"
+		lblSerialNo.text = "161028"
+		strSelectedEpcCode = "3312D58E3D8100C000027504"
+		lblProcCount.text = "2"
+
+		//#2.RFID태그정보
+		boolNewTagInfoExist = true
+
+		let clsRFIDInfo1 = ItemInfo()
+		clsRFIDInfo1.setEpcCode(epcCode: "3312D58E3D8100C000027504")
+		clsRFIDInfo1.setRowState(rowState: Constants.DATA_ROW_STATE_ADDED)
+		clsRFIDInfo1.setEpcUrn(epcUrn: "grai:95100027.1027.161028")
+		clsRFIDInfo1.setSerialNo(serialNo: "161028")
+		clsRFIDInfo1.setAssetEpc(assetEpc: "951000271027")
+		clsRFIDInfo1.setAssetName(assetName: "RB11")
+		clsRFIDInfo1.setReadCount(readCount: 1)
+		clsRFIDInfo1.setReadTime(readTime: strCurReadTime)
+		arrRfidRows.append(clsRFIDInfo1)
+		clsProdContainer.addProdEpc(epcCode: "3312D58E3D8100C000027504")
+
+		let clsRFIDInfo2 = ItemInfo()
+		clsRFIDInfo2.setEpcCode(epcCode: "3312D58E3D8100C000027507")
+		clsRFIDInfo2.setRowState(rowState: Constants.DATA_ROW_STATE_ADDED)
+		clsRFIDInfo2.setEpcUrn(epcUrn: "grai:95100027.1027.161031")
+		clsRFIDInfo2.setSerialNo(serialNo: "161031")
+		clsRFIDInfo2.setAssetEpc(assetEpc: "951000271027")
+		clsRFIDInfo2.setAssetName(assetName: "RB11")
+		clsRFIDInfo2.setReadCount(readCount: 1)
+		clsRFIDInfo2.setReadTime(readTime: strCurReadTime)
+		arrRfidRows.append(clsRFIDInfo2)
+		clsProdContainer.addProdEpc(epcCode: "3312D58E3D8100C000027507")
+
+		tvProdMappingRfid.reloadData()
+
+		//#3.바코드정보
+		let clsBarcodeInfo1 = ItemInfo()
+		clsBarcodeInfo1.setEpcCode(epcCode: "3312D58E3D8100C000027504")
+		clsBarcodeInfo1.setRowState(rowState: Constants.DATA_ROW_STATE_ADDED)
+		clsBarcodeInfo1.setProdCode(prodCode: "10012345000017")
+		clsBarcodeInfo1.setProdName(prodName: "빼빼로")
+		clsBarcodeInfo1.setProdReadCnt(prodReadCnt: "1")
+		clsBarcodeInfo1.setReadTime(readTime: strCurReadTime)
+		arrItemRows.append(clsBarcodeInfo1)
+		clsProdContainer.addItem(epcCode: "3312D58E3D8100C000027504", itemInfo: clsBarcodeInfo1)
+	
+		let clsBarcodeInfo2 = ItemInfo()
+		clsBarcodeInfo2.setEpcCode(epcCode: "3312D58E3D8100C000027504")
+		clsBarcodeInfo2.setRowState(rowState: Constants.DATA_ROW_STATE_ADDED)
+		clsBarcodeInfo2.setProdCode(prodCode: "10012345000024")
+		clsBarcodeInfo2.setProdName(prodName: "초코파이")
+		clsBarcodeInfo2.setProdReadCnt(prodReadCnt: "1");
+		clsBarcodeInfo2.setReadTime(readTime: strCurReadTime);
+		arrItemRows.append(clsBarcodeInfo2)
+		clsProdContainer.addItem(epcCode: "3312D58E3D8100C000027504", itemInfo: clsBarcodeInfo2)
+
+		//슬래이브 그리드 - 업데이트
+		tvProdMappingItem.reloadData()
+	}
+	
 	func didReadTagList(_ tagId: String)
 	{
 
