@@ -51,14 +51,14 @@ class LoginViewController: UIViewController
 	
 	@IBAction func onSwitchChanged(_ sender: UISwitch)
 	{
-		if(sender.isOn)
-		{
-			self.view.backgroundColor = UIColor.red
-		}
-		else
-		{
-			self.view.backgroundColor = UIColor.black
-		}
+//		if(sender.isOn)
+//		{
+//			self.view.backgroundColor = UIColor.red
+//		}
+//		else
+//		{
+//			self.view.backgroundColor = UIColor.black
+//		}
 	}
 	
 	@IBAction func doLogin(_ sender: Any)
