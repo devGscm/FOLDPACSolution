@@ -32,10 +32,6 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		mIvLogo.layer.masksToBounds = false
 		mIvLogo.layer.cornerRadius = mIvLogo.frame.height / 2
 		mIvLogo.clipsToBounds = true
-		//  prepareTransitionButton()
-		
-		
-		
 	}
 	
 	override func viewDidAppear(_ animated: Bool)
@@ -55,14 +51,14 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		
 		if(strCustType == "ISS")
 		{
-			arrMenuData.append(MenuItem(menuId: "TagSupply", menuName: "납품등록(RFID)"))
+			//arrMenuData.append(MenuItem(menuId: "TagSupply", menuName: "납품등록(RFID)"))
 			arrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "RFID태그검수"))
-			arrMenuData.append(MenuItem(menuId: "RfidTrackingService", menuName: "이력추적"))
+			//arrMenuData.append(MenuItem(menuId: "RfidTrackingService", menuName: "이력추적"))
 		}
 		else if(strCustType == "MGR")
 		{
 			// 관리회사(MGR)
-			arrMenuData.append(MenuItem(menuId: "TagSupply", menuName: "납품등록(RFID)"))
+			//arrMenuData.append(MenuItem(menuId: "TagSupply", menuName: "납품등록(RFID)"))
 			arrMenuData.append(MenuItem(menuId: "ProductMount", menuName: NSLocalizedString("title_product_mount", comment: "자산등록")))
 			arrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "RFID태그검수"))
             
@@ -76,7 +72,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
             arrMenuData.append(MenuItem(menuId: "ProdMappingOut", menuName: NSLocalizedString("title_work_sale_c", comment: "출고C")))
 			arrMenuData.append(MenuItem(menuId: "WorkHistorySearch", menuName: NSLocalizedString("title_work_history_search", comment: "작업내역조회")))
             arrMenuData.append(MenuItem(menuId: "InOutCancel", menuName: NSLocalizedString("title_work_inout_cancel", comment: "입출고취소")))
-			arrMenuData.append(MenuItem(menuId: "RfidTrackingService", menuName: "이력추적"))
+			//arrMenuData.append(MenuItem(menuId: "RfidTrackingService", menuName: "이력추적"))
 		}
         
         arrMenuData.append(MenuItem(menuId: "ClientConfig", menuName: NSLocalizedString("title_client_config", comment: "환경설정")))
