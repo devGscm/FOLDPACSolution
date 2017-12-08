@@ -217,7 +217,6 @@ class BaseRfidViewController : BaseViewController
 		
 	override func viewDidAppear(_ animated: Bool)
 	{
-		
 		if (AppContext.sharedManager.getUserInfo().getBranchId().isEmpty == true)
 		{
 			Dialog.show(container: self, title: nil, message: NSLocalizedString("msg_no_selected_branch_cust_type", comment: "선택된 거점이 없습니다. 환경설정에서 거점을 선택하십시오."))
@@ -437,6 +436,10 @@ class BaseRfidViewController : BaseViewController
 		self.mClsReader?.stopRead()
 	}
 	
+	func clearInventory()
+	{
+		self.mClsReader?.clearInventory?()
+	}
 	
 	/// 리더기 바코드 / RFID 모드설정
 	///
