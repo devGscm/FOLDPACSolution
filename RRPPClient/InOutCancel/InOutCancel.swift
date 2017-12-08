@@ -178,13 +178,10 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
     func doSearch()
     {
         intPageNo += 1
+        let strSearchValue = tfSearchValue.text ?? "";
         
-        let strLocaleStDate = StrUtil.replace(sourceText: (tfStDate?.text)!, findText: "-", replaceText: "") + "000000"
-        let strLocaleEnDate = StrUtil.replace(sourceText: (tfEnDate?.text)!, findText: "-", replaceText: "") + "235959"
-        
-        print("strLocaleStDate:\(strLocaleStDate)")
-        print("strLocaleEnDate:\(strLocaleEnDate)")
-        
+        var strLocaleStDate = StrUtil.replace(sourceText: (tfStDate?.text)!, findText: "-", replaceText: "") + "000000"
+        var strLocaleEnDate = StrUtil.replace(sourceText: (tfEnDate?.text)!, findText: "-", replaceText: "") + "235959"
         
         let dtLocaleStDate = DateUtil.getFormatDate(date: strLocaleStDate, dateFormat:"yyyyMMddHHmmss")
         let dtLocaleEnDate = DateUtil.getFormatDate(date: strLocaleEnDate, dateFormat:"yyyyMMddHHmmss")
@@ -195,6 +192,9 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
             return
         }
         
+        strLocaleStDate = "20170626050000"
+        strLocaleEnDate = "20170726050000"
+        
         print("startOrderDate:\(strLocaleStDate)")
         print("endOrderDate:\(strLocaleEnDate)")
         print("pageNo:\(intPageNo)")
@@ -204,7 +204,7 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
         clsDataClient.addServiceParam(paramName: "endWorkDate", value: strLocaleEnDate)
         clsDataClient.addServiceParam(paramName: "ioType", value: strSaleType!)
         clsDataClient.addServiceParam(paramName: "searchCondition", value: strSearchCondtion)
-        clsDataClient.addServiceParam(paramName: "searchValue", value: strSearchCondtion)
+        clsDataClient.addServiceParam(paramName: "searchValue", value: strSearchValue)
         clsDataClient.addServiceParam(paramName: "pageNo", value: intPageNo)
         clsDataClient.addServiceParam(paramName: "rowsPerPage", value: Constants.ROWS_PER_PAGE)
         clsDataClient.selectData(dataCompletionHandler: {(data, error) in
@@ -235,9 +235,6 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
             doSearch()
         }
     }
-    
-    
-
     
     
     //=======================================
@@ -364,12 +361,17 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
         let strUtcTraceDate = clsDataRow.getString(name:"traceDate")
         let strLocaleTraceDate = DateUtil.utcToLocale(utcDate: strUtcTraceDate!, dateFormat: "yyyyMMddHHmmss")
         let strTraceDate = DateUtil.getConvertFormatDate(date: strLocaleTraceDate, srcFormat: "yyyyMMddHHmmss", dstFormat:"MM-dd HH:mm")
+
         
-        objCell.lblTraceDate?.text = strTraceDate
-        objCell.lblAssetEpcName?.text = clsDataRow.getString(name:"assetEpcName")
-        objCell.lblEventName?.text = clsDataRow.getString(name:"eventName")
-        objCell.lblEventCount?.text = clsDataRow.getString(name:"eventCnt")
-        objCell.lblBranchName?.text = clsDataRow.getString(name:"branchName")
+        
+        objCell.lblWorkDate?.text = strTraceDate
+        
+//        objCell.lblAssetEpcName?.text = clsDataRow.getString(name:"assetEpcName")
+//        objCell.lblEventName?.text = clsDataRow.getString(name:"eventName")
+//        objCell.lblEventCount?.text = clsDataRow.getString(name:"eventCnt")
+//        objCell.lblBranchName?.text = clsDataRow.getString(name:"branchName")
+        
+        
         return objCell
     }
     

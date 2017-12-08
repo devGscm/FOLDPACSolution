@@ -10,11 +10,14 @@ import UIKit
 
 class InOutCancelCell: UITableViewCell
 {
-    @IBOutlet weak var lblTraceDate: UILabel!
+    @IBOutlet weak var lblRowNo: UILabel!
+    @IBOutlet weak var lblWorkDate: UILabel!
+    @IBOutlet weak var lblInoutCustName: UILabel!
+    @IBOutlet weak var lblIoTypeName: UILabel!
+    @IBOutlet weak var lblWorkId: UILabel!
     @IBOutlet weak var lblAssetEpcName: UILabel!
-    @IBOutlet weak var lblEventName: UILabel!
-    @IBOutlet weak var lblEventCount: UILabel!
-    @IBOutlet weak var lblBranchName: UILabel!
+    @IBOutlet weak var lblCompleteWorkCnt: UILabel!
+    @IBOutlet weak var btnSelection: UIButton!
     
     override func awakeFromNib()
     {
