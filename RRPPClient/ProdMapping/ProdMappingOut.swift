@@ -21,17 +21,6 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	
 	@IBOutlet weak var btnWorkOutCustSearch: UIButton!
 	
-	
-    @IBOutlet weak var tfVehName: UITextField!
-    @IBOutlet weak var lblProcCount: UILabel!
-    @IBOutlet weak var tfTradeChit: UITextField!
-    
-    @IBOutlet weak var lblAssetName: UILabel!
-    @IBOutlet weak var lblSerialNo: UILabel!
-    
-	@IBOutlet weak var btnProductAdd: UIButton!
-	
-	@IBOutlet weak var btnProdBarcode: UIButton!
 	@IBOutlet weak var tvProdMappingRfid: UITableView!
 	@IBOutlet weak var tvProdMappingItem: UITableView!
 
@@ -84,9 +73,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		prepareToolbar()
 		
 		//TODO:: 전역객체에서 등록된 리더기정보를 가져온다.
-		let devId  = "D32F0010-8DB8-856F-A8DF-85B3D00CF26A"
-		self.initRfid(.SWING, id:  devId, delegateReder:  self as ReaderResponseDelegate )
-		
+		self.initRfid(self as ReaderResponseDelegate )
 		initViewControl()
 		
 		
@@ -1367,17 +1354,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		}
 	}
 	
-	
-	/**
-	* 송장번호를 발급후, 데이터를 서버로 전송 한다.
-	* @param workState			작업상태
-	* @param strTransferCustId		입고처 정보
-	* @param strVehName			차량번호
-	* @param strTradeChit			전표번호
-	* @param strRemark				비고
-	* @param strSignData			사인
-	*/
-	func sendDataNoneSaleWorkId(workState: String, toBranchId: String, vehName: String, tradeChit: String, remark: String, signData: String)
+	func didReadTagid(_ tagId: String)
 	{
 		do
 		{

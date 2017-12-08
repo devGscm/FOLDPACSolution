@@ -45,15 +45,18 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		print("=========================================")
 		super.viewWillAppear(animated)
 		prepareToolbar()
-		
-		//TODO:: 전역객체에서 등록된 리더기정보를 가져온다.
-		let devId  = "D32F0010-8DB8-856F-A8DF-85B3D00CF26A"
-		self.initRfid(.SWING, id:  devId, delegateReder:  self as ReaderResponseDelegate )
+		self.initRfid(self as ReaderResponseDelegate )
 		
 		initViewControl()
 	}
 	
-	
+	override func viewDidAppear(_ animated: Bool)
+	{
+		let clsController: ClientConfig = {
+				return UIStoryboard.viewController(storyBoardName: "Config", identifier: "ClientConfig") as! ClientConfig
+		}()
+		self.toolbarController?.transition(to: clsController, completion:	nil)
+	}
 	
 	override func viewDidDisappear(_ animated: Bool)
 	{
@@ -572,7 +575,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		
 	}
 	
-	func didReadTagList(_ tagId: String)
+	func didReadTagid(_ tagId: String)
 	{
 		
 	}
