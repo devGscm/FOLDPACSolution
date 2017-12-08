@@ -242,6 +242,7 @@ class BaseRfidViewController : BaseViewController
 //		}
 		let readerType  = AppContext.sharedManager.getUserInfo().getReaderType() as ReaderType
 		
+		let devId = "xxxx"
 		switch readerType
 		{
 			case .SWING :
