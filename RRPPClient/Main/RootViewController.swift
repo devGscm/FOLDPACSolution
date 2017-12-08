@@ -96,32 +96,44 @@ class RootViewController: BaseViewController
 			localData.versionCheck()
 			
 			
-			//               01234567890123456789012
-            let strEpcUrn = "grai:0.95100043.1025.62"
-//            let intLength = StrUtil.getLength(sourceText: strEpcUrn)
-//            let intIndex = StrUtil.lastIndexOf(sourceText: strEpcUrn, of: ".") + 1
-//
-//            let intSubLength = intLength - intIndex
-//
-//            let strTest = StrUtil.substr(sourceText: strEpcUrn, startIndex: intIndex, length: intSubLength)
-//
-//            print("=============================================")
-//            print("intLength:\(intLength)")
-//            print("intIndex:\(intIndex)")
-//            print("strTest:\(strTest)")
-//            print("=============================================")
+
+            var mDicPallet : Dictionary<String, String> = Dictionary<String, String>()
+            mDicPallet["yomile1"] = "test1"
+            mDicPallet["yomile2"] = "test2"
+            mDicPallet["yomile3"] = "test3"
+            mDicPallet["yomile4"] = "test4"
             
-            let intIndex = strEpcUrn.lastIndex(of: ".") + 1
-            let intLength = strEpcUrn.length - intIndex
-//
-            let strTest = strEpcUrn.substring(intIndex, length: intLength)
-            print("=============================================")
-             print("strEpcUrn.length:\(strEpcUrn.length)")
-            print("intIndex:\(intIndex)")
-            print("strTest:\(strTest)")
-//            print("=============================================")
+            
+            if(mDicPallet.index(forKey: "yomile1") == nil)
+            {
+               print("mDicPallet NIL")
+            }
+            else
+            {
+               print("mDicPallet NOT NIL")
+            }
+            
+            if(mDicPallet.index(forKey: "yomile6") == nil)
+            {
+                print("yomile6 mDicPallet NIL")
+            }
+            else
+            {
+                print("yomile6 mDicPallet NOT NIL")
+            }
+            
+            
+            if(mDicPallet.keys.contains("yomile1"))
+            {
+                print("yomile1 mDicPallet contains")
+            }
+            if(mDicPallet.keys.contains("yomile6"))
+            {
+                print("yomile6 mDicPallet contains")
+            }
             
 
+            
 			//print("=============================================")
 			//print(" UserName : \( AppContext.sharedManager.getUserInfo().getUserName() )")
 			//print("=============================================")

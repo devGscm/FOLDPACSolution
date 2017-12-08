@@ -64,21 +64,118 @@ class Constants
 	
 	
 	//=====================================================================================
+	// 작업 구분
+	//-------------------------------------------------------------------------------------
+	static let TRANSFER_TYPE_RETURN					= "01"		/**< 출하구분 : 반납 */
+	static let TRANSFER_TYPE_SHIPMENT				= "02"		/**< 출하구분 : 출하 */
+	//=====================================================================================
+	
+	
+	
+	//=====================================================================================
+	// 작업 구분
+	//-------------------------------------------------------------------------------------
+	static let WORK_TYPE_SALE_IN					= "01"		/**< 작업구분 : 주문입고 */
+	static let WORK_TYPE_SALE_OUT					= "02"		/**< 작업구분 : 주문출고 */
+	static let WORK_TYPE_MOVE_IN					= "03"		/**< 작업구분 : 이동입고 */
+	static let WORK_TYPE_MOVE_OUT					= "04"		/**< 작업구분 : 이동출고 */
+	static let WORK_TYPE_RESALE_IN					= "05"		/**< 작업구분 : 구매입고 */
+	static let WORK_TYPE_RESALE_OUT					= "06"		/**< 작업구분 : 구매출고(반납 : 미정인 항목) */
+	
+	//=====================================================================================
+	
+	//=====================================================================================
+	// 출고-작업 처리 상태
+	//-------------------------------------------------------------------------------------
+	static let WORK_STATE_WORKING					= "01"		/**< 작업중	*/
+	static let WORK_STATE_COMPLETE					= "02"		/**< 완료		*/
+	static let WORK_STATE_COMPLETE_FORCE			= "03"		/**< (강제)완료 **/
+	static let WORK_STATE_ONGOING					= "04"		/**< 처리진행	*/
+	//=====================================================================================
+	
+	//=====================================================================================
+	// 입고-작업 처리 상태
+	//-------------------------------------------------------------------------------------
+	static let RESALE_ORDER_STATE_START				= "01"		/**< 신규 **/
+	static let RESALE_ORDER_STATE_WORK				= "02"		/**< 처리 **/
+	static let RESALE_ORDER_STATE_CONFIRM			= "03"		/**< 승인 **/
+	static let RESALE_ORDER_STATE_CANCEL			= "04"		/**< 취소 **/
+	//=====================================================================================
+	
+	
+	//=====================================================================================
+	// 재고조사 상태
+	//-------------------------------------------------------------------------------------
+	static let STOCK_REVIEW_STATE_NEW				= "01"	/**< 신규 */
+	static let STOCK_REVIEW_STATE_WORKING			= "02"	/**< 실사진행 */
+	static let STOCK_REVIEW_STATE_COMPLETE			= "03"	/**< 실사완료 */
+	static let STOCK_REVIEW_STATE_ADJUSTMENT		= "04"	/**< 재고조정 */
+	static let STOCK_REVIEW_STATE_CANCEL			= "99"	/**< 취소 */
+	
+	//=====================================================================================
+	
+	//=====================================================================================
+	// 이벤트 코드
+	//-------------------------------------------------------------------------------------
+	static let EVENT_CODE_IN						= "10"	/**< 이벤트 코드 : 입고 **/
+	static let EVENT_CODE_MOUNT						= "40"	/**< 이벤트 코드 : 파렛트 장착 **/
+	static let EVENT_CODE_CLEAN						= "60"	/**< 이벤트 코드 : 세척 **/
+	static let EVENT_CODE_SELECT_STORE				= "80"	/**< 이밴트 코드 : 선별/보관 **/
+	static let EVENT_CODE_OUT						= "90"	/**< 이벤트 코드 : 출고 **/
+	static let EVENT_CODE_DESTORY					= "91"	/**< 이벤트 코드 : 파손폐기 **/
+	static let EVENT_CODE_NOREAD					= "92"	/**< 이벤트 코드 : 미인식폐기 **/
+	static let EVENT_CODE_DISPOSAL					= "93"	/**< 이벤트 코드 : 매각 **/
+	//=====================================================================================
+	
+	//=====================================================================================
 	// 사용자 언어
 	//-------------------------------------------------------------------------------------
 	static let USER_LANG_KR											= "KR"		/**< 한국어	*/
 	static let USER_LANG_EN											= "EN"		/**< 영어		*/
 	static let USER_LANG_CH											= "CH"		/**< 중국어	*/
 	//=====================================================================================
-    
-    
-    static let IDENTIFICATION_SYSTEM_GTIN14 						= "1"	/**< 식별체계 : GTIN-14     	*/
-    static let IDENTIFICATION_SYSTEM_AGQR							= "2"	/**< 식별체계 : 농산물 QR코드     */
 	
+
 	
+	//센서 태그 헤더 정보
+	static let SWING_ABNORMAL_TAG_HEADER_INFO						= "301E"		/**< 이상 센서태그 헤더정보, #4번태그*/
+	static let SWING_TAG_HEADER_INFO								= "3000"		/**< 센서태그 헤더정보 */
+	static let SWING_BARCODE_HEADER_INFO							= "http:"		/**< 바코드 헤더정보*/
+	static let SWING_BARCODE_QR_INFO								= "qc="			/**< 바코드 QR정보*/
+	
+	static let READING_LANGTH_BARCODE 								= 14			/**< 바코드타입:GTIN-14 */
+	static let READING_LANGTH_QRCODE 								= 18			/**< 바코드타입:QR코드 	*/
+	static let READING_LANGTH_RFIDTAG 								= 28			/**< 바코드타입:RFID태그 	*/
+	
+	static let INTENT_EXTRA_READING_TYPE 							= "ReadingType"	/**< 바코드타입:GTIN-14 */
+	static let READING_TYPE_BARCODE 								= "BARCODE"		/**< 바코드타입:GTIN-14 */
+	static let READING_TYPE_QRCODE 									= "QRCODE"			/**< 바코드타입:QR코드 	*/
+	static let READING_TYPE_RFIDTAG 								= "RFIDTAG"		/**< 바코드타입:RFID태그 	*/
+	
+	static let SWING_READER_MODE_RFID 								= 0				/**< 스윙리더기 : RFID 읽기모드 	*/
+	static let SWING_READER_MODE_TEMPERATURE						= 1				/**< 스윙리더기 : TEMPERATURE 읽기모드 	*/
+	static let SWING_READER_MODE_BCD 								= 2				/**< 스윙리더기 : BCD 읽기모드 	*/
+	static let SWING_READER_MODE_ENC 								= 3				/**< 스윙리더기 : ENC 읽기모드 	*/
+	
+	static let SWING_TAG_REPORT_MODE_NEW 							= 0				/**< 스윙리더기 : 태그리포트 [N] 	*/
+	static let SWING_TAG_REPORT_MODE_ALL							= 1				/**< 스윙리더기 : 태그리포트 [A]	*/
+	
+    
+    static let IDENTIFICATION_SYSTEM_GTIN14 						= 1		/**< 식별체계 : GTIN-14     	*/
+    static let IDENTIFICATION_SYSTEM_AGQR							= 2		/**< 식별체계 : 농산물 QR코드     */
+	
+    static let DATA_ROW_STATE_UNCHANGED               				= 0     /**< 데이터상태 : 변경 없음 **/
+    static let DATA_ROW_STATE_ADDED                    				= 1     /**< 데이터상태 : 삽입 **/
+    static let DATA_ROW_STATE_MODIFIED                    			= 2     /**< 데이터상태 : 수정 **/
+    static let DATA_ROW_STATE_DELETED                    			= 3     /**< 데이터상태 : 삭제 **/
+
+    
 	static let RELOAD_STATE_DEFAULT									= 0		/**< 리로드상태: 기본 **/
 	static let RELOAD_STATE_TEMPORARY								= 1		/**< 리로드상태: 임시저장 **/
 	static let RELOAD_STATE_COMPLETE								= 2		/**< 리로드상태: 완료저장 **/
+
+    static let REMOVE_STATE_NORMAL                        			= 1		/**< 삭제상태: 기본 **/
+    static let REMOVE_STATE_COMPLETE                    			= 2		/**< 삭제상태: 임시저장 **/
 
 	
 }

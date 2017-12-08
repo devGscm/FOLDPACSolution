@@ -46,20 +46,33 @@ class ClientConfig : UITableViewController, DataProtocol
     {
        
         // 거점선택
-        let strBranch = UserDefaults.standard.string(forKey: Constants.BASE_BRANCH_KEY) ?? "Selection"
+		let strBranchName = AppContext.sharedManager.getUserInfo().getBranchName()
+		if(strBranchName.isEmpty == false)
+		{
+			self.btnBranch.setTitle(strBranchName, for: .normal)
+		}
+        //let strBranch = UserDefaults.standard.string(forKey: Constants.BASE_BRANCH_KEY) ?? "Selection"
         //print("@@@@@@ Branch : \(strBranch)")
-        self.btnBranch.setTitle(strBranch, for: .normal)
+        //self.btnBranch.setTitle(strBranch, for: .normal)
         
-        
+		
+		
         //상품식별체계
-        mLstIdentificationSystem.append(IdentificationSystemDialog.IdentificationSystem(IdentificationSystemType: 0, IdentificationSystemName: "ITF-14 바코드"))
-        mLstIdentificationSystem.append(IdentificationSystemDialog.IdentificationSystem(IdentificationSystemType: 1, IdentificationSystemName: "농산물 QR코드"))
+        mLstIdentificationSystem.append(IdentificationSystemDialog.IdentificationSystem(IdentificationSystemType: 1, IdentificationSystemName: NSLocalizedString("identification_system_itf14", comment: "ITF-14 바코드")))
+        mLstIdentificationSystem.append(IdentificationSystemDialog.IdentificationSystem(IdentificationSystemType: 2, IdentificationSystemName: NSLocalizedString("identification_system_agqr", comment: "농산물 QR코드")))
         
         let intIdentificationSystem = UserDefaults.standard.integer(forKey: Constants.IDENTIFICATION_SYSTEM_LIST_KEY)
-        let strIdentificationSystemName = mLstIdentificationSystem[intIdentificationSystem].IdentificationSystemName
-        
-        print("@@@@@@ ID-SYSTEM:\(intIdentificationSystem)")
-        self.btnIdentificationSystem.setTitle(strIdentificationSystemName, for: .normal)
+		for strtIdentificationSystem in mLstIdentificationSystem
+		{
+			if(strtIdentificationSystem.IdentificationSystemType == intIdentificationSystem)
+			{
+				let strIdentificationSystemName = strtIdentificationSystem.IdentificationSystemName
+				self.btnIdentificationSystem.setTitle(strIdentificationSystemName, for: .normal)
+				break
+			}
+		}
+		
+		
         
         //효과음
         self.swRfidBeep.isOn = UserDefaults.standard.bool(forKey: Constants.RFID_BEEP_ENABLED_KEY)
@@ -122,8 +135,8 @@ class ClientConfig : UITableViewController, DataProtocol
                 
                 
                 print("@@@@@@@@@@@@@ strBranchID:\(strBranchId)" )
-                UserDefaults.standard.setValue(strBranchId, forKey: Constants.BASE_BRANCH_KEY)
-                UserDefaults.standard.synchronize()
+                //UserDefaults.standard.setValue(strBranchId, forKey: Constants.BASE_BRANCH_KEY)
+                //UserDefaults.standard.synchronize()
                 self.btnBranch.setTitle(strBranchName, for: .normal)
             }
         }
@@ -175,7 +188,8 @@ class ClientConfig : UITableViewController, DataProtocol
      */
     
     //상품식별체계
-    @IBAction func onIdentificationSystemClicked(_ sender: UIButton) {
+    @IBAction func onIdentificationSystemClicked(_ sender: UIButton)
+	{
         let clsIdentificationSystemDialog = IdentificationSystemDialog()
         clsIdentificationSystemDialog.loadData(lstIdentificationSystem: mLstIdentificationSystem)
         

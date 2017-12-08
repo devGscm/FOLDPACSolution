@@ -151,7 +151,7 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
     {
         clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
         clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
-        clsDataClient.SelectUrl = "stockService:selectWorkHistoryist"
+        clsDataClient.SelectUrl = "inOutService:selectWorkCombineInOutCancelList"
         clsDataClient.removeServiceParam()
         clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
         clsDataClient.addServiceParam(paramName: "branchId", value: AppContext.sharedManager.getUserInfo().getBranchId())
@@ -200,10 +200,11 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
         print("pageNo:\(intPageNo)")
         print("rowPerPage:\(Constants.ROWS_PER_PAGE)")
         
-        clsDataClient.addServiceParam(paramName: "startTraceDate", value: strLocaleStDate)
-        clsDataClient.addServiceParam(paramName: "endTraceDate", value: strLocaleEnDate)
-        //clsDataClient.addServiceParam(paramName: "eventCode", value: strEventCode!)
-        
+        clsDataClient.addServiceParam(paramName: "startWorkDate", value: strLocaleStDate)
+        clsDataClient.addServiceParam(paramName: "endWorkDate", value: strLocaleEnDate)
+        clsDataClient.addServiceParam(paramName: "ioType", value: strSaleType!)
+        clsDataClient.addServiceParam(paramName: "searchCondition", value: strSearchCondtion)
+        clsDataClient.addServiceParam(paramName: "searchValue", value: strSearchCondtion)
         clsDataClient.addServiceParam(paramName: "pageNo", value: intPageNo)
         clsDataClient.addServiceParam(paramName: "rowsPerPage", value: Constants.ROWS_PER_PAGE)
         clsDataClient.selectData(dataCompletionHandler: {(data, error) in
@@ -213,13 +214,12 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
                 return
             }
             guard let clsDataTable = data else {
-                print("에러 데이터가 없음")
+                //print("에러 데이터가 없음")
                 return
             }
             self.arcDataRows.append(contentsOf: clsDataTable.getDataRows())
             DispatchQueue.main.async { self.tvInOutCancel?.reloadData() }
         })
-        
     }
     
     //=======================================
@@ -227,7 +227,7 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
     //=======================================
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
     {
-        print("* scrollViewDidEndDragging")
+        //print("* scrollViewDidEndDragging")
         let fltOffsetY = scrollView.contentOffset.y
         let fltContentHeight = scrollView.contentSize.height
         if (fltOffsetY >= fltContentHeight - scrollView.frame.size.height)
@@ -269,7 +269,7 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
             self.strSaleType = clsDialog.selectedRow.itemCode
             let strItemName = clsDialog.selectedRow.itemName
 
-            print("self.strSaleType: \(self.strSaleType!)")
+            //print("== self.strSaleType: \(self.strSaleType!) :: \(strItemName) ==")
             
             self.btnSaleTypeCondition.setTitle(strItemName, for: .normal)
         }
@@ -291,21 +291,34 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
         
         let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
             self.strSearchCondtion = clsDialog.selectedRow.itemCode
-            print("strSearchCondtion: \(self.strSearchCondtion)")
             let strItemName = clsDialog.selectedRow.itemName
+            
+            print("== strSearchCondtion: \(self.strSearchCondtion) :: \(strItemName)")
+            
             self.btnSearchCondition.setTitle(strItemName, for: .normal)
         }
+        
         acDialog.addAction(aaOkAction)
         self.present(acDialog, animated: true)
     }
     
+    //=======================================
+    //===== '검색'버튼
+    //=======================================
+    @IBAction func onSearchClicked(_ sender: UIButton) {
+        print("==== 검색버튼 ====")
+        print("================")
+        
+        doInitSearch()
+        
+    }
     
     //=======================================
     //===== createDatePicker
     //=======================================
     func createDatePicker(tfDateControl : UITextField)
     {
-        print("@@@@@@createDatePicker")
+        //print("@@@@@@createDatePicker")
         tfCurControl = tfDateControl
         
         dpPicker.locale = Locale(identifier: "ko_KR")
