@@ -120,6 +120,16 @@ public class SwingReader : NSObject, ReaderProtocol, SwingProtocolProtocol
 			swing.swing_setReadMode(mode)
 		}
 	}
+	
+	func clearInventory()
+	{
+		if(self.swing.isSwingrederConnected())
+		{
+			swing.swing_readStop()
+			swing.swing_clear_inventory()
+		}
+		
+	}
 	////////////////////////////////////////////////////////////////////////////
 	/// 여기서 부터 Swing delegate Protocol 구현
 	////////////////////////////////////////////////////////////////////////////

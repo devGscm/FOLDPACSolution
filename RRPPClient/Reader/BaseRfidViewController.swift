@@ -217,10 +217,9 @@ class BaseRfidViewController : BaseViewController
 		
 	override func viewDidAppear(_ animated: Bool)
 	{
-		
 		if (AppContext.sharedManager.getUserInfo().getBranchId().isEmpty == true)
 		{
-			Dialog.show(container: self, title: nil, message: NSLocalizedString("rfid_no_selected_bluetooth_select_config", comment: "선택된 블루투스 장비가 없습니다."))
+			Dialog.show(container: self, title: nil, message: NSLocalizedString("msg_no_selected_branch_cust_type", comment: "선택된 거점이 없습니다. 환경설정에서 거점을 선택하십시오."))
 			
 			let clsController: ClientConfig = {
 				return UIStoryboard.viewController(storyBoardName: "Config", identifier: "ClientConfig") as! ClientConfig
@@ -229,20 +228,23 @@ class BaseRfidViewController : BaseViewController
 			return
 		}
 		
-//		guard let devId  = AppContext.sharedManager.getUserInfo().getReaderDevId()
-//			else
-//		{
-//			Dialog.show(container: self, title: nil, message: NSLocalizedString("rfid_no_selected_bluetooth_select_config", comment: "선택된 블루투스 장비가 없습니다."))
-//
-//			let clsController: ClientConfig = {
-//				return UIStoryboard.viewController(storyBoardName: "Config", identifier: "ClientConfig") as! ClientConfig
-//			}()
-//			self.toolbarController?.transition(to: clsController, completion:	nil)
-//			return
-//		}
+		//시뮬레이터인지 실제 디바이스인지 판단
+		#if (arch(i386) || arch(x86_64)) && os(iOS)
+			let devId  = "D32F0010-8DB8-856F-A8DF-85B3D00CF26A"
+		#else
+			guard let devId  = AppContext.sharedManager.getUserInfo().getReaderDevId() else
+			{
+				Dialog.show(container: self, title: nil, message: NSLocalizedString("rfid_no_selected_bluetooth_select_config", comment: "선택된 블루투스 장비가 없습니다."))
+				let clsController: ClientConfig = {
+					return UIStoryboard.viewController(storyBoardName: "Config", identifier: "ClientConfig") as! ClientConfig
+				}()
+				self.toolbarController?.transition(to: clsController, completion:	nil)
+				return
+			}
+		#endif
+		
 		let readerType  = AppContext.sharedManager.getUserInfo().getReaderType() as ReaderType
 		
-		let devId = "xxxx"
 		switch readerType
 		{
 			case .SWING :
@@ -434,6 +436,10 @@ class BaseRfidViewController : BaseViewController
 		self.mClsReader?.stopRead()
 	}
 	
+	func clearInventory()
+	{
+		self.mClsReader?.clearInventory?()
+	}
 	
 	/// 리더기 바코드 / RFID 모드설정
 	///
