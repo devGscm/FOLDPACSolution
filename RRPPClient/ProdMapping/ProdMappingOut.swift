@@ -20,8 +20,6 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	
 	@IBOutlet weak var btnWorkOutCustSearch: UIButton!
 	
-	
-	
 	@IBOutlet weak var tvProdMappingRfid: UITableView!
 	@IBOutlet weak var tvProdMappingItem: UITableView!
 
@@ -55,9 +53,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		prepareToolbar()
 		
 		//TODO:: 전역객체에서 등록된 리더기정보를 가져온다.
-		let devId  = "D32F0010-8DB8-856F-A8DF-85B3D00CF26A"
-		self.initRfid(.SWING, id:  devId, delegateReder:  self as ReaderResponseDelegate )
-		
+		self.initRfid(self as ReaderResponseDelegate )
 		initViewControl()
 	}
 	
@@ -751,7 +747,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		}
 	}
 	
-	func didReadTagList(_ tagId: String)
+	func didReadTagid(_ tagId: String)
 	{
 		
 	}

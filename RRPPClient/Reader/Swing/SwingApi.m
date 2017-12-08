@@ -251,7 +251,7 @@ typedef enum
 
 -(void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
-
+	NSLog(@"didFailToConnectPeripheral!!");
 }
 
 
