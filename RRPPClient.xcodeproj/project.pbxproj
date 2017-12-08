@@ -24,6 +24,8 @@
 		559F39DA1FD7704C006E5C17 /* RfidTypeDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F39D91FD7704C006E5C17 /* RfidTypeDialog.swift */; };
 		559F39DC1FD77068006E5C17 /* RfidReaderDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F39DB1FD77068006E5C17 /* RfidReaderDialog.swift */; };
 		559F39DE1FD7708A006E5C17 /* IdentificationSystemDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F39DD1FD7708A006E5C17 /* IdentificationSystemDialog.swift */; };
+		559F39E91FD779D9006E5C17 /* EpcInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F39E81FD779D9006E5C17 /* EpcInfo.swift */; };
+		559F39EB1FD77D28006E5C17 /* ProdContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F39EA1FD77D28006E5C17 /* ProdContainer.swift */; };
 		55A579F01FD51A5700DBA188 /* WorkOutCustSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A579EF1FD51A5700DBA188 /* WorkOutCustSearch.swift */; };
 		55A579F21FD51A7400DBA188 /* WorkOutCustSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A579F11FD51A7400DBA188 /* WorkOutCustSearchCell.swift */; };
 		55ACD6771FC802BD00A2DC72 /* ProductOrderSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD6731FC802BC00A2DC72 /* ProductOrderSearch.swift */; };
@@ -152,6 +154,8 @@
 		559F39D91FD7704C006E5C17 /* RfidTypeDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RfidTypeDialog.swift; sourceTree = "<group>"; };
 		559F39DB1FD77068006E5C17 /* RfidReaderDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RfidReaderDialog.swift; sourceTree = "<group>"; };
 		559F39DD1FD7708A006E5C17 /* IdentificationSystemDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentificationSystemDialog.swift; sourceTree = "<group>"; };
+		559F39E81FD779D9006E5C17 /* EpcInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpcInfo.swift; sourceTree = "<group>"; };
+		559F39EA1FD77D28006E5C17 /* ProdContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdContainer.swift; sourceTree = "<group>"; };
 		55A579EF1FD51A5700DBA188 /* WorkOutCustSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOutCustSearch.swift; sourceTree = "<group>"; };
 		55A579F11FD51A7400DBA188 /* WorkOutCustSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOutCustSearchCell.swift; sourceTree = "<group>"; };
 		55ACD6731FC802BC00A2DC72 /* ProductOrderSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductOrderSearch.swift; sourceTree = "<group>"; };
@@ -279,6 +283,8 @@
 				5590A55E1FD4E1AE007571D5 /* ProdMapping.storyboard */,
 				5590A5601FD4E7C1007571D5 /* ProdMappingOutCell.swift */,
 				55B154B91FD7681500F69ABE /* ItemInfo.swift */,
+				559F39E81FD779D9006E5C17 /* EpcInfo.swift */,
+				559F39EA1FD77D28006E5C17 /* ProdContainer.swift */,
 			);
 			path = ProdMapping;
 			sourceTree = "<group>";
@@ -721,6 +727,7 @@
 				55B302C71FCE32A600BDCCB1 /* RfidInspect.swift in Sources */,
 				559F39DE1FD7708A006E5C17 /* IdentificationSystemDialog.swift in Sources */,
 				553BCF8B1FC2DC3B00BE39C1 /* SliderDialog.swift in Sources */,
+				559F39E91FD779D9006E5C17 /* EpcInfo.swift in Sources */,
 				96994C511FC545DF00B3A726 /* LocalData.swift in Sources */,
 				9618F0E61FCE83D300F376B7 /* TagCell.swift in Sources */,
 				55B302CA1FCE339400BDCCB1 /* ProductMountCell.swift in Sources */,
@@ -731,6 +738,7 @@
 				55FA78481FBDAD0B00583A80 /* AppNavigationDrawerController.swift in Sources */,
 				559F39DA1FD7704C006E5C17 /* RfidTypeDialog.swift in Sources */,
 				55B302C31FCE323B00BDCCB1 /* RfidUtil.swift in Sources */,
+				559F39EB1FD77D28006E5C17 /* ProdContainer.swift in Sources */,
 				55FA783A1FBDACE300583A80 /* LoginViewController.swift in Sources */,
 				5571CDE31FCF98E600F88B97 /* AppSnackbarController.swift in Sources */,
 				559F39DC1FD77068006E5C17 /* RfidReaderDialog.swift in Sources */,

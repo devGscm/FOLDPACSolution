@@ -407,7 +407,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 			
 			let clsDataRow : DataRow = DataRow()
 			clsDataRow.State = DataRow.DATA_ROW_STATE_ADDED
-			clsDataRow.addRow(value: clsInfo.getEpcUrn())
+			clsDataRow.addRow(name:"epcCode", value: clsInfo.getEpcUrn())
 			clsDataTable.addDataRow(dataRow: clsDataRow)
 		}
 		clsDataClient.executeData(dataTable: clsDataTable, dataCompletionHandler: { (data, error) in

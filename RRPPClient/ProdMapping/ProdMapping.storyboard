@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -345,7 +345,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Serial No." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AfH-TF-CXu">
-                                                <rect key="frame" x="102" y="5" width="80" height="30"/>
+                                                <rect key="frame" x="102" y="5" width="78" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -361,7 +361,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2RH-dN-FH6">
-                                                <rect key="frame" x="259" y="4" width="57" height="30"/>
+                                                <rect key="frame" x="256" y="4" width="57" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.0" green="0.50196078430000002" blue="0.047058823530000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="상품추가">
@@ -372,6 +372,9 @@
                                                         <real key="value" value="4"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="onProductAddClicked:" destination="H5O-z6-Ftf" eventType="touchUpInside" id="heg-j8-wB5"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="RP11" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yS3-et-Umo">
                                                 <rect key="frame" x="50" y="4" width="50" height="30"/>
@@ -382,7 +385,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lvw-IG-0D0">
-                                                <rect key="frame" x="185" y="4" width="70" height="30"/>
+                                                <rect key="frame" x="182" y="4" width="70" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -390,7 +393,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qCd-WL-IXY">
-                                                <rect key="frame" x="318" y="4" width="50" height="30"/>
+                                                <rect key="frame" x="314" y="4" width="50" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.0" green="0.50196078430000002" blue="0.047058823530000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="바코드">
@@ -401,6 +404,9 @@
                                                         <real key="value" value="4"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="onProdBarcodeClicked:" destination="H5O-z6-Ftf" eventType="touchUpInside" id="fAT-fW-CE5"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -553,7 +559,6 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="onClearAllClicked:" destination="H5O-z6-Ftf" eventType="touchUpInside" id="bXb-8r-rAl"/>
                                                     <action selector="onWorkInitClick:" destination="H5O-z6-Ftf" eventType="touchUpInside" id="pRU-VF-Tuq"/>
                                                 </connections>
                                             </button>
@@ -574,7 +579,6 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="onSendClicked:" destination="H5O-z6-Ftf" eventType="touchUpInside" id="X66-Yd-rcr"/>
                                                     <action selector="onTempSaveClick:" destination="H5O-z6-Ftf" eventType="touchUpInside" id="cH1-e6-r6w"/>
                                                 </connections>
                                             </button>
@@ -613,9 +617,14 @@
                     <connections>
                         <outlet property="btnRfidReader" destination="nfF-7s-QnA" id="2q5-V8-Azm"/>
                         <outlet property="btnWorkOutCustSearch" destination="Xey-Ec-Ymm" id="md8-Ue-OkL"/>
+                        <outlet property="lblAssetName" destination="yS3-et-Umo" id="OgB-JF-YDc"/>
                         <outlet property="lblBranchInfo" destination="oCd-73-slB" id="Tuc-EW-llZ"/>
+                        <outlet property="lblProcCount" destination="hcl-oU-1eW" id="sD6-O3-HD5"/>
                         <outlet property="lblReaderName" destination="OMh-XZ-dkz" id="56j-WT-2o0"/>
+                        <outlet property="lblSerialNo" destination="Lvw-IG-0D0" id="m7v-o0-e6W"/>
                         <outlet property="lblUserName" destination="hMu-RY-dUc" id="jIC-4x-lp9"/>
+                        <outlet property="tfTradeChit" destination="9W7-po-sN4" id="mO4-wc-0ze"/>
+                        <outlet property="tfVehName" destination="75B-p8-rYp" id="udy-qN-Tq2"/>
                         <outlet property="tvProdMappingItem" destination="ENK-kJ-Fea" id="ytN-0a-FgV"/>
                         <outlet property="tvProdMappingRfid" destination="lgk-nd-C7l" id="xZr-fE-1xB"/>
                     </connections>
