@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RRPPClient/ProdMapping/ProdMappingOut.swift"
-            timestampString = "534332554.965654"
+            timestampString = "534387592.109783"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "641"
-            endingLineNumber = "641"
-            landmarkName = "onItemSelectionClicked(_:)"
+            startingLineNumber = "661"
+            endingLineNumber = "661"
+            landmarkName = "clearUserInterfaceData()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RRPPClient/ProdMapping/ProdMappingOut.swift"
-            timestampString = "534332554.965982"
+            timestampString = "534387592.109838"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1115"
-            endingLineNumber = "1115"
-            landmarkName = "sendDataExistSaleWorkId(workState:saleWorkId:vehName:tradeChit:remark:signData:)"
+            startingLineNumber = "1135"
+            endingLineNumber = "1135"
+            landmarkName = "sendWorkInitData(saleWorkId:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

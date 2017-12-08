@@ -181,7 +181,6 @@ typedef enum
 [""] *	@param 	dev 	advertisementData
 [""] *	@param 	dev 	RSSI
 [""] *
-[""] *	@return	void
 [""] */
 
 -(void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
@@ -287,7 +286,6 @@ typedef enum
 /**
 [""] *	@brief	읽기 쓰기 가능한 서비스 검색
 [""] *
-[""] *	@return	void
 [""] */
 
 -(void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
@@ -311,7 +309,6 @@ typedef enum
 [""] *	@param 	dev 	advertisementData 비콘 i,a 메시지
 [""] *	@param 	dev 	RSSI 신호 세기
 [""] *
-[""] *	@return	void
 [""] */
 -(void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {

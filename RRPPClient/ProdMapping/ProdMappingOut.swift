@@ -29,7 +29,10 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var lblAssetName: UILabel!
     @IBOutlet weak var lblSerialNo: UILabel!
     
-    @IBOutlet weak var tvProdMappingRfid: UITableView!
+	@IBOutlet weak var btnProductAdd: UIButton!
+	
+	@IBOutlet weak var btnProdBarcode: UIButton!
+	@IBOutlet weak var tvProdMappingRfid: UITableView!
 	@IBOutlet weak var tvProdMappingItem: UITableView!
 
     //var strSaleWorkId	= ""	// 송장번호
@@ -52,9 +55,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	var clsIndicator : ProgressIndicator?
 	var clsDataClient : DataClient!
     
-    
-    var arrResultDataRows : Array<DataRow> = Array<DataRow>()
-    
+	
     var strToBranchId    = ""    // 출하고객사ID
     
     //==== Ver2.0.0 ====
@@ -65,7 +66,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	
 	var boolNewTagInfoExist		= false	/**< 신규태그 - 신규태그가 있는지 여부 -전송용 */
 	var boolExistSavedInvoice	= false	/**< 송장번호ID - DB에서 할당받았는지 여부 */
-	
+	var	intIDSystem 			= -1	/**< 환경설정값:바코드/QR코드	*/
     var strSelectedEpcCode		= ""	/**< 선택된 시리얼의 EPC 코드    */
     var strSelectedProdCode		= ""	/**< 선택된 시리얼의 상품 코드    */
     var intSelectedProdIndex	= 0		/**< 선택된 상품의 인덱스    */
@@ -77,7 +78,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	override func viewWillAppear(_ animated: Bool)
 	{
 		print("=========================================")
-		print("*ProductMount.viewWillAppear()")
+		print("*ProdMappingOut.viewWillAppear()")
 		print("=========================================")
 		super.viewWillAppear(animated)
 		prepareToolbar()
@@ -88,6 +89,15 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		
 		initViewControl()
 		
+		
+	}
+	
+	override func viewDidAppear(_ animated: Bool)
+	{
+		print("=========================================")
+		print("*ProdMappingOut.viewDidAppear()")
+		print("=========================================")
+		super.viewDidAppear(animated)
 		initTestProcess()
 	}
 	
@@ -112,12 +122,10 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	override func viewDidDisappear(_ animated: Bool)
 	{
 		print("=========================================")
-		print("*ProductMount.viewDidDisappear()")
+		print("*ProdMappingOut.viewDidDisappear()")
 		print("=========================================")
         
-        
-		arrResultDataRows.removeAll()
-        
+		
         
 		clsIndicator = nil
 		clsDataClient = nil
@@ -165,7 +173,18 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		lblReaderName.text = UserDefaults.standard.string(forKey: Constants.RFID_READER_NAME_KEY)
         
         lblProcCount.text = "0"
-        
+		
+		intIDSystem = UserDefaults.standard.integer(forKey: Constants.IDENTIFICATION_SYSTEM_LIST_KEY)
+		if(intIDSystem == Constants.IDENTIFICATION_SYSTEM_GTIN14)
+		{
+			btnProdBarcode.setTitle(NSLocalizedString("common_read_itf14", comment: "바코드"), for: .normal)
+		}
+		else
+		{
+			btnProdBarcode.setTitle(NSLocalizedString("common_read_aqgr", comment: "QR코드"), for: .normal)
+		}
+		
+
         clsProdContainer = ProdContainer()
 	}
 	
@@ -189,7 +208,6 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		{
 			if(returnData.returnRawData != nil)
 			{
-
                 // 새로운 입고처가 들어오면 기존 데이터를 삭제한다.
                 if(strSaleWorkId.isEmpty == false)
                 {
@@ -197,7 +215,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
                 }
                 
 				let clsDataRow = returnData.returnRawData as! DataRow
-                var strCustName = clsDataRow.getString(name: "custName") ?? ""
+				let strCustName = clsDataRow.getString(name: "custName") ?? ""
 				self.strToBranchId	= clsDataRow.getString(name: "branchId") ?? ""
 	        	self.btnWorkOutCustSearch.setTitle(strCustName, for: .normal)
 			}
@@ -301,12 +319,66 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
     // 바코드 버튼
     @IBAction func onProdBarcodeClicked(_ sender: UIButton)
     {
+		
+		// 마스터 그리드에서 상품이 선택된 경우만 진입.
+		if(lblSerialNo.text?.isEmpty == false)
+		{
+			//리더기 읽기 중지
+			if(isConnected() == true)
+			{
+				stopRead()
+			}
+			
+			if(intIDSystem == Constants.IDENTIFICATION_SYSTEM_GTIN14)
+			{
+				if(sender.isSelected == false)
+				{
+					sender.isSelected = true
+					
+					// TODO
+					//setReaderModeControl(mode : Constants.SWING_READER_MODE_BCD)
+					btnProdBarcode.setTitle(NSLocalizedString("common_read_rfid", comment: "RFID태그"), for: .normal)
+				}
+				else
+				{
+					sender.isSelected = false
+					
+					// TODO
+					//setReaderModeControl(mode: Constants.SWING_READER_MODE_RFID)
+					btnProdBarcode.setTitle(NSLocalizedString("common_read_itf14", comment: "바코드"), for: .normal)
+				}
+			}
+			else
+			{
+				if(sender.isSelected == false)
+				{
+					sender.isSelected = true
+					
+					// TODO
+					//setReaderModeControl(mode : Constants.SWING_READER_MODE_BCD)
+					btnProdBarcode.setTitle(NSLocalizedString("common_read_rfid", comment: "RFID태그"), for: .normal)
+				}
+				else
+				{
+					sender.isSelected = false
+					
+					// TODO
+					//setReaderModeControl(mode: Constants.SWING_READER_MODE_RFID)
+					btnProdBarcode.setTitle(NSLocalizedString("common_read_aqgr", comment: "QR코드"), for: .normal)
+				}
+			}
+		}
+		else
+		{
+			super.showSnackbar(message: NSLocalizedString("msg_no_selected_serial_no", comment: "시리얼번호를 선택하여 주십시오."))
+		}
     }
+	
     
 	// 데이터를 clear한다.
     func clearTagData( boolClearScreen: Bool)
 	{
-        arrResultDataRows.removeAll()
+		
         
 //		arrTagRows.removeAll()
 //		arrAssetRows.removeAll()
@@ -321,6 +393,74 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 //
 //		// TODO : 나중에 구현할 사항
 //		//super.clear항nventory()
+		
+		
+		
+		self.boolNewTagInfoExist = false // 신규태그 입력 체크, 전송용
+		
+		self.arrRfidRows.removeAll()
+		self.arrItemRows.removeAll()
+		
+		
+		self.intSelectedIndex = -1
+		
+		tvProdMappingRfid.reloadData()
+		tvProdMappingItem.reloadData()
+		
+		
+		//바코드 버튼
+		if(intIDSystem == Constants.IDENTIFICATION_SYSTEM_GTIN14)
+		{
+			btnProdBarcode.setTitle(NSLocalizedString("common_read_itf14", comment: "바코드"), for: .normal)
+		}
+		else
+		{
+			btnProdBarcode.setTitle(NSLocalizedString("common_read_aqgr", comment: "QR코드"), for: .normal)
+		}
+		
+		
+		if(isConnected() == true)
+		{
+			stopRead()	//리더기 읽기 중지
+		}
+		
+		// TODO
+
+		//setReaderModeControl(Constants.SWING_READER_MODE_RFID)	//리더기 모드 초기화
+//
+//		//헤시맵 클리어
+//		mClsProdContainer.clear();
+//
+//		//작업자,거점명을 제외한 모든 데이터 초기화
+//		if(boolClearScreen == true)
+//		{
+//			mStrTransferCustId		= null;
+//			if(mBtnTransferCustId 	!= null) mBtnTransferCustId.setText(getString(R.string.title_easy_cust_selection));	//고객사 선택
+//			if(mEtVehName 			!= null) mEtVehName.setText("");			//차량번호
+//			if(mEtTradeChit 		!= null) mEtTradeChit.setText("");			//전표번호
+//
+//			mStrSaleWorkId			= null;
+//			mIntProcCount			= 0;
+//			mIntSelectedProdIndex	= 0;
+//			mStrSelectedEpcCode		= null;
+//			mStrSelectedProdCode	= null;
+//			mBoolExistSavedInvoice	= false;	//'송장번호'할당여부
+//			mBoolNewTagInfoExist 	= false;
+//
+//			//hyun_20170722: 임시저장 -> 서버에서 오류 ACK -> 초기화시, 처리량 초기화 안되는 문제로 인하여 옮김
+//			//if(mTvSelectedSerialNo	!= null) mTvSelectedSerialNo.setText("");	//시리얼 번호
+//			//if(mTvSelectedAssetName	!= null) mTvSelectedAssetName.setText("");	//유형
+//			//if(mTvProcCount			!= null) mTvProcCount.setText("0");			//처리수량
+//		}
+//
+//		//hyun_20170722: 임시저장 -> 서버에서 오류 ACK -> 초기화시, 처리량 초기화 안되는 문제로 인하여 추가
+//		if(mTvSelectedSerialNo	!= null) mTvSelectedSerialNo.setText("");	//시리얼 번호
+//		if(mTvSelectedAssetName	!= null) mTvSelectedAssetName.setText("");	//유형
+//		if(mTvProcCount			!= null) mTvProcCount.setText("0");			//처리수량
+//
+//
+//		//RFID리더기 초기화
+//		clearInventory();
 		
 	}
 	
@@ -525,20 +665,30 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	
 	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
+		print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+		print(" tableview(Count)")
+		print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 		if(tableView == tvProdMappingRfid)
 		{
+			print(" tvcProdMappingRfid")
 			return self.arrRfidRows.count
 		}
 		else
 		{
+			print(" tvcProdMappingItem")
+			print("@@@@@@@@@@@@@@@@@@self.arrItemRows.count:\(self.arrItemRows.count)")
 			return self.arrItemRows.count
 		}
 	}
 	
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
+		print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+		print(" tableview")
+		print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 		if(tableView == tvProdMappingRfid)
 		{
+			print(" tvcProdMappingRfid")
 			let objCell:ProdMappingRfidCell = tableView.dequeueReusableCell(withIdentifier: "tvcProdMappingRfid", for: indexPath) as! ProdMappingRfidCell
 			let clsTagInfo = arrRfidRows[indexPath.row]
             objCell.lblAssetName.text = clsTagInfo.getAssetName()
@@ -551,6 +701,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		}
 		else
 		{
+			print(" tvcProdMappingItem")
 			let objCell:ProdMappingItemCell = tableView.dequeueReusableCell(withIdentifier: "tvcProdMappingItem", for: indexPath) as! ProdMappingItemCell
             let clsItemInfo = arrItemRows[indexPath.row]
             objCell.lblProdCode.text = clsItemInfo.getProdCode()
@@ -657,8 +808,8 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 			{
 				if(clsItemInfo.getProdCode() == clsDataRow.getProdCode())
 				{
-					strSelectedProdCode = clsDataRow.getProdCode()    //선택한 상품코드
-					sendDeleteItemInfo(saleItemSeq: clsItemInfo.getSaleItemSeq(), prodCode: strSelectedProdCode)
+					self.strSelectedProdCode = clsDataRow.getProdCode()    //선택한 상품코드
+					sendDeleteItemInfo(saleItemSeq: clsItemInfo.getSaleItemSeq(), prodCode: self.strSelectedProdCode)
 					break
 				}
 			}
@@ -1351,8 +1502,8 @@ extension ProdMappingOut
 		tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
 
         var strType = ""
-        let strIdentificationSystem = UserDefaults.standard.string(forKey: Constants.IDENTIFICATION_SYSTEM_LIST_KEY)
-        if(strIdentificationSystem == Constants.IDENTIFICATION_SYSTEM_AGQR)
+        let intIdentificationSystem = UserDefaults.standard.integer(forKey: Constants.IDENTIFICATION_SYSTEM_LIST_KEY)
+        if(intIdentificationSystem == Constants.IDENTIFICATION_SYSTEM_AGQR)
         {
 			strType = NSLocalizedString("identification_system_agqr", comment: "농산물 QR코드")
         }
