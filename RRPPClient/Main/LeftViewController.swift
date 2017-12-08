@@ -62,11 +62,11 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			arrMenuData.append(MenuItem(menuId: "ProductMount", menuName: NSLocalizedString("title_product_mount", comment: "자산등록")))
 			arrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "RFID태그검수"))
             
-            let strIdentificationSystem = UserDefaults.standard.string(forKey: Constants.IDENTIFICATION_SYSTEM_LIST_KEY)
-            if(strIdentificationSystem == Constants.IDENTIFICATION_SYSTEM_AGQR)
-            {
-                
-            }
+//            let strIdentificationSystem = UserDefaults.standard.string(forKey: Constants.IDENTIFICATION_SYSTEM_LIST_KEY)
+//            if(strIdentificationSystem == Constants.IDENTIFICATION_SYSTEM_AGQR)
+//            {
+//                
+//            }
             
             //UserDefaults.standard.setValue(intIdentificationSystemType, forKey: Constants.IDENTIFICATION_SYSTEM_LIST_KEY)
             arrMenuData.append(MenuItem(menuId: "ProdMappingOut", menuName: NSLocalizedString("title_work_sale_c", comment: "출고C")))

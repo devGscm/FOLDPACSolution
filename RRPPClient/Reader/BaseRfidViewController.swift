@@ -229,17 +229,17 @@ class BaseRfidViewController : BaseViewController
 			return
 		}
 		
-		guard let devId  = AppContext.sharedManager.getUserInfo().getReaderDevId()
-			else
-		{
-			Dialog.show(container: self, title: nil, message: NSLocalizedString("rfid_no_selected_bluetooth_select_config", comment: "선택된 블루투스 장비가 없습니다."))
-			
-			let clsController: ClientConfig = {
-				return UIStoryboard.viewController(storyBoardName: "Config", identifier: "ClientConfig") as! ClientConfig
-			}()
-			self.toolbarController?.transition(to: clsController, completion:	nil)
-			return
-		}
+//		guard let devId  = AppContext.sharedManager.getUserInfo().getReaderDevId()
+//			else
+//		{
+//			Dialog.show(container: self, title: nil, message: NSLocalizedString("rfid_no_selected_bluetooth_select_config", comment: "선택된 블루투스 장비가 없습니다."))
+//
+//			let clsController: ClientConfig = {
+//				return UIStoryboard.viewController(storyBoardName: "Config", identifier: "ClientConfig") as! ClientConfig
+//			}()
+//			self.toolbarController?.transition(to: clsController, completion:	nil)
+//			return
+//		}
 		let readerType  = AppContext.sharedManager.getUserInfo().getReaderType() as ReaderType
 		
 		switch readerType
