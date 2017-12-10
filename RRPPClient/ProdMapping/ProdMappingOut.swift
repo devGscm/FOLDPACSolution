@@ -69,7 +69,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
     var strSaleWorkId = ""	/**< 송장번호ID - DB에서 할당받은 */
     var intProcCount			= 0		/**< 처리량 */
     var arrRfidRows : Array<ItemInfo> = Array<ItemInfo>()        /**< 데이터 리스트 - 마스터 ITEM데이터, 그리드 표출용 */
-    var arrItemRows : Array<ItemInfo> = Array<ItemInfo>()        /**< 데이터 리스트 - 슬래이브 ITEM데이터, 그리드 표출용 */
+    var arrProdRows : Array<ItemInfo> = Array<ItemInfo>()        /**< 데이터 리스트 - 슬래이브 ITEM데이터, 그리드 표출용 */
 	
 	var boolNewTagInfoExist		= false	/**< 신규태그 - 신규태그가 있는지 여부 -전송용 */
 	var boolExistSavedInvoice	= false	/**< 송장번호ID - DB에서 할당받았는지 여부 */
@@ -182,8 +182,6 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		{
 			btnProdBarcode.setTitle(NSLocalizedString("common_read_aqgr", comment: "QR코드"), for: .normal)
 		}
-		
-
         clsProdContainer = ProdContainer()
 	}
 	
@@ -195,6 +193,15 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		{
 			if let clsDialog = segue.destination as? WorkOutCustSearch
 			{
+				clsDialog.ptcDataHandler = self
+			}
+		}
+		
+		if(segue.identifier == "segProdInfoDialog")
+		{
+			if let clsDialog = segue.destination as? ProdInfoDialog
+			{
+				clsDialog.type = "addProduct"
 				clsDialog.ptcDataHandler = self
 			}
 		}
@@ -217,6 +224,58 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 				let strCustName = clsDataRow.getString(name: "custName") ?? ""
 				self.strToBranchId	= clsDataRow.getString(name: "branchId") ?? ""
 	        	self.btnToBranchSearch.setTitle(strCustName, for: .normal)
+			}
+		}
+		else if(returnData.returnType == "addProduct")
+		{
+			// 상품 등록
+			if(returnData.returnRawData != nil)
+			{
+				let clsDataRow = returnData.returnRawData as! DataRow
+				let strProdCode	= clsDataRow.getString(name: "prodCode") ?? ""
+				let strProdName	= clsDataRow.getString(name: "prodName") ?? ""
+				let strReadCnt	= clsDataRow.getString(name: "readCnt") ?? ""
+				
+				print("@@@@@@@@@@@@@ prodCode:\(strProdCode)")
+				
+				// 상품코드 입력확인
+				if(strProdCode.isEmpty == false)
+				{
+					var boolAbnormalProdCode = false
+					
+					//이상 유무 판단
+					if(intIDSystem == Constants.IDENTIFICATION_SYSTEM_GTIN14 && strProdCode.length == Constants.READING_LANGTH_BARCODE)
+					{
+						//바코드 처리
+						boolAbnormalProdCode = false
+					}
+					else if(intIDSystem == Constants.IDENTIFICATION_SYSTEM_AGQR && strProdCode.length == Constants.READING_LANGTH_QRCODE)
+					{
+						//농산물(QR코드)
+						boolAbnormalProdCode = false
+					}
+					else
+					{
+						boolAbnormalProdCode = true
+						
+						Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("msg_error_product_code", comment: "상품코드 오류"))
+						return
+					}
+					
+					// 이상없을시 처리 프로세스
+					if(boolAbnormalProdCode == false)
+					{
+						//2)DB에서 상품명 조회
+						doInspectProdName(type: "addProduct", prodCode: strProdCode, readCnt: strReadCnt)
+					
+					}
+					
+				}
+				else
+				{
+					Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("msg_enter_product_code", comment: "상품코드를 입력하여 주십시오."))
+					return
+				}
 			}
 		}
 	}
@@ -303,8 +362,6 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
         }
         
         // 리더기 읽기 중지
-        
-        //if(super.isReaderConnected() == true)
         if(super.isConnected() == true)
         {
         	stopRead()
@@ -312,6 +369,8 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 
         // TODO : 팝업 열기
         //showDialog(Constants.DIALOG_PROD_INSERT)
+		
+		self.performSegue(withIdentifier: "segProdInfoDialog", sender: self)
     }
     
 
@@ -372,7 +431,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		self.boolNewTagInfoExist = false // 신규태그 입력 체크, 전송용
 		
 		self.arrRfidRows.removeAll()
-		self.arrItemRows.removeAll()
+		self.arrProdRows.removeAll()
 		
 		
 		self.intSelectedIndex = -1
@@ -424,9 +483,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		lblProcCount.text	= "0"	// 처리수량
 
 		// RFID리더기 초기화
-		
-		// TODO
-		// clearInventory()
+		clearInventory()
 	
 	}
 	
@@ -637,7 +694,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		}
 		else
 		{
-			return self.arrItemRows.count
+			return self.arrProdRows.count
 		}
 	}
 	
@@ -660,13 +717,13 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		{
 			print(" tvcProdMappingItem")
 			let objCell:ProdMappingItemCell = tableView.dequeueReusableCell(withIdentifier: "tvcProdMappingItem", for: indexPath) as! ProdMappingItemCell
-            let clsItemInfo = arrItemRows[indexPath.row]
-            objCell.lblProdCode.text = clsItemInfo.getProdCode()
-            objCell.lblProdName.text = clsItemInfo.getProdName()
+            let clsProdInfo = arrProdRows[indexPath.row]
+            objCell.lblProdCode.text = clsProdInfo.getProdCode()
+            objCell.lblProdName.text = clsProdInfo.getProdName()
 			
             //mClsViewWrapper.tvSaleItemSeq.setText(clsDataRow.getSaleItemSeq());
  
-			objCell.lblProdReadCnt.attributedText = NSAttributedString(string: clsItemInfo.getProdReadCnt(),
+			objCell.lblProdReadCnt.attributedText = NSAttributedString(string: clsProdInfo.getProdReadCnt(),
 						   attributes: [NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle.rawValue])
 			
 			objCell.lblProdReadCnt.isUserInteractionEnabled = true
@@ -702,16 +759,16 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
             //setSelectedIndex(intPosition);
             
             //슬래이브-그리드 초기화
-            arrItemRows.removeAll()
+            arrProdRows.removeAll()
             
             
             //선택된 RFID태그에 대한 바코드리스트
             if(self.lblSerialNo.text?.isEmpty == false)
             {
-                let arrItems = clsProdContainer.getItemes(epcCode: strSelectedEpcCode)
-                if(arrItems.count > 0)
+                let arrProds = clsProdContainer.getItemes(epcCode: strSelectedEpcCode)
+                if(arrProds.count > 0)
                 {
-                    arrItemRows.append(contentsOf: arrItems)
+                    arrProdRows.append(contentsOf: arrProds)
                 }
             }
             
@@ -720,21 +777,21 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
             
             
             //처리량
-            lblProcCount.text = "\(arrItemRows.count)"
+            lblProcCount.text = "\(arrProdRows.count)"
         }
     }
     
     @objc func onItemSelectionClicked(_ sender: UIButton)
     {
-		let clsDataRow = arrItemRows[sender.tag]
+		let clsDataRow = arrProdRows[sender.tag]
 
 		//헤시맵과 그리드뷰에서 제거
 		let	intRowState = clsProdContainer.deleteItem(epcCode: strSelectedEpcCode, prodCode: clsDataRow.getProdCode(), removeState: Constants.REMOVE_STATE_NORMAL)
 
 		if( intRowState == Constants.DATA_ROW_STATE_ADDED)
 		{
-			arrItemRows.removeAll()
-			arrItemRows.append(contentsOf: clsProdContainer.getItemes(epcCode: strSelectedEpcCode))
+			arrProdRows.removeAll()
+			arrProdRows.append(contentsOf: clsProdContainer.getItemes(epcCode: strSelectedEpcCode))
 			tvProdMappingItem.reloadData()
 		}
 		else
@@ -1004,7 +1061,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
                         self.clsProdContainer.addItem(epcCode: strEpcCode, itemInfo: clsSlaveItemInfo)
                         
                         //#3.서브 그리드 저장
-                        self.arrItemRows.append(clsSlaveItemInfo)
+                        self.arrProdRows.append(clsSlaveItemInfo)
                     }
 				}
                 
@@ -1107,7 +1164,116 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 			print(error.localizedDescription)
         }
     }
-    
+	
+	func doInspectProdName(type: String, prodCode:String, readCnt: String)
+	{
+		print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+		print("@doInspectProdName()")
+		print(" - prodCode:\(prodCode)")
+		print(" - readCnt:\(readCnt)")
+		print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+		
+		var strProdName = ""
+		do
+		{
+			let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+			clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+			clsDataClient.SelectUrl = "inOutService:selectMappingOutProdName"
+			clsDataClient.removeServiceParam()
+			clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+			clsDataClient.addServiceParam(paramName: "userId", value: AppContext.sharedManager.getUserInfo().getUserId())
+			clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
+			clsDataClient.addServiceParam(paramName: "itemCode", value: prodCode)
+			clsDataClient.selectRawData(dataCompletionHandler: { (responseData, error) in
+					if let error = error {
+						// 에러처리
+						print(error)
+						return
+					}
+					guard let responseData = responseData else {
+						print("에러 데이터가 없음")
+						return
+					}
+					// 성공
+					if let returnCode = responseData.returnCode , returnCode > 0
+					{
+						let returnMessage = responseData.returnMessage ?? ""
+						print("@@@@@@@@@ return RawMessage : \(returnMessage)")
+						
+						let dataSourceMgr = DataSourceMgr()
+						dataSourceMgr.Notation = DataSourceMgr.NOTATION_NONE
+						
+						if (dataSourceMgr.parse(data: responseData.returnMessage!))
+						{
+							let clsDataTable = dataSourceMgr.getDataTable()
+							let clsDataRows = clsDataTable.getDataRows()
+							if(clsDataRows.count > 0)
+							{
+								let clsResultRow = clsDataRows[0]
+								
+								let strResultCode = clsResultRow.getString(name: "resultCode") ?? ""
+								let strResultMsg = clsResultRow.getString(name: "resultMessage") ?? ""
+								let strResultRowcount = clsResultRow.getString(name: "resultRowcount") ?? ""
+								
+								print("-리턴코드: \(strResultCode)")
+								print("-리턴메시지: \(strResultMsg)")
+								print("-리턴로우카운트: \(strResultRowcount)")
+								
+								if(strResultCode == Constants.PROC_RESULT_SUCCESS)
+								{
+									strProdName = strResultMsg
+									if(strProdName.isEmpty == true)
+									{
+										strProdName = NSLocalizedString("msg_error_unregistered_product", comment: "상품정보없음")
+									}
+									
+									let strCurReadTime = DateUtil.getDate(dateFormat: "yyyyMMddHHmmss")
+									if( type == "addProduct")
+									{
+										// 상품추가
+										let clsItemInfo = ItemInfo()
+										clsItemInfo.setRowState(rowState: Constants.DATA_ROW_STATE_ADDED) //신규 태그 입력시 체크-DB전송관련
+										clsItemInfo.setEpcCode(epcCode: self.strSelectedEpcCode)
+										clsItemInfo.setProdCode(prodCode: prodCode)
+										clsItemInfo.setReadTime(readTime: strCurReadTime)
+										clsItemInfo.setProdReadCnt(prodReadCnt: readCnt)
+										clsItemInfo.setProdName(prodName: strProdName)
+										self.arrProdRows.append(clsItemInfo)		//중복이 없다면 그리드용 리스트에 삽입한다.
+										self.tvProdMappingItem.reloadData()
+										self.boolNewTagInfoExist = true 				//신규태그 입력 체크
+										self.clsProdContainer.addItem(epcCode: self.strSelectedEpcCode, itemInfo: clsItemInfo)
+									}
+								}
+								else
+								{
+									
+									Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("msg_error_unregistered_product", comment: "상품정보없음"))
+								}
+								
+								
+								
+								
+								
+							
+								
+					
+							}
+						}
+					}
+					else
+					{
+						print("json 오류")
+					}
+			})
+		}
+		catch let error
+		{
+			super.showSnackbar(message: NSLocalizedString("msg_inspect_prod_name_error_try_again", comment: "에러로 인하여 상품명을 조회할 수 없습니다. 잠시후 다시 시도하여 주십시오."))
+			print(error.localizedDescription)
+		}
+
+
+	}
 	
 	/**
 	* 선택된 상품정보(바코드)를 삭제처리 한다.
@@ -1157,8 +1323,8 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 						{
 							//그리드 삭제 및 구조체 삭제
 							self.clsProdContainer.deleteItem(epcCode: self.strSelectedEpcCode, prodCode: self.strSelectedProdCode, removeState: Constants.REMOVE_STATE_COMPLETE)
-							self.arrItemRows.removeAll()
-							self.arrItemRows.append(contentsOf: self.clsProdContainer.getItemes(epcCode: self.strSelectedEpcCode))
+							self.arrProdRows.removeAll()
+							self.arrProdRows.append(contentsOf: self.clsProdContainer.getItemes(epcCode: self.strSelectedEpcCode))
 							self.tvProdMappingItem.reloadData()
 							
 							let strMsg = NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다.")
@@ -1414,7 +1580,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		clsBarcodeInfo1.setProdName(prodName: "빼빼로")
 		clsBarcodeInfo1.setProdReadCnt(prodReadCnt: "1")
 		clsBarcodeInfo1.setReadTime(readTime: strCurReadTime)
-		arrItemRows.append(clsBarcodeInfo1)
+		arrProdRows.append(clsBarcodeInfo1)
 		clsProdContainer.addItem(epcCode: "3312D58E3D8100C000027504", itemInfo: clsBarcodeInfo1)
 	
 		let clsBarcodeInfo2 = ItemInfo()
@@ -1424,7 +1590,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		clsBarcodeInfo2.setProdName(prodName: "초코파이")
 		clsBarcodeInfo2.setProdReadCnt(prodReadCnt: "1");
 		clsBarcodeInfo2.setReadTime(readTime: strCurReadTime);
-		arrItemRows.append(clsBarcodeInfo2)
+		arrProdRows.append(clsBarcodeInfo2)
 		clsProdContainer.addItem(epcCode: "3312D58E3D8100C000027504", itemInfo: clsBarcodeInfo2)
 
 		//슬래이브 그리드 - 업데이트
