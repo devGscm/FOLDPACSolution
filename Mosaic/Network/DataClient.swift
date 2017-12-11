@@ -528,7 +528,7 @@ public class DataClient
 		dicParam["mode"] = mode
 		
 		var strServiceUrl : String = ""
-		if (mStrServiceUrlSelect.isEmpty == true)
+		if (mStrServiceUrlExecute.isEmpty == true)
 		{
 			strServiceUrl = self.mDefaultServiceUrlExecute
 		}
