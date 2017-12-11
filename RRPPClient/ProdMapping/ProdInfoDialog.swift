@@ -15,11 +15,13 @@ class ProdInfoDialog: BaseViewController
 
 	@IBOutlet weak var tfProdCode: UITextField!
 	@IBOutlet weak var tfProdName: UITextField!
-	@IBOutlet weak var tfReadCnt: UITextField!
+	@IBOutlet weak var tfProdReadCnt: UITextField!
 	
 	var ptcDataHandler : DataProtocol?
 	
-	var type : String?
+	var segueType : String?
+	
+	var itemInfo : ItemInfo?
 	
     override func viewDidLoad()
 	{
@@ -46,16 +48,33 @@ class ProdInfoDialog: BaseViewController
 	
 	func initViewControl()
 	{
+		print("==========================================")
+		print("*initViewControl()")
+		print("@@@@@@@@@@@ segueType:\(segueType!)")
+		print("==========================================")
 		tfProdCode.text	= ""
 		tfProdName.text	= ""
-		tfReadCnt.text	= "1"
-		tfReadCnt.becomeFirstResponder()
+		tfProdReadCnt.text	= "1"
+		tfProdReadCnt.becomeFirstResponder()
 		
-		if(type! == "addProduct")
+		if(segueType! == "addProduct")
 		{
 			tfProdName.isEnabled = false
 			tfProdName.backgroundColor = Color.grey.lighten3
 		}
+		else if(segueType! == "editProduct")
+		{
+			tfProdCode.isEnabled = false
+			tfProdCode.backgroundColor = Color.grey.lighten3
+			
+			tfProdName.isEnabled = false
+			tfProdName.backgroundColor = Color.grey.lighten3
+			
+			tfProdCode.text = itemInfo?.getProdCode()
+			tfProdName.text	= itemInfo?.getProdName()
+			tfProdReadCnt.text	= itemInfo?.getProdReadCnt()
+		}
+	
 	}
 	
 	@IBAction func onConfirmClicked(_ sender: UIButton)
@@ -63,9 +82,9 @@ class ProdInfoDialog: BaseViewController
 		let clsDataRow : DataRow = DataRow()
 		clsDataRow.addRow(name: "prodCode", value: tfProdCode.text ?? "")
 		clsDataRow.addRow(name: "prodName", value: tfProdName.text ?? "")
-		clsDataRow.addRow(name: "readCnt", value: tfReadCnt.text ?? "")
+		clsDataRow.addRow(name: "prodReadCnt", value: tfProdReadCnt.text ?? "")
 		
-		let strtData = ReturnData(returnType: "addProduct", returnCode: nil, returnMesage: nil, returnRawData: clsDataRow)
+		let strtData = ReturnData(returnType: segueType!, returnCode: nil, returnMesage: nil, returnRawData: clsDataRow)
 		ptcDataHandler?.recvData(returnData: strtData)
 		self.dismiss(animated: true, completion: nil)
 		

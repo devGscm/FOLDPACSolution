@@ -489,7 +489,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="인식수량" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="68g-ys-UAR">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="인식수량" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="68g-ys-UAR">
                                                             <rect key="frame" x="260" y="11" width="60" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -821,7 +821,7 @@
                     <connections>
                         <outlet property="tfProdCode" destination="CwW-cP-7CU" id="txr-pI-5Pq"/>
                         <outlet property="tfProdName" destination="P4h-zK-W9l" id="5Nh-3k-EeW"/>
-                        <outlet property="tfReadCnt" destination="zHf-GE-5Xf" id="A2h-Ph-nyS"/>
+                        <outlet property="tfProdReadCnt" destination="zHf-GE-5Xf" id="A2h-Ph-nyS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ciz-bh-JLm" userLabel="First Responder" sceneMemberID="firstResponder"/>
