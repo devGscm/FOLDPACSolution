@@ -27,12 +27,15 @@ class BaseViewController : UIViewController
 	}
 	func showSnackbar(message : String, visibleDelay: TimeInterval, hiddenDelay: TimeInterval)
 	{
-		guard let clsController = snackbarController else {
-			return
+		DispatchQueue.main.async
+		{
+			guard let clsController = self.snackbarController else {
+				return
+			}
+			clsController.snackbar.text = message
+			_ = clsController.animate(snackbar: .visible, delay: visibleDelay)
+			_ = clsController.animate(snackbar: .hidden, delay: hiddenDelay)
 		}
-		clsController.snackbar.text = message
-		_ = clsController.animate(snackbar: .visible, delay: visibleDelay)
-		_ = clsController.animate(snackbar: .hidden, delay: hiddenDelay)
 	}
 }
 

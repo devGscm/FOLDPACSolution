@@ -75,6 +75,8 @@ public class ProgressIndicator: UIView
 			let tgrRecognizer = UITapGestureRecognizer(target: self, action: #selector(onLoadingClicked))
 			vwLoading.addGestureRecognizer(tgrRecognizer)
 		}
+		
+		self.isHidden = true
 	}
 	
 	@objc func onLoadingClicked(sender: UITapGestureRecognizer)
@@ -84,9 +86,9 @@ public class ProgressIndicator: UIView
 		onCancelHandler(self)
 	}
 	
-	convenience init(view : UIView)
+	public convenience init(view : UIView)
 	{
-		self.init(view: view, backgroundColor: UIColor.brown, indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "Loading..", cancelable: false, cancelHandler: { (_) in })
+		self.init(view: view, backgroundColor: UIColor.gray, indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "Loading..", cancelable: false, cancelHandler: { (_) in })
 	}
 	
 	convenience init(view : UIView, messsage:String)

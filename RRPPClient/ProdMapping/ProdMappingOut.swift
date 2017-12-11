@@ -150,6 +150,13 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	// View관련 컨트롤을 초기화한다.
 	func initViewControl()
 	{
+		clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
+										  indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.")
+//		self.clsIndicator?.show()
+//		DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//			self.clsIndicator?.hide()
+//		}
+
 		
 		/*
 		//		clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
@@ -208,6 +215,14 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 				{
 					clsDialog.itemInfo = arrProdRows[self.intSelectedProdIndex]
 				}
+				clsDialog.ptcDataHandler = self
+			}
+		}
+		
+		if(segue.identifier == "segOutSignDialog")
+		{
+			if let clsDialog = segue.destination as? OutSignDialog
+			{
 				clsDialog.ptcDataHandler = self
 			}
 		}
@@ -322,6 +337,33 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 				//mLstItemListSlaveRows.clear();
 				//mLstItemListSlaveRows.addAll(mClsProdContainer.getItemes(strSelectedEpcCode));
 				//mClsAdapterSlave.notifyDataSetChanged();
+			}
+		}
+		else if(returnData.returnType == "outSignDialog")
+		{
+			// 상품정보 수정
+			if(returnData.returnRawData != nil)
+			{
+				let clsDataRow = returnData.returnRawData as! DataRow
+				let strRemark		= clsDataRow.getString(name: "remark") ?? ""
+				let strSignData		= clsDataRow.getString(name: "signData") ?? ""
+				
+				print("@@@@@@@@@@@@@ strRemark:\(strRemark)")
+				print("@@@@@@@@@@@@@ strSignData:\(strSignData)")
+				
+				let strVehName		= tfVehName?.text ?? ""
+				let strTradeChit	= tfTradeChit?.text ?? ""
+				
+				if strSaleWorkId.isEmpty == false
+				{
+					//DB로 데이터 전송 처리
+					sendDataExistSaleWorkId(workState: Constants.WORK_STATE_COMPLETE, saleWorkId: self.strSaleWorkId, vehName: strVehName, tradeChit: strTradeChit, remark: strRemark, signData: strSignData)
+				}
+				else
+				{
+					sendDataNoneSaleWorkId(workState: Constants.WORK_STATE_COMPLETE, toBranchId: self.strToBranchId, vehName: strVehName, tradeChit: strTradeChit, remark: strRemark, signData: strSignData)
+				}
+				
 			}
 		}
 	}
@@ -799,11 +841,11 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 			objCell.lblProdReadCnt.addGestureRecognizer(tgrProdReadCnt)
 			
 
-            objCell.btnSelection.titleLabel?.font = UIFont.fontAwesome(ofSize: 14)
-			objCell.btnSelection.backgroundColor = Color.red.darken1
-            objCell.btnSelection.setTitle(String.fontAwesomeIcon(name:.close), for: .normal)
-            objCell.btnSelection.tag = indexPath.row
-            objCell.btnSelection.addTarget(self, action: #selector(onItemSelectionClicked(_:)), for: .touchUpInside)
+            objCell.btnDelete.titleLabel?.font = UIFont.fontAwesome(ofSize: 14)
+			objCell.btnDelete.backgroundColor = Color.red.darken1
+            objCell.btnDelete.setTitle(String.fontAwesomeIcon(name:.close), for: .normal)
+            objCell.btnDelete.tag = indexPath.row
+            objCell.btnDelete.addTarget(self, action: #selector(onProdDeleteClicked(_:)), for: .touchUpInside)
 			return objCell
 		}
 	}
@@ -845,7 +887,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
         }
     }
     
-    @objc func onItemSelectionClicked(_ sender: UIButton)
+    @objc func onProdDeleteClicked(_ sender: UIButton)
     {
 		let clsDataRow = arrProdRows[sender.tag]
 
@@ -972,7 +1014,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	}
 	
 	
-	// 전송
+	// 완료 전송
 	@IBAction func onSendClicked(_ sender: UIButton)
 	{
 		
@@ -1004,26 +1046,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 			return
 		}
 		
-		//showDialog(Constants.DIALOG_CONFIRM_SEND);
-	
-	/*
-		let acDialog = UIAlertController(title: NSLocalizedString("common_confirm", comment: "확인"), message: nil, preferredStyle: .alert)
-		acDialog.addTextField() {
-			$0.placeholder = NSLocalizedString("make_remark", comment: "확인")
-		}
-		acDialog.addAction(UIAlertAction(title: NSLocalizedString("common_cancel", comment: "취소"), style: .default) { (_) in
-			acDialog.textFields?[0].text = ""
-		})
-		acDialog.addAction(UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
-
-			let strMakeOrderId = self.btnMakeOrderId?.titleLabel?.text
-			let strMakeLotId = self.tfMakeLotId?.text
-			let strWorkerName = self.lblUserName?.text
-			let strRemark = acDialog.textFields?[0].text
-			self.sendData(makeOrderId: strMakeOrderId!, makeLotId: strMakeLotId!, workerName: strWorkerName!, remark: strRemark!)
-		})
-		self.present(acDialog, animated: true, completion: nil)
-		*/
+		self.performSegue(withIdentifier: "segOutSignDialog", sender: self)
 	}
 	
 	
@@ -1489,6 +1512,10 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	*/
 	func sendDataExistSaleWorkId(workState: String, saleWorkId: String, vehName: String, tradeChit: String, remark: String, signData: String)
 	{
+		print("=================================")
+		print("*sendDataExistSaleWorkId()")
+		print("=================================")
+		
 		do
 		{
 			clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
@@ -1588,8 +1615,13 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 					else
 					{
 						
-						let strMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
-						self.showSnackbar(message: strMsg)
+						let strErrorMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
+						
+						print("@@@@@@@@@ 에러메시지:\(strErrorMsg)")
+					
+						self.showSnackbar(message: strErrorMsg)
+					
+						
 					}
 				}
 				
@@ -1624,6 +1656,9 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	*/
 	func sendDataNoneSaleWorkId(workState: String, toBranchId: String, vehName: String, tradeChit: String, remark: String, signData: String)
 	{
+		print("=================================")
+		print("*sendDataNoneSaleWorkId \(Constants.WEB_SVC_URL)")
+		print("=================================")
 		do
 		{
 			let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)

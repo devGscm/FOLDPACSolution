@@ -10,6 +10,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--OutSignDialog-->
+        <scene sceneID="4IA-Ue-Y0c">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Common" referencedIdentifier="OutSignDialog" id="Z3h-ls-bdg" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NWb-LA-Dhn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-8073" y="-3144"/>
+        </scene>
         <!--Prod Mapping Out-->
         <scene sceneID="6FP-Yr-0QC">
             <objects>
@@ -525,7 +533,7 @@
                                                     </subviews>
                                                 </tableViewCellContentView>
                                                 <connections>
-                                                    <outlet property="btnSelection" destination="PgW-iU-DZM" id="TD5-mM-R5O"/>
+                                                    <outlet property="btnDelete" destination="PgW-iU-DZM" id="TD5-mM-R5O"/>
                                                     <outlet property="lblProdCode" destination="evY-dW-Th4" id="c5C-FB-j5B"/>
                                                     <outlet property="lblProdName" destination="c5p-Ho-XIW" id="iTo-pA-vjk"/>
                                                     <outlet property="lblProdReadCnt" destination="68g-ys-UAR" id="Lno-xo-MZ5"/>
@@ -611,6 +619,7 @@
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="onSendClicked:" destination="H5O-z6-Ftf" eventType="touchUpInside" id="xBa-Il-nBw"/>
+                                                    <segue destination="Z3h-ls-bdg" kind="presentation" identifier="segOutSignDialog" modalPresentationStyle="overCurrentContext" id="yyo-Ca-mlI"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -649,7 +658,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BkM-Xc-j6C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7146.3999999999996" y="-3421.4392803598203"/>
+            <point key="canvasLocation" x="-7147" y="-3577"/>
         </scene>
         <!--WorkOutCustSearch-->
         <scene sceneID="nnI-LU-csP">
@@ -657,7 +666,7 @@
                 <viewControllerPlaceholder storyboardName="Common" referencedIdentifier="WorkOutCustSearch" id="vbe-nB-uwm" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1jh-rZ-JZN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-6375" y="-3587"/>
+            <point key="canvasLocation" x="-6361" y="-3956"/>
         </scene>
         <!--Prod Info Dialog-->
         <scene sceneID="ede-c3-tZ0">
@@ -826,7 +835,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ciz-bh-JLm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-6375.1999999999998" y="-3070.6146926536735"/>
+            <point key="canvasLocation" x="-6252" y="-3396"/>
         </scene>
     </scenes>
     <resources>

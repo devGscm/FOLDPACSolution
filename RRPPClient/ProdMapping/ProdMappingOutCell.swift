@@ -34,7 +34,7 @@ class ProdMappingItemCell: UITableViewCell
 	@IBOutlet weak var lblProdCode: UILabel!
 	@IBOutlet weak var lblProdName: UILabel!
 	@IBOutlet weak var lblProdReadCnt: UILabel!
-	@IBOutlet weak var btnSelection: UIButton!
+	@IBOutlet weak var btnDelete: UIButton!
 	
 	override func awakeFromNib()
 	{
