@@ -316,7 +316,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHM-ZO-YWb">
-                                                            <rect key="frame" x="322" y="6" width="30" height="30"/>
+                                                            <rect key="frame" x="322" y="6" width="28" height="28"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                             <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <state key="normal" title="선택">
@@ -505,7 +505,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PgW-iU-DZM">
-                                                            <rect key="frame" x="328" y="6" width="30" height="30"/>
+                                                            <rect key="frame" x="328" y="6" width="28" height="28"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                             <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <state key="normal" title="삭제">
@@ -652,8 +652,8 @@
                         <outlet property="lblUserName" destination="hMu-RY-dUc" id="jIC-4x-lp9"/>
                         <outlet property="tfTradeChit" destination="9W7-po-sN4" id="mO4-wc-0ze"/>
                         <outlet property="tfVehName" destination="75B-p8-rYp" id="udy-qN-Tq2"/>
-                        <outlet property="tvProdMappingItem" destination="ENK-kJ-Fea" id="ytN-0a-FgV"/>
-                        <outlet property="tvProdMappingRfid" destination="lgk-nd-C7l" id="xZr-fE-1xB"/>
+                        <outlet property="tvMappingProd" destination="ENK-kJ-Fea" id="ytN-0a-FgV"/>
+                        <outlet property="tvMappingRfid" destination="lgk-nd-C7l" id="xZr-fE-1xB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BkM-Xc-j6C" userLabel="First Responder" sceneMemberID="firstResponder"/>

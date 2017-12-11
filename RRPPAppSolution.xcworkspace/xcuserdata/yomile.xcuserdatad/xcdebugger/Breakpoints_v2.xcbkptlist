@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RRPPClient/ProdMapping/ProdMappingOut.swift"
-            timestampString = "534668845.986648"
+            timestampString = "534669061.47719"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "825"
             endingLineNumber = "825"
-            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkName = "onProdDeleteClicked(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
