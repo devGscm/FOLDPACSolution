@@ -43,16 +43,18 @@ public class SwingReader : NSObject, ReaderProtocol, SwingProtocolProtocol
 		//안되는것 같다 따라서 무조건 연결처리
 		//print("스윙연결요청 !!!")
 		self.swing.swingapi.connect(to:  dev)
-		//timeoutMonitor = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.connectTimeout(_:)), userInfo: nil, repeats: false)
+		
+		//타이머를 생성시켜 5초동안 연결아 안되어 있을경우 이벤트를 발생
+		timeoutMonitor = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.connectTimeout(_:)), userInfo: nil, repeats: false)
 	}
 	
-//	@objc func connectTimeout(_ timer : Timer) {
-//		if(swing.isSwingrederConnected() == false) {
-//			timeoutMonitor?.invalidate()
-//			timeoutMonitor = nil
-//			self.connect()
-//		}
-//	}
+	@objc func connectTimeout(_ timer : Timer) {
+		if(swing.isSwingrederConnected() == false) {
+			timeoutMonitor?.invalidate()
+			timeoutMonitor = nil
+			self.delegate?.didRederConnectTimeOver?()
+		}
+	}
 	
 	func close() {
 		if(swing.isSwingrederConnected())
@@ -137,6 +139,8 @@ public class SwingReader : NSObject, ReaderProtocol, SwingProtocolProtocol
 	
 	public func swing_Response_TagList(_ value: String!) {
 		var trimedData = value.trimmingCharacters(in: .whitespacesAndNewlines)
+		 trimedData = trimedData.replacingOccurrences(of: "\0", with: "")
+		
 		if(trimedData.hasPrefix(">T"))		//태그일 경우 didReadTagid 이벤트를 발생
 		{
 			//trimedData = trimedData.replacingOccurrences(of: ">T", with: "")
@@ -175,15 +179,20 @@ public class SwingReader : NSObject, ReaderProtocol, SwingProtocolProtocol
 	public func swing_ready ( toCommunicate dev: SwingDevice!)
 	{
 		print("Swing_readyToCommunicate!!!")
+		//설정된 타이머가 있을경우
+		if let connectTimer =  timeoutMonitor
+		{
+			connectTimer.invalidate()
+			timeoutMonitor = nil
+		}
 		
 		//연결이 되면 바로 리더기를 읽을 수 있도록 초기화
 		//소스와 비슷하게 리더기설정
 		if let swing : SwingProtocol  = SwingProtocol.sharedInstace() as? SwingProtocol
 		{
-//			swing.swing_set_inventory_mode(0)
-//			swing.swing_clear_inventory()
-//			swing.swing_readStop()
-			print("##############swing is connected \(swing.isSwingrederConnected())");
+			swing.swing_set_inventory_mode(0)
+			swing.swing_clear_inventory()
+			swing.swing_readStop()			
 			self.delegate?.didReaderConnected?()
 		}
 	}	

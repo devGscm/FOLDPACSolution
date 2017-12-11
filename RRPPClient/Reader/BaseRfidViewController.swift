@@ -70,6 +70,8 @@ public protocol ReaderResponseDelegate : class {
 	
 	 @objc optional func didReaderDisConnected()
 	
+	@objc optional func didRederConnectTimeOver()
+	
 	///optional로 프로토콜 설계시 구조체 파라메터를 사용할 수 없다.
 	@objc optional func didReaderScanList(id:String, name: String, macAddr: String)
 	

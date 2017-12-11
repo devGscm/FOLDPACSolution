@@ -518,7 +518,7 @@ public class DataRow : NSObject, NSCopying
         
         if(dataHandlerType == 1)
         {
-            for index in 0...self.mVecDataRowName.count
+            for index in 0..<self.mVecDataRowName.count
             {
                 let name = self.mVecDataRowName[index]
                 let value = self.mVecDataRowValue[index]
