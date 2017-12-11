@@ -65,7 +65,7 @@
 		55FA784C1FBDAD0B00583A80 /* RightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78461FBDAD0B00583A80 /* RightViewController.swift */; };
 		55FA784D1FBDAD0B00583A80 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78471FBDAD0B00583A80 /* RootViewController.swift */; };
 		55FA78561FBDAD7E00583A80 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78551FBDAD7E00583A80 /* AppContext.swift */; };
-		55FC62A41FD14A41003B7173 /* StockReviewProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FC62A31FD14A41003B7173 /* StockReviewProcess.swift */; };
+		55FC62A41FD14A41003B7173 /* StockReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FC62A31FD14A41003B7173 /* StockReview.swift */; };
 		55FC62A61FD14A56003B7173 /* Stock.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55FC62A51FD14A56003B7173 /* Stock.storyboard */; };
 		960224421FD0DBCD00DE7C65 /* SwingReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960224411FD0DBCD00DE7C65 /* SwingReader.swift */; };
 		960224441FD0F3E400DE7C65 /* AT288Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960224431FD0F3E400DE7C65 /* AT288Reader.swift */; };
@@ -195,7 +195,7 @@
 		55FA78461FBDAD0B00583A80 /* RightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightViewController.swift; sourceTree = "<group>"; };
 		55FA78471FBDAD0B00583A80 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		55FA78551FBDAD7E00583A80 /* AppContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
-		55FC62A31FD14A41003B7173 /* StockReviewProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockReviewProcess.swift; sourceTree = "<group>"; };
+		55FC62A31FD14A41003B7173 /* StockReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockReview.swift; sourceTree = "<group>"; };
 		55FC62A51FD14A56003B7173 /* Stock.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Stock.storyboard; sourceTree = "<group>"; };
 		960224411FD0DBCD00DE7C65 /* SwingReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwingReader.swift; sourceTree = "<group>"; };
 		960224431FD0F3E400DE7C65 /* AT288Reader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AT288Reader.swift; sourceTree = "<group>"; };
@@ -412,7 +412,7 @@
 			isa = PBXGroup;
 			children = (
 				55FC62A51FD14A56003B7173 /* Stock.storyboard */,
-				55FC62A31FD14A41003B7173 /* StockReviewProcess.swift */,
+				55FC62A31FD14A41003B7173 /* StockReview.swift */,
 			);
 			path = Stock;
 			sourceTree = "<group>";
@@ -740,7 +740,7 @@
 				9618F0E61FCE83D300F376B7 /* TagCell.swift in Sources */,
 				55B302CA1FCE339400BDCCB1 /* ProductMountCell.swift in Sources */,
 				9680BE871FCBD91D002838A4 /* SwingDevice.m in Sources */,
-				55FC62A41FD14A41003B7173 /* StockReviewProcess.swift in Sources */,
+				55FC62A41FD14A41003B7173 /* StockReview.swift in Sources */,
 				55A579F01FD51A5700DBA188 /* WorkOutCustSearch.swift in Sources */,
 				55ECF5DE1FCE8BC40021F786 /* TagDetailList.swift in Sources */,
 				55FA78481FBDAD0B00583A80 /* AppNavigationDrawerController.swift in Sources */,

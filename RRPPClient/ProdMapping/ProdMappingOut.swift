@@ -720,8 +720,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	{
 		if(tableView == tvMappingRfid)
 		{
-			print(" tvcProdMappingRfid")
-			let objCell:ProdMappingRfidCell = tableView.dequeueReusableCell(withIdentifier: "tvcProdMappingRfid", for: indexPath) as! ProdMappingRfidCell
+			let objCell:MappingRfidCell = tableView.dequeueReusableCell(withIdentifier: "tvcMappingRfid", for: indexPath) as! MappingRfidCell
 			let clsTagInfo = arrRfidRows[indexPath.row]
             objCell.lblAssetName.text = clsTagInfo.getAssetName()
             objCell.lblSerialNo.text = clsTagInfo.getSerialNo()
@@ -733,8 +732,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		}
 		else
 		{
-			print(" tvcProdMappingItem")
-			let objCell:ProdMappingItemCell = tableView.dequeueReusableCell(withIdentifier: "tvcProdMappingItem", for: indexPath) as! ProdMappingItemCell
+			let objCell:MappingProdCell = tableView.dequeueReusableCell(withIdentifier: "tvcMappingProd", for: indexPath) as! MappingProdCell
             let clsProdInfo = arrProdRows[indexPath.row]
             objCell.lblProdCode.text = clsProdInfo.getProdCode()
             objCell.lblProdName.text = clsProdInfo.getProdName()

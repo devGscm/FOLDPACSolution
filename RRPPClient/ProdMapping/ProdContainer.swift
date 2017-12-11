@@ -62,15 +62,9 @@ public class ProdContainer
     func addItem(epcCode: String, itemInfo: ItemInfo)
 	{
  		let clsEpcInfo = mDicPallet[epcCode] as! EpcInfo
-		if(clsEpcInfo != nil)
-        {
-            var arrItemList = clsEpcInfo.getItemes()
-            if(arrItemList != nil)
-            {
-                arrItemList.append(itemInfo)
-            }
-        }
-    }
+		var arrItemList = clsEpcInfo.getItemes()
+		arrItemList.append(itemInfo)
+	}
 
     /**
      * 클래스에 있는 Item(서브)정보를 변경한다.
@@ -238,7 +232,7 @@ public class ProdContainer
             if(arrItemList.count > 0)
             {
                 //서브 그리드에 - 입력된 바코드 정보가 있는경우
-                for (index, clsItem) in arrItemList.enumerated()
+                for clsItem in arrItemList
                 {
                     if(clsItem.getRowState() != Constants.DATA_ROW_STATE_UNCHANGED)
                     {

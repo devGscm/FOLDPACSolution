@@ -10,7 +10,7 @@ import UIKit
 
 
 // RFID
-class ProdMappingRfidCell: UITableViewCell
+class MappingRfidCell: UITableViewCell
 {
 	@IBOutlet weak var lblAssetName: UILabel!
 	@IBOutlet weak var lblSerialNo: UILabel!
@@ -29,7 +29,7 @@ class ProdMappingRfidCell: UITableViewCell
 
 
 // 상품
-class ProdMappingItemCell: UITableViewCell
+class MappingProdCell: UITableViewCell
 {
 	@IBOutlet weak var lblProdCode: UILabel!
 	@IBOutlet weak var lblProdName: UILabel!

@@ -55,24 +55,25 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			arrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "RFID태그검수"))
 			//arrMenuData.append(MenuItem(menuId: "RfidTrackingService", menuName: "이력추적"))
 		}
+		else if(strCustType == "RDC")
+		{
+			arrMenuData.append(MenuItem(menuId: "StockReview", menuName: NSLocalizedString("title_stock_review", comment: "재고실사")))
+			arrMenuData.append(MenuItem(menuId: "RfidTrackingService", menuName: NSLocalizedString("title_rfid_tracking_service", comment: "이력추적")))
+		}
+			
 		else if(strCustType == "MGR")
 		{
 			// 관리회사(MGR)
 			//arrMenuData.append(MenuItem(menuId: "TagSupply", menuName: "납품등록(RFID)"))
 			arrMenuData.append(MenuItem(menuId: "ProductMount", menuName: NSLocalizedString("title_product_mount", comment: "자산등록")))
-			arrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "RFID태그검수"))
-            
-//            let strIdentificationSystem = UserDefaults.standard.string(forKey: Constants.IDENTIFICATION_SYSTEM_LIST_KEY)
-//            if(strIdentificationSystem == Constants.IDENTIFICATION_SYSTEM_AGQR)
-//            {
-//                
-//            }
-            
-            //UserDefaults.standard.setValue(intIdentificationSystemType, forKey: Constants.IDENTIFICATION_SYSTEM_LIST_KEY)
+			
             arrMenuData.append(MenuItem(menuId: "ProdMappingOut", menuName: NSLocalizedString("title_work_sale_c", comment: "출고C")))
 			arrMenuData.append(MenuItem(menuId: "WorkHistorySearch", menuName: NSLocalizedString("title_work_history_search", comment: "작업내역조회")))
             arrMenuData.append(MenuItem(menuId: "InOutCancel", menuName: NSLocalizedString("title_work_inout_cancel", comment: "입출고취소")))
-			//arrMenuData.append(MenuItem(menuId: "RfidTrackingService", menuName: "이력추적"))
+			
+			arrMenuData.append(MenuItem(menuId: "StockReview", menuName: NSLocalizedString("title_stock_review", comment: "재고실사")))
+			arrMenuData.append(MenuItem(menuId: "RfidTrackingService", menuName: NSLocalizedString("title_rfid_tracking_service", comment: "이력추적")))
+			arrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "RFID태그검수"))
 		}
         
         arrMenuData.append(MenuItem(menuId: "ClientConfig", menuName: NSLocalizedString("title_client_config", comment: "환경설정")))
@@ -102,6 +103,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		switch (strtMenuItem.menuId)
 		{
 			case "ProductMount" :
+				// 자산등록 (장착)
 				let clsController: ProductMount = {
                     print("==== ProductMount ====")
 					return UIStoryboard.viewController(storyBoardName: "Product", identifier: "ProductMount") as! ProductMount
@@ -109,6 +111,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 				toolbarController?.transition(to: clsController, completion: closeNavigationDrawer)
 				break
 			case "RfidInspect" :
+				// 검수
 				let clsController: RfidInspect = {
                     print("==== RfidInspect ====")
 					return UIStoryboard.viewController(storyBoardName: "Tag", identifier: "RfidInspect") as! RfidInspect
@@ -134,15 +137,28 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 				toolbarController?.transition(to: clsController, completion: closeNavigationDrawer)
 				break
 
-            //입출고취소
+			
             case "InOutCancel" :
+				// 입출고취소
                 let clsController: InOutCancel = {
                     print("==== InOutCancel ====")
                     return UIStoryboard.viewController(storyBoardName: "InOutCancel", identifier: "InOutCancel") as! InOutCancel
                 }()
                 toolbarController?.transition(to: clsController, completion: closeNavigationDrawer)
                 break
-            
+			
+			case "StockReview" :
+				// 재고실사
+				let clsController: StockReview = {
+					print("==== StockReview ====")
+					return UIStoryboard.viewController(storyBoardName: "Stock", identifier: "StockReview") as! StockReview
+				}()
+				toolbarController?.transition(to: clsController, completion: closeNavigationDrawer)
+				break
+			
+			case "RfidTrackingService" :
+				// 이력추적
+				break
         	case "ClientConfig" :
                 let clsController: ClientConfig = {
                     return UIStoryboard.viewController(storyBoardName: "Config", identifier: "ClientConfig") as! ClientConfig
