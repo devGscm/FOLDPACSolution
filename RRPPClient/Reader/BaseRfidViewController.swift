@@ -266,6 +266,11 @@ class BaseRfidViewController : BaseViewController
 	
 	func destoryRfid()
 	{
+		if (self.mClsReader?.isConnected() == true )
+		{
+			//self.mClsReader?.clearInventory?()
+			self.mClsReader?.close()
+		}
 		super.releaseController()
 	}
 	
