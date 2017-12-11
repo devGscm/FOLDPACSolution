@@ -153,10 +153,10 @@ class Constants
 	static let READING_TYPE_QRCODE 									= "QRCODE"			/**< 바코드타입:QR코드 	*/
 	static let READING_TYPE_RFIDTAG 								= "RFIDTAG"		/**< 바코드타입:RFID태그 	*/
 	
-	static let SWING_READER_MODE_RFID 								= 0				/**< 스윙리더기 : RFID 읽기모드 	*/
-	static let SWING_READER_MODE_TEMPERATURE						= 1				/**< 스윙리더기 : TEMPERATURE 읽기모드 	*/
-	static let SWING_READER_MODE_BCD 								= 2				/**< 스윙리더기 : BCD 읽기모드 	*/
-	static let SWING_READER_MODE_ENC 								= 3				/**< 스윙리더기 : ENC 읽기모드 	*/
+	//static let SWING_READER_MODE_RFID 								= 0				/**< 스윙리더기 : RFID 읽기모드 	*/
+	//static let SWING_READER_MODE_TEMPERATURE						= 1				/**< 스윙리더기 : TEMPERATURE 읽기모드 	*/
+	//static let SWING_READER_MODE_BCD 								= 2				/**< 스윙리더기 : BCD 읽기모드 	*/
+	//static let SWING_READER_MODE_ENC 								= 3				/**< 스윙리더기 : ENC 읽기모드 	*/
 	
 	static let SWING_TAG_REPORT_MODE_NEW 							= 0				/**< 스윙리더기 : 태그리포트 [N] 	*/
 	static let SWING_TAG_REPORT_MODE_ALL							= 1				/**< 스윙리더기 : 태그리포트 [A]	*/

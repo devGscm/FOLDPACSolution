@@ -13,6 +13,7 @@
 		555B988A1FD2774D006CC14F /* History.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 555B98891FD2774D006CC14F /* History.storyboard */; };
 		555B988C1FD2776A006CC14F /* HistorySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555B988B1FD2776A006CC14F /* HistorySearch.swift */; };
 		555B988E1FD27CC3006CC14F /* HistorySearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555B988D1FD27CC3006CC14F /* HistorySearchCell.swift */; };
+		556C7DDA1FDA54010048D6C4 /* ProdInfoDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556C7DD91FDA54010048D6C4 /* ProdInfoDialog.swift */; };
 		5571CDE31FCF98E600F88B97 /* AppSnackbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5571CDE21FCF98E600F88B97 /* AppSnackbarController.swift */; };
 		5590A55D1FD4E194007571D5 /* ProdMappingOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590A55C1FD4E194007571D5 /* ProdMappingOut.swift */; };
 		5590A55F1FD4E1AE007571D5 /* ProdMapping.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5590A55E1FD4E1AE007571D5 /* ProdMapping.storyboard */; };
@@ -143,6 +144,7 @@
 		555B988B1FD2776A006CC14F /* HistorySearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorySearch.swift; sourceTree = "<group>"; };
 		555B988D1FD27CC3006CC14F /* HistorySearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorySearchCell.swift; sourceTree = "<group>"; };
 		5564DA751FC5583800A39598 /* ListViewDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewDialog.swift; sourceTree = "<group>"; };
+		556C7DD91FDA54010048D6C4 /* ProdInfoDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdInfoDialog.swift; sourceTree = "<group>"; };
 		5571CDE21FCF98E600F88B97 /* AppSnackbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSnackbarController.swift; sourceTree = "<group>"; };
 		5590A55C1FD4E194007571D5 /* ProdMappingOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdMappingOut.swift; sourceTree = "<group>"; };
 		5590A55E1FD4E1AE007571D5 /* ProdMapping.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProdMapping.storyboard; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 				55B154B91FD7681500F69ABE /* ItemInfo.swift */,
 				559F39E81FD779D9006E5C17 /* EpcInfo.swift */,
 				559F39EA1FD77D28006E5C17 /* ProdContainer.swift */,
+				556C7DD91FDA54010048D6C4 /* ProdInfoDialog.swift */,
 			);
 			path = ProdMapping;
 			sourceTree = "<group>";
@@ -741,6 +744,7 @@
 				559F39EB1FD77D28006E5C17 /* ProdContainer.swift in Sources */,
 				55FA783A1FBDACE300583A80 /* LoginViewController.swift in Sources */,
 				5571CDE31FCF98E600F88B97 /* AppSnackbarController.swift in Sources */,
+				556C7DDA1FDA54010048D6C4 /* ProdInfoDialog.swift in Sources */,
 				559F39DC1FD77068006E5C17 /* RfidReaderDialog.swift in Sources */,
 				55FA78491FBDAD0B00583A80 /* AppToolbarController.swift in Sources */,
 				55ACD6771FC802BD00A2DC72 /* ProductOrderSearch.swift in Sources */,
