@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Material
 import Mosaic
 import SQLite
 
@@ -791,7 +792,7 @@ class LocalData {
 	}
 	
 	/// 원격 Db와 버전체크 버전체크후, 데이터를 가져와서 동기화
-	public func versionCheck(_ clsIndicatior: ProgressIndicator) -> Void
+	public func versionCheck(indicator: ProgressIndicator, navigation: NavigationDrawerController? ) -> Void
 	{
 		if(self.mRemoteDbEnncryptId.isEmpty)
 		{
@@ -863,7 +864,8 @@ class LocalData {
 				
 				//모든데이터가 다 받을수 있도록 대기한다
 				clsDispatchGrp.notify(queue: .main) {
-					clsIndicatior.hide()
+					indicator.hide()
+					navigation?.isEnabled = true
 				}
 		})
 	}

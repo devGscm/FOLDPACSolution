@@ -89,14 +89,17 @@ class RootViewController: BaseViewController
 //					}
 //			})
 			
-			
 			let clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
 											 indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: NSLocalizedString("common_progressbar_loading_basedata", comment: "서버로 부터 기초데이터를 수신중입니다."))
+			//인디케이터를 활성화 하고 왼쪽메뉴를 비활성화
+			//공통코드 로딩처리 후, 뒷단에서 다시 반대로 다시 돌림
 			clsIndicator.show()
+			navigationDrawerController?.isEnabled = false
+			
 			let localData = LocalData.shared
 			localData.RemoteDbEnncryptId = AppContext.sharedManager.getUserInfo().getEncryptId()
 			localData.CorpId = AppContext.sharedManager.getUserInfo().getCorpId()
-			localData.versionCheck(clsIndicator)
+			localData.versionCheck(indicator: clsIndicator, navigation: navigationDrawerController)
 
             var mDicPallet : Dictionary<String, String> = Dictionary<String, String>()
             mDicPallet["yomile1"] = "test1"
