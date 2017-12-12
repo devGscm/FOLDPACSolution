@@ -165,7 +165,7 @@ public class SwingReader : NSObject, ReaderProtocol, SwingProtocolProtocol
 	}
 	
 	public func swing_didDiscover(_ dev: SwingDevice!) {
-		print("######Swing_didDiscoverDevice!!!")
+		//print("######Swing_didDiscoverDevice!!!")
 		self.delegate?.didReaderScanList?(id: dev.identifier, name: dev.name, macAddr: dev.macaddress)
 	}
 	
@@ -173,7 +173,7 @@ public class SwingReader : NSObject, ReaderProtocol, SwingProtocolProtocol
 	/// 네톰에서 구현을 안함 즉  Swing_readyToCommunicate가 호출이 되지 않음
 	/// - Parameter dev: <#dev description#>
 	public func swing_didconnectedDevice(_ dev: SwingDevice!) {
-		print("Swing_didconnectedDevice!!!")
+		//print("Swing_didconnectedDevice!!!")
 	}
 	
 	public func swing_ready ( toCommunicate dev: SwingDevice!)

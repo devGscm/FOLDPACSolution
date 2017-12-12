@@ -64,11 +64,11 @@ public protocol ReaderResponseDelegate : class {
 	//objc optional 을 사용하는 경우는 일반타입만 가능하고 구조체나 클래스로 넘겨줄 수가 없음
 	func didReadTagid( _ tagid : String)
 	
-	 @objc optional func didReadBarcode(_ barcode: String)
+	@objc optional func didReadBarcode(_ barcode: String)
 	
-	 @objc optional func didReaderConnected()
+	@objc optional func didReaderConnected()
 	
-	 @objc optional func didReaderDisConnected()
+	@objc optional func didReaderDisConnected()
 	
 	@objc optional func didRederConnectTimeOver()
 	

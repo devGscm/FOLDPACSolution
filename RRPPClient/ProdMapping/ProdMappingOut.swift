@@ -92,8 +92,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		super.viewWillAppear(animated)
 		prepareToolbar()
 		
-		//TODO:: 전역객체에서 등록된 리더기정보를 가져온다.
-		let devId  = "D32F0010-8DB8-856F-A8DF-85B3D00CF26A"
+		// RFID를 처리할 델리게이트 지정
 		self.initRfid( self as ReaderResponseDelegate )
 		
 		initViewControl()
@@ -107,7 +106,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		print("*ProdMappingOut.viewDidAppear()")
 		print("=========================================")
 		super.viewDidAppear(animated)
-		initTestProcess()
+		//initTestProcess()
 	}
 	
 
@@ -133,18 +132,13 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		print("=========================================")
 		print("*ProdMappingOut.viewDidDisappear()")
 		print("=========================================")
-        
 		
-        
 		clsIndicator = nil
 		clsDataClient = nil
 		
 		super.destoryRfid()
 		super.viewDidDisappear(animated)
-		
 	}
-	
-	
 	
 	
 	// View관련 컨트롤을 초기화한다.
@@ -157,11 +151,8 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 //			self.clsIndicator?.hide()
 //		}
 
-		
+
 		/*
-		//		clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
-		//									  indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.")
-		
 		// 취소가능하도록 수정
 		clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
 		indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.",
@@ -368,70 +359,8 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		}
 	}
 	
+
 	
-	// 리더기 연결 클릭이벤트
-	@IBAction func onRfidReaderClicked(_ sender: UIButton)
-	{
-		if(sender.isSelected == false)
-		{
-			print(" 리더기 연결")
-			sender.isSelected = true
-			sender.backgroundColor = Color.orange.base
-			sender.tintColor = Color.orange.base
-			sender.setTitle(NSLocalizedString("rfid_reader_close", comment: "종료"), for: .normal)
-		}
-		else
-		{
-			print(" 리더기 종료")
-			sender.isSelected = false
-			sender.backgroundColor = Color.blue.base
-			sender.tintColor = Color.white
-			sender.setTitle(NSLocalizedString("rfid_reader_connect", comment: "연결"), for: .normal)
-		}
-		
-		// TODO  : test
-		let clsTagInfo1 = RfidUtil.TagInfo()
-		clsTagInfo1.setYymm(strYymm: "1705")
-		clsTagInfo1.setSeqNo(strSeqNo: "170005")
-		clsTagInfo1.setEpcCode(strEpcCode: "3312D58E4581004000029815")
-		clsTagInfo1.setEpcUrn(strEpcUrn: "grai:0.95100043.1025.170005")
-		clsTagInfo1.setSerialNo(strSerialNo: "170005")
-		clsTagInfo1.setCorpEpc(strCorpEpc: "95100043")
-		clsTagInfo1.setAssetEpc(assetEpc: "1025")
-		getRfidData(clsTagInfo: clsTagInfo1)
-		
-		
-		let clsTagInfo2 = RfidUtil.TagInfo()
-		clsTagInfo2.setYymm(strYymm: "1705")
-		clsTagInfo2.setSeqNo(strSeqNo: "170004")
-		clsTagInfo2.setEpcCode(strEpcCode: "3312D58E4581004000029814")
-		clsTagInfo2.setEpcUrn(strEpcUrn: "grai:0.95100043.1025.170004")
-		clsTagInfo2.setSerialNo(strSerialNo: "170004")
-		clsTagInfo2.setCorpEpc(strCorpEpc: "95100043")
-		clsTagInfo2.setAssetEpc(assetEpc: "1025")
-		getRfidData(clsTagInfo: clsTagInfo2)
-		
-		
-		let clsTagInfo3 = RfidUtil.TagInfo()
-		clsTagInfo3.setYymm(strYymm: "1607")
-		clsTagInfo3.setSeqNo(strSeqNo: "6002")
-		clsTagInfo3.setEpcCode(strEpcCode: "3312D58E3D81004000001772")
-		clsTagInfo3.setEpcUrn(strEpcUrn: "grai:0.95100027.1025.6002")
-		clsTagInfo3.setSerialNo(strSerialNo: "6002")
-		clsTagInfo3.setCorpEpc(strCorpEpc: "95100027")
-		clsTagInfo3.setAssetEpc(assetEpc: "1025")
-		getRfidData(clsTagInfo: clsTagInfo3)
-		
-		let clsTagInfo4 = RfidUtil.TagInfo()
-		clsTagInfo4.setYymm(strYymm: "1607")
-		clsTagInfo4.setSeqNo(strSeqNo: "6001")
-		clsTagInfo4.setEpcCode(strEpcCode: "3312D58E3D81004000001771")
-		clsTagInfo4.setEpcUrn(strEpcUrn: "grai:0.95100027.1025.6001")
-		clsTagInfo4.setSerialNo(strSerialNo: "6001")
-		clsTagInfo4.setCorpEpc(strCorpEpc: "95100027")
-		clsTagInfo4.setAssetEpc(assetEpc: "1025")
-		getRfidData(clsTagInfo: clsTagInfo4)
-	}
 	
 	
 	// 입고처 선택
@@ -1671,10 +1600,130 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		tvMappingProd.reloadData()
 	}
 	
-	func didReadTagList(_ tagId: String)
+	//========================================================================
+	// 리더기 관련 이벤트및 처리 시작
+	//------------------------------------------------------------------------
+	
+	// 리더기 연결 클릭이벤트
+	@IBAction func onRfidReaderClicked(_ sender: UIButton)
 	{
-
+		if(sender.isSelected == false)
+		{
+			showSnackbar(message: NSLocalizedString("rfid_connecting_reader", comment: "RFID 리더기에 연결하는 중 입니다."))
+			//print(" 리더기 연결")
+			super.readerConnect()
+		}
+		else
+		{
+			super.readerDisConnect()
+		}
+	
+		/*
+		// TODO  : test
+		let clsTagInfo1 = RfidUtil.TagInfo()
+		clsTagInfo1.setYymm(strYymm: "1705")
+		clsTagInfo1.setSeqNo(strSeqNo: "170005")
+		clsTagInfo1.setEpcCode(strEpcCode: "3312D58E4581004000029815")
+		clsTagInfo1.setEpcUrn(strEpcUrn: "grai:0.95100043.1025.170005")
+		clsTagInfo1.setSerialNo(strSerialNo: "170005")
+		clsTagInfo1.setCorpEpc(strCorpEpc: "95100043")
+		clsTagInfo1.setAssetEpc(assetEpc: "1025")
+		getRfidData(clsTagInfo: clsTagInfo1)
+		
+		
+		let clsTagInfo2 = RfidUtil.TagInfo()
+		clsTagInfo2.setYymm(strYymm: "1705")
+		clsTagInfo2.setSeqNo(strSeqNo: "170004")
+		clsTagInfo2.setEpcCode(strEpcCode: "3312D58E4581004000029814")
+		clsTagInfo2.setEpcUrn(strEpcUrn: "grai:0.95100043.1025.170004")
+		clsTagInfo2.setSerialNo(strSerialNo: "170004")
+		clsTagInfo2.setCorpEpc(strCorpEpc: "95100043")
+		clsTagInfo2.setAssetEpc(assetEpc: "1025")
+		getRfidData(clsTagInfo: clsTagInfo2)
+		
+		
+		let clsTagInfo3 = RfidUtil.TagInfo()
+		clsTagInfo3.setYymm(strYymm: "1607")
+		clsTagInfo3.setSeqNo(strSeqNo: "6002")
+		clsTagInfo3.setEpcCode(strEpcCode: "3312D58E3D81004000001772")
+		clsTagInfo3.setEpcUrn(strEpcUrn: "grai:0.95100027.1025.6002")
+		clsTagInfo3.setSerialNo(strSerialNo: "6002")
+		clsTagInfo3.setCorpEpc(strCorpEpc: "95100027")
+		clsTagInfo3.setAssetEpc(assetEpc: "1025")
+		getRfidData(clsTagInfo: clsTagInfo3)
+		
+		let clsTagInfo4 = RfidUtil.TagInfo()
+		clsTagInfo4.setYymm(strYymm: "1607")
+		clsTagInfo4.setSeqNo(strSeqNo: "6001")
+		clsTagInfo4.setEpcCode(strEpcCode: "3312D58E3D81004000001771")
+		clsTagInfo4.setEpcUrn(strEpcUrn: "grai:0.95100027.1025.6001")
+		clsTagInfo4.setSerialNo(strSerialNo: "6001")
+		clsTagInfo4.setCorpEpc(strCorpEpc: "95100027")
+		clsTagInfo4.setAssetEpc(assetEpc: "1025")
+		getRfidData(clsTagInfo: clsTagInfo4)
+		
+		*/
 	}
+	
+	func didReadTagList(_ tagid: String)
+	{
+		print("@@@@@@@@@@@@@@@@@@@@@")
+		print("@didReadTagList()")
+		print("@@@@@@@@@@@@@@@@@@@@@")
+		let clsTagInfo = RfidUtil.parse(strData: tagid)
+		getRfidData(clsTagInfo: clsTagInfo)
+	}
+	
+	func didReadBarcode(_ barcode: String)
+	{
+		print("@@@@@@@@@@@@@@@@@@@@@")
+		print("@didReadBarcode()")
+		print("@@@@@@@@@@@@@@@@@@@@@")
+	}
+	
+	//리더기 연결성공
+	func didReaderConnected()
+	{
+		showSnackbar(message: NSLocalizedString("rfid_connected_reader", comment: "RFID 리더기에 연결되었습니다."))
+		changeBtnRfidReader(true)
+	}
+	
+	//리더기 연결종로
+	func didReaderDisConnected()
+	{
+		showSnackbar(message: NSLocalizedString("rfid_connection_terminated", comment: "연결이 종료되었습니다."))
+		changeBtnRfidReader(false)
+	}
+	
+	//리더기 연결 타임오바
+	func didRederConnectTimeOver()
+	{
+		showSnackbar(message: NSLocalizedString("rfid_not_connect_reader", comment: "RFID 리더기에 연결할수 없습니다."))
+		changeBtnRfidReader(false)
+	}
+	
+	//리더기 연결 여부에 따른 버튼에대한 상태값 변경
+	func changeBtnRfidReader(_ isConnected : Bool)
+	{
+		if(isConnected )
+		{
+			self.btnRfidReader.isSelected = true
+			self.btnRfidReader.backgroundColor = Color.orange.base
+			self.btnRfidReader.tintColor = Color.orange.base
+			self.btnRfidReader.setTitle(NSLocalizedString("rfid_reader_close", comment: "종료"), for: .normal)
+		}
+		else
+		{
+			self.btnRfidReader.isSelected = false
+			self.btnRfidReader.backgroundColor = Color.blue.base
+			self.btnRfidReader.tintColor = Color.white
+			self.btnRfidReader.setTitle(NSLocalizedString("rfid_reader_connect", comment: "연결"), for: .normal)
+		}
+	}
+	//------------------------------------------------------------------------
+	// 리더기 관련 이벤트및 처리 끝
+	//========================================================================
+
 
 	
 }
