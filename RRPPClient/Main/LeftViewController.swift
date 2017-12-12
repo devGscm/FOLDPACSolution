@@ -113,7 +113,6 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			case "ProductMount" :
 				// 자산등록 (장착)
 				clsController = { () -> ProductMount in
-					print("==== ProductMount ====")
 					return UIStoryboard.viewController(storyBoardName: "Product", identifier: "ProductMount") as! ProductMount
 				}()
 				
@@ -126,17 +125,13 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			case "RfidInspect" :
 				// 검수
 				clsController = { () -> RfidInspect in
-                    print("==== RfidInspect ====")
 					return UIStoryboard.viewController(storyBoardName: "Tag", identifier: "RfidInspect") as! RfidInspect
 				}()
-
 				break
 			
 			case "ProdMappingOut" :
-                
                 // 출고C(출하)
 				clsController = { () -> ProdMappingOut in
-                    print("==== ProdMappingOut ====")
 					return UIStoryboard.viewController(storyBoardName: "ProdMapping", identifier: "ProdMappingOut") as! ProdMappingOut
 				}()
 
@@ -144,14 +139,12 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			
 			case "WorkHistorySearch" :
 				clsController = { () -> HistorySearch in
-                    print("==== WorkHistorySearch ====")
 					return UIStoryboard.viewController(storyBoardName: "History", identifier: "HistorySearch") as! HistorySearch
 				}()
 				break
             case "InOutCancel" :
 				// 입출고취소
 				clsController = { () -> InOutCancel in
-                    print("==== InOutCancel ====")
                     return UIStoryboard.viewController(storyBoardName: "InOutCancel", identifier: "InOutCancel") as! InOutCancel
                 }()
                 break
@@ -159,7 +152,6 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			case "StockReview" :
 				// 재고실사
 				clsController = { () -> StockReview in
-					print("==== StockReview ====")
 					return UIStoryboard.viewController(storyBoardName: "Stock", identifier: "StockReview") as! StockReview
 				}()
 				break
