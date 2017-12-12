@@ -22,6 +22,7 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
     @IBOutlet weak var tfSearchValue: UITextField!
     @IBOutlet weak var btnSearch: UIButton!
     @IBOutlet weak var tvInOutCancel: UITableView!
+
     
     var tfCurControl : UITextField!
     var dpPicker : UIDatePicker!
@@ -35,6 +36,7 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
     var arcSearchCondition:Array<ListViewDialog.ListViewItem> = Array<ListViewDialog.ListViewItem>()
     var strSearchCondtion = ""
     
+    var intSelectedIndex = -1
     
     //=======================================
     //=====  viewDidLoad()
@@ -68,6 +70,7 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
         
         initViewControl()
         initDataClient()
+        
         doInitSearch()
     }
     
@@ -167,8 +170,8 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
     {
         print("doInitSearch()")
         intPageNo = 0
-        arcDataRows.removeAll()
-        doSearch()
+        self.arcDataRows.removeAll()
+        self.doSearch()
     }
     
     
@@ -218,7 +221,7 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
                 return
             }
             self.arcDataRows.append(contentsOf: clsDataTable.getDataRows())
-            DispatchQueue.main.async { self.tvInOutCancel?.reloadData() }
+            DispatchQueue.main.async{ self.tvInOutCancel?.reloadData()}
         })
     }
     
@@ -309,6 +312,8 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
         doInitSearch()
         
     }
+  
+    
     
     //=======================================
     //===== createDatePicker
@@ -348,32 +353,100 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
     
     
     //=======================================
-    //=====
+    //===== 테이블뷰
     //=======================================
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.arcDataRows.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        tableView.rowHeight = 60                    //셀 크기 조정
+        tableView.allowsSelection = false           //셀 선택안되게 막음
+        
         let objCell:InOutCancelCell = tableView.dequeueReusableCell(withIdentifier: "tvcInOutCancel", for: indexPath) as! InOutCancelCell
         let clsDataRow = arcDataRows[indexPath.row]
         
-        let strUtcTraceDate = clsDataRow.getString(name:"traceDate")
+        let strUtcTraceDate = clsDataRow.getString(name:"workDate")
         let strLocaleTraceDate = DateUtil.utcToLocale(utcDate: strUtcTraceDate!, dateFormat: "yyyyMMddHHmmss")
-        let strTraceDate = DateUtil.getConvertFormatDate(date: strLocaleTraceDate, srcFormat: "yyyyMMddHHmmss", dstFormat:"MM-dd HH:mm")
+        let strTraceDate = DateUtil.getConvertFormatDate(date: strLocaleTraceDate, srcFormat: "yyyyMMddHHmmss", dstFormat:"MM/dd")
+        let strTraceTime = DateUtil.getConvertFormatDate(date: strLocaleTraceDate, srcFormat: "yyyyMMddHHmmss", dstFormat:"HH:mm")
 
         
-        
+        objCell.lblRowNo?.text = clsDataRow.getString(name:"rowNo")
         objCell.lblWorkDate?.text = strTraceDate
-        
-//        objCell.lblAssetEpcName?.text = clsDataRow.getString(name:"assetEpcName")
-//        objCell.lblEventName?.text = clsDataRow.getString(name:"eventName")
-//        objCell.lblEventCount?.text = clsDataRow.getString(name:"eventCnt")
-//        objCell.lblBranchName?.text = clsDataRow.getString(name:"branchName")
-        
+        objCell.lblWorkTime?.text = strTraceTime
+        objCell.lblInoutCustName?.text = clsDataRow.getString(name:"inoutCustName")
+        objCell.lblIoTypeName?.text = clsDataRow.getString(name:"ioTypeName")
+        objCell.lblWorkId?.text = clsDataRow.getString(name:"workId")
+
+        //유형라벨(버튼)
+        objCell.btnAssetEpcName.setTitle(clsDataRow.getString(name:"assetEpcName"), for: .normal)
+        objCell.btnAssetEpcName.tag = indexPath.row
+        objCell.btnAssetEpcName.addTarget(self, action: #selector(onItemSelectionClicked(_:)), for: .touchUpInside)
+        objCell.lblCompleteWorkCnt?.text = clsDataRow.getString(name:"completeWorkCnt")
+
+        //취소버튼
+        objCell.btnSelection.titleLabel?.font = UIFont.fontAwesome(ofSize: 17)
+        objCell.btnSelection.setTitle(String.fontAwesomeIcon(name:.trashO), for: .normal)
+        objCell.btnSelection.tag = indexPath.row
+        objCell.btnSelection.addTarget(self, action: #selector(onItemCancelClicked(_:)), for: .touchUpInside)
         
         return objCell
     }
+
+    //=======================================
+    //===== '유형'버튼
+    //=======================================
+    @objc func onItemSelectionClicked(_ sender: UIButton)
+    {
+        self.intSelectedIndex = sender.tag
+        
+        print("========== 유형 누름 ==========:\(self.intSelectedIndex)")
+        self.performSegue(withIdentifier: "segInOutCancelDetailCell", sender: self)
+    }
+    
+    
+    // Segue로 파라미터 넘기면 반드시 prepare를 타기 때문에 여기서 DataProtocol을 세팅하는걸로 함
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        //그리드 삭제 및 구조체 삭제
+        print("========== 유형 누름[2] ==========")
+        
+        if(segue.identifier == "segInOutCancelDetailCell")
+        {
+            if let clsDialog = segue.destination as? InOutCancelDetail
+            {
+                print("==self.arcDataRows.count: \(self.arcDataRows.count)")
+                print("==self.intSelectedIndex: \(self.intSelectedIndex)")
+                
+                if let btnAssetEpcName = sender as? UIButton
+                {
+                    print("==btnAssetEpcName: \(btnAssetEpcName.tag)")
+                    let clsAssetEpc = self.arcDataRows[btnAssetEpcName.tag]
+                    
+                    let saleOrderId = clsAssetEpc.getString(name:"workId")
+                    
+                    print("==saleOrderId: \(saleOrderId!)")
+                    clsDialog.strSaleWorkId = saleOrderId!      //상세리스트에 표출할 ResaleOrderId 전달
+                }
+            }
+        }
+    }
+        
+    
+    
+    
+    
+    
+    //=======================================
+    //===== '취소'버튼
+    //=======================================
+    @IBAction func onItemCancelClicked(_ sender: UIButton) {
+                let clsDataRow = arcDataRows[sender.tag]
+    }
+    
+
     
     
     

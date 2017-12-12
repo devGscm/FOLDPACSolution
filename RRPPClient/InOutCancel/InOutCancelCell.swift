@@ -15,9 +15,11 @@ class InOutCancelCell: UITableViewCell
     @IBOutlet weak var lblInoutCustName: UILabel!
     @IBOutlet weak var lblIoTypeName: UILabel!
     @IBOutlet weak var lblWorkId: UILabel!
-    @IBOutlet weak var lblAssetEpcName: UILabel!
     @IBOutlet weak var lblCompleteWorkCnt: UILabel!
     @IBOutlet weak var btnSelection: UIButton!
+    @IBOutlet weak var lblWorkTime: UILabel!
+
+    @IBOutlet weak var btnAssetEpcName: UIButton!
     
     override func awakeFromNib()
     {
