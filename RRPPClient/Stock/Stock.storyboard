@@ -327,6 +327,9 @@
                                                         <real key="value" value="4"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <segue destination="oaM-px-M2S" kind="presentation" identifier="segOutSignDialog" modalPresentationStyle="overCurrentContext" id="Wnk-oe-gjA"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -359,6 +362,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SgN-Ro-IsZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-6772" y="-3429.5352323838083"/>
+        </scene>
+        <!--OutSignDialog-->
+        <scene sceneID="L2w-NQ-5yj">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Common" referencedIdentifier="OutSignDialog" id="oaM-px-M2S" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Egj-ih-2Lb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-6193" y="-3146"/>
         </scene>
     </scenes>
 </document>
