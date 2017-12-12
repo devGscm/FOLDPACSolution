@@ -74,17 +74,10 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 	// View관련 컨트롤을 초기화한다.
 	func initViewControl()
 	{
-		// For Test
-//		AppContext.sharedManager.getUserInfo().setEncryptId(strEncryptId: "xxOxOsU93/PvK/NN7DZmZw==")
-//		AppContext.sharedManager.getUserInfo().setCorpId(strCorpId: "logisallcm")
-//		AppContext.sharedManager.getUserInfo().setBranchId(branchId: "160530000045")
-//		AppContext.sharedManager.getUserInfo().setBranchCustId(branchCustId: "160530000071")
-//		AppContext.sharedManager.getUserInfo().setUserLang(strUserLang: "KR")
+		clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
+										 indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.")
 		
 		/*
-		//		clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
-		//									  indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.")
-		
 		// 취소가능하도록 수정
 		clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
 		indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.",
@@ -425,10 +418,8 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 				}
 				else
 				{
-					DispatchQueue.main.async {
-						let strMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
-						self.showSnackbar(message: strMsg)
-					}
+					let strMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
+					self.showSnackbar(message: strMsg)
 				}
 			}
 			

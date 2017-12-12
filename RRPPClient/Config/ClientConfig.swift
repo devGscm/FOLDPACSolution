@@ -13,7 +13,8 @@ import UIKit
 import Material
 import Mosaic
 
-class ClientConfig : UITableViewController, DataProtocol
+//class ClientConfig : UITableViewController, DataProtocol
+class ClientConfig : BaseTableViewController, DataProtocol
 {
     var mLstRfidType:Array<ReaderType> = Array<ReaderType>()
     var mLstIdentificationSystem:Array<IdentificationSystemDialog.IdentificationSystem> = Array<IdentificationSystemDialog.IdentificationSystem>()
@@ -30,7 +31,9 @@ class ClientConfig : UITableViewController, DataProtocol
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-        prepareToolbar()
+		super.initController()
+		prepareToolbar()
+		
         initViewControl()
     }
     
@@ -38,6 +41,7 @@ class ClientConfig : UITableViewController, DataProtocol
     
     override func viewDidDisappear(_ animated: Bool)
     {
+		super.releaseController()
         super.viewDidDisappear(animated)
     }
     
