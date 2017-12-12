@@ -348,68 +348,190 @@ class LocalData {
 	///   - updateDate: <#updateDate description#>
 	///   - ref: <#ref description#>
 	///   - bIsInsert: <#bIsInsert description#>
-	private func changeNewVersiion(remoteDbUserInfo: String, corpId: String, db: Connection, updateCode: String, updateDate: Int, ref : Int, bIsInsert : Bool ) -> Void
+	private func changeNewVersiion(remoteDbUserInfo: String, corpId: String, db: Connection, updateCode: String, updateDate: Int, ref : Int, bIsInsert : Bool, disPatchGrp : DispatchGroup ) -> Void
 	{
-		do
+		
+		let dataClient = Mosaic.DataClient(url: Constants.WEB_SVC_URL)
+		
+		//TODO:: 아라의 코드중 self를 objMe로 대체
+		let objMe = self
+		
+		//완료처리를 위하여 디스페쳐 그룹을 설정한다.
+		disPatchGrp.enter()
+		switch updateCode
 		{
-			let dataClient = Mosaic.DataClient(url: Constants.WEB_SVC_URL)
-			
-			//TODO:: 아라의 코드중 self를 objMe로 대체
-			//let objMe = self
-			
-			switch updateCode
-			{
-				case "CODE_MAST" :
-					dataClient.UserInfo = remoteDbUserInfo
-					dataClient.UserData = "app.update.selectCodeMastList"
-					dataClient.removeServiceParam()
-					dataClient.selectData(dataCompletionHandler:
-						{ (data, error) in
-							if let error = error {
-								// 에러처리
-								print(error)
-								return
-							}
-							guard let dataTable = data else {
-								print("에러 데이터가 없음")
-								return
-							}
-							do
-							{
-								try db.run(self.mTblCodeMast.delete())
-								for dataRow in dataTable.getDataRows()
-								{
-									try db.run(self.mTblCodeMast.insert(self.mColFieldValue <- dataRow.getString(name:"fieldValue")!
-																			, self.mColFieldName <- dataRow.getString(name:"fieldName")!,
-																			 self.mColRemark <- dataRow.getString(name:"remark")!)
-									)
-								}
-//								//For Test
-//								for rows in try db.prepare(self.mTblCodeMast) {
-//									print("mColFieldValue: \(rows[self.mColFieldValue]), mColFieldName: \(rows[self.mColFieldName]), mColRemark: \(rows[self.mColRemark]!)")
-//								}
-								
-								/// 비동기로 처리 되므로 개별적으로 Update
-								if(bIsInsert)
-								{
-									print("insert mobUpdateInfo")
-									try db.run(self.mTblMobUpdateInfo.insert(self.mColUcd <- updateCode, self.mColUdt <- Int64(updateDate),
-																			 self.mColRef <- Int64(ref)))
-								}
-								else{
-									print("update mobUpdateInfo")
-									// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
-									let updateState = self.mTblMobUpdateInfo.where(self.mColUcd == updateCode)
-									try db.run(updateState.update(self.mColUdt <- Int64(updateDate), self.mColRef <- Int64(ref)))
-								}
-							} catch {
-								print("local mobUpdateInfo fail: \(error)")
-							}
-					})
-				
-			case "CODE_MAST_CORP" :
+			case "CODE_MAST" :
 				dataClient.UserInfo = remoteDbUserInfo
-				dataClient.UserData = "app.update.selectCodeMastCorpList"
+				dataClient.UserData = "app.update.selectCodeMastList"
+				dataClient.removeServiceParam()
+				dataClient.selectData(dataCompletionHandler:
+					{ (data, error) in
+						if let error = error {
+							// 에러처리
+							print(error)
+							return
+						}
+						guard let dataTable = data else {
+							print("에러 데이터가 없음")
+							return
+						}
+						do
+						{
+							try db.run(objMe.mTblCodeMast.delete())
+							for dataRow in dataTable.getDataRows()
+							{
+								try db.run(objMe.mTblCodeMast.insert(objMe.mColFieldValue <- dataRow.getString(name:"fieldValue")!
+																		, objMe.mColFieldName <- dataRow.getString(name:"fieldName")!,
+																		 objMe.mColRemark <- dataRow.getString(name:"remark")!)
+								)
+							}
+	//								//For Test
+	//								for rows in try db.prepare(self.mTblCodeMast) {
+	//									print("mColFieldValue: \(rows[self.mColFieldValue]), mColFieldName: \(rows[self.mColFieldName]), mColRemark: \(rows[self.mColRemark]!)")
+	//								}
+							
+							/// 비동기로 처리 되므로 개별적으로 Update
+							if(bIsInsert)
+							{
+								print("insert mobUpdateInfo")
+								try db.run(objMe.mTblMobUpdateInfo.insert(objMe.mColUcd <- updateCode, objMe.mColUdt <- Int64(updateDate),
+																		 objMe.mColRef <- Int64(ref)))
+							}
+							else{
+								print("update mobUpdateInfo")
+								// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
+								let updateState = objMe.mTblMobUpdateInfo.where(objMe.mColUcd == updateCode)
+								try db.run(updateState.update(objMe.mColUdt <- Int64(updateDate), objMe.mColRef <- Int64(ref)))
+							}
+						} catch {
+							print("local mobUpdateInfo fail: \(error)")
+						}
+						//왼료처리를 위하여 디스페쳐를 나간다.
+						disPatchGrp.leave()
+				})
+			
+		case "CODE_MAST_CORP" :
+			dataClient.UserInfo = remoteDbUserInfo
+			dataClient.UserData = "app.update.selectCodeMastCorpList"
+			dataClient.removeServiceParam()
+			dataClient.addServiceParam(paramName: "corpId", value: corpId)
+			dataClient.selectData(dataCompletionHandler:
+				{ (data, error) in
+					if let error = error {
+						// 에러처리
+						print(error)
+						return
+					}
+					guard let dataTable = data else {
+						print("에러 데이터가 없음")
+						return
+					}
+					do
+					{
+						try db.run(objMe.mTblCodeMastCorp.delete())
+						for dataRow in dataTable.getDataRows()
+						{
+							try db.run(objMe.mTblCodeMastCorp.insert(self.mColCorpId <- dataRow.getString(name:"corpId")!,
+								 objMe.mColFieldValue <- dataRow.getString(name:"fieldValue")!,
+								 objMe.mColFieldName <- dataRow.getString(name:"fieldName")!,
+								 objMe.mColRemark <- dataRow.getString(name:"remark")!
+								)
+							)
+						}
+						//For Test
+						//for rows in try db.prepare(self.mTblCodeMastCorp) {
+						//	print("mColCorpId: \(rows[self.mColCorpId]), mColFieldValue: \(rows[self.mColFieldValue]), mColFieldName: \(rows[self.mColFieldName]), mColRemark: \(rows[self.mColRemark]!)")
+						//	}
+						
+						/// 비동기로 처리 되므로 개별적으로 Update
+						if(bIsInsert)
+						{
+							print("insert mobUpdateInfo")
+							try db.run(objMe.mTblMobUpdateInfo.insert(objMe.mColUcd <- updateCode, objMe.mColUdt <- Int64(updateDate),
+																	 objMe.mColRef <- Int64(ref)))
+						}
+						else{
+							print("update mobUpdateInfo")
+							// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
+							let updateState = objMe.mTblMobUpdateInfo.where(objMe.mColUcd == updateCode)
+							try db.run(updateState.update(objMe.mColUdt <- Int64(updateDate), objMe.mColRef <- Int64(ref)))
+						}
+					} catch {
+						print("local mobUpdateInfo fail: \(error)")
+					}
+					
+					//왼료처리를 위하여 디스페쳐를 나간다.
+					disPatchGrp.leave()
+				})
+			
+			case "CODE_DETAIL" :
+				dataClient.UserInfo = remoteDbUserInfo
+				dataClient.UserData = "app.update.selectCodeDetailList"
+				dataClient.removeServiceParam()
+				dataClient.selectData(dataCompletionHandler:
+					{ (data, error) in
+						if let error = error {
+							// 에러처리
+							print(error)
+							return
+						}
+						guard let dataTable = data else {
+							print("에러 데이터가 없음")
+							return
+						}
+						do
+						{
+							try db.run(objMe.mTblCodeDetail.delete())
+							for dataRow in dataTable.getDataRows()
+							{
+								try db.run(self.mTblCodeDetail.insert(objMe.mColFieldValue <- dataRow.getString(name:"fieldValue")!,
+																	  objMe.mColCommCode <- dataRow.getString(name:"commCode")!,
+																	  objMe.mColCommNameKr <- dataRow.getString(name:"commNameKr")!,
+																	  objMe.mColCommNameEn <- dataRow.getString(name:"commNameEn")!,
+																	  objMe.mColCommNameCh <- dataRow.getString(name:"commNameCh")!,
+																	  objMe.mColCommRef1 <- dataRow.getString(name:"commRef1")!,
+																	  objMe.mColCommRef2 <- dataRow.getString(name:"commRef2")!,
+																	  objMe.mColCommRef3 <- dataRow.getString(name:"commRef3")!,
+																	  objMe.mColCommOrder <- Int64((dataRow.getInt(name:"commOrder") ?? 0)!),
+																	  objMe.mColViewYn <- dataRow.getString(name:"viewYn")!
+																)
+												)
+							}
+	//								//For Test
+	//								for rows in try db.prepare(self.mTblCodeDetail) {
+	//									print("""
+	//										mColFieldValue: \(rows[self.mColFieldValue]), mColCommCode: \(rows[self.mColCommCode]),
+	//										mColCommNameKr: \(rows[self.mColCommNameKr]!),mColCommNameEn: \(rows[self.mColCommNameEn]!),
+	//										mColCommNameCh: \(rows[self.mColCommNameCh]!), mColCommRef1: \(rows[self.mColCommRef1]!)
+	//										mColCommRef2: \(rows[self.mColCommRef2]!), mColCommRef3: \(rows[self.mColCommRef3]!),
+	//										mColCommOrder: \(rows[self.mColCommOrder]!), mColViewYn: \(rows[self.mColViewYn]!)
+	//										""")
+	//								}
+							
+							/// 비동기로 처리 되므로 개별적으로 Update
+							if(bIsInsert)
+							{
+								print("insert mobUpdateInfo")
+								try db.run(objMe.mTblMobUpdateInfo.insert(objMe.mColUcd <- updateCode, objMe.mColUdt <- Int64(updateDate),
+																		 objMe.mColRef <- Int64(ref)))
+							}
+							else{
+								print("update mobUpdateInfo")
+								// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
+								let updateState = objMe.mTblMobUpdateInfo.where(objMe.mColUcd == updateCode)
+								try db.run(updateState.update(objMe.mColUdt <- Int64(updateDate), objMe.mColRef <- Int64(ref)))
+							}
+						} catch {
+							print("local mobUpdateInfo fail: \(error)")
+						}
+						
+						//왼료처리를 위하여 디스페쳐를 나간다.
+						disPatchGrp.leave()
+				})
+			
+			case "CODE_DETAIL_CORP" :
+				dataClient.UserInfo = remoteDbUserInfo
+				dataClient.UserData = "app.update.selectCodeDetailCorpList"
 				dataClient.removeServiceParam()
 				dataClient.addServiceParam(paramName: "corpId", value: corpId)
 				dataClient.selectData(dataCompletionHandler:
@@ -425,383 +547,266 @@ class LocalData {
 						}
 						do
 						{
-							try db.run(self.mTblCodeMastCorp.delete())
+							try db.run(objMe.mTblCodeDetailCorp.delete())
 							for dataRow in dataTable.getDataRows()
 							{
-								try db.run(self.mTblCodeMastCorp.insert(self.mColCorpId <- dataRow.getString(name:"corpId")!,
-									 self.mColFieldValue <- dataRow.getString(name:"fieldValue")!,
-									 self.mColFieldName <- dataRow.getString(name:"fieldName")!,
-									 self.mColRemark <- dataRow.getString(name:"remark")!
+								try db.run(objMe.mTblCodeDetailCorp.insert(objMe.mColCorpId <- dataRow.getString(name:"corpId")!,
+																	 objMe.mColFieldValue <- dataRow.getString(name:"fieldValue")!,
+																	  objMe.mColCommCode <- dataRow.getString(name:"commCode")!,
+																	  objMe.mColCommNameKr <- dataRow.getString(name:"commNameKr")!,
+																	  objMe.mColCommNameEn <- dataRow.getString(name:"commNameEn")!,
+																	  objMe.mColCommNameCh <- dataRow.getString(name:"commNameCh")!,
+																	  objMe.mColCommRef1 <- dataRow.getString(name:"commRef1")!,
+																	  objMe.mColCommRef2 <- dataRow.getString(name:"commRef2") ?? "",
+																	  objMe.mColCommRef3 <- dataRow.getString(name:"commRef3") ?? "",
+																	  objMe.mColCommOrder <- Int64((dataRow.getInt(name:"commOrder") ?? 0))
 									)
 								)
 							}
 							//For Test
-							//for rows in try db.prepare(self.mTblCodeMastCorp) {
-							//	print("mColCorpId: \(rows[self.mColCorpId]), mColFieldValue: \(rows[self.mColFieldValue]), mColFieldName: \(rows[self.mColFieldName]), mColRemark: \(rows[self.mColRemark]!)")
-							//	}
+	//								for rows in try db.prepare(self.mTblCodeDetailCorp) {
+	//									print("""
+	//										mColCorpId: \(rows[self.mColCorpId])
+	//										mColFieldValue: \(rows[self.mColFieldValue]), mColCommCode: \(rows[self.mColCommCode]),
+	//										mColCommNameKr: \(rows[self.mColCommNameKr]!),mColCommNameEn: \(rows[self.mColCommNameEn]!),
+	//										mColCommNameCh: \(rows[self.mColCommNameCh]!), mColCommRef1: \(rows[self.mColCommRef1]!),
+	//										mColCommRef2: \(rows[self.mColCommRef2]!), mColCommRef3: \(rows[self.mColCommRef3]!),
+	//										mColCommOrder: \(rows[self.mColCommOrder]!)
+	//										""")
+	//								}
 							
 							/// 비동기로 처리 되므로 개별적으로 Update
 							if(bIsInsert)
 							{
 								print("insert mobUpdateInfo")
-								try db.run(self.mTblMobUpdateInfo.insert(self.mColUcd <- updateCode, self.mColUdt <- Int64(updateDate),
-																		 self.mColRef <- Int64(ref)))
+								try db.run(objMe.mTblMobUpdateInfo.insert(objMe.mColUcd <- updateCode, objMe.mColUdt <- Int64(updateDate),
+																		 objMe.mColRef <- Int64(ref)))
 							}
 							else{
 								print("update mobUpdateInfo")
 								// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
-								let updateState = self.mTblMobUpdateInfo.where(self.mColUcd == updateCode)
-								try db.run(updateState.update(self.mColUdt <- Int64(updateDate), self.mColRef <- Int64(ref)))
+								let updateState = objMe.mTblMobUpdateInfo.where(objMe.mColUcd == updateCode)
+								try db.run(updateState.update(objMe.mColUdt <- Int64(updateDate), objMe.mColRef <- Int64(ref)))
+							}
+							
+						} catch {
+							print("local mobUpdateInfo fail: \(error)")
+						}
+						
+						//왼료처리를 위하여 디스페쳐를 나간다.
+						disPatchGrp.leave()
+				})
+			
+			case "UNIT_INFO" :
+				dataClient.UserInfo = remoteDbUserInfo
+				dataClient.UserData = "app.update.selectUnitInfoList"
+				dataClient.removeServiceParam()
+				dataClient.addServiceParam(paramName: "corpId", value: corpId)
+				dataClient.selectData(dataCompletionHandler:
+					{ (data, error) in
+						if let error = error {
+							// 에러처리
+							print(error)
+							return
+						}
+						guard let dataTable = data else {
+							print("에러 데이터가 없음")
+							return
+						}
+						do
+						{
+							try db.run(objMe.mTblUnitInfo.delete())
+							for dataRow in dataTable.getDataRows()
+							{
+								try db.run(objMe.mTblUnitInfo.insert(self.mColUnitId <- dataRow.getString(name:"unitId")!,
+																		  objMe.mColUnitName <- dataRow.getString(name:"unitName")!,
+																		  objMe.mColEventCode <- dataRow.getString(name:"eventCode") ?? "",
+																		  objMe.mColBranchId <- dataRow.getString(name:"branchId") ?? "",
+																		  objMe.mColBranchName <- dataRow.getString(name:"branchName") ?? "",
+																		  objMe.mColCoordX <- dataRow.getDouble(name:"coordX") ?? 0,
+																		  objMe.mColCoordY <- dataRow.getDouble(name:"coordY") ?? 0
+									)
+								)
+							}
+							//For Test
+	//									for rows in try db.prepare(self.mTblUnitInfo) {
+	//										print("""
+	//											mColUnitId: \(rows[self.mColUnitId]), mColUnitName: \(rows[self.mColUnitName]!),
+	//											mColEventCode: \(rows[self.mColEventCode]!),mColBranchId: \(rows[self.mColBranchId]!),
+	//											mColBranchName: \(rows[self.mColBranchName]!),
+	//											mColCoordX: \(rows[self.mColCoordX]!), 	mColCoordY: \(rows[self.mColCoordY]!)
+	//											""")
+	//									}
+							
+							/// 비동기로 처리 되므로 개별적으로 Update
+							if(bIsInsert)
+							{
+								print("insert mobUpdateInfo")
+								try db.run(objMe.mTblMobUpdateInfo.insert(objMe.mColUcd <- updateCode, objMe.mColUdt <- Int64(updateDate),
+																		 objMe.mColRef <- Int64(ref)))
+							}
+							else{
+								print("update mobUpdateInfo")
+								// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
+								let updateState = objMe.mTblMobUpdateInfo.where(objMe.mColUcd == updateCode)
+								try db.run(updateState.update(objMe.mColUdt <- Int64(updateDate), objMe.mColRef <- Int64(ref)))
 							}
 						} catch {
 							print("local mobUpdateInfo fail: \(error)")
 						}
-					})
-				
-				case "CODE_DETAIL" :
-					dataClient.UserInfo = remoteDbUserInfo
-					dataClient.UserData = "app.update.selectCodeDetailList"
-					dataClient.removeServiceParam()
-					dataClient.selectData(dataCompletionHandler:
-						{ (data, error) in
-							if let error = error {
-								// 에러처리
-								print(error)
-								return
-							}
-							guard let dataTable = data else {
-								print("에러 데이터가 없음")
-								return
-							}
-							do
-							{
-								try db.run(self.mTblCodeDetail.delete())
-								for dataRow in dataTable.getDataRows()
-								{
-									try db.run(self.mTblCodeDetail.insert(self.mColFieldValue <- dataRow.getString(name:"fieldValue")!,
-																		  self.mColCommCode <- dataRow.getString(name:"commCode")!,
-																		  self.mColCommNameKr <- dataRow.getString(name:"commNameKr")!,
-											   							  self.mColCommNameEn <- dataRow.getString(name:"commNameEn")!,
-																		  self.mColCommNameCh <- dataRow.getString(name:"commNameCh")!,
-																		  self.mColCommRef1 <- dataRow.getString(name:"commRef1")!,
-																		  self.mColCommRef2 <- dataRow.getString(name:"commRef2")!,
-																		  self.mColCommRef3 <- dataRow.getString(name:"commRef3")!,
-																		  self.mColCommOrder <- Int64((dataRow.getInt(name:"commOrder") ?? 0)!),
-																		  self.mColViewYn <- dataRow.getString(name:"viewYn")!
-																	)
-													)
-								}
-//								//For Test
-//								for rows in try db.prepare(self.mTblCodeDetail) {
-//									print("""
-//										mColFieldValue: \(rows[self.mColFieldValue]), mColCommCode: \(rows[self.mColCommCode]),
-//										mColCommNameKr: \(rows[self.mColCommNameKr]!),mColCommNameEn: \(rows[self.mColCommNameEn]!),
-//										mColCommNameCh: \(rows[self.mColCommNameCh]!), mColCommRef1: \(rows[self.mColCommRef1]!)
-//										mColCommRef2: \(rows[self.mColCommRef2]!), mColCommRef3: \(rows[self.mColCommRef3]!),
-//										mColCommOrder: \(rows[self.mColCommOrder]!), mColViewYn: \(rows[self.mColViewYn]!)
-//										""")
-//								}
-								
-								/// 비동기로 처리 되므로 개별적으로 Update
-								if(bIsInsert)
-								{
-									print("insert mobUpdateInfo")
-									try db.run(self.mTblMobUpdateInfo.insert(self.mColUcd <- updateCode, self.mColUdt <- Int64(updateDate),
-																			 self.mColRef <- Int64(ref)))
-								}
-								else{
-									print("update mobUpdateInfo")
-									// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
-									let updateState = self.mTblMobUpdateInfo.where(self.mColUcd == updateCode)
-									try db.run(updateState.update(self.mColUdt <- Int64(updateDate), self.mColRef <- Int64(ref)))
-								}
-							} catch {
-								print("local mobUpdateInfo fail: \(error)")
-							}
-					})
-				
-				case "CODE_DETAIL_CORP" :
-					dataClient.UserInfo = remoteDbUserInfo
-					dataClient.UserData = "app.update.selectCodeDetailCorpList"
-					dataClient.removeServiceParam()
-					dataClient.addServiceParam(paramName: "corpId", value: corpId)
-					dataClient.selectData(dataCompletionHandler:
-						{ (data, error) in
-							if let error = error {
-								// 에러처리
-								print(error)
-								return
-							}
-							guard let dataTable = data else {
-								print("에러 데이터가 없음")
-								return
-							}
-							do
-							{
-								try db.run(self.mTblCodeDetailCorp.delete())
-								for dataRow in dataTable.getDataRows()
-								{
-									try db.run(self.mTblCodeDetailCorp.insert(self.mColCorpId <- dataRow.getString(name:"corpId")!,
-																		 self.mColFieldValue <- dataRow.getString(name:"fieldValue")!,
-																		  self.mColCommCode <- dataRow.getString(name:"commCode")!,
-																		  self.mColCommNameKr <- dataRow.getString(name:"commNameKr")!,
-																		  self.mColCommNameEn <- dataRow.getString(name:"commNameEn")!,
-																		  self.mColCommNameCh <- dataRow.getString(name:"commNameCh")!,
-																		  self.mColCommRef1 <- dataRow.getString(name:"commRef1")!,
-																		  self.mColCommRef2 <- dataRow.getString(name:"commRef2") ?? "",
-																		  self.mColCommRef3 <- dataRow.getString(name:"commRef3") ?? "",
-																		  self.mColCommOrder <- Int64((dataRow.getInt(name:"commOrder") ?? 0))
-										)
-									)
-								}
-								//For Test
-//								for rows in try db.prepare(self.mTblCodeDetailCorp) {
-//									print("""
-//										mColCorpId: \(rows[self.mColCorpId])
-//										mColFieldValue: \(rows[self.mColFieldValue]), mColCommCode: \(rows[self.mColCommCode]),
-//										mColCommNameKr: \(rows[self.mColCommNameKr]!),mColCommNameEn: \(rows[self.mColCommNameEn]!),
-//										mColCommNameCh: \(rows[self.mColCommNameCh]!), mColCommRef1: \(rows[self.mColCommRef1]!),
-//										mColCommRef2: \(rows[self.mColCommRef2]!), mColCommRef3: \(rows[self.mColCommRef3]!),
-//										mColCommOrder: \(rows[self.mColCommOrder]!)
-//										""")
-//								}
-								
-								/// 비동기로 처리 되므로 개별적으로 Update
-								if(bIsInsert)
-								{
-									print("insert mobUpdateInfo")
-									try db.run(self.mTblMobUpdateInfo.insert(self.mColUcd <- updateCode, self.mColUdt <- Int64(updateDate),
-																			 self.mColRef <- Int64(ref)))
-								}
-								else{
-									print("update mobUpdateInfo")
-									// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
-									let updateState = self.mTblMobUpdateInfo.where(self.mColUcd == updateCode)
-									try db.run(updateState.update(self.mColUdt <- Int64(updateDate), self.mColRef <- Int64(ref)))
-								}
-								
-							} catch {
-								print("local mobUpdateInfo fail: \(error)")
-							}
-					})
-				
-				case "UNIT_INFO" :
-					dataClient.UserInfo = remoteDbUserInfo
-					dataClient.UserData = "app.update.selectUnitInfoList"
-					dataClient.removeServiceParam()
-					dataClient.addServiceParam(paramName: "corpId", value: corpId)
-					dataClient.selectData(dataCompletionHandler:
-						{ (data, error) in
-							if let error = error {
-								// 에러처리
-								print(error)
-								return
-							}
-							guard let dataTable = data else {
-								print("에러 데이터가 없음")
-								return
-							}
-							do
-							{
-								try db.run(self.mTblUnitInfo.delete())
-								for dataRow in dataTable.getDataRows()
-								{
-									try db.run(self.mTblUnitInfo.insert(self.mColUnitId <- dataRow.getString(name:"unitId")!,
-																			  self.mColUnitName <- dataRow.getString(name:"unitName")!,
-																			  self.mColEventCode <- dataRow.getString(name:"eventCode") ?? "",
-																			  self.mColBranchId <- dataRow.getString(name:"branchId") ?? "",
-																			  self.mColBranchName <- dataRow.getString(name:"branchName") ?? "",
-																			  self.mColCoordX <- dataRow.getDouble(name:"coordX") ?? 0,
-																			  self.mColCoordY <- dataRow.getDouble(name:"coordY") ?? 0
-										)
-									)
-								}
-								//For Test
-//									for rows in try db.prepare(self.mTblUnitInfo) {
-//										print("""
-//											mColUnitId: \(rows[self.mColUnitId]), mColUnitName: \(rows[self.mColUnitName]!),
-//											mColEventCode: \(rows[self.mColEventCode]!),mColBranchId: \(rows[self.mColBranchId]!),
-//											mColBranchName: \(rows[self.mColBranchName]!),
-//											mColCoordX: \(rows[self.mColCoordX]!), 	mColCoordY: \(rows[self.mColCoordY]!)
-//											""")
-//									}
-								
-								/// 비동기로 처리 되므로 개별적으로 Update
-								if(bIsInsert)
-								{
-									print("insert mobUpdateInfo")
-									try db.run(self.mTblMobUpdateInfo.insert(self.mColUcd <- updateCode, self.mColUdt <- Int64(updateDate),
-																			 self.mColRef <- Int64(ref)))
-								}
-								else{
-									print("update mobUpdateInfo")
-									// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
-									let updateState = self.mTblMobUpdateInfo.where(self.mColUcd == updateCode)
-									try db.run(updateState.update(self.mColUdt <- Int64(updateDate), self.mColRef <- Int64(ref)))
-								}
-							} catch {
-								print("local mobUpdateInfo fail: \(error)")
-							}
-					})
-				
-				case "ASSET_INFO" :
-					dataClient.UserInfo = remoteDbUserInfo
-					dataClient.UserData = "app.update.selectAssetInfoList"
-					dataClient.removeServiceParam()
-					dataClient.addServiceParam(paramName: "corpId", value: corpId)
-					dataClient.selectData(dataCompletionHandler:
-						{ (data, error) in
-							if let error = error {
-								// 에러처리
-								print(error)
-								return
-							}
-							guard let dataTable = data else {
-								print("에러 데이터가 없음")
-								return
-							}
-							do
-							{
-								try db.run(self.mTblAssetInfo.delete())
-								for dataRow in dataTable.getDataRows()
-								{
-									try db.run(self.mTblAssetInfo.insert(self.mColAssetEpc <- dataRow.getString(name:"assetEpc")!,
-																		self.mColAssetCateCode <- dataRow.getString(name:"assetCateCode")!,
-																		self.mColAssetTypeCode <- dataRow.getString(name:"assetTypeCode") ?? "",
-																		self.mColAssetTypeName <- dataRow.getString(name:"assetTypeName") ?? "",
-																		self.mColAssetName <- dataRow.getString(name:"assetName") ?? "",
-																		self.mColRemark <- dataRow.getString(name:"remark") ?? ""
-										)
-									)
-								}
-								//For Test
-//								for rows in try db.prepare(self.mTblAssetInfo) {
-//									print("""
-//										mColAssetEpc: \(rows[self.mColAssetEpc]), mColAssetCateCode: \(rows[self.mColAssetCateCode]!),
-//										mColAssetTypeCode: \(rows[self.mColAssetTypeCode]!),mColAssetTypeName: \(rows[self.mColAssetTypeName]!),
-//										mColAssetName: \(rows[self.mColAssetName]!), mColRemark: \(rows[self.mColRemark]!)
-//										""")
-//								}
-								
-								/// 비동기로 처리 되므로 개별적으로 Update
-								if(bIsInsert)
-								{
-									print("insert mobUpdateInfo")
-									try db.run(self.mTblMobUpdateInfo.insert(self.mColUcd <- updateCode, self.mColUdt <- Int64(updateDate),
-																			 self.mColRef <- Int64(ref)))
-								}
-								else{
-									print("update mobUpdateInfo")
-									// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
-									let updateState = self.mTblMobUpdateInfo.where(self.mColUcd == updateCode)
-									try db.run(updateState.update(self.mColUdt <- Int64(updateDate), self.mColRef <- Int64(ref)))
-								}
-								
-							} catch {
-								print("local mobUpdateInfo fail: \(error)")
-							}
-					})
-				
-				case "CUST_MAST" :
-					dataClient.UserInfo = remoteDbUserInfo
-					dataClient.UserData = "app.update.selectCustMastList"
-					dataClient.removeServiceParam()
-					dataClient.addServiceParam(paramName: "corpId", value: corpId)
-					dataClient.selectData(dataCompletionHandler:
-						{ (data, error) in
-							if let error = error {
-								// 에러처리
-								print(error)
-								return
-							}
-							guard let dataTable = data else {
-								print("에러 데이터가 없음")
-								return
-							}
-							do
-							{
-								try db.run(self.mTblCustMast.delete())
-								for dataRow in dataTable.getDataRows()
-								{
-									try db.run(self.mTblCustMast.insert(self.mColCustId <- dataRow.getString(name:"custId")!,
-																		 self.mColCorpId <- dataRow.getString(name:"corpId")!,
-																		 self.mColParentCustId <- dataRow.getString(name:"parentCustId") ?? "",
-																		 self.mColCustType <- dataRow.getString(name:"custType") ?? "",
-																		 self.mColCustName <- dataRow.getString(name:"custName") ?? "",
-																		 self.mColCustKey <- dataRow.getString(name:"custKey") ?? "",
-																		 self.mColEpcLock <- dataRow.getString(name:"epcLock") ?? "",
-																		 self.mColCustEpc <- dataRow.getString(name:"custEpc") ?? "",
-																		 self.mColUseYn <- dataRow.getString(name:"useYn") ?? ""
-										)
-									)
-								}
-								//For Test
-//								for rows in try db.prepare(self.mTblCustMast) {
-//									print("""
-//										mColCustId: \(rows[self.mColCustId]), mColCorpId: \(rows[self.mColCorpId]),
-//										mColParentCustId: \(rows[self.mColParentCustId]!),mColCustType: \(rows[self.mColCustType]!),
-//										mColCustName: \(rows[self.mColCustName]!), mColCustKey: \(rows[self.mColCustKey]!),
-//										mColEpcLock: \(rows[self.mColEpcLock]!), mColCustEpc: \(rows[self.mColCustEpc]!)
-//										mColUseYn: \(rows[self.mColUseYn]!)
-//										""")
-//								}
-								
-								/// 비동기로 처리 되므로 개별적으로 Update
-								if(bIsInsert)
-								{
-									print("insert mobUpdateInfo")
-									try db.run(self.mTblMobUpdateInfo.insert(self.mColUcd <- updateCode, self.mColUdt <- Int64(updateDate),
-																			 self.mColRef <- Int64(ref)))
-								}
-								else{
-									print("update mobUpdateInfo")
-									// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
-									let updateState = self.mTblMobUpdateInfo.where(self.mColUcd == updateCode)
-									try db.run(updateState.update(self.mColUdt <- Int64(updateDate), self.mColRef <- Int64(ref)))
-								}
-
-								
-								
-							} catch {
-								print("local mobUpdateInfo fail: \(error)")
-							}
-					})
-				default:
-					print(" 업데이트 항목에 대한 구현이 없음. 코드: \(updateCode)")
-			}
+						
+						//왼료처리를 위하여 디스페쳐를 나간다.
+						disPatchGrp.leave()
+				})
 			
-			//For Test
-//			for rows in try db.prepare(self.mTblMobUpdateInfo) {
-//				print("Ucd: \(rows[self.mColUcd]), Udt: \(rows[self.mColUdt]), Ref: \(rows[self.mColRef])")
-//			}
-
-		} catch {
-		print("local mobUpdateInfo fail: \(error)")
+			case "ASSET_INFO" :
+				dataClient.UserInfo = remoteDbUserInfo
+				dataClient.UserData = "app.update.selectAssetInfoList"
+				dataClient.removeServiceParam()
+				dataClient.addServiceParam(paramName: "corpId", value: corpId)
+				dataClient.selectData(dataCompletionHandler:
+					{ (data, error) in
+						if let error = error {
+							// 에러처리
+							print(error)
+							return
+						}
+						guard let dataTable = data else {
+							print("에러 데이터가 없음")
+							return
+						}
+						do
+						{
+							try db.run(objMe.mTblAssetInfo.delete())
+							for dataRow in dataTable.getDataRows()
+							{
+								try db.run(objMe.mTblAssetInfo.insert(self.mColAssetEpc <- dataRow.getString(name:"assetEpc")!,
+																	objMe.mColAssetCateCode <- dataRow.getString(name:"assetCateCode")!,
+																	objMe.mColAssetTypeCode <- dataRow.getString(name:"assetTypeCode") ?? "",
+																	objMe.mColAssetTypeName <- dataRow.getString(name:"assetTypeName") ?? "",
+																	objMe.mColAssetName <- dataRow.getString(name:"assetName") ?? "",
+																	objMe.mColRemark <- dataRow.getString(name:"remark") ?? ""
+									)
+								)
+							}
+							//For Test
+	//								for rows in try db.prepare(self.mTblAssetInfo) {
+	//									print("""
+	//										mColAssetEpc: \(rows[self.mColAssetEpc]), mColAssetCateCode: \(rows[self.mColAssetCateCode]!),
+	//										mColAssetTypeCode: \(rows[self.mColAssetTypeCode]!),mColAssetTypeName: \(rows[self.mColAssetTypeName]!),
+	//										mColAssetName: \(rows[self.mColAssetName]!), mColRemark: \(rows[self.mColRemark]!)
+	//										""")
+	//								}
+							
+							/// 비동기로 처리 되므로 개별적으로 Update
+							if(bIsInsert)
+							{
+								print("insert mobUpdateInfo")
+								try db.run(objMe.mTblMobUpdateInfo.insert(objMe.mColUcd <- updateCode, objMe.mColUdt <- Int64(updateDate),
+																		 objMe.mColRef <- Int64(ref)))
+							}
+							else{
+								print("update mobUpdateInfo")
+								// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
+								let updateState = objMe.mTblMobUpdateInfo.where(objMe.mColUcd == updateCode)
+								try db.run(updateState.update(objMe.mColUdt <- Int64(updateDate), objMe.mColRef <- Int64(ref)))
+							}
+							
+						} catch {
+							print("local mobUpdateInfo fail: \(error)")
+						}
+						
+						//왼료처리를 위하여 디스페쳐를 나간다.
+						disPatchGrp.leave()
+				})
+			
+			case "CUST_MAST" :
+				dataClient.UserInfo = remoteDbUserInfo
+				dataClient.UserData = "app.update.selectCustMastList"
+				dataClient.removeServiceParam()
+				dataClient.addServiceParam(paramName: "corpId", value: corpId)
+				dataClient.selectData(dataCompletionHandler:
+					{ (data, error) in
+						if let error = error {
+							// 에러처리
+							print(error)
+							return
+						}
+						guard let dataTable = data else {
+							print("에러 데이터가 없음")
+							return
+						}
+						do
+						{
+							try db.run(objMe.mTblCustMast.delete())
+							for dataRow in dataTable.getDataRows()
+							{
+								try db.run(objMe.mTblCustMast.insert(self.mColCustId <- dataRow.getString(name:"custId")!,
+																	 objMe.mColCorpId <- dataRow.getString(name:"corpId")!,
+																	 objMe.mColParentCustId <- dataRow.getString(name:"parentCustId") ?? "",
+																	 objMe.mColCustType <- dataRow.getString(name:"custType") ?? "",
+																	 objMe.mColCustName <- dataRow.getString(name:"custName") ?? "",
+																	 objMe.mColCustKey <- dataRow.getString(name:"custKey") ?? "",
+																	 objMe.mColEpcLock <- dataRow.getString(name:"epcLock") ?? "",
+																	 objMe.mColCustEpc <- dataRow.getString(name:"custEpc") ?? "",
+																	 objMe.mColUseYn <- dataRow.getString(name:"useYn") ?? ""
+									)
+								)
+							}
+							//For Test
+	//								for rows in try db.prepare(self.mTblCustMast) {
+	//									print("""
+	//										mColCustId: \(rows[self.mColCustId]), mColCorpId: \(rows[self.mColCorpId]),
+	//										mColParentCustId: \(rows[self.mColParentCustId]!),mColCustType: \(rows[self.mColCustType]!),
+	//										mColCustName: \(rows[self.mColCustName]!), mColCustKey: \(rows[self.mColCustKey]!),
+	//										mColEpcLock: \(rows[self.mColEpcLock]!), mColCustEpc: \(rows[self.mColCustEpc]!)
+	//										mColUseYn: \(rows[self.mColUseYn]!)
+	//										""")
+	//								}
+							
+							/// 비동기로 처리 되므로 개별적으로 Update
+							if(bIsInsert)
+							{
+								print("insert mobUpdateInfo")
+								try db.run(objMe.mTblMobUpdateInfo.insert(objMe.mColUcd <- updateCode, objMe.mColUdt <- Int64(updateDate),
+																		 objMe.mColRef <- Int64(ref)))
+							}
+							else{
+								print("update mobUpdateInfo")
+								// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
+								let updateState = objMe.mTblMobUpdateInfo.where(objMe.mColUcd == updateCode)
+								try db.run(updateState.update(objMe.mColUdt <- Int64(updateDate), objMe.mColRef <- Int64(ref)))
+							}
+						} catch {
+							print("local mobUpdateInfo fail: \(error)")
+						}
+						
+						//왼료처리를 위하여 디스페쳐를 나간다.
+						disPatchGrp.leave()
+				})
+			default:
+				print(" 업데이트 항목에 대한 구현이 없음. 코드: \(updateCode)")
+				disPatchGrp.leave()
 		}
 	}
 	
 	/// 원격 Db와 버전체크 버전체크후, 데이터를 가져와서 동기화
-	public func versionCheck() -> Void
+	public func versionCheck(_ clsIndicatior: ProgressIndicator) -> Void
 	{
-
-		print("=============================================")
-		print("*LocalData.versionCheck")
-		print("=============================================")
-		
-		
 		if(self.mRemoteDbEnncryptId.isEmpty)
 		{
-			//TODO:: 공통로그및 공통 Exception 처리
 			print("원격연결정보가 없습니다. 확인해 주세요.")
 			return
 		}
 		
 		if(self.mCorpId.isEmpty)
 		{
-			//TODO:: 공통로그및 공통 Exception 처리
 			print("조회할 회사 정보가 없습니다. 확인해 주세요.")
 			return
 		}
+		
+		//모든 Dispatch 쓰레드가 종료되기를 기다린다.
+		let clsDispatchGrp = DispatchGroup()
 		
 		let dataClient = Mosaic.DataClient(url: Constants.WEB_SVC_URL)
 		dataClient.UserInfo = self.mRemoteDbEnncryptId
@@ -843,30 +848,22 @@ class LocalData {
 							if(updateDate > localRow[self.mColUdt])
 							{
 								print("update date  org: \(updateDate), new:\(localRow[self.mColUdt])")
-								self.changeNewVersiion(remoteDbUserInfo: self.mRemoteDbEnncryptId, corpId: self.mCorpId, db: db, updateCode: updateCode, updateDate: updateDate, ref : ref,  bIsInsert : false )
+								self.changeNewVersiion(remoteDbUserInfo: self.mRemoteDbEnncryptId, corpId: self.mCorpId, db: db, updateCode: updateCode, updateDate: updateDate, ref : ref,  bIsInsert : false , disPatchGrp : clsDispatchGrp)
 							}
 						}
 						else
 						{
-							self.changeNewVersiion(remoteDbUserInfo: self.mRemoteDbEnncryptId, corpId: self.mCorpId, db: db, updateCode: updateCode, updateDate: updateDate, ref : ref,  bIsInsert : true )
+							self.changeNewVersiion(remoteDbUserInfo: self.mRemoteDbEnncryptId, corpId: self.mCorpId, db: db, updateCode: updateCode, updateDate: updateDate, ref : ref,  bIsInsert : true , disPatchGrp : clsDispatchGrp)
 						}
 					}
 					
-					//for Test
-					//					for rows in try db.prepare(self.mTblMobUpdateInfo) {
-					//						print("Ucd: \(rows[self.mColUcd]), Udt: \(rows[self.mColUdt]), Ref: \(rows[self.mColRef])")
-					//					}
-					
-					//for Test
-					//self.getCodeDetail(fieldValue: "SALE_TYPE", commCode:"", viewYn: "Y",  initCodeName:  "")
-					//self.getCodeDetailCorp(corpId: "logisallcm", fieldValue: "BIZ_TYPE",  initCodeName:  "업종타입")
-					//self.getUnitInfo(searchValue: "고덕")
-					//self.getAssetInfo(searchValue: "11")
-					//self.getCustInfo()
-					//self.getSaleTypeCodeDetail(fieldValue : "RESALE_TYPE",  saleResale : SaleResaleType.Sale, custType: CustType.RDC, initCodeName : nil)
-					
 				} catch {
 					print("local mobUpdateInfo fail: \(error)")
+				}
+				
+				//모든데이터가 다 받을수 있도록 대기한다
+				clsDispatchGrp.notify(queue: .main) {
+					clsIndicatior.hide()
 				}
 		})
 	}
