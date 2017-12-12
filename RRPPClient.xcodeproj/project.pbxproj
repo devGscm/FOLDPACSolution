@@ -96,6 +96,8 @@
 		B060131B1FD5088A00594CCD /* InOutCancel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B060131A1FD5088A00594CCD /* InOutCancel.storyboard */; };
 		B060131D1FD512B900594CCD /* InOutCancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B060131C1FD512B900594CCD /* InOutCancel.swift */; };
 		B060131F1FD529A200594CCD /* InOutCancelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B060131E1FD529A200594CCD /* InOutCancelCell.swift */; };
+		B0A2357C1FDA5E7F00AD4925 /* InOutCancelDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A2357B1FDA5E7F00AD4925 /* InOutCancelDetailCell.swift */; };
+		B0A2357E1FDA6D4D00AD4925 /* InOutCancelDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A2357D1FDA6D4D00AD4925 /* InOutCancelDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -244,6 +246,8 @@
 		B060131A1FD5088A00594CCD /* InOutCancel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InOutCancel.storyboard; sourceTree = "<group>"; };
 		B060131C1FD512B900594CCD /* InOutCancel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InOutCancel.swift; sourceTree = "<group>"; };
 		B060131E1FD529A200594CCD /* InOutCancelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InOutCancelCell.swift; sourceTree = "<group>"; };
+		B0A2357B1FDA5E7F00AD4925 /* InOutCancelDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InOutCancelDetailCell.swift; sourceTree = "<group>"; };
+		B0A2357D1FDA6D4D00AD4925 /* InOutCancelDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InOutCancelDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -556,6 +560,8 @@
 				B060131A1FD5088A00594CCD /* InOutCancel.storyboard */,
 				B060131C1FD512B900594CCD /* InOutCancel.swift */,
 				B060131E1FD529A200594CCD /* InOutCancelCell.swift */,
+				B0A2357B1FDA5E7F00AD4925 /* InOutCancelDetailCell.swift */,
+				B0A2357D1FDA6D4D00AD4925 /* InOutCancelDetail.swift */,
 			);
 			path = InOutCancel;
 			sourceTree = "<group>";
@@ -737,6 +743,7 @@
 				559F39D41FD76A9F006E5C17 /* ClientConfig.swift in Sources */,
 				55B302C21FCE323B00BDCCB1 /* BaseRfidViewController.swift in Sources */,
 				55FA784D1FBDAD0B00583A80 /* RootViewController.swift in Sources */,
+				B0A2357E1FDA6D4D00AD4925 /* InOutCancelDetail.swift in Sources */,
 				96E494201FB1A78500D1E2C1 /* AppDelegate.swift in Sources */,
 				5522A6311FDFA778009ED6EF /* BaseTableViewController.swift in Sources */,
 				9680BE8C1FCBD9D4002838A4 /* RfidSwing.swift in Sources */,
@@ -745,6 +752,7 @@
 				5590A5611FD4E7C1007571D5 /* ProdMappingOutCell.swift in Sources */,
 				559F39D61FD76EC7006E5C17 /* BranchSearchDialog.swift in Sources */,
 				55FA784C1FBDAD0B00583A80 /* RightViewController.swift in Sources */,
+				B0A2357C1FDA5E7F00AD4925 /* InOutCancelDetailCell.swift in Sources */,
 				9680BE861FCBD91D002838A4 /* SwingApi.m in Sources */,
 				555B988E1FD27CC3006CC14F /* HistorySearchCell.swift in Sources */,
 				9680BE891FCBD91D002838A4 /* BLEUtility.m in Sources */,
