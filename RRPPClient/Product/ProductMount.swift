@@ -46,14 +46,16 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		super.viewWillAppear(animated)
 		prepareToolbar()
 		
-		//TODO:: 전역객체에서 등록된 리더기정보를 가져온다.
-		let devId  = "D32F0010-8DB8-856F-A8DF-85B3D00CF26A"
-		self.initRfid(.SWING, id:  devId, delegateReder:  self as ReaderResponseDelegate )
+		//RFID를 처리할 델리게이트 지정
+		self.initRfid(self as ReaderResponseDelegate )
 		
 		initViewControl()
 	}
 	
-	
+	override func viewDidAppear(_ animated: Bool)
+	{
+		super.viewDidAppear(animated)
+	}
 	
 	override func viewDidDisappear(_ animated: Bool)
 	{
@@ -67,26 +69,15 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		
 		super.destoryRfid()
 		super.viewDidDisappear(animated)
-		
 	}
-	
-	
-	
 	
 	// View관련 컨트롤을 초기화한다.
 	func initViewControl()
 	{
-		// For Test
-//		AppContext.sharedManager.getUserInfo().setEncryptId(strEncryptId: "xxOxOsU93/PvK/NN7DZmZw==")
-//		AppContext.sharedManager.getUserInfo().setCorpId(strCorpId: "logisallcm")
-//		AppContext.sharedManager.getUserInfo().setBranchId(branchId: "160530000045")
-//		AppContext.sharedManager.getUserInfo().setBranchCustId(branchCustId: "160530000071")
-//		AppContext.sharedManager.getUserInfo().setUserLang(strUserLang: "KR")
+		clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
+										 indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.")
 		
 		/*
-		//		clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
-		//									  indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.")
-		
 		// 취소가능하도록 수정
 		clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
 		indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.",
@@ -103,7 +94,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		
 		lblUserName.text = AppContext.sharedManager.getUserInfo().getUserName()
 		lblBranchInfo.text = AppContext.sharedManager.getUserInfo().getBranchName()
-		lblReaderName.text = UserDefaults.standard.string(forKey: Constants.RFID_READER_NAME_KEY)
+		lblReaderName.text = AppContext.sharedManager.getUserInfo().getReaderDevName()
 	}
 	
 	
@@ -162,85 +153,80 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 				self.lblOrderCustName.text = clsDataRow.getString(name: "orderCustName")
 				self.lblOrderCount.text = "\(intOrderWorkCnt)/\(intOrderReqCnt)"
 				
-				// 새로운 발주번호가 들어ㅗ면 기존 데이터를 삭제한다.
+				// 새로운 발주번호가 들어면 기존 데이터를 삭제한다.
 				clearTagData()
 			}
 		}
 	}
 	
-	
+	//////////////////////////////////////////////////////////////////////////////////////////
+	////   리더기 관련 이벤트및 처리 시작
+	//////////////////////////////////////////////////////////////////////////////////////////
 	// 리더기 연결 클릭이벤트
 	@IBAction func onRfidReaderClicked(_ sender: UIButton)
 	{
-		
 		if(sender.isSelected == false)
 		{
-			print(" 리더기 연결")
-			sender.isSelected = true
-			sender.backgroundColor = Color.orange.base
-			sender.tintColor = Color.orange.base
-			sender.setTitle(NSLocalizedString("rfid_reader_close", comment: "종료"), for: .normal)
+			showSnackbar(message: NSLocalizedString("rfid_connecting_reader", comment: "RFID 리더기에 연결하는 중 입니다."))
+			//print(" 리더기 연결")
+			super.readerConnect()
 		}
 		else
 		{
-			print(" 리더기 종료")
-			sender.isSelected = false
-			sender.backgroundColor = Color.blue.base
-			sender.tintColor = Color.white
-			sender.setTitle(NSLocalizedString("rfid_reader_connect", comment: "연결"), for: .normal)
+			super.readerDisConnect()
 		}
-		
-		// TODO  : test
-		let clsTagInfo1 = RfidUtil.TagInfo()
-		clsTagInfo1.setYymm(strYymm: "1705")
-		clsTagInfo1.setSeqNo(strSeqNo: "170005")
-		clsTagInfo1.setEpcCode(strEpcCode: "3312D58E4581004000029815")
-		clsTagInfo1.setEpcUrn(strEpcUrn: "grai:0.95100043.1025.170005")
-		clsTagInfo1.setSerialNo(strSerialNo: "170005")
-		clsTagInfo1.setCorpEpc(strCorpEpc: "95100043")
-		clsTagInfo1.setAssetEpc(assetEpc: "1025")
-		getRfidData(clsTagInfo: clsTagInfo1)
-		
-		
-		
-		
-		let clsTagInfo2 = RfidUtil.TagInfo()
-		clsTagInfo2.setYymm(strYymm: "1705")
-		clsTagInfo2.setSeqNo(strSeqNo: "170004")
-		clsTagInfo2.setEpcCode(strEpcCode: "3312D58E4581004000029814")
-		clsTagInfo2.setEpcUrn(strEpcUrn: "grai:0.95100043.1025.170004")
-		clsTagInfo2.setSerialNo(strSerialNo: "170004")
-		clsTagInfo2.setCorpEpc(strCorpEpc: "95100043")
-		clsTagInfo2.setAssetEpc(assetEpc: "1025")
-		getRfidData(clsTagInfo: clsTagInfo2)
-		
-		
-		
-		
-		let clsTagInfo3 = RfidUtil.TagInfo()
-		clsTagInfo3.setYymm(strYymm: "1607")
-		clsTagInfo3.setSeqNo(strSeqNo: "6002")
-		clsTagInfo3.setEpcCode(strEpcCode: "3312D58E3D81004000001772")
-		clsTagInfo3.setEpcUrn(strEpcUrn: "grai:0.95100027.1025.6002")
-		clsTagInfo3.setSerialNo(strSerialNo: "6002")
-		clsTagInfo3.setCorpEpc(strCorpEpc: "95100027")
-		clsTagInfo3.setAssetEpc(assetEpc: "1025")
-		getRfidData(clsTagInfo: clsTagInfo3)
-		
-		let clsTagInfo4 = RfidUtil.TagInfo()
-		clsTagInfo4.setYymm(strYymm: "1607")
-		clsTagInfo4.setSeqNo(strSeqNo: "6001")
-		clsTagInfo4.setEpcCode(strEpcCode: "3312D58E3D81004000001771")
-		clsTagInfo4.setEpcUrn(strEpcUrn: "grai:0.95100027.1025.6001")
-		clsTagInfo4.setSerialNo(strSerialNo: "6001")
-		clsTagInfo4.setCorpEpc(strCorpEpc: "95100027")
-		clsTagInfo4.setAssetEpc(assetEpc: "1025")
-		getRfidData(clsTagInfo: clsTagInfo4)
-		
-		
 	}
 	
+	//리더기에서 읽어드린 태그에 대한 이벤트 발생처리
+	func didReadTagid(_ tagid: String)
+	{
+		let clsTagInfo = RfidUtil.parse(strData: tagid)
+		getRfidData(clsTagInfo: clsTagInfo)
+	}
 	
+	//리더기 연결성공
+	func didReaderConnected()
+	{
+		showSnackbar(message: NSLocalizedString("rfid_connected_reader", comment: "RFID 리더기에 연결되었습니다."))
+		changeBtnRfidReader(true)
+	}
+	
+	//리더기 연결종로
+	func didReaderDisConnected()
+	{
+		showSnackbar(message: NSLocalizedString("rfid_connection_terminated", comment: "연결이 종료되었습니다."))
+		changeBtnRfidReader(false)
+	}
+	
+	//리더기 연결 타임오바
+	func didRederConnectTimeOver()
+	{
+		showSnackbar(message: NSLocalizedString("rfid_not_connect_reader", comment: "RFID 리더기에 연결할수 없습니다."))
+		changeBtnRfidReader(false)
+	}
+	
+	//리더기 연결 여부에 따른 버튼에대한 상태값 변경
+	func changeBtnRfidReader(_ isConnected : Bool)
+	{
+		if(isConnected )
+		{
+			self.btnRfidReader.isSelected = true
+			self.btnRfidReader.backgroundColor = Color.orange.base
+			self.btnRfidReader.tintColor = Color.orange.base
+			self.btnRfidReader.setTitle(NSLocalizedString("rfid_reader_close", comment: "종료"), for: .normal)
+		}
+		else
+		{
+			self.btnRfidReader.isSelected = false
+			self.btnRfidReader.backgroundColor = Color.blue.base
+			self.btnRfidReader.tintColor = Color.white
+			self.btnRfidReader.setTitle(NSLocalizedString("rfid_reader_connect", comment: "연결"), for: .normal)
+		}
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////
+	////   리더기 관련 이벤트및 처리 종료
+	//////////////////////////////////////////////////////////////////////////////////////////
 	
 	// 주문선택
 	@IBAction func onMakeOrderIdClicked(_ sender: UIButton)
@@ -261,10 +247,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		{
 			lblOrderCount?.text = "\(self.intCurOrderWorkCnt)/\(self.intOrderReqCnt)"
 		}
-		
-		// TODO : 나중에 구현할 사항
-		//super.clear항nventory()
-		
+		super.clearInventory()
 	}
 	
 	func getRfidData( clsTagInfo : RfidUtil.TagInfo)
@@ -277,11 +260,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		clsTagInfo.setAssetEpc(assetEpc: strAssetEpc)
 		if(clsTagInfo.getAssetEpc().isEmpty == false)
 		{
-			guard let strAssetName = super.getAssetName(assetEpc: strAssetEpc) as? String
-				else
-			{
-				return
-			}
+			let strAssetName = super.getAssetName(assetEpc: strAssetEpc)
 			clsTagInfo.setAssetName(assetName : strAssetName)
 			print("@@@@@@@@ AssetName2:\(clsTagInfo.getAssetName() )")
 		}
@@ -355,10 +334,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 					lblOrderCount.text = "\(intCurOrderWorkCnt)/\(intOrderReqCnt)"
 				}
 			}
-			
 		}
-		
-		
 		DispatchQueue.main.async { self.tvProductMount?.reloadData() }
 	}
 	
@@ -399,7 +375,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		{
 			if(self.strProdAssetEpc != clsInfo.getAssetEpc())
 			{
-				clsIndicator!.hide()
+				self.clsIndicator?.hide()
 				
 				Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("stock_can_not_processed_because_different_pallet", comment: "품목이 다른 파렛트가 있어 처리 할 수 없습니다."))
 				return
@@ -407,14 +383,11 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 			
 			let clsDataRow : DataRow = DataRow()
 			clsDataRow.State = DataRow.DATA_ROW_STATE_ADDED
-			clsDataRow.addRow(name:"epcCode", value: clsInfo.getEpcUrn())
+			clsDataRow.addRow(name:"epcCode", value: clsInfo.getEpcCode())
 			clsDataTable.addDataRow(dataRow: clsDataRow)
 		}
 		clsDataClient.executeData(dataTable: clsDataTable, dataCompletionHandler: { (data, error) in
-			
-			
-			self.clsIndicator!.hide()
-			
+			self.clsIndicator?.hide()
 			if let error = error {
 				// 에러처리
 				print(error)
@@ -435,11 +408,13 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 				print(" -strResultCode:\(strResultCode!)")
 				if(Constants.PROC_RESULT_SUCCESS == strResultCode)
 				{
-					self.clearTagData()
-					self.clearUserInterfaceData()
-					
-					let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
-					self.showSnackbar(message: strMsg)
+					//비동기 처리 결과에대한  UI에한 처리는 반드시 쓰레드로 처리되어야 한다.
+					DispatchQueue.main.async {
+						self.clearTagData()
+						self.clearUserInterfaceData()
+						let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
+						self.showSnackbar(message: strMsg)
+					}
 				}
 				else
 				{
@@ -461,12 +436,13 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		strMakeOrderId	= ""
 		strProdAssetEpc = ""
 		
+		//UI 변경은 Thread로 호출하여 변경한
 		
 		self.btnMakeOrderId.setTitle("", for: .normal)
 		self.lblOrderCustName.text = ""
 		self.lblOrderCount.text = ""
 		self.tfMakeLotId.text = ""
-		
+	
 	}
 	
 	
@@ -500,7 +476,6 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 	// 초기화
 	@IBAction func onClearAllClicked(_ sender: UIButton)
 	{
-		
 		Dialog.show(container: self, viewController: nil,
 					title: NSLocalizedString("common_delete", comment: "삭제"),
 					message: NSLocalizedString("common_confirm_delete", comment: "전체 데이터를 삭제하시겠습니까?"),
@@ -509,7 +484,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 						self.clearTagData()
 						super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
 		},
-					cancelTitle: NSLocalizedString("common_cancel", comment: "확인"), cancelHandler: nil)
+		cancelTitle: NSLocalizedString("common_cancel", comment: "확인"), cancelHandler: nil)
 	}
 	
 	// 전송
@@ -571,12 +546,6 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		self.present(acDialog, animated: true, completion: nil)
 		
 	}
-	
-	func didReadTagList(_ tagId: String)
-	{
-		
-	}
-	
 }
 
 

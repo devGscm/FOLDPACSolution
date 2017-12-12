@@ -15,6 +15,7 @@
 		559F39E51FD77414006E5C17 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F39E41FD77414006E5C17 /* UIView.swift */; };
 		559F39E71FD7742A006E5C17 /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F39E61FD7742A006E5C17 /* UIStoryboard.swift */; };
 		559F39EF1FD78218006E5C17 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F39EE1FD78218006E5C17 /* Dictionary.swift */; };
+		55B0830D1FDE5464007E3EAB /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B0830C1FDE5464007E3EAB /* UIImage.swift */; };
 		9641E8B51FB56DBA00E0E422 /* DataColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9641E8B41FB56DBA00E0E422 /* DataColumn.swift */; };
 		967DC3E41FB42C37000265CD /* DataRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967DC3E31FB42C37000265CD /* DataRow.swift */; };
 		96B2A9911FB5836F009E2615 /* DataTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B2A9901FB5836F009E2615 /* DataTable.swift */; };
@@ -46,6 +47,7 @@
 		559F39E41FD77414006E5C17 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		559F39E61FD7742A006E5C17 /* UIStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboard.swift; sourceTree = "<group>"; };
 		559F39EE1FD78218006E5C17 /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
+		55B0830C1FDE5464007E3EAB /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		9641E8B41FB56DBA00E0E422 /* DataColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataColumn.swift; sourceTree = "<group>"; };
 		967DC3E31FB42C37000265CD /* DataRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRow.swift; sourceTree = "<group>"; };
 		96B2A9901FB5836F009E2615 /* DataTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTable.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				559F39E41FD77414006E5C17 /* UIView.swift */,
 				559F39E61FD7742A006E5C17 /* UIStoryboard.swift */,
 				559F39EE1FD78218006E5C17 /* Dictionary.swift */,
+				55B0830C1FDE5464007E3EAB /* UIImage.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				96B2A9931FB5A0F9009E2615 /* DataClient.swift in Sources */,
 				559F39E51FD77414006E5C17 /* UIView.swift in Sources */,
 				9641E8B51FB56DBA00E0E422 /* DataColumn.swift in Sources */,
+				55B0830D1FDE5464007E3EAB /* UIImage.swift in Sources */,
 				96B2A9951FB5A13C009E2615 /* DataSourceMgr.swift in Sources */,
 				96B6E7711FBC1E80004F85B5 /* QueryMaker.swift in Sources */,
 				554035331FC92C9300A4F2A4 /* DateUtil.swift in Sources */,

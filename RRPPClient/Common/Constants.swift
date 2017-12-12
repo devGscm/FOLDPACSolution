@@ -32,7 +32,6 @@ class Constants
 	static let RFID_MASK_KEY							= "rfidMask"						/**< RFID 마스크 */
 	static let BASE_BRANCH_KEY							= "baseBranch"					    /**< 거점 선택 */
 	static let RFID_POWER_KEY							= "rfidPower"						/**< RFID 파워 */
-
     
 	
 	//static let WEB_SVC_URL 	    					= "http://upis.moramcnt.com"	    /**< 서비스 URL     */
@@ -135,10 +134,35 @@ class Constants
 	static let USER_LANG_EN											= "EN"		/**< 영어		*/
 	static let USER_LANG_CH											= "CH"		/**< 중국어	*/
 	//=====================================================================================
+	
+
+	
+	//센서 태그 헤더 정보
+	static let SWING_ABNORMAL_TAG_HEADER_INFO						= "301E"		/**< 이상 센서태그 헤더정보, #4번태그*/
+	static let SWING_TAG_HEADER_INFO								= "3000"		/**< 센서태그 헤더정보 */
+	static let SWING_BARCODE_HEADER_INFO							= "http:"		/**< 바코드 헤더정보*/
+	static let SWING_BARCODE_QR_INFO								= "qc="			/**< 바코드 QR정보*/
+	
+	static let READING_LANGTH_BARCODE 								= 14			/**< 바코드타입:GTIN-14 */
+	static let READING_LANGTH_QRCODE 								= 18			/**< 바코드타입:QR코드 	*/
+	static let READING_LANGTH_RFIDTAG 								= 28			/**< 바코드타입:RFID태그 	*/
+	
+	static let INTENT_EXTRA_READING_TYPE 							= "ReadingType"	/**< 바코드타입:GTIN-14 */
+	static let READING_TYPE_BARCODE 								= "BARCODE"		/**< 바코드타입:GTIN-14 */
+	static let READING_TYPE_QRCODE 									= "QRCODE"			/**< 바코드타입:QR코드 	*/
+	static let READING_TYPE_RFIDTAG 								= "RFIDTAG"		/**< 바코드타입:RFID태그 	*/
+	
+	//static let SWING_READER_MODE_RFID 								= 0				/**< 스윙리더기 : RFID 읽기모드 	*/
+	//static let SWING_READER_MODE_TEMPERATURE						= 1				/**< 스윙리더기 : TEMPERATURE 읽기모드 	*/
+	//static let SWING_READER_MODE_BCD 								= 2				/**< 스윙리더기 : BCD 읽기모드 	*/
+	//static let SWING_READER_MODE_ENC 								= 3				/**< 스윙리더기 : ENC 읽기모드 	*/
+	
+	static let SWING_TAG_REPORT_MODE_NEW 							= 0				/**< 스윙리더기 : 태그리포트 [N] 	*/
+	static let SWING_TAG_REPORT_MODE_ALL							= 1				/**< 스윙리더기 : 태그리포트 [A]	*/
+	
     
-    
-    static let IDENTIFICATION_SYSTEM_GTIN14 						= "1"	/**< 식별체계 : GTIN-14     	*/
-    static let IDENTIFICATION_SYSTEM_AGQR							= "2"	/**< 식별체계 : 농산물 QR코드     */
+    static let IDENTIFICATION_SYSTEM_GTIN14 						= 1		/**< 식별체계 : GTIN-14     	*/
+    static let IDENTIFICATION_SYSTEM_AGQR							= 2		/**< 식별체계 : 농산물 QR코드     */
 	
     static let DATA_ROW_STATE_UNCHANGED               				= 0     /**< 데이터상태 : 변경 없음 **/
     static let DATA_ROW_STATE_ADDED                    				= 1     /**< 데이터상태 : 삽입 **/

@@ -240,6 +240,20 @@ class UserInfo
 		return nil
 	}
 	
+	func getReaderDevName() -> String?
+	{
+		if let rederInfoList = UserDefaults.standard.data(forKey: Constants.RFID_READER_INFO_KEY)
+		{
+			if let rederInfoList = NSKeyedUnarchiver.unarchiveObject(with: rederInfoList) as? [ReaderDevInfo]
+			{
+				for rederInfo in rederInfoList
+				{
+					return rederInfo.name
+				}
+			}
+		}
+		return nil
+	}
 	
 	/**
 	* 자동로그인 여부를 설정한다.

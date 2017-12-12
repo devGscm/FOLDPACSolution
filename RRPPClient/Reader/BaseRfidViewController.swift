@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Mosaic
 
 //UserDefaults 에 넣기 위하여  구조체대신 클래스 Array로 선언
 //또한 NSCoding 에대한 프로토콜을 구현해야 된다.
@@ -48,15 +49,28 @@ public enum ReaderType : Int
 	}
 }
 
+public enum ReaderSenssorMode : Int
+{
+	case RFID = 0
+	case BARCODE = 2
+}
+
 
 /// 리더기 공통 응답프로토콜 선언
 @objc
 public protocol ReaderResponseDelegate : class {
-	func didReadTagList( _ tagId : String)
 	
-	 @objc optional func didReaderConnected()
+	// 자체적으로 이벤트를 구조체나 클래스로 (TagInfo) 넘겨주고 싶었으나
+	//objc optional 을 사용하는 경우는 일반타입만 가능하고 구조체나 클래스로 넘겨줄 수가 없음
+	func didReadTagid( _ tagid : String)
 	
-	 @objc optional func didReaderDisConnected()
+	@objc optional func didReadBarcode(_ barcode: String)
+	
+	@objc optional func didReaderConnected()
+	
+	@objc optional func didReaderDisConnected()
+	
+	@objc optional func didRederConnectTimeOver()
 	
 	///optional로 프로토콜 설계시 구조체 파라메터를 사용할 수 없다.
 	@objc optional func didReaderScanList(id:String, name: String, macAddr: String)
@@ -165,10 +179,10 @@ protocol ReaderProtocol : class {
 	@objc optional func   readerTempDataSync(_ blLarge_memory : Bool)
 	
 	/**
-	* 리더기 모드 컨트롤 - 스윙센서
+	* 리더기 모드 컨트롤 - 스윙센서 (RFID/바코드 구분)
 	* @return boolean
 	*/
-	@objc optional func   setReaderModeControl(_ mode : Int);
+	@objc optional func setReaderModeControl(_ mode : Int)
 	
 	/**
 	* 리더기의 태그리포트[A],[N]모드를 컨트롤한다.
@@ -200,27 +214,63 @@ class BaseRfidViewController : BaseViewController
 	//해당 클레스를 참조하는 서브클래스에서 이벤트 수신을 위하여
 	//응답 프로토클을 정의 기존 네톰에서 정의한 이벤트를 수신하면
 	//해당 프로토콜의 정의한 이벤트로 다시 재전송 즉  네톰이벤트 ---> 신규정의이벤트
-	weak var delegateReder: ReaderResponseDelegate?
-	var reader : ReaderProtocol?
-	
-	func initRfid(_ type : ReaderType, id : String,	delegateReder : ReaderResponseDelegate?)
+	weak var mDelegateResponse: ReaderResponseDelegate?
+	var mClsReader : ReaderProtocol?
+		
+	override func viewDidAppear(_ animated: Bool)
 	{
-		super.initController()
-		switch type
+		if (AppContext.sharedManager.getUserInfo().getBranchId().isEmpty == true)
 		{
-			case .SWING :
-				self.reader = SwingReader(deviceId : id ,  delegate: delegateReder)
+			Dialog.show(container: self, title: nil, message: NSLocalizedString("msg_no_selected_branch_cust_type", comment: "선택된 거점이 없습니다. 환경설정에서 거점을 선택하십시오."))
 			
-			case .AT288 :
-				self.reader = AT288Reader(deviceId : id ,  delegate: delegateReder)
+			let clsController: ClientConfig = {
+				return UIStoryboard.viewController(storyBoardName: "Config", identifier: "ClientConfig") as! ClientConfig
+			}()
+			self.toolbarController?.transition(to: clsController, completion:	nil)
+			return
 		}
 		
+		//시뮬레이터인지 실제 디바이스인지 판단
+		#if (arch(i386) || arch(x86_64)) && os(iOS)
+			let devId  = "D32F0010-8DB8-856F-A8DF-85B3D00CF26A"
+		#else
+			guard let devId  = AppContext.sharedManager.getUserInfo().getReaderDevId() else
+			{
+				Dialog.show(container: self, title: nil, message: NSLocalizedString("rfid_no_selected_bluetooth_select_config", comment: "선택된 블루투스 장비가 없습니다."))
+				let clsController: ClientConfig = {
+					return UIStoryboard.viewController(storyBoardName: "Config", identifier: "ClientConfig") as! ClientConfig
+				}()
+				self.toolbarController?.transition(to: clsController, completion:	nil)
+				return
+			}
+		#endif
+		
+		let readerType  = AppContext.sharedManager.getUserInfo().getReaderType() as ReaderType
+		
+		switch readerType
+		{
+			case .SWING :
+				self.mClsReader = SwingReader(deviceId : devId ,  delegate: mDelegateResponse)
+			
+			case .AT288 :
+				self.mClsReader = AT288Reader(deviceId : devId ,  delegate: mDelegateResponse)
+		}
+	}
+	
+	func initRfid(_ delegateReder : ReaderResponseDelegate?)
+	{
 		//자산코드 및 기타 공통코드를 LocalDB에서 가져옮
 		initCodeInfo()
+		mDelegateResponse = delegateReder
 	}
 	
 	func destoryRfid()
 	{
+		if (self.mClsReader?.isConnected() == true )
+		{
+			//self.mClsReader?.clearInventory?()
+			self.mClsReader?.close()
+		}
 		super.releaseController()
 	}
 	
@@ -360,13 +410,13 @@ class BaseRfidViewController : BaseViewController
 	//접속가능한 Reader기를 찾기를 시작한다
 	func startReaderScan()
 	{
-		self.reader?.startReaderScan?()
+		self.mClsReader?.startReaderScan?()
 	}
 	
 	
 	func isConnected() -> Bool
 	{
-		if let bIsConnect = self.reader?.isConnected()
+		if let bIsConnect = self.mClsReader?.isConnected()
 		{
 			return bIsConnect
 		}
@@ -375,21 +425,34 @@ class BaseRfidViewController : BaseViewController
 	
 	func readerConnect()
 	{
-		self.reader?.connect()
+		self.mClsReader?.connect()
 	}
 	
 	func readerDisConnect()
 	{
-		self.reader?.close()
+		self.mClsReader?.close()
 	}
 	
 	func startRead()
 	{
-		self.reader?.startRead()
+		self.mClsReader?.startRead()
 	}
 	
 	func stopRead()
 	{
-		self.reader?.stopRead()
+		self.mClsReader?.stopRead()
+	}
+	
+	func clearInventory()
+	{
+		self.mClsReader?.clearInventory?()
+	}
+	
+	/// 리더기 바코드 / RFID 모드설정
+	///
+	/// - Parameter mode: <#mode description#>
+	func setRederMode(_ mode: ReaderSenssorMode)
+	{
+		self.mClsReader?.setReaderModeControl?(mode.rawValue)
 	}
 }

@@ -70,37 +70,37 @@ public struct Login: Codable {
 	
 	init?(json: [String: Any])
 	{
-		guard let userName = json["userName"] as? String,
-			let custEpc = json["custEpc"] as? String,
-			let encryptId = json["encryptId"] as? String,
-			//        let corpEpc = json["corpEpc"] as? String,
-			let branchId = json["branchId"] as? String,
-			let custType = json["custType"] as? String,
-			let custId = json["custId"] as? String,
-			let epcLock = json["epcLock"] as? String,
-			let branchName = json["branchName"] as? String,
-			let userLang = json["userLang"] as? String,
-			let custName = json["custName"] as? String,
-			let eventCode = json["eventCode"] as? String,
-			let branchCustId = json["branchCustId"] as? String,
-			let parentCustId = json["parentCustId"] as? String,
-			let branchCustType = json["branchCustType"] as? String,
-			let corpType = json["corpType"] as? String,
-			let corpId = json["corpId"] as? String,
-			let branchCustName = json["branchCustName"] as? String,
-			let unitId = json["unitId"] as? String,
-			let version = json["version"] as? String,
-			let pushUseYn = json["pushUseYn"] as? String,
-			let returnCode = json["returnCode"] as? Int,
-			let returnMessage = json["returnMessage"] as? String
-			else {
-				return nil
-		}
+		//let custEpc = json["custEpc"] as? String ?? ""
+		
+		let userName = json["userName"] as? String ?? ""
+		let encryptId = json["encryptId"] as? String
+		let custEpc = json["custEpc"] as? String ?? ""
+		let corpEpc = json["corpEpc"] as? String ?? ""
+		let branchId = json["branchId"] as? String ?? ""
+		let custType = json["custType"] as? String ?? ""
+		let custId = json["custId"] as? String ?? ""
+		let epcLock = json["epcLock"] as? String ?? ""
+		let branchName = json["branchName"] as? String ?? ""
+		let userLang = json["userLang"] as? String ?? ""
+		let custName = json["custName"] as? String ?? ""
+		let eventCode = json["eventCode"] as? String ?? ""
+		let branchCustId = json["branchCustId"] as? String ?? ""
+		let parentCustId = json["parentCustId"] as? String ?? ""
+		let branchCustType = json["branchCustType"] as? String ?? ""
+		let corpType = json["corpType"] as? String ?? ""
+		let corpId = json["corpId"] as? String ?? ""
+		let branchCustName = json["branchCustName"] as? String ?? ""
+		let unitId = json["unitId"] as? String ?? ""
+		let version = json["version"] as? String ?? ""
+		let pushUseYn = json["pushUseYn"] as? String ?? ""
+		let returnCode = json["returnCode"] as? Int ?? 0
+		let returnMessage = json["returnMessage"] as? String ?? ""
+		
 		//self.userId = userId
 		self.userName = userName
 		self.custEpc = custEpc
 		self.encryptId = encryptId
-		//        self.corpEpc = corpEpc
+		self.corpEpc = corpEpc
 		self.branchId = branchId
 		self.custType = custType
 		self.custId = custId
@@ -263,8 +263,8 @@ public class DataClient
 			do {
 				if let loginJSON = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]
 				{
+					print(loginJSON)					
 					if let login = Login(json: loginJSON) {
-						print(loginJSON)
 						loginCompletionHandler(login, nil)
 					} else {
 						print(responseData)
@@ -528,7 +528,7 @@ public class DataClient
 		dicParam["mode"] = mode
 		
 		var strServiceUrl : String = ""
-		if (mStrServiceUrlSelect.isEmpty == true)
+		if (mStrServiceUrlExecute.isEmpty == true)
 		{
 			strServiceUrl = self.mDefaultServiceUrlExecute
 		}

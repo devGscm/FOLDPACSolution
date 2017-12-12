@@ -355,7 +355,7 @@ class LocalData {
 			let dataClient = Mosaic.DataClient(url: Constants.WEB_SVC_URL)
 			
 			//TODO:: 아라의 코드중 self를 objMe로 대체
-			let objMe = self
+			//let objMe = self
 			
 			switch updateCode
 			{

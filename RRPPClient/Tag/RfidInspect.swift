@@ -15,32 +15,18 @@ class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	@IBOutlet weak var tvTagList: UITableView!
 	
     //var arrTagList		: Array<String> = Array<String>()
-    var arrTagList     : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
+	@IBOutlet weak var swRederMode: UISwitch!
+	var arrTagList     : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
 
-	
-    override func viewDidLoad()
+    override func viewWillAppear(_ animated: Bool)
     {
-		print("###############################")
-		print("##### viewDidLoad() ######")
-		print("###############################")
-		super.viewDidLoad()
-		
-		// 오른쪽 토클메뉴 강제로 띄위기
-		//navigationDrawerController?.toggleRightView()
-		
-		//TODO:: 전역객체에서 등록된 리더기정보를 가져온다.
-		guard let devId  = AppContext.sharedManager.getUserInfo().getReaderDevId()
-		else
-		{
-			Dialog.show(container: self, title: nil, message: NSLocalizedString("rfid_no_selected_bluetooth_select_config", comment: "선택된 블루투스 장비가 없습니다."))
-			navigationDrawerController?.toggleRightView()
-			return
-		}
-		self.initRfid(AppContext.sharedManager.getUserInfo().getReaderType(),
-					  id:  devId, delegateReder:  self as ReaderResponseDelegate )
-		
+		self.initRfid(self as ReaderResponseDelegate )
     }
 	
+	override func viewDidAppear(_ animated: Bool)
+	{
+		super.viewDidAppear(animated)
+	}
 	
 	
 	@IBAction func readerConnectClicked(_ sender: Any) {
@@ -77,22 +63,38 @@ class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 		self.stopRead()
 	}
 	
+	@IBAction func readerModeChanged(_ sender: Any) {
+		if(self.isConnected() == false)
+		{
+			Dialog.show(container: self, title: nil, message: NSLocalizedString("rfid_reader_not_connected", comment: "리더기에 연결되어있지않음"))
+			return
+		}
+		
+		if(self.swRederMode.isOn == true)
+		{
+			//실제 불려지는 함수
+			self.setRederMode(.BARCODE)
+		}
+		else
+		{
+			//실제 불려지는 함수
+			self.setRederMode(.RFID)
+		}	
+	}
+	
 	///////////////////////////////////////////////////////////
 	/// ReaderResponseDelegate에서 받는 이벤트 구현 시작
 	//////////////////////////////////////////////////////////
 	
 	/// 테그 데이터 반환
-	/// - Parameter tagId: <#tagId description#>
-	func didReadTagList(_ tagId: String)
-    {
+	/// - Parameter tagId:
+	func didReadTagid(_ tagid: String) {
         //[1]입력태그: T30003312D58E3D8100C00002BF52
         //[2]변환태그: 30003312D58E3D8100C00002BF52
         //[3]strTagIdParse: 3312D58E3D8100C00002BF52
-        let strTagIdParse = StrUtil.substring(strInputString: tagId, intIndexStart: 4, intIndexEnd: 0)
-        let clsTagInfo = RfidUtil.parse(strData: strTagIdParse)
-     
-
-        
+        //let strTagidParse = StrUtil.substring(strInputString: tagid, intIndexStart: 4, intIndexEnd: 0)
+        let clsTagInfo = RfidUtil.parse(strData: tagid)
+		
         arrTagList.append(clsTagInfo)
         let objMe = self
         DispatchQueue.main.async {
@@ -100,6 +102,25 @@ class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDel
             self.tvTagList?.reloadData()
         }
 	}
+	
+	///바코드 반환 (구현 안해도 됨.)
+	func didReadBarcode(_ barcode: String)
+	{
+		//let clsTagInfo = RfidUtil.parse(strData: tagid)
+		
+		let clsTagInfo = RfidUtil.TagInfo()
+		clsTagInfo.setEpcUrn(strEpcUrn: "XXX" + barcode)
+		
+		arrTagList.append(clsTagInfo)
+		let objMe = self
+		DispatchQueue.main.async {
+			self.txtCount.text = "\(objMe.arrTagList.count)"
+			self.tvTagList?.reloadData()
+		}
+		
+	}
+	
+	
 	
 	func didReaderScanList(id: String, name: String, macAddr: String) {
 		print("Bluetooth에서 스캔한 리더기 리스트:  id:\(id), name:\(name), macAddr:\(macAddr)")
