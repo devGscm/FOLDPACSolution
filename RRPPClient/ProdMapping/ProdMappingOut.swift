@@ -109,22 +109,45 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		//initTestProcess()
 	}
 	
+	override func didUnload(to viewController: UIViewController, completion: ((Bool) -> Void)? = nil)
+	{
+		print("=========================================")
+		print("*ProdMappingOut.didUnload()")
+		print("=========================================")
+		
+		// TransitionController에서 다른화면으로 이동못하도록 false 처리를 한다.
+		super.setUnload(unload: false)
+		
+		Dialog.show(container: self, viewController: nil,
+					title: NSLocalizedString("common_delete", comment: "삭제"),
+					message: "바부야",
+					okTitle: NSLocalizedString("common_confirm", comment: "확인"),
+					okHandler: { (_) in
+						
+						// 확인이 끝나면 다른 화면으로 이동한다.
+						self.toolbarController?.transition(to: viewController, completion: completion)
+						return
+					},
+					cancelTitle: NSLocalizedString("common_cancel", comment: "취소"), cancelHandler: { (_) in
+						completion!(false)
+					}
+		)
 
+	}
+	
 	override func viewWillDisappear(_ animated: Bool)
 	{
+		print("=========================================")
+		print("*ProdMappingOut.viewWillDisappear()")
+		print("=========================================")
 		super.viewWillDisappear(animated)
+		if(self.isBeingDismissed == true || self.isMovingToParentViewController == true)
+		{
+			
+
+
+		}
 		
-		
-//
-//		Dialog.show(container: self, viewController: nil,
-//					title: NSLocalizedString("common_delete", comment: "삭제"),
-//					message: "바부야",
-//					okTitle: NSLocalizedString("common_confirm", comment: "확인"),
-//					okHandler: { (_) in
-//
-//						return
-//			},
-//			cancelTitle: NSLocalizedString("common_cancel", comment: "확인"), cancelHandler: nil)
 	}
 	
 	override func viewDidDisappear(_ animated: Bool)

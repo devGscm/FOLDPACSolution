@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StockReview: UIViewController
+class StockReview: BaseViewController
 {
 
     override func viewDidLoad()
@@ -20,4 +20,27 @@ class StockReview: UIViewController
 	{
         super.didReceiveMemoryWarning()
     }
+	
+	override func viewDidAppear(_ animated: Bool)
+	{
+		print("=========================================")
+		print("*StockReview.viewDidAppear()")
+		print("=========================================")
+		super.viewDidAppear(animated)
+	}
+	
+//	override func didUnload(to viewController: BaseViewController, completion: ((Bool) -> Void)? = nil)
+//	{
+//		print("=========================================")
+//		print("*StockReview.didUnload()")
+//		print("=========================================")
+//		
+//	}
+	
+	override func viewWillDisappear(_ animated: Bool)
+	{
+		print("=========================================")
+		print("*StockReview.viewWillDisappear()")
+		print("=========================================")
+	}
 }

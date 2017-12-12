@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5522A62D1FDF9010009ED6EF /* TransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5522A62C1FDF9010009ED6EF /* TransitionController.swift */; };
+		5522A6311FDFA778009ED6EF /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5522A6301FDFA778009ED6EF /* BaseTableViewController.swift */; };
+		5522A6351FDFB3D1009ED6EF /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5522A6341FDFB3D1009ED6EF /* UIViewController.swift */; };
 		553BCF8B1FC2DC3B00BE39C1 /* SliderDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553BCF8A1FC2DC3B00BE39C1 /* SliderDialog.swift */; };
 		553F42EE1FCCE94C006784AF /* Product.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 553F42F01FCCE94C006784AF /* Product.storyboard */; };
 		553F42FA1FCD4E8E006784AF /* ProductMount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F42F91FCD4E8E006784AF /* ProductMount.swift */; };
@@ -134,6 +137,9 @@
 
 /* Begin PBXFileReference section */
 		551FA96F1FC50EF4007C17F7 /* DataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProtocol.swift; sourceTree = "<group>"; };
+		5522A62C1FDF9010009ED6EF /* TransitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionController.swift; sourceTree = "<group>"; };
+		5522A6301FDFA778009ED6EF /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
+		5522A6341FDFB3D1009ED6EF /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		553BCF8A1FC2DC3B00BE39C1 /* SliderDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderDialog.swift; sourceTree = "<group>"; };
 		553F42EA1FCCDD5B006784AF /* RfidInspect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RfidInspect.swift; sourceTree = "<group>"; };
 		553F42EC1FCCDDC6006784AF /* Tag.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tag.storyboard; sourceTree = "<group>"; };
@@ -272,6 +278,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5522A62B1FDF8FE1009ED6EF /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				5522A62C1FDF9010009ED6EF /* TransitionController.swift */,
+				5522A6341FDFB3D1009ED6EF /* UIViewController.swift */,
+			);
+			name = Extension;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		555B98881FD27734006CC14F /* History */ = {
 			isa = PBXGroup;
 			children = (
@@ -371,6 +387,7 @@
 				55A579F11FD51A7400DBA188 /* WorkOutCustSearchCell.swift */,
 				55B083061FDE48F3007E3EAB /* OutSignDialog.swift */,
 				55B0830A1FDE4E0B007E3EAB /* YPDrawSignatureView.swift */,
+				5522A6301FDFA778009ED6EF /* BaseTableViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -484,6 +501,7 @@
 		96E4941E1FB1A78500D1E2C1 /* RRPPClient */ = {
 			isa = PBXGroup;
 			children = (
+				5522A62B1FDF8FE1009ED6EF /* Extension */,
 				B06013191FD5080F00594CCD /* InOutCancel */,
 				5590A55B1FD4DE65007571D5 /* ProdMapping */,
 				555B98881FD27734006CC14F /* History */,
@@ -720,8 +738,10 @@
 				55B302C21FCE323B00BDCCB1 /* BaseRfidViewController.swift in Sources */,
 				55FA784D1FBDAD0B00583A80 /* RootViewController.swift in Sources */,
 				96E494201FB1A78500D1E2C1 /* AppDelegate.swift in Sources */,
+				5522A6311FDFA778009ED6EF /* BaseTableViewController.swift in Sources */,
 				9680BE8C1FCBD9D4002838A4 /* RfidSwing.swift in Sources */,
 				B060131D1FD512B900594CCD /* InOutCancel.swift in Sources */,
+				5522A6351FDFB3D1009ED6EF /* UIViewController.swift in Sources */,
 				5590A5611FD4E7C1007571D5 /* ProdMappingOutCell.swift in Sources */,
 				559F39D61FD76EC7006E5C17 /* BranchSearchDialog.swift in Sources */,
 				55FA784C1FBDAD0B00583A80 /* RightViewController.swift in Sources */,
@@ -761,6 +781,7 @@
 				55B2D8101FCC0DF40010E61D /* BaseViewController.swift in Sources */,
 				960224421FD0DBCD00DE7C65 /* SwingReader.swift in Sources */,
 				55FA78351FBDACC600583A80 /* Constants.swift in Sources */,
+				5522A62D1FDF9010009ED6EF /* TransitionController.swift in Sources */,
 				55A579F21FD51A7400DBA188 /* WorkOutCustSearchCell.swift in Sources */,
 				55B0830B1FDE4E0B007E3EAB /* YPDrawSignatureView.swift in Sources */,
 				553F42FA1FCD4E8E006784AF /* ProductMount.swift in Sources */,
