@@ -16,6 +16,7 @@ public class BaseViewController : UIViewController
 	
 	func initController()
 	{
+		boolUnload = true
 		print("*BaseViewController.initController()")
 	}
 	
@@ -42,6 +43,7 @@ public class BaseViewController : UIViewController
 		}
 	}
 
+	// 언로드시
 	func didUnload(to viewController: UIViewController, completion: ((Bool) -> Void)? = nil)
 	{
 	}

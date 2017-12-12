@@ -15,6 +15,7 @@ public class BaseTableViewController : UITableViewController
 	
 	func initController()
 	{
+		boolUnload = true
 		print("*BaseViewController.initController()")
 	}
 	

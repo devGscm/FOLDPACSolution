@@ -384,13 +384,13 @@
 				553BCF8A1FC2DC3B00BE39C1 /* SliderDialog.swift */,
 				55FA78331FBDACC600583A80 /* Constants.swift */,
 				96994C501FC545DF00B3A726 /* LocalData.swift */,
-				55B2D80F1FCC0DF40010E61D /* BaseViewController.swift */,
 				55ECF5DD1FCE8BC40021F786 /* TagDetailList.swift */,
 				55C00A911FCE96E400ED5165 /* TagDetailCell.swift */,
 				55A579EF1FD51A5700DBA188 /* WorkOutCustSearch.swift */,
 				55A579F11FD51A7400DBA188 /* WorkOutCustSearchCell.swift */,
 				55B083061FDE48F3007E3EAB /* OutSignDialog.swift */,
 				55B0830A1FDE4E0B007E3EAB /* YPDrawSignatureView.swift */,
+				55B2D80F1FCC0DF40010E61D /* BaseViewController.swift */,
 				5522A6301FDFA778009ED6EF /* BaseTableViewController.swift */,
 			);
 			path = Common;
