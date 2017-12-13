@@ -202,7 +202,6 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
     //=======================================
     func doInitSearch()
     {
-        print("doInitSearch()")
         intPageNo = 0
         self.arcDataRows.removeAll()
         self.doSearch()
@@ -217,8 +216,8 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
         intPageNo += 1
         let strSearchValue = tfSearchValue.text ?? "";
         
-        var strLocaleStDate = StrUtil.replace(sourceText: (tfStDate?.text)!, findText: "-", replaceText: "") + "000000"
-        var strLocaleEnDate = StrUtil.replace(sourceText: (tfEnDate?.text)!, findText: "-", replaceText: "") + "235959"
+        let strLocaleStDate = StrUtil.replace(sourceText: (tfStDate?.text)!, findText: "-", replaceText: "") + "000000"
+        let strLocaleEnDate = StrUtil.replace(sourceText: (tfEnDate?.text)!, findText: "-", replaceText: "") + "235959"
         
         let dtLocaleStDate = DateUtil.getFormatDate(date: strLocaleStDate, dateFormat:"yyyyMMddHHmmss")
         let dtLocaleEnDate = DateUtil.getFormatDate(date: strLocaleEnDate, dateFormat:"yyyyMMddHHmmss")
@@ -229,13 +228,14 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
             return
         }
         
-        strLocaleStDate = "20170626050000"
-        strLocaleEnDate = "20170726050000"
+        //== 테스트 데이터
+        //strLocaleStDate = "20170626050000"
+        //strLocaleEnDate = "20170726050000"
         
-        print("startOrderDate:\(strLocaleStDate)")
-        print("endOrderDate:\(strLocaleEnDate)")
-        print("pageNo:\(intPageNo)")
-        print("rowPerPage:\(Constants.ROWS_PER_PAGE)")
+        //print("startOrderDate:\(strLocaleStDate)")
+        //print("endOrderDate:\(strLocaleEnDate)")
+        //print("pageNo:\(intPageNo)")
+        //print("rowPerPage:\(Constants.ROWS_PER_PAGE)")
         
         clsDataClient.addServiceParam(paramName: "startWorkDate", value: strLocaleStDate)
         clsDataClient.addServiceParam(paramName: "endWorkDate", value: strLocaleEnDate)
@@ -302,9 +302,6 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
         let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
             self.strSaleType = clsDialog.selectedRow.itemCode
             let strItemName = clsDialog.selectedRow.itemName
-
-            //print("== self.strSaleType: \(self.strSaleType!) :: \(strItemName) ==")
-            
             self.btnSaleTypeCondition.setTitle(strItemName, for: .normal)
         }
         acDialog.addAction(aaOkAction)
@@ -326,9 +323,6 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
         let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
             self.strSearchCondtion = clsDialog.selectedRow.itemCode
             let strItemName = clsDialog.selectedRow.itemName
-            
-            print("== strSearchCondtion: \(self.strSearchCondtion) :: \(strItemName)")
-            
             self.btnSearchCondition.setTitle(strItemName, for: .normal)
         }
         
@@ -340,9 +334,6 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
     //===== '검색'버튼
     //=======================================
     @IBAction func onSearchClicked(_ sender: UIButton) {
-        print("==== 검색버튼 ====")
-        print("================")
-        
         doInitSearch()
         
     }
@@ -354,7 +345,6 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
     //=======================================
     func createDatePicker(tfDateControl : UITextField)
     {
-        //print("@@@@@@createDatePicker")
         tfCurControl = tfDateControl
         
         dpPicker.locale = Locale(identifier: "ko_KR")
@@ -436,8 +426,6 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
     @objc func onItemSelectionClicked(_ sender: UIButton)
     {
         self.intSelectedIndex = sender.tag
-        
-        print("========== 유형 누름 ==========:\(self.intSelectedIndex)")
         self.performSegue(withIdentifier: "segInOutCancelDetailCell", sender: self)
     }
     
@@ -445,25 +433,18 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
     // Segue로 파라미터 넘기면 반드시 prepare를 타기 때문에 여기서 DataProtocol을 세팅하는걸로 함
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        //그리드 삭제 및 구조체 삭제
-        print("========== 유형 누름[2] ==========")
-        
         //'유형'그리드 버튼
         if(segue.identifier == "segInOutCancelDetailCell")
         {
             if let clsDialog = segue.destination as? InOutCancelDetail
             {
-                print("==self.arcDataRows.count: \(self.arcDataRows.count)")
-                print("==self.intSelectedIndex: \(self.intSelectedIndex)")
-                
                 if let btnAssetEpcName = sender as? UIButton
                 {
-                    print("==btnAssetEpcName: \(btnAssetEpcName.tag)")
+                    //print("==btnAssetEpcName: \(btnAssetEpcName.tag)")
                     let clsAssetEpc = self.arcDataRows[btnAssetEpcName.tag]
-                    
                     let saleOrderId = clsAssetEpc.getString(name:"workId")
                     
-                    print("==saleOrderId: \(saleOrderId!)")
+                    //print("==saleOrderId: \(saleOrderId!)")
                     clsDialog.strSaleWorkId = saleOrderId!      //상세리스트에 표출할 ResaleOrderId 전달
                 }
             }
@@ -471,56 +452,28 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
         //'취소'그리드 버튼
         else if(segue.identifier == "segOutMemoDialog")
         {
-            print("========== 취소처리 다이얼로그 버튼 누름[1] ==========")
             if let clsDialog = segue.destination as? OutMemoDialog
             {
-                print("========== 취소처리 다이얼로그 버튼 누름[2] ==========")
                 clsDialog.ptcDataHandler = self
-                print("========== 취소처리 다이얼로그 버튼 누름[3] ==========")
-                
                 if let btnAssetEpcName = sender as? UIButton
                 {
                     let clsDataRow = self.arcDataRows[btnAssetEpcName.tag]
-//                    strRecvSaleOrderId = clsDataRow.getString(name:"workId")!   //수신받은 SaleOrderId
-//                    let tsIoType = clsDataRow.getString(name:"ioType")!
-//                    let tsWorkId = clsDataRow.getString(name:"workId")!
-//                    let tsWorkerName = clsDataRow.getString(name:"workerName")!
-//
-//                    print("==tsIoType: \(tsIoType)")
-//                    print("==tsWorkId: \(tsWorkId)")
-//                    print("==tsWorkerName: \(tsWorkerName)")
-                    
-                    //취소 처리 데이터
-                    //arrClickedDataRow = ClickedDataRow()
-
-                    //arrClickedDataRow.
-                    
-                    
                     arrClickedDataRow.ioType = clsDataRow.getString(name:"ioType") ?? ""
                     arrClickedDataRow.workId = clsDataRow.getString(name:"workId") ?? ""
                     arrClickedDataRow.workerName = clsDataRow.getString(name:"workerName") ?? ""
-                   
                 }
-
             }
         }
     }
-        
-    
-    
-    
-    
     
     //=======================================
     //===== '취소'버튼
     //=======================================
     @IBAction func onItemCancelClicked(_ sender: UIButton)
     {
-        print("======= 취소버튼 =====")
+        //print("======= 취소버튼 =====")
         //self.performSegue(withIdentifier: "segOutMemoDialog", sender: self)
     }
-    
-    
     
     //=======================================
     //===== '취소'버튼 다이얼로그로 부터 수신 데이터
@@ -529,13 +482,10 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
     {
         if(returnData.returnType == "outMemoDialog")
         {
-            
-            print("@@@@@@@@@@@@@ recvData: 리시브데이터)")
-            
             // 상품정보 수정
             if(returnData.returnRawData != nil)
             {
-                let clsDataRow      = returnData.returnRawData as! DataRow
+                let clsDataRow = returnData.returnRawData as! DataRow
                 arrClickedDataRow.remark = clsDataRow.getString(name: "remark") ?? ""
                 
                 if(arrClickedDataRow.workId.isEmpty == false)
@@ -549,7 +499,6 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
                     
                     //취소처리
                     sendCancelData(arrClickedDataRow.ioType, arrClickedDataRow.workId, arrClickedDataRow.workerName, arrClickedDataRow.remark)
-                    
                 }
             }
         }
@@ -570,7 +519,6 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
         print("##[InOutCancel]->sendCancelData()")
         print("=================================")
         
- 
         clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
         
         let strCurReadTime = DateUtil.getDate(dateFormat: "yyyyMMddHHmmss")
@@ -620,6 +568,7 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
             {
                 let clsDataRow = clsResultDataRows[0]
                 let strResultCode = clsDataRow.getString(name: "resultCode")
+                //let strResultMsg = clsDataRow.getString(name: "resultMessage") ?? ""
                 
                 print(" -strResultCode:\(strResultCode!)")
                 if(Constants.PROC_RESULT_SUCCESS == strResultCode)
@@ -646,6 +595,7 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
                     {
                         self.showSnackbar(message: strMsg)
                     }
+
                 }
              }
         })
@@ -655,7 +605,9 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 
 
 
-
+//=======================================
+//===== 툴바 타이틀
+//=======================================
 extension InOutCancel
 {
     fileprivate func prepareToolbar()
