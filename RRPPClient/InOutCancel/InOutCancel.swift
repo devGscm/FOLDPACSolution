@@ -29,12 +29,22 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
     //취소 처리용
     struct ClickedDataRow
     {
-        var ioType : String?        /**< 입출고타입 **/
-        var workId : String?        /**< 작업ID **/
-        var workerName : String?   /**< 작업자명 **/
-        var remark : String?       /**< 비고 **/
+        var ioType : String        /**< 입출고타입 **/
+        var workId : String        /**< 작업ID **/
+        var workerName : String   /**< 작업자명 **/
+        var remark : String       /**< 비고 **/
+        
+        init()
+        {
+            ioType = ""
+            workId = ""
+            workerName = ""
+            remark = ""
+        }
     }
     
+    
+    //var arrClickedDataRow = ClickedDataRow(ioType: "", workId: "", workerName: "", remark: "")
     var arrClickedDataRow = ClickedDataRow()
     var clsIndicator : ProgressIndicator?
     
@@ -481,10 +491,15 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 //                    print("==tsWorkerName: \(tsWorkerName)")
                     
                     //취소 처리 데이터
-                    arrClickedDataRow = ClickedDataRow()
-                    arrClickedDataRow.ioType = clsDataRow.getString(name:"ioType")!
-                    arrClickedDataRow.workId = clsDataRow.getString(name:"workId")!
-                    arrClickedDataRow.workerName = clsDataRow.getString(name:"workerName")!
+                    //arrClickedDataRow = ClickedDataRow()
+
+                    //arrClickedDataRow.
+                    
+                    
+                    arrClickedDataRow.ioType = clsDataRow.getString(name:"ioType") ?? ""
+                    arrClickedDataRow.workId = clsDataRow.getString(name:"workId") ?? ""
+                    arrClickedDataRow.workerName = clsDataRow.getString(name:"workerName") ?? ""
+                   
                 }
 
             }
@@ -521,21 +536,19 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
             if(returnData.returnRawData != nil)
             {
                 let clsDataRow      = returnData.returnRawData as! DataRow
-                //let strRemark       = clsDataRow.getString(name: "remark") ?? ""
-                
                 arrClickedDataRow.remark = clsDataRow.getString(name: "remark") ?? ""
                 
-                if(arrClickedDataRow.workId!.isEmpty == false)
+                if(arrClickedDataRow.workId.isEmpty == false)
                 {
                     print("=============================================")
-                    print("==== IO타입: \(arrClickedDataRow.ioType!)")
-                    print("==== 작업번호: \(arrClickedDataRow.workId!)")
-                    print("==== 작업자명: \(arrClickedDataRow.workerName!)")
-                    print("==== 비고: \(arrClickedDataRow.remark!)")
+                    print("==== IO타입: \(arrClickedDataRow.ioType)")
+                    print("==== 작업번호: \(arrClickedDataRow.workId)")
+                    print("==== 작업자명: \(arrClickedDataRow.workerName)")
+                    print("==== 비고: \(arrClickedDataRow.remark)")
                     print("=============================================")
                     
                     //취소처리
-                    sendCancelData(arrClickedDataRow.ioType!, arrClickedDataRow.workId!, arrClickedDataRow.workerName!, arrClickedDataRow.remark!)
+                    sendCancelData(arrClickedDataRow.ioType, arrClickedDataRow.workId, arrClickedDataRow.workerName, arrClickedDataRow.remark)
                     
                 }
             }
