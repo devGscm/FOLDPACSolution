@@ -32,12 +32,27 @@ public class EpcInfo : NSObject
 	{
 		arrItemData.append(itemInfo)
     }
-    
+	
+	public func removeItem(index: Int)
+	{
+		arrItemData.remove(at: index)
+	}
+	
     func getItemes() -> Array<ItemInfo>
 	{
  		return self.arrItemData
     }
-    
+	
+	func removeAllItems()
+	{
+		self.arrItemData.removeAll()
+	}
+	
+	func setItemes( itemes: Array<ItemInfo>)
+	{
+		self.arrItemData.append(contentsOf: itemes)
+	}
+	
     func getEpcCode() -> String
 	{
  		return mStrEpcCode
