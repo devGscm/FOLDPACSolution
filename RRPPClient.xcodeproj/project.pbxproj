@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		550DD8AC1FDFC5BE00766DCF /* StockReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550DD8AB1FDFC5BE00766DCF /* StockReviewCell.swift */; };
 		5522A62D1FDF9010009ED6EF /* TransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5522A62C1FDF9010009ED6EF /* TransitionController.swift */; };
-		5522A6311FDFA778009ED6EF /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5522A6301FDFA778009ED6EF /* BaseTableViewController.swift */; };
 		5522A6351FDFB3D1009ED6EF /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5522A6341FDFB3D1009ED6EF /* UIViewController.swift */; };
 		553BCF8B1FC2DC3B00BE39C1 /* SliderDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553BCF8A1FC2DC3B00BE39C1 /* SliderDialog.swift */; };
 		553F42EE1FCCE94C006784AF /* Product.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 553F42F01FCCE94C006784AF /* Product.storyboard */; };
@@ -40,7 +39,6 @@
 		55B083091FDE497F007E3EAB /* ProductOrderSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B083081FDE497F007E3EAB /* ProductOrderSearchCell.swift */; };
 		55B0830B1FDE4E0B007E3EAB /* YPDrawSignatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B0830A1FDE4E0B007E3EAB /* YPDrawSignatureView.swift */; };
 		55B154BA1FD7681500F69ABE /* ItemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B154B91FD7681500F69ABE /* ItemInfo.swift */; };
-		55B2D8101FCC0DF40010E61D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B2D80F1FCC0DF40010E61D /* BaseViewController.swift */; };
 		55B302C21FCE323B00BDCCB1 /* BaseRfidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B302C01FCE323A00BDCCB1 /* BaseRfidViewController.swift */; };
 		55B302C31FCE323B00BDCCB1 /* RfidUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B302C11FCE323A00BDCCB1 /* RfidUtil.swift */; };
 		55B302C71FCE32A600BDCCB1 /* RfidInspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B302C51FCE32A600BDCCB1 /* RfidInspect.swift */; };
@@ -94,6 +92,8 @@
 		96E494271FB1A78500D1E2C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96E494261FB1A78500D1E2C1 /* Assets.xcassets */; };
 		96E4942A1FB1A78500D1E2C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96E494281FB1A78500D1E2C1 /* LaunchScreen.storyboard */; };
 		96E494351FB1A78500D1E2C1 /* RRPPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E494341FB1A78500D1E2C1 /* RRPPClientTests.swift */; };
+		B01C42051FE0CA8000404301 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01C42031FE0CA7F00404301 /* BaseViewController.swift */; };
+		B01C42081FE0CBD200404301 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01C42041FE0CA7F00404301 /* BaseTableViewController.swift */; };
 		B060131B1FD5088A00594CCD /* InOutCancel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B060131A1FD5088A00594CCD /* InOutCancel.storyboard */; };
 		B060131D1FD512B900594CCD /* InOutCancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B060131C1FD512B900594CCD /* InOutCancel.swift */; };
 		B060131F1FD529A200594CCD /* InOutCancelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B060131E1FD529A200594CCD /* InOutCancelCell.swift */; };
@@ -246,6 +246,8 @@
 		96E494361FB1A78500D1E2C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96E4943B1FB1A78500D1E2C1 /*  RRPPClientUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = " RRPPClientUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E4944F1FB1A81F00D1E2C1 /* moramframework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = moramframework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B01C42031FE0CA7F00404301 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		B01C42041FE0CA7F00404301 /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		B060131A1FD5088A00594CCD /* InOutCancel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InOutCancel.storyboard; sourceTree = "<group>"; };
 		B060131C1FD512B900594CCD /* InOutCancel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InOutCancel.swift; sourceTree = "<group>"; };
 		B060131E1FD529A200594CCD /* InOutCancelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InOutCancelCell.swift; sourceTree = "<group>"; };
@@ -342,6 +344,8 @@
 				55B2D80D1FCBF4FA0010E61D /* RfidUtil.swift */,
 				553F42EA1FCCDD5B006784AF /* RfidInspect.swift */,
 				553F42EC1FCCDDC6006784AF /* Tag.storyboard */,
+				5522A6301FDFA778009ED6EF /* BaseTableViewController.swift */,
+				55B2D80F1FCC0DF40010E61D /* BaseViewController.swift */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -382,6 +386,8 @@
 		55FA78321FBDACC600583A80 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				B01C42041FE0CA7F00404301 /* BaseTableViewController.swift */,
+				B01C42031FE0CA7F00404301 /* BaseViewController.swift */,
 				55ECF5DB1FCE89B70021F786 /* Common.storyboard */,
 				55ACD67F1FC8051900A2DC72 /* DataProtocol.swift */,
 				55ACD67C1FC804F800A2DC72 /* ListViewDialog.swift */,
@@ -737,6 +743,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B01C42081FE0CBD200404301 /* BaseTableViewController.swift in Sources */,
+				B01C42051FE0CA8000404301 /* BaseViewController.swift in Sources */,
 				B060131F1FD529A200594CCD /* InOutCancelCell.swift in Sources */,
 				9680BE881FCBD91D002838A4 /* SwingProtocol.m in Sources */,
 				55ACD6801FC8051900A2DC72 /* DataProtocol.swift in Sources */,
@@ -749,7 +757,6 @@
 				55FA784D1FBDAD0B00583A80 /* RootViewController.swift in Sources */,
 				B0A2357E1FDA6D4D00AD4925 /* InOutCancelDetail.swift in Sources */,
 				96E494201FB1A78500D1E2C1 /* AppDelegate.swift in Sources */,
-				5522A6311FDFA778009ED6EF /* BaseTableViewController.swift in Sources */,
 				9680BE8C1FCBD9D4002838A4 /* RfidSwing.swift in Sources */,
 				B060131D1FD512B900594CCD /* InOutCancel.swift in Sources */,
 				5522A6351FDFB3D1009ED6EF /* UIViewController.swift in Sources */,
@@ -792,7 +799,6 @@
 				960224441FD0F3E400DE7C65 /* AT288Reader.swift in Sources */,
 				55ACD67E1FC804F800A2DC72 /* ListViewDialog.swift in Sources */,
 				55FA783B1FBDACE300583A80 /* UserInfo.swift in Sources */,
-				55B2D8101FCC0DF40010E61D /* BaseViewController.swift in Sources */,
 				960224421FD0DBCD00DE7C65 /* SwingReader.swift in Sources */,
 				55FA78351FBDACC600583A80 /* Constants.swift in Sources */,
 				5522A62D1FDF9010009ED6EF /* TransitionController.swift in Sources */,
