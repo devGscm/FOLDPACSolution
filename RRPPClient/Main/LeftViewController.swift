@@ -69,8 +69,11 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			// 관리회사(MGR)
 			//arrMenuData.append(MenuItem(menuId: "TagSupply", menuName: "납품등록(RFID)"))
 			arrMenuData.append(MenuItem(menuId: "ProductMount", menuName: NSLocalizedString("title_product_mount", comment: "자산등록")))
-			
+
+            arrMenuData.append(MenuItem(menuId: "CombineOut", menuName: NSLocalizedString("title_work_sale_a", comment: "출고A")))
+            
             arrMenuData.append(MenuItem(menuId: "ProdMappingOut", menuName: NSLocalizedString("title_work_sale_c", comment: "출고C")))
+            
 			arrMenuData.append(MenuItem(menuId: "WorkHistorySearch", menuName: NSLocalizedString("title_work_history_search", comment: "작업내역조회")))
             arrMenuData.append(MenuItem(menuId: "InOutCancel", menuName: NSLocalizedString("title_work_inout_cancel", comment: "입출고취소")))
 			
@@ -129,6 +132,13 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 				}()
 				break
 			
+            case "CombineOut" :
+                //출고A
+                clsController = { () -> CombineOut in
+                    return UIStoryboard.viewController(storyBoardName: "CombineOut", identifier: "CombineOut") as! CombineOut
+                }()
+                break
+            
 			case "ProdMappingOut" :
                 // 출고C(출하)
 				clsController = { () -> ProdMappingOut in
@@ -142,8 +152,9 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 					return UIStoryboard.viewController(storyBoardName: "History", identifier: "HistorySearch") as! HistorySearch
 				}()
 				break
+            
             case "InOutCancel" :
-				// 입출고취소
+				//입출고취소
 				clsController = { () -> InOutCancel in
                     return UIStoryboard.viewController(storyBoardName: "InOutCancel", identifier: "InOutCancel") as! InOutCancel
                 }()
