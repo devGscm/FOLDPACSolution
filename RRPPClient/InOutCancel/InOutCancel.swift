@@ -10,7 +10,6 @@ import UIKit
 import Material
 import Mosaic
 
-//class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegate, DataProtocol
 class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, DataProtocol
 {
     
@@ -29,10 +28,10 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
     //취소 처리용
     struct ClickedDataRow
     {
-        var ioType : String        /**< 입출고타입 **/
-        var workId : String        /**< 작업ID **/
-        var workerName : String   /**< 작업자명 **/
-        var remark : String       /**< 비고 **/
+        var ioType : String         /**< 입출고타입 **/
+        var workId : String         /**< 작업ID   **/
+        var workerName : String     /**< 작업자명  **/
+        var remark : String         /**< 비고     **/
         
         init()
         {
@@ -42,9 +41,7 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
             remark = ""
         }
     }
-    
-    
-    //var arrClickedDataRow = ClickedDataRow(ioType: "", workId: "", workerName: "", remark: "")
+
     var arrClickedDataRow = ClickedDataRow()
     var clsIndicator : ProgressIndicator?
     
@@ -93,12 +90,11 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
         print("=========================================")
         super.viewWillAppear(animated)
         super.initController()
-        prepareToolbar()
         
-        initViewControl()
-        initDataClient()
-        
-        doInitSearch()
+        prepareToolbar()        //툴바 타이틀 설정
+        initViewControl()       //뷰 컨트롤 초기화
+        initDataClient()        //데이터 컨트롤 초기화
+        doInitSearch()          //조회
     }
     
 
@@ -341,7 +337,7 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
     
     
     //=======================================
-    //===== createDatePicker
+    //===== createDatePicker - 날짜 검색
     //=======================================
     func createDatePicker(tfDateControl : UITextField)
     {
@@ -362,7 +358,7 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
     
     
     //=======================================
-    //===== onDoneButtonPressed
+    //===== onDoneButtonPressed - 날짜 검색완료
     //=======================================
     @objc func onDoneButtonPressed(_ sender : Any)
     {

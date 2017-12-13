@@ -96,6 +96,9 @@
 		96E494351FB1A78500D1E2C1 /* RRPPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E494341FB1A78500D1E2C1 /* RRPPClientTests.swift */; };
 		B01C42051FE0CA8000404301 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01C42031FE0CA7F00404301 /* BaseViewController.swift */; };
 		B01C42081FE0CBD200404301 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01C42041FE0CA7F00404301 /* BaseTableViewController.swift */; };
+		B01C420B1FE0EEBA00404301 /* CombineOut.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B01C420A1FE0EEBA00404301 /* CombineOut.storyboard */; };
+		B01C420D1FE105BB00404301 /* CombineOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01C420C1FE105BB00404301 /* CombineOut.swift */; };
+		B01C420F1FE105E400404301 /* CombineOutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01C420E1FE105E400404301 /* CombineOutCell.swift */; };
 		B060131B1FD5088A00594CCD /* InOutCancel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B060131A1FD5088A00594CCD /* InOutCancel.storyboard */; };
 		B060131D1FD512B900594CCD /* InOutCancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B060131C1FD512B900594CCD /* InOutCancel.swift */; };
 		B060131F1FD529A200594CCD /* InOutCancelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B060131E1FD529A200594CCD /* InOutCancelCell.swift */; };
@@ -252,6 +255,9 @@
 		96E4944F1FB1A81F00D1E2C1 /* moramframework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = moramframework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B01C42031FE0CA7F00404301 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		B01C42041FE0CA7F00404301 /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
+		B01C420A1FE0EEBA00404301 /* CombineOut.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CombineOut.storyboard; sourceTree = "<group>"; };
+		B01C420C1FE105BB00404301 /* CombineOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineOut.swift; sourceTree = "<group>"; };
+		B01C420E1FE105E400404301 /* CombineOutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineOutCell.swift; sourceTree = "<group>"; };
 		B060131A1FD5088A00594CCD /* InOutCancel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InOutCancel.storyboard; sourceTree = "<group>"; };
 		B060131C1FD512B900594CCD /* InOutCancel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InOutCancel.swift; sourceTree = "<group>"; };
 		B060131E1FD529A200594CCD /* InOutCancelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InOutCancelCell.swift; sourceTree = "<group>"; };
@@ -521,6 +527,7 @@
 		96E4941E1FB1A78500D1E2C1 /* RRPPClient */ = {
 			isa = PBXGroup;
 			children = (
+				B01C42091FE0EDA000404301 /* CombineOut */,
 				5522A62B1FDF8FE1009ED6EF /* Extension */,
 				B06013191FD5080F00594CCD /* InOutCancel */,
 				5590A55B1FD4DE65007571D5 /* ProdMapping */,
@@ -568,6 +575,16 @@
 				96E4944F1FB1A81F00D1E2C1 /* moramframework.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B01C42091FE0EDA000404301 /* CombineOut */ = {
+			isa = PBXGroup;
+			children = (
+				B01C420A1FE0EEBA00404301 /* CombineOut.storyboard */,
+				B01C420C1FE105BB00404301 /* CombineOut.swift */,
+				B01C420E1FE105E400404301 /* CombineOutCell.swift */,
+			);
+			path = CombineOut;
 			sourceTree = "<group>";
 		};
 		B06013191FD5080F00594CCD /* InOutCancel */ = {
@@ -694,6 +711,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B01C420B1FE0EEBA00404301 /* CombineOut.storyboard in Resources */,
 				55FA78401FBDACFD00583A80 /* pallet.png in Resources */,
 				55B302C81FCE32A600BDCCB1 /* Tag.storyboard in Resources */,
 				96E4942A1FB1A78500D1E2C1 /* LaunchScreen.storyboard in Resources */,
@@ -769,6 +787,7 @@
 				5590A5611FD4E7C1007571D5 /* ProdMappingOutCell.swift in Sources */,
 				559F39D61FD76EC7006E5C17 /* BranchSearchDialog.swift in Sources */,
 				55FA784C1FBDAD0B00583A80 /* RightViewController.swift in Sources */,
+				B01C420D1FE105BB00404301 /* CombineOut.swift in Sources */,
 				B0A2357C1FDA5E7F00AD4925 /* InOutCancelDetailCell.swift in Sources */,
 				9680BE861FCBD91D002838A4 /* SwingApi.m in Sources */,
 				555B988E1FD27CC3006CC14F /* HistorySearchCell.swift in Sources */,
@@ -800,6 +819,7 @@
 				550DD8AC1FDFC5BE00766DCF /* StockReviewCell.swift in Sources */,
 				556C7DDA1FDA54010048D6C4 /* ProdInfoDialog.swift in Sources */,
 				559F39DC1FD77068006E5C17 /* RfidReaderDialog.swift in Sources */,
+				B01C420F1FE105E400404301 /* CombineOutCell.swift in Sources */,
 				55FA78491FBDAD0B00583A80 /* AppToolbarController.swift in Sources */,
 				55ACD6771FC802BD00A2DC72 /* ProductOrderSearch.swift in Sources */,
 				960224441FD0F3E400DE7C65 /* AT288Reader.swift in Sources */,
