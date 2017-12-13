@@ -37,11 +37,15 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	var arrTagRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
 	
 	
-	var strMakeOrderId: String = ""
-	var intOrderWorkCnt: Int = 0
-	var intOrderReqCnt: Int = 0
-	var strProdAssetEpc: String?
-	var intCurOrderWorkCnt: Int = 0
+	var strStockReviewId: String = ""		/**< 재고조사ID */
+	var strProdAssetEpc: String = ""		/**< 장착제품 자산 EPC 코드 */
+	var strProdAssetEpcName: String = ""	/**< 장착제품 자산 EPC 명 */
+	
+	var intOldStockCount			= 0		/**< 전산재고수량 */
+	var intRealStockCount 			= 0		/**< 실재고수량 */
+	var intCurProcCount 			= 0		/**< 현재처리량 */
+
+	
 	var clsIndicator : ProgressIndicator?
 	var clsDataClient : DataClient!
 	
@@ -121,6 +125,15 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 				}
 			}
 		}
+		
+		if(segue.identifier == "segOutSignDialog")
+		{
+			if let clsDialog = segue.destination as? OutSignDialog
+			{
+				clsDialog.ptcDataHandler = self
+			}
+		}
+		
 	}
 	
 	// 팝업 다이얼로그로 부터 데이터 수신
@@ -133,14 +146,14 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 				clearUserInterfaceData()
 				
 				let clsDataRow = returnData.returnRawData as! DataRow
-				strMakeOrderId	= clsDataRow.getString(name: "makeOrderId") ?? ""
-				intOrderWorkCnt	= clsDataRow.getInt(name: "orderWorkCnt") ?? 0
-				intOrderReqCnt	= clsDataRow.getInt(name: "orderReqCnt") ?? 0
-				strProdAssetEpc = clsDataRow.getString(name: "prodAssetEpc")
-				intCurOrderWorkCnt = intOrderWorkCnt
+				strStockReviewId	= clsDataRow.getString(name: "makeOrderId") ?? ""
+				intRealStockCount	= clsDataRow.getInt(name: "orderWorkCnt") ?? 0
+//				intOrderReqCnt	= clsDataRow.getInt(name: "orderReqCnt") ?? 0
+//				strProdAssetEpc = clsDataRow.getString(name: "prodAssetEpc")
+//				intCurProcCount = intRealStockCount
 				
-				print("@@@@@@@@strMakeOrderId=\(strMakeOrderId)")
-				print("@@@@@@@@intOrderWorkCnt=\(intOrderWorkCnt)")
+//				print("@@@@@@@@strMakeOrderId=\(strStockReviewId)")
+//				print("@@@@@@@@intOrderWorkCnt=\(intRealStockCount)")
 				
 //				self.btnMakeOrderId.setTitle(strMakeOrderId, for: .normal)
 //				self.lblOrderCustName.text = clsDataRow.getString(name: "orderCustName")
@@ -150,19 +163,31 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 				clearTagData()
 			}
 		}
+		
+		else if(returnData.returnType == "outSignDialog")
+		{
+			// 상품정보 수정
+			if(returnData.returnRawData != nil)
+			{
+				let clsDataRow = returnData.returnRawData as! DataRow
+				let strRemark			= clsDataRow.getString(name: "remark") ?? ""
+				let strSignData			= clsDataRow.getString(name: "signData") ?? ""
+				let strStockReviewId	= btnStockReviewId.titleLabel?.text ?? ""
+				let strWorkerName		= lblUserName.text ?? ""
+				
+				sendData(workState: Constants.WORK_STATE_COMPLETE, stockReviewId: strStockReviewId, workerName: strWorkerName, remark: strRemark, signData: strSignData)
+			}
+		}
 	}
 	
-	
-
 
 	
 	
-	
-	
-	// 주문선택
-	@IBAction func onMakeOrderIdClicked(_ sender: UIButton)
+	// 실사번호 선택
+	@IBAction func onStockReviewIdClicked(_ sender: UIButton)
 	{
-		self.performSegue(withIdentifier: "segProductOrderSearch", sender: self)
+		// TODO
+		//self.performSegue(withIdentifier: "segProductOrderSearch", sender: self)
 	}
 	
 	// 데이터를 clear한다.
@@ -170,14 +195,9 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	{
 		arrTagRows.removeAll()
 		arrAssetRows.removeAll()
-		
 		tvStockReview?.reloadData()
-		
-		self.intCurOrderWorkCnt = self.intOrderWorkCnt
-//		if(lblOrderCustName.text?.isEmpty == false)
-//		{
-//			lblOrderCount?.text = "\(self.intCurOrderWorkCnt)/\(self.intOrderReqCnt)"
-//		}
+		self.intCurProcCount = self.intRealStockCount
+		lblRealStockCount?.text = "\(self.intCurProcCount)"
 		super.clearInventory()
 	}
 	
@@ -257,7 +277,7 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 				
 				// 발주번호가 있는 경무만 "처리수량/발주수량"을 처리한다.
 				
-				print("@@@@@@strMakeOrderId:\(strMakeOrderId)")
+				print("@@@@@@strMakeOrderId:\(strStockReviewId)")
 				
 //				if(strMakeOrderId.isEmpty == false)
 //				{
@@ -360,20 +380,20 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	
 	func clearUserInterfaceData()
 	{
-		intOrderWorkCnt	= 0
-		intCurOrderWorkCnt = 0
-		intOrderReqCnt	= 0
+		intOldStockCount	= 0	/**< 전산재고수량 */
+		intCurProcCount 	= 0	/**< 현재 처리량 */
+		intRealStockCount	= 0	/**< 실재고수량 */
+		strStockReviewId	= ""
+		strProdAssetEpc		= ""
 		
-		strMakeOrderId	= ""
-		strProdAssetEpc = ""
+		// 재고실사번호 초기화
+		self.btnStockReviewId.setTitle("", for: .normal)
 		
-		//UI 변경은 Thread로 호출하여 변경한
+		//유형 초기화
+		lblProdAssetEpcName.text = ""
 		
-//		self.btnMakeOrderId.setTitle("", for: .normal)
-//		self.lblOrderCustName.text = ""
-//		self.lblOrderCount.text = ""
-//		self.tfMakeLotId.text = ""
-		
+		//처리수량 초기화
+		lblRealStockCount.text = ""
 	}
 	
 	
@@ -440,8 +460,10 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 			return
 		}
 
-		// TODO
-		//sendData()
+		print(" -현처리 수량 : \(intCurProcCount)")
+		print(" -전산재고수량 : \(intOldStockCount)")
+		
+		sendData(workState: Constants.WORK_STATE_WORKING, stockReviewId: self.strStockReviewId, workerName: "", remark: "", signData: "")
 	}
 	
 	
@@ -496,18 +518,11 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 			}
 		}
 		
-		
-		
-		
-		
-		
-		/// TODO @@@@@@@@
-		
-		
 		let clsDataTable : DataTable = DataTable()
-		clsDataTable.Id = "TAG_MOUNT"
+		clsDataTable.Id = "STOCK_REVIEW"
 		clsDataTable.addDataColumn(dataColumn: DataColumn(id: "epcCode", type: "String", size: "0", keyColumn: false, updateColumn: true, autoIncrement: false, canXlsExport: false, title: ""))
-		
+		clsDataTable.addDataColumn(dataColumn: DataColumn(id: "traceDateTime", type: "String", size: "0", keyColumn: false, updateColumn: true, autoIncrement: false, canXlsExport: false, title: ""))
+
 		for clsInfo in self.arrTagRows
 		{
 			if(self.strProdAssetEpc != clsInfo.getAssetEpc())
@@ -517,10 +532,13 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 				Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("stock_can_not_processed_because_different_pallet", comment: "품목이 다른 파렛트가 있어 처리 할 수 없습니다."))
 				return
 			}
+			let strTraceDate = DateUtil.localeToUtc(localeDate: clsInfo.getReadTime(), dateFormat: "yyyyMMddHHmmss")
+			
 			
 			let clsDataRow : DataRow = DataRow()
 			clsDataRow.State = DataRow.DATA_ROW_STATE_ADDED
 			clsDataRow.addRow(name:"epcCode", value: clsInfo.getEpcCode())
+			clsDataRow.addRow(name:"traceDateTime", value: strTraceDate)
 			clsDataTable.addDataRow(dataRow: clsDataRow)
 		}
 		clsDataClient.executeData(dataTable: clsDataTable, dataCompletionHandler: { (data, error) in
@@ -545,13 +563,21 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 				print(" -strResultCode:\(strResultCode!)")
 				if(Constants.PROC_RESULT_SUCCESS == strResultCode)
 				{
+					let strSvrProcCount = clsDataRow.getString(name: "procCount")
+					let strSvrWorkState = clsDataRow.getString(name: "workState")
+					print(" -서버로부터받은처리갯수 : \(String(describing: strSvrProcCount))")
+					print(" -서버로부터받은작업처리상태 : \(String(describing: strSvrWorkState))")
+					
+					
 					//비동기 처리 결과에대한  UI에한 처리는 반드시 쓰레드로 처리되어야 한다.
 					DispatchQueue.main.async {
+						
 						self.clearTagData()
 						self.clearUserInterfaceData()
-						let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
-						self.showSnackbar(message: strMsg)
 					}
+					let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
+					self.showSnackbar(message: strMsg)
+
 				}
 				else
 				{
@@ -567,9 +593,9 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 
 	
 	
-	//////////////////////////////////////////////////////////////////////////////////////////
-	////   리더기 관련 이벤트및 처리 시작
-	//////////////////////////////////////////////////////////////////////////////////////////
+	//========================================================================
+	// 리더기 관련 이벤트및 처리 시작
+	//------------------------------------------------------------------------
 	// 리더기 연결 클릭이벤트
 	@IBAction func onRfidReaderClicked(_ sender: UIButton)
 	{
@@ -631,10 +657,9 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 			self.btnRfidReader.setTitle(NSLocalizedString("rfid_reader_connect", comment: "연결"), for: .normal)
 		}
 	}
-	
-	//////////////////////////////////////////////////////////////////////////////////////////
-	////   리더기 관련 이벤트및 처리 종료
-	//////////////////////////////////////////////////////////////////////////////////////////
+	//------------------------------------------------------------------------
+	// 리더기 관련 이벤트및 처리 끝
+	//========================================================================
 }
 
 

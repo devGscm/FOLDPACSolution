@@ -138,6 +138,9 @@
                                                         <real key="value" value="4"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="onStockReviewIdClicked:" destination="AVF-YF-1cO" eventType="touchUpInside" id="RfP-Zm-15h"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="유형" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2sL-kW-3ue">
                                                 <rect key="frame" x="92" y="4" width="60" height="30"/>
@@ -253,6 +256,9 @@
                                                                     <real key="value" value="0.0"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
+                                                            <connections>
+                                                                <segue destination="aL2-gv-NWN" kind="presentation" identifier="segTagDetailList" modalPresentationStyle="overCurrentContext" id="V6h-Ud-gag"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                 </tableViewCellContentView>
@@ -363,13 +369,21 @@
             </objects>
             <point key="canvasLocation" x="-6772" y="-3429.5352323838083"/>
         </scene>
+        <!--TagDetailList-->
+        <scene sceneID="cin-83-x9p">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Common" referencedIdentifier="TagDetailList" id="aL2-gv-NWN" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bmO-dv-ndW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-6050" y="-3531"/>
+        </scene>
         <!--OutSignDialog-->
         <scene sceneID="L2w-NQ-5yj">
             <objects>
                 <viewControllerPlaceholder storyboardName="Common" referencedIdentifier="OutSignDialog" id="oaM-px-M2S" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Egj-ih-2Lb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-6193" y="-3146"/>
+            <point key="canvasLocation" x="-6044" y="-3330"/>
         </scene>
     </scenes>
 </document>
