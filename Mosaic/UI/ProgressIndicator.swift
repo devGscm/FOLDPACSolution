@@ -111,27 +111,33 @@ public class ProgressIndicator: UIView
 	
 	public func show()
 	{
-		if self.subviews.contains(vwContainer) == false
-		{
-			self.isHidden = false
-			aivIndicator.startAnimating()
-			self.addSubview(vwContainer)
-		}
+        DispatchQueue.main.async
+        {
+            if self.subviews.contains(self.vwContainer) == false
+            {
+                self.isHidden = false
+                self.aivIndicator.startAnimating()
+                self.addSubview(self.vwContainer)
+            }
+        }
 	}
 	
 	public func hide()
 	{
-		if self.subviews.contains(vwContainer) == true
-		{
-			aivIndicator.stopAnimating()
-			vwContainer.removeFromSuperview()
-			
-			//self.isHidden = true
-			// 트랜지션 효과
-			UIView.transition(with: self, duration: 0.5, options: .transitionCrossDissolve, animations: {
-				self.isHidden = true
-			}, completion: nil)
-		}
+        DispatchQueue.main.async
+        {
+            if self.subviews.contains(self.vwContainer) == true
+            {
+                self.aivIndicator.stopAnimating()
+                self.vwContainer.removeFromSuperview()
+                
+                //self.isHidden = true
+                // 트랜지션 효과
+                UIView.transition(with: self, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                    self.isHidden = true
+                }, completion: nil)
+            }
+        }
 	}
 	
 	
