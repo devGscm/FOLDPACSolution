@@ -24,7 +24,7 @@ class RootViewController: BaseViewController
 	
 		if(AppContext.sharedManager.getUserInfo().getAutoLogin() == true || AppContext.sharedManager.getAuthenticated() == true)
 		{			
-			showSnackbar(message: "스네이크바 테스트입니다.")
+//			showSnackbar(message: "스네이크바 테스트입니다.")
 			
 //			let dataClient = Mosaic.DataClient(url: Constants.WEB_SVC_URL)
 //			dataClient.UserInfo = "xxOxOsU93/PvK/NN7DZmZw=="
@@ -87,15 +87,16 @@ class RootViewController: BaseViewController
 //							print(" dataColumn Id:" + dataColumn.Id + " Value:" + dataRow.get(name: dataColumn.Id, defaultValue: 0).debugDescription)
 //						}
 //					}
-//			})		
-		
-			print("로그인 성공")
+//			})
+			
+			
+			let clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
+											 indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: NSLocalizedString("common_progressbar_loading_basedata", comment: "서버로 부터 기초데이터를 수신중입니다."))
+			clsIndicator.show()
 			let localData = LocalData.shared
 			localData.RemoteDbEnncryptId = AppContext.sharedManager.getUserInfo().getEncryptId()
 			localData.CorpId = AppContext.sharedManager.getUserInfo().getCorpId()
-			localData.versionCheck()
-			
-			
+			localData.versionCheck(clsIndicator)
 
             var mDicPallet : Dictionary<String, String> = Dictionary<String, String>()
             mDicPallet["yomile1"] = "test1"

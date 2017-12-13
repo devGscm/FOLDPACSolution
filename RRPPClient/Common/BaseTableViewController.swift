@@ -1,16 +1,15 @@
 //
-//  BaseUIController.swift
+//  BaseTableViewController.swift
 //   RRPPClient
 //
-//  Created by 이용민 on 2017. 11. 27..
+//  Created by 이용민 on 2017. 12. 12..
 //  Copyright © 2017년 MORAMCNT. All rights reserved.
 //
 
+import Foundation
 import UIKit
-import Material
 
-
-public class BaseViewController : UIViewController
+public class BaseTableViewController : UITableViewController
 {
 	var boolUnload = true
 	
@@ -33,17 +32,16 @@ public class BaseViewController : UIViewController
 	func showSnackbar(message : String, visibleDelay: TimeInterval, hiddenDelay: TimeInterval)
 	{
 		DispatchQueue.main.async
-		{
-			guard let clsController = self.snackbarController else {
-				return
-			}
-			clsController.snackbar.text = message
-			_ = clsController.animate(snackbar: .visible, delay: visibleDelay)
-			_ = clsController.animate(snackbar: .hidden, delay: hiddenDelay)
+			{
+				guard let clsController = self.snackbarController else {
+					return
+				}
+				clsController.snackbar.text = message
+				_ = clsController.animate(snackbar: .visible, delay: visibleDelay)
+				_ = clsController.animate(snackbar: .hidden, delay: hiddenDelay)
 		}
 	}
-
-	// 언로드시
+	
 	func didUnload(to viewController: UIViewController, completion: ((Bool) -> Void)? = nil)
 	{
 	}
@@ -56,8 +54,4 @@ public class BaseViewController : UIViewController
 	{
 		return boolUnload
 	}
-	
 }
-
-
-

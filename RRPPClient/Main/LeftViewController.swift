@@ -21,10 +21,13 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return UIStoryboard.viewController(identifier: "RootViewController") as! RootViewController
     }()
 
+	var clsController : UIViewController?
+	
+	var intMenuIndex = -1
+	var intOldMenuIndex = -1
     
 	open override func viewDidLoad()
 	{
-        
 		super.viewDidLoad()
 		//view.backgroundColor = Color.blue.base
 		
@@ -94,81 +97,79 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		objCell.lblMenuName.text = "\(String.fontAwesomeIcon(name: .chevronCircleRight)) \(strtMenuItem.menuName )"
 		return objCell
 	}
+
 	
 	public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
 	{
+		print("============================================")
+		print("*LeftViewController:: tableView, willSelectRowAt")
+		print("============================================")
+		
         let strtMenuItem  = arrMenuData[indexPath.row]
-        
-        print("==== LeftViewController::tableView ====: \(strtMenuItem.menuId)")
+		self.intMenuIndex = indexPath.row
+		
 		switch (strtMenuItem.menuId)
 		{
 			case "ProductMount" :
 				// 자산등록 (장착)
-				let clsController: ProductMount = {
-                    print("==== ProductMount ====")
+				clsController = { () -> ProductMount in
 					return UIStoryboard.viewController(storyBoardName: "Product", identifier: "ProductMount") as! ProductMount
 				}()
-				toolbarController?.transition(to: clsController, completion: closeNavigationDrawer)
+				
+//				let clsController: ProductMount = {
+//                    print("==== ProductMount ====")
+//					return UIStoryboard.viewController(storyBoardName: "Product", identifier: "ProductMount") as! ProductMount
+//				}()
+
 				break
 			case "RfidInspect" :
 				// 검수
-				let clsController: RfidInspect = {
-                    print("==== RfidInspect ====")
+				clsController = { () -> RfidInspect in
 					return UIStoryboard.viewController(storyBoardName: "Tag", identifier: "RfidInspect") as! RfidInspect
 				}()
-				toolbarController?.transition(to: clsController, completion: closeNavigationDrawer)
 				break
 			
 			case "ProdMappingOut" :
-                
                 // 출고C(출하)
-				let clsController: ProdMappingOut = {
-                    print("==== ProdMappingOut ====")
+				clsController = { () -> ProdMappingOut in
 					return UIStoryboard.viewController(storyBoardName: "ProdMapping", identifier: "ProdMappingOut") as! ProdMappingOut
 				}()
-				toolbarController?.transition(to: clsController, completion: closeNavigationDrawer)
+
 				break
 			
 			case "WorkHistorySearch" :
-				let clsController: HistorySearch = {
-                    print("==== WorkHistorySearch ====")
+				clsController = { () -> HistorySearch in
 					return UIStoryboard.viewController(storyBoardName: "History", identifier: "HistorySearch") as! HistorySearch
 				}()
-				toolbarController?.transition(to: clsController, completion: closeNavigationDrawer)
 				break
-
-			
             case "InOutCancel" :
 				// 입출고취소
-                let clsController: InOutCancel = {
-                    print("==== InOutCancel ====")
+				clsController = { () -> InOutCancel in
                     return UIStoryboard.viewController(storyBoardName: "InOutCancel", identifier: "InOutCancel") as! InOutCancel
                 }()
-                toolbarController?.transition(to: clsController, completion: closeNavigationDrawer)
                 break
 			
 			case "StockReview" :
 				// 재고실사
-				let clsController: StockReview = {
-					print("==== StockReview ====")
+				clsController = { () -> StockReview in
 					return UIStoryboard.viewController(storyBoardName: "Stock", identifier: "StockReview") as! StockReview
 				}()
-				toolbarController?.transition(to: clsController, completion: closeNavigationDrawer)
 				break
 			
 			case "RfidTrackingService" :
 				// 이력추적
 				break
         	case "ClientConfig" :
-                let clsController: ClientConfig = {
+				clsController = { () -> ClientConfig in
                     return UIStoryboard.viewController(storyBoardName: "Config", identifier: "ClientConfig") as! ClientConfig
                 }()
-                toolbarController?.transition(to: clsController, completion: closeNavigationDrawer)
+
             	break
 			default:
 				print("is selected");
 		}
-		
+		toolbarController?.move(to: clsController!, completion: closeNavigationDrawer)
+		//toolbarController?.transition(to: clsController!, completion: closeNavigationDrawer)
 	}
 	
 	@IBAction func onLogoutClicked(_ sender: Any)
@@ -187,6 +188,18 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	public func closeNavigationDrawer(result: Bool)
 	{
+		if(result == true)
+		{
+			intOldMenuIndex = intMenuIndex
+		}
+		else
+		{
+			// 취소를 누른경우 이전 메뉴로 돌아간다.
+			if(self.intOldMenuIndex > -1)
+			{
+				 self.tvMenu.selectRow(at: IndexPath(row: self.intOldMenuIndex, section: 0), animated: true, scrollPosition: .none)
+			}
+		}
 		navigationDrawerController?.closeLeftView()
 	}
 }

@@ -83,7 +83,6 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	
 	var strSegueType			= ""	/**< 세그웨이 타임 */
 	
-	
 	override func viewWillAppear(_ animated: Bool)
 	{
 		print("=========================================")
@@ -96,8 +95,6 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		self.initRfid( self as ReaderResponseDelegate )
 		
 		initViewControl()
-		
-		
 	}
 	
 	override func viewDidAppear(_ animated: Bool)
@@ -106,25 +103,47 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		print("*ProdMappingOut.viewDidAppear()")
 		print("=========================================")
 		super.viewDidAppear(animated)
-		//initTestProcess()
+		initTestProcess()
 	}
 	
+	override func didUnload(to viewController: UIViewController, completion: ((Bool) -> Void)? = nil)
+	{
+		print("=========================================")
+		print("*ProdMappingOut.didUnload()")
+		print("=========================================")
+	
+		if(self.strSaleWorkId.isEmpty == false)
+		{
+			// TransitionController에서 다른화면으로 이동못하도록 false 처리를 한다.
+			super.setUnload(unload: false)
+			
+			Dialog.show(container: self, viewController: nil,
+						title: NSLocalizedString("common_confirm", comment: "확인"),
+						message: NSLocalizedString("easy_process_exist_message", comment: "임시 저장된 데이터가 지워집니다. 종료 하시겠습니까?"),
+						okTitle: NSLocalizedString("common_confirm", comment: "확인"),
+						okHandler: { (_) in
+							
+							// 작업 취소처리
+							self.sendWorkInitData(saleWorkId: self.strSaleWorkId)
 
+							// 확인이 끝나면 다른 화면으로 이동한다.
+							self.toolbarController?.transition(to: viewController, completion: completion)
+							return
+						},
+						cancelTitle: NSLocalizedString("common_cancel", comment: "취소"), cancelHandler: { (_) in
+							
+							completion!(false)
+						}
+			)
+		}
+	}
+	
 	override func viewWillDisappear(_ animated: Bool)
 	{
+		print("=========================================")
+		print("*ProdMappingOut.viewWillDisappear()")
+		print("=========================================")
 		super.viewWillDisappear(animated)
-		
-		
-//
-//		Dialog.show(container: self, viewController: nil,
-//					title: NSLocalizedString("common_delete", comment: "삭제"),
-//					message: "바부야",
-//					okTitle: NSLocalizedString("common_confirm", comment: "확인"),
-//					okHandler: { (_) in
-//
-//						return
-//			},
-//			cancelTitle: NSLocalizedString("common_cancel", comment: "확인"), cancelHandler: nil)
 	}
 	
 	override func viewDidDisappear(_ animated: Bool)
@@ -1123,16 +1142,20 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
                     	{
 							self.clearTagData(boolClearScreen: true)
 							
-							// TODO: 백버튼?
-							//if(mBoolonBackPressed == false)
-                            let strMsg = NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다.")
-                            self.showSnackbar(message: strMsg)
+							if(super.getUnload() == true)
+							{
+                            	let strMsg = NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다.")
+                            	self.showSnackbar(message: strMsg)
+							}
                         }
                     }
                     else
                     {
-                        let strMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
-                        self.showSnackbar(message: strMsg)
+						if(super.getUnload() == true)
+						{
+                        	let strMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
+                        	self.showSnackbar(message: strMsg)
+						}
                     }
                 }
                 
