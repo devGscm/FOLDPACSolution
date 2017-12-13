@@ -170,19 +170,84 @@ class StockReviewSearch: BaseViewController, UITableViewDataSource, UITableViewD
 	{
 		let clsDataRow = arcDataRows[sender.tag]
 		
-		let strStockReviewState = clsDataRow.getString(name:"stockReviewState")	// 재고조사 상태값
-		print("@@@@strStockReviewState:\(strStockReviewState)")
-		
+		let strStockReviewId	= clsDataRow.getString(name:"stockReviewId") ?? ""	// 재고조사ID
+		let strStockReviewState	= clsDataRow.getString(name:"stockReviewState") ?? ""	// 재고조사 상태값
+		print("@@@@strStockReviewState:\(strStockReviewState) @@@@@@@@@@@@@@")
 		// 재고조사 초기화
 		if(Constants.STOCK_REVIEW_STATE_WORKING == strStockReviewState)
 		{
-			
+			sendStockReviewInitData(stockReviewId: strStockReviewId, dataRow: clsDataRow)
 		}
+		else
+		{
+			let strtData = ReturnData(returnType: "stockReviewSearch", returnCode: nil, returnMesage: nil, returnRawData: clsDataRow)
+			ptcDataHandler?.recvData(returnData: strtData)
+			self.dismiss(animated: true, completion: nil)
+		}
+	}
+	
+	func sendStockReviewInitData(stockReviewId: String, dataRow: DataRow)
+	{
+		print("@@@@sendStockReviewInitData @@@@@@@@@@@@@@")
 		
-		
-		let strtData = ReturnData(returnType: "stockReviewSearch", returnCode: nil, returnMesage: nil, returnRawData: clsDataRow)
-		ptcDataHandler?.recvData(returnData: strtData)
-		self.dismiss(animated: true, completion: nil)
+		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+		clsDataClient.SelectUrl = "reviewService:executeStockReviewInitData"
+		clsDataClient.removeServiceParam()
+		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+		clsDataClient.addServiceParam(paramName: "userId", value: AppContext.sharedManager.getUserInfo().getUserId())
+		clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
+		clsDataClient.addServiceParam(paramName: "stockReviewId", value: stockReviewId)
+		clsDataClient.selectRawData(dataCompletionHandler: { (responseData, error) in
+			if let error = error {
+				// 에러처리
+				super.showSnackbar(message: error.localizedDescription)
+				print(error)
+				self.dismiss(animated: true, completion: nil)
+				return
+			}
+			guard let responseData = responseData else {
+				print("에러 데이터가 없음")
+				self.dismiss(animated: true, completion: nil)
+				return
+			}
+			// 성공
+			if let returnCode = responseData.returnCode , returnCode > 0
+			{
+				let returnMessage = responseData.returnMessage ?? ""
+				print("@@@@@@@@@ return RawMessage : \(returnMessage)")
+				
+				let dataSourceMgr = DataSourceMgr()
+				dataSourceMgr.Notation = DataSourceMgr.NOTATION_NONE
+				
+				if (dataSourceMgr.parse(data: responseData.returnMessage!))
+				{
+					let clsDataTable = dataSourceMgr.getDataTable()
+					let clsDataRows = clsDataTable.getDataRows()
+					if(clsDataRows.count > 0)
+					{
+						let clsResultRow = clsDataRows[0]
+						
+						let strResultCode = clsResultRow.getString(name: "resultCode") ?? ""
+						let strResultMsg = clsResultRow.getString(name: "resultMessage") ?? ""
+						
+						print("-리턴코드: \(strResultCode)")
+						print("-리턴메시지: \(strResultMsg)")
+						
+						if(strResultCode == Constants.PROC_RESULT_SUCCESS)
+						{
+							let strtData = ReturnData(returnType: "stockReviewSearch", returnCode: nil, returnMesage: nil, returnRawData: dataRow)
+							self.ptcDataHandler?.recvData(returnData: strtData)
+						}
+					}
+				}
+			}
+			else
+			{
+				print("json 오류")
+			}
+			self.dismiss(animated: true, completion: nil)
+		})
 	}
 	
 	@IBAction func onCloseClicked(_ sender: Any)

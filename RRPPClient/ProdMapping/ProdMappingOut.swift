@@ -853,8 +853,8 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 			return
 		}
 		
-		var strVehName		= tfVehName?.text ?? ""
-		var strTradeChit	= tfTradeChit?.text ?? ""
+		let strVehName		= tfVehName?.text ?? ""
+		let strTradeChit	= tfTradeChit?.text ?? ""
 		
 		if(strSaleWorkId.isEmpty == false)
 		{
@@ -912,123 +912,117 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		var strProdAssetEpcName 	= ""
 		var strSerialNo 			= ""
 
-		do
-		{
-			// 1) 태그데이터 초기화
-			clearTagData(boolClearScreen: false)
 
-			let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
-            clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
-            clsDataClient.SelectUrl = "supplyService:selectProdMappingOutTagList" //출고C타입용 (출고A,B타입과 다름)
-            clsDataClient.removeServiceParam()
-            clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
-            clsDataClient.addServiceParam(paramName: "saleWorkId", value: strSaleWorkId)
-            clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
-			clsDataClient.selectData(dataCompletionHandler: {(data, error) in
-				if let error = error {
-					// 에러처리
-					print(error)
-					return
-				}
-				guard let clsDataTable = data else {
-					print("에러 데이터가 없음")
-					return
-				}
+		
+		// 1) 태그데이터 초기화
+		clearTagData(boolClearScreen: false)
+		
+		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+		clsDataClient.SelectUrl = "supplyService:selectProdMappingOutTagList" //출고C타입용 (출고A,B타입과 다름)
+		clsDataClient.removeServiceParam()
+		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+		clsDataClient.addServiceParam(paramName: "saleWorkId", value: strSaleWorkId)
+		clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
+		clsDataClient.selectData(dataCompletionHandler: {(data, error) in
+			if let error = error {
+				// 에러처리
+				print(error)
+				return
+			}
+			guard let clsDataTable = data else {
+				print("에러 데이터가 없음")
+				return
+			}
+			
+			// 2) DB에서 리스트 조회값 받음
+			for clsDataRow in clsDataTable.getDataRows()
+			{
+				let strEpcUrn 			= clsDataRow.getString(name: "epcUrn") ?? ""
+				strEpcCode				= clsDataRow.getString(name: "epcCode") ?? ""
+				let strUtcTraceDate 	= clsDataRow.getString(name: "utcTraceDate") ?? ""
+				let strProdAssetEpc 	= clsDataRow.getString(name: "prodAssetEpc") ?? ""
+				strProdAssetEpcName		= clsDataRow.getString(name: "prodAssetEpcName") ?? ""
+				let strBarcodeId 		= clsDataRow.getString(name: "barcodeId") ?? ""
+				let strSaleItemSeq 		= clsDataRow.getString(name: "saleItemSeq") ?? ""
+				//let strItemCode 		= clsDataRow.getString(name: "itemCode") ?? ""
+				let strItemName 		= clsDataRow.getString(name: "itemName") ?? ""
+				let strCnt 				= clsDataRow.getString(name: "cnt") ?? ""
+				//let strTradeChit		= clsDataRow.getString(name: "tradeChit") ?? ""
+				//let strVehName 			= clsDataRow.getString(name: "vehName") ?? ""
 				
-				// 2) DB에서 리스트 조회값 받음
-				for clsDataRow in clsDataTable.getDataRows()
+				// 날짜 포맷 변환
+				let strLocaleTraceDate = DateUtil.utcToLocale(utcDate: strUtcTraceDate, dateFormat: "yyyyMMddHHmmss")
+				let strTraceDate = DateUtil.getConvertFormatDate(date: strLocaleTraceDate, srcFormat: "yyyyMMddHHmmss", dstFormat:"yyyy-MM-dd HH:mm:ss")
+				
+				if(strEpcUrn.isEmpty == false)
 				{
-					let strEpcUrn 			= clsDataRow.getString(name: "epcUrn") ?? ""
-					strEpcCode				= clsDataRow.getString(name: "epcCode") ?? ""
-					let strUtcTraceDate 	= clsDataRow.getString(name: "utcTraceDate") ?? ""
-					let strProdAssetEpc 	= clsDataRow.getString(name: "prodAssetEpc") ?? ""
-					strProdAssetEpcName		= clsDataRow.getString(name: "prodAssetEpcName") ?? ""
-					let strBarcodeId 		= clsDataRow.getString(name: "barcodeId") ?? ""
-					let strSaleItemSeq 		= clsDataRow.getString(name: "saleItemSeq") ?? ""
-					//let strItemCode 		= clsDataRow.getString(name: "itemCode") ?? ""
-					let strItemName 		= clsDataRow.getString(name: "itemName") ?? ""
-					let strCnt 				= clsDataRow.getString(name: "cnt") ?? ""
-					//let strTradeChit		= clsDataRow.getString(name: "tradeChit") ?? ""
-					//let strVehName 			= clsDataRow.getString(name: "vehName") ?? ""
+					let intIndex = strEpcUrn.lastIndex(of: ".") + 1
+					let intLength = strEpcUrn.length - intIndex
 					
-					// 날짜 포맷 변환
-					let strLocaleTraceDate = DateUtil.utcToLocale(utcDate: strUtcTraceDate, dateFormat: "yyyyMMddHHmmss")
-					let strTraceDate = DateUtil.getConvertFormatDate(date: strLocaleTraceDate, srcFormat: "yyyyMMddHHmmss", dstFormat:"yyyy-MM-dd HH:mm:ss")
-
-					if(strEpcUrn.isEmpty == false)
-					{
-                        let intIndex = strEpcUrn.lastIndex(of: ".") + 1
-                        let intLength = strEpcUrn.length - intIndex
-                        
-						strSerialNo = strEpcUrn.substring(intIndex, length: intLength)
-						print("=============================================")
-						print("strSerialNo:\(strSerialNo)")
-						print("=============================================")
-					}
-					
-					// 마스터-RFID태그정보
-                    let clsMastItemInfo = ItemInfo()
-                    clsMastItemInfo.setEpcCode(epcCode: strEpcCode)
-                    clsMastItemInfo.setEpcUrn(epcUrn: strEpcUrn)
-                    clsMastItemInfo.setSerialNo(serialNo: strSerialNo)
-                    clsMastItemInfo.setAssetEpc(assetEpc: strProdAssetEpc)
-                    clsMastItemInfo.setAssetName(assetName: strProdAssetEpcName)
-                    clsMastItemInfo.setRowState(rowState: Constants.DATA_ROW_STATE_UNCHANGED)
-                    clsMastItemInfo.setReadCount(readCount: 1)
-                    clsMastItemInfo.setReadTime(readTime: strTraceDate)
-
-					//슬래이브-상품정보
-                    let clsSlaveItemInfo = ItemInfo()
-                    clsSlaveItemInfo.setEpcCode(epcCode: strEpcCode)
-                    clsSlaveItemInfo.setSaleItemSeq(saleItemSeq: strSaleItemSeq)
-                    clsSlaveItemInfo.setProdCode(prodCode: strBarcodeId)
-                    clsSlaveItemInfo.setProdName(prodName: strItemName)
-                    clsSlaveItemInfo.setRowState(rowState: Constants.DATA_ROW_STATE_UNCHANGED)
-                    clsSlaveItemInfo.setProdReadCnt(prodReadCnt: strCnt)
-                    clsSlaveItemInfo.setReadTime(readTime: strTraceDate)
-
-                    // #1.헤시맵 생성
-                    if(self.clsProdContainer.containEpcCode(epcCode: strEpcCode) == false)
-                    {
-                        // #1-1.구조체 수정
-                        self.clsProdContainer.loadProdEpc(epcCode: strEpcCode)
-
-                        // #1-2.마스터 그리스 저장
-                        self.arrRfidRows.append(clsMastItemInfo)
-                    }
-
-                    // #2.아이템 생성-바코드ID가 있는경우
-                    if(strBarcodeId.isEmpty == false)
-                    {
-                        self.clsProdContainer.addItem(epcCode: strEpcCode, itemInfo: clsSlaveItemInfo)
-                        
-                        //#3.서브 그리드 저장
-                        self.arrProdRows.append(clsSlaveItemInfo)
-                    }
+					strSerialNo = strEpcUrn.substring(intIndex, length: intLength)
+					print("=============================================")
+					print("strSerialNo:\(strSerialNo)")
+					print("=============================================")
 				}
-                
-				// 3)'처리량' 텍스트박스에 표시
-                self.lblProcCount.text = "\(self.arrRfidRows.count)"
 				
-
-				// 4)그리드 업데이트
-                self.tvMappingRfid?.reloadData()
-                self.tvMappingProd?.reloadData()
-         
-                // 5)마지막 마스터 그리드가 선택되게 만들기
-                self.strSelectedEpcCode = strEpcCode
-                
-                self.lblSerialNo?.text = strSerialNo
-                self.lblAssetName?.text = strProdAssetEpcName
-                
-                super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
-    		})
-		}
-		catch let error
-		{
-            super.showSnackbar(message: error.localizedDescription)
-			print(error.localizedDescription)
-		}
+				// 마스터-RFID태그정보
+				let clsMastItemInfo = ItemInfo()
+				clsMastItemInfo.setEpcCode(epcCode: strEpcCode)
+				clsMastItemInfo.setEpcUrn(epcUrn: strEpcUrn)
+				clsMastItemInfo.setSerialNo(serialNo: strSerialNo)
+				clsMastItemInfo.setAssetEpc(assetEpc: strProdAssetEpc)
+				clsMastItemInfo.setAssetName(assetName: strProdAssetEpcName)
+				clsMastItemInfo.setRowState(rowState: Constants.DATA_ROW_STATE_UNCHANGED)
+				clsMastItemInfo.setReadCount(readCount: 1)
+				clsMastItemInfo.setReadTime(readTime: strTraceDate)
+				
+				//슬래이브-상품정보
+				let clsSlaveItemInfo = ItemInfo()
+				clsSlaveItemInfo.setEpcCode(epcCode: strEpcCode)
+				clsSlaveItemInfo.setSaleItemSeq(saleItemSeq: strSaleItemSeq)
+				clsSlaveItemInfo.setProdCode(prodCode: strBarcodeId)
+				clsSlaveItemInfo.setProdName(prodName: strItemName)
+				clsSlaveItemInfo.setRowState(rowState: Constants.DATA_ROW_STATE_UNCHANGED)
+				clsSlaveItemInfo.setProdReadCnt(prodReadCnt: strCnt)
+				clsSlaveItemInfo.setReadTime(readTime: strTraceDate)
+				
+				// #1.헤시맵 생성
+				if(self.clsProdContainer.containEpcCode(epcCode: strEpcCode) == false)
+				{
+					// #1-1.구조체 수정
+					self.clsProdContainer.loadProdEpc(epcCode: strEpcCode)
+					
+					// #1-2.마스터 그리스 저장
+					self.arrRfidRows.append(clsMastItemInfo)
+				}
+				
+				// #2.아이템 생성-바코드ID가 있는경우
+				if(strBarcodeId.isEmpty == false)
+				{
+					self.clsProdContainer.addItem(epcCode: strEpcCode, itemInfo: clsSlaveItemInfo)
+					
+					//#3.서브 그리드 저장
+					self.arrProdRows.append(clsSlaveItemInfo)
+				}
+			}
+			
+			// 3)'처리량' 텍스트박스에 표시
+			self.lblProcCount.text = "\(self.arrRfidRows.count)"
+			
+			
+			// 4)그리드 업데이트
+			self.tvMappingRfid?.reloadData()
+			self.tvMappingProd?.reloadData()
+			
+			// 5)마지막 마스터 그리드가 선택되게 만들기
+			self.strSelectedEpcCode = strEpcCode
+			
+			self.lblSerialNo?.text = strSerialNo
+			self.lblAssetName?.text = strProdAssetEpcName
+			
+			super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
+		})
 	}
 	
 	
