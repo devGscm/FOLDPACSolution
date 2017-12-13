@@ -98,7 +98,7 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	// Segue로 파라미터 넘기면 반드시 prepare를 타기 때문에 여기서 DataProtocol을 세팅하는걸로 함
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?)
 	{
-		if(segue.identifier == "segProductOrderSearch")
+		if(segue.identifier == "segStockReviewSearch")
 		{
 			if let clsDialog = segue.destination as? ProductOrderSearch
 			{
@@ -139,7 +139,7 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	// 팝업 다이얼로그로 부터 데이터 수신
 	func recvData( returnData : ReturnData)
 	{
-		if(returnData.returnType == "productOrderSearch")
+		if(returnData.returnType == "stockReviewSearch")
 		{
 			if(returnData.returnRawData != nil)
 			{
@@ -186,8 +186,7 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	// 실사번호 선택
 	@IBAction func onStockReviewIdClicked(_ sender: UIButton)
 	{
-		// TODO
-		//self.performSegue(withIdentifier: "segProductOrderSearch", sender: self)
+		//self.performSegue(withIdentifier: "segStockReviewSearch", sender: self)
 	}
 	
 	// 데이터를 clear한다.

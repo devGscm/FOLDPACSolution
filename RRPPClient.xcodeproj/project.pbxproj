@@ -10,6 +10,8 @@
 		550DD8AC1FDFC5BE00766DCF /* StockReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550DD8AB1FDFC5BE00766DCF /* StockReviewCell.swift */; };
 		5522A62D1FDF9010009ED6EF /* TransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5522A62C1FDF9010009ED6EF /* TransitionController.swift */; };
 		5522A6351FDFB3D1009ED6EF /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5522A6341FDFB3D1009ED6EF /* UIViewController.swift */; };
+		553A4E021FE0AFCE00271BBD /* StockReviewSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553A4E011FE0AFCE00271BBD /* StockReviewSearch.swift */; };
+		553A4E041FE0C0AB00271BBD /* StockReviewSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553A4E031FE0C0AB00271BBD /* StockReviewSearchCell.swift */; };
 		553BCF8B1FC2DC3B00BE39C1 /* SliderDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553BCF8A1FC2DC3B00BE39C1 /* SliderDialog.swift */; };
 		553F42EE1FCCE94C006784AF /* Product.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 553F42F01FCCE94C006784AF /* Product.storyboard */; };
 		553F42FA1FCD4E8E006784AF /* ProductMount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F42F91FCD4E8E006784AF /* ProductMount.swift */; };
@@ -145,6 +147,8 @@
 		5522A62C1FDF9010009ED6EF /* TransitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionController.swift; sourceTree = "<group>"; };
 		5522A6301FDFA778009ED6EF /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		5522A6341FDFB3D1009ED6EF /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		553A4E011FE0AFCE00271BBD /* StockReviewSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockReviewSearch.swift; sourceTree = "<group>"; };
+		553A4E031FE0C0AB00271BBD /* StockReviewSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockReviewSearchCell.swift; sourceTree = "<group>"; };
 		553BCF8A1FC2DC3B00BE39C1 /* SliderDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderDialog.swift; sourceTree = "<group>"; };
 		553F42EA1FCCDD5B006784AF /* RfidInspect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RfidInspect.swift; sourceTree = "<group>"; };
 		553F42EC1FCCDDC6006784AF /* Tag.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tag.storyboard; sourceTree = "<group>"; };
@@ -444,6 +448,8 @@
 				55FC62A51FD14A56003B7173 /* Stock.storyboard */,
 				55FC62A31FD14A41003B7173 /* StockReview.swift */,
 				550DD8AB1FDFC5BE00766DCF /* StockReviewCell.swift */,
+				553A4E011FE0AFCE00271BBD /* StockReviewSearch.swift */,
+				553A4E031FE0C0AB00271BBD /* StockReviewSearchCell.swift */,
 			);
 			path = Stock;
 			sourceTree = "<group>";
@@ -799,6 +805,8 @@
 				960224441FD0F3E400DE7C65 /* AT288Reader.swift in Sources */,
 				55ACD67E1FC804F800A2DC72 /* ListViewDialog.swift in Sources */,
 				55FA783B1FBDACE300583A80 /* UserInfo.swift in Sources */,
+				55B2D8101FCC0DF40010E61D /* BaseViewController.swift in Sources */,
+				553A4E041FE0C0AB00271BBD /* StockReviewSearchCell.swift in Sources */,
 				960224421FD0DBCD00DE7C65 /* SwingReader.swift in Sources */,
 				55FA78351FBDACC600583A80 /* Constants.swift in Sources */,
 				5522A62D1FDF9010009ED6EF /* TransitionController.swift in Sources */,
@@ -806,6 +814,7 @@
 				55B0830B1FDE4E0B007E3EAB /* YPDrawSignatureView.swift in Sources */,
 				553F42FA1FCD4E8E006784AF /* ProductMount.swift in Sources */,
 				5590A55D1FD4E194007571D5 /* ProdMappingOut.swift in Sources */,
+				553A4E021FE0AFCE00271BBD /* StockReviewSearch.swift in Sources */,
 				55FA784A1FBDAD0B00583A80 /* LeftMenuItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
