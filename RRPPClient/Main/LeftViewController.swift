@@ -6,7 +6,8 @@ import FontAwesome
 
 class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
-	struct MenuItem {
+	struct MenuItem
+	{
 		let menuId : String
 		let menuName : String
 	}
@@ -35,36 +36,40 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		mIvLogo.layer.masksToBounds = false
 		mIvLogo.layer.cornerRadius = mIvLogo.frame.height / 2
 		mIvLogo.clipsToBounds = true
+		
+		
+		// 옵져버 패턴 : 응답대기
+		NotificationCenter.default.addObserver(self, selector: #selector(makeLeftMenu), name: NSNotification.Name(rawValue: "makeLeftMenu"), object: nil)
 	}
 	
 	override func viewDidAppear(_ animated: Bool)
 	{
 		print(" LeftViewCOntroller.viewDidAppear")
-		makeMenuItem()
+		makeLeftMenu()
 	}
 	
-	public func makeMenuItem() -> Void
+	@objc public func makeLeftMenu()
 	{
 		arrMenuData.removeAll()
 		
-		let strCustType = AppContext.sharedManager.getUserInfo().getCustType()
+		let strBranchCustType = AppContext.sharedManager.getUserInfo().getBranchCustType()
 		print("=============================================")
-		print(" strCustType : \( AppContext.sharedManager.getUserInfo().getCustType() )")
+		print(" strBranchCustType : \( strBranchCustType) )")
 		print("=============================================")
 		
-		if(strCustType == "ISS")
+		if(strBranchCustType == "ISS")
 		{
 			//arrMenuData.append(MenuItem(menuId: "TagSupply", menuName: "납품등록(RFID)"))
 			arrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "RFID태그검수"))
 			//arrMenuData.append(MenuItem(menuId: "RfidTrackingService", menuName: "이력추적"))
 		}
-		else if(strCustType == "RDC")
+		else if(strBranchCustType == "RDC")
 		{
 			arrMenuData.append(MenuItem(menuId: "StockReview", menuName: NSLocalizedString("title_stock_review", comment: "재고실사")))
 			arrMenuData.append(MenuItem(menuId: "RfidTrackingService", menuName: NSLocalizedString("title_rfid_tracking_service", comment: "이력추적")))
 		}
 			
-		else if(strCustType == "MGR")
+		else if(strBranchCustType == "MGR")
 		{
 			// 관리회사(MGR)
 			//arrMenuData.append(MenuItem(menuId: "TagSupply", menuName: "납품등록(RFID)"))
@@ -83,7 +88,11 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		}
         
         arrMenuData.append(MenuItem(menuId: "ClientConfig", menuName: NSLocalizedString("title_client_config", comment: "환경설정")))
-		tvMenu?.reloadData()
+		
+		DispatchQueue.main.async
+		{
+			self.tvMenu?.reloadData()
+		}
 	}
 	
 	

@@ -27,7 +27,10 @@ class ClientConfig : BaseTableViewController, DataProtocol
     @IBOutlet weak var btnRfidPower: UIButton!
     @IBOutlet weak var btnIdentificationSystem: UIButton! //상품식별체계
     
-    
+	lazy var mClsLeftController: LeftViewController = {
+		return UIStoryboard.viewController(identifier: "LeftViewController") as! LeftViewController
+	}()
+	
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
@@ -142,6 +145,11 @@ class ClientConfig : BaseTableViewController, DataProtocol
                 //UserDefaults.standard.setValue(strBranchId, forKey: Constants.BASE_BRANCH_KEY)
                 //UserDefaults.standard.synchronize()
                 self.btnBranch.setTitle(strBranchName, for: .normal)
+				
+				
+				// 옵져버 전달 : 왼쪽메뉴 재생성
+				NotificationCenter.default.post(name: NSNotification.Name(rawValue: "makeLeftMenu"), object: nil)
+				
             }
         }
     }
