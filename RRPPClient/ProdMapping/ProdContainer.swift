@@ -61,9 +61,22 @@ public class ProdContainer
      */
     func addItem(epcCode: String, itemInfo: ItemInfo)
 	{
+		print("=====================================")
+		print("*addItem()")
+		print("=====================================")
+		print(" -epcCode:\(epcCode)")
  		let clsEpcInfo = mDicPallet[epcCode] as! EpcInfo
-		var arrItemList = clsEpcInfo.getItemes()
-		arrItemList.append(itemInfo)
+
+//		var arrItemList = clsEpcInfo.getItemes()
+//		print(" -epcCode:\(epcCode)")
+//		arrItemList.append(itemInfo)
+		
+		// 위 안드로이드 코딩을 아래와 같이 바꿈
+		
+		clsEpcInfo.addItem(strEpcCode: epcCode, itemInfo: itemInfo)
+		
+		print(" -clsEpcInfo.getItemes().count:\(clsEpcInfo.getItemes().count)")
+		
 	}
 
     /**
@@ -130,12 +143,22 @@ public class ProdContainer
      */
     func deleteItem(epcCode: String, prodCode: String, removeState: Int) -> Int
     {
+		print("=====================================")
+		print("*deleteItem()")
+		print("=====================================")
+		print(" -epcCode:\(epcCode)")
+		print(" -prodCode:\(prodCode)")
+		
         var intReturnRowState = 0
         let clsEpcInfo = mDicPallet[epcCode] as! EpcInfo
 		var arrItemList = clsEpcInfo.getItemes()
+		
+		print(" -arrItemList.count:\(arrItemList.count)")
+		
         
         for (index, clsItem) in arrItemList.enumerated()
         {
+			print("@@@@@@@@@@ epcCode:\(clsItem.getEpcCode()), ProdCode:\(clsItem.getProdCode())")
             if(clsItem.getEpcCode() == epcCode && clsItem.getProdCode() == prodCode)
             {
                 if(removeState == Constants.REMOVE_STATE_NORMAL)
@@ -160,6 +183,12 @@ public class ProdContainer
                 }
             }
         }
+		
+		// 배열을 초기화하고 다시 집어넣는다.
+		var arrNewItemData:Array<ItemInfo> = Array<ItemInfo>()
+		arrNewItemData.append(contentsOf: arrItemList)
+		clsEpcInfo.removeAllItems()
+		clsEpcInfo.setItemes(itemes: arrNewItemData)
         return intReturnRowState
     }
     

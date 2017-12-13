@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RRPPClient/ProdMapping/EpcInfo.swift"
-            timestampString = "534249561.912671"
+            timestampString = "534849160.435054"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
             landmarkName = "getEpcCode()"
             landmarkType = "7">
          </BreakpointContent>

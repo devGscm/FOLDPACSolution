@@ -702,6 +702,7 @@ public class RfidUtil
      */
     public static func parseGrai96(enuEncoding: Encodings, strData: String) -> TagInfo
     {
+		
         //print("[2]=>parseGrai96: \(strData)")
         
         //let enuEncoding = RfidUtil.Encodings.GRAI_96                                        //테스트 입력값: GRAI_96
@@ -759,8 +760,25 @@ public class RfidUtil
             strSerialNo = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 58, intIndexEnd: 95), radix: 2)!)               //결과: 161029
             strCorpEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 14, intIndexEnd: 40), radix: 2)!)                //결과: 95100027
             strAssetEpc = String(Int(StrUtil.substring(strInputString: bitString, intIndexStart: 41, intIndexEnd: 57), radix: 2)!)               //결과: 1027
-            strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strAssetEpc, intCount: 12 - strAssetEpc.count - strCorpEpc.count)
-                + "." + strSerialNo                                                                                                             //결과: grai:95100027.1027.161029
+			
+			let intLength = 12 - strAssetEpc.count - strCorpEpc.count
+			
+//			print("===================================")
+//			print("*RfidUtil.parseGrai96()")
+//			print(" -strData:\(strData)")
+//			print("===================================")
+//			print(" -strSerialNo:\(strSerialNo)")
+//			print(" -strAssetEpc:\(strAssetEpc)")
+//			print(" -strCorpEpc:\(strCorpEpc)")
+//			print(" -strAssetEpc.count:\(strAssetEpc.count)")
+//			print(" -strCorpEpc.count:\(strCorpEpc.count)")
+//			print(" -intLength:\(intLength)")
+//			print("-------------------------")
+//
+			if(intLength > -1)
+			{
+				strEpcUrn += strCorpEpc + "." + addPaddingZeros(strInputString: strAssetEpc, intCount: intLength) + "." + strSerialNo                                                                                                             //결과: grai:95100027.1027.161029
+			}
             break;
             
         case 5:
@@ -937,8 +955,12 @@ public class RfidUtil
     //=======================================
     public static func addPaddingZeros(strInputString: String, intCount: Int) -> String
     {
+		if(intCount < 0)
+		{
+			return strInputString
+		}
         var strInputData = strInputString
-        
+	
         for _ in 0..<intCount
         {
             strInputData = "0" + strInputData

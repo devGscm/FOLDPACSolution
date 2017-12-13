@@ -296,6 +296,9 @@
                                                         <real key="value" value="4"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="onClearAllClicked:" destination="AVF-YF-1cO" eventType="touchUpInside" id="doj-No-O2c"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ezj-wS-zj3">
                                                 <rect key="frame" x="80" y="0.0" width="78.5" height="30"/>
@@ -335,6 +338,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
+                                                    <action selector="onSendClicked:" destination="AVF-YF-1cO" eventType="touchUpInside" id="Tp9-o6-ImQ"/>
                                                     <segue destination="oaM-px-M2S" kind="presentation" identifier="segOutSignDialog" modalPresentationStyle="overCurrentContext" id="Wnk-oe-gjA"/>
                                                 </connections>
                                             </button>

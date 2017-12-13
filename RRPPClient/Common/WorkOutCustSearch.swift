@@ -131,7 +131,7 @@ class WorkOutCustSearch: BaseViewController, UITableViewDataSource, UITableViewD
         clsDataClient.selectData(dataCompletionHandler: {(data, error) in
             if let error = error {
                 // 에러처리
-                print(error)
+                super.showSnackbar(message: error.localizedDescription)
                 return
             }
             guard let clsDataTable = data else {
