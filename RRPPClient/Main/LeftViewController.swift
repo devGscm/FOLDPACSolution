@@ -6,7 +6,8 @@ import FontAwesome
 
 class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
-	struct MenuItem {
+	struct MenuItem
+	{
 		let menuId : String
 		let menuName : String
 	}
@@ -35,52 +36,126 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		mIvLogo.layer.masksToBounds = false
 		mIvLogo.layer.cornerRadius = mIvLogo.frame.height / 2
 		mIvLogo.clipsToBounds = true
+		
+		
+		// 옵져버 패턴 : 응답대기
+		NotificationCenter.default.addObserver(self, selector: #selector(makeLeftMenu), name: NSNotification.Name(rawValue: "makeLeftMenu"), object: nil)
 	}
 	
 	override func viewDidAppear(_ animated: Bool)
 	{
 		print(" LeftViewCOntroller.viewDidAppear")
-		makeMenuItem()
+		makeLeftMenu()
 	}
 	
-	public func makeMenuItem() -> Void
+	@objc public func makeLeftMenu()
 	{
 		arrMenuData.removeAll()
 		
-		let strCustType = AppContext.sharedManager.getUserInfo().getCustType()
+		let strBranchCustType = AppContext.sharedManager.getUserInfo().getBranchCustType()
 		print("=============================================")
-		print(" strCustType : \( AppContext.sharedManager.getUserInfo().getCustType() )")
+		print(" strBranchCustType : \( strBranchCustType) )")
 		print("=============================================")
 		
-		if(strCustType == "ISS")
+		if(strBranchCustType == "ISS")
 		{
-			//arrMenuData.append(MenuItem(menuId: "TagSupply", menuName: "납품등록(RFID)"))
-			arrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "RFID태그검수"))
-			//arrMenuData.append(MenuItem(menuId: "RfidTrackingService", menuName: "이력추적"))
+			//==============================================
+			// 태그공급회사
+			//==============================================
+			arrMenuData.append(MenuItem(menuId: "TagSupply", menuName: NSLocalizedString("title_tag_supply", comment: "납품등록(RFID)")))
+			arrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: NSLocalizedString("title_rfid_inspect", comment: "RFID태그검수")))
+			arrMenuData.append(MenuItem(menuId: "RfidTrackingService", menuName: NSLocalizedString("title_rfid_tracking_service", comment: "이력추적")))
 		}
-		else if(strCustType == "RDC")
+		else if(strBranchCustType == "PMK")
 		{
+			//==============================================
+			// 생산처 (파렛트 제작회사)
+			//==============================================
+			arrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: NSLocalizedString("title_rfid_inspect", comment: "RFID태그검수")))
+			arrMenuData.append(MenuItem(menuId: "ProductMount", menuName: NSLocalizedString("title_product_mount", comment: "자산등록")))
+			arrMenuData.append(MenuItem(menuId: "StockReview", menuName: NSLocalizedString("title_stock_review", comment: "재고실사")))
+			
+			arrMenuData.append(MenuItem(menuId: "CombineOut", menuName: NSLocalizedString("title_work_sale_a", comment: "출고A")))
+			// 입고(입고A : 주문서 있는 입고)
+			arrMenuData.append(MenuItem(menuId: "InOutCancel", menuName: NSLocalizedString("title_work_inout_cancel", comment: "입출고취소")))
+			arrMenuData.append(MenuItem(menuId: "WorkHistorySearch", menuName: NSLocalizedString("title_work_history_search", comment: "작업내역조회")))
+			arrMenuData.append(MenuItem(menuId: "RfidTrackingService", menuName: NSLocalizedString("title_rfid_tracking_service", comment: "이력추적")))
+			arrMenuData.append(MenuItem(menuId: "EventDestory", menuName: NSLocalizedString("title_event_destory", comment: "폐기")))
+		}
+		else if(strBranchCustType == "RDC")
+		{
+			//==============================================
+			// 물류센터
+			//==============================================
+			
+			arrMenuData.append(MenuItem(menuId: "CombineOut", menuName: NSLocalizedString("title_work_sale_a", comment: "출고A")))
+			// 이동/반납입고 (입고A : 주문서 있는 입고)
+			// 회수 입고 ( 입고B : 지시서 없는 입고)
+			arrMenuData.append(MenuItem(menuId: "EventSelectStore", menuName: NSLocalizedString("title_event_select_store", comment: "선별/보관")))
+			arrMenuData.append(MenuItem(menuId: "EventClean", menuName: NSLocalizedString("title_event_clean", comment: "세척")))
+			arrMenuData.append(MenuItem(menuId: "EventDestory", menuName: NSLocalizedString("title_event_destory", comment: "폐기")))
+			arrMenuData.append(MenuItem(menuId: "WorkHistorySearch", menuName: NSLocalizedString("title_work_history_search", comment: "작업내역조회")))
+			arrMenuData.append(MenuItem(menuId: "InOutCancel", menuName: NSLocalizedString("title_work_inout_cancel", comment: "입출고취소")))
 			arrMenuData.append(MenuItem(menuId: "StockReview", menuName: NSLocalizedString("title_stock_review", comment: "재고실사")))
 			arrMenuData.append(MenuItem(menuId: "RfidTrackingService", menuName: NSLocalizedString("title_rfid_tracking_service", comment: "이력추적")))
 		}
-			
-		else if(strCustType == "MGR")
+		else if(strBranchCustType == "EXP")
 		{
-			// 관리회사(MGR)
-			//arrMenuData.append(MenuItem(menuId: "TagSupply", menuName: "납품등록(RFID)"))
-			arrMenuData.append(MenuItem(menuId: "ProductMount", menuName: NSLocalizedString("title_product_mount", comment: "자산등록")))
+			//==============================================
+			// 계약처
+			//==============================================
+			// 납품입고 (입고A : 지시서 있는 입고)
+			// 출고 (출고B : 지시서 없는 출고)
+			// 입고 (입고B : 지시서 없는 입고)
+			arrMenuData.append(MenuItem(menuId: "ProdMappingOut", menuName: NSLocalizedString("title_work_out_product", comment: "상품매핑")))
+			arrMenuData.append(MenuItem(menuId: "WorkHistorySearch", menuName: NSLocalizedString("title_work_history_search", comment: "작업내역조회")))
+			arrMenuData.append(MenuItem(menuId: "StockReview", menuName: NSLocalizedString("title_stock_review", comment: "재고실사")))
+			arrMenuData.append(MenuItem(menuId: "InOutCancel", menuName: NSLocalizedString("title_work_inout_cancel", comment: "입출고취소")))
+		}
+		else if(strBranchCustType == "IMP")
+		{
+			//==============================================
+			// 실수요처
+			//==============================================
 			
+			// 출고 (출고B : 지시서 없는 출고)
+			// 입고 (입고B : 지시서 없는 입고)
+			arrMenuData.append(MenuItem(menuId: "ProdMappingOut", menuName: NSLocalizedString("title_work_out_product", comment: "상품매핑")))
+			arrMenuData.append(MenuItem(menuId: "WorkHistorySearch", menuName: NSLocalizedString("title_work_history_search", comment: "작업내역조회")))
+			arrMenuData.append(MenuItem(menuId: "StockReview", menuName: NSLocalizedString("title_stock_review", comment: "재고실사")))
+			arrMenuData.append(MenuItem(menuId: "InOutCancel", menuName: NSLocalizedString("title_work_inout_cancel", comment: "입출고취소")))
+		}
+
+		else if(strBranchCustType == "MGR")
+		{
+			//==============================================
+			// 관리회사(MGR)
+			//==============================================
+			arrMenuData.append(MenuItem(menuId: "TagSupply", menuName: NSLocalizedString("title_tag_supply", comment: "납품등록(RFID)")))
+			arrMenuData.append(MenuItem(menuId: "ProductMount", menuName: NSLocalizedString("title_product_mount", comment: "자산등록")))
+			arrMenuData.append(MenuItem(menuId: "CombineOut", menuName: NSLocalizedString("title_work_sale_a", comment: "출고A")))
+			
+			// 입고 (입고A : 지시서 있는 입고)
+			// 출고 (출고B : 지시서 없는 출고)
+			// 입고 (입고B : 지시서 없는 입고)
             arrMenuData.append(MenuItem(menuId: "ProdMappingOut", menuName: NSLocalizedString("title_work_sale_c", comment: "출고C")))
+			
+			arrMenuData.append(MenuItem(menuId: "EventClean", menuName: NSLocalizedString("title_event_clean", comment: "세척")))
+			arrMenuData.append(MenuItem(menuId: "EventDestory", menuName: NSLocalizedString("title_event_destory", comment: "폐기")))
 			arrMenuData.append(MenuItem(menuId: "WorkHistorySearch", menuName: NSLocalizedString("title_work_history_search", comment: "작업내역조회")))
             arrMenuData.append(MenuItem(menuId: "InOutCancel", menuName: NSLocalizedString("title_work_inout_cancel", comment: "입출고취소")))
-			
 			arrMenuData.append(MenuItem(menuId: "StockReview", menuName: NSLocalizedString("title_stock_review", comment: "재고실사")))
 			arrMenuData.append(MenuItem(menuId: "RfidTrackingService", menuName: NSLocalizedString("title_rfid_tracking_service", comment: "이력추적")))
-			arrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: "RFID태그검수"))
+			arrMenuData.append(MenuItem(menuId: "EventSelectStore", menuName: NSLocalizedString("title_event_select_store", comment: "선별/보관")))
+			arrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: NSLocalizedString("title_rfid_inspect", comment: "RFID태그검수")))
 		}
-        
+		
         arrMenuData.append(MenuItem(menuId: "ClientConfig", menuName: NSLocalizedString("title_client_config", comment: "환경설정")))
-		tvMenu?.reloadData()
+		
+		DispatchQueue.main.async
+		{
+			self.tvMenu?.reloadData()
+		}
 	}
 	
 	
@@ -110,6 +185,26 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		
 		switch (strtMenuItem.menuId)
 		{
+			case "TagSupply" :
+				// 납품등록(RFID)
+				clsController = { () -> TagSupply in
+					return UIStoryboard.viewController(storyBoardName: "Tag", identifier: "TagSupply") as! TagSupply
+				}()
+			break
+			
+			case "RfidInspect" :
+				// 검수
+				clsController = { () -> RfidInspect in
+					return UIStoryboard.viewController(storyBoardName: "Tag", identifier: "RfidInspect") as! RfidInspect
+				}()
+				break
+			case "RfidTrackingService" :
+				// 이력추적
+				clsController = { () -> RfidTrackingService in
+					return UIStoryboard.viewController(storyBoardName: "Tag", identifier: "RfidTrackingService") as! RfidTrackingService
+				}()
+				break
+			
 			case "ProductMount" :
 				// 자산등록 (장착)
 				clsController = { () -> ProductMount in
@@ -122,10 +217,37 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //				}()
 
 				break
-			case "RfidInspect" :
-				// 검수
-				clsController = { () -> RfidInspect in
-					return UIStoryboard.viewController(storyBoardName: "Tag", identifier: "RfidInspect") as! RfidInspect
+
+			
+            case "CombineOut" :
+                //출고A
+                clsController = { () -> CombineOut in
+                    return UIStoryboard.viewController(storyBoardName: "CombineOut", identifier: "CombineOut") as! CombineOut
+                }()
+                break
+			
+			case "EventSelectStore" :
+				// 선별/보관
+				clsController = { () -> EventSelectStore in
+					return UIStoryboard.viewController(storyBoardName: "Event", identifier: "EventSelectStore") as! EventSelectStore
+				}()
+				break
+			
+			case "EventClean" :
+				// 세척
+				clsController = { () -> EventOther in
+					let clsEventOther = UIStoryboard.viewController(storyBoardName: "Event", identifier: "EventOther") as! EventOther
+					clsEventOther.setEventType(eventType: Constants.EVENT_CODE_CLEAN)
+					return clsEventOther
+				}()
+				break
+			
+			case "EventDestory" :
+				// 폐기
+				clsController = { () -> EventOther in
+					let clsEventOther = UIStoryboard.viewController(storyBoardName: "Event", identifier: "EventOther") as! EventOther
+					clsEventOther.setEventType(eventType: Constants.EVENT_CODE_DESTORY)
+					return clsEventOther
 				}()
 				break
 			
@@ -142,8 +264,9 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 					return UIStoryboard.viewController(storyBoardName: "History", identifier: "HistorySearch") as! HistorySearch
 				}()
 				break
+            
             case "InOutCancel" :
-				// 입출고취소
+				//입출고취소
 				clsController = { () -> InOutCancel in
                     return UIStoryboard.viewController(storyBoardName: "InOutCancel", identifier: "InOutCancel") as! InOutCancel
                 }()
@@ -156,15 +279,20 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 				}()
 				break
 			
-			case "RfidTrackingService" :
-				// 이력추적
-				break
+
         	case "ClientConfig" :
 				clsController = { () -> ClientConfig in
                     return UIStoryboard.viewController(storyBoardName: "Config", identifier: "ClientConfig") as! ClientConfig
                 }()
 
             	break
+			
+//		case "BranchSearch" :
+//
+//			clsController = { () -> BranchSearchDialog in
+//				return UIStoryboard.viewController(storyBoardName: "Config", identifier: "BranchSearchDialog") as! BranchSearchDialog
+//			}()
+//			break
 			default:
 				print("is selected");
 		}
@@ -182,7 +310,6 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		toolbarController?.transition(to: clsRootController, completion: closeNavigationDrawer)
 		//self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
 		
-        
 		self.performSegue(withIdentifier: "segLogout", sender: self)
 	}
 	

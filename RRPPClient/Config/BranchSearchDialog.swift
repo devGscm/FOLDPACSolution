@@ -10,19 +10,15 @@ import UIKit
 import Mosaic
 import Material
 
-class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDelegate
+class BranchSearchDialog: BaseViewController, UITableViewDataSource, UITableViewDelegate
 {
-    
     @IBOutlet weak var tvBranch: UITableView!
     @IBOutlet weak var btnClose: UIButton!
-    
     @IBOutlet weak var btnSearchCondition: UIButton!
     @IBOutlet weak var tfSearchValue: UITextField!
-    
     @IBOutlet weak var btnSearch: UIButton!
     
     var arcSearchCondition:Array<ListViewDialog.ListViewItem> = Array<ListViewDialog.ListViewItem>()
-    
     
     var intPageNo  = 0
     
@@ -31,14 +27,30 @@ class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDe
     var arcDataRows : Array<DataRow> = Array<DataRow>()
     var ptcDataHandler : DataProtocol?
     var strSearchCondtion = ""
-    
+	
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        initDataClient()
-        initViewControl()
-        doInitSearch()
     }
+	
+	override func viewWillAppear(_ animated: Bool)
+	{
+		super.viewWillAppear(animated)
+		super.initController()
+		
+		initViewControl()
+		initDataClient()
+		doInitSearch()
+	}
+
+	override func viewDidDisappear(_ animated: Bool)
+	{
+		arcDataRows.removeAll()
+		clsDataClient = nil
+		super.releaseController()
+		super.viewDidDisappear(animated)
+	}
+	
     
     func initViewControl()
     {
@@ -76,16 +88,9 @@ class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDe
     func initDataClient()
     {
         clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
-        //clsDataClient.UserInfo = "xxOxOsU93/PvK/NN7DZmZw=="
         clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
         clsDataClient.UserData = "redis.selectBranchList"
         clsDataClient.removeServiceParam()
-        
-        //clsDataClient.addServiceParam(paramName: "corpId", value: "logisallcm")
-        //clsDataClient.addServiceParam(paramName: "parentCustId", value: "170627000205")
-        //clsDataClient.addServiceParam(paramName: "custType", value: "MGR")
-        
-        
         clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
         clsDataClient.addServiceParam(paramName: "corpType", value: AppContext.sharedManager.getUserInfo().getCorpType())
         clsDataClient.addServiceParam(paramName: "custType", value: AppContext.sharedManager.getUserInfo().getCustType())
@@ -119,7 +124,9 @@ class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDe
         print("============================================")
         print("doSearch(), PageNo:\(intPageNo)")
         print("============================================")
-        
+		
+		self.tvBranch.showIndicator()
+		
         clsDataClient.addServiceParam(paramName: "searchCondition", value: strSearchCondtion)
         clsDataClient.addServiceParam(paramName: "searchValue", value: strSearchValue)
         clsDataClient.addServiceParam(paramName: "pageNo", value: intPageNo)
@@ -127,45 +134,61 @@ class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDe
         clsDataClient.selectData(dataCompletionHandler: {(data, error) in
             if let error = error {
                 // 에러처리
-                print(error)
+				DispatchQueue.main.async { self.tvBranch.hideIndicator() }
+				super.showSnackbar(message: error.localizedDescription)
                 return
             }
             guard let clsDataTable = data else {
-                print("에러 데이터가 없음")
+				
+				DispatchQueue.main.async { self.tvBranch.hideIndicator() }
+				print("에러 데이터가 없음")
                 return
             }
             self.arcDataRows.append(contentsOf: clsDataTable.getDataRows())
-            DispatchQueue.main.async
-                {
-                    self.tvBranch?.reloadData()
-                    //self.boolInitSearch = false
+			
+           	DispatchQueue.main.async
+            {
+				self.tvBranch?.reloadData()
+				//self.boolInitSearch = false
+				self.tvBranch.hideIndicator()
             }
         })
     }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
-    {
-        print("* scrollViewDidEndDragging")
-        let fltOffsetY = scrollView.contentOffset.y
-        let fltContentHeight = scrollView.contentSize.height
-        if (fltOffsetY >= fltContentHeight - scrollView.frame.size.height)
-        {
-            doSearch()
-        }
-    }
-    
-    /*
-     func scrollViewDidScroll(_ scrollView: UIScrollView)
-     {
-     print("* ScrollViewDidSroll, initSearch:\(boolInitSearch)")
-     let fltOffsetY = scrollView.contentOffset.y
-     let fltContentHeight = scrollView.contentSize.height
-     if boolInitSearch == false && fltOffsetY > 10 && (fltOffsetY >= fltContentHeight - scrollView.frame.size.height)
-     {
-     doSearch()
-     }
-     }
-     */
+
+	
+	func scrollViewDidScroll(_ scrollView: UIScrollView)
+	{
+		let boolLargeContent = (scrollView.contentSize.height > scrollView.frame.size.height)
+		let fltViewableHeight = boolLargeContent ? scrollView.frame.size.height : scrollView.contentSize.height
+		let boolBottom = (scrollView.contentOffset.y >= scrollView.contentSize.height - fltViewableHeight + 50)
+		if boolBottom == true && tvBranch.isIndicatorShowing() == false
+		{
+			doSearch()
+		}
+	}
+
+	/*
+	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
+	{
+	print("* scrollViewDidEndDragging")
+	let fltOffsetY = scrollView.contentOffset.y
+	let fltContentHeight = scrollView.contentSize.height
+	if (fltOffsetY >= fltContentHeight - scrollView.frame.size.height)
+	{
+	doSearch()
+	}
+	} */
+//     func scrollViewDidScroll(_ scrollView: UIScrollView)
+//     {
+//		 print("* ScrollViewDidSroll, initSearch:\(boolInitSearch)")
+//		 let fltOffsetY = scrollView.contentOffset.y
+//		 let fltContentHeight = scrollView.contentSize.height
+//		 if boolInitSearch == false && fltOffsetY > 10 && (fltOffsetY >= fltContentHeight - scrollView.frame.size.height)
+//		 {
+//			 doSearch()
+//		 }
+//     }
+
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return self.arcDataRows.count
@@ -173,10 +196,11 @@ class BranchSearchDialog: UIViewController, UITableViewDataSource, UITableViewDe
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let objCell:BranchSearchItem = tableView.dequeueReusableCell(withIdentifier: "tvcBranchSearchItem", for: indexPath) as! BranchSearchItem
+        let objCell:BranchSearchCell = tableView.dequeueReusableCell(withIdentifier: "tvcBranchSearch", for: indexPath) as! BranchSearchCell
         let clsDataRow = arcDataRows[indexPath.row]
         //objCell.lblBranchCustType.text = "\(indexPath.row + 1)"
         objCell.lblBranchCustType.text = clsDataRow.getString(name:"branchCustTypeName")
+		objCell.lblBranchId.text = clsDataRow.getString(name:"branchId")
         objCell.lblBranchName.text = clsDataRow.getString(name:"branchName")
         objCell.btnSelection.titleLabel?.font = UIFont.fontAwesome(ofSize: 14)
         objCell.btnSelection.setTitle(String.fontAwesomeIcon(name:.arrowDown), for: .normal)

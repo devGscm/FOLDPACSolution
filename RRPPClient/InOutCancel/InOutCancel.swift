@@ -10,8 +10,11 @@ import UIKit
 import Material
 import Mosaic
 
-class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegate
+class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, DataProtocol, ReaderResponseDelegate
 {
+    //== ReaderRespnseDelegate
+    func didReadTagid(_ tagid: String) { }
+    
     
     @IBOutlet weak var lblUserName: UILabel!
     @IBOutlet weak var lblBranchInfo: UILabel!
@@ -22,7 +25,29 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
     @IBOutlet weak var tfSearchValue: UITextField!
     @IBOutlet weak var btnSearch: UIButton!
     @IBOutlet weak var tvInOutCancel: UITableView!
+    @IBOutlet weak var btnSelect: UIButton!
+    
 
+    //== 취소 처리용
+    struct ClickedDataRow
+    {
+        var ioType : String         /**< 입출고타입 **/
+        var workId : String         /**< 작업ID   **/
+        var workerName : String     /**< 작업자명  **/
+        var remark : String         /**< 비고     **/
+        
+        init()
+        {
+            ioType = ""
+            workId = ""
+            workerName = ""
+            remark = ""
+        }
+    }
+
+    var arrClickedDataRow = ClickedDataRow()
+    var clsIndicator : ProgressIndicator?
+    
     
     var tfCurControl : UITextField!
     var dpPicker : UIDatePicker!
@@ -34,9 +59,10 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
     var strSaleType : String?
     
     var arcSearchCondition:Array<ListViewDialog.ListViewItem> = Array<ListViewDialog.ListViewItem>()
-    var strSearchCondtion = ""
+    var strSearchCondtion = String()
     
     var intSelectedIndex = -1
+    var strRecvSaleOrderId = String()
     
     //=======================================
     //=====  viewDidLoad()
@@ -68,10 +94,12 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
         super.viewWillAppear(animated)
         super.initController()
         
-        initViewControl()
-        initDataClient()
+        prepareToolbar()        //툴바 타이틀 설정
+        initViewControl()       //뷰 컨트롤 초기화
+        initDataClient()        //데이터 컨트롤 초기화
+        doInitSearch()          //조회
         
-        doInitSearch()
+        self.initRfid( self as ReaderResponseDelegate )
     }
     
 
@@ -83,6 +111,9 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
         dpPicker = nil
         arcDataRows.removeAll()
         arcSearchCondition.removeAll()
+
+        
+        clsIndicator = nil
         clsDataClient = nil
         
         super.releaseController()
@@ -95,6 +126,10 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
     //=======================================
     func initViewControl()
     {
+        
+        clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
+                                         indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.")
+        
         lblUserName.text = AppContext.sharedManager.getUserInfo().getUserName()
         lblBranchInfo.text = AppContext.sharedManager.getUserInfo().getBranchName()
         
@@ -168,7 +203,6 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
     //=======================================
     func doInitSearch()
     {
-        print("doInitSearch()")
         intPageNo = 0
         self.arcDataRows.removeAll()
         self.doSearch()
@@ -183,8 +217,8 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
         intPageNo += 1
         let strSearchValue = tfSearchValue.text ?? "";
         
-        var strLocaleStDate = StrUtil.replace(sourceText: (tfStDate?.text)!, findText: "-", replaceText: "") + "000000"
-        var strLocaleEnDate = StrUtil.replace(sourceText: (tfEnDate?.text)!, findText: "-", replaceText: "") + "235959"
+        let strLocaleStDate = StrUtil.replace(sourceText: (tfStDate?.text)!, findText: "-", replaceText: "") + "000000"
+        let strLocaleEnDate = StrUtil.replace(sourceText: (tfEnDate?.text)!, findText: "-", replaceText: "") + "235959"
         
         let dtLocaleStDate = DateUtil.getFormatDate(date: strLocaleStDate, dateFormat:"yyyyMMddHHmmss")
         let dtLocaleEnDate = DateUtil.getFormatDate(date: strLocaleEnDate, dateFormat:"yyyyMMddHHmmss")
@@ -195,14 +229,15 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
             return
         }
         
-        strLocaleStDate = "20170626050000"
-        strLocaleEnDate = "20170726050000"
+        //== 테스트 데이터
+        //strLocaleStDate = "20170626050000"
+        //strLocaleEnDate = "20170726050000"
         
-        print("startOrderDate:\(strLocaleStDate)")
-        print("endOrderDate:\(strLocaleEnDate)")
-        print("pageNo:\(intPageNo)")
-        print("rowPerPage:\(Constants.ROWS_PER_PAGE)")
-        
+        //print("startOrderDate:\(strLocaleStDate)")
+        //print("endOrderDate:\(strLocaleEnDate)")
+        //print("pageNo:\(intPageNo)")
+        //print("rowPerPage:\(Constants.ROWS_PER_PAGE)")
+        tvInOutCancel?.showIndicator()
         clsDataClient.addServiceParam(paramName: "startWorkDate", value: strLocaleStDate)
         clsDataClient.addServiceParam(paramName: "endWorkDate", value: strLocaleEnDate)
         clsDataClient.addServiceParam(paramName: "ioType", value: strSaleType!)
@@ -213,31 +248,55 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
         clsDataClient.selectData(dataCompletionHandler: {(data, error) in
             if let error = error {
                 // 에러처리
-                print(error)
+                DispatchQueue.main.async { self.tvInOutCancel.hideIndicator() }
+                super.showSnackbar(message: error.localizedDescription)
                 return
             }
             guard let clsDataTable = data else {
+                DispatchQueue.main.async { self.tvInOutCancel.hideIndicator() }
                 //print("에러 데이터가 없음")
                 return
             }
+            
             self.arcDataRows.append(contentsOf: clsDataTable.getDataRows())
-            DispatchQueue.main.async{ self.tvInOutCancel?.reloadData()}
+            DispatchQueue.main.async
+            {
+                self.tvInOutCancel?.reloadData()
+                self.tvInOutCancel?.hideIndicator()
+            }
         })
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView)
+    {
+        let boolLargeContent = (scrollView.contentSize.height > scrollView.frame.size.height)
+        let fltViewableHeight = boolLargeContent ? scrollView.frame.size.height : scrollView.contentSize.height
+        let boolBottom = (scrollView.contentOffset.y >= scrollView.contentSize.height - fltViewableHeight + 50)
+        if boolBottom == true && tvInOutCancel.isIndicatorShowing() == false
+        {
+            doSearch()
+        }
     }
     
     //=======================================
     //===== scrollViewDidEndDragging()
     //=======================================
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
-    {
-        //print("* scrollViewDidEndDragging")
-        let fltOffsetY = scrollView.contentOffset.y
-        let fltContentHeight = scrollView.contentSize.height
-        if (fltOffsetY >= fltContentHeight - scrollView.frame.size.height)
-        {
-            doSearch()
-        }
-    }
+//    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
+//    {
+//        //print("* scrollViewDidEndDragging")
+//        let fltOffsetY = scrollView.contentOffset.y
+//        let fltContentHeight = scrollView.contentSize.height
+//        if (fltOffsetY >= fltContentHeight - scrollView.frame.size.height)
+//        {
+//            //doSearch()
+//
+//            //DispatchQueue.main.async
+//            //{
+//                    //DB재조회
+//                self.doInitSearch()
+//            //}
+//        }
+//    }
     
     
     //=======================================
@@ -268,9 +327,6 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
         let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
             self.strSaleType = clsDialog.selectedRow.itemCode
             let strItemName = clsDialog.selectedRow.itemName
-
-            //print("== self.strSaleType: \(self.strSaleType!) :: \(strItemName) ==")
-            
             self.btnSaleTypeCondition.setTitle(strItemName, for: .normal)
         }
         acDialog.addAction(aaOkAction)
@@ -292,9 +348,6 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
         let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
             self.strSearchCondtion = clsDialog.selectedRow.itemCode
             let strItemName = clsDialog.selectedRow.itemName
-            
-            print("== strSearchCondtion: \(self.strSearchCondtion) :: \(strItemName)")
-            
             self.btnSearchCondition.setTitle(strItemName, for: .normal)
         }
         
@@ -306,9 +359,6 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
     //===== '검색'버튼
     //=======================================
     @IBAction func onSearchClicked(_ sender: UIButton) {
-        print("==== 검색버튼 ====")
-        print("================")
-        
         doInitSearch()
         
     }
@@ -316,11 +366,10 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
     
     
     //=======================================
-    //===== createDatePicker
+    //===== createDatePicker - 날짜 검색
     //=======================================
     func createDatePicker(tfDateControl : UITextField)
     {
-        //print("@@@@@@createDatePicker")
         tfCurControl = tfDateControl
         
         dpPicker.locale = Locale(identifier: "ko_KR")
@@ -338,7 +387,7 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
     
     
     //=======================================
-    //===== onDoneButtonPressed
+    //===== onDoneButtonPressed - 날짜 검색완료
     //=======================================
     @objc func onDoneButtonPressed(_ sender : Any)
     {
@@ -364,7 +413,7 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
         tableView.rowHeight = 60                    //셀 크기 조정
         tableView.allowsSelection = false           //셀 선택안되게 막음
         
-        let objCell:InOutCancelCell = tableView.dequeueReusableCell(withIdentifier: "tvcInOutCancel", for: indexPath) as! InOutCancelCell
+        let objCell:InOutCancelCell = tableView.dequeueReusableCell(withIdentifier: "tvcInOutCancel", for: indexPath) as! InOutCancelCell        
         let clsDataRow = arcDataRows[indexPath.row]
         
         let strUtcTraceDate = clsDataRow.getString(name:"workDate")
@@ -386,6 +435,7 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
         objCell.btnAssetEpcName.addTarget(self, action: #selector(onItemSelectionClicked(_:)), for: .touchUpInside)
         objCell.lblCompleteWorkCnt?.text = clsDataRow.getString(name:"completeWorkCnt")
 
+
         //취소버튼
         objCell.btnSelection.titleLabel?.font = UIFont.fontAwesome(ofSize: 17)
         objCell.btnSelection.setTitle(String.fontAwesomeIcon(name:.trashO), for: .normal)
@@ -401,8 +451,6 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
     @objc func onItemSelectionClicked(_ sender: UIButton)
     {
         self.intSelectedIndex = sender.tag
-        
-        print("========== 유형 누름 ==========:\(self.intSelectedIndex)")
         self.performSegue(withIdentifier: "segInOutCancelDetailCell", sender: self)
     }
     
@@ -410,48 +458,182 @@ class InOutCancel: BaseViewController, UITableViewDataSource, UITableViewDelegat
     // Segue로 파라미터 넘기면 반드시 prepare를 타기 때문에 여기서 DataProtocol을 세팅하는걸로 함
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        //그리드 삭제 및 구조체 삭제
-        print("========== 유형 누름[2] ==========")
-        
+        //'유형'그리드 버튼
         if(segue.identifier == "segInOutCancelDetailCell")
         {
             if let clsDialog = segue.destination as? InOutCancelDetail
             {
-                print("==self.arcDataRows.count: \(self.arcDataRows.count)")
-                print("==self.intSelectedIndex: \(self.intSelectedIndex)")
-                
                 if let btnAssetEpcName = sender as? UIButton
                 {
-                    print("==btnAssetEpcName: \(btnAssetEpcName.tag)")
+                    //print("==btnAssetEpcName: \(btnAssetEpcName.tag)")
                     let clsAssetEpc = self.arcDataRows[btnAssetEpcName.tag]
-                    
                     let saleOrderId = clsAssetEpc.getString(name:"workId")
                     
-                    print("==saleOrderId: \(saleOrderId!)")
+                    //print("==saleOrderId: \(saleOrderId!)")
                     clsDialog.strSaleWorkId = saleOrderId!      //상세리스트에 표출할 ResaleOrderId 전달
                 }
             }
         }
+        //'취소'그리드 버튼
+        else if(segue.identifier == "segOutMemoDialog")
+        {
+            if let clsDialog = segue.destination as? OutMemoDialog
+            {
+                clsDialog.ptcDataHandler = self
+                if let btnAssetEpcName = sender as? UIButton
+                {
+                    let clsDataRow = self.arcDataRows[btnAssetEpcName.tag]
+                    arrClickedDataRow.ioType = clsDataRow.getString(name:"ioType") ?? ""
+                    arrClickedDataRow.workId = clsDataRow.getString(name:"workId") ?? ""
+                    arrClickedDataRow.workerName = clsDataRow.getString(name:"workerName") ?? ""
+                }
+            }
+        }
     }
-        
-    
-    
-    
-    
     
     //=======================================
     //===== '취소'버튼
     //=======================================
-    @IBAction func onItemCancelClicked(_ sender: UIButton) {
-                let clsDataRow = arcDataRows[sender.tag]
+    @IBAction func onItemCancelClicked(_ sender: UIButton)
+    {
+        //print("======= 취소버튼 =====")
+        //self.performSegue(withIdentifier: "segOutMemoDialog", sender: self)
     }
     
+    //=======================================
+    //===== '취소'버튼 다이얼로그로 부터 수신 데이터
+    //=======================================
+    func recvData( returnData : ReturnData)
+    {
+        if(returnData.returnType == "outMemoDialog")
+        {
+            // 상품정보 수정
+            if(returnData.returnRawData != nil)
+            {
+                let clsDataRow = returnData.returnRawData as! DataRow
+                arrClickedDataRow.remark = clsDataRow.getString(name: "remark") ?? ""
+                
+                if(arrClickedDataRow.workId.isEmpty == false)
+                {
+                    print("=============================================")
+                    print("==== IO타입: \(arrClickedDataRow.ioType)")
+                    print("==== 작업번호: \(arrClickedDataRow.workId)")
+                    print("==== 작업자명: \(arrClickedDataRow.workerName)")
+                    print("==== 비고: \(arrClickedDataRow.remark)")
+                    print("=============================================")
+                    
+                    //취소처리
+                    sendCancelData(arrClickedDataRow.ioType, arrClickedDataRow.workId, arrClickedDataRow.workerName, arrClickedDataRow.remark)
+                }
+            }
+        }
+    }
+    
+    
+    
+    /**
+     * 선택된 데이터를 취소처리한다.
+     * @param strIoType             구분
+     * @param strSaleWorkId         송장번호
+     * @param strWorkerName         작업자
+     * @param strRemark             기타메모
+     */
+    func sendCancelData(_ strIoType: String,_ strSaleWorkId: String,_ strWorkerName: String,_ strRemark: String)
+    {
+        print("=================================")
+        print("##[InOutCancel]->sendCancelData()")
+        print("=================================")
+        
+        clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
+        
+        let strCurReadTime = DateUtil.getDate(dateFormat: "yyyyMMddHHmmss")
+        let strWorkDateTime = DateUtil.localeToUtc(localeDate: strCurReadTime, dateFormat: "yyyyMMddHHmmss")
+        
+        
+        let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+        clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 
+        clsDataClient.removeServiceParam()
+        clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+        clsDataClient.addServiceParam(paramName: "userId", value: AppContext.sharedManager.getUserInfo().getUserId())
+        clsDataClient.addServiceParam(paramName: "unitId", value: AppContext.sharedManager.getUserInfo().getUnitId())
+        clsDataClient.addServiceParam(paramName: "branchId", value: AppContext.sharedManager.getUserInfo().getBranchId())
+        clsDataClient.addServiceParam(paramName: "branchCustId", value: AppContext.sharedManager.getUserInfo().getBranchCustId())
+        
+        clsDataClient.addServiceParam(paramName: "ioType", value: strIoType)
+        clsDataClient.addServiceParam(paramName: "workDateTime", value: strWorkDateTime)
+        clsDataClient.addServiceParam(paramName: "workerName", value: strWorkerName)
+        clsDataClient.addServiceParam(paramName: "remark", value: strRemark)
+        
+        if(strIoType == Constants.INOUT_TYPE_INPUT)
+        {
+            clsDataClient.ExecuteUrl = "inOutService:executeInCancelData"
+            clsDataClient.addServiceParam(paramName: "resaleOrderId", value: strSaleWorkId)
+        }
+        else
+        {
+            clsDataClient.ExecuteUrl = "inOutService:executeOutCancelData"
+            clsDataClient.addServiceParam(paramName: "saleWorkId", value: strSaleWorkId)
+        }
     
-    
-    
+        clsDataClient.executeData(dataCompletionHandler: { (data, error) in
+            self.clsIndicator?.hide()
+            if let error = error {
+                // 에러처리
+                print(error)
+                return
+            }
+            guard let clsResultDataTable = data else {
+                print("에러 데이터가 없음")
+                return
+            }
+            
+            let clsResultDataRows = clsResultDataTable.getDataRows()
+            if(clsResultDataRows.count > 0)
+            {
+                let clsDataRow = clsResultDataRows[0]
+                let strResultCode = clsDataRow.getString(name: "resultCode")
+                //let strResultMsg = clsDataRow.getString(name: "resultMessage") ?? ""
+                
+                print(" -strResultCode:\(strResultCode!)")
+                if(Constants.PROC_RESULT_SUCCESS == strResultCode)
+                {
+                    //삭제성공
+                    //그리드 삭제 및 구조체 삭제
+                    DispatchQueue.main.async
+                    {
+                        let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
+                        self.showSnackbar(message: strMsg)
+                        
+                        //DB재조회
+                        self.doInitSearch()
+                    }
+                }
+                else
+                {
+                    let strMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
+                    
+                    if((Constants.PROC_RESULT_ERROR_NO_REGISTERED_READERS == strResultCode) || (Constants.PROC_RESULT_ERROR_NO_MATCH_BRANCH_CUST_INFO == strResultCode))
+                    {
+                        super.showSnackbar(message: NSLocalizedString("common_error", comment: "에러"))
+                    }
+                    else
+                    {
+                        self.showSnackbar(message: strMsg)
+                    }
+
+                }
+             }
+        })
+    }
 }
 
+
+
+
+//=======================================
+//===== 툴바 타이틀
+//=======================================
 extension InOutCancel
 {
     fileprivate func prepareToolbar()
@@ -460,11 +642,7 @@ extension InOutCancel
             return
         }
         tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
-        
-        if(AppContext.sharedManager.getUserInfo().getCustType() == "MGR")
-        {
-            tc.toolbar.detail = NSLocalizedString("title_work_inout_cancel", comment: "입출고취소")
-        }
+        tc.toolbar.detail = NSLocalizedString("title_work_inout_cancel", comment: "입출고취소")
     }
 }
 

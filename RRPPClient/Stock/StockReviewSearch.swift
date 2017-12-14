@@ -1,21 +1,20 @@
 //
-//  ProductOrderSearch.swift
+//  StockReviewSearch.swift
 //   RRPPClient
 //
-//  Created by 이용민 on 2017. 11. 24..
+//  Created by 이용민 on 2017. 12. 13..
 //  Copyright © 2017년 MORAMCNT. All rights reserved.
 //
 
 import UIKit
 import Mosaic
 
-class ProductOrderSearch: BaseViewController, UITableViewDataSource, UITableViewDelegate
+class StockReviewSearch: BaseViewController, UITableViewDataSource, UITableViewDelegate
 {
-
-	@IBOutlet weak var tvProductOrderSearch: UITableView!
+	
+	@IBOutlet weak var tvStockReviewSearch: UITableView!
 	var tfCurControl : UITextField!
 	
-	@IBOutlet weak var btnClose: UIBarButtonItem!
 	@IBOutlet weak var btnStDate: UITextField!
 	@IBOutlet weak var btnEnDate: UITextField!
 	@IBOutlet weak var btnSearch: UIButton!
@@ -26,7 +25,7 @@ class ProductOrderSearch: BaseViewController, UITableViewDataSource, UITableView
 	var intPageNo  = 0
 	var clsDataClient : DataClient!
 	var arcDataRows : Array<DataRow> = Array<DataRow>()
-
+	
 	override func viewWillAppear(_ animated: Bool)
 	{
 		super.viewWillAppear(animated)
@@ -65,16 +64,9 @@ class ProductOrderSearch: BaseViewController, UITableViewDataSource, UITableView
 	
 	func initDataClient()
 	{
-		print(" EncId:\(AppContext.sharedManager.getUserInfo().getEncryptId())")
-		print(" corpId:\(AppContext.sharedManager.getUserInfo().getCorpId())")
-		print(" branchId:\(AppContext.sharedManager.getUserInfo().getBranchId())")
-		print(" branchCustId:\(AppContext.sharedManager.getUserInfo().getBranchCustId())")
-		print(" userLang:\(AppContext.sharedManager.getUserInfo().getUserLang())")
-	
-		
 		clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
-		clsDataClient.SelectUrl = "productService:selectProductOrderList"
+		clsDataClient.SelectUrl = "reviewService:selectStockReviewList"
 		clsDataClient.removeServiceParam()
 		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
 		clsDataClient.addServiceParam(paramName: "branchId", value: AppContext.sharedManager.getUserInfo().getBranchId())
@@ -97,7 +89,7 @@ class ProductOrderSearch: BaseViewController, UITableViewDataSource, UITableView
 	
 	func doSearch()
 	{
-
+		
 		intPageNo += 1
 		
 		let strLocaleStDate = StrUtil.replace(sourceText: (btnStDate?.text)!, findText: "-", replaceText: "") + "000000"
@@ -116,60 +108,56 @@ class ProductOrderSearch: BaseViewController, UITableViewDataSource, UITableView
 			return
 		}
 		
-		print("startOrderDate:\(strLocaleStDate)")
-		print("endOrderDate:\(strLocaleEnDate)")
-		print("pageNo:\(intPageNo)")
-		print("rowPerPage:\(Constants.ROWS_PER_PAGE)")
-		
-		tvProductOrderSearch?.showIndicator()
-		clsDataClient.addServiceParam(paramName: "startOrderDate", value: strLocaleStDate)
-		clsDataClient.addServiceParam(paramName: "endOrderDate", value: strLocaleEnDate)
+		self.tvStockReviewSearch?.showIndicator()
+		clsDataClient.addServiceParam(paramName: "startReviewReqDate", value: strLocaleStDate)
+		clsDataClient.addServiceParam(paramName: "endReviewReqDate", value: strLocaleEnDate)
 		clsDataClient.addServiceParam(paramName: "pageNo", value: intPageNo)
 		clsDataClient.addServiceParam(paramName: "rowsPerPage", value: Constants.ROWS_PER_PAGE)
 		clsDataClient.selectData(dataCompletionHandler: {(data, error) in
 			if let error = error {
 				// 에러처리
-				DispatchQueue.main.async { self.tvProductOrderSearch?.hideIndicator() }
+				DispatchQueue.main.async { self.tvStockReviewSearch?.hideIndicator() }
 				super.showSnackbar(message: error.localizedDescription)
 				return
 			}
 			guard let clsDataTable = data else {
-				DispatchQueue.main.async { self.tvProductOrderSearch?.hideIndicator() }
+				DispatchQueue.main.async { self.tvStockReviewSearch?.hideIndicator() }
 				print("에러 데이터가 없음")
 				return
 			}
 			self.arcDataRows.append(contentsOf: clsDataTable.getDataRows())
 			DispatchQueue.main.async
 			{
-				self.tvProductOrderSearch?.reloadData()
-				self.tvProductOrderSearch?.hideIndicator()
+				self.tvStockReviewSearch?.reloadData()
+				self.tvStockReviewSearch?.hideIndicator()
 			}
 		})
-
+		
 	}
-
+	
 	func scrollViewDidScroll(_ scrollView: UIScrollView)
 	{
 		let boolLargeContent = (scrollView.contentSize.height > scrollView.frame.size.height)
 		let fltViewableHeight = boolLargeContent ? scrollView.frame.size.height : scrollView.contentSize.height
 		let boolBottom = (scrollView.contentOffset.y >= scrollView.contentSize.height - fltViewableHeight + 50)
-		if boolBottom == true && tvProductOrderSearch.isIndicatorShowing() == false
+		if boolBottom == true && tvStockReviewSearch.isIndicatorShowing() == false
 		{
 			doSearch()
 		}
 	}
-	
-//	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
-//	{
-//		print("* scrollViewDidEndDragging")
-//		let fltOffsetY = scrollView.contentOffset.y
-//		let fltContentHeight = scrollView.contentSize.height
-//		if (fltOffsetY >= fltContentHeight - scrollView.frame.size.height)
-//		{
-//			doSearch()
-//		}
-//	}
 
+	/*
+	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
+	{
+		print("* scrollViewDidEndDragging")
+		let fltOffsetY = scrollView.contentOffset.y
+		let fltContentHeight = scrollView.contentSize.height
+		if (fltOffsetY >= fltContentHeight - scrollView.frame.size.height)
+		{
+			doSearch()
+		}
+	}*/
+	
 	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
 		return self.arcDataRows.count
@@ -177,20 +165,18 @@ class ProductOrderSearch: BaseViewController, UITableViewDataSource, UITableView
 	
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
-		let objCell:ProductOrderSearchCell = tableView.dequeueReusableCell(withIdentifier: "tvcProductOrderSearchCell", for: indexPath) as! ProductOrderSearchCell
+		let objCell:StockReviewSearchCell = tableView.dequeueReusableCell(withIdentifier: "tvcStockReviewSearch", for: indexPath) as! StockReviewSearchCell
 		let clsDataRow = arcDataRows[indexPath.row]
 		
-		let strUtcOrderDate = clsDataRow.getString(name:"orderDate")
-		let strLocaleOrderDate = DateUtil.utcToLocale(utcDate: strUtcOrderDate!, dateFormat: "yyyyMMddHHmmss")
-		let strOrderDate = DateUtil.getConvertFormatDate(date: strLocaleOrderDate, srcFormat: "yyyyMMddHHmmss", dstFormat:"MM-dd")
-		
-		//objCell.lblOrderDate.text = "\(indexPath.row + 1)
-		objCell.lblOrderDate.text = strOrderDate
-		objCell.lblOrderReqCnt.text = clsDataRow.getString(name:"orderReqCnt")
-		objCell.lblOrderCustName.text = clsDataRow.getString(name:"orderCustName")
-		objCell.lblMakeOrderId.text = clsDataRow.getString(name:"makeOrderId")
+		objCell.lblStockReviewId.text = clsDataRow.getString(name:"stockReviewId")
+		let strUtcReviewReqDate = clsDataRow.getString(name:"reviewReqDate")
+		if(strUtcReviewReqDate?.isEmpty == false)
+		{
+			let strLocaleReviewReqDate = DateUtil.utcToLocale(utcDate: strUtcReviewReqDate!, dateFormat: "yyyyMMddHHmmss")
+			let strReviewReqDate = DateUtil.getConvertFormatDate(date: strLocaleReviewReqDate, srcFormat: "yyyyMMddHHmmss", dstFormat:"yyyy-MM-dd")
+			objCell.lblReviewReqDate.text = strReviewReqDate
+		}
 		objCell.lblProdAssetEpcName.text = clsDataRow.getString(name:"prodAssetEpcName")
-		objCell.lblOrderAddr.text = clsDataRow.getString(name:"oderAddr")
 		
 		objCell.btnSelection.titleLabel?.font = UIFont.fontAwesome(ofSize: 14)
 		objCell.btnSelection.setTitle(String.fontAwesomeIcon(name:.arrowDown), for: .normal)
@@ -202,9 +188,85 @@ class ProductOrderSearch: BaseViewController, UITableViewDataSource, UITableView
 	@objc func onSelectionClicked(_ sender: UIButton)
 	{
 		let clsDataRow = arcDataRows[sender.tag]
-		let strtData = ReturnData(returnType: "productOrderSearch", returnCode: nil, returnMesage: nil, returnRawData: clsDataRow)
-		ptcDataHandler?.recvData(returnData: strtData)
-		self.dismiss(animated: true, completion: nil)
+		
+		let strStockReviewId	= clsDataRow.getString(name:"stockReviewId") ?? ""	// 재고조사ID
+		let strStockReviewState	= clsDataRow.getString(name:"stockReviewState") ?? ""	// 재고조사 상태값
+		print("@@@@strStockReviewState:\(strStockReviewState) @@@@@@@@@@@@@@")
+		// 재고조사 초기화
+		if(Constants.STOCK_REVIEW_STATE_WORKING == strStockReviewState)
+		{
+			sendStockReviewInitData(stockReviewId: strStockReviewId, dataRow: clsDataRow)
+		}
+		else
+		{
+			let strtData = ReturnData(returnType: "stockReviewSearch", returnCode: nil, returnMesage: nil, returnRawData: clsDataRow)
+			ptcDataHandler?.recvData(returnData: strtData)
+			self.dismiss(animated: true, completion: nil)
+		}
+	}
+	
+	func sendStockReviewInitData(stockReviewId: String, dataRow: DataRow)
+	{
+		print("@@@@sendStockReviewInitData @@@@@@@@@@@@@@")
+		
+		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+		clsDataClient.SelectUrl = "reviewService:executeStockReviewInitData"
+		clsDataClient.removeServiceParam()
+		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+		clsDataClient.addServiceParam(paramName: "userId", value: AppContext.sharedManager.getUserInfo().getUserId())
+		clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
+		clsDataClient.addServiceParam(paramName: "stockReviewId", value: stockReviewId)
+		clsDataClient.selectRawData(dataCompletionHandler: { (responseData, error) in
+			if let error = error {
+				// 에러처리
+				super.showSnackbar(message: error.localizedDescription)
+				print(error)
+				self.dismiss(animated: true, completion: nil)
+				return
+			}
+			guard let responseData = responseData else {
+				print("에러 데이터가 없음")
+				self.dismiss(animated: true, completion: nil)
+				return
+			}
+			// 성공
+			if let returnCode = responseData.returnCode , returnCode > 0
+			{
+				let returnMessage = responseData.returnMessage ?? ""
+				print("@@@@@@@@@ return RawMessage : \(returnMessage)")
+				
+				let dataSourceMgr = DataSourceMgr()
+				dataSourceMgr.Notation = DataSourceMgr.NOTATION_NONE
+				
+				if (dataSourceMgr.parse(data: responseData.returnMessage!))
+				{
+					let clsDataTable = dataSourceMgr.getDataTable()
+					let clsDataRows = clsDataTable.getDataRows()
+					if(clsDataRows.count > 0)
+					{
+						let clsResultRow = clsDataRows[0]
+						
+						let strResultCode = clsResultRow.getString(name: "resultCode") ?? ""
+						let strResultMsg = clsResultRow.getString(name: "resultMessage") ?? ""
+						
+						print("-리턴코드: \(strResultCode)")
+						print("-리턴메시지: \(strResultMsg)")
+						
+						if(strResultCode == Constants.PROC_RESULT_SUCCESS)
+						{
+							let strtData = ReturnData(returnType: "stockReviewSearch", returnCode: nil, returnMesage: nil, returnRawData: dataRow)
+							self.ptcDataHandler?.recvData(returnData: strtData)
+						}
+					}
+				}
+			}
+			else
+			{
+				print("json 오류")
+			}
+			self.dismiss(animated: true, completion: nil)
+		})
 	}
 	
 	@IBAction func onCloseClicked(_ sender: Any)
@@ -226,7 +288,7 @@ class ProductOrderSearch: BaseViewController, UITableViewDataSource, UITableView
 	{
 		print("@@@@@@createDatePicker")
 		tfCurControl = tfDateControl
-
+		
 		dpPicker.locale = Locale(identifier: "ko_KR")
 		dpPicker.datePickerMode = .date
 		
@@ -247,3 +309,4 @@ class ProductOrderSearch: BaseViewController, UITableViewDataSource, UITableView
 		self.view.endEditing(true)
 	}
 }
+

@@ -7,16 +7,6 @@
 //
 
 import UIKit
-
-//
-//  ProductMount.swift
-//  RRPPClient
-//
-//  Created by 이용민 on 2017. 11. 10..
-//  Copyright © 2017년 Logisall. All rights reserved.
-//
-
-import UIKit
 import Material
 import Mosaic
 
@@ -37,13 +27,13 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	var arrTagRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
 	
 	
-	var strStockReviewId: String = ""		/**< 재고조사ID */
-	var strProdAssetEpc: String = ""		/**< 장착제품 자산 EPC 코드 */
-	var strProdAssetEpcName: String = ""	/**< 장착제품 자산 EPC 명 */
+	var strStockReviewId	: String = ""	/**< 재고조사ID */
+	var strProdAssetEpc		: String = ""	/**< 장착제품 자산 EPC 코드 */
+	var strProdAssetEpcName	: String = ""	/**< 장착제품 자산 EPC 명 */
 	
-	var intOldStockCount			= 0		/**< 전산재고수량 */
-	var intRealStockCount 			= 0		/**< 실재고수량 */
-	var intCurProcCount 			= 0		/**< 현재처리량 */
+	var intOldStockCount	= 0		/**< 전산재고수량 */
+	var intRealStockCount 	= 0		/**< 실재고수량 */
+	var intCurProcCount 	= 0		/**< 현재처리량 */
 
 	
 	var clsIndicator : ProgressIndicator?
@@ -86,8 +76,7 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	// View관련 컨트롤을 초기화한다.
 	func initViewControl()
 	{
-		clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
-										 indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.")
+		clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray, indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.")
 		
 		lblUserName.text = AppContext.sharedManager.getUserInfo().getUserName()
 		lblBranchInfo.text = AppContext.sharedManager.getUserInfo().getBranchName()
@@ -98,9 +87,9 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	// Segue로 파라미터 넘기면 반드시 prepare를 타기 때문에 여기서 DataProtocol을 세팅하는걸로 함
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?)
 	{
-		if(segue.identifier == "segProductOrderSearch")
+		if(segue.identifier == "segStockReviewSearch")
 		{
-			if let clsDialog = segue.destination as? ProductOrderSearch
+			if let clsDialog = segue.destination as? StockReviewSearch
 			{
 				clsDialog.ptcDataHandler = self
 			}
@@ -139,25 +128,28 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	// 팝업 다이얼로그로 부터 데이터 수신
 	func recvData( returnData : ReturnData)
 	{
-		if(returnData.returnType == "productOrderSearch")
+		print("@@@@@@@ recvData:\(returnData.returnType)")
+		
+		if(returnData.returnType == "stockReviewSearch")
 		{
 			if(returnData.returnRawData != nil)
 			{
 				clearUserInterfaceData()
 				
 				let clsDataRow = returnData.returnRawData as! DataRow
-				strStockReviewId	= clsDataRow.getString(name: "makeOrderId") ?? ""
+				strStockReviewId	= clsDataRow.getString(name: "stockReviewId") ?? ""
+				strProdAssetEpc		= clsDataRow.getString(name: "prodAssetEpc") ?? ""
+				strProdAssetEpcName	= clsDataRow.getString(name: "prodAssetEpcName") ?? ""
+				
+				intOldStockCount	= clsDataRow.getInt(name: "oldStockCnt") ?? 0
 				intRealStockCount	= clsDataRow.getInt(name: "orderWorkCnt") ?? 0
-//				intOrderReqCnt	= clsDataRow.getInt(name: "orderReqCnt") ?? 0
-//				strProdAssetEpc = clsDataRow.getString(name: "prodAssetEpc")
-//				intCurProcCount = intRealStockCount
+				intCurProcCount		= intRealStockCount	// 현 처리량
 				
-//				print("@@@@@@@@strMakeOrderId=\(strStockReviewId)")
-//				print("@@@@@@@@intOrderWorkCnt=\(intRealStockCount)")
 				
-//				self.btnMakeOrderId.setTitle(strMakeOrderId, for: .normal)
-//				self.lblOrderCustName.text = clsDataRow.getString(name: "orderCustName")
-//				self.lblOrderCount.text = "\(intOrderWorkCnt)/\(intOrderReqCnt)"
+				self.btnStockReviewId.setTitle(strStockReviewId, for: .normal)
+				self.lblProdAssetEpcName.text = strProdAssetEpcName	// 장착제품자산EPC코드명
+				self.lblRealStockCount.text = "\(intCurProcCount)"	// 실재고수량
+				//if(mTvOldStockCount		!= null) mTvOldStockCount.setText(String.valueOf(mIntOldStockCount));	// 전산재고수량
 				
 				// 새로운 발주번호가 들어면 기존 데이터를 삭제한다.
 				clearTagData()
@@ -180,14 +172,11 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 		}
 	}
 	
-
-	
 	
 	// 실사번호 선택
 	@IBAction func onStockReviewIdClicked(_ sender: UIButton)
 	{
-		// TODO
-		//self.performSegue(withIdentifier: "segProductOrderSearch", sender: self)
+		//self.performSegue(withIdentifier: "segStockReviewSearch", sender: self)
 	}
 	
 	// 데이터를 clear한다.
@@ -203,6 +192,12 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	
 	func getRfidData( clsTagInfo : RfidUtil.TagInfo)
 	{
+		// 재고실사ID가 있는 경우만 처리한다.
+		if(strStockReviewId.isEmpty == true)
+		{
+			return
+		}
+		
 		let strCurReadTime = DateUtil.getDate(dateFormat: "yyyyMMddHHmmss")
 		let strSerialNo = clsTagInfo.getSerialNo()
 		let strAssetEpc = "\(clsTagInfo.getCorpEpc())\(clsTagInfo.getAssetEpc())"	// 회사EPC코드 + 자산EPC코드
@@ -272,18 +267,9 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 				{
 					arrAssetRows.append(clsTagInfo)
 				}
-				
-				let intCurDataSize = arrTagRows.count
-				
-				// 발주번호가 있는 경무만 "처리수량/발주수량"을 처리한다.
-				
-				print("@@@@@@strMakeOrderId:\(strStockReviewId)")
-				
-//				if(strMakeOrderId.isEmpty == false)
-//				{
-//					intCurOrderWorkCnt = intOrderWorkCnt + intCurDataSize
-//					lblOrderCount.text = "\(intCurOrderWorkCnt)/\(intOrderReqCnt)"
-//				}
+
+				intCurProcCount = intRealStockCount + arrTagRows.count
+				lblRealStockCount.text = "\(intCurProcCount)"
 			}
 		}
 		DispatchQueue.main.async { self.tvStockReview?.reloadData() }
@@ -427,14 +413,14 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	@IBAction func onClearAllClicked(_ sender: UIButton)
 	{
 		Dialog.show(container: self, viewController: nil,
-					title: NSLocalizedString("common_delete", comment: "삭제"),
-					message: NSLocalizedString("common_confirm_delete", comment: "전체 데이터를 삭제하시겠습니까?"),
-					okTitle: NSLocalizedString("common_confirm", comment: "확인"),
-					okHandler: { (_) in
-						self.clearTagData()
-						super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
-		},
-					cancelTitle: NSLocalizedString("common_cancel", comment: "확인"), cancelHandler: nil)
+			title: NSLocalizedString("common_delete", comment: "삭제"),
+			message: NSLocalizedString("common_confirm_delete", comment: "전체 데이터를 삭제하시겠습니까?"),
+			okTitle: NSLocalizedString("common_confirm", comment: "확인"),
+			okHandler: { (_) in
+				self.clearTagData()
+				super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
+			},
+			cancelTitle: NSLocalizedString("common_cancel", comment: "확인"), cancelHandler: nil)
 	}
 
 	

@@ -19,12 +19,12 @@ class Constants
 	static let RFID_READER_TYPE_ARETE					= 4	/**< RFID 리더기 : ARETE */
 	
 	static let LANDSCAPE_SCREEN_ENABLED_KEY				= "landscapeScreenEnabled"		    /**< 화면 가로/세로 보기 키*/
-	static let RFID_READER_TYPE_KEY					= "rfidReaderType"			        /**< RFID 리더기 Type */
+	static let RFID_READER_TYPE_KEY					    = "rfidReaderType"			        /**< RFID 리더기 Type */
 	static let RFID_READER_INFO_KEY						= "rfidReaderInfo"			       	/**< RFID 리더기 정보 */
 	
 	static let RFID_READER_ID_KEY						= "rfidReaderId"			        	/**< RFID 리더기 UUID */
-	static let RFID_READER_NAME_KEY					= "rfidReaderName"			    /**< RFID 리더기 명 */
-	static let RFID_READER_MACADDR_KEY			= "rfidReaderMacAddr"			 /**< RFID 리더기 MAC ADDRESS */
+	static let RFID_READER_NAME_KEY					    = "rfidReaderName"			    /**< RFID 리더기 명 */
+	static let RFID_READER_MACADDR_KEY			        = "rfidReaderMacAddr"			 /**< RFID 리더기 MAC ADDRESS */
 	
 	static let IDENTIFICATION_SYSTEM_LIST_KEY			= "identificationSystemList"		/**< 식별체계*/
 	static let BLUETOOTH_SELECTION_KEY					= "bluetoothSelection"		        /**< 블루투스 장치 선택 */
@@ -139,8 +139,27 @@ class Constants
 	static let USER_LANG_CH											= "CH"		/**< 중국어	*/
 	//=====================================================================================
 	
+    //=====================================================================================
+    // 고객사 구분
+    //-------------------------------------------------------------------------------------
+    static let  CUST_TYPE_ADM                                       = "ADM"    /**< 어드민회사       */
+    static let  CUST_TYPE_EXP                                       = "EXP"    /**< 수출회사        */
+    static let  CUST_TYPE_IMP                                       = "IMP"    /**< 수입회사        */
+    static let  CUST_TYPE_ISS                                       = "ISS"    /**< 태그공급회사     */
+    static let  CUST_TYPE_MGR                                       = "MGR"    /**< 관리회사        */
+    static let  CUST_TYPE_PMK                                       = "PMK"    /**< 파렛트제작회사    */
+    static let  CUST_TYPE_RDC                                       = "RDC"    /**< 물류회사        */
+    static let  CUST_TYPE_SAL                                       = "SAL"    /**< 판매대행사       */
+    static let  CUST_TYPE_TMK                                       = "TMK"    /**< 태그생산회사     */
+    static let  CUST_TYPE_VIR                                       = "VIR"    /**< 가상고객사       */
+    static let  CUST_TYPE_ETC                                       = "ETC"    /**< 기타회사        */
+    //=====================================================================================
+    
+    //공통코드 구분자
+    static let CODE_DETAIL_TYPE_SALE                                = "SALE"           /**< SALE_TYPE  */
+    static let CODE_DETAIL_TYPE_RESALE                              = "RESALE"         /**< RESALE_TYPE  */
 
-	
+    
 	//센서 태그 헤더 정보
 	static let SWING_ABNORMAL_TAG_HEADER_INFO						= "301E"		/**< 이상 센서태그 헤더정보, #4번태그*/
 	static let SWING_TAG_HEADER_INFO								= "3000"		/**< 센서태그 헤더정보 */
@@ -181,5 +200,7 @@ class Constants
     static let REMOVE_STATE_NORMAL                        			= 1		/**< 삭제상태: 기본 **/
     static let REMOVE_STATE_COMPLETE                    			= 2		/**< 삭제상태: 임시저장 **/
 
+    static let INOUT_TYPE_INPUT                                     = "I"   /**< 구분:입고 선택    */
+    static let INOUT_TYPE_OUTPUT                                    = "O"   /**< 구분:출고 선택    */
 	
 }

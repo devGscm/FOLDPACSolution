@@ -112,6 +112,7 @@ class HistorySearch: BaseViewController, UITableViewDataSource, UITableViewDeleg
 	
 	func initDataClient()
 	{
+		
 		clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		clsDataClient.SelectUrl = "stockService:selectWorkHistoryist"
@@ -176,43 +177,55 @@ class HistorySearch: BaseViewController, UITableViewDataSource, UITableViewDeleg
 			return
 		}
 		
-		print("startOrderDate:\(strLocaleStDate)")
-		print("endOrderDate:\(strLocaleEnDate)")
-		print("pageNo:\(intPageNo)")
-		print("rowPerPage:\(Constants.ROWS_PER_PAGE)")
-		
+		tvHistorySearch?.showIndicator()
 		clsDataClient.addServiceParam(paramName: "startTraceDate", value: strLocaleStDate)
 		clsDataClient.addServiceParam(paramName: "endTraceDate", value: strLocaleEnDate)
 		clsDataClient.addServiceParam(paramName: "eventCode", value: strEventCode)
-		
 		clsDataClient.addServiceParam(paramName: "pageNo", value: intPageNo)
 		clsDataClient.addServiceParam(paramName: "rowsPerPage", value: Constants.ROWS_PER_PAGE)
 		clsDataClient.selectData(dataCompletionHandler: {(data, error) in
 			if let error = error {
 				// 에러처리
-				print(error)
+				DispatchQueue.main.async { self.tvHistorySearch?.hideIndicator() }
+				super.showSnackbar(message: error.localizedDescription)
 				return
 			}
 			guard let clsDataTable = data else {
+				DispatchQueue.main.async { self.tvHistorySearch?.hideIndicator() }
 				print("에러 데이터가 없음")
 				return
 			}
 			self.arcDataRows.append(contentsOf: clsDataTable.getDataRows())
-			DispatchQueue.main.async { self.tvHistorySearch?.reloadData() }
+			DispatchQueue.main.async
+			{
+				self.tvHistorySearch?.reloadData()
+				self.tvHistorySearch?.hideIndicator()
+			}
 		})
 		
 	}
-	
-	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
+
+	func scrollViewDidScroll(_ scrollView: UIScrollView)
 	{
-		print("* scrollViewDidEndDragging")
-		let fltOffsetY = scrollView.contentOffset.y
-		let fltContentHeight = scrollView.contentSize.height
-		if (fltOffsetY >= fltContentHeight - scrollView.frame.size.height)
+		let boolLargeContent = (scrollView.contentSize.height > scrollView.frame.size.height)
+		let fltViewableHeight = boolLargeContent ? scrollView.frame.size.height : scrollView.contentSize.height
+		let boolBottom = (scrollView.contentOffset.y >= scrollView.contentSize.height - fltViewableHeight + 50)
+		if boolBottom == true && tvHistorySearch.isIndicatorShowing() == false
 		{
 			doSearch()
 		}
 	}
+	
+//	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
+//	{
+//		print("* scrollViewDidEndDragging")
+//		let fltOffsetY = scrollView.contentOffset.y
+//		let fltContentHeight = scrollView.contentSize.height
+//		if (fltOffsetY >= fltContentHeight - scrollView.frame.size.height)
+//		{
+//			doSearch()
+//		}
+//	}
 	
 	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
@@ -268,5 +281,17 @@ class HistorySearch: BaseViewController, UITableViewDataSource, UITableViewDeleg
 		dfFormatter.dateFormat = "yyyy-MM-dd"
 		tfCurControl.text = dfFormatter.string(from: dpPicker.date)
 		self.view.endEditing(true)
+	}
+}
+
+extension HistorySearch
+{
+	fileprivate func prepareToolbar()
+	{
+		guard let tc = toolbarController else {
+			return
+		}
+		tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
+		tc.toolbar.detail = NSLocalizedString("title_work_history_search", comment: "작업내역조회")
 	}
 }
