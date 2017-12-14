@@ -237,7 +237,7 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
         //print("endOrderDate:\(strLocaleEnDate)")
         //print("pageNo:\(intPageNo)")
         //print("rowPerPage:\(Constants.ROWS_PER_PAGE)")
-        
+        tvInOutCancel?.showIndicator()
         clsDataClient.addServiceParam(paramName: "startWorkDate", value: strLocaleStDate)
         clsDataClient.addServiceParam(paramName: "endWorkDate", value: strLocaleEnDate)
         clsDataClient.addServiceParam(paramName: "ioType", value: strSaleType!)
@@ -248,37 +248,55 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
         clsDataClient.selectData(dataCompletionHandler: {(data, error) in
             if let error = error {
                 // 에러처리
-                print(error)
+                DispatchQueue.main.async { self.tvInOutCancel.hideIndicator() }
+                super.showSnackbar(message: error.localizedDescription)
                 return
             }
             guard let clsDataTable = data else {
+                DispatchQueue.main.async { self.tvInOutCancel.hideIndicator() }
                 //print("에러 데이터가 없음")
                 return
             }
+            
             self.arcDataRows.append(contentsOf: clsDataTable.getDataRows())
-            DispatchQueue.main.async{ self.tvInOutCancel?.reloadData()}
+            DispatchQueue.main.async
+            {
+                self.tvInOutCancel?.reloadData()
+                self.tvInOutCancel?.hideIndicator()
+            }
         })
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView)
+    {
+        let boolLargeContent = (scrollView.contentSize.height > scrollView.frame.size.height)
+        let fltViewableHeight = boolLargeContent ? scrollView.frame.size.height : scrollView.contentSize.height
+        let boolBottom = (scrollView.contentOffset.y >= scrollView.contentSize.height - fltViewableHeight + 50)
+        if boolBottom == true && tvInOutCancel.isIndicatorShowing() == false
+        {
+            doSearch()
+        }
     }
     
     //=======================================
     //===== scrollViewDidEndDragging()
     //=======================================
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
-    {
-        //print("* scrollViewDidEndDragging")
-        let fltOffsetY = scrollView.contentOffset.y
-        let fltContentHeight = scrollView.contentSize.height
-        if (fltOffsetY >= fltContentHeight - scrollView.frame.size.height)
-        {
-            //doSearch()
-            
-            //DispatchQueue.main.async
-            //{
-                    //DB재조회
-                self.doInitSearch()
-            //}
-        }
-    }
+//    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
+//    {
+//        //print("* scrollViewDidEndDragging")
+//        let fltOffsetY = scrollView.contentOffset.y
+//        let fltContentHeight = scrollView.contentSize.height
+//        if (fltOffsetY >= fltContentHeight - scrollView.frame.size.height)
+//        {
+//            //doSearch()
+//
+//            //DispatchQueue.main.async
+//            //{
+//                    //DB재조회
+//                self.doInitSearch()
+//            //}
+//        }
+//    }
     
     
     //=======================================
