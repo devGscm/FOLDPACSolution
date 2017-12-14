@@ -28,17 +28,3 @@ extension UIImage
 	}
 }
 
-//extension UIImage
-//{
-//	public func base64(format: ImageFormat) -> String
-//	{
-//		var imageData: NSData
-//		switch format
-//		{
-//			case .PNG: imageData = UIImagePNGRepresentation(self)
-//			case .JPEG(let compression): imageData = UIImageJPEGRepresentation(self, compression)
-//		}
-//		return imageData.base64EncodedStringWithOptions(.allZeros)
-//	}
-//}
-

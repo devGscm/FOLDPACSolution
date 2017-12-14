@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		550DD8AC1FDFC5BE00766DCF /* StockReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550DD8AB1FDFC5BE00766DCF /* StockReviewCell.swift */; };
 		5522A62D1FDF9010009ED6EF /* TransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5522A62C1FDF9010009ED6EF /* TransitionController.swift */; };
-		5522A6351FDFB3D1009ED6EF /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5522A6341FDFB3D1009ED6EF /* UIViewController.swift */; };
 		553A4E021FE0AFCE00271BBD /* StockReviewSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553A4E011FE0AFCE00271BBD /* StockReviewSearch.swift */; };
 		553A4E041FE0C0AB00271BBD /* StockReviewSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553A4E031FE0C0AB00271BBD /* StockReviewSearchCell.swift */; };
 		553BCF8B1FC2DC3B00BE39C1 /* SliderDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553BCF8A1FC2DC3B00BE39C1 /* SliderDialog.swift */; };
@@ -28,7 +27,7 @@
 		559F39CF1FD76A67006E5C17 /* Config.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 559F39CE1FD76A67006E5C17 /* Config.storyboard */; };
 		559F39D41FD76A9F006E5C17 /* ClientConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F39D31FD76A9F006E5C17 /* ClientConfig.swift */; };
 		559F39D61FD76EC7006E5C17 /* BranchSearchDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F39D51FD76EC7006E5C17 /* BranchSearchDialog.swift */; };
-		559F39D81FD76EF5006E5C17 /* BranchSearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F39D71FD76EF5006E5C17 /* BranchSearchItem.swift */; };
+		559F39D81FD76EF5006E5C17 /* BranchSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F39D71FD76EF5006E5C17 /* BranchSearchCell.swift */; };
 		559F39DA1FD7704C006E5C17 /* RfidTypeDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F39D91FD7704C006E5C17 /* RfidTypeDialog.swift */; };
 		559F39DC1FD77068006E5C17 /* RfidReaderDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F39DB1FD77068006E5C17 /* RfidReaderDialog.swift */; };
 		559F39DE1FD7708A006E5C17 /* IdentificationSystemDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F39DD1FD7708A006E5C17 /* IdentificationSystemDialog.swift */; };
@@ -151,7 +150,6 @@
 		551FA96F1FC50EF4007C17F7 /* DataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProtocol.swift; sourceTree = "<group>"; };
 		5522A62C1FDF9010009ED6EF /* TransitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionController.swift; sourceTree = "<group>"; };
 		5522A6301FDFA778009ED6EF /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
-		5522A6341FDFB3D1009ED6EF /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		553A4E011FE0AFCE00271BBD /* StockReviewSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockReviewSearch.swift; sourceTree = "<group>"; };
 		553A4E031FE0C0AB00271BBD /* StockReviewSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockReviewSearchCell.swift; sourceTree = "<group>"; };
 		553BCF8A1FC2DC3B00BE39C1 /* SliderDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderDialog.swift; sourceTree = "<group>"; };
@@ -176,7 +174,7 @@
 		559F39CE1FD76A67006E5C17 /* Config.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Config.storyboard; sourceTree = "<group>"; };
 		559F39D31FD76A9F006E5C17 /* ClientConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientConfig.swift; sourceTree = "<group>"; };
 		559F39D51FD76EC7006E5C17 /* BranchSearchDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchSearchDialog.swift; sourceTree = "<group>"; };
-		559F39D71FD76EF5006E5C17 /* BranchSearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchSearchItem.swift; sourceTree = "<group>"; };
+		559F39D71FD76EF5006E5C17 /* BranchSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchSearchCell.swift; sourceTree = "<group>"; };
 		559F39D91FD7704C006E5C17 /* RfidTypeDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RfidTypeDialog.swift; sourceTree = "<group>"; };
 		559F39DB1FD77068006E5C17 /* RfidReaderDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RfidReaderDialog.swift; sourceTree = "<group>"; };
 		559F39DD1FD7708A006E5C17 /* IdentificationSystemDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentificationSystemDialog.swift; sourceTree = "<group>"; };
@@ -306,7 +304,6 @@
 			isa = PBXGroup;
 			children = (
 				5522A62C1FDF9010009ED6EF /* TransitionController.swift */,
-				5522A6341FDFB3D1009ED6EF /* UIViewController.swift */,
 			);
 			name = Extension;
 			path = "New Group";
@@ -342,7 +339,7 @@
 				559F39CE1FD76A67006E5C17 /* Config.storyboard */,
 				559F39D31FD76A9F006E5C17 /* ClientConfig.swift */,
 				559F39D51FD76EC7006E5C17 /* BranchSearchDialog.swift */,
-				559F39D71FD76EF5006E5C17 /* BranchSearchItem.swift */,
+				559F39D71FD76EF5006E5C17 /* BranchSearchCell.swift */,
 				559F39D91FD7704C006E5C17 /* RfidTypeDialog.swift */,
 				559F39DB1FD77068006E5C17 /* RfidReaderDialog.swift */,
 				559F39DD1FD7708A006E5C17 /* IdentificationSystemDialog.swift */,
@@ -779,7 +776,7 @@
 				9680BE881FCBD91D002838A4 /* SwingProtocol.m in Sources */,
 				55ACD6801FC8051900A2DC72 /* DataProtocol.swift in Sources */,
 				55FA78561FBDAD7E00583A80 /* AppContext.swift in Sources */,
-				559F39D81FD76EF5006E5C17 /* BranchSearchItem.swift in Sources */,
+				559F39D81FD76EF5006E5C17 /* BranchSearchCell.swift in Sources */,
 				555B988C1FD2776A006CC14F /* HistorySearch.swift in Sources */,
 				96E494221FB1A78500D1E2C1 /* ViewController.swift in Sources */,
 				559F39D41FD76A9F006E5C17 /* ClientConfig.swift in Sources */,
@@ -789,7 +786,6 @@
 				96E494201FB1A78500D1E2C1 /* AppDelegate.swift in Sources */,
 				9680BE8C1FCBD9D4002838A4 /* RfidSwing.swift in Sources */,
 				B060131D1FD512B900594CCD /* InOutCancel.swift in Sources */,
-				5522A6351FDFB3D1009ED6EF /* UIViewController.swift in Sources */,
 				5590A5611FD4E7C1007571D5 /* ProdMappingOutCell.swift in Sources */,
 				559F39D61FD76EC7006E5C17 /* BranchSearchDialog.swift in Sources */,
 				55FA784C1FBDAD0B00583A80 /* RightViewController.swift in Sources */,
