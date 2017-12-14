@@ -108,6 +108,7 @@ class StockReviewSearch: BaseViewController, UITableViewDataSource, UITableViewD
 			return
 		}
 		
+		self.tvStockReviewSearch?.showIndicator()
 		clsDataClient.addServiceParam(paramName: "startReviewReqDate", value: strLocaleStDate)
 		clsDataClient.addServiceParam(paramName: "endReviewReqDate", value: strLocaleEnDate)
 		clsDataClient.addServiceParam(paramName: "pageNo", value: intPageNo)
@@ -115,19 +116,37 @@ class StockReviewSearch: BaseViewController, UITableViewDataSource, UITableViewD
 		clsDataClient.selectData(dataCompletionHandler: {(data, error) in
 			if let error = error {
 				// 에러처리
-				print(error)
+				DispatchQueue.main.async { self.tvStockReviewSearch?.hideIndicator() }
+				super.showSnackbar(message: error.localizedDescription)
 				return
 			}
 			guard let clsDataTable = data else {
+				DispatchQueue.main.async { self.tvStockReviewSearch?.hideIndicator() }
 				print("에러 데이터가 없음")
 				return
 			}
 			self.arcDataRows.append(contentsOf: clsDataTable.getDataRows())
-			DispatchQueue.main.async { self.tvStockReviewSearch?.reloadData() }
+			DispatchQueue.main.async
+			{
+				self.tvStockReviewSearch?.reloadData()
+				self.tvStockReviewSearch?.hideIndicator()
+			}
 		})
 		
 	}
 	
+	func scrollViewDidScroll(_ scrollView: UIScrollView)
+	{
+		let boolLargeContent = (scrollView.contentSize.height > scrollView.frame.size.height)
+		let fltViewableHeight = boolLargeContent ? scrollView.frame.size.height : scrollView.contentSize.height
+		let boolBottom = (scrollView.contentOffset.y >= scrollView.contentSize.height - fltViewableHeight + 50)
+		if boolBottom == true && tvStockReviewSearch.isIndicatorShowing() == false
+		{
+			doSearch()
+		}
+	}
+
+	/*
 	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
 	{
 		print("* scrollViewDidEndDragging")
@@ -137,7 +156,7 @@ class StockReviewSearch: BaseViewController, UITableViewDataSource, UITableViewD
 		{
 			doSearch()
 		}
-	}
+	}*/
 	
 	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{

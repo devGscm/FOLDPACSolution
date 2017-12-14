@@ -149,6 +149,8 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			// 선별/보관
 			arrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: NSLocalizedString("title_rfid_inspect", comment: "RFID태그검수")))
 		}
+		
+		//arrMenuData.append(MenuItem(menuId: "BranchSearch", menuName: "거점선택 테스트"))
         
         arrMenuData.append(MenuItem(menuId: "ClientConfig", menuName: NSLocalizedString("title_client_config", comment: "환경설정")))
 		
@@ -261,6 +263,13 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 }()
 
             	break
+			
+//		case "BranchSearch" :
+//
+//			clsController = { () -> BranchSearchDialog in
+//				return UIStoryboard.viewController(storyBoardName: "Config", identifier: "BranchSearchDialog") as! BranchSearchDialog
+//			}()
+//			break
 			default:
 				print("is selected");
 		}
@@ -278,7 +287,6 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		toolbarController?.transition(to: clsRootController, completion: closeNavigationDrawer)
 		//self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
 		
-        
 		self.performSegue(withIdentifier: "segLogout", sender: self)
 	}
 	
