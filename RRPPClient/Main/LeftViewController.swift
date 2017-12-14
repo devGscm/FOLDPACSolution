@@ -91,7 +91,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			arrMenuData.append(MenuItem(menuId: "CombineOut", menuName: NSLocalizedString("title_work_sale_a", comment: "출고A")))
 			// 이동/반납입고 (입고A : 주문서 있는 입고)
 			// 회수 입고 ( 입고B : 지시서 없는 입고)
-			// 선별/보관
+			arrMenuData.append(MenuItem(menuId: "EventSelectStore", menuName: NSLocalizedString("title_event_select_store", comment: "선별/보관")))
 			arrMenuData.append(MenuItem(menuId: "EventClean", menuName: NSLocalizedString("title_event_clean", comment: "세척")))
 			arrMenuData.append(MenuItem(menuId: "EventDestory", menuName: NSLocalizedString("title_event_destory", comment: "폐기")))
 			arrMenuData.append(MenuItem(menuId: "WorkHistorySearch", menuName: NSLocalizedString("title_work_history_search", comment: "작업내역조회")))
@@ -146,7 +146,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
             arrMenuData.append(MenuItem(menuId: "InOutCancel", menuName: NSLocalizedString("title_work_inout_cancel", comment: "입출고취소")))
 			arrMenuData.append(MenuItem(menuId: "StockReview", menuName: NSLocalizedString("title_stock_review", comment: "재고실사")))
 			arrMenuData.append(MenuItem(menuId: "RfidTrackingService", menuName: NSLocalizedString("title_rfid_tracking_service", comment: "이력추적")))
-			// 선별/보관
+			arrMenuData.append(MenuItem(menuId: "EventSelectStore", menuName: NSLocalizedString("title_event_select_store", comment: "선별/보관")))
 			arrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: NSLocalizedString("title_rfid_inspect", comment: "RFID태그검수")))
 		}
 		
@@ -225,6 +225,13 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     return UIStoryboard.viewController(storyBoardName: "CombineOut", identifier: "CombineOut") as! CombineOut
                 }()
                 break
+			
+			case "EventSelectStore" :
+				// 선별/보관
+				clsController = { () -> EventSelectStore in
+					return UIStoryboard.viewController(storyBoardName: "Event", identifier: "EventSelectStore") as! EventSelectStore
+				}()
+				break
 			
 			case "EventClean" :
 				// 세척

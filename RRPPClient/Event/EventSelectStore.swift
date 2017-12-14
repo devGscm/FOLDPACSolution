@@ -1,5 +1,5 @@
 //
-//  EventOther.swift
+//  EventSelectStore.swift
 //   RRPPClient
 //
 //  Created by 이용민 on 2017. 12. 14..
@@ -10,27 +10,29 @@ import UIKit
 import Material
 import Mosaic
 
-class EventOther : BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, ReaderResponseDelegate
+
+
+class EventSelectStore : BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, ReaderResponseDelegate
 {
 	
 	@IBOutlet weak var lblUserName: UILabel!
 	@IBOutlet weak var lblBranchInfo: UILabel!
 	@IBOutlet weak var lblReaderName: UILabel!
 	@IBOutlet weak var btnRfidReader: UIButton!
-	@IBOutlet weak var tvEventOther: UITableView!
+	@IBOutlet weak var tvSelectStore: UITableView!
 	
+	@IBOutlet weak var btnProdGrade: UIButton!
 	var arrAssetRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
 	var arrTagRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
+	
 
-	var strEventType : String = ""
 	
 	var clsIndicator : ProgressIndicator?
 	var clsDataClient : DataClient!
 	
-	func setEventType(eventType: String)
-	{
-		self.strEventType = eventType
-	}
+	var arcProdGrade: Array<ListViewDialog.ListViewItem> = Array<ListViewDialog.ListViewItem>()
+	var strProdGrade = ""
+	
 	
 	override func viewWillAppear(_ animated: Bool)
 	{
@@ -73,13 +75,59 @@ class EventOther : BaseRfidViewController, UITableViewDataSource, UITableViewDel
 		lblUserName.text = AppContext.sharedManager.getUserInfo().getUserName()
 		lblBranchInfo.text = AppContext.sharedManager.getUserInfo().getBranchName()
 		lblReaderName.text = AppContext.sharedManager.getUserInfo().getReaderDevName()
+		
+		makeProdGradeCodeList(userLang: AppContext.sharedManager.getUserInfo().getUserLang())
+		self.strProdGrade = ""
+	}
+
+	func makeProdGradeCodeList(userLang : String)
+	{
+		//arcProdGrade.append(ListViewDialog.ListViewItem(itemCode: "", itemName: NSLocalizedString("common_select_all", comment: "전체")))
+		let arrEventCode: Array<CodeInfo> = LocalData.shared.getCodeDetail(fieldValue:"PROD_GRADE", commCode:nil, viewYn:"Y", initCodeName:nil)
+		for clsInfo in arrEventCode
+		{
+			var strCommName = ""
+			if(Constants.USER_LANG_CH == userLang)
+			{
+				strCommName = clsInfo.commNameCh
+			}
+			else if(Constants.USER_LANG_EN == userLang)
+			{
+				strCommName = clsInfo.commNameEn
+			}
+			else
+			{
+				strCommName = clsInfo.commNameKr
+			}
+			arcProdGrade.append(ListViewDialog.ListViewItem(itemCode: clsInfo.commCode, itemName: strCommName))
+		}
+	}
+	
+
+	@IBAction func onProdGradeClicked(_ sender: UIButton)
+	{
+		let clsDialog = ListViewDialog()
+		clsDialog.loadData(data: arcProdGrade, selectedItem: strProdGrade)
+		clsDialog.contentHeight = 150
+		
+		let acDialog = UIAlertController(title: NSLocalizedString("make_prod_grade", comment: "등급"), message:nil, preferredStyle: .alert)
+		acDialog.setValue(clsDialog, forKeyPath: "contentViewController")
+		
+		let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
+			self.strProdGrade = clsDialog.selectedRow.itemCode
+			let strItemName = clsDialog.selectedRow.itemName
+			self.btnProdGrade.setTitle(strItemName, for: .normal)
+		}
+		acDialog.addAction(aaOkAction)
+		self.present(acDialog, animated: true)
+		
 	}
 	
 	
 	// Segue로 파라미터 넘기면 반드시 prepare를 타기 때문에 여기서 DataProtocol을 세팅하는걸로 함
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?)
 	{
-
+		
 		if(segue.identifier == "segTagDetailList")
 		{
 			if let clsDialog = segue.destination as? TagDetailList
@@ -102,13 +150,13 @@ class EventOther : BaseRfidViewController, UITableViewDataSource, UITableViewDel
 		}
 	}
 	
-
+	
 	// 데이터를 clear한다.
 	func clearAllData()
 	{
 		arrTagRows.removeAll()
 		arrAssetRows.removeAll()
-		tvEventOther?.reloadData()
+		tvSelectStore?.reloadData()
 		super.clearInventory()
 	}
 	
@@ -186,7 +234,7 @@ class EventOther : BaseRfidViewController, UITableViewDataSource, UITableViewDel
 				
 			}
 		}
-		DispatchQueue.main.async { self.tvEventOther?.reloadData() }
+		DispatchQueue.main.async { self.tvSelectStore?.reloadData() }
 	}
 	
 	
@@ -197,7 +245,7 @@ class EventOther : BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
-		let objCell:EventOtherCell = tableView.dequeueReusableCell(withIdentifier: "tvcEventOther", for: indexPath) as! EventOtherCell
+		let objCell:EventSelectStoreCell = tableView.dequeueReusableCell(withIdentifier: "tvcEventSelectStore", for: indexPath) as! EventSelectStoreCell
 		let clsTagInfo = arrAssetRows[indexPath.row]
 		
 		objCell.lblAssetName.text = clsTagInfo.getAssetName()
@@ -245,7 +293,13 @@ class EventOther : BaseRfidViewController, UITableViewDataSource, UITableViewDel
 			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("common_no_data_send", comment: "전송할 데이터가 없습니다."))
 			return
 		}
-		sendData(eventType: strEventType)
+		if(strProdGrade.isEmpty == true)
+		{
+			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("event_select_grade", comment: "등급을 선택하여 주십시오."))
+			return
+		}
+		
+		sendData(eventType: Constants.EVENT_CODE_SELECT_STORE)
 	}
 	
 	func sendData(eventType: String)
@@ -261,7 +315,8 @@ class EventOther : BaseRfidViewController, UITableViewDataSource, UITableViewDel
 		clsDataClient.addServiceParam(paramName: "branchId", value: AppContext.sharedManager.getUserInfo().getBranchId())
 		clsDataClient.addServiceParam(paramName: "branchCustId", value: AppContext.sharedManager.getUserInfo().getBranchCustId())
 		clsDataClient.addServiceParam(paramName: "evenCode", value: eventType)
-
+		clsDataClient.addServiceParam(paramName: "prodGrade", value: strProdGrade)
+		
 		let clsDataTable : DataTable = DataTable()
 		clsDataTable.Id = "EVENT"
 		clsDataTable.addDataColumn(dataColumn: DataColumn(id: "epcCode", type: "String", size: "0", keyColumn: false, updateColumn: true, autoIncrement: false, canXlsExport: false, title: ""))
@@ -302,6 +357,7 @@ class EventOther : BaseRfidViewController, UITableViewDataSource, UITableViewDel
 					DispatchQueue.main.async
 					{
 						self.clearAllData()
+						self.clearUserInterfaceData()
 					}
 					let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
 					self.showSnackbar(message: strMsg)
@@ -314,6 +370,12 @@ class EventOther : BaseRfidViewController, UITableViewDataSource, UITableViewDel
 				}
 			}
 		})
+	}
+	
+	func clearUserInterfaceData()
+	{
+		self.btnProdGrade.setTitle("", for: .normal)
+		self.strProdGrade = ""
 	}
 	
 	
@@ -387,7 +449,7 @@ class EventOther : BaseRfidViewController, UITableViewDataSource, UITableViewDel
 }
 
 
-extension EventOther
+extension EventSelectStore
 {
 	fileprivate func prepareToolbar()
 	{
@@ -395,14 +457,6 @@ extension EventOther
 			return
 		}
 		tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
-		
-		if(self.strEventType == Constants.EVENT_CODE_CLEAN)
-		{
-			tc.toolbar.detail = NSLocalizedString("title_event_clean", comment: "세척")
-		}
-		else if(self.strEventType == Constants.EVENT_CODE_DESTORY)
-		{
-			tc.toolbar.detail = NSLocalizedString("title_event_destory", comment: "폐기")
-		}
+		tc.toolbar.detail = NSLocalizedString("title_event_select_store", comment: "선별/보관")
 	}
 }

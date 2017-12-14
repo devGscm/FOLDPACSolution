@@ -283,3 +283,15 @@ class HistorySearch: BaseViewController, UITableViewDataSource, UITableViewDeleg
 		self.view.endEditing(true)
 	}
 }
+
+extension HistorySearch
+{
+	fileprivate func prepareToolbar()
+	{
+		guard let tc = toolbarController else {
+			return
+		}
+		tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
+		tc.toolbar.detail = NSLocalizedString("title_work_history_search", comment: "작업내역조회")
+	}
+}
