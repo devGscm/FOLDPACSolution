@@ -15,6 +15,8 @@
 		553BCF8B1FC2DC3B00BE39C1 /* SliderDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553BCF8A1FC2DC3B00BE39C1 /* SliderDialog.swift */; };
 		553F42EE1FCCE94C006784AF /* Product.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 553F42F01FCCE94C006784AF /* Product.storyboard */; };
 		553F42FA1FCD4E8E006784AF /* ProductMount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F42F91FCD4E8E006784AF /* ProductMount.swift */; };
+		5542B4BA1FE1F67600BD6A00 /* RfidTrackingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5542B4B91FE1F67600BD6A00 /* RfidTrackingService.swift */; };
+		5542B4BC1FE1F69000BD6A00 /* TagSupply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5542B4BB1FE1F69000BD6A00 /* TagSupply.swift */; };
 		555B988A1FD2774D006CC14F /* History.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 555B98891FD2774D006CC14F /* History.storyboard */; };
 		555B988C1FD2776A006CC14F /* HistorySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555B988B1FD2776A006CC14F /* HistorySearch.swift */; };
 		555B988E1FD27CC3006CC14F /* HistorySearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555B988D1FD27CC3006CC14F /* HistorySearchCell.swift */; };
@@ -160,6 +162,8 @@
 		553F42F41FCCE959006784AF /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/Product.strings; sourceTree = "<group>"; };
 		553F42F61FCCE95B006784AF /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Product.strings; sourceTree = "<group>"; };
 		553F42F91FCD4E8E006784AF /* ProductMount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMount.swift; sourceTree = "<group>"; };
+		5542B4B91FE1F67600BD6A00 /* RfidTrackingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RfidTrackingService.swift; sourceTree = "<group>"; };
+		5542B4BB1FE1F69000BD6A00 /* TagSupply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSupply.swift; sourceTree = "<group>"; };
 		555B98891FD2774D006CC14F /* History.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = History.storyboard; sourceTree = "<group>"; };
 		555B988B1FD2776A006CC14F /* HistorySearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorySearch.swift; sourceTree = "<group>"; };
 		555B988D1FD27CC3006CC14F /* HistorySearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorySearchCell.swift; sourceTree = "<group>"; };
@@ -377,6 +381,8 @@
 				55B302C51FCE32A600BDCCB1 /* RfidInspect.swift */,
 				55B302C61FCE32A600BDCCB1 /* Tag.storyboard */,
 				9618F0E51FCE83D300F376B7 /* TagCell.swift */,
+				5542B4B91FE1F67600BD6A00 /* RfidTrackingService.swift */,
+				5542B4BB1FE1F69000BD6A00 /* TagSupply.swift */,
 			);
 			path = Tag;
 			sourceTree = "<group>";
@@ -790,6 +796,7 @@
 				B01C420D1FE105BB00404301 /* CombineOut.swift in Sources */,
 				B0A2357C1FDA5E7F00AD4925 /* InOutCancelDetailCell.swift in Sources */,
 				9680BE861FCBD91D002838A4 /* SwingApi.m in Sources */,
+				5542B4BC1FE1F69000BD6A00 /* TagSupply.swift in Sources */,
 				555B988E1FD27CC3006CC14F /* HistorySearchCell.swift in Sources */,
 				9680BE891FCBD91D002838A4 /* BLEUtility.m in Sources */,
 				55C00A921FCE96E400ED5165 /* TagDetailCell.swift in Sources */,
@@ -814,6 +821,7 @@
 				55B083091FDE497F007E3EAB /* ProductOrderSearchCell.swift in Sources */,
 				55B302C31FCE323B00BDCCB1 /* RfidUtil.swift in Sources */,
 				559F39EB1FD77D28006E5C17 /* ProdContainer.swift in Sources */,
+				5542B4BA1FE1F67600BD6A00 /* RfidTrackingService.swift in Sources */,
 				55FA783A1FBDACE300583A80 /* LoginViewController.swift in Sources */,
 				5571CDE31FCF98E600F88B97 /* AppSnackbarController.swift in Sources */,
 				550DD8AC1FDFC5BE00766DCF /* StockReviewCell.swift in Sources */,
