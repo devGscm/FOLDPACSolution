@@ -80,7 +80,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			arrMenuData.append(MenuItem(menuId: "InOutCancel", menuName: NSLocalizedString("title_work_inout_cancel", comment: "입출고취소")))
 			arrMenuData.append(MenuItem(menuId: "WorkHistorySearch", menuName: NSLocalizedString("title_work_history_search", comment: "작업내역조회")))
 			arrMenuData.append(MenuItem(menuId: "RfidTrackingService", menuName: NSLocalizedString("title_rfid_tracking_service", comment: "이력추적")))
-			// 폐기
+			arrMenuData.append(MenuItem(menuId: "EventDestory", menuName: NSLocalizedString("title_event_destory", comment: "폐기")))
 		}
 		else if(strBranchCustType == "RDC")
 		{
@@ -92,8 +92,8 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			// 이동/반납입고 (입고A : 주문서 있는 입고)
 			// 회수 입고 ( 입고B : 지시서 없는 입고)
 			// 선별/보관
-			// 세척
-			// 폐기
+			arrMenuData.append(MenuItem(menuId: "EventClean", menuName: NSLocalizedString("title_event_clean", comment: "세척")))
+			arrMenuData.append(MenuItem(menuId: "EventDestory", menuName: NSLocalizedString("title_event_destory", comment: "폐기")))
 			arrMenuData.append(MenuItem(menuId: "WorkHistorySearch", menuName: NSLocalizedString("title_work_history_search", comment: "작업내역조회")))
 			arrMenuData.append(MenuItem(menuId: "InOutCancel", menuName: NSLocalizedString("title_work_inout_cancel", comment: "입출고취소")))
 			arrMenuData.append(MenuItem(menuId: "StockReview", menuName: NSLocalizedString("title_stock_review", comment: "재고실사")))
@@ -140,8 +140,8 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			// 입고 (입고B : 지시서 없는 입고)
             arrMenuData.append(MenuItem(menuId: "ProdMappingOut", menuName: NSLocalizedString("title_work_sale_c", comment: "출고C")))
 			
-			// 세척
-			// 폐기
+			arrMenuData.append(MenuItem(menuId: "EventClean", menuName: NSLocalizedString("title_event_clean", comment: "세척")))
+			arrMenuData.append(MenuItem(menuId: "EventDestory", menuName: NSLocalizedString("title_event_destory", comment: "폐기")))
 			arrMenuData.append(MenuItem(menuId: "WorkHistorySearch", menuName: NSLocalizedString("title_work_history_search", comment: "작업내역조회")))
             arrMenuData.append(MenuItem(menuId: "InOutCancel", menuName: NSLocalizedString("title_work_inout_cancel", comment: "입출고취소")))
 			arrMenuData.append(MenuItem(menuId: "StockReview", menuName: NSLocalizedString("title_stock_review", comment: "재고실사")))
@@ -150,8 +150,6 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			arrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: NSLocalizedString("title_rfid_inspect", comment: "RFID태그검수")))
 		}
 		
-		//arrMenuData.append(MenuItem(menuId: "BranchSearch", menuName: "거점선택 테스트"))
-        
         arrMenuData.append(MenuItem(menuId: "ClientConfig", menuName: NSLocalizedString("title_client_config", comment: "환경설정")))
 		
 		DispatchQueue.main.async
@@ -227,7 +225,25 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     return UIStoryboard.viewController(storyBoardName: "CombineOut", identifier: "CombineOut") as! CombineOut
                 }()
                 break
-            
+			
+			case "EventClean" :
+				// 세척
+				clsController = { () -> EventOther in
+					let clsEventOther = UIStoryboard.viewController(storyBoardName: "Event", identifier: "EventOther") as! EventOther
+					clsEventOther.setEventType(eventType: Constants.EVENT_CODE_CLEAN)
+					return clsEventOther
+				}()
+				break
+			
+			case "EventDestory" :
+				// 폐기
+				clsController = { () -> EventOther in
+					let clsEventOther = UIStoryboard.viewController(storyBoardName: "Event", identifier: "EventOther") as! EventOther
+					clsEventOther.setEventType(eventType: Constants.EVENT_CODE_DESTORY)
+					return clsEventOther
+				}()
+				break
+			
 			case "ProdMappingOut" :
                 // 출고C(출하)
 				clsController = { () -> ProdMappingOut in

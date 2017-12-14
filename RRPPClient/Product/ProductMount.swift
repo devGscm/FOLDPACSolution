@@ -390,6 +390,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 			self.clsIndicator?.hide()
 			if let error = error {
 				// 에러처리
+				super.showSnackbar(message: error.localizedDescription)
 				print(error)
 				return
 			}
@@ -477,27 +478,25 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 	@IBAction func onClearAllClicked(_ sender: UIButton)
 	{
 		Dialog.show(container: self, viewController: nil,
-					title: NSLocalizedString("common_delete", comment: "삭제"),
-					message: NSLocalizedString("common_confirm_delete", comment: "전체 데이터를 삭제하시겠습니까?"),
-					okTitle: NSLocalizedString("common_confirm", comment: "확인"),
-					okHandler: { (_) in
-						self.clearTagData()
-						super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
-		},
-		cancelTitle: NSLocalizedString("common_cancel", comment: "확인"), cancelHandler: nil)
+			title: NSLocalizedString("common_delete", comment: "삭제"),
+			message: NSLocalizedString("common_confirm_delete", comment: "전체 데이터를 삭제하시겠습니까?"),
+			okTitle: NSLocalizedString("common_confirm", comment: "확인"),
+			okHandler: { (_) in
+				self.clearTagData()
+				super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
+			},
+			cancelTitle: NSLocalizedString("common_cancel", comment: "취소"), cancelHandler: nil)
 	}
 	
 	// 전송
 	@IBAction func onSendClicked(_ sender: UIButton)
 	{
-		print("- UnitID:\(AppContext.sharedManager.getUserInfo().getUnitId())")
-		
 		if(AppContext.sharedManager.getUserInfo().getUnitId().isEmpty == true)
 		{
 			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("rfid_reader_no_device_id", comment: "리더기의 장치ID가 없습니다.웹화면의 리더기정보관리에서 모바일전화번호를  입력하여주십시오."))
 			return
 		}
-		if(arrTagRows.count == 0)
+		if(arrAssetRows.count == 0)
 		{
 			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("common_no_data_send", comment: "전송할 데이터가 없습니다."))
 			return

@@ -21,6 +21,9 @@
 		555B988E1FD27CC3006CC14F /* HistorySearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555B988D1FD27CC3006CC14F /* HistorySearchCell.swift */; };
 		556C7DDA1FDA54010048D6C4 /* ProdInfoDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556C7DD91FDA54010048D6C4 /* ProdInfoDialog.swift */; };
 		5571CDE31FCF98E600F88B97 /* AppSnackbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5571CDE21FCF98E600F88B97 /* AppSnackbarController.swift */; };
+		5575BB461FE238F000CACCC8 /* EventOther.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5575BB451FE238F000CACCC8 /* EventOther.swift */; };
+		5575BB481FE238FA00CACCC8 /* Event.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5575BB471FE238FA00CACCC8 /* Event.storyboard */; };
+		5575BB4A1FE2394200CACCC8 /* EventOtherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5575BB491FE2394200CACCC8 /* EventOtherCell.swift */; };
 		5590A55D1FD4E194007571D5 /* ProdMappingOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590A55C1FD4E194007571D5 /* ProdMappingOut.swift */; };
 		5590A55F1FD4E1AE007571D5 /* ProdMapping.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5590A55E1FD4E1AE007571D5 /* ProdMapping.storyboard */; };
 		5590A5611FD4E7C1007571D5 /* ProdMappingOutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590A5601FD4E7C1007571D5 /* ProdMappingOutCell.swift */; };
@@ -168,6 +171,9 @@
 		5564DA751FC5583800A39598 /* ListViewDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewDialog.swift; sourceTree = "<group>"; };
 		556C7DD91FDA54010048D6C4 /* ProdInfoDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdInfoDialog.swift; sourceTree = "<group>"; };
 		5571CDE21FCF98E600F88B97 /* AppSnackbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSnackbarController.swift; sourceTree = "<group>"; };
+		5575BB451FE238F000CACCC8 /* EventOther.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventOther.swift; sourceTree = "<group>"; };
+		5575BB471FE238FA00CACCC8 /* Event.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Event.storyboard; sourceTree = "<group>"; };
+		5575BB491FE2394200CACCC8 /* EventOtherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventOtherCell.swift; sourceTree = "<group>"; };
 		5590A55C1FD4E194007571D5 /* ProdMappingOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdMappingOut.swift; sourceTree = "<group>"; };
 		5590A55E1FD4E1AE007571D5 /* ProdMapping.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProdMapping.storyboard; sourceTree = "<group>"; };
 		5590A5601FD4E7C1007571D5 /* ProdMappingOutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdMappingOutCell.swift; sourceTree = "<group>"; };
@@ -317,6 +323,16 @@
 				555B988D1FD27CC3006CC14F /* HistorySearchCell.swift */,
 			);
 			path = History;
+			sourceTree = "<group>";
+		};
+		5575BB441FE238CF00CACCC8 /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				5575BB451FE238F000CACCC8 /* EventOther.swift */,
+				5575BB471FE238FA00CACCC8 /* Event.storyboard */,
+				5575BB491FE2394200CACCC8 /* EventOtherCell.swift */,
+			);
+			path = Event;
 			sourceTree = "<group>";
 		};
 		5590A55B1FD4DE65007571D5 /* ProdMapping */ = {
@@ -530,6 +546,7 @@
 		96E4941E1FB1A78500D1E2C1 /* RRPPClient */ = {
 			isa = PBXGroup;
 			children = (
+				5575BB441FE238CF00CACCC8 /* Event */,
 				B01C42091FE0EDA000404301 /* CombineOut */,
 				5522A62B1FDF8FE1009ED6EF /* Extension */,
 				B06013191FD5080F00594CCD /* InOutCancel */,
@@ -723,6 +740,7 @@
 				553F42EE1FCCE94C006784AF /* Product.storyboard in Resources */,
 				5590A55F1FD4E1AE007571D5 /* ProdMapping.storyboard in Resources */,
 				967A9C4A1FC4003B00B6A9D1 /* Main.storyboard in Resources */,
+				5575BB481FE238FA00CACCC8 /* Event.storyboard in Resources */,
 				967A9C441FC3BE8D00B6A9D1 /* Localizable.strings in Resources */,
 				55FA783F1FBDACFD00583A80 /* login.png in Resources */,
 				559F39CF1FD76A67006E5C17 /* Config.storyboard in Resources */,
@@ -829,12 +847,14 @@
 				960224441FD0F3E400DE7C65 /* AT288Reader.swift in Sources */,
 				55ACD67E1FC804F800A2DC72 /* ListViewDialog.swift in Sources */,
 				55FA783B1FBDACE300583A80 /* UserInfo.swift in Sources */,
+				5575BB461FE238F000CACCC8 /* EventOther.swift in Sources */,
 				553A4E041FE0C0AB00271BBD /* StockReviewSearchCell.swift in Sources */,
 				960224421FD0DBCD00DE7C65 /* SwingReader.swift in Sources */,
 				55FA78351FBDACC600583A80 /* Constants.swift in Sources */,
 				5522A62D1FDF9010009ED6EF /* TransitionController.swift in Sources */,
 				55A579F21FD51A7400DBA188 /* WorkOutCustSearchCell.swift in Sources */,
 				55B0830B1FDE4E0B007E3EAB /* YPDrawSignatureView.swift in Sources */,
+				5575BB4A1FE2394200CACCC8 /* EventOtherCell.swift in Sources */,
 				553F42FA1FCD4E8E006784AF /* ProductMount.swift in Sources */,
 				5590A55D1FD4E194007571D5 /* ProdMappingOut.swift in Sources */,
 				553A4E021FE0AFCE00271BBD /* StockReviewSearch.swift in Sources */,
