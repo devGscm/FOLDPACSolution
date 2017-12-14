@@ -10,8 +10,11 @@ import UIKit
 import Material
 import Mosaic
 
-class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, DataProtocol
+class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, DataProtocol, ReaderResponseDelegate
 {
+    //== ReaderRespnseDelegate
+    func didReadTagid(_ tagid: String) { }
+    
     
     @IBOutlet weak var lblUserName: UILabel!
     @IBOutlet weak var lblBranchInfo: UILabel!
@@ -25,7 +28,7 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
     @IBOutlet weak var btnSelect: UIButton!
     
 
-    //취소 처리용
+    //== 취소 처리용
     struct ClickedDataRow
     {
         var ioType : String         /**< 입출고타입 **/
@@ -95,6 +98,8 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
         initViewControl()       //뷰 컨트롤 초기화
         initDataClient()        //데이터 컨트롤 초기화
         doInitSearch()          //조회
+        
+        self.initRfid( self as ReaderResponseDelegate )
     }
     
 
@@ -265,7 +270,13 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
         let fltContentHeight = scrollView.contentSize.height
         if (fltOffsetY >= fltContentHeight - scrollView.frame.size.height)
         {
-            doSearch()
+            //doSearch()
+            
+            //DispatchQueue.main.async
+            //{
+                    //DB재조회
+                self.doInitSearch()
+            //}
         }
     }
     
@@ -384,7 +395,7 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
         tableView.rowHeight = 60                    //셀 크기 조정
         tableView.allowsSelection = false           //셀 선택안되게 막음
         
-        let objCell:InOutCancelCell = tableView.dequeueReusableCell(withIdentifier: "tvcInOutCancel", for: indexPath) as! InOutCancelCell
+        let objCell:InOutCancelCell = tableView.dequeueReusableCell(withIdentifier: "tvcInOutCancel", for: indexPath) as! InOutCancelCell        
         let clsDataRow = arcDataRows[indexPath.row]
         
         let strUtcTraceDate = clsDataRow.getString(name:"workDate")
@@ -583,6 +594,7 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
                 else
                 {
                     let strMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
+                    
                     if((Constants.PROC_RESULT_ERROR_NO_REGISTERED_READERS == strResultCode) || (Constants.PROC_RESULT_ERROR_NO_MATCH_BRANCH_CUST_INFO == strResultCode))
                     {
                         super.showSnackbar(message: NSLocalizedString("common_error", comment: "에러"))

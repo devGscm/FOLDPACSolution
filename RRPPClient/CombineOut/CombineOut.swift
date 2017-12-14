@@ -119,10 +119,8 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         
         lblUserName.text = AppContext.sharedManager.getUserInfo().getUserName()                                 //작업자
         lblBranchInfo.text = AppContext.sharedManager.getUserInfo().getBranchName()                             //거점
-        lblReaderName.text = UserDefaults.standard.string(forKey: Constants.RFID_READER_NAME_KEY)               //리더기명
-
-        let aaa = UserDefaults.standard.string(forKey: Constants.RFID_READER_NAME_KEY) ?? ""
-        print("==AAA: \(aaa)")
+        //lblReaderName.text = UserDefaults.standard.string(forKey: Constants.RFID_READER_NAME_KEY)             //리더기명
+        lblReaderName.text = AppContext.sharedManager.getUserInfo().getReaderDevName()                          //리더기명
         
         btnSaleWorkId.setTitle(NSLocalizedString("sale_work_id_selection", comment: "송장선택"), for: .normal)
         btnBarcodeSearch.setTitle(NSLocalizedString("common_barcode_search", comment: "바코드"), for: .normal)
@@ -164,8 +162,17 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     //=======================================
     func initCommonCodeList(userLang : String)
     {
-        arcSaleType.append(ListViewDialog.ListViewItem(itemCode: "", itemName: NSLocalizedString("common_select_all", comment: "전체")))
-        let arrSaleType: Array<CodeInfo> = LocalData.shared.getCodeDetail(fieldValue:"SALE_TYPE", commCode:nil, viewYn:"Y", initCodeName:nil)
+        //arcSaleType.append(ListViewDialog.ListViewItem(itemCode: "", itemName: NSLocalizedString("common_select_all", comment: "전체")))
+        let strCustType = AppContext.sharedManager.getUserInfo().getCustType()
+        
+        var ctUserCustType = LocalData.CustType.PMK
+        if(strCustType == Constants.CUST_TYPE_PMK) { ctUserCustType = .PMK }
+        else if(strCustType == Constants.CUST_TYPE_RDC) { ctUserCustType = .RDC }
+        else if(strCustType == Constants.CUST_TYPE_EXP) { ctUserCustType = .EXP }
+        else if(strCustType == Constants.CUST_TYPE_IMP) { ctUserCustType = .IMP }
+        
+        let arrSaleType: Array<CodeInfo> = LocalData.shared.getSaleTypeCodeDetail(fieldValue:"SALE_TYPE", saleResale: .Sale, custType: ctUserCustType, initCodeName:nil)
+        
         for clsInfo in arrSaleType
         {
             var strCommName = ""
