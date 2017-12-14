@@ -9,7 +9,7 @@
 import UIKit
 import Mosaic
 
-class InOutCancelDetail: UIViewController, UITableViewDataSource, UITableViewDelegate
+class InOutCancelDetail: BaseViewController, UITableViewDataSource, UITableViewDelegate
 {
     @IBOutlet weak var tvInOutCancelDetail: UITableView!
 
@@ -20,22 +20,46 @@ class InOutCancelDetail: UIViewController, UITableViewDataSource, UITableViewDel
     var intPageNo       = 0
     var clsDataClient : DataClient!
     
-    
-    
-    
+	
     override func viewDidLoad()
     {
         super.viewDidLoad()
     }
-    
-    //=======================================
-    //===== viewWillAppear()
-    //=======================================
-    override func viewWillAppear(_ animated: Bool)
-    {
-        super.viewWillAppear(animated)
-        doInitSearch()
-    }
+	
+	override func viewWillAppear(_ animated: Bool)
+	{
+		super.viewWillAppear(animated)
+		super.initController()
+		
+		initViewControl()
+		initDataClient()
+		doInitSearch()
+	}
+	
+	
+	override func viewDidDisappear(_ animated: Bool)
+	{
+		arcDataRows.removeAll()
+		clsDataClient = nil
+		super.releaseController()
+		super.viewDidDisappear(animated)
+	}
+	
+	func initViewControl()
+	{
+		
+	}
+	func initDataClient()
+	{
+		clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+		clsDataClient.SelectUrl = "inOutService:selectCombineInWorkListDetail"
+		clsDataClient.removeServiceParam()
+		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+		clsDataClient.addServiceParam(paramName: "saleWorkId", value: strSaleWorkId)
+		clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
+	}
+
     
     //=======================================
     //===== doInitSearch()
@@ -54,35 +78,41 @@ class InOutCancelDetail: UIViewController, UITableViewDataSource, UITableViewDel
     func doSearch()
     {
         intPageNo += 1
-        
         print("==[InOutCancelDetail]->strSaleWorkId: \(strSaleWorkId)")
-        
-        
-        clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
-        clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
-        clsDataClient.SelectUrl = "inOutService:selectCombineInWorkListDetail"
-        clsDataClient.removeServiceParam()
-        clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
-        clsDataClient.addServiceParam(paramName: "saleWorkId", value: strSaleWorkId)
-        clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
+		self.tvInOutCancelDetail?.showIndicator()
         clsDataClient.addServiceParam(paramName: "pageNo", value: intPageNo)
         clsDataClient.addServiceParam(paramName: "rowsPerPage", value: Constants.ROWS_PER_PAGE)
         clsDataClient.selectData(dataCompletionHandler: {(data, error) in
             if let error = error {
                 // 에러처리
-                print(error)
+				DispatchQueue.main.async { self.tvInOutCancelDetail?.hideIndicator() }
+				super.showSnackbar(message: error.localizedDescription)
                 return
             }
             guard let clsDataTable = data else {
-                //print("에러 데이터가 없음")
+				DispatchQueue.main.async { self.tvInOutCancelDetail?.hideIndicator() }
+				//print("에러 데이터가 없음")
                 return
             }
             self.arcDataRows.append(contentsOf: clsDataTable.getDataRows())
-            DispatchQueue.main.async { self.tvInOutCancelDetail?.reloadData() }
+            DispatchQueue.main.async
+			{
+				self.tvInOutCancelDetail?.reloadData()
+				self.tvInOutCancelDetail?.hideIndicator()
+			}
         })
     }
     
-   
+	func scrollViewDidScroll(_ scrollView: UIScrollView)
+	{
+		let boolLargeContent = (scrollView.contentSize.height > scrollView.frame.size.height)
+		let fltViewableHeight = boolLargeContent ? scrollView.frame.size.height : scrollView.contentSize.height
+		let boolBottom = (scrollView.contentOffset.y >= scrollView.contentSize.height - fltViewableHeight + 50)
+		if boolBottom == true && tvInOutCancelDetail.isIndicatorShowing() == false
+		{
+			doSearch()
+		}
+	}
     
     
     //=======================================
