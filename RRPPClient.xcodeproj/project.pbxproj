@@ -74,6 +74,7 @@
 		960224421FD0DBCD00DE7C65 /* SwingReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960224411FD0DBCD00DE7C65 /* SwingReader.swift */; };
 		960224441FD0F3E400DE7C65 /* AT288Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960224431FD0F3E400DE7C65 /* AT288Reader.swift */; };
 		9618F0E61FCE83D300F376B7 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9618F0E51FCE83D300F376B7 /* TagCell.swift */; };
+		96779DEE1FE27CE4009A4708 /* RfidInspectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96779DED1FE27CE4009A4708 /* RfidInspectCell.swift */; };
 		967A9C441FC3BE8D00B6A9D1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 967A9C461FC3BE8D00B6A9D1 /* Localizable.strings */; };
 		967A9C4A1FC4003B00B6A9D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 967A9C4C1FC4003B00B6A9D1 /* Main.storyboard */; };
 		9680BE851FCBD91D002838A4 /* BLEDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 9680BE7C1FCBD91C002838A4 /* BLEDevice.m */; };
@@ -210,6 +211,7 @@
 		960224411FD0DBCD00DE7C65 /* SwingReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwingReader.swift; sourceTree = "<group>"; };
 		960224431FD0F3E400DE7C65 /* AT288Reader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AT288Reader.swift; sourceTree = "<group>"; };
 		9618F0E51FCE83D300F376B7 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
+		96779DED1FE27CE4009A4708 /* RfidInspectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RfidInspectCell.swift; sourceTree = "<group>"; };
 		967A9C451FC3BE8D00B6A9D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		967A9C471FC3BE9500B6A9D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		967A9C481FC3C57500B6A9D1 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -358,6 +360,7 @@
 		55B302C41FCE32A600BDCCB1 /* Tag */ = {
 			isa = PBXGroup;
 			children = (
+				96779DED1FE27CE4009A4708 /* RfidInspectCell.swift */,
 				55B302C51FCE32A600BDCCB1 /* RfidInspect.swift */,
 				55B302C61FCE32A600BDCCB1 /* Tag.storyboard */,
 				9618F0E51FCE83D300F376B7 /* TagCell.swift */,
@@ -747,6 +750,7 @@
 				55B302C21FCE323B00BDCCB1 /* BaseRfidViewController.swift in Sources */,
 				55FA784D1FBDAD0B00583A80 /* RootViewController.swift in Sources */,
 				B0A2357E1FDA6D4D00AD4925 /* InOutCancelDetail.swift in Sources */,
+				96779DEE1FE27CE4009A4708 /* RfidInspectCell.swift in Sources */,
 				96E494201FB1A78500D1E2C1 /* AppDelegate.swift in Sources */,
 				5522A6311FDFA778009ED6EF /* BaseTableViewController.swift in Sources */,
 				9680BE8C1FCBD9D4002838A4 /* RfidSwing.swift in Sources */,
