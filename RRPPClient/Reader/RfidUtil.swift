@@ -38,6 +38,9 @@ public class RfidUtil
         var mBoolNewTag : Bool?
         var mIntReadCount = 0                   /**< 조회수                */
         var mStrReadTime : String?
+		var mIsChecked : Bool
+		var mStrResult : String
+		
         
         init()
         {
@@ -59,6 +62,8 @@ public class RfidUtil
             mBoolNewTag         = false
             mIntReadCount       = 0
             mStrReadTime        = nil
+			mIsChecked			= false
+			mStrResult				= ""
         }
         
         /**
@@ -153,7 +158,10 @@ public class RfidUtil
         public func getNewTag() -> Bool                         { return mBoolNewTag ?? false }
         public func getReadCount() -> Int                       { return mIntReadCount     }
         public func getReadTime() -> String                     { return mStrReadTime ?? "" }
-        
+		
+		public func getChecked() -> Bool 						{return mIsChecked}
+		
+		public func getResult() -> String 						{return mStrResult}
         
         /**
          * 인코딩 종류를 설정한다.
@@ -243,6 +251,10 @@ public class RfidUtil
         public func setNewTag(newTag: Bool)                     { self.mBoolNewTag = newTag }
         public func setReadCount(readCount: Int)                { self.mIntReadCount = readCount }
         public func setReadTime(readTime: String)               { self.mStrReadTime = readTime }
+		
+		public func setChecked(_ checked: Bool)						{self.mIsChecked = checked	}
+		
+		public func setResult(_ result: String)						{self.mStrResult = result }
     }
 
     

@@ -100,7 +100,7 @@ class RootViewController: BaseViewController
 			localData.RemoteDbEnncryptId = AppContext.sharedManager.getUserInfo().getEncryptId()
 			localData.CorpId = AppContext.sharedManager.getUserInfo().getCorpId()
 			localData.versionCheck(indicator: clsIndicator, navigation: navigationDrawerController)
-
+			
             var mDicPallet : Dictionary<String, String> = Dictionary<String, String>()
             mDicPallet["yomile1"] = "test1"
             mDicPallet["yomile2"] = "test2"
