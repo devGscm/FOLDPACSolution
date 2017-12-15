@@ -11,6 +11,12 @@ import Mosaic
 
 class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, ReaderResponseDelegate
 {
+	@IBOutlet weak var lblAssetName: UILabel!
+	@IBOutlet weak var lblEpcUrn: UILabel!
+	@IBOutlet weak var lblSerialNo: UILabel!
+	@IBOutlet weak var lblReadTime: UILabel!	
+	@IBOutlet weak var lblResult: UILabel!
+	
 	@IBOutlet weak var lblUserName: UILabel!
 	@IBOutlet weak var lblBranchInfo: UILabel!
 	@IBOutlet weak var lblReaderName: UILabel!
@@ -26,6 +32,7 @@ class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	var clsIndicator : ProgressIndicator?
 	
 	var bisAllChekced = false
+	var boolSortAsc	= true
 	
 	override func viewWillAppear(_ animated: Bool)
 	{
@@ -71,6 +78,122 @@ class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 		lblReaderName.text = AppContext.sharedManager.getUserInfo().getReaderDevName()
 		
 		lblReadCnt.text = "0"
+		
+		//Ordering 지정
+		let tgrAssetName = UITapGestureRecognizer(target: self, action: #selector((onAssetNameClicked)))
+		self.lblAssetName.addGestureRecognizer(tgrAssetName)
+		
+		let tgrSerialNo = UITapGestureRecognizer(target: self, action: #selector((onSerialNoClicked)))
+		self.lblSerialNo.addGestureRecognizer(tgrSerialNo)
+		
+		let tgrEpcUrn = UITapGestureRecognizer(target: self, action: #selector((onEpcUrnClicked)))
+		self.lblEpcUrn.addGestureRecognizer(tgrEpcUrn)
+		
+		let tgrReadTime = UITapGestureRecognizer(target: self, action: #selector((onReadTimeClicked)))
+		self.lblReadTime.addGestureRecognizer(tgrReadTime)
+		
+		let tgrResult = UITapGestureRecognizer(target: self, action: #selector((onResultClicked)))
+		self.lblResult.addGestureRecognizer(tgrResult)
+	}
+	
+	@objc func onAssetNameClicked(sender: UITapGestureRecognizer)
+	{
+		print("onAssetNameClicked")
+		
+		if(boolSortAsc == true)
+		{
+			self.arrTagRows = self.arrTagRows.sorted(by: { (clsTagInfo1: RfidUtil.TagInfo, clsTagInfo2: RfidUtil.TagInfo) -> Bool in
+				return clsTagInfo1.getAssetName() > clsTagInfo2.getAssetName()
+			})
+		}
+		else
+		{
+			self.arrTagRows = self.arrTagRows.sorted(by: { (clsTagInfo1: RfidUtil.TagInfo, clsTagInfo2: RfidUtil.TagInfo) -> Bool in
+				return clsTagInfo1.getAssetName() < clsTagInfo2.getAssetName()
+			})
+		}
+		boolSortAsc = !boolSortAsc
+		DispatchQueue.main.async { self.tvRfidInspect?.reloadData() }
+		
+		
+	}
+	
+	@objc func onSerialNoClicked(sender: UITapGestureRecognizer)
+	{
+		print("onSerialNoClicked")
+		if(boolSortAsc == true)
+		{
+			self.arrTagRows = self.arrTagRows.sorted(by: { (clsTagInfo1: RfidUtil.TagInfo, clsTagInfo2: RfidUtil.TagInfo) -> Bool in
+				return Int(clsTagInfo1.getSerialNo())! > Int(clsTagInfo2.getSerialNo())!
+			})
+		}
+		else
+		{
+			self.arrTagRows = self.arrTagRows.sorted(by: { (clsTagInfo1: RfidUtil.TagInfo, clsTagInfo2: RfidUtil.TagInfo) -> Bool in
+				return Int(clsTagInfo1.getSerialNo())! < Int(clsTagInfo2.getSerialNo())!
+			})
+		}
+		boolSortAsc = !boolSortAsc
+		DispatchQueue.main.async { self.tvRfidInspect?.reloadData() }
+	}
+	
+	@objc func onEpcUrnClicked(sender: UITapGestureRecognizer)
+	{
+		print("onEpcUrnClicked")
+		
+		if(boolSortAsc == true)
+		{
+			self.arrTagRows = self.arrTagRows.sorted(by: { (clsTagInfo1: RfidUtil.TagInfo, clsTagInfo2: RfidUtil.TagInfo) -> Bool in
+				return clsTagInfo1.getEpcUrn() > clsTagInfo2.getEpcUrn()
+			})
+		}
+		else
+		{
+			self.arrTagRows = self.arrTagRows.sorted(by: { (clsTagInfo1: RfidUtil.TagInfo, clsTagInfo2: RfidUtil.TagInfo) -> Bool in
+				return clsTagInfo1.getEpcUrn() < clsTagInfo2.getEpcUrn()
+			})
+		}
+		boolSortAsc = !boolSortAsc
+		DispatchQueue.main.async { self.tvRfidInspect?.reloadData() }
+		
+	}
+	
+	@objc func onReadTimeClicked(sender: UITapGestureRecognizer)
+	{
+		print("onReadTimeClicked")
+		if(boolSortAsc == true)
+		{
+			self.arrTagRows = self.arrTagRows.sorted(by: { (clsTagInfo1: RfidUtil.TagInfo, clsTagInfo2: RfidUtil.TagInfo) -> Bool in
+				return clsTagInfo1.getReadTime() > clsTagInfo2.getReadTime()
+			})
+		}
+		else
+		{
+			self.arrTagRows = self.arrTagRows.sorted(by: { (clsTagInfo1: RfidUtil.TagInfo, clsTagInfo2: RfidUtil.TagInfo) -> Bool in
+				return clsTagInfo1.getReadTime() < clsTagInfo2.getReadTime()
+			})
+		}
+		boolSortAsc = !boolSortAsc
+		DispatchQueue.main.async { self.tvRfidInspect?.reloadData() }
+	}
+	
+	@objc func onResultClicked(sender: UITapGestureRecognizer)
+	{
+		print("onResultClicked")
+		if(boolSortAsc == true)
+		{
+			self.arrTagRows = self.arrTagRows.sorted(by: { (clsTagInfo1: RfidUtil.TagInfo, clsTagInfo2: RfidUtil.TagInfo) -> Bool in
+				return clsTagInfo1.getResult() > clsTagInfo2.getResult()
+			})
+		}
+		else
+		{
+			self.arrTagRows = self.arrTagRows.sorted(by: { (clsTagInfo1: RfidUtil.TagInfo, clsTagInfo2: RfidUtil.TagInfo) -> Bool in
+				return clsTagInfo1.getResult() < clsTagInfo2.getResult()
+			})
+		}
+		boolSortAsc = !boolSortAsc
+		DispatchQueue.main.async { self.tvRfidInspect?.reloadData() }
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////
@@ -328,9 +451,9 @@ class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 		objCell.lblEpcUrn.text = clsTagInfo.getEpcUrn()
 		objCell.lblSerialNo.text = clsTagInfo.getSerialNo()
 		
-		let shortTimeIndex = clsTagInfo.getReadTime().index(clsTagInfo.getReadTime().startIndex, offsetBy: 8)
-		let shortTime = clsTagInfo.getReadTime()[shortTimeIndex...]
-		objCell.lblReadTime.text = String(shortTime)
+		let strReadTimeDate = clsTagInfo.getReadTime()
+		let strDisplayReadTime = DateUtil.getConvertFormatDate(date: strReadTimeDate, srcFormat: "yyyyMMddHHmmss", dstFormat: "HH:mm:ss")
+		objCell.lblReadTime.text = strDisplayReadTime
 		
 		objCell.lblResult.text = clsTagInfo.getResult()
 		
