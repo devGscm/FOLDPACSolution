@@ -18,6 +18,7 @@
 		559F39EF1FD78218006E5C17 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F39EE1FD78218006E5C17 /* Dictionary.swift */; };
 		55B0830D1FDE5464007E3EAB /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B0830C1FDE5464007E3EAB /* UIImage.swift */; };
 		9641E8B51FB56DBA00E0E422 /* DataColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9641E8B41FB56DBA00E0E422 /* DataColumn.swift */; };
+		96779DEC1FE24C20009A4708 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96779DEB1FE24C20009A4708 /* Checkbox.swift */; };
 		967DC3E41FB42C37000265CD /* DataRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967DC3E31FB42C37000265CD /* DataRow.swift */; };
 		96B2A9911FB5836F009E2615 /* DataTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B2A9901FB5836F009E2615 /* DataTable.swift */; };
 		96B2A9931FB5A0F9009E2615 /* DataClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B2A9921FB5A0F9009E2615 /* DataClient.swift */; };
@@ -51,6 +52,7 @@
 		559F39EE1FD78218006E5C17 /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		55B0830C1FDE5464007E3EAB /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		9641E8B41FB56DBA00E0E422 /* DataColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataColumn.swift; sourceTree = "<group>"; };
+		96779DEB1FE24C20009A4708 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		967DC3E31FB42C37000265CD /* DataRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRow.swift; sourceTree = "<group>"; };
 		96B2A9901FB5836F009E2615 /* DataTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTable.swift; sourceTree = "<group>"; };
 		96B2A9921FB5A0F9009E2615 /* DataClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataClient.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			children = (
 				556C67D71FC668FA00EAF4B7 /* Dialog.swift */,
 				5564CBA51FD0E7F000BBD868 /* ProgressIndicator.swift */,
+				96779DEB1FE24C20009A4708 /* Checkbox.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96779DEC1FE24C20009A4708 /* Checkbox.swift in Sources */,
 				96B2A9911FB5836F009E2615 /* DataTable.swift in Sources */,
 				559F39E31FD77330006E5C17 /* String.swift in Sources */,
 				967DC3E41FB42C37000265CD /* DataRow.swift in Sources */,

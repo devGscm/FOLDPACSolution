@@ -30,7 +30,7 @@ import UIKit
             }
         }
     }
-    @IBInspectable var borderWidth:CGFloat
+    @IBInspectable public var borderWidth:CGFloat
         {
         set
         {

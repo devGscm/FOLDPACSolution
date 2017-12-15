@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Material
 import Mosaic
 import SQLite
 
@@ -498,17 +499,37 @@ class LocalData {
 																	  objMe.mColViewYn <- dataRow.getString(name:"viewYn")!
 																)
 												)
+								
+								//For Test
+//								if let testCode =  dataRow.getString(name:"commCode")
+//								{
+//									if(testCode == "RS4030")
+//									{
+//										if let testName = dataRow.getString(name:"commNameKr")
+//										{
+//												print(" \(testName) ")
+//										}
+//									}
+//								}
 							}
-	//								//For Test
-	//								for rows in try db.prepare(self.mTblCodeDetail) {
-	//									print("""
-	//										mColFieldValue: \(rows[self.mColFieldValue]), mColCommCode: \(rows[self.mColCommCode]),
-	//										mColCommNameKr: \(rows[self.mColCommNameKr]!),mColCommNameEn: \(rows[self.mColCommNameEn]!),
-	//										mColCommNameCh: \(rows[self.mColCommNameCh]!), mColCommRef1: \(rows[self.mColCommRef1]!)
-	//										mColCommRef2: \(rows[self.mColCommRef2]!), mColCommRef3: \(rows[self.mColCommRef3]!),
-	//										mColCommOrder: \(rows[self.mColCommOrder]!), mColViewYn: \(rows[self.mColViewYn]!)
-	//										""")
-	//								}
+									//For Test
+//									for rows in try db.prepare(self.mTblCodeDetail) {
+//										print("""
+//											mColFieldValue: \(rows[self.mColFieldValue]), mColCommCode: \(rows[self.mColCommCode]),
+//											mColCommNameKr: \(rows[self.mColCommNameKr]!),mColCommNameEn: \(rows[self.mColCommNameEn]!),
+//											mColCommNameCh: \(rows[self.mColCommNameCh]!), mColCommRef1: \(rows[self.mColCommRef1]!)
+//											mColCommRef2: \(rows[self.mColCommRef2]!), mColCommRef3: \(rows[self.mColCommRef3]!),
+//											mColCommOrder: \(rows[self.mColCommOrder]!), mColViewYn: \(rows[self.mColViewYn]!)
+//											""")
+//
+//										if(rows[objMe.mColCommCode] == "RS4030")
+//										{
+//											if let testName = rows[objMe.mColCommNameKr]
+//											{
+//												print(" \(testName) ")
+//											}
+//										}
+//									}
 							
 							/// 비동기로 처리 되므로 개별적으로 Update
 							if(bIsInsert)
@@ -793,7 +814,7 @@ class LocalData {
 	}
 	
 	/// 원격 Db와 버전체크 버전체크후, 데이터를 가져와서 동기화
-	public func versionCheck(_ clsIndicatior: ProgressIndicator) -> Void
+	public func versionCheck(indicator: ProgressIndicator, navigation: NavigationDrawerController? ) -> Void
 	{
 		if(self.mRemoteDbEnncryptId.isEmpty)
 		{
@@ -820,11 +841,17 @@ class LocalData {
 			{ (data, error) in
 				if let error = error {
 					// 에러처리
-					print(error)
+					DispatchQueue.main.async {
+						indicator.show(message:error.localizedDescription)
+					}
+					sleep(5)
+					indicator.hide()
 					return
 				}
 				guard let dataTable = data else {
 					print("에러 데이터가 없음")
+					indicator.hide()
+					navigation?.isEnabled = true
 					return
 				}
 				
@@ -865,7 +892,8 @@ class LocalData {
 				
 				//모든데이터가 다 받을수 있도록 대기한다
 				clsDispatchGrp.notify(queue: .main) {
-					clsIndicatior.hide()
+					indicator.hide()
+					navigation?.isEnabled = true
 				}
 		})
 	}

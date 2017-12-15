@@ -34,13 +34,17 @@ class Constants
 	static let RFID_POWER_KEY							= "rfidPower"						/**< RFID 파워 */
     
 	
+	#if REDMOON
+	static let WEB_SVC_URL 							= "http://192.168.0.213:8080"	    /**< 서비스 URL-훈태 */
+	#elseif ROY
+	static let WEB_SVC_URL                            = "http://192.168.0.218:8080"       /**< 서비스 URL-현님 */
+	#elseif YOMILE
+	static let WEB_SVC_URL                             = "http://192.168.0.240:8080"       /**< 서비스 URL-용민 */
+	#else
 	static let WEB_SVC_URL 	    					= "http://upis.moramcnt.com"	    /**< 서비스 URL     */
-	//static let WEB_SVC_URL 							= "http://192.168.0.213:8080"	    /**< 서비스 URL-훈태 */
-	//static let WEB_SVC_URL                              = "http://192.168.0.218:8080"       /**< 서비스 URL-현님 */
-    
+	#endif
+	
 	static let ROWS_PER_PAGE							= 20	/**< 기본 페이지 크기 */
-	
-	
 	
 	static let PROC_RESULT_SUCCESS									= "00"		/**< 처리결과 : 성공	**/
 	static let PROC_RESULT_ERROR_NOT_EXIST_TAG						= "MK0110"	/**< 처리결과 : 존재하지 않는 EPC코드	**/
