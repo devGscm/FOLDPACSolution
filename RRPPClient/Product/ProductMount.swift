@@ -240,12 +240,14 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		arrTagRows.removeAll()
 		arrAssetRows.removeAll()
 		
-		tvProductMount?.reloadData()
-		
-		self.intCurOrderWorkCnt = self.intOrderWorkCnt
-		if(lblOrderCustName.text?.isEmpty == false)
+		DispatchQueue.main.async
 		{
-			lblOrderCount?.text = "\(self.intCurOrderWorkCnt)/\(self.intOrderReqCnt)"
+			self.tvProductMount?.reloadData()
+			self.intCurOrderWorkCnt = self.intOrderWorkCnt
+			if(self.lblOrderCustName.text?.isEmpty == false)
+			{
+				self.lblOrderCount?.text = "\(self.intCurOrderWorkCnt)/\(self.intOrderReqCnt)"
+			}
 		}
 		super.clearInventory()
 	}

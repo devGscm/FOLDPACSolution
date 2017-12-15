@@ -32,27 +32,44 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	@IBOutlet weak var lblRemainCount: UILabel!
 	
 	
+	@IBOutlet weak var tvCombineIn: UITableView!
+	
+	var strTitle	= ""
+	
 	var arcWorkType: Array<ListViewDialog.ListViewItem> = Array<ListViewDialog.ListViewItem>()
 	var strWorkType = ""
 	
 	
 	
+	var strResaleOrderId							= ""			/**< 구매주문ID */
+	var strSaleWorkId								= ""			/**< 송장번호 */
+	var strProdAssetEpc								= ""			/**< 유형 */
+	var intOrderReqCount							= 0			/**< 출고량 */
+	var intProcCount 								= 0			/**< 처리량 */
+
 	
-	@IBOutlet weak var btnMakeOrderId: UIButton!
-	@IBOutlet weak var lblOrderCustName: UILabel!
-	@IBOutlet weak var lblOrderCount: UILabel!
+	var boolWorkListSelected						= false		/**< 송장-선택 했는지 여부 */
+	var boolNewTagInfoExist							= false		/**< 신규태그 - 신규태그가 있는지 여부 -전소용 */
 	
-	@IBOutlet weak var tfMakeLotId: UITextField!
-	@IBOutlet weak var tvCombineIn: UITableView!
+	var strWorkerName								= ""			/**< 반납-인수자정보*/
+	var intNoreadCnt								= 0			/**< 미인식 -고장으로 인해 리더기 미인식*/
+	var strCustType									= ""			/**< 고객사 구분 */
+	
+	var strWorkState								= ""			/**< 작업상태(서버전송) */
+	var boolWorkCompleteBtn							= false		/**< 완료전송 버튼 입력 -전송용 */
+	var strNoReadCount								= "0"			/**< 미인식수량-전송용 */
+	var strRemark									= ""			/**< 비고-전송용 */
+	var strSignData									= ""			/**< 사인 -전송용 */
+	var strResultMsg 								= ""			/**< 완료전송에 대한 메시지  */
 	
 	
-	var strSaleWorkId : String = ""
+	
 	
 	
 	var strMakeOrderId: String = ""
 	var intOrderWorkCnt: Int = 0
 	var intOrderReqCnt: Int = 0
-	var strProdAssetEpc: String?
+
 	var intCurOrderWorkCnt: Int = 0
 	
 	var arrAssetRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
@@ -62,8 +79,6 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	var clsDataClient : DataClient!
 	var clsBarcodeScanner: BarcodeScannerController?
 	
-	var strTitle : String = ""
-
 	func setTitle(title: String)
 	{
 		self.strTitle = title
@@ -99,6 +114,10 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 		print("=========================================")
 		print("*ProductMount.viewDidDisappear()")
 		print("=========================================")
+		
+		boolNewTagInfoExist = false
+		
+		
 		
 		arcWorkType.removeAll()
 		
@@ -166,11 +185,12 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	// Segue로 파라미터 넘기면 반드시 prepare를 타기 때문에 여기서 DataProtocol을 세팅하는걸로 함
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?)
 	{
-		if(segue.identifier == "segProductOrderSearch")
+		if(segue.identifier == "segCombineInSearch")
 		{
-			if let clsDialog = segue.destination as? ProductOrderSearch
+			if let clsDialog = segue.destination as? CombineInSearch
 			{
 				clsDialog.ptcDataHandler = self
+				clsDialog.workType = self.strWorkType
 			}
 		}
 		else if(segue.identifier == "segTagDetailList")
@@ -198,28 +218,65 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	// 팝업 다이얼로그로 부터 데이터 수신
 	func recvData( returnData : ReturnData)
 	{
-		if(returnData.returnType == "productOrderSearch")
+		if(returnData.returnType == "combineInSearch")
 		{
 			if(returnData.returnRawData != nil)
 			{
-				clearUserInterfaceData()
+				// 새로운 발주번호가 들어오면 기존 데이터는 삭제한다.
+				if(self.strSaleWorkId.isEmpty == false)
+				{
+					clearTagData(clearScreen: true)
+				}
+				
+				
+				
+				
 				
 				let clsDataRow = returnData.returnRawData as! DataRow
-				strMakeOrderId	= clsDataRow.getString(name: "makeOrderId") ?? ""
-				intOrderWorkCnt	= clsDataRow.getInt(name: "orderWorkCnt") ?? 0
-				intOrderReqCnt	= clsDataRow.getInt(name: "orderReqCnt") ?? 0
-				strProdAssetEpc = clsDataRow.getString(name: "prodAssetEpc")
-				intCurOrderWorkCnt = intOrderWorkCnt
+//				strMakeOrderId	= clsDataRow.getString(name: "makeOrderId") ?? ""
+//				intOrderWorkCnt	= clsDataRow.getInt(name: "orderWorkCnt") ?? 0
+//				intOrderReqCnt	= clsDataRow.getInt(name: "orderReqCnt") ?? 0
+//				strProdAssetEpc = clsDataRow.getString(name: "prodAssetEpc")
+//				intCurOrderWorkCnt = intOrderWorkCnt
+//				print("@@@@@@@@strMakeOrderId=\(strMakeOrderId)")
+//				print("@@@@@@@@intOrderWorkCnt=\(intOrderWorkCnt)")
+//				self.btnMakeOrderId.setTitle(strMakeOrderId, for: .normal)
+//				self.lblOrderCustName.text = clsDataRow.getString(name: "orderCustName")
+//				self.lblOrderCount.text = "\(intOrderWorkCnt)/\(intOrderReqCnt)"
 				
-				print("@@@@@@@@strMakeOrderId=\(strMakeOrderId)")
-				print("@@@@@@@@intOrderWorkCnt=\(intOrderWorkCnt)")
+			
+		
+				strResaleOrderId			= clsDataRow.getString(name: "resaleOrderId") ?? ""
+				strSaleWorkId 				= clsDataRow.getString(name: "saleWorkId") ?? ""
+				intOrderReqCount 			= clsDataRow.getInt(name: "orderReqCnt") ?? 0
+				intProcCount				= clsDataRow.getInt(name: "procCnt") ?? 0
+				intNoreadCnt				= clsDataRow.getInt(name: "noreadCnt") ?? 0				//미인식
+				strWorkerName				= clsDataRow.getString(name: "workerName") ?? ""		//반납-인수자
+				strProdAssetEpc				= clsDataRow.getString(name: "prodAssetEpc") ?? ""		//유형
+				let intRemainCnt			= clsDataRow.getInt(name: "remainCnt") ?? 0				//미처리량
 				
-				self.btnMakeOrderId.setTitle(strMakeOrderId, for: .normal)
-				self.lblOrderCustName.text = clsDataRow.getString(name: "orderCustName")
-				self.lblOrderCount.text = "\(intOrderWorkCnt)/\(intOrderReqCnt)"
+				lblResaleBranchName.text	= clsDataRow.getString(name: "resaleBranchName") ?? ""		// 출고처
+				btnSaleWorkId.setTitle(strSaleWorkId, for: .normal)									// 송장번호
+				lblOrderReqCount.text		= "\(intOrderReqCount)"									// 입고예정수량
+				lblProcCount.text			= "\(intProcCount)"										// 처리수량
+				tfVehName.text				= clsDataRow.getString(name: "vehName") ?? ""			// 차량번호
+				lblDriverName.text			= clsDataRow.getString(name: "driverName") ?? ""		// 납품자
+				lblProdAssetEpcName.text 	= clsDataRow.getString(name: "prodAssetEpcName") ?? ""	// 유형
+				lblRemainCount.text			= "\(intRemainCnt)"										// 미처리량
+
 				
-				// 새로운 발주번호가 들어면 기존 데이터를 삭제한다.
-				clearTagData()
+				//선택된 '송장정보' 내용 조회
+				
+				// TODO
+				//doSearchWorkListDetail()
+				
+				//선택된 '송장정보'에 대한 태그리스트
+				// TODO
+				//doSearchTagList()
+				
+				//송장 선택 여부
+				boolWorkListSelected = true
+			
 			}
 		}
 	}
@@ -247,31 +304,53 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 		self.present(acDialog, animated: true)
 	}
 	
-	@IBAction func onSaleWorkIdClicked(_ sender: UIButton) {
-	}
-	
-	
-
-
-	// 주문선택
-	@IBAction func onMakeOrderIdClicked(_ sender: UIButton)
+	@IBAction func onSaleWorkIdClicked(_ sender: UIButton)
 	{
-		self.performSegue(withIdentifier: "segProductOrderSearch", sender: self)
+		self.performSegue(withIdentifier: "segCombineInSearch", sender: self)
 	}
+	
 	
 	// 데이터를 clear한다.
-	func clearTagData()
+	func clearTagData(clearScreen : Bool)
 	{
+		self.boolNewTagInfoExist = false	// 신규태그 입력 체크, 전송용
 		arrTagRows.removeAll()
 		arrAssetRows.removeAll()
-		
-		tvCombineIn?.reloadData()
-		
-		self.intCurOrderWorkCnt = self.intOrderWorkCnt
-		if(lblOrderCustName.text?.isEmpty == false)
+
+		DispatchQueue.main.async
 		{
-			lblOrderCount?.text = "\(self.intCurOrderWorkCnt)/\(self.intOrderReqCnt)"
+			self.tvCombineIn?.reloadData()
 		}
+	
+		if(clearScreen == true)
+		{
+			strSaleWorkId				= ""
+			strProdAssetEpc				= ""
+			intProcCount				= 0
+			intOrderReqCount			= 0		/**< 출고량 */
+			intNoreadCnt				= 0
+			strWorkerName				= ""
+			boolWorkCompleteBtn			= false
+			strWorkState				= ""
+			strNoReadCount				= "0";
+			strRemark					= ""
+			strSignData					= ""
+			strResultMsg				= ""
+			
+			DispatchQueue.main.async
+			{
+				self.lblResaleBranchName.text	= ""	//출고처
+				self.btnSaleWorkId.setTitle(NSLocalizedString("sale_work_id_selection", comment: "송장선택"), for: .normal) //송장번호
+				self.lblOrderReqCount.text		= ""	// 입고예정수량
+				self.lblProcCount.text			= ""	// 처리량
+				self.tfVehName.text				= ""	// 차량번호
+				self.lblProdAssetEpcName.text	= ""	// 유형
+				self.lblRemainCount.text			= ""	// 미처리량
+				self.lblDriverName.text			= ""	// 납품자
+			}
+		}
+		
+		// RFID리더기 초기화
 		super.clearInventory()
 	}
 	
@@ -353,11 +432,11 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 				
 				print("@@@@@@strMakeOrderId:\(strMakeOrderId)")
 				
-				if(strMakeOrderId.isEmpty == false)
-				{
-					intCurOrderWorkCnt = intOrderWorkCnt + intCurDataSize
-					lblOrderCount.text = "\(intCurOrderWorkCnt)/\(intOrderReqCnt)"
-				}
+//				if(strMakeOrderId.isEmpty == false)
+//				{
+//					intCurOrderWorkCnt = intOrderWorkCnt + intCurDataSize
+//					lblOrderCount.text = "\(intCurOrderWorkCnt)/\(intOrderReqCnt)"
+//				}
 			}
 		}
 		DispatchQueue.main.async { self.tvCombineIn?.reloadData() }
@@ -436,7 +515,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 				{
 					//비동기 처리 결과에대한  UI에한 처리는 반드시 쓰레드로 처리되어야 한다.
 					DispatchQueue.main.async {
-						self.clearTagData()
+//						self.clearTagData()
 						self.clearUserInterfaceData()
 						let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
 						self.showSnackbar(message: strMsg)
@@ -464,10 +543,10 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 		
 		//UI 변경은 Thread로 호출하여 변경한
 		
-		self.btnMakeOrderId.setTitle("", for: .normal)
-		self.lblOrderCustName.text = ""
-		self.lblOrderCount.text = ""
-		self.tfMakeLotId.text = ""
+//		self.btnMakeOrderId.setTitle("", for: .normal)
+//		self.lblOrderCustName.text = ""
+//		self.lblOrderCount.text = ""
+//		self.tfMakeLotId.text = ""
 		
 	}
 	
@@ -507,7 +586,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 					message: NSLocalizedString("common_confirm_delete", comment: "전체 데이터를 삭제하시겠습니까?"),
 					okTitle: NSLocalizedString("common_confirm", comment: "확인"),
 					okHandler: { (_) in
-						self.clearTagData()
+//						self.clearTagData()
 						super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
 		},
 					cancelTitle: NSLocalizedString("common_cancel", comment: "취소"), cancelHandler: nil)
@@ -527,19 +606,19 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 			return
 		}
 		
-		let strMakeOrderId = btnMakeOrderId.titleLabel?.text
-		if(strMakeOrderId?.isEmpty == true)
-		{
-			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("make_enter_your_order_no", comment: "발주번호를 입력하여 주십시오."))
-			return
-		}
-		
-		let strMakeLotId = tfMakeLotId?.text
-		if(strMakeLotId?.isEmpty == true)
-		{
-			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("make_enter_your_lot_no", comment: "LOT 번호를 입력하여 주십시오."))
-			return
-		}
+//		let strMakeOrderId = btnMakeOrderId.titleLabel?.text
+//		if(strMakeOrderId?.isEmpty == true)
+//		{
+//			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("make_enter_your_order_no", comment: "발주번호를 입력하여 주십시오."))
+//			return
+//		}
+//
+//		let strMakeLotId = tfMakeLotId?.text
+//		if(strMakeLotId?.isEmpty == true)
+//		{
+//			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("make_enter_your_lot_no", comment: "LOT 번호를 입력하여 주십시오."))
+//			return
+//		}
 		
 		let intTagCount = 0
 		let intCurWorkCount = self.intOrderWorkCnt + intTagCount // 기제작수량과 현재 인식한 태그 수량
@@ -561,11 +640,11 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 		})
 		acDialog.addAction(UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
 			
-			let strMakeOrderId = self.btnMakeOrderId?.titleLabel?.text
-			let strMakeLotId = self.tfMakeLotId?.text
-			let strWorkerName = self.lblUserName?.text
-			let strRemark = acDialog.textFields?[0].text
-			self.sendData(makeOrderId: strMakeOrderId!, makeLotId: strMakeLotId!, workerName: strWorkerName!, remark: strRemark!)
+//			let strMakeOrderId = self.btnMakeOrderId?.titleLabel?.text
+//			let strMakeLotId = self.tfMakeLotId?.text
+//			let strWorkerName = self.lblUserName?.text
+//			let strRemark = acDialog.textFields?[0].text
+//			self.sendData(makeOrderId: strMakeOrderId!, makeLotId: strMakeLotId!, workerName: strWorkerName!, remark: strRemark!)
 		})
 		self.present(acDialog, animated: true, completion: nil)
 		

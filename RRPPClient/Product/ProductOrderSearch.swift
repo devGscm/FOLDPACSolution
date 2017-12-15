@@ -14,8 +14,6 @@ class ProductOrderSearch: BaseViewController, UITableViewDataSource, UITableView
 
 	@IBOutlet weak var tvProductOrderSearch: UITableView!
 	var tfCurControl : UITextField!
-	
-	@IBOutlet weak var btnClose: UIBarButtonItem!
 	@IBOutlet weak var btnStDate: UITextField!
 	@IBOutlet weak var btnEnDate: UITextField!
 	@IBOutlet weak var btnSearch: UIButton!

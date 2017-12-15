@@ -8,17 +8,23 @@
 
 import UIKit
 
-class CombineInSearchCell: UITableViewCell {
-
-    override func awakeFromNib() {
+class CombineInSearchCell: UITableViewCell
+{
+	@IBOutlet weak var lblSaleWorkId: UILabel!
+	@IBOutlet weak var lblOrderReqDate: UILabel!
+	@IBOutlet weak var lblResaleBranchName: UILabel!
+	@IBOutlet weak var lblProdAssetEpcName: UILabel!
+	@IBOutlet weak var lblOrderReqCnt: UILabel!
+	@IBOutlet weak var btnSelection: UIButton!
+	
+	override func awakeFromNib()
+	{
         super.awakeFromNib()
-        // Initialization code
     }
-
+	
+	
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }
