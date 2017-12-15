@@ -1,0 +1,4 @@
+framework module BarcodeScanner {
+    header "BarcodeScanner-Swift.h"
+    requires objc
+}
