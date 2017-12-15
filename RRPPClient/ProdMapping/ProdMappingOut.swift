@@ -42,18 +42,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	@IBOutlet weak var tvMappingRfid: UITableView!
 	@IBOutlet weak var tvMappingProd: UITableView!
 
-    
-    
-    
-    
-//    var strMakeOrderId: String = ""
-//    var intOrderWorkCnt: Int = 0
-//    var intOrderReqCnt: Int = 0
-//    var strProdAssetEpc: String?
-//    var intCurOrderWorkCnt: Int = 0
-	
-	//var arrAssetRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
-	//var arrTagRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
+
 	
 	var clsIndicator : ProgressIndicator?
 	var clsDataClient : DataClient!

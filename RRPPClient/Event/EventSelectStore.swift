@@ -58,6 +58,9 @@ class EventSelectStore : BaseRfidViewController, UITableViewDataSource, UITableV
 		print("=========================================")
 		print("*EventOther.viewDidDisappear()")
 		print("=========================================")
+		
+		arcProdGrade.removeAll()
+		
 		arrAssetRows.removeAll()
 		arrTagRows.removeAll()
 		clsIndicator = nil
@@ -76,15 +79,17 @@ class EventSelectStore : BaseRfidViewController, UITableViewDataSource, UITableV
 		lblBranchInfo.text = AppContext.sharedManager.getUserInfo().getBranchName()
 		lblReaderName.text = AppContext.sharedManager.getUserInfo().getReaderDevName()
 		
+		
 		makeProdGradeCodeList(userLang: AppContext.sharedManager.getUserInfo().getUserLang())
-		self.strProdGrade = ""
+		
 	}
 
 	func makeProdGradeCodeList(userLang : String)
 	{
+		self.strProdGrade = ""
 		//arcProdGrade.append(ListViewDialog.ListViewItem(itemCode: "", itemName: NSLocalizedString("common_select_all", comment: "전체")))
-		let arrEventCode: Array<CodeInfo> = LocalData.shared.getCodeDetail(fieldValue:"PROD_GRADE", commCode:nil, viewYn:"Y", initCodeName:nil)
-		for clsInfo in arrEventCode
+		let arrCodeInfo: Array<CodeInfo> = LocalData.shared.getCodeDetail(fieldValue:"PROD_GRADE", commCode:nil, viewYn:"Y", initCodeName:nil)
+		for clsInfo in arrCodeInfo
 		{
 			var strCommName = ""
 			if(Constants.USER_LANG_CH == userLang)

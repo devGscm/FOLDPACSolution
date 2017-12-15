@@ -1,3 +1,12 @@
+## 2.12.19
+
+* [issue-997](https://github.com/CosmicMind/Material/issues/977): Fixed NavigationDrawerController where swiping off device caused a partial correct state.
+
+## 2.12.18
+
+* Fixed layout issues in CollectionView, where the sizing was not correctlly being initialized.
+* [issue-495](https://github.com/CosmicMind/Material/issues/495): Made TextField.textInset available in Obj-C.
+
 ## 2.12.17
 
 * [pr-979](https://github.com/CosmicMind/Material/pull/979): Added `visibilityOff` icon and updated `TextField` to utilize it.

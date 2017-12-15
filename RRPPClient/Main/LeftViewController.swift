@@ -75,8 +75,9 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			arrMenuData.append(MenuItem(menuId: "ProductMount", menuName: NSLocalizedString("title_product_mount", comment: "자산등록")))
 			arrMenuData.append(MenuItem(menuId: "StockReview", menuName: NSLocalizedString("title_stock_review", comment: "재고실사")))
 			
-			arrMenuData.append(MenuItem(menuId: "CombineOut", menuName: NSLocalizedString("title_work_sale_a", comment: "출고A")))
-			// 입고(입고A : 주문서 있는 입고)
+			arrMenuData.append(MenuItem(menuId: "CombineOut", menuName: NSLocalizedString("title_work_out_delivery", comment: "출고")))
+			arrMenuData.append(MenuItem(menuId: "CombineIn", menuName: NSLocalizedString("title_work_in_warehouse", comment: "입고")))
+
 			arrMenuData.append(MenuItem(menuId: "InOutCancel", menuName: NSLocalizedString("title_work_inout_cancel", comment: "입출고취소")))
 			arrMenuData.append(MenuItem(menuId: "WorkHistorySearch", menuName: NSLocalizedString("title_work_history_search", comment: "작업내역조회")))
 			arrMenuData.append(MenuItem(menuId: "RfidTrackingService", menuName: NSLocalizedString("title_rfid_tracking_service", comment: "이력추적")))
@@ -88,8 +89,8 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			// 물류센터
 			//==============================================
 			
-			arrMenuData.append(MenuItem(menuId: "CombineOut", menuName: NSLocalizedString("title_work_sale_a", comment: "출고A")))
-			// 이동/반납입고 (입고A : 주문서 있는 입고)
+			arrMenuData.append(MenuItem(menuId: "CombineOut", menuName: NSLocalizedString("title_work_out_delivery", comment: "출고")))
+			arrMenuData.append(MenuItem(menuId: "CombineIn", menuName: NSLocalizedString("title_work_in_move_return", comment: "이동/반납입고")))
 			// 회수 입고 ( 입고B : 지시서 없는 입고)
 			arrMenuData.append(MenuItem(menuId: "EventSelectStore", menuName: NSLocalizedString("title_event_select_store", comment: "선별/보관")))
 			arrMenuData.append(MenuItem(menuId: "EventClean", menuName: NSLocalizedString("title_event_clean", comment: "세척")))
@@ -104,7 +105,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			//==============================================
 			// 계약처
 			//==============================================
-			// 납품입고 (입고A : 지시서 있는 입고)
+			arrMenuData.append(MenuItem(menuId: "CombineIn", menuName: NSLocalizedString("title_work_in_delivery", comment: "납품입고")))
 			// 출고 (출고B : 지시서 없는 출고)
 			// 입고 (입고B : 지시서 없는 입고)
 			arrMenuData.append(MenuItem(menuId: "ProdMappingOut", menuName: NSLocalizedString("title_work_out_product", comment: "상품매핑")))
@@ -134,8 +135,9 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			arrMenuData.append(MenuItem(menuId: "TagSupply", menuName: NSLocalizedString("title_tag_supply", comment: "납품등록(RFID)")))
 			arrMenuData.append(MenuItem(menuId: "ProductMount", menuName: NSLocalizedString("title_product_mount", comment: "자산등록")))
 			arrMenuData.append(MenuItem(menuId: "CombineOut", menuName: NSLocalizedString("title_work_sale_a", comment: "출고A")))
+
+			arrMenuData.append(MenuItem(menuId: "CombineIn", menuName: NSLocalizedString("title_work_resale_a", comment: "입고A")))
 			
-			// 입고 (입고A : 지시서 있는 입고)
 			// 출고 (출고B : 지시서 없는 출고)
 			// 입고 (입고B : 지시서 없는 입고)
             arrMenuData.append(MenuItem(menuId: "ProdMappingOut", menuName: NSLocalizedString("title_work_sale_c", comment: "출고C")))
@@ -150,6 +152,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			arrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: NSLocalizedString("title_rfid_inspect", comment: "RFID태그검수")))
 		}
 		
+
         arrMenuData.append(MenuItem(menuId: "ClientConfig", menuName: NSLocalizedString("title_client_config", comment: "환경설정")))
 		
 		DispatchQueue.main.async
@@ -226,6 +229,15 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 }()
                 break
 			
+			case "CombineIn" :
+				
+				clsController = { () -> CombineIn in
+					let clsCombineIn = UIStoryboard.viewController(storyBoardName: "CombineIn", identifier: "CombineIn") as! CombineIn
+					clsCombineIn.setTitle(title: strtMenuItem.menuName)
+					return clsCombineIn
+				}()
+				break
+			
 			case "EventSelectStore" :
 				// 선별/보관
 				clsController = { () -> EventSelectStore in
@@ -287,12 +299,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
             	break
 			
-//		case "BranchSearch" :
-//
-//			clsController = { () -> BranchSearchDialog in
-//				return UIStoryboard.viewController(storyBoardName: "Config", identifier: "BranchSearchDialog") as! BranchSearchDialog
-//			}()
-//			break
+
 			default:
 				print("is selected");
 		}

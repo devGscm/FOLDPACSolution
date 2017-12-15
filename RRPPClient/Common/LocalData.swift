@@ -99,8 +99,10 @@ class LocalData {
 	enum SaleResaleType
 	{	case Sale, Resale }
 	
-	enum CustType
-	{	case PMK, RDC, EXP, IMP }
+	enum CustType : String
+	{
+		case PMK = "PMK", RDC = "RDC", EXP = "EXP", IMP = "IMP"
+	}
 	
 	static let shared = LocalData()
 	
