@@ -915,6 +915,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		clsDataClient.selectData(dataCompletionHandler: {(data, error) in
 			if let error = error {
 				// 에러처리
+				super.showSnackbar(message: error.localizedDescription)
 				print(error)
 				return
 			}
