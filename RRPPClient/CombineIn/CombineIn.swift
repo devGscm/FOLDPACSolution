@@ -61,16 +61,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	var strRemark									= ""			/**< 비고-전송용 */
 	
 	var strResultMsg 								= ""			/**< 완료전송에 대한 메시지  */
-	
-	
-	
-	
-	
-	var strMakeOrderId: String = ""
-	var intOrderWorkCnt: Int = 0
-	var intOrderReqCnt: Int = 0
-	
-	var intCurOrderWorkCnt: Int = 0
+
 	
 	var arrAssetRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
 	var arrTagRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
@@ -294,7 +285,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 				let strVehName		= tfVehName?.text ?? ""
 				let strDriverName	= lblDriverName?.text ?? ""
 				
-				sendData(workState: self.strWorkState, resaleOrderId: self.strResaleOrderId, saleWorkId: self.strSaleWorkId, vehName: strVehName, driverName: strDriverName, orderReqCount: self.intOrderReqCnt, noReadCount: intNoReadCount, remark: strRemark, workerName: strWorkerName, signData: strSignData)
+				sendData(workState: self.strWorkState, resaleOrderId: self.strResaleOrderId, saleWorkId: self.strSaleWorkId, vehName: strVehName, driverName: strDriverName, orderReqCount: self.intOrderReqCount, noReadCount: intNoReadCount, remark: strRemark, workerName: strWorkerName, signData: strSignData)
 			}
 		}
 		
@@ -695,32 +686,27 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 			// 2) DB에서 리스트 조회값 받음
 			for clsDataRow in clsDataTable.getDataRows()
 			{
-				
-				self.strResaleOrderId			= clsDataRow.getString(name: "resaleOrderId") ?? ""			//구매주문ID
-				self.strSaleWorkId 				= clsDataRow.getString(name: "saleWorkId") ?? ""				//송장번호
-				
+				self.strResaleOrderId			= clsDataRow.getString(name: "resaleOrderId") ?? ""		// 구매주문ID
+				self.strSaleWorkId 				= clsDataRow.getString(name: "saleWorkId") ?? ""		// 송장번호
 				self.intOrderReqCount 			= clsDataRow.getInt(name: "orderReqCnt") ?? 0
-				self.intProcCount				= clsDataRow.getInt(name: "procCnt") ?? 0					//처리량
-				self.intNoreadCnt				= clsDataRow.getInt(name: "noreadCnt") ?? 0				//미인식
-				//let strVehName					= clsDataRow.getString(name: "resaleVehName") ?? ""			//차량번호
-				
-				self.strWorkerName				= clsDataRow.getString(name: "workerName") ?? ""			//작업자명
-				self.strProdAssetEpc			= clsDataRow.getString(name: "prodAssetEpc") ?? ""				//유형
-				
-				
-				var intRemainCnt				= self.intOrderReqCount - self.intProcCount			//미처리량
+				self.intProcCount				= clsDataRow.getInt(name: "procCnt") ?? 0				// 처리량
+				self.intNoreadCnt				= clsDataRow.getInt(name: "noreadCnt") ?? 0				// 미인식
+				self.strWorkerName				= clsDataRow.getString(name: "workerName") ?? ""		// 작업자명
+				self.strProdAssetEpc			= clsDataRow.getString(name: "prodAssetEpc") ?? ""		// 유형
+				var intRemainCnt				= self.intOrderReqCount - self.intProcCount				// 미처리량
 				if(intRemainCnt < 0)
 				{
 					intRemainCnt = 0										//미처리량 0이하는 0
 				}
 				
-				self.lblResaleBranchName.text	= clsDataRow.getString(name: "resaleBranchName") ?? ""			// 출고처
-				self.btnSaleWorkId.setTitle(self.strSaleWorkId, for: .normal)	// 송장번호
-				self.lblOrderReqCount.text		= "\(self.intOrderReqCnt)"		// 입고예정수량
-				self.lblProcCount.text			= "\(self.intProcCount)"		// 처리량
-				self.lblDriverName.text			= clsDataRow.getString(name: "resaleDriverName") ?? ""			// 납품자
-				self.lblProdAssetEpcName.text	= clsDataRow.getString(name: "prodAssetEpcName") ?? ""			// 유형명
-				self.lblRemainCount.text		= "\(intRemainCnt)"		// 미처리량
+				self.lblResaleBranchName.text	= clsDataRow.getString(name: "resaleBranchName") ?? ""	// 출고처
+				self.btnSaleWorkId.setTitle(self.strSaleWorkId, for: .normal)							// 송장번호
+				self.lblOrderReqCount.text		= "\(self.intOrderReqCount)"							// 입고예정수량
+				self.lblProcCount.text			= "\(self.intProcCount)"								// 처리량
+				//self.tfVehName.text				= clsDataRow.getString(name: "resaleVehName") ?? ""	// 차량번호
+				self.lblDriverName.text			= clsDataRow.getString(name: "resaleDriverName") ?? ""	// 납품자
+				self.lblProdAssetEpcName.text	= clsDataRow.getString(name: "prodAssetEpcName") ?? ""	// 유형명
+				self.lblRemainCount.text		= "\(intRemainCnt)"										// 미처리량
 				
 				//2) 태그데이터 초기화
 				self.clearTagData(clearScreen: false)
@@ -1190,30 +1176,27 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 			self.clearTagData(clearScreen: true)
 			
 			let clsDataRow = clsDataTable.getDataRows()[0]
-			self.strResaleOrderId			= clsDataRow.getString(name: "resaleOrderId") ?? ""			//구매주문ID
-			self.strSaleWorkId 				= clsDataRow.getString(name: "saleWorkId") ?? ""				//송장번호
-			
+			self.strResaleOrderId			= clsDataRow.getString(name: "resaleOrderId") ?? ""			// 구매주문ID
+			self.strSaleWorkId 				= clsDataRow.getString(name: "saleWorkId") ?? ""			// 송장번호
 			self.intOrderReqCount 			= clsDataRow.getInt(name: "orderReqCnt") ?? 0
-			self.intProcCount				= clsDataRow.getInt(name: "procCnt") ?? 0					//처리량
-			self.intNoreadCnt				= clsDataRow.getInt(name: "noreadCnt") ?? 0				//미인식
-			self.strWorkerName				= clsDataRow.getString(name: "workerName") ?? ""			//작업자명
-			self.strProdAssetEpc			= clsDataRow.getString(name: "prodAssetEpc") ?? ""				//유형
-			
-			
-			var intRemainCnt				= self.intOrderReqCount - self.intProcCount			//미처리량
+			self.intProcCount				= clsDataRow.getInt(name: "procCnt") ?? 0					// 처리량
+			self.intNoreadCnt				= clsDataRow.getInt(name: "noreadCnt") ?? 0					// 미인식
+			self.strWorkerName				= clsDataRow.getString(name: "workerName") ?? ""			// 작업자명
+			self.strProdAssetEpc			= clsDataRow.getString(name: "prodAssetEpc") ?? ""			// 유형
+			var intRemainCnt				= self.intOrderReqCount - self.intProcCount					// 미처리량
 			if(intRemainCnt < 0)
 			{
 				intRemainCnt = 0										//미처리량 0이하는 0
 			}
 			
-			self.lblResaleBranchName.text	= clsDataRow.getString(name: "resaleBranchName") ?? ""			// 출고처
-			self.btnSaleWorkId.setTitle(self.strSaleWorkId, for: .normal)	// 송장번호
-			self.lblOrderReqCount.text		= "\(self.intOrderReqCnt)"		// 입고예정수량
-			self.lblProcCount.text			= "\(self.intProcCount)"		// 처리량
-			//self.tfVehName.text				= clsDataRow.getString(name: "resaleVehName") ?? ""				//차량번호
-			self.lblDriverName.text			= clsDataRow.getString(name: "resaleDriverName") ?? ""			// 납품자
-			self.lblProdAssetEpcName.text	= clsDataRow.getString(name: "prodAssetEpcName") ?? ""			// 유형명
-			self.lblRemainCount.text		= "\(intRemainCnt)"		// 미처리량
+			self.lblResaleBranchName.text	= clsDataRow.getString(name: "resaleBranchName") ?? ""		// 출고처
+			self.btnSaleWorkId.setTitle(self.strSaleWorkId, for: .normal)								// 송장번호
+			self.lblOrderReqCount.text		= "\(self.intOrderReqCount)"								// 입고예정수량
+			self.lblProcCount.text			= "\(self.intProcCount)"									// 처리량
+			//self.tfVehName.text				= clsDataRow.getString(name: "resaleVehName") ?? ""		// 차량번호
+			self.lblDriverName.text			= clsDataRow.getString(name: "resaleDriverName") ?? ""		// 납품자
+			self.lblProdAssetEpcName.text	= clsDataRow.getString(name: "prodAssetEpcName") ?? ""		// 유형명
+			self.lblRemainCount.text		= "\(intRemainCnt)"											// 미처리량
 			
 			// 조회 및 그리드 리스트에 표시
 			

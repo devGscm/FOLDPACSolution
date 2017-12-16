@@ -192,6 +192,9 @@
                                                         <real key="value" value="4"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="onRfidReaderClicked:" destination="eKb-lp-9Jz" eventType="touchUpInside" id="yQL-oE-eXi"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Swing U" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNd-KE-Kn5">
                                                 <rect key="frame" x="256" y="4" width="60" height="30"/>
@@ -659,7 +662,7 @@
                 <viewControllerPlaceholder storyboardName="Common" referencedIdentifier="InSignDialog" id="3Qf-wN-To6" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZD5-sn-XV1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7148" y="-3131"/>
+            <point key="canvasLocation" x="-7322" y="-3091"/>
         </scene>
         <!--TagDetailList-->
         <scene sceneID="KR9-4u-joF">
@@ -667,7 +670,7 @@
                 <viewControllerPlaceholder storyboardName="Common" referencedIdentifier="TagDetailList" id="4Nd-3M-J4r" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DBd-Hw-alR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-6862" y="-3133"/>
+            <point key="canvasLocation" x="-6978" y="-3091"/>
         </scene>
         <!--Combine In Search-->
         <scene sceneID="aIJ-ld-BlA">
