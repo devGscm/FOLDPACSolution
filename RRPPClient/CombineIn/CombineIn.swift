@@ -973,8 +973,37 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 				print(" -strResultCode:\(strResultCode!)")
 				if(Constants.PROC_RESULT_SUCCESS == strResultCode)
 				{
-					//비동기 처리 결과에대한  UI에한 처리는 반드시 쓰레드로 처리되어야 한다.
-					DispatchQueue.main.async {
+					let strSvrProcCount = clsDataRow.getString(name: "procCount")
+					let strSvrWorkState = clsDataRow.getString(name: "workState")
+					
+					print("-서버로부터 받은 처리갯수: \(strSvrProcCount)")
+					print("-서버로부터 받은 작업처리상태:  \(strSvrWorkState)")
+					
+					DispatchQueue.main.async
+					{
+						for clsInfo in self.arrTagRows
+						{
+							//clsInfo.
+							
+						}
+						//전송 성공인 경우,
+//						for(EpcCodeInfoParcel clsInfo : mLstTagListRowsParcel)
+//						{
+//							if(clsInfo.getNewTagInfo() == true)
+//							{
+//								clsInfo.setNewTagInfo(false);		//태그상태 NEW -> OLD로 변경
+//							}
+//						}
+						
+//						mBoolNewTagInfoExist = false;
+//
+//						//현재 작업상태가 완료전송인경우
+//						if(mBoolWorkCompleteBtn == true)
+//						{
+//							//송장정보관련 UI객체를 초기화한다.
+//							clearTagData(true);
+//						}
+						
 						//						self.clearTagData()
 						self.clearUserInterfaceData()
 						let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
