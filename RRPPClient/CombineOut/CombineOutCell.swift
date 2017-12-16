@@ -16,6 +16,9 @@ class CombineOutCell: UITableViewCell
     @IBOutlet weak var lblRemainCnt: UILabel!       //미처리량
     @IBOutlet weak var btnSelection: UIButton!      //선택-버튼
     
+    
+    
+    
     override func awakeFromNib()
     {
         super.awakeFromNib()
