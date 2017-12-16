@@ -342,16 +342,16 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 		let strAssetEpc = "\(clsTagInfo.getCorpEpc())\(clsTagInfo.getAssetEpc())"	// 회사EPC코드 + 자산EPC코드
 		
 		//------------------------------------------------
-		clsTagInfo.setAssetEpc(assetEpc: strAssetEpc)
+        clsTagInfo.setAssetEpc(strAssetEpc)
 		if(clsTagInfo.getAssetEpc().isEmpty == false)
 		{
 			let strAssetName = super.getAssetName(assetEpc: strAssetEpc)
-			clsTagInfo.setAssetName(assetName : strAssetName)
+            clsTagInfo.setAssetName(strAssetName)
 			print("@@@@@@@@ AssetName2:\(clsTagInfo.getAssetName() )")
 		}
-		clsTagInfo.setNewTag(newTag : true)
-		clsTagInfo.setReadCount(readCount: 1)
-		clsTagInfo.setReadTime(readTime: strCurReadTime)
+        clsTagInfo.setNewTag(true)
+        clsTagInfo.setReadCount(1)
+        clsTagInfo.setReadTime(strCurReadTime)
 		//------------------------------------------------
 		
 		var boolValidAsset = false
@@ -396,7 +396,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 					{
 						boolFindAssetTypeOverlap = true
 						let intCurReadCount = clsTagInfo.getReadCount()
-						clsTagInfo.setReadCount(readCount: (intCurReadCount + 1))
+						clsTagInfo.setReadCount((intCurReadCount + 1))
 						break;
 					}
 				}
@@ -738,11 +738,11 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 				let strProdAssetEpcName = clsDataRow.getString(name: "prodAssetEpcName") ?? ""
 				
 				let clsTagInfo = RfidUtil.TagInfo()
-				clsTagInfo.setAssetEpc(assetEpc: strProdAssetEpc)
-				clsTagInfo.setAssetName(assetName: strProdAssetEpcName)
-				clsTagInfo.setProcCount(procCount: intProcCount)
-				clsTagInfo.setWorkAssignCount(workAssignCount: intWorkAssignCount)
-				clsTagInfo.setRemainCount(remainCount: intRemainCount)
+				clsTagInfo.setAssetEpc(strProdAssetEpc)
+				clsTagInfo.setAssetName(strProdAssetEpcName)
+				clsTagInfo.setProcCount(intProcCount)
+				clsTagInfo.setWorkAssignCount(intWorkAssignCount)
+				clsTagInfo.setRemainCount(intRemainCount)
 				
 				//그리드 리스트에 추가
 				self.arrAssetRows.append(clsTagInfo)
@@ -786,12 +786,12 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 				let strProdAssetEpcName = clsDataRow.getString(name: "prodAssetEpcName") ?? ""
 				
 				let clsTagInfo = RfidUtil.TagInfo()
-				clsTagInfo.setEpcCode(epcCode: strEpcCode)
-				clsTagInfo.setAssetName(assetName: strProdAssetEpcName)
+				clsTagInfo.setEpcCode(strEpcCode)
+				clsTagInfo.setAssetName(strProdAssetEpcName)
 				
 				if(strEpcUrn.isEmpty == false)
 				{
-					clsTagInfo.setEpcUrn(epcUrn: strEpcUrn)
+					clsTagInfo.setEpcUrn(strEpcUrn)
 					let arsEpcUrn = strEpcUrn.split(".")
 					if( arsEpcUrn.count == 4)
 					{
@@ -807,15 +807,15 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 						print("strSerialNo:\(strSerialNo)")
 						print("=============================================")
 						
-						clsTagInfo.setAssetEpc(assetEpc: strNewAssetEpc)
-						clsTagInfo.setSerialNo(serialNo: strSerialNo)
+						clsTagInfo.setAssetEpc(strNewAssetEpc)
+						clsTagInfo.setSerialNo(strSerialNo)
 					}
 				}
 				
 				if(strUtcTraceDate.isEmpty == false)
 				{
 					let strLocaleTraceDate = DateUtil.utcToLocale(utcDate: strUtcTraceDate, dateFormat: "yyyyMMddHHmmss")
-					clsTagInfo.setReadTime(readTime: strLocaleTraceDate)
+					clsTagInfo.setReadTime(strLocaleTraceDate)
 				}
 				
 				self.arrTagRows.append(clsTagInfo)
