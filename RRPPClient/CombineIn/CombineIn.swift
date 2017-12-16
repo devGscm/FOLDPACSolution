@@ -1160,7 +1160,68 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	
 	func doSearchBarcode(barcode: String)
 	{
-		
+		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+		clsDataClient.SelectUrl = "inOutService:selectSaleInWorkList"
+		clsDataClient.removeServiceParam()
+		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+		clsDataClient.addServiceParam(paramName: "branchId", value: AppContext.sharedManager.getUserInfo().getBranchId())
+		clsDataClient.addServiceParam(paramName: "branchCustId", value: AppContext.sharedManager.getUserInfo().getBranchCustId())
+		clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
+		clsDataClient.addServiceParam(paramName: "saleWorkId", value: barcode)
+		clsDataClient.addServiceParam(paramName: "resaleType", value: self.strWorkType)
+		clsDataClient.selectData(dataCompletionHandler: {(data, error) in
+			if let error = error {
+				// 에러처리
+				super.showSnackbar(message: error.localizedDescription)
+				print(error)
+				return
+			}
+			guard let clsDataTable = data else {
+				print("에러 데이터가 없음")
+				return
+			}
+			if(clsDataTable.getDataRows().count == 0)
+			{
+				super.showSnackbar(message: NSLocalizedString("common_no_data_for_barcode", comment: "해당 바코드에 해당하는 데이터가 없습니다."))
+				return
+			}
+			
+			self.clearTagData(clearScreen: true)
+			
+			let clsDataRow = clsDataTable.getDataRows()[0]
+			self.strResaleOrderId			= clsDataRow.getString(name: "resaleOrderId") ?? ""			//구매주문ID
+			self.strSaleWorkId 				= clsDataRow.getString(name: "saleWorkId") ?? ""				//송장번호
+			
+			self.intOrderReqCount 			= clsDataRow.getInt(name: "orderReqCnt") ?? 0
+			self.intProcCount				= clsDataRow.getInt(name: "procCnt") ?? 0					//처리량
+			self.intNoreadCnt				= clsDataRow.getInt(name: "noreadCnt") ?? 0				//미인식
+			self.strWorkerName				= clsDataRow.getString(name: "workerName") ?? ""			//작업자명
+			self.strProdAssetEpc			= clsDataRow.getString(name: "prodAssetEpc") ?? ""				//유형
+			
+			
+			var intRemainCnt				= self.intOrderReqCount - self.intProcCount			//미처리량
+			if(intRemainCnt < 0)
+			{
+				intRemainCnt = 0										//미처리량 0이하는 0
+			}
+			
+			self.lblResaleBranchName.text	= clsDataRow.getString(name: "resaleBranchName") ?? ""			// 출고처
+			self.btnSaleWorkId.setTitle(self.strSaleWorkId, for: .normal)	// 송장번호
+			self.lblOrderReqCount.text		= "\(self.intOrderReqCnt)"		// 입고예정수량
+			self.lblProcCount.text			= "\(self.intProcCount)"		// 처리량
+			//self.tfVehName.text				= clsDataRow.getString(name: "resaleVehName") ?? ""				//차량번호
+			self.lblDriverName.text			= clsDataRow.getString(name: "resaleDriverName") ?? ""			// 납품자
+			self.lblProdAssetEpcName.text	= clsDataRow.getString(name: "prodAssetEpcName") ?? ""			// 유형명
+			self.lblRemainCount.text		= "\(intRemainCnt)"		// 미처리량
+			
+			// 조회 및 그리드 리스트에 표시
+			
+			self.doSearchWorkListDetail()		//선택된 '송장정보' 내용 조회
+			self.doSearchTagList()				//선택된 '송장정보'에 대한 태그리스트
+			
+			self.boolWorkListSelected = true	//송장 선택 여부
+		})
 	}
 	//------------------------------------------------------------------------
 	// 바코드 관련 이벤트및 처리 끝
