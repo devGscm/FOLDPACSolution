@@ -646,7 +646,6 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 		clsDataClient.addServiceParam(paramName: "pageNo", value: 1)
 		clsDataClient.addServiceParam(paramName: "rowsPerPage", value: 300)
 		
-		
 		clsDataClient.selectData(dataCompletionHandler: {(data, error) in
 			if let error = error {
 				// 에러처리
@@ -828,7 +827,6 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	// 작업초기화 데이터를 전송한다
 	func sendWorkInitData(resaleOrderId: String, saleWorkId: String)
 	{
-		
 		clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
 		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
@@ -973,39 +971,29 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 				print(" -strResultCode:\(strResultCode!)")
 				if(Constants.PROC_RESULT_SUCCESS == strResultCode)
 				{
-					let strSvrProcCount = clsDataRow.getString(name: "procCount")
-					let strSvrWorkState = clsDataRow.getString(name: "workState")
-					
-					print("-서버로부터 받은 처리갯수: \(strSvrProcCount)")
-					print("-서버로부터 받은 작업처리상태:  \(strSvrWorkState)")
+					//let strSvrProcCount = clsDataRow.getString(name: "procCount")
+					//let strSvrWorkState = clsDataRow.getString(name: "workState")
+					//print("-서버로부터 받은 처리갯수: \(strSvrProcCount)")
+					//print("-서버로부터 받은 작업처리상태:  \(strSvrWorkState)")
 					
 					DispatchQueue.main.async
 					{
+						// 전송 성공인 경우
 						for clsInfo in self.arrTagRows
 						{
-							//clsInfo.
-							
+							if(clsInfo.getNewTag() == true)
+							{
+								clsInfo.setNewTag(newTag: false)	// 태그상태 NEW -> OLD로 변경
+							}
 						}
-						//전송 성공인 경우,
-//						for(EpcCodeInfoParcel clsInfo : mLstTagListRowsParcel)
-//						{
-//							if(clsInfo.getNewTagInfo() == true)
-//							{
-//								clsInfo.setNewTagInfo(false);		//태그상태 NEW -> OLD로 변경
-//							}
-//						}
-						
-//						mBoolNewTagInfoExist = false;
-//
-//						//현재 작업상태가 완료전송인경우
-//						if(mBoolWorkCompleteBtn == true)
-//						{
-//							//송장정보관련 UI객체를 초기화한다.
-//							clearTagData(true);
-//						}
-						
-						//						self.clearTagData()
-						self.clearUserInterfaceData()
+						self.boolNewTagInfoExist = false
+
+						// 현재 작업상태가 완료전송인경우
+						if(self.boolWorkCompleteBtn == true)
+						{
+							// 송장정보관련 UI객체를 초기화한다.
+							self.clearTagData(clearScreen: true)
+						}
 						let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
 						self.showSnackbar(message: strMsg)
 					}
@@ -1016,7 +1004,6 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 					self.showSnackbar(message: strMsg)
 				}
 			}
-
 		})
 		
 	}
