@@ -119,6 +119,8 @@
 		B077DA1C1FDF990900616F3A /* OutMemoDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B077DA1B1FDF990900616F3A /* OutMemoDialog.swift */; };
 		B0A2357C1FDA5E7F00AD4925 /* InOutCancelDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A2357B1FDA5E7F00AD4925 /* InOutCancelDetailCell.swift */; };
 		B0A2357E1FDA6D4D00AD4925 /* InOutCancelDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A2357D1FDA6D4D00AD4925 /* InOutCancelDetail.swift */; };
+		B0FD4EDD1FE3C24700EE976E /* CombineOutWorkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FD4EDB1FE3C24600EE976E /* CombineOutWorkList.swift */; };
+		B0FD4EDE1FE3C24700EE976E /* CombineOutWorkListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FD4EDC1FE3C24600EE976E /* CombineOutWorkListCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -292,6 +294,8 @@
 		B077DA1B1FDF990900616F3A /* OutMemoDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutMemoDialog.swift; sourceTree = "<group>"; };
 		B0A2357B1FDA5E7F00AD4925 /* InOutCancelDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InOutCancelDetailCell.swift; sourceTree = "<group>"; };
 		B0A2357D1FDA6D4D00AD4925 /* InOutCancelDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InOutCancelDetail.swift; sourceTree = "<group>"; };
+		B0FD4EDB1FE3C24600EE976E /* CombineOutWorkList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombineOutWorkList.swift; sourceTree = "<group>"; };
+		B0FD4EDC1FE3C24600EE976E /* CombineOutWorkListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombineOutWorkListCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -638,6 +642,8 @@
 		B01C42091FE0EDA000404301 /* CombineOut */ = {
 			isa = PBXGroup;
 			children = (
+				B0FD4EDB1FE3C24600EE976E /* CombineOutWorkList.swift */,
+				B0FD4EDC1FE3C24600EE976E /* CombineOutWorkListCell.swift */,
 				B01C420A1FE0EEBA00404301 /* CombineOut.storyboard */,
 				B01C420C1FE105BB00404301 /* CombineOut.swift */,
 				B01C420E1FE105E400404301 /* CombineOutCell.swift */,
@@ -870,6 +876,7 @@
 				B077DA1C1FDF990900616F3A /* OutMemoDialog.swift in Sources */,
 				55B302CA1FCE339400BDCCB1 /* ProductMountCell.swift in Sources */,
 				9680BE871FCBD91D002838A4 /* SwingDevice.m in Sources */,
+				B0FD4EDE1FE3C24700EE976E /* CombineOutWorkListCell.swift in Sources */,
 				55FC62A41FD14A41003B7173 /* StockReview.swift in Sources */,
 				55A579F01FD51A5700DBA188 /* WorkOutCustSearch.swift in Sources */,
 				55ECF5DE1FCE8BC40021F786 /* TagDetailList.swift in Sources */,
@@ -888,6 +895,7 @@
 				559F39DC1FD77068006E5C17 /* RfidReaderDialog.swift in Sources */,
 				B01C420F1FE105E400404301 /* CombineOutCell.swift in Sources */,
 				55FA78491FBDAD0B00583A80 /* AppToolbarController.swift in Sources */,
+				B0FD4EDD1FE3C24700EE976E /* CombineOutWorkList.swift in Sources */,
 				55ACD6771FC802BD00A2DC72 /* ProductOrderSearch.swift in Sources */,
 				960224441FD0F3E400DE7C65 /* AT288Reader.swift in Sources */,
 				55ACD67E1FC804F800A2DC72 /* ListViewDialog.swift in Sources */,
@@ -1098,8 +1106,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 98XQB8NK39;
+				DEVELOPMENT_TEAM = 33PH49LDVK;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1111,6 +1120,8 @@
 				OTHER_SWIFT_FLAGS = "-D YOMILE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.logisall.rrpp.RRPPClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "RRPPClient/RRPPClient-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1123,8 +1134,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 98XQB8NK39;
+				DEVELOPMENT_TEAM = 33PH49LDVK;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1135,6 +1147,7 @@
 				OTHER_SWIFT_FLAGS = "-D YOMILE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.logisall.rrpp.RRPPClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RRPPClient/RRPPClient-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

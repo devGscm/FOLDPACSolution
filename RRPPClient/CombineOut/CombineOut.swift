@@ -31,10 +31,20 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     
     @IBOutlet weak var lblProcCount: UILabel!           //처리량
     @IBOutlet weak var lblRemainCount: UILabel!         //미처리량
+    @IBOutlet weak var tvCombineOut: UITableView!       //테이블뷰
+    
+    
     
     
     var clsIndicator : ProgressIndicator?
     var clsDataClient : DataClient!
+    var mStrSaleWorkId = String()                        //송장번호
+    var mStrProdAssetEpc = String()                      //유형
+    var mIntProcCount = Int()                            //처리량
+    var mIntWorkAssignCount = Int()                      //출고량
+    var mBoolNewTagInfoExist = Bool()
+    var arrResultDataRows : Array<DataRow> = Array<DataRow>()
+    var arrAssetERows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
     
     
     
@@ -89,6 +99,7 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         
         prepareToolbar()        //툴바 타이틀 설정
         initViewControl()       //뷰 컨트롤 초기화
+        initSelectWorkType()
 
     }
     
@@ -133,6 +144,7 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     
     
     
+    
     //=======================================
     //===== '구분' 셀렉트박스
     //=======================================
@@ -153,8 +165,18 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         self.present(acDialog, animated: true)
     }
     
-    
-    
+    //=======================================
+    //===== '구분' 셀렉트박스 0번으로 선택
+    //=======================================
+    func initSelectWorkType()
+    {
+        //구분을 0번째 아이템으로 설정.
+        if(arcSaleType.count > 0)
+        {
+            btnSelectWorkType.setTitle(arcSaleType[0].itemName, for: .normal)
+            strSaleType = arcSaleType[0].itemCode
+        }
+    }
     
     
     //=======================================
@@ -226,141 +248,12 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     //=======================================
     func doSearch()
     {
-//        intPageNo += 1
-//        let strSearchValue = tfSearchValue.text ?? "";
-//
-//        let strLocaleStDate = StrUtil.replace(sourceText: (tfStDate?.text)!, findText: "-", replaceText: "") + "000000"
-//        let strLocaleEnDate = StrUtil.replace(sourceText: (tfEnDate?.text)!, findText: "-", replaceText: "") + "235959"
-//
-//        let dtLocaleStDate = DateUtil.getFormatDate(date: strLocaleStDate, dateFormat:"yyyyMMddHHmmss")
-//        let dtLocaleEnDate = DateUtil.getFormatDate(date: strLocaleEnDate, dateFormat:"yyyyMMddHHmmss")
-//
-//        if(dtLocaleStDate.timeIntervalSince1970 > dtLocaleEnDate.timeIntervalSince1970)
-//        {
-//            Dialog.show(container: self, title: nil, message: NSLocalizedString("msg_search_date_error", comment: "검색일자를 확인해 주세요."))
-//            return
-//        }
-//
-//        clsDataClient.addServiceParam(paramName: "startWorkDate", value: strLocaleStDate)
-//        clsDataClient.addServiceParam(paramName: "endWorkDate", value: strLocaleEnDate)
-//        clsDataClient.addServiceParam(paramName: "ioType", value: strSaleType!)
-//        clsDataClient.addServiceParam(paramName: "searchCondition", value: strSearchCondtion)
-//        clsDataClient.addServiceParam(paramName: "searchValue", value: strSearchValue)
-//        clsDataClient.addServiceParam(paramName: "pageNo", value: intPageNo)
-//        clsDataClient.addServiceParam(paramName: "rowsPerPage", value: Constants.ROWS_PER_PAGE)
-//        clsDataClient.selectData(dataCompletionHandler: {(data, error) in
-//            if let error = error {
-//                // 에러처리
-//                print(error)
-//                return
-//            }
-//            guard let clsDataTable = data else {
-//                //print("에러 데이터가 없음")
-//                return
-//            }
-//            self.arcDataRows.append(contentsOf: clsDataTable.getDataRows())
-//            DispatchQueue.main.async{ self.tvInOutCancel?.reloadData()}
-//        })
+
     }
-    
-    //=======================================
-    //===== scrollViewDidEndDragging()
-    //=======================================
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
-    {
-        let fltOffsetY = scrollView.contentOffset.y
-        let fltContentHeight = scrollView.contentSize.height
-        if (fltOffsetY >= fltContentHeight - scrollView.frame.size.height)
-        {
-            doSearch()
-        }
-    }
+   
     
     
-    //=======================================
-    //===== 입출고 구분
-    //=======================================
-//    @IBAction func onSaleTypeSelection(_ sender: Any) {
-//        let clsDialog = ListViewDialog()
-//        clsDialog.contentHeight = 150
-//        clsDialog.loadData(data: arcSaleType, selectedItem: strSaleType!)
-//
-//        let acDialog = UIAlertController(title: NSLocalizedString("sale_type_name", comment: "입출고 구분"), message:nil, preferredStyle: .alert)
-//        acDialog.setValue(clsDialog, forKeyPath: "contentViewController")
-//
-//        let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
-//            self.strSaleType = clsDialog.selectedRow.itemCode
-//            let strItemName = clsDialog.selectedRow.itemName
-//            self.btnSaleTypeCondition.setTitle(strItemName, for: .normal)
-//        }
-//        acDialog.addAction(aaOkAction)
-//        self.present(acDialog, animated: true)
-//    }
-    
-    
-    //=======================================
-    //===== 검색 조건
-    //=======================================
-//    @IBAction func onSearchCondition(_ sender: Any) {
-//        let clsDialog = ListViewDialog()
-//        clsDialog.loadData(data: arcSearchCondition, selectedItem: strSearchCondtion)
-//        clsDialog.contentHeight = 150
-//
-//        let acDialog = UIAlertController(title: NSLocalizedString("common_search_condition", comment: "검색조건"), message: nil, preferredStyle: .alert)
-//        acDialog.setValue(clsDialog, forKeyPath: "contentViewController")
-//
-//        let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
-//            self.strSearchCondtion = clsDialog.selectedRow.itemCode
-//            let strItemName = clsDialog.selectedRow.itemName
-//            self.btnSearchCondition.setTitle(strItemName, for: .normal)
-//        }
-//
-//        acDialog.addAction(aaOkAction)
-//        self.present(acDialog, animated: true)
-//    }
-    
-    //=======================================
-    //===== '검색'버튼
-    //=======================================
-//    @IBAction func onSearchClicked(_ sender: UIButton) {
-//        doInitSearch()
-//
-//    }
-    
-    
-    
-    //=======================================
-    //===== createDatePicker - 날짜검색
-    //=======================================
-//    func createDatePicker(tfDateControl : UITextField)
-//    {
-//        tfCurControl = tfDateControl
-//
-//        dpPicker.locale = Locale(identifier: "ko_KR")
-//        dpPicker.datePickerMode = .date
-//
-//        let toolbar = UIToolbar()
-//        toolbar.sizeToFit()
-//
-//        let bbiDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(onDoneButtonPressed))
-//        toolbar.setItems([bbiDoneButton], animated: false)
-//        tfDateControl.inputAccessoryView = toolbar
-//        tfDateControl.inputView = dpPicker
-//    }
-    
-    
-    
-    //=======================================
-    //===== onDoneButtonPressed - 날짜 검색완료
-    //=======================================
-//    @objc func onDoneButtonPressed(_ sender : Any)
-//    {
-//        let dfFormatter = DateFormatter()
-//        dfFormatter.dateFormat = "yyyy-MM-dd"
-//        tfCurControl.text = dfFormatter.string(from: dpPicker.date)
-//        self.view.endEditing(true)
-//    }
-    
+  
     
     
     
@@ -374,33 +267,25 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        tableView.rowHeight = 60                    //셀 크기 조정
+        tableView.rowHeight = 65                    //셀 크기 조정
         tableView.allowsSelection = false           //셀 선택안되게 막음
         
-        let objCell:InOutCancelCell = tableView.dequeueReusableCell(withIdentifier: "tvcInOutCancel", for: indexPath) as! InOutCancelCell
-        let clsDataRow = arcDataRows[indexPath.row]
-        
-        let strUtcTraceDate = clsDataRow.getString(name:"workDate")
-        let strLocaleTraceDate = DateUtil.utcToLocale(utcDate: strUtcTraceDate!, dateFormat: "yyyyMMddHHmmss")
-        let strTraceDate = DateUtil.getConvertFormatDate(date: strLocaleTraceDate, srcFormat: "yyyyMMddHHmmss", dstFormat:"MM/dd")
-        let strTraceTime = DateUtil.getConvertFormatDate(date: strLocaleTraceDate, srcFormat: "yyyyMMddHHmmss", dstFormat:"HH:mm")
-        
-        
-//        objCell.lblRowNo?.text = clsDataRow.getString(name:"rowNo")
-//        objCell.lblWorkDate?.text = strTraceDate
-//        objCell.lblWorkTime?.text = strTraceTime
-//        objCell.lblInoutCustName?.text = clsDataRow.getString(name:"inoutCustName")
-//        objCell.lblIoTypeName?.text = clsDataRow.getString(name:"ioTypeName")
-//        objCell.lblWorkId?.text = clsDataRow.getString(name:"workId")
+        let objCell:CombineOutWorkListCell = tableView.dequeueReusableCell(withIdentifier: "tvcCombineOutWorkList", for: indexPath) as! CombineOutWorkListCell
+//        let clsDataRow = arcDataRows[indexPath.row]
 //
-//        //유형라벨(버튼)
-//        objCell.btnAssetEpcName.setTitle(clsDataRow.getString(name:"assetEpcName"), for: .normal)
-//        objCell.btnAssetEpcName.tag = indexPath.row
-//        objCell.btnAssetEpcName.addTarget(self, action: #selector(onItemSelectionClicked(_:)), for: .touchUpInside)
-//        objCell.lblCompleteWorkCnt?.text = clsDataRow.getString(name:"completeWorkCnt")
+//        let strUtcTraceDate = clsDataRow.getString(name:"deliDate")
+//        let strLocaleTraceDate = DateUtil.utcToLocale(utcDate: strUtcTraceDate!, dateFormat: "yyyyMMddHHmmss")
+//        let strTraceDate = DateUtil.getConvertFormatDate(date: strLocaleTraceDate, srcFormat: "yyyyMMddHHmmss", dstFormat:"YYYY/MM/dd")
 //
 //
-//        //취소버튼
+//        objCell.lblSaleWorkId?.text = clsDataRow.getString(name:"saleWorkId")
+//        objCell.lblAssetEpcName?.text = clsDataRow.getString(name:"prodAssetEpcName")
+//        objCell.lblOrderReqDate?.text = strTraceDate
+//        objCell.lblWorkAssignCnt?.text = clsDataRow.getString(name:"workAssigCnt")
+//        objCell.lblResaleBranchName?.text = clsDataRow.getString(name:"deliBranchName")
+//        objCell.lblResaleAddr?.text = clsDataRow.getString(name:"deliAddr")
+//
+//        //선택버튼
 //        objCell.btnSelection.titleLabel?.font = UIFont.fontAwesome(ofSize: 17)
 //        objCell.btnSelection.setTitle(String.fontAwesomeIcon(name:.trashO), for: .normal)
 //        objCell.btnSelection.tag = indexPath.row
@@ -422,49 +307,224 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     // Segue로 파라미터 넘기면 반드시 prepare를 타기 때문에 여기서 DataProtocol을 세팅하는걸로 함
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-//        //'유형'그리드 버튼
-//        if(segue.identifier == "segInOutCancelDetailCell")
-//        {
-//            if let clsDialog = segue.destination as? InOutCancelDetail
-//            {
-//                if let btnAssetEpcName = sender as? UIButton
-//                {
-//                    //print("==btnAssetEpcName: \(btnAssetEpcName.tag)")
-//                    let clsAssetEpc = self.arcDataRows[btnAssetEpcName.tag]
-//                    let saleOrderId = clsAssetEpc.getString(name:"workId")
-//
-//                    //print("==saleOrderId: \(saleOrderId!)")
-//                    clsDialog.strSaleWorkId = saleOrderId!      //상세리스트에 표출할 ResaleOrderId 전달
-//                }
-//            }
-//        }
-//            //'취소'그리드 버튼
-//        else if(segue.identifier == "segOutMemoDialog")
-//        {
-//            if let clsDialog = segue.destination as? OutMemoDialog
-//            {
-//                clsDialog.ptcDataHandler = self
-//                if let btnAssetEpcName = sender as? UIButton
-//                {
-//                    let clsDataRow = self.arcDataRows[btnAssetEpcName.tag]
-//                    arrClickedDataRow.ioType = clsDataRow.getString(name:"ioType") ?? ""
-//                    arrClickedDataRow.workId = clsDataRow.getString(name:"workId") ?? ""
-//                    arrClickedDataRow.workerName = clsDataRow.getString(name:"workerName") ?? ""
-//                }
-//            }
-//        }
+        if(segue.identifier == "segCombineOutWorkList")
+        {
+            if let clsDialog = segue.destination as? CombineOutWorkList
+            {
+                clsDialog.ptcDataHandler = self
+                clsDialog.strWorkType = strSaleType!     //구분
+            }
+        }
     }
     
     
     
-    //TODO:
-    func recvData(returnData: ReturnData) {
+    //=======================================
+    //===== 씬(Scene)데이터 수신
+    //=======================================
+    func recvData(returnData: ReturnData)
+    {
+        if(returnData.returnType == "CombineOutWorkList")
+        {
+            if(returnData.returnRawData != nil)
+            {
+                let clsDataRow  = returnData.returnRawData as! DataRow
+                if(mStrSaleWorkId != clsDataRow.getString(name: "saleWorkId") ?? "")
+                {
+                    //화면정보 초기화
+                    clearTagData(true)
+                    
+                    let clsDataRow = returnData.returnRawData as! DataRow
+                    
+                    //팝업에서 넘어온 데이터를 넣는다.
+                    mStrSaleWorkId          = clsDataRow.getString(name: "saleWorkId") ?? ""
+                    let strOrderCustName    = clsDataRow.getString(name: "orderCustName") ?? ""
+                    let strDeliBranchName   = clsDataRow.getString(name: "deliBranchName") ?? ""
+                    mIntWorkAssignCount     = clsDataRow.getInt(name: "workAssignCnt") ?? 0
+                    mIntProcCount           = clsDataRow.getInt(name: "procCnt") ?? 0
+                    let strVehName          = clsDataRow.getString(name: "vehName") ?? ""
+                    mStrProdAssetEpc        = clsDataRow.getString(name: "prodAssetEpc") ?? ""
+                    let strProdAssetEpcName = clsDataRow.getString(name: "prodAssetEpcName") ?? ""
+                    let intRemainCnt        = clsDataRow.getInt(name: "remainCnt") ?? 0
+
+                    //화면에 정보표시
+                    btnSaleWorkId.setTitle(mStrSaleWorkId, for: .normal)
+                    lblOrderCustName.text   = strOrderCustName
+                    lblDeliBranchName.text  = strDeliBranchName
+                    lblAssignCount.text     = String(mIntWorkAssignCount)
+                    lblProcCount.text       = String(mIntProcCount)
+                    tfVehName.text          = strVehName
+                    lblAssetEpcName.text    = strProdAssetEpcName
+                    lblRemainCount.text     = String(intRemainCnt)
+                    
+                    //선택된 '송장정보' 내용조회
+                    doSearchWorkListDetail()
+                }
+                
+                
+                
+            }
+        }
         
     }
     
     
     func didReadTagid(_ tagid: String) {}
 
+    
+    
+    func doSearchWorkListDetail()
+    {
+        clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+        clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+        clsDataClient.SelectUrl = "inOutService:selectCombineOutWorkListDetail"
+        clsDataClient.removeServiceParam()
+        clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+        clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
+        clsDataClient.addServiceParam(paramName: "saleWorkId", value: mStrSaleWorkId)
+        
+        clsDataClient.selectData(dataCompletionHandler: {(data, error) in
+            if let error = error
+            {
+                //에러처리
+                DispatchQueue.main.async { self.tvCombineOut?.hideIndicator() }
+                super.showSnackbar(message: error.localizedDescription)
+                return
+            }
+            guard let clsDataTable = data else
+            {
+                DispatchQueue.main.async { self.tvCombineOut?.hideIndicator() }
+                print("에러 데이터가 없음")
+                return
+            }
+            
+            //DB에서 리스트 조회값 받음
+            for clsDataRow in clsDataTable.getDataRows()
+            {
+                let strSaleWorkId       = clsDataRow.getString(name: "saleWorkId") ?? ""
+                let strProcCnt          = clsDataRow.getString(name: "procCnt") ?? ""
+                let strWorkAssignCnt    = clsDataRow.getString(name: "workAssignCnt") ?? ""
+                let strRemainCnt        = clsDataRow.getString(name: "remainCnt") ?? ""
+                let strProdAssetEpc     = clsDataRow.getString(name: "prdAssetEpc") ?? ""
+                let strProdAssetEpcName = clsDataRow.getString(name: "prodAssetEpcName") ?? ""
+                                    
+                
+                let clsEpcInfo = RfidUtil.TagInfo()
+                //clsEpcInfo.
+                
+                //arrAssetERows
+                
+                
+//                if(strEpcUrn.isEmpty == false)
+//                {
+//                    let intIndex = strEpcUrn.lastIndex(of: ".") + 1
+//                    let intLength = strEpcUrn.length - intIndex
+//
+//                    strSerialNo = strEpcUrn.substring(intIndex, length: intLength)
+//                    print("=============================================")
+//                    print("strSerialNo:\(strSerialNo)")
+//                    print("=============================================")
+//                }
+//
+//                // 마스터-RFID태그정보
+//                let clsMastItemInfo = ItemInfo()
+//                clsMastItemInfo.setEpcCode(epcCode: strEpcCode)
+//                clsMastItemInfo.setEpcUrn(epcUrn: strEpcUrn)
+//                clsMastItemInfo.setSerialNo(serialNo: strSerialNo)
+//                clsMastItemInfo.setAssetEpc(assetEpc: strProdAssetEpc)
+//                clsMastItemInfo.setAssetName(assetName: strProdAssetEpcName)
+//                clsMastItemInfo.setRowState(rowState: Constants.DATA_ROW_STATE_UNCHANGED)
+//                clsMastItemInfo.setReadCount(readCount: 1)
+//                clsMastItemInfo.setReadTime(readTime: strTraceDate)
+//
+//                //슬래이브-상품정보
+//                let clsSlaveItemInfo = ItemInfo()
+//                clsSlaveItemInfo.setEpcCode(epcCode: strEpcCode)
+//                clsSlaveItemInfo.setSaleItemSeq(saleItemSeq: strSaleItemSeq)
+//                clsSlaveItemInfo.setProdCode(prodCode: strBarcodeId)
+//                clsSlaveItemInfo.setProdName(prodName: strItemName)
+//                clsSlaveItemInfo.setRowState(rowState: Constants.DATA_ROW_STATE_UNCHANGED)
+//                clsSlaveItemInfo.setProdReadCnt(prodReadCnt: strCnt)
+//                clsSlaveItemInfo.setReadTime(readTime: strTraceDate)
+//
+//                // #1.헤시맵 생성
+//                if(self.clsProdContainer.containEpcCode(epcCode: strEpcCode) == false)
+//                {
+//                    // #1-1.구조체 수정
+//                    self.clsProdContainer.loadProdEpc(epcCode: strEpcCode)
+//
+//                    // #1-2.마스터 그리스 저장
+//                    self.arrRfidRows.append(clsMastItemInfo)
+//                }
+//
+//                // #2.아이템 생성-바코드ID가 있는경우
+//                if(strBarcodeId.isEmpty == false)
+//                {
+//                    self.clsProdContainer.addItem(epcCode: strEpcCode, itemInfo: clsSlaveItemInfo)
+//
+//                    //#3.서브 그리드 저장
+//                    self.arrProdRows.append(clsSlaveItemInfo)
+//                }
+            }
+            
+            
+            
+            
+            
+            
+            
+
+            DispatchQueue.main.async
+            {
+                    self.tvCombineOut?.reloadData()
+                    self.tvCombineOut?.hideIndicator()
+            }
+        })
+        
+        
+        
+        
+    }
+    
+    
+    func clearTagData(_ boolClearScreen: Bool )
+    {
+        mBoolNewTagInfoExist = false
+        arrResultDataRows.removeAll()
+        //arrTagListRowParcel.removeAll()
+        //arrTagListRow.removeAll()
+        
+        tvCombineOut?.reloadData()      //테이블뷰 클리어
+        
+        if(boolClearScreen == true)
+        {
+            mStrSaleWorkId = ""
+            mStrProdAssetEpc = ""
+            mIntProcCount = 0
+            mIntWorkAssignCount = 0
+            
+            self.tfVehName.text = ""
+            self.lblOrderCustName.text = ""
+            self.lblDeliBranchName.text = ""
+            self.lblAssetEpcName.text = ""
+            self.lblAssignCount.text = ""
+            self.lblProcCount.text = ""
+            self.lblRemainCount.text = ""
+        }
+        
+        super.clearInventory()
+    }
+    
+    
+    
+    
+    //=======================================
+    //===== '송장선택'버튼
+    //=======================================
+    @IBAction func onSaleWorkIdClicked(_ sender: Any)
+    {
+        self.performSegue(withIdentifier: "segCombineOutWorkList", sender: self)
+    }
     
 }
     
