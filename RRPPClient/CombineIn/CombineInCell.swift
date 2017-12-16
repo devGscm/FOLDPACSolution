@@ -11,9 +11,9 @@ import UIKit
 class CombineInCell: UITableViewCell
 {
 	@IBOutlet weak var lblAssetName: UILabel!
-	@IBOutlet weak var lblAssignCnt: UILabel!
-	@IBOutlet weak var lblProcCnt: UILabel!
-	@IBOutlet weak var lblRemainCnt: UILabel!
+	@IBOutlet weak var lblWorkAssignCount: UILabel!
+	@IBOutlet weak var lblProcCount: UILabel!
+	@IBOutlet weak var lblRemainCount: UILabel!
 	@IBOutlet weak var btnDetail: UIButton!
 	
 	override func awakeFromNib()

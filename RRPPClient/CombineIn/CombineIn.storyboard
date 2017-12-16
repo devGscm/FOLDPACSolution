@@ -521,15 +521,18 @@
                                                                     <real key="value" value="0.0"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
+                                                            <connections>
+                                                                <segue destination="4Nd-3M-J4r" kind="presentation" identifier="segTagDetailList" modalPresentationStyle="overCurrentContext" id="7Pl-Gw-9DR"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="btnDetail" destination="IDr-Ll-rQa" id="gi2-0h-TYT"/>
                                                     <outlet property="lblAssetName" destination="VFg-1r-DRg" id="Yjl-Uc-GvW"/>
-                                                    <outlet property="lblAssignCnt" destination="ebz-Oq-f1g" id="NRm-SS-PoB"/>
-                                                    <outlet property="lblProcCnt" destination="VBN-Ts-BoA" id="nUd-u2-KEB"/>
-                                                    <outlet property="lblRemainCnt" destination="jDO-He-0kp" id="W4q-L0-rq2"/>
+                                                    <outlet property="lblProcCount" destination="VBN-Ts-BoA" id="nUd-u2-KEB"/>
+                                                    <outlet property="lblRemainCount" destination="jDO-He-0kp" id="W4q-L0-rq2"/>
+                                                    <outlet property="lblWorkAssignCount" destination="ebz-Oq-f1g" id="NRm-SS-PoB"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -608,6 +611,7 @@
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="onSendClicked:" destination="eKb-lp-9Jz" eventType="touchUpInside" id="q1n-LA-1Nt"/>
+                                                    <segue destination="3Qf-wN-To6" kind="presentation" identifier="segInSignDialog" modalPresentationStyle="overCurrentContext" id="dFO-cX-QdY"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -648,6 +652,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xPG-hd-x1F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-7148" y="-3577.0614692653676"/>
+        </scene>
+        <!--InSignDialog-->
+        <scene sceneID="KVD-3u-PK8">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Common" referencedIdentifier="InSignDialog" id="3Qf-wN-To6" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZD5-sn-XV1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-7148" y="-3131"/>
+        </scene>
+        <!--TagDetailList-->
+        <scene sceneID="KR9-4u-joF">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Common" referencedIdentifier="TagDetailList" id="4Nd-3M-J4r" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DBd-Hw-alR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-6862" y="-3133"/>
         </scene>
         <!--Combine In Search-->
         <scene sceneID="aIJ-ld-BlA">

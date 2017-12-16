@@ -20,6 +20,11 @@ class InSignDialog: BaseViewController, YPSignatureDelegate
 	@IBOutlet weak var tfRemark: UITextField!
 	@IBOutlet weak var vwSign: YPDrawSignatureView!
 	
+	var clsDataRow : DataRow = DataRow()
+	func loadData( dataRow: DataRow)
+	{
+		self.clsDataRow = dataRow
+	}
 	
 	override func viewDidLoad()
 	{
@@ -49,9 +54,10 @@ class InSignDialog: BaseViewController, YPSignatureDelegate
 	func initViewControl()
 	{
 		vwSign.delegate = self
-		
-		
-		
+
+		tfNoReadCount?.text	= clsDataRow.getString(name: "noReadCount") ?? ""
+		tfWorkerName?.text	= clsDataRow.getString(name: "workerName") ?? ""
+		tfRemark?.text		= clsDataRow.getString(name: "remark") ?? ""
 	}
 	
 	@IBAction func onClearClicked(_ sender: UIButton)
@@ -61,8 +67,6 @@ class InSignDialog: BaseViewController, YPSignatureDelegate
 	
 	@IBAction func onConfirmClicked(_ sender: UIButton)
 	{
-		
-		let clsDataRow : DataRow = DataRow()
 		clsDataRow.addRow(name: "noReadCount", value: tfNoReadCount.text ?? "")
 		clsDataRow.addRow(name: "workerName", value: tfWorkerName.text ?? "")
 		clsDataRow.addRow(name: "remark", value: tfRemark.text ?? "")
