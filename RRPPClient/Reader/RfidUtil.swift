@@ -33,7 +33,7 @@ public class RfidUtil
         var mStrYymm: String?                   /**< 발행연월               */
         var mStrSeqNo: String?                  /**< 발행순번               */
         var mStrAssetName: String?              /**< 자산EPC명             */
-        var mBoolNewTag : Bool?
+		var mBoolNewTag : Bool?					/**< 신규태그여부(동의어 : NewTagInfo)			*/
 		
 		var mIntWorkAssignCount	= 0				/**< 입고예정수량(동의어 : WorkAssignCnt) */
 		var mIntProcCount = 0					/**< 처리량(동의어 : ProcCnt)	*/
