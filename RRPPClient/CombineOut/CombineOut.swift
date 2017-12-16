@@ -44,8 +44,8 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     var mIntWorkAssignCount = Int()                      //출고량
     var mBoolNewTagInfoExist = Bool()
     var arrResultDataRows : Array<DataRow> = Array<DataRow>()
-    var arrAssetERows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
-    
+    var arrAssetRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
+    var arrTagRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
     
     
     
@@ -262,37 +262,40 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     //===== 테이블뷰
     //=======================================
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.arcDataRows.count
+
+        return self.arrAssetRows.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        tableView.rowHeight = 65                    //셀 크기 조정
+        //tableView.rowHeight = 65                    //셀 크기 조정
         tableView.allowsSelection = false           //셀 선택안되게 막음
         
-        let objCell:CombineOutWorkListCell = tableView.dequeueReusableCell(withIdentifier: "tvcCombineOutWorkList", for: indexPath) as! CombineOutWorkListCell
-//        let clsDataRow = arcDataRows[indexPath.row]
-//
-//        let strUtcTraceDate = clsDataRow.getString(name:"deliDate")
-//        let strLocaleTraceDate = DateUtil.utcToLocale(utcDate: strUtcTraceDate!, dateFormat: "yyyyMMddHHmmss")
-//        let strTraceDate = DateUtil.getConvertFormatDate(date: strLocaleTraceDate, srcFormat: "yyyyMMddHHmmss", dstFormat:"YYYY/MM/dd")
-//
-//
-//        objCell.lblSaleWorkId?.text = clsDataRow.getString(name:"saleWorkId")
-//        objCell.lblAssetEpcName?.text = clsDataRow.getString(name:"prodAssetEpcName")
-//        objCell.lblOrderReqDate?.text = strTraceDate
-//        objCell.lblWorkAssignCnt?.text = clsDataRow.getString(name:"workAssigCnt")
-//        objCell.lblResaleBranchName?.text = clsDataRow.getString(name:"deliBranchName")
-//        objCell.lblResaleAddr?.text = clsDataRow.getString(name:"deliAddr")
-//
-//        //선택버튼
-//        objCell.btnSelection.titleLabel?.font = UIFont.fontAwesome(ofSize: 17)
-//        objCell.btnSelection.setTitle(String.fontAwesomeIcon(name:.trashO), for: .normal)
-//        objCell.btnSelection.tag = indexPath.row
-//        objCell.btnSelection.addTarget(self, action: #selector(onItemCancelClicked(_:)), for: .touchUpInside)
+        let objCell:CombineOutCell = tableView.dequeueReusableCell(withIdentifier: "tvcCombineOut", for: indexPath) as! CombineOutCell
         
+        let clsTagInfo = arrAssetRows[indexPath.row]
+        
+        objCell.lblAssetEpcName.text = clsTagInfo.getAssetName()
+        objCell.lblAssignCnt.text = String(clsTagInfo.getWorkAssignCount())
+        objCell.lblProcCnt.text = String(clsTagInfo.getProcCount())
+        objCell.lblRemainCnt.text = String(clsTagInfo.getRemainCount())
+        
+        objCell.btnSelection.titleLabel?.font = UIFont.fontAwesome(ofSize: 14)
+        objCell.btnSelection.setTitle(String.fontAwesomeIcon(name: .listAlt), for: .normal)
+        objCell.btnSelection.tag = indexPath.row
+        objCell.btnSelection.addTarget(self, action: #selector(onTagListClicked(_:)), for: .touchUpInside)
         return objCell
     }
+    
+    //=======================================
+    //===== RFID 태그 목록 보기
+    //=======================================
+    @objc func onTagListClicked(_ sender: UIButton)
+    {
+        self.performSegue(withIdentifier: "segTagDetailList", sender: self)
+    }
+
+    
     
     //=======================================
     //===== '유형'버튼
@@ -303,16 +306,39 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
 //        self.performSegue(withIdentifier: "segInOutCancelDetailCell", sender: self)
     }
     
-    
-    // Segue로 파라미터 넘기면 반드시 prepare를 타기 때문에 여기서 DataProtocol을 세팅하는걸로 함
+
+    //=======================================
+    //===== 'Prepare' - Segue처리
+    //=======================================
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
+        //Segue로 파라미터 넘기면 반드시 prepare를 타기 때문에 여기서 DataProtocol을 세팅하는걸로 함
         if(segue.identifier == "segCombineOutWorkList")
         {
             if let clsDialog = segue.destination as? CombineOutWorkList
             {
                 clsDialog.ptcDataHandler = self
                 clsDialog.strWorkType = strSaleType!     //구분
+            }
+        }
+        else if(segue.identifier == "segTagDetailList")
+        {
+            if let clsDialog = segue.destination as? TagDetailList
+            {
+                if let btnDetail = sender as? UIButton
+                {
+                    let clsTagInfo = arrAssetRows[btnDetail.tag]
+                    
+                    // 해당 자산코드만 필터링하여 배열을 재생성하여 전달
+                    let arrData = arrTagRows.filter({ (clsData) -> Bool in
+                        if(clsData.getAssetEpc() == clsTagInfo.getAssetEpc())
+                        {
+                            return true
+                        }
+                        return false
+                    })
+                    clsDialog.loadData(arcTagInfo : arrData)
+                }
             }
         }
     }
@@ -401,117 +427,67 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
             //DB에서 리스트 조회값 받음
             for clsDataRow in clsDataTable.getDataRows()
             {
-                let strSaleWorkId       = clsDataRow.getString(name: "saleWorkId") ?? ""
+                //let strSaleWorkId       = clsDataRow.getString(name: "saleWorkId") ?? ""
                 let strProcCnt          = clsDataRow.getString(name: "procCnt") ?? ""
                 let strWorkAssignCnt    = clsDataRow.getString(name: "workAssignCnt") ?? ""
                 let strRemainCnt        = clsDataRow.getString(name: "remainCnt") ?? ""
                 let strProdAssetEpc     = clsDataRow.getString(name: "prdAssetEpc") ?? ""
                 let strProdAssetEpcName = clsDataRow.getString(name: "prodAssetEpcName") ?? ""
                                     
+                //그리드용 자료구조에 넣기
+                let clsTagInfo = RfidUtil.TagInfo()
+                clsTagInfo.setProcCount(Int(strProcCnt)!)
+                clsTagInfo.setWorkAssignCount(Int(strWorkAssignCnt)!)
+                clsTagInfo.setRemainCount(Int(strRemainCnt)!)
+                clsTagInfo.setAssetEpc(strProdAssetEpc)
+                clsTagInfo.setAssetName(strProdAssetEpcName)
                 
-                let clsEpcInfo = RfidUtil.TagInfo()
-                //clsEpcInfo.
-                
-                //arrAssetERows
                 
                 
-//                if(strEpcUrn.isEmpty == false)
-//                {
-//                    let intIndex = strEpcUrn.lastIndex(of: ".") + 1
-//                    let intLength = strEpcUrn.length - intIndex
-//
-//                    strSerialNo = strEpcUrn.substring(intIndex, length: intLength)
-//                    print("=============================================")
-//                    print("strSerialNo:\(strSerialNo)")
-//                    print("=============================================")
-//                }
-//
-//                // 마스터-RFID태그정보
-//                let clsMastItemInfo = ItemInfo()
-//                clsMastItemInfo.setEpcCode(epcCode: strEpcCode)
-//                clsMastItemInfo.setEpcUrn(epcUrn: strEpcUrn)
-//                clsMastItemInfo.setSerialNo(serialNo: strSerialNo)
-//                clsMastItemInfo.setAssetEpc(assetEpc: strProdAssetEpc)
-//                clsMastItemInfo.setAssetName(assetName: strProdAssetEpcName)
-//                clsMastItemInfo.setRowState(rowState: Constants.DATA_ROW_STATE_UNCHANGED)
-//                clsMastItemInfo.setReadCount(readCount: 1)
-//                clsMastItemInfo.setReadTime(readTime: strTraceDate)
-//
-//                //슬래이브-상품정보
-//                let clsSlaveItemInfo = ItemInfo()
-//                clsSlaveItemInfo.setEpcCode(epcCode: strEpcCode)
-//                clsSlaveItemInfo.setSaleItemSeq(saleItemSeq: strSaleItemSeq)
-//                clsSlaveItemInfo.setProdCode(prodCode: strBarcodeId)
-//                clsSlaveItemInfo.setProdName(prodName: strItemName)
-//                clsSlaveItemInfo.setRowState(rowState: Constants.DATA_ROW_STATE_UNCHANGED)
-//                clsSlaveItemInfo.setProdReadCnt(prodReadCnt: strCnt)
-//                clsSlaveItemInfo.setReadTime(readTime: strTraceDate)
-//
-//                // #1.헤시맵 생성
-//                if(self.clsProdContainer.containEpcCode(epcCode: strEpcCode) == false)
-//                {
-//                    // #1-1.구조체 수정
-//                    self.clsProdContainer.loadProdEpc(epcCode: strEpcCode)
-//
-//                    // #1-2.마스터 그리스 저장
-//                    self.arrRfidRows.append(clsMastItemInfo)
-//                }
-//
-//                // #2.아이템 생성-바코드ID가 있는경우
-//                if(strBarcodeId.isEmpty == false)
-//                {
-//                    self.clsProdContainer.addItem(epcCode: strEpcCode, itemInfo: clsSlaveItemInfo)
-//
-//                    //#3.서브 그리드 저장
-//                    self.arrProdRows.append(clsSlaveItemInfo)
-//                }
+                //그리드 리스트에 추가
+                self.arrAssetRows.append(clsTagInfo)
             }
-            
-            
-            
-            
-            
-            
-            
-
             DispatchQueue.main.async
             {
-                    self.tvCombineOut?.reloadData()
-                    self.tvCombineOut?.hideIndicator()
+                self.tvCombineOut?.reloadData()
+                self.tvCombineOut?.hideIndicator()
             }
         })
-        
-        
-        
-        
     }
     
     
-    func clearTagData(_ boolClearScreen: Bool )
+    
+    //=======================================
+    //===== 화면 및 데이터 리스트 클리어
+    //=======================================
+    func clearTagData(_ clearScreen: Bool )
     {
         mBoolNewTagInfoExist = false
-        arrResultDataRows.removeAll()
-        //arrTagListRowParcel.removeAll()
-        //arrTagListRow.removeAll()
+        arrTagRows.removeAll()
+        arrAssetRows.removeAll()
         
-        tvCombineOut?.reloadData()      //테이블뷰 클리어
+        DispatchQueue.main.async
+        {
+            self.tvCombineOut?.reloadData()      //테이블뷰 클리어
+        }
         
-        if(boolClearScreen == true)
+        if(clearScreen == true)
         {
             mStrSaleWorkId = ""
             mStrProdAssetEpc = ""
             mIntProcCount = 0
             mIntWorkAssignCount = 0
             
-            self.tfVehName.text = ""
-            self.lblOrderCustName.text = ""
-            self.lblDeliBranchName.text = ""
-            self.lblAssetEpcName.text = ""
-            self.lblAssignCount.text = ""
-            self.lblProcCount.text = ""
-            self.lblRemainCount.text = ""
+            self.tfVehName.text = ""            //차량번호
+            self.lblOrderCustName.text = ""     //입고처
+            self.lblDeliBranchName.text = ""    //배송거점
+            self.lblAssetEpcName.text = ""      //유형
+            self.lblAssignCount.text = ""       //출고예정
+            self.lblProcCount.text = ""         //처리량
+            self.lblRemainCount.text = ""       //미처리량
         }
         
+        //RFID리더기 초기화
         super.clearInventory()
     }
     
@@ -525,6 +501,14 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     {
         self.performSegue(withIdentifier: "segCombineOutWorkList", sender: self)
     }
+    
+    
+    //========================================================================
+    // 리더기 관련 이벤트및 처리 시작
+    //------------------------------------------------------------------------
+    // 리더기 연결 클릭이벤트
+    
+    
     
 }
     

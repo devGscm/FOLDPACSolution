@@ -203,16 +203,16 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 		let strAssetEpc = "\(clsTagInfo.getCorpEpc())\(clsTagInfo.getAssetEpc())"	// 회사EPC코드 + 자산EPC코드
 		
 		//------------------------------------------------
-		clsTagInfo.setAssetEpc(assetEpc: strAssetEpc)
+        clsTagInfo.setAssetEpc(strAssetEpc)
 		if(clsTagInfo.getAssetEpc().isEmpty == false)
 		{
 			let strAssetName = super.getAssetName(assetEpc: strAssetEpc)
-			clsTagInfo.setAssetName(assetName : strAssetName)
+            clsTagInfo.setAssetName(strAssetName)
 			print("@@@@@@@@ AssetName2:\(clsTagInfo.getAssetName() )")
 		}
-		clsTagInfo.setNewTag(newTag : true)
-		clsTagInfo.setReadCount(readCount: 1)
-		clsTagInfo.setReadTime(readTime: strCurReadTime)
+        clsTagInfo.setNewTag(true)
+        clsTagInfo.setReadCount(1)
+        clsTagInfo.setReadTime(strCurReadTime)
 		//------------------------------------------------
 		
 		var boolValidAsset = false
@@ -257,7 +257,7 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 					{
 						boolFindAssetTypeOverlap = true
 						let intCurReadCount = clsTagInfo.getReadCount()
-						clsTagInfo.setReadCount(readCount: (intCurReadCount + 1))
+                        clsTagInfo.setReadCount((intCurReadCount + 1))
 						break;
 					}
 				}
