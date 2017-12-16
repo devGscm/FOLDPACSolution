@@ -214,7 +214,7 @@ class UserInfo
 	* 입고자동승인여부를 리턴한다.
 	* @return 입고자동승인여부
 	*/
-	func getInAgreeYn() -> String?		{ return UserDefaults.standard.string(forKey: "inAgreeYn") }
+	func getInAgreeYn() -> String		{ return UserDefaults.standard.string(forKey: "inAgreeYn") ?? "" }
 	
 	func getReaderType() -> ReaderType
 	{

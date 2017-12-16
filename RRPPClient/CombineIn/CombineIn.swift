@@ -758,18 +758,6 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	// 송장조회(번호)에 대한 상세 태그리스트
 	func doSearchTagList()
 	{
-//		String strEpcUrn 			= null;
-//		String strEpcCode			= null;
-//		String strTraceDate 		= null;
-//		String strProdAssetEpcName 	= null;
-//		String[] splitValue 		= null;
-//		String strTraceDateFormat	= null;
-//		String strAssetEpc 			= null;
-//		String strSerialNo 			= null;
-//		String strCorpEpc 			= null;
-//		String strNewAssetEpc 		= null;
-		
-		
 		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		clsDataClient.SelectUrl = "supplyService:selectSaleInTagList"
@@ -796,12 +784,10 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 				let strEpcUrn 			= clsDataRow.getString(name: "epcUrn") ?? ""
 				let strUtcTraceDate 	= clsDataRow.getString(name: "utcTraceDate") ?? ""
 				let strProdAssetEpcName = clsDataRow.getString(name: "prodAssetEpcName") ?? ""
-
-				
 				
 				let clsTagInfo = RfidUtil.TagInfo()
 				clsTagInfo.setEpcCode(epcCode: strEpcCode)
-
+				clsTagInfo.setAssetName(assetName: strProdAssetEpcName)
 				
 				if(strEpcUrn.isEmpty == false)
 				{
@@ -820,6 +806,9 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 						print("strNewAssetEpc:\(strNewAssetEpc)")
 						print("strSerialNo:\(strSerialNo)")
 						print("=============================================")
+						
+						clsTagInfo.setAssetEpc(assetEpc: strNewAssetEpc)
+						clsTagInfo.setSerialNo(serialNo: strSerialNo)
 					}
 				}
 				
@@ -828,27 +817,10 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 					let strLocaleTraceDate = DateUtil.utcToLocale(utcDate: strUtcTraceDate, dateFormat: "yyyyMMddHHmmss")
 					clsTagInfo.setReadTime(readTime: strLocaleTraceDate)
 				}
-		
-	/*
-
-		
-				//DB에서 조회된 태그 데이터 전달용 리스트에 저장
-				EpcCodeInfoParcel clsEpcInfo = new EpcCodeInfoParcel();
-				clsEpcInfo.setEpcCode(strEpcCode);
-				clsEpcInfo.setEpcUrn(strEpcUrn);
-				clsEpcInfo.setSerialNo(strSerialNo);
-				clsEpcInfo.setAssetEpc(strNewAssetEpc);
-				clsEpcInfo.setAssetName(strProdAssetEpcName);
-				clsEpcInfo.setReadTime(strTraceDateFormat);
-		
-				mLstTagListRowsParcel.add(clsEpcInfo);
-				*/
+				
+				self.arrTagRows.append(clsTagInfo)
 			}
 			
-			DispatchQueue.main.async
-				{
-					self.tvCombineIn.reloadData()
-			}
 		})
 
 	}
@@ -857,97 +829,166 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	func sendWorkInitData(resaleOrderId: String, saleWorkId: String)
 	{
 		
+		clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
+		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+		clsDataClient.ExecuteUrl = "inOutService:executeInCancelData"
+		clsDataClient.removeServiceParam()
+		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+		clsDataClient.addServiceParam(paramName: "userId", value: AppContext.sharedManager.getUserInfo().getUserId())
+		clsDataClient.addServiceParam(paramName: "unitId", value: AppContext.sharedManager.getUserInfo().getUnitId())
+		clsDataClient.addServiceParam(paramName: "resaleOrderId", value: resaleOrderId)
+		clsDataClient.addServiceParam(paramName: "saleWorkId", value: saleWorkId)
+		clsDataClient.executeData(dataCompletionHandler: { (data, error) in
+			self.clsIndicator?.hide()
+			
+			if let error = error {
+				// 에러처리
+				super.showSnackbar(message: error.localizedDescription)
+				return
+			}
+			guard let clsResultDataTable = data else {
+				print("에러 데이터가 없음")
+				return
+			}
+			
+			print("####결과값 처리")
+			let clsResultDataRows = clsResultDataTable.getDataRows()
+			if(clsResultDataRows.count > 0)
+			{
+				let clsDataRow = clsResultDataRows[0]
+				let strResultCode = clsDataRow.getString(name: "resultCode")
+				
+				print(" -strResultCode:\(strResultCode!)")
+				if(Constants.PROC_RESULT_SUCCESS == strResultCode)
+				{
+					DispatchQueue.main.async
+					{
+						// 초기화 처리
+						self.doReloadTagList()
+						
+						// self.doReloadTagList() 에서 하므로 주석처리
+						//let strMsg = NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다.")
+						//self.showSnackbar(message: strMsg)
+					}
+				}
+				else
+				{
+					let strMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
+					self.showSnackbar(message: strMsg)
+				}
+			}
+			
+		})
 	}
 	
 	
 	func sendData(workState: String, resaleOrderId: String, saleWorkId: String, vehName: String, driverName: String, orderReqCount: Int, noReadCount: Int, remark: String, workerName: String, signData: String)
 	{
-//
-//		print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-//		print("makeOrderId:\(makeOrderId)")
-//		print("makeLotId:\(makeLotId)")
-//		print("workerName:\(workerName)")
-//		print("remark:\(remark)")
-//		print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-//
-//		clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
-//
-//		//		DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-//		//			self.clsIndicator?.hide()
-//		//		}
-//
-//		clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
-//		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
-//		clsDataClient.ExecuteUrl = "mountService:executeMountData"
-//		clsDataClient.removeServiceParam()
-//		clsDataClient.addServiceParam(paramName: "makeOrderId", value: makeOrderId)
-//		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
-//		clsDataClient.addServiceParam(paramName: "userId", value: AppContext.sharedManager.getUserInfo().getUserId())
-//		clsDataClient.addServiceParam(paramName: "unitId", value: AppContext.sharedManager.getUserInfo().getUnitId())
-//		clsDataClient.addServiceParam(paramName: "branchId", value: AppContext.sharedManager.getUserInfo().getBranchId())
-//		clsDataClient.addServiceParam(paramName: "branchCustId", value: AppContext.sharedManager.getUserInfo().getBranchCustId())
-//		clsDataClient.addServiceParam(paramName: "makeLotId", value: makeLotId)
-//		clsDataClient.addServiceParam(paramName: "workerName", value: workerName)
-//		clsDataClient.addServiceParam(paramName: "remark", value: remark)
-//
-//		let clsDataTable : DataTable = DataTable()
-//		clsDataTable.Id = "TAG_MOUNT"
-//		clsDataTable.addDataColumn(dataColumn: DataColumn(id: "epcCode", type: "String", size: "0", keyColumn: false, updateColumn: true, autoIncrement: false, canXlsExport: false, title: ""))
-//
-//		for clsInfo in self.arrTagRows
-//		{
-//			if(self.strProdAssetEpc != clsInfo.getAssetEpc())
-//			{
-//				self.clsIndicator?.hide()
-//
-//				Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("stock_can_not_processed_because_different_pallet", comment: "품목이 다른 파렛트가 있어 처리 할 수 없습니다."))
-//				return
-//			}
-//
-//			let clsDataRow : DataRow = DataRow()
-//			clsDataRow.State = DataRow.DATA_ROW_STATE_ADDED
-//			clsDataRow.addRow(name:"epcCode", value: clsInfo.getEpcCode())
-//			clsDataTable.addDataRow(dataRow: clsDataRow)
-//		}
-//		clsDataClient.executeData(dataTable: clsDataTable, dataCompletionHandler: { (data, error) in
-//			self.clsIndicator?.hide()
-//			if let error = error {
-//				// 에러처리
-//				super.showSnackbar(message: error.localizedDescription)
-//				print(error)
-//				return
-//			}
-//			guard let clsResultDataTable = data else {
-//				print("에러 데이터가 없음")
-//				return
-//			}
-//
-//			print("####결과값 처리")
-//			let clsResultDataRows = clsResultDataTable.getDataRows()
-//			if(clsResultDataRows.count > 0)
-//			{
-//				let clsDataRow = clsResultDataRows[0]
-//				let strResultCode = clsDataRow.getString(name: "resultCode")
-//
-//				print(" -strResultCode:\(strResultCode!)")
-//				if(Constants.PROC_RESULT_SUCCESS == strResultCode)
-//				{
-//					//비동기 처리 결과에대한  UI에한 처리는 반드시 쓰레드로 처리되어야 한다.
-//					DispatchQueue.main.async {
-//						//						self.clearTagData()
-//						self.clearUserInterfaceData()
-//						let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
-//						self.showSnackbar(message: strMsg)
-//					}
-//				}
-//				else
-//				{
-//					let strMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
-//					self.showSnackbar(message: strMsg)
-//				}
-//			}
-//
-//		})
+		/**
+		* 1. 전송 완료후, 'boolNewTagInfoExist = false' 처리
+		* 2. 전송 완료후, 전송된 태그들을 리스트에서 'setNewTagInfo(false)' 처리 -> 재 전송 방지
+		*/
+		clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
+
+		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+		clsDataClient.ExecuteUrl = "inOutService:executeInData"
+		clsDataClient.removeServiceParam()
+		clsDataClient.addServiceParam(paramName: "workState",		value: strWorkState)
+		clsDataClient.addServiceParam(paramName: "corpId",			value: AppContext.sharedManager.getUserInfo().getCorpId())
+		clsDataClient.addServiceParam(paramName: "userId",			value: AppContext.sharedManager.getUserInfo().getUserId())
+		clsDataClient.addServiceParam(paramName: "branchId",		value: AppContext.sharedManager.getUserInfo().getBranchId())
+		clsDataClient.addServiceParam(paramName: "unitId",			value: AppContext.sharedManager.getUserInfo().getUnitId())
+		clsDataClient.addServiceParam(paramName: "inAgreeYn",		value: AppContext.sharedManager.getUserInfo().getInAgreeYn())	//입고자동승인여부
+		clsDataClient.addServiceParam(paramName: "resaleOrderId",	value: resaleOrderId)
+		clsDataClient.addServiceParam(paramName: "saleWorkId",		value: saleWorkId)
+		clsDataClient.addServiceParam(paramName: "vehName",			value: vehName)
+		clsDataClient.addServiceParam(paramName: "driverName",		value: driverName)
+		clsDataClient.addServiceParam(paramName: "workerName",		value: workerName)
+		clsDataClient.addServiceParam(paramName: "barcodeId",		value: "")	// 바코드ID
+		clsDataClient.addServiceParam(paramName: "itemCode",		value: "")	// 제품 코드
+		clsDataClient.addServiceParam(paramName: "prodCnt",			value: "")	// 제품 개수
+		clsDataClient.addServiceParam(paramName: "easyInProcess",	value: "N")	// 입고B타입
+		
+		//완료전송 및(강제)완료전송, 처리진행인경우
+		if(Constants.WORK_STATE_COMPLETE == workState || Constants.WORK_STATE_COMPLETE_FORCE == workState || Constants.WORK_STATE_ONGOING == workState)
+		{
+			let strCurReadTime = DateUtil.getDate(dateFormat: "yyyyMMddHHmmss")
+			let strWorkDateTime = DateUtil.localeToUtc(localeDate: strCurReadTime, dateFormat: "yyyyMMddHHmmss")
+			clsDataClient.addServiceParam(paramName: "workDateTime",	value: strWorkDateTime)
+			
+			clsDataClient.addServiceParam(paramName: "orderReqCount",	value: orderReqCount)
+			clsDataClient.addServiceParam(paramName: "procCount",		value: self.intProcCount)	// 처리량
+			clsDataClient.addServiceParam(paramName: "noReadCount",		value: noReadCount)
+			clsDataClient.addServiceParam(paramName: "remark",			value: remark)
+			clsDataClient.addServiceParam(paramName: "forceYn",			value: "Y")
+			
+			if(signData.isEmpty == false)
+			{
+				clsDataClient.addServiceParam(paramName: "signData",	value: strSignData)		// 사인데이터
+			}
+			
+			self.boolWorkCompleteBtn = true
+		}
+
+
+		let clsDataTable : DataTable = DataTable()
+		clsDataTable.Id = "WORK_IN"
+		clsDataTable.addDataColumn(dataColumn: DataColumn(id: "epcCode", type: "String", size: "0", keyColumn: false, updateColumn: true, autoIncrement: false, canXlsExport: false, title: ""))
+		clsDataTable.addDataColumn(dataColumn: DataColumn(id: "traceDateTime", type: "String", size: "0", keyColumn: false, updateColumn: true, autoIncrement: false, canXlsExport: false, title: ""))
+
+		for clsInfo in self.arrTagRows
+		{
+			if(clsInfo.getNewTag() == true)
+			{
+				let strTraceDate = DateUtil.localeToUtc(localeDate: clsInfo.getReadTime(), dateFormat: "yyyyMMddHHmmss")
+				let clsDataRow : DataRow = DataRow()
+				clsDataRow.State = DataRow.DATA_ROW_STATE_ADDED
+				clsDataRow.addRow(name:"epcCode", value: clsInfo.getEpcCode())
+				clsDataRow.addRow(name:"traceDateTime", value: strTraceDate)
+				clsDataTable.addDataRow(dataRow: clsDataRow)
+			}
+		}
+		clsDataClient.executeData(dataTable: clsDataTable, dataCompletionHandler: { (data, error) in
+			self.clsIndicator?.hide()
+			if let error = error {
+				// 에러처리
+				super.showSnackbar(message: error.localizedDescription)
+				print(error)
+				return
+			}
+			guard let clsResultDataTable = data else {
+				print("에러 데이터가 없음")
+				return
+			}
+
+			print("####결과값 처리")
+			let clsResultDataRows = clsResultDataTable.getDataRows()
+			if(clsResultDataRows.count > 0)
+			{
+				let clsDataRow = clsResultDataRows[0]
+				let strResultCode = clsDataRow.getString(name: "resultCode")
+
+				print(" -strResultCode:\(strResultCode!)")
+				if(Constants.PROC_RESULT_SUCCESS == strResultCode)
+				{
+					//비동기 처리 결과에대한  UI에한 처리는 반드시 쓰레드로 처리되어야 한다.
+					DispatchQueue.main.async {
+						//						self.clearTagData()
+						self.clearUserInterfaceData()
+						let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
+						self.showSnackbar(message: strMsg)
+					}
+				}
+				else
+				{
+					let strMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
+					self.showSnackbar(message: strMsg)
+				}
+			}
+
+		})
 		
 	}
 

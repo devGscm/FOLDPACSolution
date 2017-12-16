@@ -642,6 +642,7 @@
                         <outlet property="lblResaleBranchName" destination="UQ0-d0-5dB" id="Fzz-eb-mfs"/>
                         <outlet property="lblUserName" destination="72s-ZS-vHf" id="wMY-ey-ufC"/>
                         <outlet property="tfVehName" destination="4Za-yX-HaB" id="dsN-d2-Mjp"/>
+                        <outlet property="tvCombineIn" destination="ohV-WZ-evE" id="CHJ-c3-PPN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xPG-hd-x1F" userLabel="First Responder" sceneMemberID="firstResponder"/>
