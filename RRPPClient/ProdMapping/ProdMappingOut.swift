@@ -1651,7 +1651,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		print("@@@@@@@@@@@@@@@@@@@@@")
 		
 		let clsTagInfo = RfidUtil.TagInfo()
-		clsTagInfo.setEpcCode(strEpcCode: barcode)
+		clsTagInfo.setEpcCode(epcCode: barcode)
 		getBarcodeData(clsTagInfo: clsTagInfo)
 	}
 	

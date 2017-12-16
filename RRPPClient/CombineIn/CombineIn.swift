@@ -792,24 +792,20 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 			// 2) DB에서 리스트 조회값 받음
 			for clsDataRow in clsDataTable.getDataRows()
 			{
-				let strEpcUrn 			= clsDataRow.getString(name: "epcUrn") ?? ""
 				let strEpcCode			= clsDataRow.getString(name: "epcCode") ?? ""
+				let strEpcUrn 			= clsDataRow.getString(name: "epcUrn") ?? ""
 				let strUtcTraceDate 	= clsDataRow.getString(name: "utcTraceDate") ?? ""
 				let strProdAssetEpcName = clsDataRow.getString(name: "prodAssetEpcName") ?? ""
 
 				
 				
 				let clsTagInfo = RfidUtil.TagInfo()
-				clsTagInfo.setEpcCode(strEpcCode: strEpcCode)
-				
-				if(strUtcTraceDate.isEmpty == false)
-				{
-					let strLocaleTraceDate = DateUtil.utcToLocale(utcDate: strUtcTraceDate, dateFormat: "yyyyMMddHHmmss")
-					clsTagInfo.setReadTime(readTime: strLocaleTraceDate)
-				}
+				clsTagInfo.setEpcCode(epcCode: strEpcCode)
+
 				
 				if(strEpcUrn.isEmpty == false)
 				{
+					clsTagInfo.setEpcUrn(epcUrn: strEpcUrn)
 					let arsEpcUrn = strEpcUrn.split(".")
 					if( arsEpcUrn.count == 4)
 					{
@@ -827,15 +823,14 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 					}
 				}
 				
+				if(strUtcTraceDate.isEmpty == false)
+				{
+					let strLocaleTraceDate = DateUtil.utcToLocale(utcDate: strUtcTraceDate, dateFormat: "yyyyMMddHHmmss")
+					clsTagInfo.setReadTime(readTime: strLocaleTraceDate)
+				}
 		
 	/*
-		
-				//데이터 축출
-				splitValue 		= strEpcUrn.split("\\.");
-				strCorpEpc		= splitValue[1].toString();
-				strAssetEpc		= splitValue[2].toString();
-				strSerialNo		= splitValue[3].toString();
-				strNewAssetEpc 	= strCorpEpc + strAssetEpc;
+
 		
 				//DB에서 조회된 태그 데이터 전달용 리스트에 저장
 				EpcCodeInfoParcel clsEpcInfo = new EpcCodeInfoParcel();

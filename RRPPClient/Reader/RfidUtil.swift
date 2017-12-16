@@ -202,25 +202,25 @@ public class RfidUtil
          * 인코딩 종류를 설정한다.
          * @param enuEncoding 인코딩 종류
          */
-        public func setEncoding(enuEncoding: Encodings)         { self.mEnuEncoding = enuEncoding        }
+        public func setEncoding(encoding: Encodings)         { self.mEnuEncoding = encoding        }
         
         /**
          * EPC URN를 설정한다.
          * @param strEpcUrn EPC URN
          */
-        public func setEpcUrn(strEpcUrn: String)                { self.mStrEpcUrn   = strEpcUrn        }
+        public func setEpcUrn(epcUrn: String)                { self.mStrEpcUrn   = epcUrn        }
         
         /**
          * EPC 코드를 설정한다.
          * @param strEpcCode EPC 코드
          */
-        public func setEpcCode( strEpcCode: String)             { self.mStrEpcCode  = strEpcCode        }
+        public func setEpcCode( epcCode: String)             { self.mStrEpcCode  = epcCode        }
         
         /**
          * 기업EPC코드를 설정한다.
          * @param strCorpEpc 기업EPC코드
          */
-        public func setCorpEpc( strCorpEpc: String)             { self.mStrCorpEpc  = strCorpEpc        }
+        public func setCorpEpc( corpEpc: String)             { self.mStrCorpEpc  = corpEpc        }
         
         /**
          * 자산EPC코드를 설정한다.
@@ -233,38 +233,38 @@ public class RfidUtil
          * 상품을 설정한다.
          * @param strItem 상품
          */
-        public func setItem( strItem: String)                   { self.mStrItem     = strItem            }
+        public func setItem( item: String)                   { self.mStrItem     = item            }
         
         /**
          * 시리얼번호를 설정한다.
          * @param strSerialNo 시리얼번호
          */
-        public func setSerialNo( strSerialNo: String)           { self.mStrSerialNo = strSerialNo        }
+        public func setSerialNo( serialNo: String)           { self.mStrSerialNo = serialNo        }
         
         /**
          * 위치를 설정한다.
          * @param strLocation 위치
          */
-        public func setLocation( strLocation: String)           { self.mStrLocation = strLocation        }
+        public func setLocation( location: String)           { self.mStrLocation = location        }
         
 
         /**
          * 고객사EPC를 설정한다.
          * @param strCustEpc 고객사EPC
          */
-        public func setCustEpc(strCustEpc: String)              { self.mStrCustEpc  = strCustEpc        }
+        public func setCustEpc(custEpc: String)              { self.mStrCustEpc  = custEpc        }
         
         /**
          * 발행연월를 설정한다.
          * @param strYymm 발행연월
          */
-        public func setYymm(strYymm: String)                    { self.mStrYymm     = strYymm            }
+        public func setYymm(yymm: String)                    { self.mStrYymm     = yymm            }
         
         /**
          * 발행순번을 설정한다.
          * @param strSeqNo 발행순번
          */
-        public func setSeqNo(strSeqNo: String)                  { self.mStrSeqNo = strSeqNo				}
+        public func setSeqNo(seqNo: String)                  { self.mStrSeqNo = seqNo				}
         public func setAssetName( assetName: String)            { self.mStrAssetName = assetName		}
         public func setNewTag(newTag: Bool)                     { self.mBoolNewTag = newTag				}
 
@@ -498,9 +498,9 @@ public class RfidUtil
         
         //태그정보에 저장
         let clsTagInfo = TagInfo()
-        clsTagInfo.setEpcCode(strEpcCode: strData)
-        clsTagInfo.setEncoding(enuEncoding: enuEncoding)
-        clsTagInfo.setEpcUrn(strEpcUrn: strEpcUrn)
+        clsTagInfo.setEpcCode(epcCode: strData)
+        clsTagInfo.setEncoding(encoding: enuEncoding)
+        clsTagInfo.setEpcUrn(epcUrn: strEpcUrn)
         return clsTagInfo
     }
     
@@ -588,11 +588,11 @@ public class RfidUtil
         
         //태그정보에 저장
         let clsTagInfo = TagInfo()
-        clsTagInfo.setEpcCode(strEpcCode: strData)
-        clsTagInfo.setEncoding(enuEncoding: enuEncoding)
-        clsTagInfo.setCorpEpc(strCorpEpc: strCorpEpc)
-        clsTagInfo.setItem(strItem: strItem)
-        clsTagInfo.setEpcUrn(strEpcUrn: strEpcUrn)
+        clsTagInfo.setEpcCode(epcCode: strData)
+        clsTagInfo.setEncoding(encoding: enuEncoding)
+        clsTagInfo.setCorpEpc(corpEpc: strCorpEpc)
+        clsTagInfo.setItem(item: strItem)
+        clsTagInfo.setEpcUrn(epcUrn: strEpcUrn)
         
         return clsTagInfo
     }
@@ -673,11 +673,11 @@ public class RfidUtil
         
         //태그정보에 저장
         let clsTagInfo = TagInfo()
-        clsTagInfo.setEpcCode(strEpcCode: strData)
-        clsTagInfo.setEncoding(enuEncoding: enuEncoding)
-        clsTagInfo.setCorpEpc(strCorpEpc: strCorpEpc)
-        clsTagInfo.setSerialNo(strSerialNo: strSerialNo)
-        clsTagInfo.setEpcUrn(strEpcUrn: strEpcUrn)
+        clsTagInfo.setEpcCode(epcCode: strData)
+        clsTagInfo.setEncoding(encoding: enuEncoding)
+        clsTagInfo.setCorpEpc(corpEpc: strCorpEpc)
+        clsTagInfo.setSerialNo(serialNo: strSerialNo)
+        clsTagInfo.setEpcUrn(epcUrn: strEpcUrn)
         
         return clsTagInfo
     }
@@ -762,11 +762,11 @@ public class RfidUtil
         
         //태그정보에 저장
         let clsTagInfo = TagInfo()
-        clsTagInfo.setEpcCode(strEpcCode: strData)
-        clsTagInfo.setEncoding(enuEncoding: enuEncoding)
-        clsTagInfo.setCorpEpc(strCorpEpc: strCorpEpc)
-        clsTagInfo.setLocation(strLocation: strLocation)
-        clsTagInfo.setEpcUrn(strEpcUrn: strEpcUrn)
+        clsTagInfo.setEpcCode(epcCode: strData)
+        clsTagInfo.setEncoding(encoding: enuEncoding)
+        clsTagInfo.setCorpEpc(corpEpc: strCorpEpc)
+        clsTagInfo.setLocation(location: strLocation)
+        clsTagInfo.setEpcUrn(epcUrn: strEpcUrn)
         
         return clsTagInfo
     }
@@ -877,15 +877,15 @@ public class RfidUtil
         
         //태그정보에 저장
         let clsTagInfo = TagInfo()
-        clsTagInfo.setEpcCode(strEpcCode: strData)
-        clsTagInfo.setEncoding(enuEncoding: enuEncoding)
-        clsTagInfo.setCorpEpc(strCorpEpc: strCorpEpc)
+        clsTagInfo.setEpcCode(epcCode: strData)
+        clsTagInfo.setEncoding(encoding: enuEncoding)
+        clsTagInfo.setCorpEpc(corpEpc: strCorpEpc)
         clsTagInfo.setAssetEpc(assetEpc: strAssetEpc)
-        clsTagInfo.setSerialNo(strSerialNo: strSerialNo)
-        clsTagInfo.setEpcUrn(strEpcUrn: strEpcUrn)
-        clsTagInfo.setCustEpc(strCustEpc: strCustEpc)
-        clsTagInfo.setYymm(strYymm: strIssueYear)
-        clsTagInfo.setSeqNo(strSeqNo: strIssueSeq)
+        clsTagInfo.setSerialNo(serialNo: strSerialNo)
+        clsTagInfo.setEpcUrn(epcUrn: strEpcUrn)
+        clsTagInfo.setCustEpc(custEpc: strCustEpc)
+        clsTagInfo.setYymm(yymm: strIssueYear)
+        clsTagInfo.setSeqNo(seqNo: strIssueSeq)
         
         return clsTagInfo
     }
@@ -965,11 +965,11 @@ public class RfidUtil
         
         //태그정보에 저장
         let clsTagInfo = TagInfo()
-        clsTagInfo.setEpcCode(strEpcCode: strData)
-        clsTagInfo.setEncoding(enuEncoding: enuEncoding)
-        clsTagInfo.setCorpEpc(strCorpEpc: strCorpEpc)
+        clsTagInfo.setEpcCode(epcCode: strData)
+        clsTagInfo.setEncoding(encoding: enuEncoding)
+        clsTagInfo.setCorpEpc(corpEpc: strCorpEpc)
         clsTagInfo.setAssetEpc(assetEpc: strAssetRef)
-        clsTagInfo.setEpcUrn(strEpcUrn: strEpcUrn)
+        clsTagInfo.setEpcUrn(epcUrn: strEpcUrn)
         
         return clsTagInfo
     }
@@ -998,9 +998,9 @@ public class RfidUtil
         
         //태그정보에 저장
         let clsTagInfo = TagInfo()
-        clsTagInfo.setEpcCode(strEpcCode: strData)
-        clsTagInfo.setEncoding(enuEncoding: enuEncoding)
-        clsTagInfo.setEpcUrn(strEpcUrn: strEpcUrn)
+        clsTagInfo.setEpcCode(epcCode: strData)
+        clsTagInfo.setEncoding(encoding: enuEncoding)
+        clsTagInfo.setEpcUrn(epcUrn: strEpcUrn)
         
         return clsTagInfo
     }
@@ -1017,9 +1017,9 @@ public class RfidUtil
         
         //태그정보에 저장
         let clsTagInfo = TagInfo()
-        clsTagInfo.setEpcCode(strEpcCode: strData)
-        clsTagInfo.setEncoding(enuEncoding: enuEncoding)
-        clsTagInfo.setEpcUrn(strEpcUrn: strEpcUrn)
+        clsTagInfo.setEpcCode(epcCode: strData)
+        clsTagInfo.setEncoding(encoding: enuEncoding)
+        clsTagInfo.setEpcUrn(epcUrn: strEpcUrn)
         
         return clsTagInfo
     }
