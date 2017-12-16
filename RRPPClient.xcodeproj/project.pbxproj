@@ -16,6 +16,7 @@
 		553F42FA1FCD4E8E006784AF /* ProductMount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F42F91FCD4E8E006784AF /* ProductMount.swift */; };
 		5542B4BA1FE1F67600BD6A00 /* RfidTrackingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5542B4B91FE1F67600BD6A00 /* RfidTrackingService.swift */; };
 		5542B4BC1FE1F69000BD6A00 /* TagSupply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5542B4BB1FE1F69000BD6A00 /* TagSupply.swift */; };
+		555AC1251FE4C0AB00B6CBBA /* InSignDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555AC1241FE4C0AB00B6CBBA /* InSignDialog.swift */; };
 		555B988A1FD2774D006CC14F /* History.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 555B98891FD2774D006CC14F /* History.storyboard */; };
 		555B988C1FD2776A006CC14F /* HistorySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555B988B1FD2776A006CC14F /* HistorySearch.swift */; };
 		555B988E1FD27CC3006CC14F /* HistorySearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555B988D1FD27CC3006CC14F /* HistorySearchCell.swift */; };
@@ -181,6 +182,7 @@
 		553F42F91FCD4E8E006784AF /* ProductMount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMount.swift; sourceTree = "<group>"; };
 		5542B4B91FE1F67600BD6A00 /* RfidTrackingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RfidTrackingService.swift; sourceTree = "<group>"; };
 		5542B4BB1FE1F69000BD6A00 /* TagSupply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSupply.swift; sourceTree = "<group>"; };
+		555AC1241FE4C0AB00B6CBBA /* InSignDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InSignDialog.swift; sourceTree = "<group>"; };
 		555B98891FD2774D006CC14F /* History.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = History.storyboard; sourceTree = "<group>"; };
 		555B988B1FD2776A006CC14F /* HistorySearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorySearch.swift; sourceTree = "<group>"; };
 		555B988D1FD27CC3006CC14F /* HistorySearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorySearchCell.swift; sourceTree = "<group>"; };
@@ -479,6 +481,7 @@
 				55B083061FDE48F3007E3EAB /* OutSignDialog.swift */,
 				55B0830A1FDE4E0B007E3EAB /* YPDrawSignatureView.swift */,
 				B077DA1B1FDF990900616F3A /* OutMemoDialog.swift */,
+				555AC1241FE4C0AB00B6CBBA /* InSignDialog.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -843,6 +846,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5575BB4E1FE2534100CACCC8 /* EventSelectStoreCell.swift in Sources */,
+				555AC1251FE4C0AB00B6CBBA /* InSignDialog.swift in Sources */,
 				B01C42081FE0CBD200404301 /* BaseTableViewController.swift in Sources */,
 				9609374C1FE398AB0070755E /* TagOrderSearchCell.swift in Sources */,
 				B01C42051FE0CA8000404301 /* BaseViewController.swift in Sources */,

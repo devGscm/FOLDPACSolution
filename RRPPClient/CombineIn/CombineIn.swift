@@ -59,7 +59,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	var boolWorkCompleteBtn							= false		/**< 완료전송 버튼 입력 -전송용 */
 	var strNoReadCount								= "0"			/**< 미인식수량-전송용 */
 	var strRemark									= ""			/**< 비고-전송용 */
-	var strSignData									= ""			/**< 사인 -전송용 */
+
 	var strResultMsg 								= ""			/**< 완료전송에 대한 메시지  */
 	
 	
@@ -193,6 +193,28 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 				clsDialog.workType = self.strWorkType
 			}
 		}
+		else if(segue.identifier == "segInSignDialog")
+		{
+			if let clsDialog = segue.destination as? InSignDialog
+			{
+				let clsDataRow : DataRow = DataRow()
+				clsDataRow.addRow(name: "noReadCount", value: self.strNoReadCount)
+				
+				// 인수자 : 업무구분이 "구매(반납)" 인 경우, 반납주문정보의 "인수자" 정보표시
+				if(Constants.RESALE_TYPE_RETURN == self.strWorkType)
+				{
+					clsDataRow.addRow(name: "workerName", value: self.strWorkerName)
+				}
+				else
+				{
+					clsDataRow.addRow(name: "workerName", value: AppContext.sharedManager.getUserInfo().getUserName())
+				}
+				clsDataRow.addRow(name: "remark", value: "")
+				clsDialog.loadData(dataRow: clsDataRow)
+				clsDialog.ptcDataHandler = self
+
+			}
+		}
 		else if(segue.identifier == "segTagDetailList")
 		{
 			if let clsDialog = segue.destination as? TagDetailList
@@ -260,6 +282,22 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 			
 			}
 		}
+		else if(returnData.returnType == "inSignDialog")
+		{
+			if(returnData.returnRawData != nil)
+			{
+				let clsDataRow = returnData.returnRawData as! DataRow
+				let intNoReadCount	= clsDataRow.getInt(name: "noReadCount") ?? 0
+				let strWorkerName	= clsDataRow.getString(name: "workerName") ?? ""
+				let strRemark		= clsDataRow.getString(name: "remark") ?? ""
+				let strSignData		= clsDataRow.getString(name: "signData") ?? ""
+				let strVehName		= tfVehName?.text ?? ""
+				let strDriverName	= lblDriverName?.text ?? ""
+				
+				sendData(workState: self.strWorkState, resaleOrderId: self.strResaleOrderId, saleWorkId: self.strSaleWorkId, vehName: strVehName, driverName: strDriverName, orderReqCount: self.intOrderReqCnt, noReadCount: intNoReadCount, remark: strRemark, workerName: strWorkerName, signData: strSignData)
+			}
+		}
+		
 	}
 	
 	// 구분 선택
@@ -315,7 +353,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 			strWorkState				= ""
 			strNoReadCount				= "0";
 			strRemark					= ""
-			strSignData					= ""
+
 			strResultMsg				= ""
 			
 			DispatchQueue.main.async
@@ -386,6 +424,9 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 			// 시리얼번호가 중복이 안되어 있다면
 			if(boolFindSerialNoOverlap == false)
 			{
+				// 신규태그 입력 체크
+				self.boolNewTagInfoExist = true
+				
 				// 상세보기용 배열에 추가
 				arrTagRows.append(clsTagInfo)
 				
@@ -407,41 +448,34 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 					arrAssetRows.append(clsTagInfo)
 				}
 				
-				let intCurDataSize = arrTagRows.count
+				// 입력창 내용 갱신(처리량증가/미처리량감소)
+				var intRemainCount: Int = Int(lblRemainCount?.text ?? "0")! // 미처리량
+				if intRemainCount > 0
+				{
+					intRemainCount = intRemainCount - 1
+					lblRemainCount.text = "\(intRemainCount)"
+				}
+		
 				
-				// 발주번호가 있는 경무만 "처리수량/발주수량"을 처리한다.
+				self.intProcCount = Int(lblProcCount?.text ?? "0")! + 1 // 처리량
+				lblProcCount?.text = "\(self.intProcCount)"
+	
 				
-				print("@@@@@@strMakeOrderId:\(strMakeOrderId)")
-				
-//				if(strMakeOrderId.isEmpty == false)
-//				{
-//					intCurOrderWorkCnt = intOrderWorkCnt + intCurDataSize
-//					lblOrderCount.text = "\(intCurOrderWorkCnt)/\(intOrderReqCnt)"
-//				}
+				//5)그리드 리스에 내용 갱신
+				for clsTagInfo in arrAssetRows
+				{
+					// 같은 자산타입(Asset_type)이면 처리량증가,미처리량감소
+					if(strAssetEpc == clsTagInfo.getAssetEpc())
+					{
+						clsTagInfo.setProcCount(procCount: (clsTagInfo.getProcCount() + 1)) // 처리량 증가
+						clsTagInfo.setRemainCount(remainCount: (clsTagInfo.getRemainCount() - 1)) // 미처리량 감소
+					}
+				}
 			}
 		}
 		DispatchQueue.main.async { self.tvCombineIn?.reloadData() }
 	}
 
-	
-	func clearUserInterfaceData()
-	{
-		intOrderWorkCnt	= 0
-		intCurOrderWorkCnt = 0
-		intOrderReqCnt	= 0
-		
-		strMakeOrderId	= ""
-		strProdAssetEpc = ""
-		
-		//UI 변경은 Thread로 호출하여 변경한
-		
-//		self.btnMakeOrderId.setTitle("", for: .normal)
-//		self.lblOrderCustName.text = ""
-//		self.lblOrderCount.text = ""
-//		self.tfMakeLotId.text = ""
-		
-	}
-	
 	
 	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
@@ -450,13 +484,14 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
-		//let cell : UITableViewCell = UITableViewCell(style: <#T##UITableViewCellStyle#>, reuseIdentifier: <#T##String?#>)
-		let objCell:ProductMountCell = tableView.dequeueReusableCell(withIdentifier: "tvcProductMount", for: indexPath) as! ProductMountCell
+		let objCell:CombineInCell = tableView.dequeueReusableCell(withIdentifier: "tvcCombineIn", for: indexPath) as! CombineInCell
 		let clsTagInfo = arrAssetRows[indexPath.row]
-		
-		objCell.lblAssetName.text = clsTagInfo.getAssetName()
-		objCell.lblReadCount.text = "\(clsTagInfo.getReadCount())"
-		
+
+		objCell.lblAssetName.text		= clsTagInfo.getAssetName()
+		objCell.lblWorkAssignCount.text = "\(clsTagInfo.getWorkAssignCount())"
+		objCell.lblProcCount.text		= "\(clsTagInfo.getProcCount())"
+		objCell.lblRemainCount.text		= "\(clsTagInfo.getRemainCount())"
+
 		objCell.btnDetail.titleLabel?.font = UIFont.fontAwesome(ofSize: 14)
 		objCell.btnDetail.setTitle(String.fontAwesomeIcon(name: .listAlt), for: .normal)
 		objCell.btnDetail.tag = indexPath.row
@@ -625,9 +660,8 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 			self.strWorkState = Constants.WORK_STATE_COMPLETE		//3-1) 자동승인 'Y' -> 완료처리(상태값02)
 		}
 		
-		//'완료전송'다이얼로그
-		// TODO
-		//showDialog(Constants.DIALOG_CONFIRM_SEND);
+		
+		self.performSegue(withIdentifier: "segInSignDialog", sender: self)
 	}
 
 	
@@ -645,7 +679,6 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 		clsDataClient.addServiceParam(paramName: "saleWorkId", value: self.strSaleWorkId)
 		clsDataClient.addServiceParam(paramName: "pageNo", value: 1)
 		clsDataClient.addServiceParam(paramName: "rowsPerPage", value: 300)
-		
 		
 		clsDataClient.selectData(dataCompletionHandler: {(data, error) in
 			if let error = error {
@@ -828,7 +861,6 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	// 작업초기화 데이터를 전송한다
 	func sendWorkInitData(resaleOrderId: String, saleWorkId: String)
 	{
-		
 		clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
 		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
@@ -926,7 +958,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 			
 			if(signData.isEmpty == false)
 			{
-				clsDataClient.addServiceParam(paramName: "signData",	value: strSignData)		// 사인데이터
+				clsDataClient.addServiceParam(paramName: "signData",	value: signData)		// 사인데이터
 			}
 			
 			self.boolWorkCompleteBtn = true
@@ -973,10 +1005,29 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 				print(" -strResultCode:\(strResultCode!)")
 				if(Constants.PROC_RESULT_SUCCESS == strResultCode)
 				{
-					//비동기 처리 결과에대한  UI에한 처리는 반드시 쓰레드로 처리되어야 한다.
-					DispatchQueue.main.async {
-						//						self.clearTagData()
-						self.clearUserInterfaceData()
+					//let strSvrProcCount = clsDataRow.getString(name: "procCount")
+					//let strSvrWorkState = clsDataRow.getString(name: "workState")
+					//print("-서버로부터 받은 처리갯수: \(strSvrProcCount)")
+					//print("-서버로부터 받은 작업처리상태:  \(strSvrWorkState)")
+					
+					DispatchQueue.main.async
+					{
+						// 전송 성공인 경우
+						for clsInfo in self.arrTagRows
+						{
+							if(clsInfo.getNewTag() == true)
+							{
+								clsInfo.setNewTag(newTag: false)	// 태그상태 NEW -> OLD로 변경
+							}
+						}
+						self.boolNewTagInfoExist = false
+
+						// 현재 작업상태가 완료전송인경우
+						if(self.boolWorkCompleteBtn == true)
+						{
+							// 송장정보관련 UI객체를 초기화한다.
+							self.clearTagData(clearScreen: true)
+						}
 						let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
 						self.showSnackbar(message: strMsg)
 					}
@@ -987,7 +1038,6 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 					self.showSnackbar(message: strMsg)
 				}
 			}
-
 		})
 		
 	}
