@@ -306,10 +306,13 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
 //        self.performSegue(withIdentifier: "segInOutCancelDetailCell", sender: self)
     }
     
-    
-    // Segue로 파라미터 넘기면 반드시 prepare를 타기 때문에 여기서 DataProtocol을 세팅하는걸로 함
+
+    //=======================================
+    //===== 'Prepare' - Segue처리
+    //=======================================
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
+        //Segue로 파라미터 넘기면 반드시 prepare를 타기 때문에 여기서 DataProtocol을 세팅하는걸로 함
         if(segue.identifier == "segCombineOutWorkList")
         {
             if let clsDialog = segue.destination as? CombineOutWorkList
@@ -453,31 +456,38 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     }
     
     
-    func clearTagData(_ boolClearScreen: Bool )
+    
+    //=======================================
+    //===== 화면 및 데이터 리스트 클리어
+    //=======================================
+    func clearTagData(_ clearScreen: Bool )
     {
         mBoolNewTagInfoExist = false
-        arrResultDataRows.removeAll()
-        //arrTagListRowParcel.removeAll()
-        //arrTagListRow.removeAll()
+        arrTagRows.removeAll()
+        arrAssetRows.removeAll()
         
-        tvCombineOut?.reloadData()      //테이블뷰 클리어
+        DispatchQueue.main.async
+        {
+            self.tvCombineOut?.reloadData()      //테이블뷰 클리어
+        }
         
-        if(boolClearScreen == true)
+        if(clearScreen == true)
         {
             mStrSaleWorkId = ""
             mStrProdAssetEpc = ""
             mIntProcCount = 0
             mIntWorkAssignCount = 0
             
-            self.tfVehName.text = ""
-            self.lblOrderCustName.text = ""
-            self.lblDeliBranchName.text = ""
-            self.lblAssetEpcName.text = ""
-            self.lblAssignCount.text = ""
-            self.lblProcCount.text = ""
-            self.lblRemainCount.text = ""
+            self.tfVehName.text = ""            //차량번호
+            self.lblOrderCustName.text = ""     //입고처
+            self.lblDeliBranchName.text = ""    //배송거점
+            self.lblAssetEpcName.text = ""      //유형
+            self.lblAssignCount.text = ""       //출고예정
+            self.lblProcCount.text = ""         //처리량
+            self.lblRemainCount.text = ""       //미처리량
         }
         
+        //RFID리더기 초기화
         super.clearInventory()
     }
     
@@ -491,6 +501,14 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     {
         self.performSegue(withIdentifier: "segCombineOutWorkList", sender: self)
     }
+    
+    
+    //========================================================================
+    // 리더기 관련 이벤트및 처리 시작
+    //------------------------------------------------------------------------
+    // 리더기 연결 클릭이벤트
+    
+    
     
 }
     

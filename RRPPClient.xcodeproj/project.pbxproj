@@ -653,8 +653,8 @@
 			children = (
 				B0FD4EDB1FE3C24600EE976E /* CombineOutWorkList.swift */,
 				B0FD4EDC1FE3C24600EE976E /* CombineOutWorkListCell.swift */,
-				B01C420A1FE0EEBA00404301 /* CombineOut.storyboard */,
 				B01C420C1FE105BB00404301 /* CombineOut.swift */,
+				B01C420A1FE0EEBA00404301 /* CombineOut.storyboard */,
 				B01C420E1FE105E400404301 /* CombineOutCell.swift */,
 			);
 			path = CombineOut;
