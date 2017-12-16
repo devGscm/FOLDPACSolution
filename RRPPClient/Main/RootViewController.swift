@@ -101,13 +101,13 @@ class RootViewController: BaseViewController
 			localData.CorpId = AppContext.sharedManager.getUserInfo().getCorpId()
 			localData.versionCheck(indicator: clsIndicator, navigation: navigationDrawerController)
 			
+			
+			/*
             var mDicPallet : Dictionary<String, String> = Dictionary<String, String>()
             mDicPallet["yomile1"] = "test1"
             mDicPallet["yomile2"] = "test2"
             mDicPallet["yomile3"] = "test3"
             mDicPallet["yomile4"] = "test4"
-            
-            
             if(mDicPallet.index(forKey: "yomile1") == nil)
             {
                print("mDicPallet NIL")
@@ -116,7 +116,6 @@ class RootViewController: BaseViewController
             {
                print("mDicPallet NOT NIL")
             }
-            
             if(mDicPallet.index(forKey: "yomile6") == nil)
             {
                 print("yomile6 mDicPallet NIL")
@@ -125,8 +124,7 @@ class RootViewController: BaseViewController
             {
                 print("yomile6 mDicPallet NOT NIL")
             }
-            
-            
+			
             if(mDicPallet.keys.contains("yomile1"))
             {
                 print("yomile1 mDicPallet contains")
@@ -135,7 +133,26 @@ class RootViewController: BaseViewController
             {
                 print("yomile6 mDicPallet contains")
             }
-            
+            */
+			
+//			let strEpcUrn = "grai:0.95100043.1025.62"
+//			let arsEpcUrn = strEpcUrn.split(".")
+//			if( arsEpcUrn.count == 4)
+//			{
+//				let strCorpEpc	= arsEpcUrn[ 1]
+//				let strAssetEpc	= arsEpcUrn[ 2]
+//				let strSerialNo	= arsEpcUrn[ 3]
+//				
+//				let strNewAssetEpc = "\(strCorpEpc)\(strAssetEpc)"
+//				
+//				print("=============================================")
+//				print("strCorpEpc:\(strCorpEpc)")
+//				print("strNewAssetEpc:\(strNewAssetEpc)")
+//				print("strSerialNo:\(strSerialNo)")
+//				print("=============================================")
+//			}
+//			
+	
 
             
 			//print("=============================================")

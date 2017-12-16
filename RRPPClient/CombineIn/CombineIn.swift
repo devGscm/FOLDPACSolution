@@ -705,14 +705,157 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	}
 	
 	
+	
+	// 송장조회 상세
 	func doSearchWorkListDetail()
 	{
-		
+		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+		clsDataClient.SelectUrl = "inOutService:selectCombineInWorkListDetail"
+		clsDataClient.removeServiceParam()
+		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+		clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
+		clsDataClient.addServiceParam(paramName: "saleWorkId", value: self.strSaleWorkId)
+		clsDataClient.selectData(dataCompletionHandler: {(data, error) in
+			if let error = error {
+				// 에러처리
+				super.showSnackbar(message: error.localizedDescription)
+				print(error)
+				return
+			}
+			guard let clsDataTable = data else {
+				print("에러 데이터가 없음")
+				return
+			}
+			
+			// 2) DB에서 리스트 조회값 받음
+			for clsDataRow in clsDataTable.getDataRows()
+			{
+				let intProcCount		= clsDataRow.getInt(name: "procCnt") ?? 0
+				let intWorkAssignCount	= clsDataRow.getInt(name: "workAssignCnt") ?? 0
+				let intRemainCount		= clsDataRow.getInt(name: "remainCnt") ?? 0
+				let strProdAssetEpc		= clsDataRow.getString(name: "prodAssetEpc") ?? ""
+				let strProdAssetEpcName = clsDataRow.getString(name: "prodAssetEpcName") ?? ""
+				
+				let clsTagInfo = RfidUtil.TagInfo()
+				clsTagInfo.setAssetEpc(assetEpc: strProdAssetEpc)
+				clsTagInfo.setAssetName(assetName: strProdAssetEpcName)
+				clsTagInfo.setProcCount(procCount: intProcCount)
+				clsTagInfo.setWorkAssignCount(workAssignCount: intWorkAssignCount)
+				clsTagInfo.setRemainCount(remainCount: intRemainCount)
+				
+				//그리드 리스트에 추가
+				self.arrAssetRows.append(clsTagInfo)
+			}
+			DispatchQueue.main.async
+			{
+				self.tvCombineIn.reloadData()
+			}
+		})
 	}
 	
+	
+	// 송장조회(번호)에 대한 상세 태그리스트
 	func doSearchTagList()
 	{
+//		String strEpcUrn 			= null;
+//		String strEpcCode			= null;
+//		String strTraceDate 		= null;
+//		String strProdAssetEpcName 	= null;
+//		String[] splitValue 		= null;
+//		String strTraceDateFormat	= null;
+//		String strAssetEpc 			= null;
+//		String strSerialNo 			= null;
+//		String strCorpEpc 			= null;
+//		String strNewAssetEpc 		= null;
 		
+		
+		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+		clsDataClient.SelectUrl = "supplyService:selectSaleInTagList"
+		clsDataClient.removeServiceParam()
+		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+		clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
+		clsDataClient.addServiceParam(paramName: "resaleOrderId", value: self.strResaleOrderId)
+		clsDataClient.selectData(dataCompletionHandler: {(data, error) in
+			if let error = error {
+				// 에러처리
+				super.showSnackbar(message: error.localizedDescription)
+				print(error)
+				return
+			}
+			guard let clsDataTable = data else {
+				print("에러 데이터가 없음")
+				return
+			}
+			
+			// 2) DB에서 리스트 조회값 받음
+			for clsDataRow in clsDataTable.getDataRows()
+			{
+				let strEpcUrn 			= clsDataRow.getString(name: "epcUrn") ?? ""
+				let strEpcCode			= clsDataRow.getString(name: "epcCode") ?? ""
+				let strUtcTraceDate 	= clsDataRow.getString(name: "utcTraceDate") ?? ""
+				let strProdAssetEpcName = clsDataRow.getString(name: "prodAssetEpcName") ?? ""
+
+				
+				
+				let clsTagInfo = RfidUtil.TagInfo()
+				clsTagInfo.setEpcCode(strEpcCode: strEpcCode)
+				
+				if(strUtcTraceDate.isEmpty == false)
+				{
+					let strLocaleTraceDate = DateUtil.utcToLocale(utcDate: strUtcTraceDate, dateFormat: "yyyyMMddHHmmss")
+					clsTagInfo.setReadTime(readTime: strLocaleTraceDate)
+				}
+				
+				if(strEpcUrn.isEmpty == false)
+				{
+					let arsEpcUrn = strEpcUrn.split(".")
+					if( arsEpcUrn.count == 4)
+					{
+						let strCorpEpc	= arsEpcUrn[ 1]
+						let strAssetEpc	= arsEpcUrn[ 2]
+						let strSerialNo	= arsEpcUrn[ 3]
+						
+						let strNewAssetEpc = "\(strCorpEpc)\(strAssetEpc)"
+						
+						print("=============================================")
+						print("strCorpEpc:\(strCorpEpc)")
+						print("strNewAssetEpc:\(strNewAssetEpc)")
+						print("strSerialNo:\(strSerialNo)")
+						print("=============================================")
+					}
+				}
+				
+		
+	/*
+		
+				//데이터 축출
+				splitValue 		= strEpcUrn.split("\\.");
+				strCorpEpc		= splitValue[1].toString();
+				strAssetEpc		= splitValue[2].toString();
+				strSerialNo		= splitValue[3].toString();
+				strNewAssetEpc 	= strCorpEpc + strAssetEpc;
+		
+				//DB에서 조회된 태그 데이터 전달용 리스트에 저장
+				EpcCodeInfoParcel clsEpcInfo = new EpcCodeInfoParcel();
+				clsEpcInfo.setEpcCode(strEpcCode);
+				clsEpcInfo.setEpcUrn(strEpcUrn);
+				clsEpcInfo.setSerialNo(strSerialNo);
+				clsEpcInfo.setAssetEpc(strNewAssetEpc);
+				clsEpcInfo.setAssetName(strProdAssetEpcName);
+				clsEpcInfo.setReadTime(strTraceDateFormat);
+		
+				mLstTagListRowsParcel.add(clsEpcInfo);
+				*/
+			}
+			
+			DispatchQueue.main.async
+				{
+					self.tvCombineIn.reloadData()
+			}
+		})
+
 	}
 
 	// 작업초기화 데이터를 전송한다

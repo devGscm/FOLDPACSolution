@@ -282,7 +282,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 				// 자산코드에 등록되어 있는 경우
 				print(" 동일한 자산코드 존재")
 				boolValidAsset = true
-				break;
+				break
 			}
 		}
 		print(" 자산코드:\(strAssetEpc), ExistAssetInfo:\(boolValidAsset)")
@@ -296,7 +296,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 				{
 					print(" 동일한 시리얼번호 존재")
 					boolFindSerialNoOverlap = true
-					break;
+					break
 				}
 			}
 			
