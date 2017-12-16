@@ -915,6 +915,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		clsDataClient.selectData(dataCompletionHandler: {(data, error) in
 			if let error = error {
 				// 에러처리
+				super.showSnackbar(message: error.localizedDescription)
 				print(error)
 				return
 			}
@@ -1650,7 +1651,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		print("@@@@@@@@@@@@@@@@@@@@@")
 		
 		let clsTagInfo = RfidUtil.TagInfo()
-		clsTagInfo.setEpcCode(strEpcCode: barcode)
+		clsTagInfo.setEpcCode(epcCode: barcode)
 		getBarcodeData(clsTagInfo: clsTagInfo)
 	}
 	

@@ -28,18 +28,31 @@ public class RfidUtil
         var mStrItem: String?                   /**< 상품                  */
         var mStrSerialNo: String?               /**< 시리얼번호(제조업체 + 제조년 + 제조월 + 순차번호 로 구성) */
         var mStrLocation: String?               /**< 위치                  */
-        var mStrProdCode: String?               /**< 상품코드               */
-        var mStrProdName: String?               /**< 상품명                */
-        var mStrProdReadCnt: String?            /**< 인식수량               */
+		
         var mStrCustEpc: String?                /**< 고객사EPC             */
         var mStrYymm: String?                   /**< 발행연월               */
         var mStrSeqNo: String?                  /**< 발행순번               */
         var mStrAssetName: String?              /**< 자산EPC명             */
         var mBoolNewTag : Bool?
-        var mIntReadCount = 0                   /**< 조회수                */
-        var mStrReadTime : String?
+		
+		var mIntWorkAssignCount	= 0				/**< 입고예정수량(동의어 : WorkAssignCnt) */
+		var mIntProcCount = 0					/**< 처리량(동의어 : ProcCnt)	*/
+		var mIntRemainCount	= 0					/**< 미처리량(동의어 : RemainCnt) */
+		var mIntReadCount = 0                   /**< 조회수               */
+		
+		
+		var mStrReadTime : String?
 		var mIsChecked : Bool
 		var mStrResult : String
+	
+
+	
+		//===================================================================
+		// 안쓰는것 정리, yomile
+		//var mStrProdCode: String?               /**< 상품코드               */
+		//var mStrProdName: String?               /**< 상품명                */
+		//var mStrProdReadCnt: String?            /**< 인식수량               */
+		//===================================================================
 		
         
         init()
@@ -52,18 +65,30 @@ public class RfidUtil
             mStrItem            = nil
             mStrSerialNo        = nil
             mStrLocation        = nil
-            mStrProdCode        = nil
-            mStrProdName        = nil
-            mStrProdReadCnt     = nil
+
             mStrCustEpc         = nil
             mStrYymm            = nil
             mStrSeqNo           = nil
             mStrAssetName       = nil
             mBoolNewTag         = false
+			
+			mIntWorkAssignCount	= 0
+			mIntProcCount		= 0
+			mIntRemainCount		= 0
+			mIntReadCount		= 0
+
+			mIntProcCount		= 0
             mIntReadCount       = 0
             mStrReadTime        = nil
 			mIsChecked			= false
-			mStrResult				= ""
+			mStrResult			= ""
+			
+			//===================================================================
+			// 안쓰는것 정리, yomile
+			//mStrProdCode        = nil
+			//mStrProdName        = nil
+			//mStrProdReadCnt     = nil
+			//===================================================================
         }
         
         /**
@@ -116,24 +141,6 @@ public class RfidUtil
         public func getLocation() -> String                     { return mStrLocation ?? ""            }
         
         /**
-         * 상품코드를 리턴한다.
-         * @return
-         */
-        public func getProdCode() -> String                     { return mStrProdCode ?? ""        }
-        
-        /**
-         * 상품명을 리턴한다.
-         * @return
-         */
-        public func getProdName() -> String                     { return mStrProdName ?? ""        }
-        
-        /**
-         * 상품명을 리턴한다.
-         * @return
-         */
-        public func getProdReadCnt() -> String                  { return mStrProdReadCnt ?? ""        }
-        
-        /**
          * 고객사EPC를 리턴한다.
          * @return
          */
@@ -154,107 +161,163 @@ public class RfidUtil
         
         
         // 자산명을 리턴한다.
-        public func getAssetName() -> String                    { return mStrAssetName ?? "" }
-        public func getNewTag() -> Bool                         { return mBoolNewTag ?? false }
-        public func getReadCount() -> Int                       { return mIntReadCount     }
-        public func getReadTime() -> String                     { return mStrReadTime ?? "" }
+        public func getAssetName() -> String                    { return mStrAssetName ?? ""	}
+        public func getNewTag() -> Bool                         { return mBoolNewTag ?? false	}
 		
-		public func getChecked() -> Bool 						{return mIsChecked}
 		
-		public func getResult() -> String 						{return mStrResult}
-        
+
+		/**
+		* 입고예정수량을 리턴한다.
+		*/
+		public func getWorkAssignCount() -> Int					{ return mIntWorkAssignCount	}
+		
+		/**
+		* 처리량을 리턴한다.
+		*/
+		public func getProcCount() -> Int                       { return mIntProcCount     		}
+	
+		/**
+		* 미처리량을 리턴한다.
+		*/
+		public func getRemainCount() -> Int						{ return mIntRemainCount		}
+		
+		/**
+		* 조회수를 리턴한다.
+		*/
+		public func getReadCount() -> Int                       { return mIntReadCount     		}
+		
+        public func getReadTime() -> String                     { return mStrReadTime ?? ""		}
+		public func getChecked() -> Bool 						{return mIsChecked				}
+		public func getResult() -> String 						{return mStrResult				}
+		
+		
+		//===================================================================
+		// 안쓰는것 정리, yomile
+		//public func getProdCode() -> String                     { return mStrProdCode ?? ""        }
+		//public func getProdName() -> String                     { return mStrProdName ?? ""        }
+		//public func getProdReadCnt() -> String                  { return mStrProdReadCnt ?? ""        }
+		//===================================================================
+		
         /**
          * 인코딩 종류를 설정한다.
          * @param enuEncoding 인코딩 종류
          */
-        public func setEncoding(enuEncoding: Encodings)         { self.mEnuEncoding = enuEncoding        }
+        public func setEncoding(encoding: Encodings)         { self.mEnuEncoding = encoding        }
         
         /**
          * EPC URN를 설정한다.
          * @param strEpcUrn EPC URN
          */
-        public func setEpcUrn(strEpcUrn: String)                { self.mStrEpcUrn   = strEpcUrn        }
+        public func setEpcUrn(epcUrn: String)                { self.mStrEpcUrn   = epcUrn        }
         
         /**
          * EPC 코드를 설정한다.
          * @param strEpcCode EPC 코드
          */
-        public func setEpcCode( strEpcCode: String)             { self.mStrEpcCode  = strEpcCode        }
+        public func setEpcCode( epcCode: String)             { self.mStrEpcCode  = epcCode        }
         
         /**
          * 기업EPC코드를 설정한다.
          * @param strCorpEpc 기업EPC코드
          */
-        public func setCorpEpc( strCorpEpc: String)             { self.mStrCorpEpc  = strCorpEpc        }
+        public func setCorpEpc( corpEpc: String)             { self.mStrCorpEpc  = corpEpc        }
         
         /**
          * 자산EPC코드를 설정한다.
          * @param strAssetEpc 자산EPC코드
          */
-        public func setAssetEpc( assetEpc: String)           { self.mStrAssetEpc = assetEpc        }
+        public func setAssetEpc( assetEpc: String)           	{ self.mStrAssetEpc = assetEpc        }
         
         
         /**
          * 상품을 설정한다.
          * @param strItem 상품
          */
-        public func setItem( strItem: String)                   { self.mStrItem     = strItem            }
+        public func setItem( item: String)                   { self.mStrItem     = item            }
         
         /**
          * 시리얼번호를 설정한다.
          * @param strSerialNo 시리얼번호
          */
-        public func setSerialNo( strSerialNo: String)           { self.mStrSerialNo = strSerialNo        }
+        public func setSerialNo( serialNo: String)           { self.mStrSerialNo = serialNo        }
         
         /**
          * 위치를 설정한다.
          * @param strLocation 위치
          */
-        public func setLocation( strLocation: String)           { self.mStrLocation = strLocation        }
+        public func setLocation( location: String)           { self.mStrLocation = location        }
         
-        /**
-         * 상품코드를 설정한다.
-         * @param strProdCode
-         */
-        public func setProdCode( strProdCode: String)           { self.mStrProdCode = strProdCode    }
-        
-        /**
-         * 상품명을 설정한다.
-         * @param strProdName
-         */
-        public func setProdName( strProdName: String)           { self.mStrProdName = strProdName    }
-        
-        /**
-         * 인식수량을 설정한다.
-         * @param strProdReadCnt
-         */
-        public func setProdReadCnt( strProdReadCnt: String)     { self.mStrProdReadCnt = strProdReadCnt    }
-        
+
         /**
          * 고객사EPC를 설정한다.
          * @param strCustEpc 고객사EPC
          */
-        public func setCustEpc(strCustEpc: String)              { self.mStrCustEpc  = strCustEpc        }
+        public func setCustEpc(custEpc: String)              { self.mStrCustEpc  = custEpc        }
         
         /**
          * 발행연월를 설정한다.
          * @param strYymm 발행연월
          */
-        public func setYymm(strYymm: String)                    { self.mStrYymm     = strYymm            }
+        public func setYymm(yymm: String)                    { self.mStrYymm     = yymm            }
         
         /**
          * 발행순번을 설정한다.
          * @param strSeqNo 발행순번
          */
-        public func setSeqNo(strSeqNo: String)                  { self.mStrSeqNo = strSeqNo }
-        public func setAssetName( assetName: String)            { self.mStrAssetName = assetName }
-        public func setNewTag(newTag: Bool)                     { self.mBoolNewTag = newTag }
-        public func setReadCount(readCount: Int)                { self.mIntReadCount = readCount }
-        public func setReadTime(readTime: String)               { self.mStrReadTime = readTime }
+        public func setSeqNo(seqNo: String)                  { self.mStrSeqNo = seqNo				}
+        public func setAssetName( assetName: String)            { self.mStrAssetName = assetName		}
+        public func setNewTag(newTag: Bool)                     { self.mBoolNewTag = newTag				}
+
 		
-		public func setChecked(_ checked: Bool)						{self.mIsChecked = checked	}
+		/**
+		* 입고예정수량을 설정한다.
+		* @param workAssignCount 입고예정수량
+		*/
+		public func setWorkAssignCount(workAssignCount: Int)	{ self.mIntWorkAssignCount = workAssignCount	}
 		
-		public func setResult(_ result: String)						{self.mStrResult = result }
+		
+		/**
+		* 처리량을 설정한다.
+		* @param procCount 처리량
+		*/
+		public func setProcCount(procCount: Int)                { self.mIntProcCount = procCount				}
+		
+		/**
+		* 미처리량을 설정한다.
+		* @param remainCount 미처리량
+		*/
+		public func setRemainCount(remainCount: Int)			{ self.mIntRemainCount = remainCount			}
+
+		/**
+		* 조회수을 설정한다.
+		* @param readCount 조회수
+		*/
+		public func setReadCount(readCount: Int)                { self.mIntReadCount = readCount				}
+		
+		
+        public func setReadTime(readTime: String)               { self.mStrReadTime = readTime					}
+		
+		public func setChecked(_ checked: Bool)					{ self.mIsChecked = checked						}
+		public func setResult(_ result: String)					{ self.mStrResult = result						}
+		
+		//===================================================================
+		// 안쓰는것 정리, yomile
+		/**
+		* 상품코드를 설정한다.
+		* @param strProdCode
+		*/
+		//public func setProdCode( strProdCode: String)           { self.mStrProdCode = strProdCode    }
+		
+		/**
+		* 상품명을 설정한다.
+		* @param strProdName
+		*/
+		//public func setProdName( strProdName: String)           { self.mStrProdName = strProdName    }
+		
+		
+		//public func setProdReadCnt( strProdReadCnt: String)     { self.mStrProdReadCnt = strProdReadCnt    }
+		
+		//===================================================================
     }
 
     
@@ -435,9 +498,9 @@ public class RfidUtil
         
         //태그정보에 저장
         let clsTagInfo = TagInfo()
-        clsTagInfo.setEpcCode(strEpcCode: strData)
-        clsTagInfo.setEncoding(enuEncoding: enuEncoding)
-        clsTagInfo.setEpcUrn(strEpcUrn: strEpcUrn)
+        clsTagInfo.setEpcCode(epcCode: strData)
+        clsTagInfo.setEncoding(encoding: enuEncoding)
+        clsTagInfo.setEpcUrn(epcUrn: strEpcUrn)
         return clsTagInfo
     }
     
@@ -525,11 +588,11 @@ public class RfidUtil
         
         //태그정보에 저장
         let clsTagInfo = TagInfo()
-        clsTagInfo.setEpcCode(strEpcCode: strData)
-        clsTagInfo.setEncoding(enuEncoding: enuEncoding)
-        clsTagInfo.setCorpEpc(strCorpEpc: strCorpEpc)
-        clsTagInfo.setItem(strItem: strItem)
-        clsTagInfo.setEpcUrn(strEpcUrn: strEpcUrn)
+        clsTagInfo.setEpcCode(epcCode: strData)
+        clsTagInfo.setEncoding(encoding: enuEncoding)
+        clsTagInfo.setCorpEpc(corpEpc: strCorpEpc)
+        clsTagInfo.setItem(item: strItem)
+        clsTagInfo.setEpcUrn(epcUrn: strEpcUrn)
         
         return clsTagInfo
     }
@@ -610,11 +673,11 @@ public class RfidUtil
         
         //태그정보에 저장
         let clsTagInfo = TagInfo()
-        clsTagInfo.setEpcCode(strEpcCode: strData)
-        clsTagInfo.setEncoding(enuEncoding: enuEncoding)
-        clsTagInfo.setCorpEpc(strCorpEpc: strCorpEpc)
-        clsTagInfo.setSerialNo(strSerialNo: strSerialNo)
-        clsTagInfo.setEpcUrn(strEpcUrn: strEpcUrn)
+        clsTagInfo.setEpcCode(epcCode: strData)
+        clsTagInfo.setEncoding(encoding: enuEncoding)
+        clsTagInfo.setCorpEpc(corpEpc: strCorpEpc)
+        clsTagInfo.setSerialNo(serialNo: strSerialNo)
+        clsTagInfo.setEpcUrn(epcUrn: strEpcUrn)
         
         return clsTagInfo
     }
@@ -699,11 +762,11 @@ public class RfidUtil
         
         //태그정보에 저장
         let clsTagInfo = TagInfo()
-        clsTagInfo.setEpcCode(strEpcCode: strData)
-        clsTagInfo.setEncoding(enuEncoding: enuEncoding)
-        clsTagInfo.setCorpEpc(strCorpEpc: strCorpEpc)
-        clsTagInfo.setLocation(strLocation: strLocation)
-        clsTagInfo.setEpcUrn(strEpcUrn: strEpcUrn)
+        clsTagInfo.setEpcCode(epcCode: strData)
+        clsTagInfo.setEncoding(encoding: enuEncoding)
+        clsTagInfo.setCorpEpc(corpEpc: strCorpEpc)
+        clsTagInfo.setLocation(location: strLocation)
+        clsTagInfo.setEpcUrn(epcUrn: strEpcUrn)
         
         return clsTagInfo
     }
@@ -814,15 +877,15 @@ public class RfidUtil
         
         //태그정보에 저장
         let clsTagInfo = TagInfo()
-        clsTagInfo.setEpcCode(strEpcCode: strData)
-        clsTagInfo.setEncoding(enuEncoding: enuEncoding)
-        clsTagInfo.setCorpEpc(strCorpEpc: strCorpEpc)
+        clsTagInfo.setEpcCode(epcCode: strData)
+        clsTagInfo.setEncoding(encoding: enuEncoding)
+        clsTagInfo.setCorpEpc(corpEpc: strCorpEpc)
         clsTagInfo.setAssetEpc(assetEpc: strAssetEpc)
-        clsTagInfo.setSerialNo(strSerialNo: strSerialNo)
-        clsTagInfo.setEpcUrn(strEpcUrn: strEpcUrn)
-        clsTagInfo.setCustEpc(strCustEpc: strCustEpc)
-        clsTagInfo.setYymm(strYymm: strIssueYear)
-        clsTagInfo.setSeqNo(strSeqNo: strIssueSeq)
+        clsTagInfo.setSerialNo(serialNo: strSerialNo)
+        clsTagInfo.setEpcUrn(epcUrn: strEpcUrn)
+        clsTagInfo.setCustEpc(custEpc: strCustEpc)
+        clsTagInfo.setYymm(yymm: strIssueYear)
+        clsTagInfo.setSeqNo(seqNo: strIssueSeq)
         
         return clsTagInfo
     }
@@ -902,11 +965,11 @@ public class RfidUtil
         
         //태그정보에 저장
         let clsTagInfo = TagInfo()
-        clsTagInfo.setEpcCode(strEpcCode: strData)
-        clsTagInfo.setEncoding(enuEncoding: enuEncoding)
-        clsTagInfo.setCorpEpc(strCorpEpc: strCorpEpc)
+        clsTagInfo.setEpcCode(epcCode: strData)
+        clsTagInfo.setEncoding(encoding: enuEncoding)
+        clsTagInfo.setCorpEpc(corpEpc: strCorpEpc)
         clsTagInfo.setAssetEpc(assetEpc: strAssetRef)
-        clsTagInfo.setEpcUrn(strEpcUrn: strEpcUrn)
+        clsTagInfo.setEpcUrn(epcUrn: strEpcUrn)
         
         return clsTagInfo
     }
@@ -935,9 +998,9 @@ public class RfidUtil
         
         //태그정보에 저장
         let clsTagInfo = TagInfo()
-        clsTagInfo.setEpcCode(strEpcCode: strData)
-        clsTagInfo.setEncoding(enuEncoding: enuEncoding)
-        clsTagInfo.setEpcUrn(strEpcUrn: strEpcUrn)
+        clsTagInfo.setEpcCode(epcCode: strData)
+        clsTagInfo.setEncoding(encoding: enuEncoding)
+        clsTagInfo.setEpcUrn(epcUrn: strEpcUrn)
         
         return clsTagInfo
     }
@@ -954,9 +1017,9 @@ public class RfidUtil
         
         //태그정보에 저장
         let clsTagInfo = TagInfo()
-        clsTagInfo.setEpcCode(strEpcCode: strData)
-        clsTagInfo.setEncoding(enuEncoding: enuEncoding)
-        clsTagInfo.setEpcUrn(strEpcUrn: strEpcUrn)
+        clsTagInfo.setEpcCode(epcCode: strData)
+        clsTagInfo.setEncoding(encoding: enuEncoding)
+        clsTagInfo.setEpcUrn(epcUrn: strEpcUrn)
         
         return clsTagInfo
     }

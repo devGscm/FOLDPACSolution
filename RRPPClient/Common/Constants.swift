@@ -211,6 +211,9 @@ class Constants
     static let REMOVE_STATE_NORMAL                        			= 1		/**< 삭제상태: 기본 **/
     static let REMOVE_STATE_COMPLETE                    			= 2		/**< 삭제상태: 임시저장 **/
 
+	static let AUTO_COMPLETED_AGGREMENT_YES							= "Y"	/**< 자동완료처리 : Y  **/
+	static let AUTO_COMPLETED_AGGREMENT_NO							= "N"	/**< 자동완료처리 : N  **/
+	
     static let INOUT_TYPE_INPUT                                     = "I"   /**< 구분:입고 선택    */
     static let INOUT_TYPE_OUTPUT                                    = "O"   /**< 구분:출고 선택    */
 	

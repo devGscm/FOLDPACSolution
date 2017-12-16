@@ -555,6 +555,9 @@
                                                         <real key="value" value="4"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="onClearAllClicked:" destination="eKb-lp-9Jz" eventType="touchUpInside" id="skp-fL-8Q6"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tv6-gq-trm">
                                                 <rect key="frame" x="80" y="0.0" width="78.5" height="30"/>
@@ -568,6 +571,9 @@
                                                         <real key="value" value="4"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="onWorkInitClick:" destination="eKb-lp-9Jz" eventType="touchUpInside" id="DPL-p1-uxw"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -585,6 +591,9 @@
                                                         <real key="value" value="4"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="onTempSaveClick:" destination="eKb-lp-9Jz" eventType="touchUpInside" id="k8q-QS-mcr"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eQ1-Z8-4C4">
                                                 <rect key="frame" x="80" y="0.0" width="78.5" height="30"/>
@@ -597,6 +606,9 @@
                                                         <real key="value" value="4"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="onSendClicked:" destination="eKb-lp-9Jz" eventType="touchUpInside" id="q1n-LA-1Nt"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>

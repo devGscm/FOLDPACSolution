@@ -228,23 +228,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 					clearTagData(clearScreen: true)
 				}
 				
-				
-				
-				
-				
 				let clsDataRow = returnData.returnRawData as! DataRow
-//				strMakeOrderId	= clsDataRow.getString(name: "makeOrderId") ?? ""
-//				intOrderWorkCnt	= clsDataRow.getInt(name: "orderWorkCnt") ?? 0
-//				intOrderReqCnt	= clsDataRow.getInt(name: "orderReqCnt") ?? 0
-//				strProdAssetEpc = clsDataRow.getString(name: "prodAssetEpc")
-//				intCurOrderWorkCnt = intOrderWorkCnt
-//				print("@@@@@@@@strMakeOrderId=\(strMakeOrderId)")
-//				print("@@@@@@@@intOrderWorkCnt=\(intOrderWorkCnt)")
-//				self.btnMakeOrderId.setTitle(strMakeOrderId, for: .normal)
-//				self.lblOrderCustName.text = clsDataRow.getString(name: "orderCustName")
-//				self.lblOrderCount.text = "\(intOrderWorkCnt)/\(intOrderReqCnt)"
-				
-			
 		
 				strResaleOrderId			= clsDataRow.getString(name: "resaleOrderId") ?? ""
 				strSaleWorkId 				= clsDataRow.getString(name: "saleWorkId") ?? ""
@@ -266,13 +250,10 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 
 				
 				//선택된 '송장정보' 내용 조회
-				
-				// TODO
-				//doSearchWorkListDetail()
+				doSearchWorkListDetail()
 				
 				//선택된 '송장정보'에 대한 태그리스트
-				// TODO
-				//doSearchTagList()
+				doSearchTagList()
 				
 				//송장 선택 여부
 				boolWorkListSelected = true
@@ -441,96 +422,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 		}
 		DispatchQueue.main.async { self.tvCombineIn?.reloadData() }
 	}
-	
-	func sendData(makeOrderId: String, makeLotId: String, workerName: String, remark: String)
-	{
-		print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-		print("makeOrderId:\(makeOrderId)")
-		print("makeLotId:\(makeLotId)")
-		print("workerName:\(workerName)")
-		print("remark:\(remark)")
-		print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-		
-		clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
-		
-		//		DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-		//			self.clsIndicator?.hide()
-		//		}
-		
-		clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
-		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
-		clsDataClient.ExecuteUrl = "mountService:executeMountData"
-		clsDataClient.removeServiceParam()
-		clsDataClient.addServiceParam(paramName: "makeOrderId", value: makeOrderId)
-		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
-		clsDataClient.addServiceParam(paramName: "userId", value: AppContext.sharedManager.getUserInfo().getUserId())
-		clsDataClient.addServiceParam(paramName: "unitId", value: AppContext.sharedManager.getUserInfo().getUnitId())
-		clsDataClient.addServiceParam(paramName: "branchId", value: AppContext.sharedManager.getUserInfo().getBranchId())
-		clsDataClient.addServiceParam(paramName: "branchCustId", value: AppContext.sharedManager.getUserInfo().getBranchCustId())
-		clsDataClient.addServiceParam(paramName: "makeLotId", value: makeLotId)
-		clsDataClient.addServiceParam(paramName: "workerName", value: workerName)
-		clsDataClient.addServiceParam(paramName: "remark", value: remark)
-		
-		let clsDataTable : DataTable = DataTable()
-		clsDataTable.Id = "TAG_MOUNT"
-		clsDataTable.addDataColumn(dataColumn: DataColumn(id: "epcCode", type: "String", size: "0", keyColumn: false, updateColumn: true, autoIncrement: false, canXlsExport: false, title: ""))
-		
-		for clsInfo in self.arrTagRows
-		{
-			if(self.strProdAssetEpc != clsInfo.getAssetEpc())
-			{
-				self.clsIndicator?.hide()
-				
-				Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("stock_can_not_processed_because_different_pallet", comment: "품목이 다른 파렛트가 있어 처리 할 수 없습니다."))
-				return
-			}
-			
-			let clsDataRow : DataRow = DataRow()
-			clsDataRow.State = DataRow.DATA_ROW_STATE_ADDED
-			clsDataRow.addRow(name:"epcCode", value: clsInfo.getEpcCode())
-			clsDataTable.addDataRow(dataRow: clsDataRow)
-		}
-		clsDataClient.executeData(dataTable: clsDataTable, dataCompletionHandler: { (data, error) in
-			self.clsIndicator?.hide()
-			if let error = error {
-				// 에러처리
-				super.showSnackbar(message: error.localizedDescription)
-				print(error)
-				return
-			}
-			guard let clsResultDataTable = data else {
-				print("에러 데이터가 없음")
-				return
-			}
-			
-			print("####결과값 처리")
-			let clsResultDataRows = clsResultDataTable.getDataRows()
-			if(clsResultDataRows.count > 0)
-			{
-				let clsDataRow = clsResultDataRows[0]
-				let strResultCode = clsDataRow.getString(name: "resultCode")
-				
-				print(" -strResultCode:\(strResultCode!)")
-				if(Constants.PROC_RESULT_SUCCESS == strResultCode)
-				{
-					//비동기 처리 결과에대한  UI에한 처리는 반드시 쓰레드로 처리되어야 한다.
-					DispatchQueue.main.async {
-//						self.clearTagData()
-						self.clearUserInterfaceData()
-						let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
-						self.showSnackbar(message: strMsg)
-					}
-				}
-				else
-				{
-					let strMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
-					self.showSnackbar(message: strMsg)
-				}
-			}
-			
-		})
-		
-	}
+
 	
 	func clearUserInterfaceData()
 	{
@@ -582,15 +474,84 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	@IBAction func onClearAllClicked(_ sender: UIButton)
 	{
 		Dialog.show(container: self, viewController: nil,
-					title: NSLocalizedString("common_delete", comment: "삭제"),
-					message: NSLocalizedString("common_confirm_delete", comment: "전체 데이터를 삭제하시겠습니까?"),
-					okTitle: NSLocalizedString("common_confirm", comment: "확인"),
-					okHandler: { (_) in
-//						self.clearTagData()
-						super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
-		},
-					cancelTitle: NSLocalizedString("common_cancel", comment: "취소"), cancelHandler: nil)
+			title: NSLocalizedString("common_delete", comment: "삭제"),
+			message: NSLocalizedString("common_confirm_delete", comment: "전체 데이터를 삭제하시겠습니까?"),
+			okTitle: NSLocalizedString("common_confirm", comment: "확인"),
+			okHandler: { (_) in
+				
+				if(self.strSaleWorkId.isEmpty == false)
+				{
+					self.doReloadTagList()	// 초기화
+				}
+				else
+				{
+					self.clearTagData(clearScreen: false)
+					super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
+				}
+			},
+			cancelTitle: NSLocalizedString("common_cancel", comment: "취소"), cancelHandler: nil)
 	}
+	
+
+	// 작업초기화
+	@IBAction func onWorkInitClick(_ sender: UIButton)
+	{
+		if(strSaleWorkId.isEmpty == true)
+		{
+			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("msg_select_sale_work_id", comment: "조회된 송장번호가 없습니다."))
+			return
+		}
+		
+		Dialog.show(container: self, viewController: nil,
+			title: NSLocalizedString("common_task_init", comment: "작업초기화"),
+			message: NSLocalizedString("common_confirm_work_Init", comment: "현재 작업을 초기화 하시겠습니까 ?"),
+			okTitle: NSLocalizedString("common_confirm", comment: "확인"),
+			okHandler: { (_) in
+				self.sendWorkInitData(resaleOrderId: self.strResaleOrderId, saleWorkId: self.strSaleWorkId)
+			},
+			cancelTitle: NSLocalizedString("common_cancel", comment: "취소"), cancelHandler: nil)
+	}
+	
+	
+	// 임시저장
+	@IBAction func onTempSaveClick(_ sender: UIButton)
+	{
+		if(AppContext.sharedManager.getUserInfo().getUnitId().isEmpty == true)
+		{
+			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("rfid_reader_no_device_id", comment: "리더기의 장치ID가 없습니다.웹화면의 리더기정보관리에서 모바일전화번호를  입력하여주십시오."))
+			return
+		}
+
+		if(self.strSaleWorkId.isEmpty == true)
+		{
+			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("sale_enter_your_work_id", comment: "송장번호를 입력하여 주십시오."))
+			return
+		}
+
+		if(self.boolNewTagInfoExist == false)
+		{
+			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("common_no_data_send", comment: "전송할 데이터가 없습니다."))
+			return
+		}
+
+		// 납품(지서서O) 입고 처리
+		if(self.strWorkType == Constants.RESALE_TYPE_DELIVERY)
+		{
+			if((self.intProcCount + self.intNoreadCnt) > self.intOrderReqCount)
+			{
+				// 처리수량이 예정수량보다 큽니다.(입고불가)
+				Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("msg_processing_qty_work_require_qty", comment: "처리수량은 예정수량을 초과할 수 없습니다. 다시 확인해 주세요."))
+				return
+			}
+		}
+		
+		let strVehName		= self.tfVehName?.text ?? ""
+		let strDriverName	= self.lblDriverName.text ?? ""
+		self.strWorkState	= Constants.WORK_STATE_WORKING	//작업상태 '01'-임시저장
+		//DB로 데이터 전송 처리
+		sendData(workState: self.strWorkState, resaleOrderId: self.strResaleOrderId, saleWorkId: self.strSaleWorkId, vehName: strVehName, driverName: strDriverName, orderReqCount: self.intOrderReqCount, noReadCount: self.intNoreadCnt, remark: "", workerName: "", signData: "")
+	}
+	
 	
 	// 전송
 	@IBAction func onSendClicked(_ sender: UIButton)
@@ -600,56 +561,395 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("rfid_reader_no_device_id", comment: "리더기의 장치ID가 없습니다.웹화면의 리더기정보관리에서 모바일전화번호를  입력하여주십시오."))
 			return
 		}
-		if(arrAssetRows.count == 0)
+		
+		// 차량번호 필수
+		let strVehName = tfVehName?.text ?? ""
+		if(strVehName.isEmpty == true)
 		{
-			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("common_no_data_send", comment: "전송할 데이터가 없습니다."))
+			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("msg_enter_vehicle_number", comment: "차량번호를 입력하여 주십시오."))
 			return
 		}
 		
-//		let strMakeOrderId = btnMakeOrderId.titleLabel?.text
-//		if(strMakeOrderId?.isEmpty == true)
-//		{
-//			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("make_enter_your_order_no", comment: "발주번호를 입력하여 주십시오."))
-//			return
-//		}
-//
-//		let strMakeLotId = tfMakeLotId?.text
-//		if(strMakeLotId?.isEmpty == true)
-//		{
-//			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("make_enter_your_lot_no", comment: "LOT 번호를 입력하여 주십시오."))
-//			return
-//		}
-		
-		let intTagCount = 0
-		let intCurWorkCount = self.intOrderWorkCnt + intTagCount // 기제작수량과 현재 인식한 태그 수량
-		
-		// 발주수량보다 크면
-		if(intCurWorkCount > self.intOrderReqCnt)
+		let strSaleWorkId = btnSaleWorkId.titleLabel?.text
+		if(strSaleWorkId?.isEmpty == true)
 		{
-			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("make_cannot_handle_amount_greater_qty", comment: "인식수량이 발주 수량보다 많을수는 없습니다."))
+			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("sale_enter_your_work_id", comment: "송장번호를 입력하여 주십시오."))
 			return
 		}
 		
-		
-		let acDialog = UIAlertController(title: NSLocalizedString("common_confirm", comment: "확인"), message: nil, preferredStyle: .alert)
-		acDialog.addTextField() {
-			$0.placeholder = NSLocalizedString("make_remark", comment: "확인")
+
+		// 납품입고(지시서O) 처리
+		if(self.strWorkType == Constants.RESALE_TYPE_DELIVERY)
+		{
+			if(self.intProcCount == self.intOrderReqCount)
+			{
+				//1)처리량 == 출고예정
+				self.strWorkState = Constants.WORK_STATE_COMPLETE
+			}
+			else if(self.intProcCount > self.intOrderReqCount)
+			{
+				//2)처리량 >출고예정
+				self.strWorkState = ""
+				Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("msg_processing_qty_work_require_qty", comment: "처리수량은 예정수량을 초과할 수 없습니다. 다시 확인해 주세요."))
+				return
+			}
+			else if(self.intProcCount < self.intOrderReqCount)
+			{
+				//3)처리량 <출고예정
+				if(AppContext.sharedManager.getUserInfo().getInAgreeYn() == Constants.AUTO_COMPLETED_AGGREMENT_YES)
+				{
+					self.strWorkState = Constants.WORK_STATE_COMPLETE	//3-1) 자동승인 'Y' -> 완료처리(상태값02)
+				}
+				else
+				{
+					self.strWorkState = Constants.WORK_STATE_ONGOING	//3-2) 자동승인 'N' -> 처리진행(상태값04)
+				}
+			}
 		}
-		acDialog.addAction(UIAlertAction(title: NSLocalizedString("common_cancel", comment: "취소"), style: .default) { (_) in
-			acDialog.textFields?[0].text = ""
-		})
-		acDialog.addAction(UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
+		else if(self.strWorkType == Constants.RESALE_TYPE_RETURN)
+		{
+			// 4)이동입고
+			if(AppContext.sharedManager.getUserInfo().getInAgreeYn() == Constants.AUTO_COMPLETED_AGGREMENT_YES)
+			{
+				self.strWorkState = Constants.WORK_STATE_COMPLETE	//4-1) 자동승인 'Y' -> 완료처리(상태값02)
+			}
+			else
+			{
+				
+				self.strWorkState = Constants.WORK_STATE_ONGOING	//4-2) 자동승인 'N' -> 처리진행(상태값04)
+			}
+		}
+		else
+		{
 			
-//			let strMakeOrderId = self.btnMakeOrderId?.titleLabel?.text
-//			let strMakeLotId = self.tfMakeLotId?.text
-//			let strWorkerName = self.lblUserName?.text
-//			let strRemark = acDialog.textFields?[0].text
-//			self.sendData(makeOrderId: strMakeOrderId!, makeLotId: strMakeLotId!, workerName: strWorkerName!, remark: strRemark!)
-		})
-		self.present(acDialog, animated: true, completion: nil)
+			self.strWorkState = Constants.WORK_STATE_COMPLETE		//3-1) 자동승인 'Y' -> 완료처리(상태값02)
+		}
 		
+		//'완료전송'다이얼로그
+		// TODO
+		//showDialog(Constants.DIALOG_CONFIRM_SEND);
 	}
 
+	
+	// 초기화 버튼 처리, 태그 리스트 재조회
+	func doReloadTagList()
+	{
+		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+		clsDataClient.SelectUrl = "inOutService:selectSaleInWorkList"
+		clsDataClient.removeServiceParam()
+		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+		clsDataClient.addServiceParam(paramName: "branchId", value: AppContext.sharedManager.getUserInfo().getBranchId())
+		clsDataClient.addServiceParam(paramName: "branchCustId", value: AppContext.sharedManager.getUserInfo().getBranchCustId())
+		clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
+		clsDataClient.addServiceParam(paramName: "saleWorkId", value: self.strSaleWorkId)
+		clsDataClient.addServiceParam(paramName: "pageNo", value: 1)
+		clsDataClient.addServiceParam(paramName: "rowsPerPage", value: 300)
+		
+		
+		clsDataClient.selectData(dataCompletionHandler: {(data, error) in
+			if let error = error {
+				// 에러처리
+				super.showSnackbar(message: error.localizedDescription)
+				print(error)
+				return
+			}
+			guard let clsDataTable = data else {
+				print("에러 데이터가 없음")
+				return
+			}
+			
+			// 2) DB에서 리스트 조회값 받음
+			for clsDataRow in clsDataTable.getDataRows()
+			{
+				
+				self.strResaleOrderId			= clsDataRow.getString(name: "resaleOrderId") ?? ""			//구매주문ID
+				self.strSaleWorkId 				= clsDataRow.getString(name: "saleWorkId") ?? ""				//송장번호
+			
+				self.intOrderReqCount 			= clsDataRow.getInt(name: "orderReqCnt") ?? 0
+				self.intProcCount				= clsDataRow.getInt(name: "procCnt") ?? 0					//처리량
+				self.intNoreadCnt				= clsDataRow.getInt(name: "noreadCnt") ?? 0				//미인식
+				//let strVehName					= clsDataRow.getString(name: "resaleVehName") ?? ""			//차량번호
+				
+				self.strWorkerName				= clsDataRow.getString(name: "workerName") ?? ""			//작업자명
+				self.strProdAssetEpc			= clsDataRow.getString(name: "prodAssetEpc") ?? ""				//유형
+			
+				
+				var intRemainCnt				= self.intOrderReqCount - self.intProcCount			//미처리량
+				if(intRemainCnt < 0)
+				{
+					intRemainCnt = 0										//미처리량 0이하는 0
+				}
+				
+				self.lblResaleBranchName.text	= clsDataRow.getString(name: "resaleBranchName") ?? ""			// 출고처
+				self.btnSaleWorkId.setTitle(self.strSaleWorkId, for: .normal)	// 송장번호
+				self.lblOrderReqCount.text		= "\(self.intOrderReqCnt)"		// 입고예정수량
+				self.lblProcCount.text			= "\(self.intProcCount)"		// 처리량
+				self.lblDriverName.text			= clsDataRow.getString(name: "resaleDriverName") ?? ""			// 납품자
+				self.lblProdAssetEpcName.text	= clsDataRow.getString(name: "prodAssetEpcName") ?? ""			// 유형명
+				self.lblRemainCount.text		= "\(intRemainCnt)"		// 미처리량
+				
+				//2) 태그데이터 초기화
+				self.clearTagData(clearScreen: false)
+
+				
+				//3)조회 및 그리드 리스트에 표시
+				
+				self.doSearchWorkListDetail()		//선택된 '송장정보' 내용 조회
+				self.doSearchTagList()				//선택된 '송장정보'에 대한 태그리스트
+				
+				self.boolWorkListSelected = true	//송장 선택 여부
+				super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
+			}
+		})
+	}
+	
+	
+	
+	// 송장조회 상세
+	func doSearchWorkListDetail()
+	{
+		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+		clsDataClient.SelectUrl = "inOutService:selectCombineInWorkListDetail"
+		clsDataClient.removeServiceParam()
+		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+		clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
+		clsDataClient.addServiceParam(paramName: "saleWorkId", value: self.strSaleWorkId)
+		clsDataClient.selectData(dataCompletionHandler: {(data, error) in
+			if let error = error {
+				// 에러처리
+				super.showSnackbar(message: error.localizedDescription)
+				print(error)
+				return
+			}
+			guard let clsDataTable = data else {
+				print("에러 데이터가 없음")
+				return
+			}
+			
+			// 2) DB에서 리스트 조회값 받음
+			for clsDataRow in clsDataTable.getDataRows()
+			{
+				let intProcCount		= clsDataRow.getInt(name: "procCnt") ?? 0
+				let intWorkAssignCount	= clsDataRow.getInt(name: "workAssignCnt") ?? 0
+				let intRemainCount		= clsDataRow.getInt(name: "remainCnt") ?? 0
+				let strProdAssetEpc		= clsDataRow.getString(name: "prodAssetEpc") ?? ""
+				let strProdAssetEpcName = clsDataRow.getString(name: "prodAssetEpcName") ?? ""
+				
+				let clsTagInfo = RfidUtil.TagInfo()
+				clsTagInfo.setAssetEpc(assetEpc: strProdAssetEpc)
+				clsTagInfo.setAssetName(assetName: strProdAssetEpcName)
+				clsTagInfo.setProcCount(procCount: intProcCount)
+				clsTagInfo.setWorkAssignCount(workAssignCount: intWorkAssignCount)
+				clsTagInfo.setRemainCount(remainCount: intRemainCount)
+				
+				//그리드 리스트에 추가
+				self.arrAssetRows.append(clsTagInfo)
+			}
+			DispatchQueue.main.async
+			{
+				self.tvCombineIn.reloadData()
+			}
+		})
+	}
+	
+	
+	// 송장조회(번호)에 대한 상세 태그리스트
+	func doSearchTagList()
+	{
+//		String strEpcUrn 			= null;
+//		String strEpcCode			= null;
+//		String strTraceDate 		= null;
+//		String strProdAssetEpcName 	= null;
+//		String[] splitValue 		= null;
+//		String strTraceDateFormat	= null;
+//		String strAssetEpc 			= null;
+//		String strSerialNo 			= null;
+//		String strCorpEpc 			= null;
+//		String strNewAssetEpc 		= null;
+		
+		
+		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+		clsDataClient.SelectUrl = "supplyService:selectSaleInTagList"
+		clsDataClient.removeServiceParam()
+		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+		clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
+		clsDataClient.addServiceParam(paramName: "resaleOrderId", value: self.strResaleOrderId)
+		clsDataClient.selectData(dataCompletionHandler: {(data, error) in
+			if let error = error {
+				// 에러처리
+				super.showSnackbar(message: error.localizedDescription)
+				print(error)
+				return
+			}
+			guard let clsDataTable = data else {
+				print("에러 데이터가 없음")
+				return
+			}
+			
+			// 2) DB에서 리스트 조회값 받음
+			for clsDataRow in clsDataTable.getDataRows()
+			{
+				let strEpcCode			= clsDataRow.getString(name: "epcCode") ?? ""
+				let strEpcUrn 			= clsDataRow.getString(name: "epcUrn") ?? ""
+				let strUtcTraceDate 	= clsDataRow.getString(name: "utcTraceDate") ?? ""
+				let strProdAssetEpcName = clsDataRow.getString(name: "prodAssetEpcName") ?? ""
+
+				
+				
+				let clsTagInfo = RfidUtil.TagInfo()
+				clsTagInfo.setEpcCode(epcCode: strEpcCode)
+
+				
+				if(strEpcUrn.isEmpty == false)
+				{
+					clsTagInfo.setEpcUrn(epcUrn: strEpcUrn)
+					let arsEpcUrn = strEpcUrn.split(".")
+					if( arsEpcUrn.count == 4)
+					{
+						let strCorpEpc	= arsEpcUrn[ 1]
+						let strAssetEpc	= arsEpcUrn[ 2]
+						let strSerialNo	= arsEpcUrn[ 3]
+						
+						let strNewAssetEpc = "\(strCorpEpc)\(strAssetEpc)"
+						
+						print("=============================================")
+						print("strCorpEpc:\(strCorpEpc)")
+						print("strNewAssetEpc:\(strNewAssetEpc)")
+						print("strSerialNo:\(strSerialNo)")
+						print("=============================================")
+					}
+				}
+				
+				if(strUtcTraceDate.isEmpty == false)
+				{
+					let strLocaleTraceDate = DateUtil.utcToLocale(utcDate: strUtcTraceDate, dateFormat: "yyyyMMddHHmmss")
+					clsTagInfo.setReadTime(readTime: strLocaleTraceDate)
+				}
+		
+	/*
+
+		
+				//DB에서 조회된 태그 데이터 전달용 리스트에 저장
+				EpcCodeInfoParcel clsEpcInfo = new EpcCodeInfoParcel();
+				clsEpcInfo.setEpcCode(strEpcCode);
+				clsEpcInfo.setEpcUrn(strEpcUrn);
+				clsEpcInfo.setSerialNo(strSerialNo);
+				clsEpcInfo.setAssetEpc(strNewAssetEpc);
+				clsEpcInfo.setAssetName(strProdAssetEpcName);
+				clsEpcInfo.setReadTime(strTraceDateFormat);
+		
+				mLstTagListRowsParcel.add(clsEpcInfo);
+				*/
+			}
+			
+			DispatchQueue.main.async
+				{
+					self.tvCombineIn.reloadData()
+			}
+		})
+
+	}
+
+	// 작업초기화 데이터를 전송한다
+	func sendWorkInitData(resaleOrderId: String, saleWorkId: String)
+	{
+		
+	}
+	
+	
+	func sendData(workState: String, resaleOrderId: String, saleWorkId: String, vehName: String, driverName: String, orderReqCount: Int, noReadCount: Int, remark: String, workerName: String, signData: String)
+	{
+//
+//		print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+//		print("makeOrderId:\(makeOrderId)")
+//		print("makeLotId:\(makeLotId)")
+//		print("workerName:\(workerName)")
+//		print("remark:\(remark)")
+//		print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+//
+//		clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
+//
+//		//		DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//		//			self.clsIndicator?.hide()
+//		//		}
+//
+//		clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+//		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+//		clsDataClient.ExecuteUrl = "mountService:executeMountData"
+//		clsDataClient.removeServiceParam()
+//		clsDataClient.addServiceParam(paramName: "makeOrderId", value: makeOrderId)
+//		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+//		clsDataClient.addServiceParam(paramName: "userId", value: AppContext.sharedManager.getUserInfo().getUserId())
+//		clsDataClient.addServiceParam(paramName: "unitId", value: AppContext.sharedManager.getUserInfo().getUnitId())
+//		clsDataClient.addServiceParam(paramName: "branchId", value: AppContext.sharedManager.getUserInfo().getBranchId())
+//		clsDataClient.addServiceParam(paramName: "branchCustId", value: AppContext.sharedManager.getUserInfo().getBranchCustId())
+//		clsDataClient.addServiceParam(paramName: "makeLotId", value: makeLotId)
+//		clsDataClient.addServiceParam(paramName: "workerName", value: workerName)
+//		clsDataClient.addServiceParam(paramName: "remark", value: remark)
+//
+//		let clsDataTable : DataTable = DataTable()
+//		clsDataTable.Id = "TAG_MOUNT"
+//		clsDataTable.addDataColumn(dataColumn: DataColumn(id: "epcCode", type: "String", size: "0", keyColumn: false, updateColumn: true, autoIncrement: false, canXlsExport: false, title: ""))
+//
+//		for clsInfo in self.arrTagRows
+//		{
+//			if(self.strProdAssetEpc != clsInfo.getAssetEpc())
+//			{
+//				self.clsIndicator?.hide()
+//
+//				Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("stock_can_not_processed_because_different_pallet", comment: "품목이 다른 파렛트가 있어 처리 할 수 없습니다."))
+//				return
+//			}
+//
+//			let clsDataRow : DataRow = DataRow()
+//			clsDataRow.State = DataRow.DATA_ROW_STATE_ADDED
+//			clsDataRow.addRow(name:"epcCode", value: clsInfo.getEpcCode())
+//			clsDataTable.addDataRow(dataRow: clsDataRow)
+//		}
+//		clsDataClient.executeData(dataTable: clsDataTable, dataCompletionHandler: { (data, error) in
+//			self.clsIndicator?.hide()
+//			if let error = error {
+//				// 에러처리
+//				super.showSnackbar(message: error.localizedDescription)
+//				print(error)
+//				return
+//			}
+//			guard let clsResultDataTable = data else {
+//				print("에러 데이터가 없음")
+//				return
+//			}
+//
+//			print("####결과값 처리")
+//			let clsResultDataRows = clsResultDataTable.getDataRows()
+//			if(clsResultDataRows.count > 0)
+//			{
+//				let clsDataRow = clsResultDataRows[0]
+//				let strResultCode = clsDataRow.getString(name: "resultCode")
+//
+//				print(" -strResultCode:\(strResultCode!)")
+//				if(Constants.PROC_RESULT_SUCCESS == strResultCode)
+//				{
+//					//비동기 처리 결과에대한  UI에한 처리는 반드시 쓰레드로 처리되어야 한다.
+//					DispatchQueue.main.async {
+//						//						self.clearTagData()
+//						self.clearUserInterfaceData()
+//						let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
+//						self.showSnackbar(message: strMsg)
+//					}
+//				}
+//				else
+//				{
+//					let strMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
+//					self.showSnackbar(message: strMsg)
+//				}
+//			}
+//
+//		})
+		
+	}
 
 	
 	//========================================================================

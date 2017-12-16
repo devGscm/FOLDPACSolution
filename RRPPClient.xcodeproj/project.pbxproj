@@ -86,6 +86,8 @@
 		55FC62A61FD14A56003B7173 /* Stock.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55FC62A51FD14A56003B7173 /* Stock.storyboard */; };
 		960224421FD0DBCD00DE7C65 /* SwingReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960224411FD0DBCD00DE7C65 /* SwingReader.swift */; };
 		960224441FD0F3E400DE7C65 /* AT288Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960224431FD0F3E400DE7C65 /* AT288Reader.swift */; };
+		9609374A1FE3984D0070755E /* TagOrderSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960937491FE3984D0070755E /* TagOrderSearch.swift */; };
+		9609374C1FE398AB0070755E /* TagOrderSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9609374B1FE398AB0070755E /* TagOrderSearchCell.swift */; };
 		9618F0E61FCE83D300F376B7 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9618F0E51FCE83D300F376B7 /* TagCell.swift */; };
 		96779DEE1FE27CE4009A4708 /* RfidInspectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96779DED1FE27CE4009A4708 /* RfidInspectCell.swift */; };
 		967A9C441FC3BE8D00B6A9D1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 967A9C461FC3BE8D00B6A9D1 /* Localizable.strings */; };
@@ -101,6 +103,7 @@
 		96994C4D1FC5453B00B3A726 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96994C4C1FC5453A00B3A726 /* SQLite.framework */; };
 		96994C4F1FC5455900B3A726 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 96994C4C1FC5453A00B3A726 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		96994C511FC545DF00B3A726 /* LocalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96994C501FC545DF00B3A726 /* LocalData.swift */; };
+		96999C641FE3915400A0565B /* TagSupplyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96999C631FE3915400A0565B /* TagSupplyCell.swift */; };
 		96D279C91FBE5E4D004B848F /* Mosaic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96D279C81FBE5E4D004B848F /* Mosaic.framework */; };
 		96D279CA1FBE5E4D004B848F /* Mosaic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 96D279C81FBE5E4D004B848F /* Mosaic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		96E494201FB1A78500D1E2C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E4941F1FB1A78500D1E2C1 /* AppDelegate.swift */; };
@@ -246,6 +249,8 @@
 		55FC62A51FD14A56003B7173 /* Stock.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Stock.storyboard; sourceTree = "<group>"; };
 		960224411FD0DBCD00DE7C65 /* SwingReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwingReader.swift; sourceTree = "<group>"; };
 		960224431FD0F3E400DE7C65 /* AT288Reader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AT288Reader.swift; sourceTree = "<group>"; };
+		960937491FE3984D0070755E /* TagOrderSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagOrderSearch.swift; sourceTree = "<group>"; };
+		9609374B1FE398AB0070755E /* TagOrderSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagOrderSearchCell.swift; sourceTree = "<group>"; };
 		9618F0E51FCE83D300F376B7 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
 		96779DED1FE27CE4009A4708 /* RfidInspectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RfidInspectCell.swift; sourceTree = "<group>"; };
 		967A9C451FC3BE8D00B6A9D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -271,6 +276,7 @@
 		968611DD1FBD564C000FE288 /* SWXMLHash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SWXMLHash.framework; path = Carthage/Build/iOS/SWXMLHash.framework; sourceTree = "<group>"; };
 		96994C4C1FC5453A00B3A726 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
 		96994C501FC545DF00B3A726 /* LocalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalData.swift; sourceTree = "<group>"; };
+		96999C631FE3915400A0565B /* TagSupplyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSupplyCell.swift; sourceTree = "<group>"; };
 		96D279C81FBE5E4D004B848F /* Mosaic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mosaic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E4941C1FB1A78500D1E2C1 /*  RRPPClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = " RRPPClient.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E4941F1FB1A78500D1E2C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -424,6 +430,9 @@
 				9618F0E51FCE83D300F376B7 /* TagCell.swift */,
 				5542B4B91FE1F67600BD6A00 /* RfidTrackingService.swift */,
 				5542B4BB1FE1F69000BD6A00 /* TagSupply.swift */,
+				96999C631FE3915400A0565B /* TagSupplyCell.swift */,
+				960937491FE3984D0070755E /* TagOrderSearch.swift */,
+				9609374B1FE398AB0070755E /* TagOrderSearchCell.swift */,
 			);
 			path = Tag;
 			sourceTree = "<group>";
@@ -835,9 +844,11 @@
 			files = (
 				5575BB4E1FE2534100CACCC8 /* EventSelectStoreCell.swift in Sources */,
 				B01C42081FE0CBD200404301 /* BaseTableViewController.swift in Sources */,
+				9609374C1FE398AB0070755E /* TagOrderSearchCell.swift in Sources */,
 				B01C42051FE0CA8000404301 /* BaseViewController.swift in Sources */,
 				B060131F1FD529A200594CCD /* InOutCancelCell.swift in Sources */,
 				9680BE881FCBD91D002838A4 /* SwingProtocol.m in Sources */,
+				9609374A1FE3984D0070755E /* TagOrderSearch.swift in Sources */,
 				55ACD6801FC8051900A2DC72 /* DataProtocol.swift in Sources */,
 				55FA78561FBDAD7E00583A80 /* AppContext.swift in Sources */,
 				559F39D81FD76EF5006E5C17 /* BranchSearchCell.swift in Sources */,
@@ -910,6 +921,7 @@
 				55D13A6A1FE3491C00099F50 /* CombineInCell.swift in Sources */,
 				5575BB4A1FE2394200CACCC8 /* EventOtherCell.swift in Sources */,
 				553F42FA1FCD4E8E006784AF /* ProductMount.swift in Sources */,
+				96999C641FE3915400A0565B /* TagSupplyCell.swift in Sources */,
 				5590A55D1FD4E194007571D5 /* ProdMappingOut.swift in Sources */,
 				553A4E021FE0AFCE00271BBD /* StockReviewSearch.swift in Sources */,
 				55FA784A1FBDAD0B00583A80 /* LeftMenuItem.swift in Sources */,
