@@ -37,31 +37,21 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 	var boolExistSavedInvoice	= false		/**< 송장번호ID - DB에서 할당받았는지 여부 */
 	var strSaleWorkId			= ""		/**< 송장번호 */
 	
-	
-	
-	
-	
-	
-	
 	var strTitle	= ""
 	
 
-	
-	
-	
-
-	var strProdAssetEpc								= ""			/**< 유형 */
-	var intOrderReqCount							= 0			/**< 출고량 */
-	var boolWorkListSelected						= false		/**< 송장-선택 했는지 여부 */
-	
-	
-	var strWorkerName								= ""			/**< 반납-인수자정보*/
-	var intNoreadCnt								= 0			/**< 미인식 -고장으로 인해 리더기 미인식*/
-	var strCustType									= ""			/**< 고객사 구분 */
-	
-	var strWorkState								= ""			/**< 작업상태(서버전송) */
-	var boolWorkCompleteBtn							= false		/**< 완료전송 버튼 입력 -전송용 */
-	var strNoReadCount								= "0"			/**< 미인식수량-전송용 */
+//	var strProdAssetEpc								= ""			/**< 유형 */
+//	var intOrderReqCount							= 0			/**< 출고량 */
+//	var boolWorkListSelected						= false		/**< 송장-선택 했는지 여부 */
+//
+//
+//	var strWorkerName								= ""			/**< 반납-인수자정보*/
+//	var intNoreadCnt								= 0			/**< 미인식 -고장으로 인해 리더기 미인식*/
+//	var strCustType									= ""			/**< 고객사 구분 */
+//
+//	var strWorkState								= ""			/**< 작업상태(서버전송) */
+//	var boolWorkCompleteBtn							= false		/**< 완료전송 버튼 입력 -전송용 */
+//	var strNoReadCount								= "0"			/**< 미인식수량-전송용 */
 
 	
 	
@@ -562,7 +552,11 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 			
 			let intDataRowsSize = clsDataTable.getDataRows().count
 			
-			self.lblProcCount.text = "\(intDataRowsSize)"								// 처리량
+			DispatchQueue.main.async
+			{
+				self.lblProcCount.text = "\(intDataRowsSize)"								// 처리량
+			}
+			
 			
 			if( intDataRowsSize > 0)
 			{
@@ -844,7 +838,6 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 		clsDataClient.addServiceParam(paramName: "unitId", value: AppContext.sharedManager.getUserInfo().getUnitId())
 		clsDataClient.addServiceParam(paramName: "inAgreeYn", 		value: AppContext.sharedManager.getUserInfo().getInAgreeYn()) // 입고자동승인여부
 		clsDataClient.addServiceParam(paramName: "workState", 		value: workState)
-		clsDataClient.addServiceParam(paramName: "workState",		value: strWorkState)
 		clsDataClient.addServiceParam(paramName: "resaleOrderId",	value: strResaleOrderId)
 		clsDataClient.addServiceParam(paramName: "vehName",			value: vehName)
 		clsDataClient.addServiceParam(paramName: "easyInProcess",	value: "Y")	// 입고B타입
@@ -910,32 +903,32 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 				print(" -strResultCode:\(strResultCode!)")
 				if(Constants.PROC_RESULT_SUCCESS == strResultCode)
 				{
-					let strSvrProcCount = clsDataRow.getString(name: "procCount")
+					//let strSvrProcCount = clsDataRow.getString(name: "procCount")
 					let strSvrWorkState = clsDataRow.getString(name: "workState")
 					//print("-서버로부터 받은 처리갯수: \(strSvrProcCount)")
 					//print("-서버로부터 받은 작업처리상태:  \(strSvrWorkState)")
 					
 					DispatchQueue.main.async
 					{
-							// 전송 성공인 경우
-							for clsInfo in self.arrTagRows
+						// 전송 성공인 경우
+						for clsInfo in self.arrTagRows
+						{
+							if(clsInfo.getNewTag() == true)
 							{
-								if(clsInfo.getNewTag() == true)
-								{
-									clsInfo.setNewTag(false)	// 태그상태 NEW -> OLD로 변경
-								}
+								clsInfo.setNewTag(false)	// 태그상태 NEW -> OLD로 변경
 							}
-							self.boolNewTagInfoExist = false
-							self.boolExistSavedInvoice = true	// 송장번호 할당여부
-							
-							// 현재 작업상태가 완료전송인경우
-							if(Constants.WORK_STATE_COMPLETE == strSvrWorkState || Constants.WORK_STATE_COMPLETE_FORCE == strSvrWorkState)
-							{
-								// 송장정보관련 UI객체를 초기화한다.
-								self.clearTagData(clearScreen: true)
-							}
-							let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
-							self.showSnackbar(message: strMsg)
+						}
+						self.boolNewTagInfoExist = false
+						self.boolExistSavedInvoice = true	// 송장번호 할당여부
+						
+						// 현재 작업상태가 완료전송인경우
+						if(Constants.WORK_STATE_COMPLETE == strSvrWorkState || Constants.WORK_STATE_COMPLETE_FORCE == strSvrWorkState)
+						{
+							// 송장정보관련 UI객체를 초기화한다.
+							self.clearTagData(clearScreen: true)
+						}
+						let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
+						self.showSnackbar(message: strMsg)
 					}
 				}
 				else
