@@ -456,7 +456,6 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 	
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
-		//let cell : UITableViewCell = UITableViewCell(style: <#T##UITableViewCellStyle#>, reuseIdentifier: <#T##String?#>)
 		let objCell:ProductMountCell = tableView.dequeueReusableCell(withIdentifier: "tvcProductMount", for: indexPath) as! ProductMountCell
 		let clsTagInfo = arrAssetRows[indexPath.row]
 		
