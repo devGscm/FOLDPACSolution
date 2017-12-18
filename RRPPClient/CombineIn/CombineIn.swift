@@ -652,7 +652,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	// 초기화 버튼 처리, 태그 리스트 재조회
 	func doReloadTagList()
 	{
-		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		clsDataClient.SelectUrl = "inOutService:selectSaleInWorkList"
 		clsDataClient.removeServiceParam()
@@ -721,7 +721,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	// 송장조회 상세
 	func doSearchWorkListDetail()
 	{
-		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		clsDataClient.SelectUrl = "inOutService:selectCombineInWorkListDetail"
 		clsDataClient.removeServiceParam()
@@ -770,7 +770,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	// 송장조회(번호)에 대한 상세 태그리스트
 	func doSearchTagList()
 	{
-		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		clsDataClient.SelectUrl = "supplyService:selectSaleInTagList"
 		clsDataClient.removeServiceParam()
@@ -841,7 +841,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	func sendWorkInitData(resaleOrderId: String, saleWorkId: String)
 	{
 		clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
-		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		clsDataClient.ExecuteUrl = "inOutService:executeInCancelData"
 		clsDataClient.removeServiceParam()
@@ -902,7 +902,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 		*/
 		clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
 		
-		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		clsDataClient.ExecuteUrl = "inOutService:executeInData"
 		clsDataClient.removeServiceParam()
@@ -1136,7 +1136,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	
 	func doSearchBarcode(barcode: String)
 	{
-		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		clsDataClient.SelectUrl = "inOutService:selectSaleInWorkList"
 		clsDataClient.removeServiceParam()

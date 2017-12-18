@@ -355,7 +355,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		//			self.clsIndicator?.hide()
 		//		}
 		
-		clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		clsDataClient.ExecuteUrl = "mountService:executeMountData"
 		clsDataClient.removeServiceParam()

@@ -39,21 +39,6 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 	
 	var strTitle	= ""
 	
-
-//	var strProdAssetEpc								= ""			/**< 유형 */
-//	var intOrderReqCount							= 0			/**< 출고량 */
-//	var boolWorkListSelected						= false		/**< 송장-선택 했는지 여부 */
-//
-//
-//	var strWorkerName								= ""			/**< 반납-인수자정보*/
-//	var intNoreadCnt								= 0			/**< 미인식 -고장으로 인해 리더기 미인식*/
-//	var strCustType									= ""			/**< 고객사 구분 */
-//
-//	var strWorkState								= ""			/**< 작업상태(서버전송) */
-//	var boolWorkCompleteBtn							= false		/**< 완료전송 버튼 입력 -전송용 */
-//	var strNoReadCount								= "0"			/**< 미인식수량-전송용 */
-
-	
 	
 	var arrAssetRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
 	var arrTagRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
@@ -528,7 +513,7 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 		clearTagData(clearScreen: false)
 		
 		
-		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		clsDataClient.SelectUrl = "supplyService:selectSaleInTagList"
 		clsDataClient.removeServiceParam()
@@ -640,7 +625,7 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 	// 송장조회 상세
 	func doSearchWorkListDetail()
 	{
-		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		clsDataClient.SelectUrl = "inOutService:selectCombineInWorkListDetail"
 		clsDataClient.removeServiceParam()
@@ -689,7 +674,7 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 	// 송장조회(번호)에 대한 상세 태그리스트
 	func doSearchTagList()
 	{
-		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		clsDataClient.SelectUrl = "supplyService:selectSaleInTagList"
 		clsDataClient.removeServiceParam()
@@ -760,7 +745,7 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 	func sendWorkInitData(resaleOrderId: String)
 	{
 		clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
-		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		clsDataClient.ExecuteUrl = "inOutService:executeInCancelData"
 		clsDataClient.removeServiceParam()
@@ -828,7 +813,7 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 	{
 		clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
 		
-		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		clsDataClient.ExecuteUrl = "inOutService:executeInData"
 		clsDataClient.removeServiceParam()
@@ -990,7 +975,7 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 
 	func sendDataNoneResaleOrderId(workState: String, resaleCustId: String, vehName: String, tradeChit: String, remark: String, signData: String)
 	{
-		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		clsDataClient.SelectUrl = "inOutService:selectResaleOrderId"
 		clsDataClient.removeServiceParam()
@@ -1141,7 +1126,7 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 	
 	func doSearchBarcode(barcode: String)
 	{
-		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		clsDataClient.SelectUrl = "inOutService:selectSaleInWorkList"
 		clsDataClient.removeServiceParam()

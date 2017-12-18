@@ -99,7 +99,7 @@ class RootViewController: BaseViewController
 			let localData = LocalData.shared
 			localData.RemoteDbEnncryptId = AppContext.sharedManager.getUserInfo().getEncryptId()
 			localData.CorpId = AppContext.sharedManager.getUserInfo().getCorpId()
-			localData.versionCheck(indicator: clsIndicator, navigation: navigationDrawerController)
+			localData.versionCheck(container: self, indicator: clsIndicator, navigation: navigationDrawerController)
 			
 			
 			/*

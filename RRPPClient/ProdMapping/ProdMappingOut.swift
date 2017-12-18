@@ -907,7 +907,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		// 1) 태그데이터 초기화
 		clearTagData(clearScreen: false)
 		
-		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		clsDataClient.SelectUrl = "supplyService:selectProdMappingOutTagList" //출고C타입용 (출고A,B타입과 다름)
 		clsDataClient.removeServiceParam()
@@ -1022,7 +1022,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
     {
 		do
 		{
-			let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+			let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 			clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 			clsDataClient.SelectUrl = "supplyService:selectProdMappingOutTagList"
 			clsDataClient.removeServiceParam()
@@ -1089,7 +1089,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
     	{
             clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
             
-            let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+            let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
             clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
             clsDataClient.ExecuteUrl = "inOutService:executeOutCancelData"
             clsDataClient.removeServiceParam()
@@ -1165,7 +1165,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		var strProdName = ""
 		do
 		{
-			let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+			let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 			clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 			clsDataClient.SelectUrl = "inOutService:selectMappingOutProdName"
 			clsDataClient.removeServiceParam()
@@ -1290,7 +1290,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		{
 			clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
 			
-			let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+			let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 			clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 			clsDataClient.ExecuteUrl = "inOutService:deleteItemInfo"
 			clsDataClient.removeServiceParam()
@@ -1369,7 +1369,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		{
 			clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
 			
-			let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+			let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 			clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 			clsDataClient.ExecuteUrl = "inOutService:executeOutData"
 			clsDataClient.removeServiceParam()
@@ -1510,7 +1510,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		print("=================================")
 		do
 		{
-			let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+			let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 			clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 			clsDataClient.SelectUrl = "inOutService:selectSaleWorkId"
 			clsDataClient.removeServiceParam()
@@ -1663,6 +1663,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		showSnackbar(message: NSLocalizedString("rfid_connected_reader", comment: "RFID 리더기에 연결되었습니다."))
 		changeBtnRfidReader(true)
 		
+		// 연결이 되면 RFID 모드로 바꾸어 놓는다.
 		setRederMode(ReaderSenssorMode.RFID)	//리더기 모드 초기화
 	}
 	
@@ -1671,6 +1672,9 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	{
 		showSnackbar(message: NSLocalizedString("rfid_connection_terminated", comment: "연결이 종료되었습니다."))
 		changeBtnRfidReader(false)
+		
+		// 연결이 끝나면 RFID 모드로 바꾸어 놓는다.
+		setRederMode(ReaderSenssorMode.RFID)	//리더기 모드 초기화
 	}
 	
 	//리더기 연결 타임오바

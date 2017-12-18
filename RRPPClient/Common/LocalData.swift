@@ -345,16 +345,16 @@ class LocalData {
 	///
 	/// - Parameters:
 	///   - remoteDbUserInfo: <#remoteDbUserInfo description#>
-	///   - corpId: <#corpId description#>
+	///   - corpId:
 	///   - db: <#db description#>
 	///   - updateCode: <#updateCode description#>
 	///   - updateDate: <#updateDate description#>
 	///   - ref: <#ref description#>
 	///   - bIsInsert: <#bIsInsert description#>
-	private func changeNewVersiion(remoteDbUserInfo: String, corpId: String, db: Connection, updateCode: String, updateDate: Int, ref : Int, bIsInsert : Bool, disPatchGrp : DispatchGroup ) -> Void
+	private func changeNewVersion(container: UIViewController, remoteDbUserInfo: String, corpId: String, db: Connection, updateCode: String, updateDate: Int, ref : Int, bIsInsert : Bool, disPatchGrp : DispatchGroup ) -> Void
 	{
 		
-		let dataClient = Mosaic.DataClient(url: Constants.WEB_SVC_URL)
+		let dataClient = Mosaic.DataClient(container: container, url: Constants.WEB_SVC_URL)
 		
 		//TODO:: 아라의 코드중 self를 objMe로 대체
 		let objMe = self
@@ -814,7 +814,7 @@ class LocalData {
 	}
 	
 	/// 원격 Db와 버전체크 버전체크후, 데이터를 가져와서 동기화
-	public func versionCheck(indicator: ProgressIndicator, navigation: NavigationDrawerController? ) -> Void
+	public func versionCheck(container: UIViewController, indicator: ProgressIndicator, navigation: NavigationDrawerController? ) -> Void
 	{
 		if(self.mRemoteDbEnncryptId.isEmpty)
 		{
@@ -831,7 +831,7 @@ class LocalData {
 		//모든 Dispatch 쓰레드가 종료되기를 기다린다.
 		let clsDispatchGrp = DispatchGroup()
 		
-		let dataClient = Mosaic.DataClient(url: Constants.WEB_SVC_URL)
+		let dataClient = Mosaic.DataClient(container: container, url: Constants.WEB_SVC_URL)
 		dataClient.UserInfo = self.mRemoteDbEnncryptId
 		dataClient.UserData = "app.update.selectUpdateItemList"
 		dataClient.removeServiceParam()
@@ -877,12 +877,12 @@ class LocalData {
 							if(updateDate > localRow[self.mColUdt])
 							{
 								print("update date  org: \(updateDate), new:\(localRow[self.mColUdt])")
-								self.changeNewVersiion(remoteDbUserInfo: self.mRemoteDbEnncryptId, corpId: self.mCorpId, db: db, updateCode: updateCode, updateDate: updateDate, ref : ref,  bIsInsert : false , disPatchGrp : clsDispatchGrp)
+								self.changeNewVersion(container: container, remoteDbUserInfo: self.mRemoteDbEnncryptId, corpId: self.mCorpId, db: db, updateCode: updateCode, updateDate: updateDate, ref : ref,  bIsInsert : false , disPatchGrp : clsDispatchGrp)
 							}
 						}
 						else
 						{
-							self.changeNewVersiion(remoteDbUserInfo: self.mRemoteDbEnncryptId, corpId: self.mCorpId, db: db, updateCode: updateCode, updateDate: updateDate, ref : ref,  bIsInsert : true , disPatchGrp : clsDispatchGrp)
+							self.changeNewVersion(container: container, remoteDbUserInfo: self.mRemoteDbEnncryptId, corpId: self.mCorpId, db: db, updateCode: updateCode, updateDate: updateDate, ref : ref,  bIsInsert : true , disPatchGrp : clsDispatchGrp)
 						}
 					}
 					

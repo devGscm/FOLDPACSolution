@@ -103,7 +103,7 @@ class WorkCustSearch: BaseViewController, UITableViewDataSource, UITableViewDele
     
     func initDataClient()
     {
-        clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+        clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
         clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		
 		if(inOutType == Constants.INOUT_TYPE_OUTPUT)

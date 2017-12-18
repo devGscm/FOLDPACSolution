@@ -335,7 +335,7 @@ class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	{
 		clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
 		
-		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		clsDataClient.ExecuteUrl = "inspectService:inspectTagData"
 		clsDataClient.removeServiceParam()

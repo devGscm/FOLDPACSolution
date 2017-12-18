@@ -162,16 +162,27 @@ public class DataClient
 	var mStrUserData : String?
 	var mMapParam :  [String : String] = [String : String]()
 	var mStrMode : String?
+
+	
+	var mVcContainer : UIViewController?
 	
 	//Init구현
-	public convenience init () {
-		self.init(url: "http://192.168.0.213:8080")
-	}
+//	public convenience init () {
+//		self.init(url: "http://192.168.0.213:8080")
+//	}
+//
+//	public init(url webSvcLocaiton: String)
+//	{
+//		self.mVcContainer = nil
+//		self.mStrWebSvcLocation = webSvcLocaiton
+//	}
 	
-	public init(url webSvcLocaiton: String)
+	public init(container: UIViewController, url webSvcLocaiton: String)
 	{
+		self.mVcContainer = container
 		self.mStrWebSvcLocation = webSvcLocaiton
 	}
+	
 	
 	//GetSet구현
 	public var UserInfo: String? {
@@ -360,10 +371,42 @@ public class DataClient
 			do {
 				if let responseJSON = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]
 				{
-					if let responseData = ResponseData(json: responseJSON) {
+					if let responseData = ResponseData(json: responseJSON)
+					{
 						print(responseJSON)
-						dataCompletionHandler(responseData, nil)
-					} else {
+						if( responseData.returnCode! == ReturnCodeType.RETURN_CODE_OK.rawValue)
+						{
+							dataCompletionHandler(responseData, nil)
+						}
+						else if( responseData.returnCode! == ReturnCodeType.RETURN_CODE_AUTH_FAIL.rawValue)
+						{
+							// 인증 실패시
+							print("==================================")
+							print("*DataClient.selectData() 인증 실패")
+							print("==================================")
+							
+							if let vcContainer = self.mVcContainer
+							{
+								Dialog.show(container: vcContainer,
+									title: NSLocalizedString("common_auth_error", comment: "인증오류"),
+									message: NSLocalizedString("common_auth_fail_check_id_passwd", comment: "인증에 실패하였습니다.\n사용중인 ID와 비밀번호를 확인하여 주십시요."),
+									okTitle: NSLocalizedString("common_confirm", comment: "확인"),
+									okHandler: { (_) in
+										// 현재 창 종료
+										vcContainer.dismiss(animated: false, completion: nil)
+										// 옵져버 전달 : 로그아웃 명령전송. 화면단에 반드시 수신자를 구현해야 함(LeftMenuController에서 응답대기)
+										NotificationCenter.default.post(name: NSNotification.Name(rawValue: "doLogoutNewLogin"), object: nil)
+									}
+								)
+							}
+						}
+						else
+						{
+							print("응답데이터가 없음!!")
+						}
+					}
+					else
+					{
 						print(responseData)
 						let error = BackendError.objectSerialization(reason: "JSON 처리오류, DATA:" + responseJSON.debugDescription)
 						dataCompletionHandler(nil, error)
@@ -388,7 +431,7 @@ public class DataClient
 			return
 		}
 		dicParam["userinfo"] = strUserInfo
-		print("strUserInfo!!" + strUserInfo)
+		print(" -UserInfo:" + strUserInfo)
 		
 //		guard let strUserData = self.mStrUserData , !strUserData.isEmpty else
 //		{
@@ -475,6 +518,28 @@ public class DataClient
 								let dataTable = dataSourceMgr.getDataTable()
 								dataCompletionHandler(dataTable, nil)
 								return
+							}
+						}
+						else if( responseData.returnCode! == ReturnCodeType.RETURN_CODE_AUTH_FAIL.rawValue)
+						{
+							// 인증 실패시
+							print("==================================")
+							print("*DataClient.selectData() 인증 실패")
+							print("==================================")
+							
+							if let vcContainer = self.mVcContainer
+							{
+								Dialog.show(container: vcContainer,
+									title: NSLocalizedString("common_auth_error", comment: "인증오류"),
+									message: NSLocalizedString("common_auth_fail_check_id_passwd", comment: "인증에 실패하였습니다.\n사용중인 ID와 비밀번호를 확인하여 주십시요."),
+									okTitle: NSLocalizedString("common_confirm", comment: "확인"),
+									okHandler: { (_) in
+										// 현재 창 종료
+										vcContainer.dismiss(animated: false, completion: nil)
+										// 옵져버 전달 : 로그아웃 명령전송. 화면단에 반드시 수신자를 구현해야 함(LeftMenuController에서 응답대기)
+										NotificationCenter.default.post(name: NSNotification.Name(rawValue: "doLogoutNewLogin"), object: nil)
+									}
+								)
 							}
 						}
 						else

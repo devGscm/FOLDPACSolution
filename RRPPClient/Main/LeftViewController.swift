@@ -38,17 +38,20 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		mIvLogo.clipsToBounds = true
 		
 		
-		// 옵져버 패턴 : 응답대기
-		NotificationCenter.default.addObserver(self, selector: #selector(makeLeftMenu), name: NSNotification.Name(rawValue: "makeLeftMenu"), object: nil)
+		// 옵져버 패턴 : 응답대기(왼쪽메뉴재생성)
+		NotificationCenter.default.addObserver(self, selector: #selector(doMakeLeftMenu), name: NSNotification.Name(rawValue: "doMakeLeftMenu"), object: nil)
+		
+		// 옵져버 패턴 : 응답대기(로그아웃처리)
+		NotificationCenter.default.addObserver(self, selector: #selector(doLogoutNewLogin), name: NSNotification.Name(rawValue: "doLogoutNewLogin"), object: nil)
 	}
 	
 	override func viewDidAppear(_ animated: Bool)
 	{
 		print(" LeftViewCOntroller.viewDidAppear")
-		makeLeftMenu()
+		doMakeLeftMenu()
 	}
 	
-	@objc public func makeLeftMenu()
+	@objc public func doMakeLeftMenu()
 	{
 		arrMenuData.removeAll()
 		
@@ -331,14 +334,37 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	{
 		print(" LeftViewCOntroller.onLogoutClicked")
 		AppContext.sharedManager.doLogout();
-		navigationDrawerController?.closeLeftView()
-        
-        // 로그아웃전에 루트뷰로 전환하여 로그인후 루트뷰가 나오도록 수정
-		toolbarController?.transition(to: clsRootController, completion: closeNavigationDrawer)
+		self.navigationDrawerController?.closeLeftView()
+		
+		// 로그아웃전에 루트뷰로 전환하여 로그인후 루트뷰가 나오도록 수정
+		self.toolbarController?.transition(to: self.clsRootController, completion: self.closeNavigationDrawer)
 		//self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
 		
 		self.performSegue(withIdentifier: "segLogout", sender: self)
 	}
+	
+	@objc public func doLogoutNewLogin()
+	{
+		print("==================================")
+		print("*LeftviewController.doLogoutNewLogin")
+		print("==================================")
+		
+		DispatchQueue.main.async {
+			
+		
+		AppContext.sharedManager.getUserInfo().setAutoLogin(boolAutoLogin: false)
+		
+		AppContext.sharedManager.doLogout();
+		self.navigationDrawerController?.closeLeftView()
+		
+		// 로그아웃전에 루트뷰로 전환하여 로그인후 루트뷰가 나오도록 수정
+		self.toolbarController?.transition(to: self.clsRootController, completion: self.closeNavigationDrawer)
+		//self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
+		
+		self.performSegue(withIdentifier: "segLogout", sender: self)
+		}
+	}
+	
 	
 	public func closeNavigationDrawer(result: Bool)
 	{

@@ -83,7 +83,7 @@ class LoginViewController: UIViewController
 		print("objMe.swAutoLogin.isOn:\(swAutoLogin.isOn)")
 		let objMe = self
 		
-		let dataClient = Mosaic.DataClient(url: Constants.WEB_SVC_URL)
+		let dataClient = Mosaic.DataClient(container:self, url: Constants.WEB_SVC_URL)
 		dataClient.loginService(userId : strUserId!, passwd : strPasswd!, mobileId : "",
 								loginCompletionHandler:
 			{ (login, loginError) in

@@ -187,7 +187,7 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
     //=======================================
     func initDataClient()
     {
-        clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+        clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
         clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
         clsDataClient.SelectUrl = "inOutService:selectWorkCombineInOutCancelList"
         clsDataClient.removeServiceParam()
@@ -550,7 +550,7 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
         let strWorkDateTime = DateUtil.localeToUtc(localeDate: strCurReadTime, dateFormat: "yyyyMMddHHmmss")
         
         
-        let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+        let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
         clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 
         clsDataClient.removeServiceParam()

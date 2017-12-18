@@ -59,7 +59,7 @@ class EasyInSearch: BaseViewController, UITableViewDataSource, UITableViewDelega
 	
 	func initDataClient()
 	{
-		clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		clsDataClient = DataClient(container: self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		clsDataClient.SelectUrl = "inOutService:selectSaleInWorkList"
 		clsDataClient.removeServiceParam()
