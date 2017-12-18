@@ -467,8 +467,8 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 					// 같은 자산타입(Asset_type)이면 처리량증가,미처리량감소
 					if(strAssetEpc == clsTagInfo.getAssetEpc())
 					{
-						clsTagInfo.setProcCount(procCount: (clsTagInfo.getProcCount() + 1)) // 처리량 증가
-						clsTagInfo.setRemainCount(remainCount: (clsTagInfo.getRemainCount() - 1)) // 미처리량 감소
+                        clsTagInfo.setProcCount((clsTagInfo.getProcCount() + 1)) // 처리량 증가
+                        clsTagInfo.setRemainCount((clsTagInfo.getRemainCount() - 1)) // 미처리량 감소
 					}
 				}
 			}
@@ -1017,7 +1017,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 						{
 							if(clsInfo.getNewTag() == true)
 							{
-								clsInfo.setNewTag(newTag: false)	// 태그상태 NEW -> OLD로 변경
+                                clsInfo.setNewTag(false)	// 태그상태 NEW -> OLD로 변경
 							}
 						}
 						self.boolNewTagInfoExist = false
