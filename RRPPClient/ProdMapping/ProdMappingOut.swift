@@ -172,10 +172,12 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	// Segue로 파라미터 넘기면 반드시 prepare를 타기 때문에 여기서 DataProtocol을 세팅하는걸로 함
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?)
 	{
-		if(segue.identifier == "segWorkOutCustSearch")
+		if(segue.identifier == "segWorkCustSearch")
 		{
-			if let clsDialog = segue.destination as? WorkOutCustSearch
+			if let clsDialog = segue.destination as? WorkCustSearch
 			{
+				
+				clsDialog.inOutType = Constants.INOUT_TYPE_OUTPUT
 				clsDialog.ptcDataHandler = self
 			}
 		}
@@ -205,7 +207,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	// 팝업 다이얼로그로 부터 데이터 수신
 	func recvData( returnData : ReturnData)
 	{
-   		if(returnData.returnType == "workOutCustSearch")
+   		if(returnData.returnType == "workCustSearch")
 		{
 			if(returnData.returnRawData != nil)
 			{
@@ -350,9 +352,9 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	
 	
 	// 입고처 선택
-	@IBAction func onWorkOutCustSearchClicked(_ sender: Any)
+	@IBAction func onWorkCustSearchClicked(_ sender: Any)
 	{
-		self.performSegue(withIdentifier: "segWorkOutCustSearch", sender: self)
+		self.performSegue(withIdentifier: "segWorkCustSearch", sender: self)
 	}
     
     // 상품추가

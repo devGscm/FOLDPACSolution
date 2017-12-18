@@ -1,8 +1,8 @@
 //
-//  CombineIn.swift
+//  EasyIn.swift
 //   RRPPClient
 //
-//  Created by 이용민 on 2017. 12. 15..
+//  Created by 이용민 on 2017. 12. 18..
 //  Copyright © 2017년 MORAMCNT. All rights reserved.
 //
 
@@ -11,7 +11,7 @@ import Material
 import Mosaic
 import BarcodeScanner
 
-class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, DataProtocol, ReaderResponseDelegate
+class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, DataProtocol, ReaderResponseDelegate
 {
 	
 	@IBOutlet weak var lblUserName: UILabel!
@@ -32,7 +32,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	@IBOutlet weak var lblRemainCount: UILabel!
 	
 	
-	@IBOutlet weak var tvCombineIn: UITableView!
+	@IBOutlet weak var tvEasyIn: UITableView!
 	
 	var strTitle	= ""
 	
@@ -61,7 +61,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	var strRemark									= ""			/**< 비고-전송용 */
 	
 	var strResultMsg 								= ""			/**< 완료전송에 대한 메시지  */
-
+	
 	
 	var arrAssetRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
 	var arrTagRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
@@ -84,7 +84,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	override func viewWillAppear(_ animated: Bool)
 	{
 		print("=========================================")
-		print("*CombineIn.viewWillAppear()")
+		print("*EasyIn.viewWillAppear()")
 		print("=========================================")
 		super.viewWillAppear(animated)
 		prepareToolbar()
@@ -103,7 +103,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	override func viewDidDisappear(_ animated: Bool)
 	{
 		print("=========================================")
-		print("*CombineIn.viewDidDisappear()")
+		print("*ProductMount.viewDidDisappear()")
 		print("=========================================")
 		
 		boolNewTagInfoExist = false
@@ -329,7 +329,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 		
 		DispatchQueue.main.async
 			{
-				self.tvCombineIn?.reloadData()
+				self.tvEasyIn?.reloadData()
 		}
 		
 		if(clearScreen == true)
@@ -464,7 +464,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 				}
 			}
 		}
-		DispatchQueue.main.async { self.tvCombineIn?.reloadData() }
+		DispatchQueue.main.async { self.tvEasyIn?.reloadData() }
 	}
 	
 	
@@ -475,13 +475,11 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
-		let objCell:CombineInCell = tableView.dequeueReusableCell(withIdentifier: "tvcCombineIn", for: indexPath) as! CombineInCell
+		let objCell:EasyInCell = tableView.dequeueReusableCell(withIdentifier: "tvcEasyIn", for: indexPath) as! EasyInCell
 		let clsTagInfo = arrAssetRows[indexPath.row]
 		
-		objCell.lblAssetName.text		= clsTagInfo.getAssetName()
-		objCell.lblWorkAssignCount.text = "\(clsTagInfo.getWorkAssignCount())"
-		objCell.lblProcCount.text		= "\(clsTagInfo.getProcCount())"
-		objCell.lblRemainCount.text		= "\(clsTagInfo.getRemainCount())"
+		objCell.lblAssetName.text = clsTagInfo.getAssetName()
+		objCell.lblReadCount.text = "\(clsTagInfo.getReadCount())"
 		
 		objCell.btnDetail.titleLabel?.font = UIFont.fontAwesome(ofSize: 14)
 		objCell.btnDetail.setTitle(String.fontAwesomeIcon(name: .listAlt), for: .normal)
@@ -500,22 +498,22 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	@IBAction func onClearAllClicked(_ sender: UIButton)
 	{
 		Dialog.show(container: self, viewController: nil,
-			title: NSLocalizedString("common_delete", comment: "삭제"),
-			message: NSLocalizedString("common_confirm_delete", comment: "전체 데이터를 삭제하시겠습니까?"),
-			okTitle: NSLocalizedString("common_confirm", comment: "확인"),
-			okHandler: { (_) in
-				
-				if(self.strSaleWorkId.isEmpty == false)
-				{
-					self.doReloadTagList()	// 초기화
-				}
-				else
-				{
-					self.clearTagData(clearScreen: false)
-					super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
-				}
-				},
-				cancelTitle: NSLocalizedString("common_cancel", comment: "취소"), cancelHandler: nil)
+					title: NSLocalizedString("common_delete", comment: "삭제"),
+					message: NSLocalizedString("common_confirm_delete", comment: "전체 데이터를 삭제하시겠습니까?"),
+					okTitle: NSLocalizedString("common_confirm", comment: "확인"),
+					okHandler: { (_) in
+						
+						if(self.strSaleWorkId.isEmpty == false)
+						{
+							self.doReloadTagList()	// 초기화
+						}
+						else
+						{
+							self.clearTagData(clearScreen: false)
+							super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
+						}
+		},
+					cancelTitle: NSLocalizedString("common_cancel", comment: "취소"), cancelHandler: nil)
 	}
 	
 	
@@ -768,7 +766,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 			}
 			DispatchQueue.main.async
 				{
-					self.tvCombineIn.reloadData()
+					self.tvEasyIn.reloadData()
 			}
 		})
 	}
@@ -1212,7 +1210,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	
 }
 
-extension CombineIn: BarcodeScannerCodeDelegate
+extension EasyIn: BarcodeScannerCodeDelegate
 {
 	func barcodeScanner(_ controller: BarcodeScannerController, didCaptureCode barcode: String, type: String)
 	{
@@ -1235,14 +1233,14 @@ extension CombineIn: BarcodeScannerCodeDelegate
 				doSearchBarcode(barcode: barcode)
 			}
 		}
-//		let delayTime = DispatchTime.now() + Double(Int64(6 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-//		DispatchQueue.main.asyncAfter(deadline: delayTime) {
-//			controller.resetWithError()
-//		}
+		//		let delayTime = DispatchTime.now() + Double(Int64(6 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+		//		DispatchQueue.main.asyncAfter(deadline: delayTime) {
+		//			controller.resetWithError()
+		//		}
 	}
 }
 
-extension CombineIn: BarcodeScannerErrorDelegate {
+extension EasyIn: BarcodeScannerErrorDelegate {
 	
 	func barcodeScanner(_ controller: BarcodeScannerController, didReceiveError error: Error)
 	{
@@ -1250,7 +1248,7 @@ extension CombineIn: BarcodeScannerErrorDelegate {
 	}
 }
 
-extension CombineIn: BarcodeScannerDismissalDelegate {
+extension EasyIn: BarcodeScannerDismissalDelegate {
 	
 	func barcodeScannerDidDismiss(_ controller: BarcodeScannerController) {
 		controller.dismiss(animated: true, completion: nil)
@@ -1258,7 +1256,7 @@ extension CombineIn: BarcodeScannerDismissalDelegate {
 }
 
 
-extension CombineIn
+extension EasyIn
 {
 	fileprivate func prepareToolbar()
 	{
@@ -1276,4 +1274,5 @@ extension CombineIn
 		}
 	}
 }
+
 

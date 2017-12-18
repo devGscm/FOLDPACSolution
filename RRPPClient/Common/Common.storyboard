@@ -189,10 +189,10 @@
             </objects>
             <point key="canvasLocation" x="-7134" y="-3562"/>
         </scene>
-        <!--Work Out Cust Search-->
+        <!--Work Cust Search-->
         <scene sceneID="9TR-WP-njt">
             <objects>
-                <viewController storyboardIdentifier="WorkOutCustSearch" id="x1O-gb-ucz" customClass="WorkOutCustSearch" customModule="_RRPPClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WorkCustSearch" id="x1O-gb-ucz" customClass="WorkCustSearch" customModule="_RRPPClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mDj-c7-nA8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -445,7 +445,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tvcWorkOutCustSearch" id="cYZ-LU-U6D" customClass="WorkOutCustSearchCell" customModule="_RRPPClient" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tvcWorkCustSearch" id="cYZ-LU-U6D" customClass="WorkCustSearchCell" customModule="_RRPPClient" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="352" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cYZ-LU-U6D" id="fmg-AA-aGR">
@@ -538,7 +538,7 @@
                         <outlet property="btnParentCust" destination="hFg-fr-MbB" id="0aS-Ma-pd5"/>
                         <outlet property="btnSearchCondition" destination="jsy-rc-1FT" id="syp-q3-PYH"/>
                         <outlet property="tfSearchValue" destination="opF-lR-Xk5" id="pkA-H3-1Tr"/>
-                        <outlet property="tvWorkOutCustSearch" destination="OIH-aL-x28" id="JQg-ik-utz"/>
+                        <outlet property="tvWorkCustSearch" destination="OIH-aL-x28" id="JQg-ik-utz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jd1-qf-DkC" userLabel="First Responder" sceneMemberID="firstResponder"/>

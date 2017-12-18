@@ -139,8 +139,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="onWorkOutCustSearchClicked:" destination="H5O-z6-Ftf" eventType="touchUpInside" id="q8S-2x-OSW"/>
-                                                    <segue destination="vbe-nB-uwm" kind="presentation" identifier="segWorkOutCustSearch" modalPresentationStyle="overCurrentContext" id="1LS-13-rn4"/>
+                                                    <action selector="onWorkCustSearchClicked:" destination="H5O-z6-Ftf" eventType="touchUpInside" id="q8S-2x-OSW"/>
+                                                    <segue destination="vbe-nB-uwm" kind="presentation" identifier="segWorkCustSearch" modalPresentationStyle="overCurrentContext" id="1LS-13-rn4"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="차량번호" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PFr-cm-6QW">
@@ -660,10 +660,10 @@
             </objects>
             <point key="canvasLocation" x="-7147" y="-3577"/>
         </scene>
-        <!--WorkOutCustSearch-->
+        <!--WorkCustSearch-->
         <scene sceneID="nnI-LU-csP">
             <objects>
-                <viewControllerPlaceholder storyboardName="Common" referencedIdentifier="WorkOutCustSearch" id="vbe-nB-uwm" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Common" referencedIdentifier="WorkCustSearch" id="vbe-nB-uwm" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1jh-rZ-JZN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-6361" y="-3956"/>
