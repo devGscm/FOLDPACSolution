@@ -997,56 +997,38 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 
 	func sendDataNoneResaleOrderId(workState: String, resaleCustId: String, vehName: String, tradeChit: String, remark: String, signData: String)
 	{
-		/*
-		DataTable clsDataTable = null;
-		DataClient clsDataClient = new DataClient(this);
+		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+		clsDataClient.SelectUrl = "inOutService:selectResaleOrderId"
+		clsDataClient.removeServiceParam()
+		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+		clsDataClient.addServiceParam(paramName: "userId", value: AppContext.sharedManager.getUserInfo().getUserId())
+		clsDataClient.addServiceParam(paramName: "branchId", value: AppContext.sharedManager.getUserInfo().getBranchId())
 		
-		clsDataClient.setLocation(mCtxContext.getString(R.string.webservice_data_url));
-		clsDataClient.setUserInfo(AppContext.getUserInfo().getEncryptId());
-		clsDataClient.setServiceUrl("inOutService:selectResaleOrderId");
-		clsDataClient.addServiceParam("corpId", 		AppContext.getUserInfo().getCorpId());
-		clsDataClient.addServiceParam("branchId",		AppContext.getUserInfo().getBranchId());
-		
-		if(strResaleCustId != null) clsDataClient.addServiceParam("fromBranchId",	strResaleCustId);
-		clsDataClient.addServiceParam("userId",			AppContext.getUserInfo().getUserId());
-		
-		try
-	{
-		clsDataTable = clsDataClient.selectData();
-		
-		if(clsDataTable == null)
+		if(resaleCustId.isEmpty == false)
 		{
-		if(clsDataClient.getReturnCode() == Constants.RETURN_CODE_AUTHENTICATE_FAIL)
-		{
-		showNewLoginDialogOnThread();
+			clsDataClient.addServiceParam(paramName: "fromBranchId", value: resaleCustId)
 		}
-		else
-		{
-		showToastOnThread(getString(R.string.common_not_load_data_from_server));
-		}
-		return;
-		}
+		clsDataClient.selectData(dataCompletionHandler: {(data, error) in
+			if let error = error {
+				// 에러처리
+				super.showSnackbar(message: error.localizedDescription)
+				print(error)
+				return
+			}
+			guard let clsDataTable = data else {
+				print("에러 데이터가 없음")
+				return
+			}
+			if(clsDataTable.getDataRows().count > 0)
+			{
+				let clsDataRow = clsDataTable.getDataRows()[0]
+				self.strResaleOrderId = clsDataRow.getString(name: "resaleOrderId") ?? ""			// 서버에서 발급받은 입고지시서ID(송장번호)
+				
+				self.sendDataExistResaleOrderId(workState: workState, resaleOrderId: self.strResaleOrderId, vehName: vehName, tradeChit: tradeChit, remark: remark, signData: signData)
+			}
+		})
 		
-		//2)DB에서 리스트 조회값 받음
-		List<DataRow> lstDataRows = clsDataTable.getDataRows();
-		
-		if( lstDataRows.size() > 0)
-		{
-		for(DataRow clsRow : lstDataRows)
-		{
-		mStrResaleOrderId = clsRow.getString("resultResaleOrderId");	//서버에서 발급 받은 '입고지서서ID(송장번호)'
-		}
-		
-		//#2.DB로 데이터 저장하기
-		sendDataExistResaleOrderId(strWorkState, mStrResaleOrderId, strVehName, strTradeChit, strRemark, strSignData);
-		}
-		}
-		catch (Exception e)
-		{
-		showToastOnThread(getString(R.string.common_error_occurred_data_search));
-		Logger.e(StrUtil.trace(e));
-		}
-		*/
 	}
 	
 	//========================================================================
@@ -1166,65 +1148,64 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 	
 	func doSearchBarcode(barcode: String)
 	{
-//		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
-//		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
-//		clsDataClient.SelectUrl = "inOutService:selectSaleInWorkList"
-//		clsDataClient.removeServiceParam()
-//		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
-//		clsDataClient.addServiceParam(paramName: "branchId", value: AppContext.sharedManager.getUserInfo().getBranchId())
-//		clsDataClient.addServiceParam(paramName: "branchCustId", value: AppContext.sharedManager.getUserInfo().getBranchCustId())
-//		clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
-//		clsDataClient.addServiceParam(paramName: "saleWorkId", value: barcode)
-//		clsDataClient.addServiceParam(paramName: "resaleType", value: self.strWorkType)
-//		clsDataClient.selectData(dataCompletionHandler: {(data, error) in
-//			if let error = error {
-//				// 에러처리
-//				super.showSnackbar(message: error.localizedDescription)
-//				print(error)
-//				return
-//			}
-//			guard let clsDataTable = data else {
-//				print("에러 데이터가 없음")
-//				return
-//			}
-//			if(clsDataTable.getDataRows().count == 0)
-//			{
-//				super.showSnackbar(message: NSLocalizedString("common_no_data_for_barcode", comment: "해당 바코드에 해당하는 데이터가 없습니다."))
-//				return
-//			}
-//
-//			self.clearTagData(clearScreen: true)
-//
-//			let clsDataRow = clsDataTable.getDataRows()[0]
-//			self.strResaleOrderId			= clsDataRow.getString(name: "resaleOrderId") ?? ""			// 구매주문ID
-//			self.strSaleWorkId 				= clsDataRow.getString(name: "saleWorkId") ?? ""			// 송장번호
-//			self.intOrderReqCount 			= clsDataRow.getInt(name: "orderReqCnt") ?? 0
-//			self.intProcCount				= clsDataRow.getInt(name: "procCnt") ?? 0					// 처리량
-//			self.intNoreadCnt				= clsDataRow.getInt(name: "noreadCnt") ?? 0					// 미인식
-//			self.strWorkerName				= clsDataRow.getString(name: "workerName") ?? ""			// 작업자명
-//			self.strProdAssetEpc			= clsDataRow.getString(name: "prodAssetEpc") ?? ""			// 유형
-//			var intRemainCnt				= self.intOrderReqCount - self.intProcCount					// 미처리량
-//			if(intRemainCnt < 0)
-//			{
-//				intRemainCnt = 0										//미처리량 0이하는 0
-//			}
-//
-//			self.lblResaleBranchName.text	= clsDataRow.getString(name: "resaleBranchName") ?? ""		// 출고처
-//			self.btnResaleWorkId.setTitle(self.strSaleWorkId, for: .normal)								// 송장번호
-//			self.lblOrderReqCount.text		= "\(self.intOrderReqCount)"								// 입고예정수량
-//			self.lblProcCount.text			= "\(self.intProcCount)"									// 처리량
-//			//self.tfVehName.text				= clsDataRow.getString(name: "resaleVehName") ?? ""		// 차량번호
-//			self.lblDriverName.text			= clsDataRow.getString(name: "resaleDriverName") ?? ""		// 납품자
-//			self.lblProdAssetEpcName.text	= clsDataRow.getString(name: "prodAssetEpcName") ?? ""		// 유형명
-//			self.lblRemainCount.text		= "\(intRemainCnt)"											// 미처리량
-//
-//			// 조회 및 그리드 리스트에 표시
-//
-//			self.doSearchWorkListDetail()		//선택된 '송장정보' 내용 조회
-//			self.doSearchTagList()				//선택된 '송장정보'에 대한 태그리스트
-//
-//			self.boolWorkListSelected = true	//송장 선택 여부
-//		})
+		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+		clsDataClient.SelectUrl = "inOutService:selectSaleInWorkList"
+		clsDataClient.removeServiceParam()
+		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+		clsDataClient.addServiceParam(paramName: "branchId", value: AppContext.sharedManager.getUserInfo().getBranchId())
+		clsDataClient.addServiceParam(paramName: "branchCustId", value: AppContext.sharedManager.getUserInfo().getBranchCustId())
+		clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
+		clsDataClient.addServiceParam(paramName: "saleWorkId", value: barcode)
+		
+		var strCustType = AppContext.sharedManager.getUserInfo().getCustType()
+		if(strCustType == Constants.CUST_TYPE_MGR)
+		{
+			strCustType = AppContext.sharedManager.getUserInfo().getBranchCustType()
+		}
+		
+		
+		if(Constants.CUST_TYPE_RDC == strCustType)
+		{
+			clsDataClient.addServiceParam(paramName: "resaleType", value: Constants.RESALE_TYPE_GATHER)	// 회수입고
+		}
+		else if(Constants.CUST_TYPE_EXP == strCustType)
+		{
+			clsDataClient.addServiceParam(paramName: "resaleType", value: Constants.RESALE_TYPE_WAREHOUSING)	// 입고
+		}
+		else if(Constants.CUST_TYPE_IMP == strCustType)
+		{
+			clsDataClient.addServiceParam(paramName: "resaleType", value: Constants.RESALE_TYPE_WAREHOUSING)	// 입고
+		}
+		
+		clsDataClient.selectData(dataCompletionHandler: {(data, error) in
+			if let error = error {
+				// 에러처리
+				super.showSnackbar(message: error.localizedDescription)
+				print(error)
+				return
+			}
+			guard let clsDataTable = data else {
+				print("에러 데이터가 없음")
+				return
+			}
+			if(clsDataTable.getDataRows().count == 0)
+			{
+				super.showSnackbar(message: NSLocalizedString("common_no_data_for_barcode", comment: "해당 바코드에 해당하는 데이터가 없습니다."))
+				return
+			}
+
+			//self.clearTagData(clearScreen: true)
+
+			let clsDataRow = clsDataTable.getDataRows()[0]
+			self.strResaleOrderId			= clsDataRow.getString(name: "resaleOrderId") ?? ""			// 구매주문ID
+			self.strSaleWorkId 				= clsDataRow.getString(name: "saleWorkId") ?? ""			// 송장번호
+			self.strResaleBranchId 			= clsDataRow.getString(name: "resaleBranchId") ?? ""		// 출고처
+			let strResaleBranchName			= clsDataRow.getString(name: "resaleBranchName") ?? ""		// 출고처명
+			
+			self.btnWorkCustSearch.setTitle(strResaleBranchName, for: .normal)
+			self.btnResaleWorkId.setTitle(self.strSaleWorkId, for: .normal)
+		})
 	}
 	//------------------------------------------------------------------------
 	// 바코드 관련 이벤트및 처리 끝
@@ -1255,10 +1236,6 @@ extension EasyIn: BarcodeScannerCodeDelegate
 				doSearchBarcode(barcode: barcode)
 			}
 		}
-		//		let delayTime = DispatchTime.now() + Double(Int64(6 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-		//		DispatchQueue.main.asyncAfter(deadline: delayTime) {
-		//			controller.resetWithError()
-		//		}
 	}
 }
 
