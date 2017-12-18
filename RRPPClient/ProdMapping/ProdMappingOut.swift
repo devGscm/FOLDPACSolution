@@ -26,7 +26,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	@IBOutlet weak var lblReaderName: UILabel!
 	@IBOutlet weak var btnRfidReader: UIButton!
 	
-	@IBOutlet weak var btnToBranchSearch: UIButton!
+	@IBOutlet weak var btnWorkCustSearch: UIButton!
 	
 	
     @IBOutlet weak var tfVehName: UITextField!
@@ -47,8 +47,8 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	var clsIndicator : ProgressIndicator?
 	var clsDataClient : DataClient!
     
-	
-    var strToBranchId    = ""    // 출하고객사ID
+	//var strWorkCustId		= ""
+    var strWorkBranchId		= ""    // 출하고객사ID(고객사와 BranchId가 동일하므로)
     
     //==== Ver2.0.0 ====
     var strSaleWorkId = ""	/**< 송장번호ID - DB에서 할당받은 */
@@ -214,13 +214,13 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
                 // 새로운 입고처가 들어오면 기존 데이터를 삭제한다.
                 if(strSaleWorkId.isEmpty == false)
                 {
-                	clearTagData(boolClearScreen: true)
+                	clearTagData(clearScreen: true)
                 }
                 
 				let clsDataRow = returnData.returnRawData as! DataRow
 				let strCustName = clsDataRow.getString(name: "custName") ?? ""
-				self.strToBranchId	= clsDataRow.getString(name: "branchId") ?? ""
-	        	self.btnToBranchSearch.setTitle(strCustName, for: .normal)
+				self.strWorkBranchId	= clsDataRow.getString(name: "branchId") ?? ""
+	        	self.btnWorkCustSearch.setTitle(strCustName, for: .normal)
 			}
 		}
 		else if(returnData.returnType == "addProduct")
@@ -340,7 +340,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 				}
 				else
 				{
-					sendDataNoneSaleWorkId(workState: Constants.WORK_STATE_COMPLETE, toBranchId: self.strToBranchId, vehName: strVehName, tradeChit: strTradeChit, remark: strRemark, signData: strSignData)
+					sendDataNoneSaleWorkId(workState: Constants.WORK_STATE_COMPLETE, workBranchId: self.strWorkBranchId, vehName: strVehName, tradeChit: strTradeChit, remark: strRemark, signData: strSignData)
 				}
 				
 			}
@@ -427,7 +427,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	
     
 	// 데이터를 clear한다.
-    func clearTagData( boolClearScreen: Bool)
+    func clearTagData(clearScreen: Bool)
 	{
 		self.boolNewTagInfoExist = false // 신규태그 입력 체크, 전송용
 		
@@ -464,10 +464,10 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		clsProdContainer.clear()
 
 		//작업자,거점명을 제외한 모든 데이터 초기화
-		if(boolClearScreen == true)
+		if(clearScreen == true)
 		{
-			self.strToBranchId = ""
-			btnToBranchSearch.setTitle(NSLocalizedString("title_easy_cust_selection", comment: "고객사 선택"), for: .normal)
+			self.strWorkBranchId = ""
+			btnWorkCustSearch.setTitle(NSLocalizedString("title_easy_cust_selection", comment: "고객사 선택"), for: .normal)
 		
 			tfVehName.text			= ""	// 차량번호
 			tfTradeChit.text		= ""	// 전표번호
@@ -610,8 +610,8 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 
 	func clearUserInterfaceData()
 	{
-        strToBranchId = ""
-		btnToBranchSearch.setTitle(NSLocalizedString("common_selection", comment: "선택"), for: .normal)
+        strWorkBranchId = ""
+		btnWorkCustSearch.setTitle(NSLocalizedString("common_selection", comment: "선택"), for: .normal)
 		//처리메모
 		
 		// TODO
@@ -788,7 +788,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 						
 						if(self.strSaleWorkId.isEmpty == true)
 						{
-							self.clearTagData(boolClearScreen: true)
+							self.clearTagData(clearScreen: true)
 							super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
 						}
 						else
@@ -831,7 +831,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 			return
 		}
 		
-		if(strToBranchId.isEmpty == true)
+		if(strWorkBranchId.isEmpty == true)
 		{
 			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("msg_no_selected_out_cust", comment: "입고처를 선택하여 주십시오."))
 			return
@@ -854,7 +854,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		else
 		{
 			//'SaleWorkId'발급 후, DB로 데이터 전송처리
-			sendDataNoneSaleWorkId(workState: Constants.WORK_STATE_WORKING, toBranchId: strToBranchId, vehName: strVehName, tradeChit: strTradeChit, remark: "", signData: "")
+			sendDataNoneSaleWorkId(workState: Constants.WORK_STATE_WORKING, workBranchId: strWorkBranchId, vehName: strVehName, tradeChit: strTradeChit, remark: "", signData: "")
 		}
 	}
 	
@@ -871,7 +871,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 
 		
 		//입고처 필수
-		if(strToBranchId.isEmpty == true)
+		if(strWorkBranchId.isEmpty == true)
 		{
 			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("msg_no_selected_out_cust", comment: "입고처를 선택하여 주십시오."))
 			return
@@ -905,7 +905,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 
 		
 		// 1) 태그데이터 초기화
-		clearTagData(boolClearScreen: false)
+		clearTagData(clearScreen: false)
 		
 		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
@@ -1125,7 +1125,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
                         //그리드 삭제 및 구조체 삭제
                         DispatchQueue.main.async
                     	{
-							self.clearTagData(boolClearScreen: true)
+							self.clearTagData(clearScreen: true)
 							
 							if(super.getUnload() == true)
 							{
@@ -1443,7 +1443,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 							if(Constants.WORK_STATE_COMPLETE == strSvrWorkState)
 							{
 								// 완료전송인경우
-								self.clearTagData(boolClearScreen: true) // UI객체를 초기화한다.
+								self.clearTagData(clearScreen: true) // UI객체를 초기화한다.
 							}
 							else
 							{
@@ -1503,7 +1503,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	* @param strRemark				비고
 	* @param strSignData			사인
 	*/
-	func sendDataNoneSaleWorkId(workState: String, toBranchId: String, vehName: String, tradeChit: String, remark: String, signData: String)
+	func sendDataNoneSaleWorkId(workState: String, workBranchId: String, vehName: String, tradeChit: String, remark: String, signData: String)
 	{
 		print("=================================")
 		print("*sendDataNoneSaleWorkId \(Constants.WEB_SVC_URL)")
@@ -1517,7 +1517,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 			clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
 			clsDataClient.addServiceParam(paramName: "userId", value: AppContext.sharedManager.getUserInfo().getUserId())
 			clsDataClient.addServiceParam(paramName: "branchId", value: AppContext.sharedManager.getUserInfo().getBranchId())
-			clsDataClient.addServiceParam(paramName: "toBranchId", value: toBranchId)
+			clsDataClient.addServiceParam(paramName: "toBranchId", value: workBranchId)
 			clsDataClient.selectData(dataCompletionHandler: {(data, error) in
 				if let error = error {
 					// 에러처리
@@ -1551,8 +1551,8 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		
 
 		//#1.일반정보
-		strToBranchId = "170316000142";
-		btnToBranchSearch.setTitle("농협물류센터(안성)", for: UIControlState.normal)
+		strWorkBranchId = "170316000142";
+		btnWorkCustSearch.setTitle("농협물류센터(안성)", for: UIControlState.normal)
 		tfVehName.text = "붕붕이 3호"
 		tfTradeChit.text = "TR1234"
 		lblSerialNo.text = "161028"

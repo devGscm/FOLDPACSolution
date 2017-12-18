@@ -59,6 +59,8 @@
 		55C1957E1FE743EC008299FE /* EasyIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55C1957D1FE743EC008299FE /* EasyIn.storyboard */; };
 		55C195801FE74405008299FE /* EasyIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C1957F1FE74405008299FE /* EasyIn.swift */; };
 		55C195821FE74410008299FE /* EasyInCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C195811FE74410008299FE /* EasyInCell.swift */; };
+		55C195881FE7620E008299FE /* EasyInSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C195871FE7620E008299FE /* EasyInSearch.swift */; };
+		55C1958A1FE7621D008299FE /* EasyInSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C195891FE7621D008299FE /* EasyInSearchCell.swift */; };
 		55D13A661FE348CC00099F50 /* CombineIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55D13A651FE348CC00099F50 /* CombineIn.storyboard */; };
 		55D13A681FE348FC00099F50 /* CombineIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D13A671FE348FC00099F50 /* CombineIn.swift */; };
 		55D13A6A1FE3491C00099F50 /* CombineInCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D13A691FE3491C00099F50 /* CombineInCell.swift */; };
@@ -230,6 +232,8 @@
 		55C1957D1FE743EC008299FE /* EasyIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EasyIn.storyboard; sourceTree = "<group>"; };
 		55C1957F1FE74405008299FE /* EasyIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyIn.swift; sourceTree = "<group>"; };
 		55C195811FE74410008299FE /* EasyInCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyInCell.swift; sourceTree = "<group>"; };
+		55C195871FE7620E008299FE /* EasyInSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyInSearch.swift; sourceTree = "<group>"; };
+		55C195891FE7621D008299FE /* EasyInSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyInSearchCell.swift; sourceTree = "<group>"; };
 		55D13A651FE348CC00099F50 /* CombineIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CombineIn.storyboard; sourceTree = "<group>"; };
 		55D13A671FE348FC00099F50 /* CombineIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineIn.swift; sourceTree = "<group>"; };
 		55D13A691FE3491C00099F50 /* CombineInCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineInCell.swift; sourceTree = "<group>"; };
@@ -451,6 +455,8 @@
 				55C1957D1FE743EC008299FE /* EasyIn.storyboard */,
 				55C1957F1FE74405008299FE /* EasyIn.swift */,
 				55C195811FE74410008299FE /* EasyInCell.swift */,
+				55C195871FE7620E008299FE /* EasyInSearch.swift */,
+				55C195891FE7621D008299FE /* EasyInSearchCell.swift */,
 			);
 			path = EasyIn;
 			sourceTree = "<group>";
@@ -927,6 +933,7 @@
 				5571CDE31FCF98E600F88B97 /* AppSnackbarController.swift in Sources */,
 				550DD8AC1FDFC5BE00766DCF /* StockReviewCell.swift in Sources */,
 				556C7DDA1FDA54010048D6C4 /* ProdInfoDialog.swift in Sources */,
+				55C1958A1FE7621D008299FE /* EasyInSearchCell.swift in Sources */,
 				559F39DC1FD77068006E5C17 /* RfidReaderDialog.swift in Sources */,
 				B01C420F1FE105E400404301 /* CombineOutCell.swift in Sources */,
 				55FA78491FBDAD0B00583A80 /* AppToolbarController.swift in Sources */,
@@ -936,6 +943,7 @@
 				55ACD67E1FC804F800A2DC72 /* ListViewDialog.swift in Sources */,
 				55FA783B1FBDACE300583A80 /* UserInfo.swift in Sources */,
 				5575BB461FE238F000CACCC8 /* EventOther.swift in Sources */,
+				55C195881FE7620E008299FE /* EasyInSearch.swift in Sources */,
 				553A4E041FE0C0AB00271BBD /* StockReviewSearchCell.swift in Sources */,
 				960224421FD0DBCD00DE7C65 /* SwingReader.swift in Sources */,
 				55FA78351FBDACC600583A80 /* Constants.swift in Sources */,

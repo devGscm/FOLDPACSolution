@@ -16,7 +16,7 @@
                 <viewControllerPlaceholder storyboardName="Common" referencedIdentifier="OutSignDialog" id="Z3h-ls-bdg" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NWb-LA-Dhn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-8073" y="-3144"/>
+            <point key="canvasLocation" x="-7148" y="-3146"/>
         </scene>
         <!--Prod Mapping Out-->
         <scene sceneID="6FP-Yr-0QC">
@@ -643,7 +643,7 @@
                         <outlet property="btnProdBarcode" destination="qCd-WL-IXY" id="FeU-Hd-NOZ"/>
                         <outlet property="btnProductAdd" destination="2RH-dN-FH6" id="8kz-lJ-t12"/>
                         <outlet property="btnRfidReader" destination="nfF-7s-QnA" id="2q5-V8-Azm"/>
-                        <outlet property="btnToBranchSearch" destination="Xey-Ec-Ymm" id="md8-Ue-OkL"/>
+                        <outlet property="btnWorkCustSearch" destination="Xey-Ec-Ymm" id="md8-Ue-OkL"/>
                         <outlet property="lblAssetName" destination="yS3-et-Umo" id="OgB-JF-YDc"/>
                         <outlet property="lblBranchInfo" destination="oCd-73-slB" id="Tuc-EW-llZ"/>
                         <outlet property="lblProcCount" destination="hcl-oU-1eW" id="sD6-O3-HD5"/>

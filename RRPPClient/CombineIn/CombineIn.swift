@@ -58,10 +58,6 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	var strWorkState								= ""			/**< 작업상태(서버전송) */
 	var boolWorkCompleteBtn							= false		/**< 완료전송 버튼 입력 -전송용 */
 	var strNoReadCount								= "0"			/**< 미인식수량-전송용 */
-	var strRemark									= ""			/**< 비고-전송용 */
-	
-	var strResultMsg 								= ""			/**< 완료전송에 대한 메시지  */
-
 	
 	var arrAssetRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
 	var arrTagRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
@@ -243,23 +239,23 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 				
 				let clsDataRow = returnData.returnRawData as! DataRow
 				
-				strResaleOrderId			= clsDataRow.getString(name: "resaleOrderId") ?? ""
-				strSaleWorkId 				= clsDataRow.getString(name: "saleWorkId") ?? ""
-				intOrderReqCount 			= clsDataRow.getInt(name: "orderReqCnt") ?? 0
-				intProcCount				= clsDataRow.getInt(name: "procCnt") ?? 0
-				intNoreadCnt				= clsDataRow.getInt(name: "noreadCnt") ?? 0				//미인식
-				strWorkerName				= clsDataRow.getString(name: "workerName") ?? ""		//반납-인수자
-				strProdAssetEpc				= clsDataRow.getString(name: "prodAssetEpc") ?? ""		//유형
-				let intRemainCnt			= clsDataRow.getInt(name: "remainCnt") ?? 0				//미처리량
+				self.strResaleOrderId			= clsDataRow.getString(name: "resaleOrderId") ?? ""
+				self.strSaleWorkId 				= clsDataRow.getString(name: "saleWorkId") ?? ""
+				self.intOrderReqCount 			= clsDataRow.getInt(name: "orderReqCnt") ?? 0
+				self.intProcCount				= clsDataRow.getInt(name: "procCnt") ?? 0
+				self.intNoreadCnt				= clsDataRow.getInt(name: "noreadCnt") ?? 0				//미인식
+				self.strWorkerName				= clsDataRow.getString(name: "workerName") ?? ""		//반납-인수자
+				self.strProdAssetEpc			= clsDataRow.getString(name: "prodAssetEpc") ?? ""		//유형
+				let intRemainCnt				= clsDataRow.getInt(name: "remainCnt") ?? 0				//미처리량
 				
-				lblResaleBranchName.text	= clsDataRow.getString(name: "resaleBranchName") ?? ""		// 출고처
-				btnSaleWorkId.setTitle(strSaleWorkId, for: .normal)									// 송장번호
-				lblOrderReqCount.text		= "\(intOrderReqCount)"									// 입고예정수량
-				lblProcCount.text			= "\(intProcCount)"										// 처리수량
-				tfVehName.text				= clsDataRow.getString(name: "vehName") ?? ""			// 차량번호
-				lblDriverName.text			= clsDataRow.getString(name: "driverName") ?? ""		// 납품자
-				lblProdAssetEpcName.text 	= clsDataRow.getString(name: "prodAssetEpcName") ?? ""	// 유형
-				lblRemainCount.text			= "\(intRemainCnt)"										// 미처리량
+				self.lblResaleBranchName.text	= clsDataRow.getString(name: "resaleBranchName") ?? ""		// 출고처
+				self.btnSaleWorkId.setTitle(strSaleWorkId, for: .normal)									// 송장번호
+				self.lblOrderReqCount.text		= "\(intOrderReqCount)"									// 입고예정수량
+				self.lblProcCount.text			= "\(intProcCount)"										// 처리수량
+				self.tfVehName.text				= clsDataRow.getString(name: "vehName") ?? ""			// 차량번호
+				self.lblDriverName.text			= clsDataRow.getString(name: "driverName") ?? ""		// 납품자
+				self.lblProdAssetEpcName.text 	= clsDataRow.getString(name: "prodAssetEpcName") ?? ""	// 유형
+				self.lblRemainCount.text		= "\(intRemainCnt)"										// 미처리량
 				
 				
 				//선택된 '송장정보' 내용 조회
@@ -342,11 +338,8 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 			strWorkerName				= ""
 			boolWorkCompleteBtn			= false
 			strWorkState				= ""
-			strNoReadCount				= "0";
-			strRemark					= ""
-			
-			strResultMsg				= ""
-			
+			strNoReadCount				= "0"
+
 			DispatchQueue.main.async
 				{
 					self.lblResaleBranchName.text	= ""	//출고처
