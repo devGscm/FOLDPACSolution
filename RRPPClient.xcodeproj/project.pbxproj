@@ -77,7 +77,7 @@
 		55FA78301FBDAB7800583A80 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA78281FBDAB5800583A80 /* SwiftyJSON.framework */; };
 		55FA78311FBDAB7800583A80 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA78281FBDAB5800583A80 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		55FA78351FBDACC600583A80 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78331FBDACC600583A80 /* Constants.swift */; };
-		55FA783A1FBDACE300583A80 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78381FBDACE300583A80 /* LoginViewController.swift */; };
+		55FA783A1FBDACE300583A80 /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78381FBDACE300583A80 /* UserLogin.swift */; };
 		55FA783B1FBDACE300583A80 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78391FBDACE300583A80 /* UserInfo.swift */; };
 		55FA783F1FBDACFD00583A80 /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = 55FA783D1FBDACFC00583A80 /* login.png */; };
 		55FA78401FBDACFD00583A80 /* pallet.png in Resources */ = {isa = PBXBuildFile; fileRef = 55FA783E1FBDACFC00583A80 /* pallet.png */; };
@@ -246,7 +246,7 @@
 		55FA78261FBDAB4700583A80 /* Motion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Motion.framework; path = Carthage/Build/iOS/Motion.framework; sourceTree = "<group>"; };
 		55FA78281FBDAB5800583A80 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		55FA78331FBDACC600583A80 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		55FA78381FBDACE300583A80 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		55FA78381FBDACE300583A80 /* UserLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
 		55FA78391FBDACE300583A80 /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		55FA783D1FBDACFC00583A80 /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login.png; sourceTree = "<group>"; };
 		55FA783E1FBDACFC00583A80 /* pallet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pallet.png; sourceTree = "<group>"; };
@@ -511,7 +511,7 @@
 		55FA78371FBDACE300583A80 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				55FA78381FBDACE300583A80 /* LoginViewController.swift */,
+				55FA78381FBDACE300583A80 /* UserLogin.swift */,
 				55FA78391FBDACE300583A80 /* UserInfo.swift */,
 			);
 			path = User;
@@ -929,7 +929,7 @@
 				559F39EB1FD77D28006E5C17 /* ProdContainer.swift in Sources */,
 				5542B4BA1FE1F67600BD6A00 /* RfidTrackingService.swift in Sources */,
 				55D13A6C1FE36FB400099F50 /* CombineInSearch.swift in Sources */,
-				55FA783A1FBDACE300583A80 /* LoginViewController.swift in Sources */,
+				55FA783A1FBDACE300583A80 /* UserLogin.swift in Sources */,
 				5571CDE31FCF98E600F88B97 /* AppSnackbarController.swift in Sources */,
 				550DD8AC1FDFC5BE00766DCF /* StockReviewCell.swift in Sources */,
 				556C7DDA1FDA54010048D6C4 /* ProdInfoDialog.swift in Sources */,
