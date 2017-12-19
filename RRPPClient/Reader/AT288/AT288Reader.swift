@@ -13,9 +13,11 @@ public class AT288Reader : NSObject, ReaderProtocol
 	let atReder : SwingProtocol
 	let identifier : String
 	let delegate : ReaderResponseDelegate?
+	let viewControl : BaseViewController
 	
-	required public init(deviceId : String ,  delegate : ReaderResponseDelegate?)
+	required public init(viewControl: BaseViewController, deviceId : String ,  delegate : ReaderResponseDelegate?)
 	{
+		self.viewControl = viewControl
 		self.atReder = SwingProtocol.sharedInstace() as! SwingProtocol
 		self.identifier = deviceId
 		self.delegate = delegate

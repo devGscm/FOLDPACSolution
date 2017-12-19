@@ -13,11 +13,13 @@ public class SwingReader : NSObject, ReaderProtocol, SwingProtocolProtocol
 	let swing : SwingProtocol
 	let identifier : String
 	let delegate : ReaderResponseDelegate?
+	let viewControl : BaseViewController
 	
 	private var timeoutMonitor : Timer? /// Timeout 연결 모니터링
 	
-	required public init(deviceId : String ,  delegate : ReaderResponseDelegate?)
+	required public init(viewControl: BaseViewController, deviceId : String ,  delegate : ReaderResponseDelegate?)
 	{
+		self.viewControl = viewControl
 		self.swing = SwingProtocol.sharedInstace() as! SwingProtocol
 		
 		//리더기 스켄을 멈춤
@@ -146,6 +148,17 @@ public class SwingReader : NSObject, ReaderProtocol, SwingProtocolProtocol
 			//trimedData = trimedData.replacingOccurrences(of: ">T", with: "")
 			let indexStartOfText = trimedData.index(trimedData.startIndex, offsetBy: 6)   // ">T3000" 를 제거
 			let result = trimedData[indexStartOfText...]
+			
+			//RFID Mask오류 알림
+			let strRfidMask = UserDefaults.standard.string(forKey: Constants.RFID_MASK_KEY) ?? "3312"
+			if(result.hasPrefix(strRfidMask) == false)
+			{
+				//TODO::다국에 처리 안드로이드에서 해당 메세지가 없음.
+				self.viewControl.showSnackbar(message: "The RFID does not match Configured EPC Header")
+				//self.viewControl.showSnackbar(message: NSLocalizedString("rfid_connected_reader", comment: "환경설정에서 설정한 마스크와 다른 EPC코드 입니다."))
+				return
+			}
+			
 			self.delegate?.didReadTagid(String(result) )
 		}
 		else if(trimedData.hasPrefix(">J"))	//Barcode일경우 didReadBarcode 이벤트를 발생
