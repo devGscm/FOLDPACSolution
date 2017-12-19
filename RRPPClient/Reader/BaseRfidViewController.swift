@@ -82,7 +82,7 @@ public protocol ReaderResponseDelegate : class {
 protocol ReaderProtocol : class {
 	
 	/// 초기화 는 항상 리더기 식별자와 이벤트를 전파할 delegate로 한다
-	init(deviceId : String ,  delegate : ReaderResponseDelegate?)
+	init(viewControl: BaseViewController, deviceId : String ,  delegate : ReaderResponseDelegate?)
 	
 	/**
 	* 리더기에 연결한다.
@@ -250,10 +250,10 @@ class BaseRfidViewController : BaseViewController, UITextFieldDelegate
 		switch readerType
 		{
 			case .SWING :
-				self.mClsReader = SwingReader(deviceId : devId ,  delegate: mDelegateResponse)
+				self.mClsReader = SwingReader(viewControl:self, deviceId : devId ,  delegate: mDelegateResponse)
 			
 			case .AT288 :
-				self.mClsReader = AT288Reader(deviceId : devId ,  delegate: mDelegateResponse)
+				self.mClsReader = AT288Reader(viewControl:self, deviceId : devId ,  delegate: mDelegateResponse)
 		}
 	}
 	

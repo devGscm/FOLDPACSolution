@@ -139,6 +139,46 @@ class ClientConfig : BaseTableViewController, DataProtocol
                 clsUserInfo.setBranchCustType(branchCustType: strBranchCustType)
                 clsUserInfo.setBranchCustName(branchCustName: strBranchCustName)
                 clsUserInfo.setInAgreeYn(inAgreeYn: strInAgreeYn)
+				
+				
+				//사용자가 선택된 거점 정보를 서버에 전달
+				//해당 단말기ID 대한 거점정보를 업데이트
+				if(strBranchId.isEmpty == false && strBranchCustId.isEmpty == false)
+				{
+					let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
+					clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+					clsDataClient.ExecuteUrl = "redisService:executeClientConfigData"
+					clsDataClient.removeServiceParam()
+					clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+					clsDataClient.addServiceParam(paramName: "userId", value: AppContext.sharedManager.getUserInfo().getUserId())
+					clsDataClient.addServiceParam(paramName: "unitId", value: AppContext.sharedManager.getUserInfo().getUnitId())
+					clsDataClient.addServiceParam(paramName: "branchId", value: strBranchId)
+					clsDataClient.addServiceParam(paramName: "branchCustId", value:strBranchCustId )
+					
+					clsDataClient.executeData(dataCompletionHandler: { (data, error) in
+						if let error = error {
+							self.showSnackbar(message: error.localizedDescription)
+							return
+						}
+						guard let clsResultDataTable = data else {
+							print("에러 데이터가 없음")
+							return
+						}
+						
+						let clsResultDataRows = clsResultDataTable.getDataRows()
+						if(clsResultDataRows.count > 0)
+						{
+							let clsDataRow = clsResultDataRows[0]
+							let strResultCode = clsDataRow.getString(name: "resultCode")
+							print(" -strResultCode:\(strResultCode!)")
+							if(Constants.PROC_RESULT_SUCCESS != strResultCode)
+							{
+								self.showSnackbar(message: NSLocalizedString("common_error_occur_modification_try_again", comment: "수정 중 에러가 발생하였습니다. 잠시후 다시 시도하여 주십시오."))
+							}
+						}
+					})
+				}
+				
                 
                 
                 print("@@@@@@@@@@@@@ strBranchID:\(strBranchId)" )

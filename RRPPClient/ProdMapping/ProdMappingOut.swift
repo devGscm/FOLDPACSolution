@@ -230,7 +230,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 			{
 				let clsDataRow = returnData.returnRawData as! DataRow
 				let strProdCode	= clsDataRow.getString(name: "prodCode") ?? ""
-				let strProdName	= clsDataRow.getString(name: "prodName") ?? ""
+				//let strProdName	= clsDataRow.getString(name: "prodName") ?? ""
 				let strProdReadCnt	= clsDataRow.getString(name: "prodReadCnt") ?? ""
 				
 				print("@@@@@@@@@@@@@ prodCode:\(strProdCode)")
@@ -565,7 +565,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	
 	func getBarcodeData(clsTagInfo : RfidUtil.TagInfo)
 	{
-		let strCurReadTime = DateUtil.getDate(dateFormat: "yyyyMMddHHmmss")
+		//let strCurReadTime = DateUtil.getDate(dateFormat: "yyyyMMddHHmmss")
 		//let strSerialNo = clsTagInfo.getSerialNo()
 		//let strAssetEpc = "\(clsTagInfo.getCorpEpc())\(clsTagInfo.getAssetEpc())"    // 회사EPC코드 + 자산EPC코드
 	

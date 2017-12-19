@@ -35,7 +35,7 @@ class UserLogin: UIViewController
 		//mClsProgressBar.SetDialogColor(UIColor.black)
 		//mClsProgressBar.Show(true, strMessage:"Loading...")
 		
-		btnLogin.titleLabel?.font = UIFont.fontAwesome(ofSize:18)
+		//btnLogin.titleLabel?.font = UIFont.fontAwesome(ofSize:18)
 		//let strLogin:String? = String.fontAwesomeIcon(name:.lock) + " 로그인"
 		//btnLogin.setTitle(strLogin, for: .normal)
 		
@@ -84,7 +84,14 @@ class UserLogin: UIViewController
 		let objMe = self
 		
 		let dataClient = Mosaic.DataClient(container:self, url: Constants.WEB_SVC_URL)
-		dataClient.loginService(userId : strUserId!, passwd : strPasswd!, mobileId : "", loginCompletionHandler:
+		
+		//IOS 에서는 사용자의 전화번호를 얻는것이 보안상 금지되어 있다 따라서 항상
+		//임시 번호인 99999999999 만 입력
+		//만약 디폴트 전화번호를 입력하지 않으면 웹서비스에서 거점항목을 가져오지 못한다.
+		//서버의 main.login.xml 의 actionLogin 참조
+		//전달하는 파라메터 전화번호와 상관은 없음.
+		let mobileId = "99999999999"
+		dataClient.loginService(userId : strUserId!, passwd : strPasswd!, mobileId : mobileId, loginCompletionHandler:
 			{ (login, loginError) in
 				if let error = loginError {
 					DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // in half a second...
@@ -108,9 +115,12 @@ class UserLogin: UIViewController
 						{
 							if(unitId.isEmpty == true)
 							{
+								//여기가 호출이 안될것임. 웹서비스 소스상 사용자 unit가 설정이 없으면
+								//자체적으로 성공메새지를 안보내고 RETURN_CODE_NOT_ATTACH_UNIT 로 보냄
+								//안드로이드용 소스를 따라서 한것으로 향후 해당 루틴은 삭제해도 될것 같음.
 								DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // in half a second...
 									self.showLoginErrorDialog(strTitle: NSLocalizedString("common_error", comment: "에러"),
-															  strMessage: NSLocalizedString("rfid_reader_no_device_id", comment: "선택된 리더기가 없습니다."))
+															  strMessage: NSLocalizedString("rfid_no_selected_readers", comment: "선택된 리더기가 없습니다."))
 								}
 								return
 							}

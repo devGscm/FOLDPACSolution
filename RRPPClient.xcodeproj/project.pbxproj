@@ -32,6 +32,7 @@
 		5590A55D1FD4E194007571D5 /* ProdMappingOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590A55C1FD4E194007571D5 /* ProdMappingOut.swift */; };
 		5590A55F1FD4E1AE007571D5 /* ProdMapping.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5590A55E1FD4E1AE007571D5 /* ProdMapping.storyboard */; };
 		5590A5611FD4E7C1007571D5 /* ProdMappingOutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590A5601FD4E7C1007571D5 /* ProdMappingOutCell.swift */; };
+		559E0E231FE8EDEA0011CD98 /* main.png in Resources */ = {isa = PBXBuildFile; fileRef = 559E0E221FE8EDEA0011CD98 /* main.png */; };
 		559F39CF1FD76A67006E5C17 /* Config.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 559F39CE1FD76A67006E5C17 /* Config.storyboard */; };
 		559F39D41FD76A9F006E5C17 /* ClientConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F39D31FD76A9F006E5C17 /* ClientConfig.swift */; };
 		559F39D61FD76EC7006E5C17 /* BranchSearchDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F39D51FD76EC7006E5C17 /* BranchSearchDialog.swift */; };
@@ -61,6 +62,7 @@
 		55C195821FE74410008299FE /* EasyInCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C195811FE74410008299FE /* EasyInCell.swift */; };
 		55C195881FE7620E008299FE /* EasyInSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C195871FE7620E008299FE /* EasyInSearch.swift */; };
 		55C1958A1FE7621D008299FE /* EasyInSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C195891FE7621D008299FE /* EasyInSearchCell.swift */; };
+		55C9D5921FE8B5CF00DDD48E /* intro.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C9D5911FE8B5CF00DDD48E /* intro.png */; };
 		55D13A661FE348CC00099F50 /* CombineIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55D13A651FE348CC00099F50 /* CombineIn.storyboard */; };
 		55D13A681FE348FC00099F50 /* CombineIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D13A671FE348FC00099F50 /* CombineIn.swift */; };
 		55D13A6A1FE3491C00099F50 /* CombineInCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D13A691FE3491C00099F50 /* CombineInCell.swift */; };
@@ -79,7 +81,6 @@
 		55FA78351FBDACC600583A80 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78331FBDACC600583A80 /* Constants.swift */; };
 		55FA783A1FBDACE300583A80 /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78381FBDACE300583A80 /* UserLogin.swift */; };
 		55FA783B1FBDACE300583A80 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78391FBDACE300583A80 /* UserInfo.swift */; };
-		55FA783F1FBDACFD00583A80 /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = 55FA783D1FBDACFC00583A80 /* login.png */; };
 		55FA78401FBDACFD00583A80 /* pallet.png in Resources */ = {isa = PBXBuildFile; fileRef = 55FA783E1FBDACFC00583A80 /* pallet.png */; };
 		55FA78481FBDAD0B00583A80 /* AppNavigationDrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78421FBDAD0B00583A80 /* AppNavigationDrawerController.swift */; };
 		55FA78491FBDAD0B00583A80 /* AppToolbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78431FBDAD0B00583A80 /* AppToolbarController.swift */; };
@@ -207,6 +208,7 @@
 		5590A55C1FD4E194007571D5 /* ProdMappingOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdMappingOut.swift; sourceTree = "<group>"; };
 		5590A55E1FD4E1AE007571D5 /* ProdMapping.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProdMapping.storyboard; sourceTree = "<group>"; };
 		5590A5601FD4E7C1007571D5 /* ProdMappingOutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdMappingOutCell.swift; sourceTree = "<group>"; };
+		559E0E221FE8EDEA0011CD98 /* main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main.png; sourceTree = "<group>"; };
 		559F39CE1FD76A67006E5C17 /* Config.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Config.storyboard; sourceTree = "<group>"; };
 		559F39D31FD76A9F006E5C17 /* ClientConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientConfig.swift; sourceTree = "<group>"; };
 		559F39D51FD76EC7006E5C17 /* BranchSearchDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchSearchDialog.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 		55C195811FE74410008299FE /* EasyInCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyInCell.swift; sourceTree = "<group>"; };
 		55C195871FE7620E008299FE /* EasyInSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyInSearch.swift; sourceTree = "<group>"; };
 		55C195891FE7621D008299FE /* EasyInSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyInSearchCell.swift; sourceTree = "<group>"; };
+		55C9D5911FE8B5CF00DDD48E /* intro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro.png; sourceTree = "<group>"; };
 		55D13A651FE348CC00099F50 /* CombineIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CombineIn.storyboard; sourceTree = "<group>"; };
 		55D13A671FE348FC00099F50 /* CombineIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineIn.swift; sourceTree = "<group>"; };
 		55D13A691FE3491C00099F50 /* CombineInCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineInCell.swift; sourceTree = "<group>"; };
@@ -252,7 +255,6 @@
 		55FA78331FBDACC600583A80 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		55FA78381FBDACE300583A80 /* UserLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
 		55FA78391FBDACE300583A80 /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
-		55FA783D1FBDACFC00583A80 /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login.png; sourceTree = "<group>"; };
 		55FA783E1FBDACFC00583A80 /* pallet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pallet.png; sourceTree = "<group>"; };
 		55FA78421FBDAD0B00583A80 /* AppNavigationDrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppNavigationDrawerController.swift; sourceTree = "<group>"; };
 		55FA78431FBDAD0B00583A80 /* AppToolbarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppToolbarController.swift; sourceTree = "<group>"; };
@@ -529,7 +531,8 @@
 		55FA783C1FBDACFC00583A80 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				55FA783D1FBDACFC00583A80 /* login.png */,
+				559E0E221FE8EDEA0011CD98 /* main.png */,
+				55C9D5911FE8B5CF00DDD48E /* intro.png */,
 				55FA783E1FBDACFC00583A80 /* pallet.png */,
 			);
 			path = Images;
@@ -844,7 +847,7 @@
 				5575BB481FE238FA00CACCC8 /* Event.storyboard in Resources */,
 				B04078591FE8A91300F44FBE /* EasyOut.storyboard in Resources */,
 				967A9C441FC3BE8D00B6A9D1 /* Localizable.strings in Resources */,
-				55FA783F1FBDACFD00583A80 /* login.png in Resources */,
+				55C9D5921FE8B5CF00DDD48E /* intro.png in Resources */,
 				559F39CF1FD76A67006E5C17 /* Config.storyboard in Resources */,
 				96E494271FB1A78500D1E2C1 /* Assets.xcassets in Resources */,
 				B060131B1FD5088A00594CCD /* InOutCancel.storyboard in Resources */,
@@ -1173,6 +1176,7 @@
 		96E494451FB1A78500D1E2C1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -1202,6 +1206,7 @@
 		96E494461FB1A78500D1E2C1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
