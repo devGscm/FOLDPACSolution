@@ -327,11 +327,11 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         }
         else if(segue.identifier == "segOutSignDialog")
         {
-            if let clsDialog = segue.destination as? InSignDialog
+            if let clsDialog = segue.destination as? OutSignDialog
             {
-                let clsDataRow : DataRow = DataRow()
-                clsDataRow.addRow(name: "remark", value: "")
-                clsDialog.loadData(dataRow: clsDataRow)
+//                let clsDataRow : DataRow = DataRow()
+//                clsDataRow.addRow(name: "remark", value: "")
+//                clsDialog.loadData(dataRow: clsDataRow)
                 clsDialog.ptcDataHandler = self
             }
         }
@@ -364,8 +364,6 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     //=======================================
     func recvData(returnData: ReturnData)
     {
-        print("=========[recvData] :  \(returnData) ========")
-        
         if(returnData.returnType == "CombineOutWorkList")
         {
             if(returnData.returnRawData != nil)
@@ -412,7 +410,6 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         }
         else if(returnData.returnType == "outSignDialog")
         {
-            print("=========[1] [ 완료전송 데이터 ] ========")
             if(returnData.returnRawData != nil)
             {
                 let clsDataRow      = returnData.returnRawData as! DataRow
@@ -670,18 +667,20 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         
         if(clearScreen == true)
         {
-            mStrSaleWorkId = ""
-            mStrProdAssetEpc = ""
-            mIntProcCount = 0
-            mIntWorkAssignCount = 0
-           
-            self.tfVehName.text = ""            //차량번호
-            self.lblOrderCustName.text = ""     //입고처
-            self.lblDeliBranchName.text = ""    //배송거점
-            self.lblAssetEpcName.text = ""      //유형
-            self.lblAssignCount.text = ""       //출고예정
-            self.lblProcCount.text = ""         //처리량
-            self.lblRemainCount.text = ""       //미처리량
+            
+                self.mStrSaleWorkId = ""
+                self.mStrProdAssetEpc = ""
+                self.mIntProcCount = 0
+                self.mIntWorkAssignCount = 0
+               
+                self.tfVehName.text = ""            //차량번호
+                self.lblOrderCustName.text = ""     //입고처
+                self.lblDeliBranchName.text = ""    //배송거점
+                self.lblAssetEpcName.text = ""      //유형
+                self.lblAssignCount.text = ""       //출고예정
+                self.lblProcCount.text = ""         //처리량
+                self.lblRemainCount.text = ""       //미처리량
+            
         }
         
         //RFID리더기 초기화
@@ -1070,7 +1069,6 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                 let strDeliBranchName           = clsDataRow.getString(name: "deliBranchName") ?? ""
                 self.mIntWorkAssignCount        = clsDataRow.getInt(name: "workAssignCnt") ?? 0
                 self.mIntProcCount              = clsDataRow.getInt(name: "procCnt") ?? 0               //처리량
-                let strVehName                  = clsDataRow.getString(name: "resaleVehName") ?? ""     //차량명
                 self.mStrProdAssetEpc           = clsDataRow.getString(name: "prodAssetEpc") ?? ""      //유형
                 let strProdAssetEpcName         = clsDataRow.getString(name: "prodAssetEpcName") ?? ""  //유형명
                 var intRemainCnt                = self.mIntWorkAssignCount - self.mIntProcCount         //미처리량
@@ -1080,14 +1078,16 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                 }
                 
                 //1)화면에 표시
-                self.lblOrderCustName.text = strOrderCustName
-                self.lblDeliBranchName.text = strDeliBranchName
-                self.btnSaleWorkId.setTitle(self.mStrSaleWorkId, for: .normal)      //송장번호
-                self.lblAssignCount.text = String(self.mIntWorkAssignCount)         //출고지시수량
-                self.lblProcCount.text = String(self.mIntProcCount)                 //처리수량
-                self.lblAssetEpcName.text = strProdAssetEpcName                     //유형명
-                self.lblRemainCount.text = String(intRemainCnt)                     //미처리량
-                
+                DispatchQueue.main.async
+                {
+                    self.lblOrderCustName.text = strOrderCustName
+                    self.lblDeliBranchName.text = strDeliBranchName
+                    self.btnSaleWorkId.setTitle(self.mStrSaleWorkId, for: .normal)      //송장번호
+                    self.lblAssignCount.text = String(self.mIntWorkAssignCount)         //출고지시수량
+                    self.lblProcCount.text = String(self.mIntProcCount)                 //처리수량
+                    self.lblAssetEpcName.text = strProdAssetEpcName                     //유형명
+                    self.lblRemainCount.text = String(intRemainCnt)                     //미처리량
+                }
                 //2)태그데이터 초기화
                 self.clearTagData(false)
 

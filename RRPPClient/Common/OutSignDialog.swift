@@ -16,8 +16,13 @@ class OutSignDialog: BaseViewController, YPSignatureDelegate
 	var ptcDataHandler : DataProtocol?
 	
 	@IBOutlet weak var tfRemark: UITextField!
-	
 	@IBOutlet weak var vwSign: YPDrawSignatureView!
+    
+//    var clsDataRow : DataRow = DataRow()
+//    func loadData( dataRow: DataRow)
+//    {
+//        self.clsDataRow = dataRow
+//    }
 	
 	
 	override func viewDidLoad()
@@ -72,8 +77,9 @@ class OutSignDialog: BaseViewController, YPSignatureDelegate
 			
 			self.vwSign.clear()
 		}
-        print("==== onConfirmClicked ====")
+        print("==== [1]onConfirmClicked ====")
 		let strtData = ReturnData(returnType: "outSignDialog", returnCode: nil, returnMesage: nil, returnRawData: clsDataRow)
+        print("==== [2]onConfirmClicked ====")
 		ptcDataHandler?.recvData(returnData: strtData)
 		self.dismiss(animated: true, completion: nil)
 	}
