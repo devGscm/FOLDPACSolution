@@ -35,7 +35,7 @@ class UserLogin: UIViewController
 		//mClsProgressBar.SetDialogColor(UIColor.black)
 		//mClsProgressBar.Show(true, strMessage:"Loading...")
 		
-		btnLogin.titleLabel?.font = UIFont.fontAwesome(ofSize:18)
+		//btnLogin.titleLabel?.font = UIFont.fontAwesome(ofSize:18)
 		//let strLogin:String? = String.fontAwesomeIcon(name:.lock) + " 로그인"
 		//btnLogin.setTitle(strLogin, for: .normal)
 		

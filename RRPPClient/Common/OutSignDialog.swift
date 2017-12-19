@@ -66,9 +66,7 @@ class OutSignDialog: BaseViewController, YPSignatureDelegate
 		if let imgSign = self.vwSign.getSignature()
 		{
 			let strSignData = imgSign.base64(format: .png)
-			
-			print("@@@@@@@@@@@@ strSignData:\(strSignData)")
-			
+			//print("@@@@@@@@@@@@ strSignData:\(strSignData)")
 			clsDataRow.addRow(name: "signData", value: strSignData)
 			
 			self.vwSign.clear()

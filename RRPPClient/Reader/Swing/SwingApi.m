@@ -177,9 +177,6 @@ typedef enum
 /**
 [""] *	@brief	Discover Swing Device Override function is Ioss
 [""] *
-[""] *	@param 	dev 	peripheral
-[""] *	@param 	dev 	advertisementData
-[""] *	@param 	dev 	RSSI
 [""] *
 [""] */
 
@@ -305,9 +302,6 @@ typedef enum
 /**
 [""] *	@brief	페어링 안된 상태에서 비콘 메세지 케치를 위한 오버라이드 함수
 [""] *
-[""] *	@param 	dev 	peripheral 디바이스 정보
-[""] *	@param 	dev 	advertisementData 비콘 i,a 메시지
-[""] *	@param 	dev 	RSSI 신호 세기
 [""] *
 [""] */
 -(void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
@@ -316,11 +310,11 @@ typedef enum
 
     if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:kSwingServiceID]])
        {
-           NSString *value = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+           //NSString *value = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
            //NSLog(@"Value %@",value);
 
            NSData *data = characteristic.value;
-           NSString *stringFromData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+          // NSString *stringFromData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
           // NSLog(@"Data ====== %@", stringFromData);
        }
     
