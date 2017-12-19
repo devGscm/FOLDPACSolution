@@ -54,9 +54,6 @@ class RfidTrackingService: BaseRfidViewController, UITableViewDataSource, UITabl
 		//RFID를 처리할 델리게이트 지정
 		self.initRfid(self as ReaderResponseDelegate )
 		initViewControl()
-		//tvRfidInspect.rowHeight = UITableViewAutomaticDimension
-		//테이블의 셀에대한 높이설정
-		tvRfidTrackingService.rowHeight = 70
 	}
 	
 	override func viewDidAppear(_ animated: Bool)
