@@ -288,11 +288,11 @@
                                                     <segue destination="sac-ed-Mbe" kind="presentation" identifier="segEasyInSearch" modalPresentationStyle="overCurrentContext" id="Bij-d0-QOV"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="huY-7q-NDL">
-                                                <rect key="frame" x="121" y="4" width="60" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="huY-7q-NDL">
+                                                <rect key="frame" x="124" y="4" width="60" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <state key="normal" title="바코드">
+                                                <state key="normal" image="ic_barcode_white">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
@@ -890,6 +890,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ic_barcode_white" width="24" height="24"/>
         <image name="ic_close_white" width="24" height="24"/>
     </resources>
 </document>
