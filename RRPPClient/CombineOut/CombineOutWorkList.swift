@@ -109,7 +109,7 @@ class CombineOutWorkList: BaseViewController, UITableViewDataSource, UITableView
         print(" branchCustId:\(AppContext.sharedManager.getUserInfo().getBranchCustId())")
         print(" userLang:\(AppContext.sharedManager.getUserInfo().getUserLang())")
         
-        clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+        clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
         clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
         clsDataClient.SelectUrl = "inOutService:selectSaleOutWorkList"
         clsDataClient.removeServiceParam()

@@ -311,7 +311,7 @@ class EventSelectStore : BaseRfidViewController, UITableViewDataSource, UITableV
 	{
 		clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
 		
-		clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		clsDataClient.ExecuteUrl = "eventService:executeEventData"
 		clsDataClient.removeServiceParam()

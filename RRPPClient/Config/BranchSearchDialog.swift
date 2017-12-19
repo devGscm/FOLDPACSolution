@@ -87,7 +87,7 @@ class BranchSearchDialog: BaseViewController, UITableViewDataSource, UITableView
     
     func initDataClient()
     {
-        clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
         clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
         clsDataClient.UserData = "redis.selectBranchList"
         clsDataClient.removeServiceParam()

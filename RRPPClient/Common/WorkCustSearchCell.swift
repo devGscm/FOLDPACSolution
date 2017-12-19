@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WorkOutCustSearchCell: UITableViewCell
+class WorkCustSearchCell: UITableViewCell
 {
     @IBOutlet weak var lblParentCustName: UILabel!
     @IBOutlet weak var lblCustTypeName: UILabel!

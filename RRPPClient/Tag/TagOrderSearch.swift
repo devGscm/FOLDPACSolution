@@ -72,7 +72,7 @@ class TagOrderSearch: BaseViewController, UITableViewDataSource, UITableViewDele
 		print(" userLang:\(AppContext.sharedManager.getUserInfo().getUserLang())")
 		
 		
-		clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		clsDataClient.SelectUrl = "supplyService:selectTagOrderList"
 		clsDataClient.removeServiceParam()

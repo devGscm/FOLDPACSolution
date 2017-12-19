@@ -296,7 +296,6 @@
         <!--Branch Search Dialog-->
         <scene sceneID="hP6-3f-Ahg">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iPD-Jq-D4q" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="BranchSearchDialog" id="eb8-3X-Uev" customClass="BranchSearchDialog" customModule="_RRPPClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zMf-SZ-c9I">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -328,7 +327,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="onCloseClick:" destination="eb8-3X-Uev" eventType="touchUpInside" id="Gih-j7-xEH"/>
+                                                    <action selector="onCloseClicked:" destination="eb8-3X-Uev" eventType="touchUpInside" id="gC4-GT-QDr"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -553,6 +552,7 @@
                         <outlet property="tvBranch" destination="N01-71-xVi" id="DTD-Xn-V73"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iPD-Jq-D4q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1752.8" y="-985.45727136431788"/>
         </scene>

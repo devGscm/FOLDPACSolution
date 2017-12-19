@@ -64,7 +64,7 @@ class StockReviewSearch: BaseViewController, UITableViewDataSource, UITableViewD
 	
 	func initDataClient()
 	{
-		clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		clsDataClient.SelectUrl = "reviewService:selectStockReviewList"
 		clsDataClient.removeServiceParam()
@@ -209,7 +209,7 @@ class StockReviewSearch: BaseViewController, UITableViewDataSource, UITableViewD
 	{
 		print("@@@@sendStockReviewInitData @@@@@@@@@@@@@@")
 		
-		let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		clsDataClient.SelectUrl = "reviewService:executeStockReviewInitData"
 		clsDataClient.removeServiceParam()

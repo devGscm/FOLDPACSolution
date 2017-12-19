@@ -1,8 +1,8 @@
 //
-//  CombineIn.swift
+//  EasyIn.swift
 //   RRPPClient
 //
-//  Created by 이용민 on 2017. 12. 15..
+//  Created by 이용민 on 2017. 12. 18..
 //  Copyright © 2017년 MORAMCNT. All rights reserved.
 //
 
@@ -11,53 +11,34 @@ import Material
 import Mosaic
 import BarcodeScanner
 
-class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, DataProtocol, ReaderResponseDelegate
+class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, DataProtocol, ReaderResponseDelegate
 {
-	
+
 	@IBOutlet weak var lblUserName: UILabel!
 	@IBOutlet weak var lblBranchInfo: UILabel!
 	@IBOutlet weak var lblReaderName: UILabel!
 	@IBOutlet weak var btnRfidReader: UIButton!
-	
-	
-	@IBOutlet weak var btnWorkType: UIButton!
-	@IBOutlet weak var btnSaleWorkId: UIButton!
+	@IBOutlet weak var btnResaleWorkId: UIButton!
 	@IBOutlet weak var btnBarcodeSearch: UIButton!
+	@IBOutlet weak var btnWorkCustSearch: UIButton!
 	@IBOutlet weak var tfVehName: UITextField!
-	@IBOutlet weak var lblResaleBranchName: UILabel!
-	@IBOutlet weak var lblDriverName: UILabel!
-	@IBOutlet weak var lblProdAssetEpcName: UILabel!
-	@IBOutlet weak var lblOrderReqCount: UILabel!
+	@IBOutlet weak var tfTradeChit: UITextField!
 	@IBOutlet weak var lblProcCount: UILabel!
-	@IBOutlet weak var lblRemainCount: UILabel!
+	@IBOutlet weak var tvEasyIn: UITableView!
+	
+	var strResaleBranchId		= ""
+	var strResaleBranchName		= ""
+	
+	var strResaleOrderId		= ""		/**< 송장번호ID - DB에서 할당받은 */
+	var intProcCount 			= 0			/**< 처리량 */
+	var boolNewTagInfoExist							= false		/**< 신규태그 - 신규태그가 있는지 여부 -전소용 */
 	
 	
-	@IBOutlet weak var tvCombineIn: UITableView!
+	var boolExistSavedInvoice	= false		/**< 송장번호ID - DB에서 할당받았는지 여부 */
+	var strSaleWorkId			= ""		/**< 송장번호 */
 	
 	var strTitle	= ""
 	
-	var arcWorkType: Array<ListViewDialog.ListViewItem> = Array<ListViewDialog.ListViewItem>()
-	var strWorkType = ""
-	
-	
-	
-	var strResaleOrderId							= ""			/**< 구매주문ID */
-	var strSaleWorkId								= ""			/**< 송장번호 */
-	var strProdAssetEpc								= ""			/**< 유형 */
-	var intOrderReqCount							= 0			/**< 출고량 */
-	var intProcCount 								= 0			/**< 처리량 */
-	
-	
-	var boolWorkListSelected						= false		/**< 송장-선택 했는지 여부 */
-	var boolNewTagInfoExist							= false		/**< 신규태그 - 신규태그가 있는지 여부 -전소용 */
-	
-	var strWorkerName								= ""			/**< 반납-인수자정보*/
-	var intNoreadCnt								= 0			/**< 미인식 -고장으로 인해 리더기 미인식*/
-	var strCustType									= ""			/**< 고객사 구분 */
-	
-	var strWorkState								= ""			/**< 작업상태(서버전송) */
-	var boolWorkCompleteBtn							= false		/**< 완료전송 버튼 입력 -전송용 */
-	var strNoReadCount								= "0"			/**< 미인식수량-전송용 */
 	
 	var arrAssetRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
 	var arrTagRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
@@ -80,7 +61,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	override func viewWillAppear(_ animated: Bool)
 	{
 		print("=========================================")
-		print("*CombineIn.viewWillAppear()")
+		print("*EasyIn.viewWillAppear()")
 		print("=========================================")
 		super.viewWillAppear(animated)
 		prepareToolbar()
@@ -96,17 +77,44 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 		super.viewDidAppear(animated)
 	}
 	
+	override func didUnload(to viewController: UIViewController, completion: ((Bool) -> Void)? = nil)
+	{
+		print("=========================================")
+		print("*ProdMappingOut.didUnload()")
+		print("=========================================")
+		
+		if(self.strResaleOrderId.isEmpty == false)
+		{
+			// TransitionController에서 다른화면으로 이동못하도록 false 처리를 한다.
+			super.setUnload(unload: false)
+			
+			Dialog.show(container: self, viewController: nil,
+				title: NSLocalizedString("common_confirm", comment: "확인"),
+				message: NSLocalizedString("easy_process_exist_message", comment: "임시 저장된 데이터가 지워집니다. 종료 하시겠습니까?"),
+				okTitle: NSLocalizedString("common_confirm", comment: "확인"),
+				okHandler: { (_) in
+					
+					// 작업 취소처리
+					self.sendWorkInitData(resaleOrderId: self.strResaleOrderId)
+				
+					// 확인이 끝나면 다른 화면으로 이동한다.
+					self.toolbarController?.transition(to: viewController, completion: completion)
+					return
+				},
+				cancelTitle: NSLocalizedString("common_cancel", comment: "취소"), cancelHandler: { (_) in
+					completion!(false)
+				}
+			)
+		}
+	}
+	
 	override func viewDidDisappear(_ animated: Bool)
 	{
 		print("=========================================")
-		print("*CombineIn.viewDidDisappear()")
+		print("*ProductMount.viewDidDisappear()")
 		print("=========================================")
 		
 		boolNewTagInfoExist = false
-		
-		
-		
-		arcWorkType.removeAll()
 		
 		arrAssetRows.removeAll()
 		arrTagRows.removeAll()
@@ -126,82 +134,39 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 		lblUserName.text = AppContext.sharedManager.getUserInfo().getUserName()
 		lblBranchInfo.text = AppContext.sharedManager.getUserInfo().getBranchName()
 		lblReaderName.text = AppContext.sharedManager.getUserInfo().getReaderDevName()
-		
-		makeWorkTypeCodeList(userLang: AppContext.sharedManager.getUserInfo().getUserLang())
 	}
-	
-	
-	func makeWorkTypeCodeList(userLang : String)
-	{
-		var strCustType = AppContext.sharedManager.getUserInfo().getCustType()
-		
-		// 고객사 타입
-		if(AppContext.sharedManager.getUserInfo().getCustType() == Constants.CUST_TYPE_MGR)
-		{
-			strCustType = AppContext.sharedManager.getUserInfo().getBranchCustType()
-		}
-		
-		let enuCustType = LocalData.CustType(rawValue: strCustType)
-		let arrCodeInfo: Array<CodeInfo> = LocalData.shared.getSaleTypeCodeDetail(fieldValue: "RESALE_TYPE", saleResale: LocalData.SaleResaleType.Resale, custType: enuCustType!, initCodeName: nil)
-		
-		for (intIndex, clsInfo) in arrCodeInfo.enumerated()
-		{
-			var strCommName = ""
-			if(Constants.USER_LANG_CH == userLang)
-			{
-				strCommName = clsInfo.commNameCh
-			}
-			else if(Constants.USER_LANG_EN == userLang)
-			{
-				strCommName = clsInfo.commNameEn
-			}
-			else
-			{
-				strCommName = clsInfo.commNameKr
-			}
-			
-			if(intIndex == 0)
-			{
-				self.strWorkType = clsInfo.commCode
-				self.btnWorkType.setTitle(strCommName, for: .normal)
-			}
-			arcWorkType.append(ListViewDialog.ListViewItem(itemCode: clsInfo.commCode, itemName: strCommName))
-		}
-	}
+
 	
 	// Segue로 파라미터 넘기면 반드시 prepare를 타기 때문에 여기서 DataProtocol을 세팅하는걸로 함
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?)
 	{
-		if(segue.identifier == "segCombineInSearch")
+		if(segue.identifier == "segEasyInSearch")
 		{
-			if let clsDialog = segue.destination as? CombineInSearch
+			// 송장조회
+			if let clsDialog = segue.destination as? EasyInSearch
 			{
 				clsDialog.ptcDataHandler = self
-				clsDialog.workType = self.strWorkType
 			}
 		}
-		else if(segue.identifier == "segInSignDialog")
+			
+		else if(segue.identifier == "segWorkCustSearch")
 		{
-			if let clsDialog = segue.destination as? InSignDialog
+			// 고객사 조회
+			if let clsDialog = segue.destination as? WorkCustSearch
 			{
-				let clsDataRow : DataRow = DataRow()
-				clsDataRow.addRow(name: "noReadCount", value: self.strNoReadCount)
-				
-				// 인수자 : 업무구분이 "구매(반납)" 인 경우, 반납주문정보의 "인수자" 정보표시
-				if(Constants.RESALE_TYPE_RETURN == self.strWorkType)
-				{
-					clsDataRow.addRow(name: "workerName", value: self.strWorkerName)
-				}
-				else
-				{
-					clsDataRow.addRow(name: "workerName", value: AppContext.sharedManager.getUserInfo().getUserName())
-				}
-				clsDataRow.addRow(name: "remark", value: "")
-				clsDialog.loadData(dataRow: clsDataRow)
+				clsDialog.inOutType = Constants.INOUT_TYPE_INPUT
 				clsDialog.ptcDataHandler = self
-				
 			}
 		}
+			
+		else if(segue.identifier == "segOutSignDialog")
+		{
+			if let clsDialog = segue.destination as? OutSignDialog
+			{
+				clsDialog.ptcDataHandler = self
+			}
+		}
+	
 		else if(segue.identifier == "segTagDetailList")
 		{
 			if let clsDialog = segue.destination as? TagDetailList
@@ -227,94 +192,75 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	// 팝업 다이얼로그로 부터 데이터 수신
 	func recvData( returnData : ReturnData)
 	{
-		if(returnData.returnType == "combineInSearch")
+		//송장번호가 있는경우, 새로운 입고처가 들어오면 기존 데이터를 삭제한다.
+		if(boolExistSavedInvoice == true)
 		{
+			clearTagData(clearScreen: true)
+		}
+		
+		if(returnData.returnType == "easyInSearch")
+		{
+			// 송장조회
 			if(returnData.returnRawData != nil)
 			{
-				// 새로운 발주번호가 들어오면 기존 데이터는 삭제한다.
-				if(self.strSaleWorkId.isEmpty == false)
-				{
-					clearTagData(clearScreen: true)
-				}
-				
 				let clsDataRow = returnData.returnRawData as! DataRow
+
+				self.strResaleOrderId		= clsDataRow.getString(name: "resaleOrderId") ?? ""
+				self.strSaleWorkId 			= clsDataRow.getString(name: "saleWorkId") ?? ""
+				let strResaleBranchName		= clsDataRow.getString(name: "resaleBranchName") ?? ""	// 출고처명
 				
-				self.strResaleOrderId			= clsDataRow.getString(name: "resaleOrderId") ?? ""
-				self.strSaleWorkId 				= clsDataRow.getString(name: "saleWorkId") ?? ""
-				self.intOrderReqCount 			= clsDataRow.getInt(name: "orderReqCnt") ?? 0
-				self.intProcCount				= clsDataRow.getInt(name: "procCnt") ?? 0
-				self.intNoreadCnt				= clsDataRow.getInt(name: "noreadCnt") ?? 0				//미인식
-				self.strWorkerName				= clsDataRow.getString(name: "workerName") ?? ""		//반납-인수자
-				self.strProdAssetEpc			= clsDataRow.getString(name: "prodAssetEpc") ?? ""		//유형
-				let intRemainCnt				= clsDataRow.getInt(name: "remainCnt") ?? 0				//미처리량
+				self.btnWorkCustSearch.setTitle(strResaleBranchName, for: UIControlState.normal)			// 출고처
+				self.btnResaleWorkId.setTitle(strSaleWorkId, for: UIControlState.normal)					// 송장번호
 				
-				self.lblResaleBranchName.text	= clsDataRow.getString(name: "resaleBranchName") ?? ""		// 출고처
-				self.btnSaleWorkId.setTitle(strSaleWorkId, for: .normal)									// 송장번호
-				self.lblOrderReqCount.text		= "\(intOrderReqCount)"									// 입고예정수량
-				self.lblProcCount.text			= "\(intProcCount)"										// 처리수량
-				self.tfVehName.text				= clsDataRow.getString(name: "vehName") ?? ""			// 차량번호
-				self.lblDriverName.text			= clsDataRow.getString(name: "driverName") ?? ""		// 납품자
-				self.lblProdAssetEpcName.text 	= clsDataRow.getString(name: "prodAssetEpcName") ?? ""	// 유형
-				self.lblRemainCount.text		= "\(intRemainCnt)"										// 미처리량
-				
-				
-				//선택된 '송장정보' 내용 조회
-				doSearchWorkListDetail()
-				
-				//선택된 '송장정보'에 대한 태그리스트
-				doSearchTagList()
-				
-				//송장 선택 여부
-				boolWorkListSelected = true
-				
+				// 태그리스트 재조회
+				doReloadTagList(showInitMsg: false)
 			}
 		}
-		else if(returnData.returnType == "inSignDialog")
+		if(returnData.returnType == "workCustSearch")
 		{
+			// 고객사 조회
 			if(returnData.returnRawData != nil)
 			{
 				let clsDataRow = returnData.returnRawData as! DataRow
-				let intNoReadCount	= clsDataRow.getInt(name: "noReadCount") ?? 0
-				let strWorkerName	= clsDataRow.getString(name: "workerName") ?? ""
+				let strCustName = clsDataRow.getString(name: "custName") ?? ""
+				self.strResaleBranchId	= clsDataRow.getString(name: "branchId") ?? ""
+				self.btnWorkCustSearch.setTitle(strCustName, for: .normal)	// 출고처
+			}
+		}
+		else if(returnData.returnType == "outSignDialog")
+		{
+			// 전송
+			if(returnData.returnRawData != nil)
+			{
+				let clsDataRow = returnData.returnRawData as! DataRow
 				let strRemark		= clsDataRow.getString(name: "remark") ?? ""
 				let strSignData		= clsDataRow.getString(name: "signData") ?? ""
 				let strVehName		= tfVehName?.text ?? ""
-				let strDriverName	= lblDriverName?.text ?? ""
+				let strTradeChit	= tfTradeChit?.text ?? ""
 				
-				sendData(workState: self.strWorkState, resaleOrderId: self.strResaleOrderId, saleWorkId: self.strSaleWorkId, vehName: strVehName, driverName: strDriverName, orderReqCount: self.intOrderReqCount, noReadCount: intNoReadCount, remark: strRemark, workerName: strWorkerName, signData: strSignData)
+				if self.strResaleOrderId.isEmpty == false
+				{
+					//DB로 데이터 전송 처리
+					sendDataExistResaleOrderId(workState: Constants.WORK_STATE_COMPLETE, resaleOrderId: self.strResaleOrderId, vehName: strVehName, tradeChit: strTradeChit, remark: strRemark, signData: strSignData)
+				}
+				else
+				{
+					sendDataNoneResaleOrderId(workState: Constants.WORK_STATE_COMPLETE, resaleCustId: self.strResaleBranchId, vehName: strVehName, tradeChit: strTradeChit, remark: strRemark, signData: strSignData)
+				}
 			}
 		}
-		
 	}
 	
-	// 구분 선택
-	@IBAction func onWorkTypeClicked(_ sender: UIButton)
+
+	
+	@IBAction func onResaleWorkIdClicked(_ sender: UIButton)
 	{
-		let clsDialog = ListViewDialog()
-		
-		print("@@@@@@@@@ onWOkrTypeClicked:\(strWorkType)")
-		
-		
-		clsDialog.loadData(data: arcWorkType, selectedItem: strWorkType)
-		clsDialog.contentHeight = 150
-		
-		let acDialog = UIAlertController(title: NSLocalizedString("combine_work_type", comment: "구분"), message:nil, preferredStyle: .alert)
-		acDialog.setValue(clsDialog, forKeyPath: "contentViewController")
-		
-		let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
-			self.strWorkType = clsDialog.selectedRow.itemCode
-			let strItemName = clsDialog.selectedRow.itemName
-			self.btnWorkType.setTitle(strItemName, for: .normal)
-		}
-		acDialog.addAction(aaOkAction)
-		self.present(acDialog, animated: true)
+		self.performSegue(withIdentifier: "segEasyInSearch", sender: self)
 	}
 	
-	@IBAction func onSaleWorkIdClicked(_ sender: UIButton)
-	{
-		self.performSegue(withIdentifier: "segCombineInSearch", sender: self)
-	}
 	
+	@IBAction func onWorkCustSearchClicked(_ sender: UIButton) {
+	}
 	
 	// 데이터를 clear한다.
 	func clearTagData(clearScreen : Bool)
@@ -324,32 +270,24 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 		arrAssetRows.removeAll()
 		
 		DispatchQueue.main.async
-			{
-				self.tvCombineIn?.reloadData()
+		{
+			self.tvEasyIn?.reloadData()
 		}
 		
 		if(clearScreen == true)
 		{
-			strSaleWorkId				= ""
-			strProdAssetEpc				= ""
-			intProcCount				= 0
-			intOrderReqCount			= 0		/**< 출고량 */
-			intNoreadCnt				= 0
-			strWorkerName				= ""
-			boolWorkCompleteBtn			= false
-			strWorkState				= ""
-			strNoReadCount				= "0"
+			strResaleOrderId		= ""
+			intProcCount			= 0
+			strResaleBranchId		= ""
+			boolExistSavedInvoice	= false	//'송장번호'할당여부
 
 			DispatchQueue.main.async
-				{
-					self.lblResaleBranchName.text	= ""	//출고처
-					self.btnSaleWorkId.setTitle(NSLocalizedString("sale_work_id_selection", comment: "송장선택"), for: .normal) //송장번호
-					self.lblOrderReqCount.text		= ""	// 입고예정수량
-					self.lblProcCount.text			= ""	// 처리량
-					self.tfVehName.text				= ""	// 차량번호
-					self.lblProdAssetEpcName.text	= ""	// 유형
-					self.lblRemainCount.text			= ""	// 미처리량
-					self.lblDriverName.text			= ""	// 납품자
+			{
+				self.btnResaleWorkId.setTitle(NSLocalizedString("sale_work_id_selection", comment: "송장선택"), for: .normal)
+				self.btnWorkCustSearch.setTitle(NSLocalizedString("title_easy_cust_selection", comment: "고객사 선택"), for: .normal)
+				self.lblProcCount.text			= "0"	// 처리수량
+				self.tfVehName.text				= ""	// 차량번호
+				self.tfTradeChit.text			= ""	// 전표번호
 			}
 		}
 		
@@ -432,32 +370,11 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 					arrAssetRows.append(clsTagInfo)
 				}
 				
-				// 입력창 내용 갱신(처리량증가/미처리량감소)
-				var intRemainCount: Int = Int(lblRemainCount?.text ?? "0")! // 미처리량
-				if intRemainCount > 0
-				{
-					intRemainCount = intRemainCount - 1
-					lblRemainCount.text = "\(intRemainCount)"
-				}
-				
-				
 				self.intProcCount = Int(lblProcCount?.text ?? "0")! + 1 // 처리량
 				lblProcCount?.text = "\(self.intProcCount)"
-				
-				
-				//5)그리드 리스에 내용 갱신
-				for clsTagInfo in arrAssetRows
-				{
-					// 같은 자산타입(Asset_type)이면 처리량증가,미처리량감소
-					if(strAssetEpc == clsTagInfo.getAssetEpc())
-					{
-                        clsTagInfo.setProcCount((clsTagInfo.getProcCount() + 1)) // 처리량 증가
-                        clsTagInfo.setRemainCount((clsTagInfo.getRemainCount() - 1)) // 미처리량 감소
-					}
-				}
 			}
 		}
-		DispatchQueue.main.async { self.tvCombineIn?.reloadData() }
+		DispatchQueue.main.async { self.tvEasyIn?.reloadData() }
 	}
 	
 	
@@ -468,13 +385,11 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
-		let objCell:CombineInCell = tableView.dequeueReusableCell(withIdentifier: "tvcCombineIn", for: indexPath) as! CombineInCell
+		let objCell:EasyInCell = tableView.dequeueReusableCell(withIdentifier: "tvcEasyIn", for: indexPath) as! EasyInCell
 		let clsTagInfo = arrAssetRows[indexPath.row]
 		
-		objCell.lblAssetName.text		= clsTagInfo.getAssetName()
-		objCell.lblWorkAssignCount.text = "\(clsTagInfo.getWorkAssignCount())"
-		objCell.lblProcCount.text		= "\(clsTagInfo.getProcCount())"
-		objCell.lblRemainCount.text		= "\(clsTagInfo.getRemainCount())"
+		objCell.lblAssetName.text = clsTagInfo.getAssetName()
+		objCell.lblReadCount.text = "\(clsTagInfo.getReadCount())"
 		
 		objCell.btnDetail.titleLabel?.font = UIFont.fontAwesome(ofSize: 14)
 		objCell.btnDetail.setTitle(String.fontAwesomeIcon(name: .listAlt), for: .normal)
@@ -493,42 +408,43 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	@IBAction func onClearAllClicked(_ sender: UIButton)
 	{
 		Dialog.show(container: self, viewController: nil,
-			title: NSLocalizedString("common_delete", comment: "삭제"),
-			message: NSLocalizedString("common_confirm_delete", comment: "전체 데이터를 삭제하시겠습니까?"),
-			okTitle: NSLocalizedString("common_confirm", comment: "확인"),
-			okHandler: { (_) in
-				
-				if(self.strSaleWorkId.isEmpty == false)
-				{
-					self.doReloadTagList()	// 초기화
-				}
-				else
-				{
-					self.clearTagData(clearScreen: false)
-					super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
-				}
-				},
-				cancelTitle: NSLocalizedString("common_cancel", comment: "취소"), cancelHandler: nil)
+		title: NSLocalizedString("common_delete", comment: "삭제"),
+		message: NSLocalizedString("common_confirm_delete", comment: "전체 데이터를 삭제하시겠습니까?"),
+		okTitle: NSLocalizedString("common_confirm", comment: "확인"),
+		okHandler: { (_) in
+			
+			// 송장번호 할당된 경우
+			if(self.boolExistSavedInvoice == true)
+			{
+				self.doReloadTagList(showInitMsg: true)
+			}
+			else
+			{
+				self.clearTagData(clearScreen: true)
+				super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
+			}
+		},
+		cancelTitle: NSLocalizedString("common_cancel", comment: "취소"), cancelHandler: nil)
 	}
 	
 	
 	// 작업초기화
 	@IBAction func onWorkInitClick(_ sender: UIButton)
 	{
-		if(strSaleWorkId.isEmpty == true)
+		if(strResaleOrderId.isEmpty == true)
 		{
-			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("msg_select_sale_work_id", comment: "조회된 송장번호가 없습니다."))
+			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("msg_no_temporary_saved_data", comment: "임시 저장된 데이터가 없습니다."))
 			return
 		}
 		
 		Dialog.show(container: self, viewController: nil,
-					title: NSLocalizedString("common_task_init", comment: "작업초기화"),
-					message: NSLocalizedString("common_confirm_work_Init", comment: "현재 작업을 초기화 하시겠습니까 ?"),
-					okTitle: NSLocalizedString("common_confirm", comment: "확인"),
-					okHandler: { (_) in
-						self.sendWorkInitData(resaleOrderId: self.strResaleOrderId, saleWorkId: self.strSaleWorkId)
-		},
-					cancelTitle: NSLocalizedString("common_cancel", comment: "취소"), cancelHandler: nil)
+			title: NSLocalizedString("common_task_init", comment: "작업초기화"),
+			message: NSLocalizedString("common_confirm_work_Init", comment: "현재 작업을 초기화 하시겠습니까 ?"),
+			okTitle: NSLocalizedString("common_confirm", comment: "확인"),
+			okHandler: { (_) in
+				self.sendWorkInitData(resaleOrderId: self.strResaleOrderId)
+			},
+			cancelTitle: NSLocalizedString("common_cancel", comment: "취소"), cancelHandler: nil)
 	}
 	
 	
@@ -541,34 +457,25 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 			return
 		}
 		
-		if(self.strSaleWorkId.isEmpty == true)
-		{
-			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("sale_enter_your_work_id", comment: "송장번호를 입력하여 주십시오."))
-			return
-		}
-		
 		if(self.boolNewTagInfoExist == false)
 		{
 			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("common_no_data_send", comment: "전송할 데이터가 없습니다."))
 			return
 		}
 		
-		// 납품(지서서O) 입고 처리
-		if(self.strWorkType == Constants.RESALE_TYPE_DELIVERY)
-		{
-			if((self.intProcCount + self.intNoreadCnt) > self.intOrderReqCount)
-			{
-				// 처리수량이 예정수량보다 큽니다.(입고불가)
-				Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("msg_processing_qty_work_require_qty", comment: "처리수량은 예정수량을 초과할 수 없습니다. 다시 확인해 주세요."))
-				return
-			}
-		}
-		
 		let strVehName		= self.tfVehName?.text ?? ""
-		let strDriverName	= self.lblDriverName.text ?? ""
-		self.strWorkState	= Constants.WORK_STATE_WORKING	//작업상태 '01'-임시저장
-		//DB로 데이터 전송 처리
-		sendData(workState: self.strWorkState, resaleOrderId: self.strResaleOrderId, saleWorkId: self.strSaleWorkId, vehName: strVehName, driverName: strDriverName, orderReqCount: self.intOrderReqCount, noReadCount: self.intNoreadCnt, remark: "", workerName: "", signData: "")
+		let strTradeChit	= self.tfTradeChit.text ?? ""
+		
+		if(self.strResaleOrderId.isEmpty == false)
+		{
+			// 송장번호 O, DB로 데이터 전송 처리
+			sendDataExistResaleOrderId(workState: Constants.WORK_STATE_WORKING, resaleOrderId: self.strResaleOrderId, vehName: strVehName, tradeChit: strTradeChit, remark: "", signData: "")
+		}
+		else
+		{
+			// 송장번호 X , 송장번호(ResaleOrderId) 발급후 DB로 데이터 전송 처리
+			sendDataNoneResaleOrderId(workState: Constants.WORK_STATE_WORKING, resaleCustId: self.strResaleBranchId, vehName: strVehName, tradeChit: strTradeChit, remark: "", signData: "")
+		}
 	}
 	
 	
@@ -589,78 +496,30 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 			return
 		}
 		
-		let strSaleWorkId = btnSaleWorkId.titleLabel?.text
-		if(strSaleWorkId?.isEmpty == true)
+		if(self.arrTagRows.count == 0)
 		{
-			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("sale_enter_your_work_id", comment: "송장번호를 입력하여 주십시오."))
+			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("common_no_data_send", comment: "전송할 데이터가 없습니다."))
 			return
 		}
 		
-		
-		// 납품입고(지시서O) 처리
-		if(self.strWorkType == Constants.RESALE_TYPE_DELIVERY)
-		{
-			if(self.intProcCount == self.intOrderReqCount)
-			{
-				//1)처리량 == 출고예정
-				self.strWorkState = Constants.WORK_STATE_COMPLETE
-			}
-			else if(self.intProcCount > self.intOrderReqCount)
-			{
-				//2)처리량 >출고예정
-				self.strWorkState = ""
-				Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("msg_processing_qty_work_require_qty", comment: "처리수량은 예정수량을 초과할 수 없습니다. 다시 확인해 주세요."))
-				return
-			}
-			else if(self.intProcCount < self.intOrderReqCount)
-			{
-				//3)처리량 <출고예정
-				if(AppContext.sharedManager.getUserInfo().getInAgreeYn() == Constants.AUTO_COMPLETED_AGGREMENT_YES)
-				{
-					self.strWorkState = Constants.WORK_STATE_COMPLETE	//3-1) 자동승인 'Y' -> 완료처리(상태값02)
-				}
-				else
-				{
-					self.strWorkState = Constants.WORK_STATE_ONGOING	//3-2) 자동승인 'N' -> 처리진행(상태값04)
-				}
-			}
-		}
-		else if(self.strWorkType == Constants.RESALE_TYPE_RETURN)
-		{
-			// 4)이동입고
-			if(AppContext.sharedManager.getUserInfo().getInAgreeYn() == Constants.AUTO_COMPLETED_AGGREMENT_YES)
-			{
-				self.strWorkState = Constants.WORK_STATE_COMPLETE	//4-1) 자동승인 'Y' -> 완료처리(상태값02)
-			}
-			else
-			{
-				
-				self.strWorkState = Constants.WORK_STATE_ONGOING	//4-2) 자동승인 'N' -> 처리진행(상태값04)
-			}
-		}
-		else
-		{
-			
-			self.strWorkState = Constants.WORK_STATE_COMPLETE		//3-1) 자동승인 'Y' -> 완료처리(상태값02)
-		}
-		
-		
-		self.performSegue(withIdentifier: "segInSignDialog", sender: self)
+		self.performSegue(withIdentifier: "segOutSignDialog", sender: self)
 	}
 	
 	
 	// 초기화 버튼 처리, 태그 리스트 재조회
-	func doReloadTagList()
+	func doReloadTagList(showInitMsg : Bool)
 	{
+		// 1) 태그리스트 초기화
+		clearTagData(clearScreen: false)
+		
+		
 		let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
-		clsDataClient.SelectUrl = "inOutService:selectSaleInWorkList"
+		clsDataClient.SelectUrl = "supplyService:selectSaleInTagList"
 		clsDataClient.removeServiceParam()
 		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
-		clsDataClient.addServiceParam(paramName: "branchId", value: AppContext.sharedManager.getUserInfo().getBranchId())
-		clsDataClient.addServiceParam(paramName: "branchCustId", value: AppContext.sharedManager.getUserInfo().getBranchCustId())
 		clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
-		clsDataClient.addServiceParam(paramName: "saleWorkId", value: self.strSaleWorkId)
+		clsDataClient.addServiceParam(paramName: "resaleOrderId", value: self.strResaleOrderId)
 		clsDataClient.addServiceParam(paramName: "pageNo", value: 1)
 		clsDataClient.addServiceParam(paramName: "rowsPerPage", value: 300)
 		
@@ -676,42 +535,87 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 				return
 			}
 			
-			// 2) DB에서 리스트 조회값 받음
-			for clsDataRow in clsDataTable.getDataRows()
+			let intDataRowsSize = clsDataTable.getDataRows().count
+			
+			DispatchQueue.main.async
 			{
-				self.strResaleOrderId			= clsDataRow.getString(name: "resaleOrderId") ?? ""		// 구매주문ID
-				self.strSaleWorkId 				= clsDataRow.getString(name: "saleWorkId") ?? ""		// 송장번호
-				self.intOrderReqCount 			= clsDataRow.getInt(name: "orderReqCnt") ?? 0
-				self.intProcCount				= clsDataRow.getInt(name: "procCnt") ?? 0				// 처리량
-				self.intNoreadCnt				= clsDataRow.getInt(name: "noreadCnt") ?? 0				// 미인식
-				self.strWorkerName				= clsDataRow.getString(name: "workerName") ?? ""		// 작업자명
-				self.strProdAssetEpc			= clsDataRow.getString(name: "prodAssetEpc") ?? ""		// 유형
-				var intRemainCnt				= self.intOrderReqCount - self.intProcCount				// 미처리량
-				if(intRemainCnt < 0)
+				self.lblProcCount.text = "\(intDataRowsSize)"								// 처리량
+			}
+			
+			
+			if( intDataRowsSize > 0)
+			{
+				for clsDataRow in clsDataTable.getDataRows()
 				{
-					intRemainCnt = 0										//미처리량 0이하는 0
+					let strEpcCode			= clsDataRow.getString(name: "epcCode") ?? ""
+					let strEpcUrn 			= clsDataRow.getString(name: "epcUrn") ?? ""
+					let strUtcTraceDate 	= clsDataRow.getString(name: "utcTraceDate") ?? ""
+					let strProdAssetEpcName = clsDataRow.getString(name: "prodAssetEpcName") ?? ""
+					
+					let strProdAssetEpc 	= clsDataRow.getString(name: "prodAssetEpc") ?? ""
+					//let strTradeChit		= clsDataRow.getString(name: "tradeChit") ?? ""
+					//let strVehName 			= clsDataRow.getString(name: "vehName") ?? ""
+					
+					// DB에서 조회된 태그 데이터 전달용 리스트에 저장
+					let clsTagInfo = RfidUtil.TagInfo()
+					clsTagInfo.setEpcCode(strEpcCode)
+					clsTagInfo.setAssetName(strProdAssetEpcName)
+					if(strEpcUrn.isEmpty == false)
+					{
+						clsTagInfo.setEpcUrn(strEpcUrn)
+						let arsEpcUrn = strEpcUrn.split(".")
+						if( arsEpcUrn.count == 4)
+						{
+							let strSerialNo	= arsEpcUrn[ 3]
+							clsTagInfo.setSerialNo(strSerialNo)
+						}
+					}
+					clsTagInfo.setAssetEpc(strProdAssetEpc)
+					clsTagInfo.setAssetName(strProdAssetEpcName)
+					clsTagInfo.setReadCount(1)
+					
+					if(strUtcTraceDate.isEmpty == false)
+					{
+						let strLocaleTraceDate = DateUtil.utcToLocale(utcDate: strUtcTraceDate, dateFormat: "yyyyMMddHHmmss")
+						clsTagInfo.setReadTime(strLocaleTraceDate)
+					}
+					
+					self.arrTagRows.append(clsTagInfo)
+				
+					
+					var boolFindAssetTypeOverlap = false
+					
+					//자산타입 증복확인 및 조회수를 업데이트한다.
+					for clsInfo in self.arrAssetRows
+					{
+						//같은 Asset_Epc가 있다면
+						if(clsInfo.getAssetEpc() == strProdAssetEpc)
+						{
+							boolFindAssetTypeOverlap = true
+							let intCurReadCount = clsInfo.getReadCount()
+							clsInfo.setReadCount(intCurReadCount + 1)
+							break
+						}
+					}
+					
+					//자산타입이 중복되지 않으면, 그리드용 리스트에 삽입
+					if(boolFindAssetTypeOverlap == false)
+					{
+						self.arrAssetRows.append(clsTagInfo)
+					}
 				}
 				
-				self.lblResaleBranchName.text	= clsDataRow.getString(name: "resaleBranchName") ?? ""	// 출고처
-				self.btnSaleWorkId.setTitle(self.strSaleWorkId, for: .normal)							// 송장번호
-				self.lblOrderReqCount.text		= "\(self.intOrderReqCount)"							// 입고예정수량
-				self.lblProcCount.text			= "\(self.intProcCount)"								// 처리량
-				//self.tfVehName.text				= clsDataRow.getString(name: "resaleVehName") ?? ""	// 차량번호
-				self.lblDriverName.text			= clsDataRow.getString(name: "resaleDriverName") ?? ""	// 납품자
-				self.lblProdAssetEpcName.text	= clsDataRow.getString(name: "prodAssetEpcName") ?? ""	// 유형명
-				self.lblRemainCount.text		= "\(intRemainCnt)"										// 미처리량
+				DispatchQueue.main.async
+				{
+					self.tvEasyIn.reloadData()
+				}
 				
-				//2) 태그데이터 초기화
-				self.clearTagData(clearScreen: false)
+				// 초기화버튼 처리의 경우
+				if(showInitMsg == true)
+				{
+					super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
+				}
 				
-				
-				//3)조회 및 그리드 리스트에 표시
-				
-				self.doSearchWorkListDetail()		//선택된 '송장정보' 내용 조회
-				self.doSearchTagList()				//선택된 '송장정보'에 대한 태그리스트
-				
-				self.boolWorkListSelected = true	//송장 선택 여부
-				super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
 			}
 		})
 	}
@@ -761,7 +665,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 			}
 			DispatchQueue.main.async
 				{
-					self.tvCombineIn.reloadData()
+					self.tvEasyIn.reloadData()
 			}
 		})
 	}
@@ -838,7 +742,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	}
 	
 	// 작업초기화 데이터를 전송한다
-	func sendWorkInitData(resaleOrderId: String, saleWorkId: String)
+	func sendWorkInitData(resaleOrderId: String)
 	{
 		clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
 		let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
@@ -849,7 +753,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 		clsDataClient.addServiceParam(paramName: "userId", value: AppContext.sharedManager.getUserInfo().getUserId())
 		clsDataClient.addServiceParam(paramName: "unitId", value: AppContext.sharedManager.getUserInfo().getUnitId())
 		clsDataClient.addServiceParam(paramName: "resaleOrderId", value: resaleOrderId)
-		clsDataClient.addServiceParam(paramName: "saleWorkId", value: saleWorkId)
+
 		clsDataClient.executeData(dataCompletionHandler: { (data, error) in
 			self.clsIndicator?.hide()
 			
@@ -869,81 +773,80 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 			{
 				let clsDataRow = clsResultDataRows[0]
 				let strResultCode = clsDataRow.getString(name: "resultCode")
-				
 				print(" -strResultCode:\(strResultCode!)")
 				if(Constants.PROC_RESULT_SUCCESS == strResultCode)
 				{
+					// 삭제성공
+					//그리드 삭제 및 구조체 삭제
 					DispatchQueue.main.async
+					{
+						self.clearTagData(clearScreen: true)
+						if(super.getUnload() == true)
 						{
-							// 초기화 처리
-							self.doReloadTagList()
-							
-							// self.doReloadTagList() 에서 하므로 주석처리
-							//let strMsg = NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다.")
-							//self.showSnackbar(message: strMsg)
+							let strMsg = NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다.")
+							self.showSnackbar(message: strMsg)
+						}
 					}
 				}
 				else
 				{
-					let strMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
-					self.showSnackbar(message: strMsg)
+					if(super.getUnload() == true)
+					{
+						let strMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
+						self.showSnackbar(message: strMsg)
+					}
 				}
 			}
-			
 		})
 	}
 	
 	
-	func sendData(workState: String, resaleOrderId: String, saleWorkId: String, vehName: String, driverName: String, orderReqCount: Int, noReadCount: Int, remark: String, workerName: String, signData: String)
+	
+	/**
+	* 데이터를 서버로 전송 한다.
+	* @param strWorkState			출하구분
+	* @param strResaleOrderId		송장번호
+	* @param strRemark				처리메모
+	* @param strSignData			사인
+	*/
+	func sendDataExistResaleOrderId(workState: String, resaleOrderId: String, vehName: String, tradeChit: String, remark : String, signData: String)
 	{
-		/**
-		* 1. 전송 완료후, 'boolNewTagInfoExist = false' 처리
-		* 2. 전송 완료후, 전송된 태그들을 리스트에서 'setNewTagInfo(false)' 처리 -> 재 전송 방지
-		*/
 		clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
 		
 		let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		clsDataClient.ExecuteUrl = "inOutService:executeInData"
 		clsDataClient.removeServiceParam()
-		clsDataClient.addServiceParam(paramName: "workState",		value: strWorkState)
-		clsDataClient.addServiceParam(paramName: "corpId",			value: AppContext.sharedManager.getUserInfo().getCorpId())
-		clsDataClient.addServiceParam(paramName: "userId",			value: AppContext.sharedManager.getUserInfo().getUserId())
-		clsDataClient.addServiceParam(paramName: "branchId",		value: AppContext.sharedManager.getUserInfo().getBranchId())
-		clsDataClient.addServiceParam(paramName: "unitId",			value: AppContext.sharedManager.getUserInfo().getUnitId())
-		clsDataClient.addServiceParam(paramName: "inAgreeYn",		value: AppContext.sharedManager.getUserInfo().getInAgreeYn())	//입고자동승인여부
-		clsDataClient.addServiceParam(paramName: "resaleOrderId",	value: resaleOrderId)
-		clsDataClient.addServiceParam(paramName: "saleWorkId",		value: saleWorkId)
+		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+		clsDataClient.addServiceParam(paramName: "userId", value: AppContext.sharedManager.getUserInfo().getUserId())
+		clsDataClient.addServiceParam(paramName: "branchId", value: AppContext.sharedManager.getUserInfo().getBranchId())
+		clsDataClient.addServiceParam(paramName: "unitId", value: AppContext.sharedManager.getUserInfo().getUnitId())
+		clsDataClient.addServiceParam(paramName: "inAgreeYn", 		value: AppContext.sharedManager.getUserInfo().getInAgreeYn()) // 입고자동승인여부
+		clsDataClient.addServiceParam(paramName: "workState", 		value: workState)
+		clsDataClient.addServiceParam(paramName: "resaleOrderId",	value: strResaleOrderId)
 		clsDataClient.addServiceParam(paramName: "vehName",			value: vehName)
-		clsDataClient.addServiceParam(paramName: "driverName",		value: driverName)
-		clsDataClient.addServiceParam(paramName: "workerName",		value: workerName)
+		clsDataClient.addServiceParam(paramName: "easyInProcess",	value: "Y")	// 입고B타입
 		clsDataClient.addServiceParam(paramName: "barcodeId",		value: "")	// 바코드ID
 		clsDataClient.addServiceParam(paramName: "itemCode",		value: "")	// 제품 코드
 		clsDataClient.addServiceParam(paramName: "prodCnt",			value: "")	// 제품 개수
-		clsDataClient.addServiceParam(paramName: "easyInProcess",	value: "N")	// 입고B타입
-		
-		//완료전송 및(강제)완료전송, 처리진행인경우
-		if(Constants.WORK_STATE_COMPLETE == workState || Constants.WORK_STATE_COMPLETE_FORCE == workState || Constants.WORK_STATE_ONGOING == workState)
+	
+	
+		// 완료전송 및(강제)완료전송 경우
+		if(Constants.WORK_STATE_COMPLETE == workState || Constants.WORK_STATE_COMPLETE_FORCE == workState)
 		{
 			let strCurReadTime = DateUtil.getDate(dateFormat: "yyyyMMddHHmmss")
 			let strWorkDateTime = DateUtil.localeToUtc(localeDate: strCurReadTime, dateFormat: "yyyyMMddHHmmss")
 			clsDataClient.addServiceParam(paramName: "workDateTime",	value: strWorkDateTime)
-			
-			clsDataClient.addServiceParam(paramName: "orderReqCount",	value: orderReqCount)
-			clsDataClient.addServiceParam(paramName: "procCount",		value: self.intProcCount)	// 처리량
-			clsDataClient.addServiceParam(paramName: "noReadCount",		value: noReadCount)
+			clsDataClient.addServiceParam(paramName: "workerName",		value: "")
+			clsDataClient.addServiceParam(paramName: "tradeChit",		value: tradeChit)
 			clsDataClient.addServiceParam(paramName: "remark",			value: remark)
 			clsDataClient.addServiceParam(paramName: "forceYn",			value: "Y")
-			
 			if(signData.isEmpty == false)
 			{
-				clsDataClient.addServiceParam(paramName: "signData",	value: signData)		// 사인데이터
+				clsDataClient.addServiceParam(paramName: "signData",	value: signData)		//사인데이터
 			}
-			
-			self.boolWorkCompleteBtn = true
 		}
-		
-		
+	
 		let clsDataTable : DataTable = DataTable()
 		clsDataTable.Id = "WORK_IN"
 		clsDataTable.addDataColumn(dataColumn: DataColumn(id: "epcCode", type: "String", size: "0", keyColumn: false, updateColumn: true, autoIncrement: false, canXlsExport: false, title: ""))
@@ -961,6 +864,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 				clsDataTable.addDataRow(dataRow: clsDataRow)
 			}
 		}
+		
 		clsDataClient.executeData(dataTable: clsDataTable, dataCompletionHandler: { (data, error) in
 			self.clsIndicator?.hide()
 			if let error = error {
@@ -985,39 +889,125 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 				if(Constants.PROC_RESULT_SUCCESS == strResultCode)
 				{
 					//let strSvrProcCount = clsDataRow.getString(name: "procCount")
-					//let strSvrWorkState = clsDataRow.getString(name: "workState")
+					let strSvrWorkState = clsDataRow.getString(name: "workState")
 					//print("-서버로부터 받은 처리갯수: \(strSvrProcCount)")
 					//print("-서버로부터 받은 작업처리상태:  \(strSvrWorkState)")
 					
 					DispatchQueue.main.async
+					{
+						// 전송 성공인 경우
+						for clsInfo in self.arrTagRows
 						{
-							// 전송 성공인 경우
-							for clsInfo in self.arrTagRows
+							if(clsInfo.getNewTag() == true)
 							{
-                                clsInfo.setNewTag(false)	// 태그상태 NEW -> OLD로 변경
+								clsInfo.setNewTag(false)	// 태그상태 NEW -> OLD로 변경
 							}
-							self.boolNewTagInfoExist = false
-							
-							// 현재 작업상태가 완료전송인경우
-							if(self.boolWorkCompleteBtn == true)
-							{
-								// 송장정보관련 UI객체를 초기화한다.
-								self.clearTagData(clearScreen: true)
-							}
-							let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
-							self.showSnackbar(message: strMsg)
+						}
+						self.boolNewTagInfoExist = false
+						self.boolExistSavedInvoice = true	// 송장번호 할당여부
+						
+						// 현재 작업상태가 완료전송인경우
+						if(Constants.WORK_STATE_COMPLETE == strSvrWorkState || Constants.WORK_STATE_COMPLETE_FORCE == strSvrWorkState)
+						{
+							// 송장정보관련 UI객체를 초기화한다.
+							self.clearTagData(clearScreen: true)
+						}
+						let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
+						self.showSnackbar(message: strMsg)
 					}
 				}
 				else
 				{
 					let strMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
-					self.showSnackbar(message: strMsg)
+					
+					if(Constants.PROC_RESULT_ERROR_NEED_WORK_COMPLETE_FORCE == strResultCode)
+					{
+						// TAGID가 해당거점에 이미 입고처리가 되어져 있습니다. 그래도 입고처리하겠습니까?
+						// TODO
+						var strDialogMessage = strMsg
+						if(strMsg.isEmpty == true)
+						{
+							strDialogMessage = NSLocalizedString("msg_error_need_work_complete_force", comment: "입고처리 하고자 하는 파렛트 중, 해당 거점에 이미 입고되어 있는 파렛트가 존재합니다. 해당 파렛트를 제외하고 입고처리됩니다. 계속하시겠습니까?")
+						}
+						
+						Dialog.show(container: self, viewController: nil,
+							title: NSLocalizedString("common_confirm", comment: "확인"),
+							message: strDialogMessage,
+							okTitle: NSLocalizedString("common_confirm", comment: "확인"),
+							okHandler: { (_) in
+								let strVehName		= self.tfVehName.text ?? ""
+								let strTradeChit	= self.tfTradeChit.text ?? ""
+								// 서버 전송 처리
+								self.sendDataExistResaleOrderId(workState: Constants.WORK_STATE_COMPLETE_FORCE, resaleOrderId: self.strResaleOrderId, vehName: strVehName, tradeChit: strTradeChit, remark: remark, signData: signData)
+					
+							},
+							cancelTitle: NSLocalizedString("common_cancel", comment: "취소"), cancelHandler: nil)
+						
+					}
+					else if((Constants.PROC_RESULT_ERROR_NO_REGISTERED_READERS == strResultCode) || (Constants.PROC_RESULT_ERROR_NO_MATCH_BRANCH_CUST_INFO == strResultCode))
+					{
+						super.showSnackbar(message: NSLocalizedString("common_error", comment: "에러"))
+					}
+					else
+					{
+						self.showSnackbar(message: strMsg)
+					}
+					
+					if(self.strResaleOrderId.isEmpty == false)
+					{
+						// 완료전송 처리중 오류시 발번받은 송장번호 초기화
+						self.sendWorkInitData(resaleOrderId: self.strResaleOrderId)	// 초기화
+						self.boolNewTagInfoExist = false
+						self.boolExistSavedInvoice = true
+						
+						self.clearTagData(clearScreen: true)
+					}
+					
 				}
+			}
+		})
+	}
+	
+	
+	/**
+	* 송장번호를 발급후, 데이터를 서버로 전송 한다.
+	*/
+
+	func sendDataNoneResaleOrderId(workState: String, resaleCustId: String, vehName: String, tradeChit: String, remark: String, signData: String)
+	{
+		let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
+		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+		clsDataClient.SelectUrl = "inOutService:selectResaleOrderId"
+		clsDataClient.removeServiceParam()
+		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+		clsDataClient.addServiceParam(paramName: "userId", value: AppContext.sharedManager.getUserInfo().getUserId())
+		clsDataClient.addServiceParam(paramName: "branchId", value: AppContext.sharedManager.getUserInfo().getBranchId())
+		
+		if(resaleCustId.isEmpty == false)
+		{
+			clsDataClient.addServiceParam(paramName: "fromBranchId", value: resaleCustId)
+		}
+		clsDataClient.selectData(dataCompletionHandler: {(data, error) in
+			if let error = error {
+				// 에러처리
+				super.showSnackbar(message: error.localizedDescription)
+				print(error)
+				return
+			}
+			guard let clsDataTable = data else {
+				print("에러 데이터가 없음")
+				return
+			}
+			if(clsDataTable.getDataRows().count > 0)
+			{
+				let clsDataRow = clsDataTable.getDataRows()[0]
+				self.strResaleOrderId = clsDataRow.getString(name: "resaleOrderId") ?? ""			// 서버에서 발급받은 입고지시서ID(송장번호)
+				
+				self.sendDataExistResaleOrderId(workState: workState, resaleOrderId: self.strResaleOrderId, vehName: vehName, tradeChit: tradeChit, remark: remark, signData: signData)
 			}
 		})
 		
 	}
-	
 	
 	//========================================================================
 	// 리더기 관련 이벤트및 처리 시작
@@ -1114,7 +1104,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 		//		BarcodeScanner.Title.color = UIColor.black
 		//		BarcodeScanner.CloseButton.color = UIColor.black
 		//		BarcodeScanner.SettingsButton.color = UIColor.white
-		//	/Users/roy/Projects/32.RRPPSolutions/02.Solutions/RRPPSolution/RRPPClient/CombineIn/CombineIn.swift	BarcodeScanner.Info.textColor = UIColor.black
+		//		BarcodeScanner.Info.textColor = UIColor.black
 		//		BarcodeScanner.Info.tint = UIColor.black
 		//		BarcodeScanner.Info.loadingTint = UIColor.black
 		//		BarcodeScanner.Info.notFoundTint = UIColor.red
@@ -1145,7 +1135,27 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 		clsDataClient.addServiceParam(paramName: "branchCustId", value: AppContext.sharedManager.getUserInfo().getBranchCustId())
 		clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
 		clsDataClient.addServiceParam(paramName: "saleWorkId", value: barcode)
-		clsDataClient.addServiceParam(paramName: "resaleType", value: self.strWorkType)
+		
+		var strCustType = AppContext.sharedManager.getUserInfo().getCustType()
+		if(strCustType == Constants.CUST_TYPE_MGR)
+		{
+			strCustType = AppContext.sharedManager.getUserInfo().getBranchCustType()
+		}
+		
+		
+		if(Constants.CUST_TYPE_RDC == strCustType)
+		{
+			clsDataClient.addServiceParam(paramName: "resaleType", value: Constants.RESALE_TYPE_GATHER)	// 회수입고
+		}
+		else if(Constants.CUST_TYPE_EXP == strCustType)
+		{
+			clsDataClient.addServiceParam(paramName: "resaleType", value: Constants.RESALE_TYPE_WAREHOUSING)	// 입고
+		}
+		else if(Constants.CUST_TYPE_IMP == strCustType)
+		{
+			clsDataClient.addServiceParam(paramName: "resaleType", value: Constants.RESALE_TYPE_WAREHOUSING)	// 입고
+		}
+		
 		clsDataClient.selectData(dataCompletionHandler: {(data, error) in
 			if let error = error {
 				// 에러처리
@@ -1162,38 +1172,17 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 				super.showSnackbar(message: NSLocalizedString("common_no_data_for_barcode", comment: "해당 바코드에 해당하는 데이터가 없습니다."))
 				return
 			}
-			
-			self.clearTagData(clearScreen: true)
-			
+
+			//self.clearTagData(clearScreen: true)
+
 			let clsDataRow = clsDataTable.getDataRows()[0]
 			self.strResaleOrderId			= clsDataRow.getString(name: "resaleOrderId") ?? ""			// 구매주문ID
 			self.strSaleWorkId 				= clsDataRow.getString(name: "saleWorkId") ?? ""			// 송장번호
-			self.intOrderReqCount 			= clsDataRow.getInt(name: "orderReqCnt") ?? 0
-			self.intProcCount				= clsDataRow.getInt(name: "procCnt") ?? 0					// 처리량
-			self.intNoreadCnt				= clsDataRow.getInt(name: "noreadCnt") ?? 0					// 미인식
-			self.strWorkerName				= clsDataRow.getString(name: "workerName") ?? ""			// 작업자명
-			self.strProdAssetEpc			= clsDataRow.getString(name: "prodAssetEpc") ?? ""			// 유형
-			var intRemainCnt				= self.intOrderReqCount - self.intProcCount					// 미처리량
-			if(intRemainCnt < 0)
-			{
-				intRemainCnt = 0										//미처리량 0이하는 0
-			}
+			self.strResaleBranchId 			= clsDataRow.getString(name: "resaleBranchId") ?? ""		// 출고처
+			let strResaleBranchName			= clsDataRow.getString(name: "resaleBranchName") ?? ""		// 출고처명
 			
-			self.lblResaleBranchName.text	= clsDataRow.getString(name: "resaleBranchName") ?? ""		// 출고처
-			self.btnSaleWorkId.setTitle(self.strSaleWorkId, for: .normal)								// 송장번호
-			self.lblOrderReqCount.text		= "\(self.intOrderReqCount)"								// 입고예정수량
-			self.lblProcCount.text			= "\(self.intProcCount)"									// 처리량
-			//self.tfVehName.text				= clsDataRow.getString(name: "resaleVehName") ?? ""		// 차량번호
-			self.lblDriverName.text			= clsDataRow.getString(name: "resaleDriverName") ?? ""		// 납품자
-			self.lblProdAssetEpcName.text	= clsDataRow.getString(name: "prodAssetEpcName") ?? ""		// 유형명
-			self.lblRemainCount.text		= "\(intRemainCnt)"											// 미처리량
-			
-			// 조회 및 그리드 리스트에 표시
-			
-			self.doSearchWorkListDetail()		//선택된 '송장정보' 내용 조회
-			self.doSearchTagList()				//선택된 '송장정보'에 대한 태그리스트
-			
-			self.boolWorkListSelected = true	//송장 선택 여부
+			self.btnWorkCustSearch.setTitle(strResaleBranchName, for: .normal)
+			self.btnResaleWorkId.setTitle(self.strSaleWorkId, for: .normal)
 		})
 	}
 	//------------------------------------------------------------------------
@@ -1202,7 +1191,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	
 }
 
-extension CombineIn: BarcodeScannerCodeDelegate
+extension EasyIn: BarcodeScannerCodeDelegate
 {
 	func barcodeScanner(_ controller: BarcodeScannerController, didCaptureCode barcode: String, type: String)
 	{
@@ -1225,14 +1214,10 @@ extension CombineIn: BarcodeScannerCodeDelegate
 				doSearchBarcode(barcode: barcode)
 			}
 		}
-//		let delayTime = DispatchTime.now() + Double(Int64(6 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-//		DispatchQueue.main.asyncAfter(deadline: delayTime) {
-//			controller.resetWithError()
-//		}
 	}
 }
 
-extension CombineIn: BarcodeScannerErrorDelegate {
+extension EasyIn: BarcodeScannerErrorDelegate {
 	
 	func barcodeScanner(_ controller: BarcodeScannerController, didReceiveError error: Error)
 	{
@@ -1240,7 +1225,7 @@ extension CombineIn: BarcodeScannerErrorDelegate {
 	}
 }
 
-extension CombineIn: BarcodeScannerDismissalDelegate {
+extension EasyIn: BarcodeScannerDismissalDelegate {
 	
 	func barcodeScannerDidDismiss(_ controller: BarcodeScannerController) {
 		controller.dismiss(animated: true, completion: nil)
@@ -1248,7 +1233,7 @@ extension CombineIn: BarcodeScannerDismissalDelegate {
 }
 
 
-extension CombineIn
+extension EasyIn
 {
 	fileprivate func prepareToolbar()
 	{
@@ -1266,4 +1251,5 @@ extension CombineIn
 		}
 	}
 }
+
 

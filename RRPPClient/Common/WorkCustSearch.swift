@@ -9,7 +9,7 @@
 import UIKit
 import Mosaic
 
-class WorkOutCustSearch: BaseViewController, UITableViewDataSource, UITableViewDelegate
+class WorkCustSearch: BaseViewController, UITableViewDataSource, UITableViewDelegate
 {
 
     @IBOutlet weak var btnParentCust: UIButton!	// 법인
@@ -17,7 +17,7 @@ class WorkOutCustSearch: BaseViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var btnSearchCondition: UIButton!	// 검색조건
     
     @IBOutlet weak var tfSearchValue: UITextField!
-    @IBOutlet weak var tvWorkOutCustSearch: UITableView!
+    @IBOutlet weak var tvWorkCustSearch: UITableView!
   
 	var ptcDataHandler : DataProtocol?
 	var intPageNo  = 0
@@ -35,6 +35,8 @@ class WorkOutCustSearch: BaseViewController, UITableViewDataSource, UITableViewD
     var strSearchCondtion = ""
 
 
+	var inOutType = ""	// IN/OUT 구분
+	
 	override func viewDidLoad()
 	{
         super.viewDidLoad()
@@ -101,9 +103,17 @@ class WorkOutCustSearch: BaseViewController, UITableViewDataSource, UITableViewD
     
     func initDataClient()
     {
-        clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+        clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
         clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
-        clsDataClient.UserData = "app.sales.work.selectWorkEasyOutCustList"
+		
+		if(inOutType == Constants.INOUT_TYPE_OUTPUT)
+		{
+	        clsDataClient.UserData = "app.sales.work.selectWorkEasyOutCustList"
+		}
+		else
+		{
+			clsDataClient.UserData = "app.sales.work.selectWorkEasyInCustList"
+		}
         clsDataClient.removeServiceParam()
         clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
         clsDataClient.addServiceParam(paramName: "branchCustId", value: AppContext.sharedManager.getUserInfo().getBranchCustId())
@@ -139,7 +149,7 @@ class WorkOutCustSearch: BaseViewController, UITableViewDataSource, UITableViewD
                 return
             }
             self.arcDataRows.append(contentsOf: clsDataTable.getDataRows())
-            DispatchQueue.main.async { self.tvWorkOutCustSearch?.reloadData() }
+            DispatchQueue.main.async { self.tvWorkCustSearch?.reloadData() }
         })
     }
     
@@ -225,7 +235,7 @@ class WorkOutCustSearch: BaseViewController, UITableViewDataSource, UITableViewD
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let objCell:WorkOutCustSearchCell = tableView.dequeueReusableCell(withIdentifier: "tvcWorkOutCustSearch", for: indexPath) as! WorkOutCustSearchCell
+        let objCell:WorkCustSearchCell = tableView.dequeueReusableCell(withIdentifier: "tvcWorkCustSearch", for: indexPath) as! WorkCustSearchCell
 		let clsDataRow = arcDataRows[indexPath.row]
         
         objCell.lblParentCustName.text = clsDataRow.getString(name:"parentCustName")
@@ -244,7 +254,7 @@ class WorkOutCustSearch: BaseViewController, UITableViewDataSource, UITableViewD
     @objc func onSelectionClicked(_ sender: UIButton)
     {
         let clsDataRow = arcDataRows[sender.tag]
-        let strtData = ReturnData(returnType: "workOutCustSearch", returnCode: nil, returnMesage: nil, returnRawData: clsDataRow)
+        let strtData = ReturnData(returnType: "workCustSearch", returnCode: nil, returnMesage: nil, returnRawData: clsDataRow)
         ptcDataHandler?.recvData(returnData: strtData)
         self.dismiss(animated: true, completion: nil)
     }

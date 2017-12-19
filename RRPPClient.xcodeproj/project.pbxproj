@@ -41,8 +41,8 @@
 		559F39DE1FD7708A006E5C17 /* IdentificationSystemDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F39DD1FD7708A006E5C17 /* IdentificationSystemDialog.swift */; };
 		559F39E91FD779D9006E5C17 /* EpcInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F39E81FD779D9006E5C17 /* EpcInfo.swift */; };
 		559F39EB1FD77D28006E5C17 /* ProdContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F39EA1FD77D28006E5C17 /* ProdContainer.swift */; };
-		55A579F01FD51A5700DBA188 /* WorkOutCustSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A579EF1FD51A5700DBA188 /* WorkOutCustSearch.swift */; };
-		55A579F21FD51A7400DBA188 /* WorkOutCustSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A579F11FD51A7400DBA188 /* WorkOutCustSearchCell.swift */; };
+		55A579F01FD51A5700DBA188 /* WorkCustSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A579EF1FD51A5700DBA188 /* WorkCustSearch.swift */; };
+		55A579F21FD51A7400DBA188 /* WorkCustSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A579F11FD51A7400DBA188 /* WorkCustSearchCell.swift */; };
 		55ACD6771FC802BD00A2DC72 /* ProductOrderSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD6731FC802BC00A2DC72 /* ProductOrderSearch.swift */; };
 		55ACD67E1FC804F800A2DC72 /* ListViewDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD67C1FC804F800A2DC72 /* ListViewDialog.swift */; };
 		55ACD6801FC8051900A2DC72 /* DataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD67F1FC8051900A2DC72 /* DataProtocol.swift */; };
@@ -56,6 +56,11 @@
 		55B302C81FCE32A600BDCCB1 /* Tag.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55B302C61FCE32A600BDCCB1 /* Tag.storyboard */; };
 		55B302CA1FCE339400BDCCB1 /* ProductMountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B302C91FCE339400BDCCB1 /* ProductMountCell.swift */; };
 		55C00A921FCE96E400ED5165 /* TagDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C00A911FCE96E400ED5165 /* TagDetailCell.swift */; };
+		55C1957E1FE743EC008299FE /* EasyIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55C1957D1FE743EC008299FE /* EasyIn.storyboard */; };
+		55C195801FE74405008299FE /* EasyIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C1957F1FE74405008299FE /* EasyIn.swift */; };
+		55C195821FE74410008299FE /* EasyInCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C195811FE74410008299FE /* EasyInCell.swift */; };
+		55C195881FE7620E008299FE /* EasyInSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C195871FE7620E008299FE /* EasyInSearch.swift */; };
+		55C1958A1FE7621D008299FE /* EasyInSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C195891FE7621D008299FE /* EasyInSearchCell.swift */; };
 		55D13A661FE348CC00099F50 /* CombineIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55D13A651FE348CC00099F50 /* CombineIn.storyboard */; };
 		55D13A681FE348FC00099F50 /* CombineIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D13A671FE348FC00099F50 /* CombineIn.swift */; };
 		55D13A6A1FE3491C00099F50 /* CombineInCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D13A691FE3491C00099F50 /* CombineInCell.swift */; };
@@ -72,7 +77,7 @@
 		55FA78301FBDAB7800583A80 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA78281FBDAB5800583A80 /* SwiftyJSON.framework */; };
 		55FA78311FBDAB7800583A80 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA78281FBDAB5800583A80 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		55FA78351FBDACC600583A80 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78331FBDACC600583A80 /* Constants.swift */; };
-		55FA783A1FBDACE300583A80 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78381FBDACE300583A80 /* LoginViewController.swift */; };
+		55FA783A1FBDACE300583A80 /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78381FBDACE300583A80 /* UserLogin.swift */; };
 		55FA783B1FBDACE300583A80 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78391FBDACE300583A80 /* UserInfo.swift */; };
 		55FA783F1FBDACFD00583A80 /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = 55FA783D1FBDACFC00583A80 /* login.png */; };
 		55FA78401FBDACFD00583A80 /* pallet.png in Resources */ = {isa = PBXBuildFile; fileRef = 55FA783E1FBDACFC00583A80 /* pallet.png */; };
@@ -207,8 +212,8 @@
 		559F39DD1FD7708A006E5C17 /* IdentificationSystemDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentificationSystemDialog.swift; sourceTree = "<group>"; };
 		559F39E81FD779D9006E5C17 /* EpcInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpcInfo.swift; sourceTree = "<group>"; };
 		559F39EA1FD77D28006E5C17 /* ProdContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdContainer.swift; sourceTree = "<group>"; };
-		55A579EF1FD51A5700DBA188 /* WorkOutCustSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOutCustSearch.swift; sourceTree = "<group>"; };
-		55A579F11FD51A7400DBA188 /* WorkOutCustSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOutCustSearchCell.swift; sourceTree = "<group>"; };
+		55A579EF1FD51A5700DBA188 /* WorkCustSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkCustSearch.swift; sourceTree = "<group>"; };
+		55A579F11FD51A7400DBA188 /* WorkCustSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkCustSearchCell.swift; sourceTree = "<group>"; };
 		55ACD6731FC802BC00A2DC72 /* ProductOrderSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductOrderSearch.swift; sourceTree = "<group>"; };
 		55ACD67C1FC804F800A2DC72 /* ListViewDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewDialog.swift; sourceTree = "<group>"; };
 		55ACD67F1FC8051900A2DC72 /* DataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProtocol.swift; sourceTree = "<group>"; };
@@ -224,6 +229,11 @@
 		55B302C61FCE32A600BDCCB1 /* Tag.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tag.storyboard; sourceTree = "<group>"; };
 		55B302C91FCE339400BDCCB1 /* ProductMountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductMountCell.swift; sourceTree = "<group>"; };
 		55C00A911FCE96E400ED5165 /* TagDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagDetailCell.swift; sourceTree = "<group>"; };
+		55C1957D1FE743EC008299FE /* EasyIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EasyIn.storyboard; sourceTree = "<group>"; };
+		55C1957F1FE74405008299FE /* EasyIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyIn.swift; sourceTree = "<group>"; };
+		55C195811FE74410008299FE /* EasyInCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyInCell.swift; sourceTree = "<group>"; };
+		55C195871FE7620E008299FE /* EasyInSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyInSearch.swift; sourceTree = "<group>"; };
+		55C195891FE7621D008299FE /* EasyInSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyInSearchCell.swift; sourceTree = "<group>"; };
 		55D13A651FE348CC00099F50 /* CombineIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CombineIn.storyboard; sourceTree = "<group>"; };
 		55D13A671FE348FC00099F50 /* CombineIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineIn.swift; sourceTree = "<group>"; };
 		55D13A691FE3491C00099F50 /* CombineInCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineInCell.swift; sourceTree = "<group>"; };
@@ -236,7 +246,7 @@
 		55FA78261FBDAB4700583A80 /* Motion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Motion.framework; path = Carthage/Build/iOS/Motion.framework; sourceTree = "<group>"; };
 		55FA78281FBDAB5800583A80 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		55FA78331FBDACC600583A80 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		55FA78381FBDACE300583A80 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		55FA78381FBDACE300583A80 /* UserLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
 		55FA78391FBDACE300583A80 /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		55FA783D1FBDACFC00583A80 /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login.png; sourceTree = "<group>"; };
 		55FA783E1FBDACFC00583A80 /* pallet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pallet.png; sourceTree = "<group>"; };
@@ -439,6 +449,18 @@
 			path = Tag;
 			sourceTree = "<group>";
 		};
+		55C1957C1FE743DD008299FE /* EasyIn */ = {
+			isa = PBXGroup;
+			children = (
+				55C1957D1FE743EC008299FE /* EasyIn.storyboard */,
+				55C1957F1FE74405008299FE /* EasyIn.swift */,
+				55C195811FE74410008299FE /* EasyInCell.swift */,
+				55C195871FE7620E008299FE /* EasyInSearch.swift */,
+				55C195891FE7621D008299FE /* EasyInSearchCell.swift */,
+			);
+			path = EasyIn;
+			sourceTree = "<group>";
+		};
 		55D13A641FE348A500099F50 /* CombineIn */ = {
 			isa = PBXGroup;
 			children = (
@@ -476,8 +498,8 @@
 				96994C501FC545DF00B3A726 /* LocalData.swift */,
 				55ECF5DD1FCE8BC40021F786 /* TagDetailList.swift */,
 				55C00A911FCE96E400ED5165 /* TagDetailCell.swift */,
-				55A579EF1FD51A5700DBA188 /* WorkOutCustSearch.swift */,
-				55A579F11FD51A7400DBA188 /* WorkOutCustSearchCell.swift */,
+				55A579EF1FD51A5700DBA188 /* WorkCustSearch.swift */,
+				55A579F11FD51A7400DBA188 /* WorkCustSearchCell.swift */,
 				55B083061FDE48F3007E3EAB /* OutSignDialog.swift */,
 				55B0830A1FDE4E0B007E3EAB /* YPDrawSignatureView.swift */,
 				B077DA1B1FDF990900616F3A /* OutMemoDialog.swift */,
@@ -489,7 +511,7 @@
 		55FA78371FBDACE300583A80 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				55FA78381FBDACE300583A80 /* LoginViewController.swift */,
+				55FA78381FBDACE300583A80 /* UserLogin.swift */,
 				55FA78391FBDACE300583A80 /* UserInfo.swift */,
 			);
 			path = User;
@@ -598,6 +620,7 @@
 		96E4941E1FB1A78500D1E2C1 /* RRPPClient */ = {
 			isa = PBXGroup;
 			children = (
+				55C1957C1FE743DD008299FE /* EasyIn */,
 				55D13A641FE348A500099F50 /* CombineIn */,
 				5575BB441FE238CF00CACCC8 /* Event */,
 				B01C42091FE0EDA000404301 /* CombineOut */,
@@ -792,6 +815,7 @@
 				55D13A661FE348CC00099F50 /* CombineIn.storyboard in Resources */,
 				55B302C81FCE32A600BDCCB1 /* Tag.storyboard in Resources */,
 				96E4942A1FB1A78500D1E2C1 /* LaunchScreen.storyboard in Resources */,
+				55C1957E1FE743EC008299FE /* EasyIn.storyboard in Resources */,
 				555B988A1FD2774D006CC14F /* History.storyboard in Resources */,
 				55ECF5DC1FCE89B70021F786 /* Common.storyboard in Resources */,
 				553F42EE1FCCE94C006784AF /* Product.storyboard in Resources */,
@@ -879,6 +903,7 @@
 				55D13A681FE348FC00099F50 /* CombineIn.swift in Sources */,
 				9680BE891FCBD91D002838A4 /* BLEUtility.m in Sources */,
 				55C00A921FCE96E400ED5165 /* TagDetailCell.swift in Sources */,
+				55C195821FE74410008299FE /* EasyInCell.swift in Sources */,
 				55B154BA1FD7681500F69ABE /* ItemInfo.swift in Sources */,
 				55FA784B1FBDAD0B00583A80 /* LeftViewController.swift in Sources */,
 				9680BE851FCBD91D002838A4 /* BLEDevice.m in Sources */,
@@ -893,20 +918,22 @@
 				9680BE871FCBD91D002838A4 /* SwingDevice.m in Sources */,
 				B0FD4EDE1FE3C24700EE976E /* CombineOutWorkListCell.swift in Sources */,
 				55FC62A41FD14A41003B7173 /* StockReview.swift in Sources */,
-				55A579F01FD51A5700DBA188 /* WorkOutCustSearch.swift in Sources */,
+				55A579F01FD51A5700DBA188 /* WorkCustSearch.swift in Sources */,
 				55ECF5DE1FCE8BC40021F786 /* TagDetailList.swift in Sources */,
 				55FA78481FBDAD0B00583A80 /* AppNavigationDrawerController.swift in Sources */,
 				559F39DA1FD7704C006E5C17 /* RfidTypeDialog.swift in Sources */,
 				55B083071FDE48F3007E3EAB /* OutSignDialog.swift in Sources */,
+				55C195801FE74405008299FE /* EasyIn.swift in Sources */,
 				55B083091FDE497F007E3EAB /* ProductOrderSearchCell.swift in Sources */,
 				55B302C31FCE323B00BDCCB1 /* RfidUtil.swift in Sources */,
 				559F39EB1FD77D28006E5C17 /* ProdContainer.swift in Sources */,
 				5542B4BA1FE1F67600BD6A00 /* RfidTrackingService.swift in Sources */,
 				55D13A6C1FE36FB400099F50 /* CombineInSearch.swift in Sources */,
-				55FA783A1FBDACE300583A80 /* LoginViewController.swift in Sources */,
+				55FA783A1FBDACE300583A80 /* UserLogin.swift in Sources */,
 				5571CDE31FCF98E600F88B97 /* AppSnackbarController.swift in Sources */,
 				550DD8AC1FDFC5BE00766DCF /* StockReviewCell.swift in Sources */,
 				556C7DDA1FDA54010048D6C4 /* ProdInfoDialog.swift in Sources */,
+				55C1958A1FE7621D008299FE /* EasyInSearchCell.swift in Sources */,
 				559F39DC1FD77068006E5C17 /* RfidReaderDialog.swift in Sources */,
 				B01C420F1FE105E400404301 /* CombineOutCell.swift in Sources */,
 				55FA78491FBDAD0B00583A80 /* AppToolbarController.swift in Sources */,
@@ -916,11 +943,12 @@
 				55ACD67E1FC804F800A2DC72 /* ListViewDialog.swift in Sources */,
 				55FA783B1FBDACE300583A80 /* UserInfo.swift in Sources */,
 				5575BB461FE238F000CACCC8 /* EventOther.swift in Sources */,
+				55C195881FE7620E008299FE /* EasyInSearch.swift in Sources */,
 				553A4E041FE0C0AB00271BBD /* StockReviewSearchCell.swift in Sources */,
 				960224421FD0DBCD00DE7C65 /* SwingReader.swift in Sources */,
 				55FA78351FBDACC600583A80 /* Constants.swift in Sources */,
 				5522A62D1FDF9010009ED6EF /* TransitionController.swift in Sources */,
-				55A579F21FD51A7400DBA188 /* WorkOutCustSearchCell.swift in Sources */,
+				55A579F21FD51A7400DBA188 /* WorkCustSearchCell.swift in Sources */,
 				55B0830B1FDE4E0B007E3EAB /* YPDrawSignatureView.swift in Sources */,
 				55D13A6A1FE3491C00099F50 /* CombineInCell.swift in Sources */,
 				5575BB4A1FE2394200CACCC8 /* EventOtherCell.swift in Sources */,
@@ -1133,13 +1161,13 @@
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				INFOPLIST_FILE = RRPPClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "-D YOMILE";
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.logisall.rrpp.RRPPClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ROY;
-				"SWIFT_ACTIVE_COMPILATION_CONDITIONS[arch=*]" = ROY;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = YOMILE;
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS[arch=*]" = YOMILE;
 				SWIFT_OBJC_BRIDGING_HEADER = "RRPPClient/RRPPClient-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -1161,7 +1189,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				INFOPLIST_FILE = RRPPClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "-D YOMILE";
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.logisall.rrpp.RRPPClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
