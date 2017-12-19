@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AVFoundation
 
 public class SwingReader : NSObject, ReaderProtocol, SwingProtocolProtocol
 {	
@@ -203,7 +204,15 @@ public class SwingReader : NSObject, ReaderProtocol, SwingProtocolProtocol
 		//소스와 비슷하게 리더기설정
 		if let swing : SwingProtocol  = SwingProtocol.sharedInstace() as? SwingProtocol
 		{
-			//power설정 적용
+			//RFID 효과음
+			let blsBeep = UserDefaults.standard.bool(forKey: Constants.RFID_BEEP_ENABLED_KEY)
+			if(blsBeep)
+			{
+				let systemSoundID: SystemSoundID = 1007
+				AudioServicesPlaySystemSound (systemSoundID)
+			}
+			
+			//RFID Power
 			let powerRate = UserDefaults.standard.integer(forKey: Constants.RFID_POWER_KEY)
 			let maxPower	= 30
 			var attenRfPower	= 30
