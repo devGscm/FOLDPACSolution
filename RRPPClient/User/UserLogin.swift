@@ -11,7 +11,7 @@ import Material
 import FontAwesome
 import Mosaic
 
-class LoginViewController: UIViewController
+class UserLogin: UIViewController
 {
 	
 	@IBOutlet weak var swAutoLogin: UISwitch!
@@ -43,9 +43,9 @@ class LoginViewController: UIViewController
 
 	}
 	
-	override func didReceiveMemoryWarning() {
+	override func didReceiveMemoryWarning()
+	{
 		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
 	}
 	
 	
@@ -63,7 +63,7 @@ class LoginViewController: UIViewController
 	
 	@IBAction func doLogin(_ sender: Any)
 	{
-		print("*LoginViewController.doLogin()")
+		print("*UserLogin.doLogin()")
 		
 		let strUserId = tfUserId.text;
 		let strPasswd = tfPasswd.text;
@@ -83,9 +83,8 @@ class LoginViewController: UIViewController
 		print("objMe.swAutoLogin.isOn:\(swAutoLogin.isOn)")
 		let objMe = self
 		
-		let dataClient = Mosaic.DataClient(url: Constants.WEB_SVC_URL)
-		dataClient.loginService(userId : strUserId!, passwd : strPasswd!, mobileId : "",
-								loginCompletionHandler:
+		let dataClient = Mosaic.DataClient(container:self, url: Constants.WEB_SVC_URL)
+		dataClient.loginService(userId : strUserId!, passwd : strPasswd!, mobileId : "", loginCompletionHandler:
 			{ (login, loginError) in
 				if let error = loginError {
 					DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // in half a second...
@@ -102,8 +101,7 @@ class LoginViewController: UIViewController
 				// 성공
 				if let returnCode = login.returnCode
 				{
-					//if ( returnCode == ReturnCodeType.RETURN_CODE_OK.rawValue )
-					if ( returnCode == 1)
+					if ( returnCode == Constants.RETURN_CODE_SUCCESS)
 					{
 						let clsUserInfo = AppContext.sharedManager.getUserInfo()
 						if let unitId = login.unitId
@@ -203,7 +201,7 @@ class LoginViewController: UIViewController
 
 
 
-extension LoginViewController: SwitchDelegate {
+extension UserLogin: SwitchDelegate {
 	func switchDidChangeState(control: Switch, state: SwitchState) {
 		print("Switch changed state to: ", .on == state ? "on" : "off")
 	}

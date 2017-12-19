@@ -38,17 +38,20 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		mIvLogo.clipsToBounds = true
 		
 		
-		// 옵져버 패턴 : 응답대기
-		NotificationCenter.default.addObserver(self, selector: #selector(makeLeftMenu), name: NSNotification.Name(rawValue: "makeLeftMenu"), object: nil)
+		// 옵져버 패턴 : 응답대기(왼쪽메뉴재생성)
+		NotificationCenter.default.addObserver(self, selector: #selector(doMakeLeftMenu), name: NSNotification.Name(rawValue: "doMakeLeftMenu"), object: nil)
+		
+		// 옵져버 패턴 : 응답대기(로그아웃처리)
+		NotificationCenter.default.addObserver(self, selector: #selector(doLogoutNewLogin), name: NSNotification.Name(rawValue: "doLogoutNewLogin"), object: nil)
 	}
 	
 	override func viewDidAppear(_ animated: Bool)
 	{
 		print(" LeftViewCOntroller.viewDidAppear")
-		makeLeftMenu()
+		doMakeLeftMenu()
 	}
 	
-	@objc public func makeLeftMenu()
+	@objc public func doMakeLeftMenu()
 	{
 		arrMenuData.removeAll()
 		
@@ -91,7 +94,10 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			
 			arrMenuData.append(MenuItem(menuId: "CombineOut", menuName: NSLocalizedString("title_work_out_delivery", comment: "출고")))
 			arrMenuData.append(MenuItem(menuId: "CombineIn", menuName: NSLocalizedString("title_work_in_move_return", comment: "이동/반납입고")))
+			
 			// 회수 입고 ( 입고B : 지시서 없는 입고)
+			arrMenuData.append(MenuItem(menuId: "EasyIn", menuName: NSLocalizedString("title_work_in_gather", comment: "회수입고")))
+			
 			arrMenuData.append(MenuItem(menuId: "EventSelectStore", menuName: NSLocalizedString("title_event_select_store", comment: "선별/보관")))
 			arrMenuData.append(MenuItem(menuId: "EventClean", menuName: NSLocalizedString("title_event_clean", comment: "세척")))
 			arrMenuData.append(MenuItem(menuId: "EventDestory", menuName: NSLocalizedString("title_event_destory", comment: "폐기")))
@@ -107,7 +113,10 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			//==============================================
 			arrMenuData.append(MenuItem(menuId: "CombineIn", menuName: NSLocalizedString("title_work_in_delivery", comment: "납품입고")))
 			// 출고 (출고B : 지시서 없는 출고)
+			
 			// 입고 (입고B : 지시서 없는 입고)
+			arrMenuData.append(MenuItem(menuId: "EasyIn", menuName: NSLocalizedString("title_work_in_warehouse", comment: "입고")))
+			
 			arrMenuData.append(MenuItem(menuId: "ProdMappingOut", menuName: NSLocalizedString("title_work_out_product", comment: "상품매핑")))
 			arrMenuData.append(MenuItem(menuId: "WorkHistorySearch", menuName: NSLocalizedString("title_work_history_search", comment: "작업내역조회")))
 			arrMenuData.append(MenuItem(menuId: "StockReview", menuName: NSLocalizedString("title_stock_review", comment: "재고실사")))
@@ -120,7 +129,10 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			//==============================================
 			
 			// 출고 (출고B : 지시서 없는 출고)
+			
 			// 입고 (입고B : 지시서 없는 입고)
+			arrMenuData.append(MenuItem(menuId: "EasyIn", menuName: NSLocalizedString("title_work_in_warehouse", comment: "입고")))
+			
 			arrMenuData.append(MenuItem(menuId: "ProdMappingOut", menuName: NSLocalizedString("title_work_out_product", comment: "상품매핑")))
 			arrMenuData.append(MenuItem(menuId: "WorkHistorySearch", menuName: NSLocalizedString("title_work_history_search", comment: "작업내역조회")))
 			arrMenuData.append(MenuItem(menuId: "StockReview", menuName: NSLocalizedString("title_stock_review", comment: "재고실사")))
@@ -139,7 +151,10 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			arrMenuData.append(MenuItem(menuId: "CombineIn", menuName: NSLocalizedString("title_work_resale_a", comment: "입고A")))
 			
 			// 출고 (출고B : 지시서 없는 출고)
+			
 			// 입고 (입고B : 지시서 없는 입고)
+			arrMenuData.append(MenuItem(menuId: "EasyIn", menuName: NSLocalizedString("title_work_resale_b", comment: "입고B")))
+			
             arrMenuData.append(MenuItem(menuId: "ProdMappingOut", menuName: NSLocalizedString("title_work_sale_c", comment: "출고C")))
 			
 			arrMenuData.append(MenuItem(menuId: "EventClean", menuName: NSLocalizedString("title_event_clean", comment: "세척")))
@@ -230,13 +245,21 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 break
 			
 			case "CombineIn" :
-				
 				clsController = { () -> CombineIn in
 					let clsCombineIn = UIStoryboard.viewController(storyBoardName: "CombineIn", identifier: "CombineIn") as! CombineIn
 					clsCombineIn.setTitle(title: strtMenuItem.menuName)
 					return clsCombineIn
 				}()
 				break
+
+			case "EasyIn" :
+				clsController = { () -> EasyIn in
+					let clsEasyIn = UIStoryboard.viewController(storyBoardName: "EasyIn", identifier: "EasyIn") as! EasyIn
+					clsEasyIn.setTitle(title: strtMenuItem.menuName)
+					return clsEasyIn
+				}()
+				break
+		
 			
 			case "EventSelectStore" :
 				// 선별/보관
@@ -311,14 +334,32 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	{
 		print(" LeftViewCOntroller.onLogoutClicked")
 		AppContext.sharedManager.doLogout();
-		navigationDrawerController?.closeLeftView()
-        
-        // 로그아웃전에 루트뷰로 전환하여 로그인후 루트뷰가 나오도록 수정
-		toolbarController?.transition(to: clsRootController, completion: closeNavigationDrawer)
+		self.navigationDrawerController?.closeLeftView()
+		
+		// 로그아웃전에 루트뷰로 전환하여 로그인후 루트뷰가 나오도록 수정
+		self.toolbarController?.transition(to: self.clsRootController, completion: self.closeNavigationDrawer)
 		//self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
 		
 		self.performSegue(withIdentifier: "segLogout", sender: self)
 	}
+	
+	@objc public func doLogoutNewLogin()
+	{
+		print("==================================")
+		print("*LeftviewController.doLogoutNewLogin")
+		print("==================================")
+		
+		DispatchQueue.main.async
+		{
+			AppContext.sharedManager.getUserInfo().setAutoLogin(boolAutoLogin: false)
+			AppContext.sharedManager.doLogout();
+			self.navigationDrawerController?.closeLeftView()
+			// 로그아웃전에 루트뷰로 전환하여 로그인후 루트뷰가 나오도록 수정
+			self.toolbarController?.transition(to: self.clsRootController, completion: self.closeNavigationDrawer)
+			self.performSegue(withIdentifier: "segLogout", sender: self)
+		}
+	}
+	
 	
 	public func closeNavigationDrawer(result: Bool)
 	{

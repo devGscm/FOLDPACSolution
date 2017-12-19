@@ -355,7 +355,7 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		//			self.clsIndicator?.hide()
 		//		}
 		
-		clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+		clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		clsDataClient.ExecuteUrl = "mountService:executeMountData"
 		clsDataClient.removeServiceParam()
@@ -456,7 +456,6 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 	
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
-		//let cell : UITableViewCell = UITableViewCell(style: <#T##UITableViewCellStyle#>, reuseIdentifier: <#T##String?#>)
 		let objCell:ProductMountCell = tableView.dequeueReusableCell(withIdentifier: "tvcProductMount", for: indexPath) as! ProductMountCell
 		let clsTagInfo = arrAssetRows[indexPath.row]
 		

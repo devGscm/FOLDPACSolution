@@ -70,6 +70,15 @@ class Constants
 	static let RFID_EPC_MODE_SGTIN_96				= "30";	/**< EPC MODE - SGTIN **/
 
 	
+    //=====================================================================================
+    // 출고 구분
+    //-------------------------------------------------------------------------------------
+    static let SALE_TYPE_DELIVERY                             = "01";        /**< 출고  : 납품(지시서 O) */
+    static let SALE_TYPE_MOVE                                 = "02";        /**< 출고  : 이동(지시서 O) */
+    static let SALE_TYPE_RESALE                               = "05";        /**< 출고  : 출고(지시서 X) */
+    static let SALE_TYPE_BARCODE                              = "10";        /**< 출고  : 출하(지시서 X/상품매핑O) */
+    
+    
 	//=====================================================================================
 	// 입고 구분
 	//-------------------------------------------------------------------------------------
@@ -168,6 +177,22 @@ class Constants
     static let  CUST_TYPE_VIR                                       = "VIR"    /**< 가상고객사       */
     static let  CUST_TYPE_ETC                                       = "ETC"    /**< 기타회사        */
     //=====================================================================================
+	
+	static let RETURN_CODE_AUTHENTICATE_FAIL						= -1		/**< 응답코드:인증실패 **/
+	static let RETURN_CODE_FAIL										= 0			/**< 응답코드:실패 **/
+	static let RETURN_CODE_SUCCESS									= 1			/**< 응답코드:성공**/
+	static let RETURN_CODE_LOADING									= 2			/**< 응답코드:로딩중 **/
+	
+	
+	static let RETURN_CODE_NOT_ATTACH_UNIT							= 94		/**< 응답코드: 사용가능한 리더기정보 등록여부를 확인하여 주십시오. **/
+	static let RETURN_CODE_ENTER_USER_ID							= 95		/**< 응답코드: 아이디를 입력하여 주십시오. **/
+	static let RETURN_CODE_ENTER_PASSWORD							= 96		/**< 응답코드: 패스워드를 입력하여 주십시오. **/
+	static let RETURN_CODE_VERIFY_LOGIN_INFO						= 97		/**< 응답코드: 로그인 정보를 다시 확인하여 주십시오. **/
+	static let RETURN_CODE_DISABLED_USER							= 98		/**< 응답코드: 사용 중지된 사용자입니다. **/
+	static let RETURN_CODE_NOT_RRPP_USER							= 99		/**< 응답코드: RRPP 사용자가 아님 **/
+	static let RETURN_CODE_PK_VIOLATION								= 23000		/**< 응답코드:중복키 에러 **/
+	
+	
     
     //공통코드 구분자
     static let CODE_DETAIL_TYPE_SALE                                = "SALE"           /**< SALE_TYPE  */
