@@ -40,6 +40,9 @@ class WorkCustSearch: BaseViewController, UITableViewDataSource, UITableViewDele
 	override func viewDidLoad()
 	{
         super.viewDidLoad()
+        
+        //다른 화면 터치시 키보드 숨기기
+        self.hideKeyboardWhenTappedAround()
     }
 
     override func didReceiveMemoryWarning()
@@ -106,6 +109,9 @@ class WorkCustSearch: BaseViewController, UITableViewDataSource, UITableViewDele
         clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
         clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		
+        
+        print("===========인아웃: \(inOutType)")
+        
 		if(inOutType == Constants.INOUT_TYPE_OUTPUT)
 		{
 	        clsDataClient.UserData = "app.sales.work.selectWorkEasyOutCustList"
@@ -235,13 +241,15 @@ class WorkCustSearch: BaseViewController, UITableViewDataSource, UITableViewDele
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
+        tableView.allowsSelection = false           //셀 선택안되게 막음
+        
         let objCell:WorkCustSearchCell = tableView.dequeueReusableCell(withIdentifier: "tvcWorkCustSearch", for: indexPath) as! WorkCustSearchCell
 		let clsDataRow = arcDataRows[indexPath.row]
         
         objCell.lblParentCustName.text = clsDataRow.getString(name:"parentCustName")
         objCell.lblCustTypeName.text = clsDataRow.getString(name:"custTypeName")
         objCell.lblCustId.text = clsDataRow.getString(name:"custId")
-        objCell.lblCustId.text = clsDataRow.getString(name:"custName")
+        objCell.lblCustName.text = clsDataRow.getString(name:"custName")
      
         objCell.btnSelection.titleLabel?.font = UIFont.fontAwesome(ofSize: 14)
         objCell.btnSelection.setTitle(String.fontAwesomeIcon(name:.arrowDown), for: .normal)

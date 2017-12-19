@@ -123,6 +123,9 @@
 		B01C420B1FE0EEBA00404301 /* CombineOut.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B01C420A1FE0EEBA00404301 /* CombineOut.storyboard */; };
 		B01C420D1FE105BB00404301 /* CombineOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01C420C1FE105BB00404301 /* CombineOut.swift */; };
 		B01C420F1FE105E400404301 /* CombineOutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01C420E1FE105E400404301 /* CombineOutCell.swift */; };
+		B04078591FE8A91300F44FBE /* EasyOut.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B04078581FE8A91300F44FBE /* EasyOut.storyboard */; };
+		B040785B1FE8B31C00F44FBE /* EasyOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = B040785A1FE8B31C00F44FBE /* EasyOut.swift */; };
+		B040785D1FE8D02600F44FBE /* EasyOutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B040785C1FE8D02600F44FBE /* EasyOutCell.swift */; };
 		B060131B1FD5088A00594CCD /* InOutCancel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B060131A1FD5088A00594CCD /* InOutCancel.storyboard */; };
 		B060131D1FD512B900594CCD /* InOutCancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B060131C1FD512B900594CCD /* InOutCancel.swift */; };
 		B060131F1FD529A200594CCD /* InOutCancelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B060131E1FD529A200594CCD /* InOutCancelCell.swift */; };
@@ -308,6 +311,9 @@
 		B01C420A1FE0EEBA00404301 /* CombineOut.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CombineOut.storyboard; sourceTree = "<group>"; };
 		B01C420C1FE105BB00404301 /* CombineOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineOut.swift; sourceTree = "<group>"; };
 		B01C420E1FE105E400404301 /* CombineOutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineOutCell.swift; sourceTree = "<group>"; };
+		B04078581FE8A91300F44FBE /* EasyOut.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EasyOut.storyboard; sourceTree = "<group>"; };
+		B040785A1FE8B31C00F44FBE /* EasyOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyOut.swift; sourceTree = "<group>"; };
+		B040785C1FE8D02600F44FBE /* EasyOutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyOutCell.swift; sourceTree = "<group>"; };
 		B060131A1FD5088A00594CCD /* InOutCancel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InOutCancel.storyboard; sourceTree = "<group>"; };
 		B060131C1FD512B900594CCD /* InOutCancel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InOutCancel.swift; sourceTree = "<group>"; };
 		B060131E1FD529A200594CCD /* InOutCancelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InOutCancelCell.swift; sourceTree = "<group>"; };
@@ -623,6 +629,7 @@
 		96E4941E1FB1A78500D1E2C1 /* RRPPClient */ = {
 			isa = PBXGroup;
 			children = (
+				B04078571FE8A8E000F44FBE /* EasyOut */,
 				55C1957C1FE743DD008299FE /* EasyIn */,
 				55D13A641FE348A500099F50 /* CombineIn */,
 				5575BB441FE238CF00CACCC8 /* Event */,
@@ -687,6 +694,16 @@
 				B01C420E1FE105E400404301 /* CombineOutCell.swift */,
 			);
 			path = CombineOut;
+			sourceTree = "<group>";
+		};
+		B04078571FE8A8E000F44FBE /* EasyOut */ = {
+			isa = PBXGroup;
+			children = (
+				B04078581FE8A91300F44FBE /* EasyOut.storyboard */,
+				B040785A1FE8B31C00F44FBE /* EasyOut.swift */,
+				B040785C1FE8D02600F44FBE /* EasyOutCell.swift */,
+			);
+			path = EasyOut;
 			sourceTree = "<group>";
 		};
 		B06013191FD5080F00594CCD /* InOutCancel */ = {
@@ -825,6 +842,7 @@
 				5590A55F1FD4E1AE007571D5 /* ProdMapping.storyboard in Resources */,
 				967A9C4A1FC4003B00B6A9D1 /* Main.storyboard in Resources */,
 				5575BB481FE238FA00CACCC8 /* Event.storyboard in Resources */,
+				B04078591FE8A91300F44FBE /* EasyOut.storyboard in Resources */,
 				967A9C441FC3BE8D00B6A9D1 /* Localizable.strings in Resources */,
 				55FA783F1FBDACFD00583A80 /* login.png in Resources */,
 				559F39CF1FD76A67006E5C17 /* Config.storyboard in Resources */,
@@ -885,6 +903,7 @@
 				559F39D81FD76EF5006E5C17 /* BranchSearchCell.swift in Sources */,
 				555B988C1FD2776A006CC14F /* HistorySearch.swift in Sources */,
 				96E494221FB1A78500D1E2C1 /* ViewController.swift in Sources */,
+				B040785D1FE8D02600F44FBE /* EasyOutCell.swift in Sources */,
 				559F39D41FD76A9F006E5C17 /* ClientConfig.swift in Sources */,
 				55B302C21FCE323B00BDCCB1 /* BaseRfidViewController.swift in Sources */,
 				55FA784D1FBDAD0B00583A80 /* RootViewController.swift in Sources */,
@@ -918,6 +937,7 @@
 				96994C511FC545DF00B3A726 /* LocalData.swift in Sources */,
 				9618F0E61FCE83D300F376B7 /* TagCell.swift in Sources */,
 				B077DA1C1FDF990900616F3A /* OutMemoDialog.swift in Sources */,
+				B040785B1FE8B31C00F44FBE /* EasyOut.swift in Sources */,
 				55B302CA1FCE339400BDCCB1 /* ProductMountCell.swift in Sources */,
 				9680BE871FCBD91D002838A4 /* SwingDevice.m in Sources */,
 				B0FD4EDE1FE3C24700EE976E /* CombineOutWorkListCell.swift in Sources */,

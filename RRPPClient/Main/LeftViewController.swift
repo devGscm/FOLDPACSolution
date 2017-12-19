@@ -112,9 +112,11 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			// 계약처
 			//==============================================
 			arrMenuData.append(MenuItem(menuId: "CombineIn", menuName: NSLocalizedString("title_work_in_delivery", comment: "납품입고")))
-			// 출고 (출고B : 지시서 없는 출고)
-			
-			// 입고 (입고B : 지시서 없는 입고)
+
+            //출고 (출고B : 지시서 없는 출고)
+            arrMenuData.append(MenuItem(menuId: "EasyOut", menuName: NSLocalizedString("title_work_out_delivery", comment: "출고")))
+            
+			//입고 (입고B : 지시서 없는 입고)
 			arrMenuData.append(MenuItem(menuId: "EasyIn", menuName: NSLocalizedString("title_work_in_warehouse", comment: "입고")))
 			
 			arrMenuData.append(MenuItem(menuId: "ProdMappingOut", menuName: NSLocalizedString("title_work_out_product", comment: "상품매핑")))
@@ -128,9 +130,10 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			// 실수요처
 			//==============================================
 			
-			// 출고 (출고B : 지시서 없는 출고)
-			
-			// 입고 (입고B : 지시서 없는 입고)
+			//출고 (출고B : 지시서 없는 출고)
+			arrMenuData.append(MenuItem(menuId: "EasyOut", menuName: NSLocalizedString("title_work_out_delivery", comment: "출고")))
+            
+			//입고 (입고B : 지시서 없는 입고)
 			arrMenuData.append(MenuItem(menuId: "EasyIn", menuName: NSLocalizedString("title_work_in_warehouse", comment: "입고")))
 			
 			arrMenuData.append(MenuItem(menuId: "ProdMappingOut", menuName: NSLocalizedString("title_work_out_product", comment: "상품매핑")))
@@ -147,12 +150,12 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			arrMenuData.append(MenuItem(menuId: "TagSupply", menuName: NSLocalizedString("title_tag_supply", comment: "납품등록(RFID)")))
 			arrMenuData.append(MenuItem(menuId: "ProductMount", menuName: NSLocalizedString("title_product_mount", comment: "자산등록")))
 			arrMenuData.append(MenuItem(menuId: "CombineOut", menuName: NSLocalizedString("title_work_sale_a", comment: "출고A")))
-
 			arrMenuData.append(MenuItem(menuId: "CombineIn", menuName: NSLocalizedString("title_work_resale_a", comment: "입고A")))
 			
-			// 출고 (출고B : 지시서 없는 출고)
-			
-			// 입고 (입고B : 지시서 없는 입고)
+			//출고 (출고B : 지시서 없는 출고)
+            arrMenuData.append(MenuItem(menuId: "EasyOut", menuName: NSLocalizedString("title_work_sale_b", comment: "출고B")))
+            
+			//입고 (입고B : 지시서 없는 입고)
 			arrMenuData.append(MenuItem(menuId: "EasyIn", menuName: NSLocalizedString("title_work_resale_b", comment: "입고B")))
 			
             arrMenuData.append(MenuItem(menuId: "ProdMappingOut", menuName: NSLocalizedString("title_work_sale_c", comment: "출고C")))
@@ -238,7 +241,6 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
 			
             case "CombineOut" :
-                //출고A
                 clsController = { () -> CombineOut in
                     return UIStoryboard.viewController(storyBoardName: "CombineOut", identifier: "CombineOut") as! CombineOut
                 }()
@@ -251,7 +253,15 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 					return clsCombineIn
 				}()
 				break
-
+            
+            case "EasyOut" :
+                clsController = { () -> EasyOut in
+                    let clsEasyOut = UIStoryboard.viewController(storyBoardName: "EasyOut", identifier: "EasyOut") as! EasyOut
+                    clsEasyOut.setTitle(title: strtMenuItem.menuName)
+                    return clsEasyOut
+                }()
+            break
+            
 			case "EasyIn" :
 				clsController = { () -> EasyIn in
 					let clsEasyIn = UIStoryboard.viewController(storyBoardName: "EasyIn", identifier: "EasyIn") as! EasyIn
@@ -259,7 +269,6 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 					return clsEasyIn
 				}()
 				break
-		
 			
 			case "EventSelectStore" :
 				// 선별/보관
