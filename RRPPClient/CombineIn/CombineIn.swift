@@ -1121,7 +1121,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 		//		BarcodeScanner.Title.color = UIColor.black
 		//		BarcodeScanner.CloseButton.color = UIColor.black
 		//		BarcodeScanner.SettingsButton.color = UIColor.white
-		//		BarcodeScanner.Info.textColor = UIColor.black
+		//	/Users/roy/Projects/32.RRPPSolutions/02.Solutions/RRPPSolution/RRPPClient/CombineIn/CombineIn.swift	BarcodeScanner.Info.textColor = UIColor.black
 		//		BarcodeScanner.Info.tint = UIColor.black
 		//		BarcodeScanner.Info.loadingTint = UIColor.black
 		//		BarcodeScanner.Info.notFoundTint = UIColor.red

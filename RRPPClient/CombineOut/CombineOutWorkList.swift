@@ -35,6 +35,7 @@ class CombineOutWorkList: BaseViewController, UITableViewDataSource, UITableView
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround() //키보드 숨기기
     }
     
     //=======================================
