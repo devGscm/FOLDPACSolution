@@ -203,6 +203,14 @@ public class SwingReader : NSObject, ReaderProtocol, SwingProtocolProtocol
 		//소스와 비슷하게 리더기설정
 		if let swing : SwingProtocol  = SwingProtocol.sharedInstace() as? SwingProtocol
 		{
+			//power설정 적용
+			let powerRate = UserDefaults.standard.integer(forKey: Constants.RFID_POWER_KEY)
+			let maxPower	= 30
+			var attenRfPower	= 30
+			attenRfPower =   Int(round(Double((maxPower * powerRate) / 100)))
+			let rfPower =  maxPower - attenRfPower
+			swing.swing_setPower(Int32(rfPower))
+			
 			swing.swing_set_inventory_mode(0)
 			swing.swing_clear_inventory()
 			swing.swing_readStop()			
