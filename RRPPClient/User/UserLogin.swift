@@ -108,9 +108,12 @@ class UserLogin: UIViewController
 						{
 							if(unitId.isEmpty == true)
 							{
+								//여기가 호출이 안될것임. 웹서비스 소스상 사용자 unit가 설정이 없으면
+								//자체적으로 성공메새지를 안보내고 RETURN_CODE_NOT_ATTACH_UNIT 로 보냄
+								//안드로이드용 소스를 따라서 한것으로 향후 해당 루틴은 삭제해도 될것 같음.
 								DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // in half a second...
 									self.showLoginErrorDialog(strTitle: NSLocalizedString("common_error", comment: "에러"),
-															  strMessage: NSLocalizedString("rfid_reader_no_device_id", comment: "선택된 리더기가 없습니다."))
+															  strMessage: NSLocalizedString("rfid_no_selected_readers", comment: "선택된 리더기가 없습니다."))
 								}
 								return
 							}
