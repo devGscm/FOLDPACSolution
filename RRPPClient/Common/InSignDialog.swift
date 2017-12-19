@@ -63,6 +63,9 @@ class InSignDialog: BaseViewController, YPSignatureDelegate
 	@IBAction func onClearClicked(_ sender: UIButton)
 	{
 		self.vwSign.clear()
+        tfNoReadCount?.text = clsDataRow.getString(name: "noReadCount") ?? ""
+        tfWorkerName?.text  = clsDataRow.getString(name: "workerName") ?? ""
+        tfRemark?.text      = clsDataRow.getString(name: "remark") ?? ""
 	}
 	
 	@IBAction func onConfirmClicked(_ sender: UIButton)

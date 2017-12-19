@@ -82,7 +82,7 @@ public protocol ReaderResponseDelegate : class {
 protocol ReaderProtocol : class {
 	
 	/// 초기화 는 항상 리더기 식별자와 이벤트를 전파할 delegate로 한다
-	init(deviceId : String ,  delegate : ReaderResponseDelegate?)
+	init(viewControl: BaseViewController, deviceId : String ,  delegate : ReaderResponseDelegate?)
 	
 	/**
 	* 리더기에 연결한다.
@@ -204,7 +204,7 @@ protocol ReaderProtocol : class {
 
 
 /// BaseRfidViewController 클래스 구현시작
-class BaseRfidViewController : BaseViewController
+class BaseRfidViewController : BaseViewController, UITextFieldDelegate
 {
 	var arrAssetInfo	: Array<AssetInfo> = Array<AssetInfo>()
 	var arrProcMsgInfo	: Array<CodeInfo> = Array<CodeInfo>()
@@ -250,10 +250,10 @@ class BaseRfidViewController : BaseViewController
 		switch readerType
 		{
 			case .SWING :
-				self.mClsReader = SwingReader(deviceId : devId ,  delegate: mDelegateResponse)
+				self.mClsReader = SwingReader(viewControl:self, deviceId : devId ,  delegate: mDelegateResponse)
 			
 			case .AT288 :
-				self.mClsReader = AT288Reader(deviceId : devId ,  delegate: mDelegateResponse)
+				self.mClsReader = AT288Reader(viewControl:self, deviceId : devId ,  delegate: mDelegateResponse)
 		}
 	}
 	
@@ -455,4 +455,26 @@ class BaseRfidViewController : BaseViewController
 	{
 		self.mClsReader?.setReaderModeControl?(mode.rawValue)
 	}
+
+    //==========================================
+    //===== UIText필드에서 엔터키로 키보드 숨기기
+    //==========================================
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        self.view.endEditing(true)
+        return true
+    }
+}
+//==========================================
+//===== UIText필드에서 화면 외부 터치시 키보드 숨기기
+//==========================================
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }

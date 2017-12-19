@@ -66,7 +66,19 @@ class Constants
 	static let PROC_RESULT_ERROR_INSPECT_UNKNOWN_EXCEPTION			= "97"	/**< 처리결과 : 알수없는 에러로 검수할수 없습니다.**/
 	static let PROC_RESULT_ERROR_INSPECT_NOT_REGISTERED_DATA		= "99"	/**< 처리결과 : 서버에 등록되지 않은 EPC코드 입니다. */
 	
+	static let RFID_EPC_MODE_GRAI_96					= "33";	/**< EPC MODE - GRAI **/
+	static let RFID_EPC_MODE_SGTIN_96				= "30";	/**< EPC MODE - SGTIN **/
+
 	
+    //=====================================================================================
+    // 출고 구분
+    //-------------------------------------------------------------------------------------
+    static let SALE_TYPE_DELIVERY                             = "01";        /**< 출고  : 납품(지시서 O) */
+    static let SALE_TYPE_MOVE                                 = "02";        /**< 출고  : 이동(지시서 O) */
+    static let SALE_TYPE_RESALE                               = "05";        /**< 출고  : 출고(지시서 X) */
+    static let SALE_TYPE_BARCODE                              = "10";        /**< 출고  : 출하(지시서 X/상품매핑O) */
+    
+    
 	//=====================================================================================
 	// 입고 구분
 	//-------------------------------------------------------------------------------------

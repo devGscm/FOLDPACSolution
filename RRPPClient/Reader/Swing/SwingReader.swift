@@ -7,17 +7,20 @@
 //
 
 import Foundation
+import AVFoundation
 
 public class SwingReader : NSObject, ReaderProtocol, SwingProtocolProtocol
 {	
 	let swing : SwingProtocol
 	let identifier : String
 	let delegate : ReaderResponseDelegate?
+	let viewControl : BaseViewController
 	
 	private var timeoutMonitor : Timer? /// Timeout 연결 모니터링
 	
-	required public init(deviceId : String ,  delegate : ReaderResponseDelegate?)
+	required public init(viewControl: BaseViewController, deviceId : String ,  delegate : ReaderResponseDelegate?)
 	{
+		self.viewControl = viewControl
 		self.swing = SwingProtocol.sharedInstace() as! SwingProtocol
 		
 		//리더기 스켄을 멈춤
@@ -146,6 +149,17 @@ public class SwingReader : NSObject, ReaderProtocol, SwingProtocolProtocol
 			//trimedData = trimedData.replacingOccurrences(of: ">T", with: "")
 			let indexStartOfText = trimedData.index(trimedData.startIndex, offsetBy: 6)   // ">T3000" 를 제거
 			let result = trimedData[indexStartOfText...]
+			
+			//RFID Mask오류 알림
+			let strRfidMask = UserDefaults.standard.string(forKey: Constants.RFID_MASK_KEY) ?? "3312"
+			if(result.hasPrefix(strRfidMask) == false)
+			{
+				//TODO::다국에 처리 안드로이드에서 해당 메세지가 없음.
+				self.viewControl.showSnackbar(message: "The RFID does not match Configured EPC Header")
+				//self.viewControl.showSnackbar(message: NSLocalizedString("rfid_connected_reader", comment: "환경설정에서 설정한 마스크와 다른 EPC코드 입니다."))
+				return
+			}
+			
 			self.delegate?.didReadTagid(String(result) )
 		}
 		else if(trimedData.hasPrefix(">J"))	//Barcode일경우 didReadBarcode 이벤트를 발생
@@ -190,6 +204,22 @@ public class SwingReader : NSObject, ReaderProtocol, SwingProtocolProtocol
 		//소스와 비슷하게 리더기설정
 		if let swing : SwingProtocol  = SwingProtocol.sharedInstace() as? SwingProtocol
 		{
+			//RFID 효과음
+			let blsBeep = UserDefaults.standard.bool(forKey: Constants.RFID_BEEP_ENABLED_KEY)
+			if(blsBeep)
+			{
+				let systemSoundID: SystemSoundID = 1007
+				AudioServicesPlaySystemSound (systemSoundID)
+			}
+			
+			//RFID Power
+			let powerRate = UserDefaults.standard.integer(forKey: Constants.RFID_POWER_KEY)
+			let maxPower	= 30
+			var attenRfPower	= 30
+			attenRfPower =   Int(round(Double((maxPower * powerRate) / 100)))
+			let rfPower =  maxPower - attenRfPower
+			swing.swing_setPower(Int32(rfPower))
+			
 			swing.swing_set_inventory_mode(0)
 			swing.swing_clear_inventory()
 			swing.swing_readStop()			
