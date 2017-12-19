@@ -54,11 +54,11 @@ class OutSignDialog: BaseViewController, YPSignatureDelegate
 	@IBAction func onClearClicked(_ sender: UIButton)
 	{
 		self.vwSign.clear()
+        self.tfRemark.text = ""
 	}
 	
 	@IBAction func onConfirmClicked(_ sender: UIButton)
 	{
-
 		let clsDataRow : DataRow = DataRow()
 		
 		clsDataRow.addRow(name: "remark", value: tfRemark.text ?? "")
@@ -67,12 +67,12 @@ class OutSignDialog: BaseViewController, YPSignatureDelegate
 		{
 			let strSignData = imgSign.base64(format: .png)
 			
-			print("@@@@@@@@@@@@ strSignData:\(strSignData)")
-			
-			clsDataRow.addRow(name: "signData", value: strSignData)
+			//print("====strSignData:\(strSignData)")			
+            clsDataRow.addRow(name: "signData", value: strSignData ?? "")
 			
 			self.vwSign.clear()
 		}
+        print("==== onConfirmClicked ====")
 		let strtData = ReturnData(returnType: "outSignDialog", returnCode: nil, returnMesage: nil, returnRawData: clsDataRow)
 		ptcDataHandler?.recvData(returnData: strtData)
 		self.dismiss(animated: true, completion: nil)

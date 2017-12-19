@@ -364,6 +364,8 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     //=======================================
     func recvData(returnData: ReturnData)
     {
+        print("=========[recvData] :  \(returnData) ========")
+        
         if(returnData.returnType == "CombineOutWorkList")
         {
             if(returnData.returnRawData != nil)
@@ -410,6 +412,7 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         }
         else if(returnData.returnType == "outSignDialog")
         {
+            print("=========[1] [ 완료전송 데이터 ] ========")
             if(returnData.returnRawData != nil)
             {
                 let clsDataRow      = returnData.returnRawData as! DataRow
@@ -439,7 +442,7 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         print("===doSearchWorkListDetail: \(doSearchWorkListDetail)")
         print("===============================")
             
-        clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+        clsDataClient = DataClient(container: self, url: Constants.WEB_SVC_URL)
         clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
         clsDataClient.SelectUrl = "inOutService:selectCombineOutWorkListDetail"
         clsDataClient.removeServiceParam()
@@ -823,7 +826,7 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     
     func doSearchBarcode(barcode: String)
     {
-        let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+        let clsDataClient = DataClient(container: self, url: Constants.WEB_SVC_URL)
         clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
         clsDataClient.SelectUrl = "inOutService:selectSaleInWorkList"
         clsDataClient.removeServiceParam()
@@ -993,6 +996,7 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     //======================================
     @IBAction func onSendClicked(_ sender: UIButton)
     {
+        //리더기 장치ID 필수
         if(AppContext.sharedManager.getUserInfo().getUnitId().isEmpty == true)
         {
             Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("rfid_reader_no_device_id", comment: "리더기의 장치ID가 없습니다.웹화면의 리더기정보관리에서 모바일전화번호를  입력하여주십시오."))
@@ -1007,6 +1011,7 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
             return
         }
         
+        //송장번호 필수
         let strSaleWorkId = btnSaleWorkId.titleLabel?.text
         if(strSaleWorkId?.isEmpty == true)
         {
@@ -1106,7 +1111,7 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     //======================================
     func doSearchTagList()
     {
-        let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+        let clsDataClient = DataClient(container: self, url: Constants.WEB_SVC_URL)
         clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
         clsDataClient.SelectUrl = "supplyService:selectSaleOutTagList"
         clsDataClient.removeServiceParam()
@@ -1180,7 +1185,7 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     func sendWorkInitData(saleWorkId: String)
     {
         clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
-        let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+        let clsDataClient = DataClient(container: self, url: Constants.WEB_SVC_URL)
         clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
         clsDataClient.ExecuteUrl = "inOutService:executeOutCancelData"
         clsDataClient.removeServiceParam()
@@ -1236,7 +1241,7 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     {
         clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
         
-        let clsDataClient = DataClient(url: Constants.WEB_SVC_URL)
+        let clsDataClient = DataClient(container: self, url: Constants.WEB_SVC_URL)
         clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
         clsDataClient.ExecuteUrl = "inOutService:executeOutData"
         clsDataClient.removeServiceParam()
