@@ -101,6 +101,7 @@
 		9680BE8C1FCBD9D4002838A4 /* RfidSwing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9680BE8B1FCBD9D4002838A4 /* RfidSwing.swift */; };
 		968611EC1FBD585C000FE288 /* SWXMLHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 968611DD1FBD564C000FE288 /* SWXMLHash.framework */; };
 		968611ED1FBD585C000FE288 /* SWXMLHash.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 968611DD1FBD564C000FE288 /* SWXMLHash.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		969674A81FE7604700B6D9EE /* RfidTrackingServiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969674A71FE7604700B6D9EE /* RfidTrackingServiceCell.swift */; };
 		96994C4D1FC5453B00B3A726 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96994C4C1FC5453A00B3A726 /* SQLite.framework */; };
 		96994C4F1FC5455900B3A726 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 96994C4C1FC5453A00B3A726 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		96994C511FC545DF00B3A726 /* LocalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96994C501FC545DF00B3A726 /* LocalData.swift */; };
@@ -276,6 +277,7 @@
 		9680BE841FCBD91D002838A4 /* SwingProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwingProtocol.h; sourceTree = "<group>"; };
 		9680BE8B1FCBD9D4002838A4 /* RfidSwing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RfidSwing.swift; sourceTree = "<group>"; };
 		968611DD1FBD564C000FE288 /* SWXMLHash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SWXMLHash.framework; path = Carthage/Build/iOS/SWXMLHash.framework; sourceTree = "<group>"; };
+		969674A71FE7604700B6D9EE /* RfidTrackingServiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RfidTrackingServiceCell.swift; sourceTree = "<group>"; };
 		96994C4C1FC5453A00B3A726 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
 		96994C501FC545DF00B3A726 /* LocalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalData.swift; sourceTree = "<group>"; };
 		96999C631FE3915400A0565B /* TagSupplyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSupplyCell.swift; sourceTree = "<group>"; };
@@ -431,6 +433,7 @@
 				55B302C61FCE32A600BDCCB1 /* Tag.storyboard */,
 				9618F0E51FCE83D300F376B7 /* TagCell.swift */,
 				5542B4B91FE1F67600BD6A00 /* RfidTrackingService.swift */,
+				969674A71FE7604700B6D9EE /* RfidTrackingServiceCell.swift */,
 				5542B4BB1FE1F69000BD6A00 /* TagSupply.swift */,
 				96999C631FE3915400A0565B /* TagSupplyCell.swift */,
 				960937491FE3984D0070755E /* TagOrderSearch.swift */,
@@ -877,6 +880,7 @@
 				555B988E1FD27CC3006CC14F /* HistorySearchCell.swift in Sources */,
 				5575BB4C1FE2528200CACCC8 /* EventSelectStore.swift in Sources */,
 				55D13A681FE348FC00099F50 /* CombineIn.swift in Sources */,
+				969674A81FE7604700B6D9EE /* RfidTrackingServiceCell.swift in Sources */,
 				9680BE891FCBD91D002838A4 /* BLEUtility.m in Sources */,
 				55C00A921FCE96E400ED5165 /* TagDetailCell.swift in Sources */,
 				55B154BA1FD7681500F69ABE /* ItemInfo.swift in Sources */,
@@ -1138,8 +1142,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ROY;
-				"SWIFT_ACTIVE_COMPILATION_CONDITIONS[arch=*]" = ROY;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG REDMOON";
 				SWIFT_OBJC_BRIDGING_HEADER = "RRPPClient/RRPPClient-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;

@@ -542,8 +542,8 @@ class TagSupply: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 			return
 		}
 		
-		let strWorkDate = btnWorkDate?.text
-		if(strWorkDate?.isEmpty == true)
+		var strWorkDate = btnWorkDate?.text ?? ""
+		if(strWorkDate.isEmpty == true)
 		{
 			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("rfid_enter_your_delivery_date", comment: "납품일자를 입력하주 주십시요"))
 			return
@@ -568,12 +568,16 @@ class TagSupply: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 			acDialog.textFields?[0].text = ""
 		})
 		acDialog.addAction(UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
-			
 			let strIssueOrderId = self.btnIssueOrderId?.titleLabel?.text
-			let strWorkDate = self.btnWorkDate?.text
+			let dtCurDate = Date()
+			let dfFormat = DateFormatter()
+			dfFormat.dateFormat = "hhmmss"
+			let strCurTime = dfFormat.string(from: dtCurDate)
+			strWorkDate = StrUtil.replace(sourceText: strWorkDate,  findText: "-", replaceText: "") + strCurTime
+			
 			let strWorkerName = self.lblUserName?.text
 			let strRemark = acDialog.textFields?[0].text
-			self.sendData(issueOrderId: strIssueOrderId!, workData: strWorkDate!, workerName: strWorkerName!, remark: strRemark!)
+			self.sendData(issueOrderId: strIssueOrderId!, workData: strWorkDate, workerName: strWorkerName!, remark: strRemark!)
 		})
 		self.present(acDialog, animated: true, completion: nil)
 		
