@@ -636,7 +636,7 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
                                 super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
                             }
                         },
-                        cancelTitle: NSLocalizedString("common_cancel", comment: "취소"), cancelHandler: nil)            
+                        cancelTitle: NSLocalizedString("common_cancel", comment: "취소"), cancelHandler: nil)
         }
         
         Dialog.show(container: self, viewController: nil,
