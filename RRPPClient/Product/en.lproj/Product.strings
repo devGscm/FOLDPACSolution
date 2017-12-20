@@ -1,96 +1,96 @@
 
 /* Class = "UIButton"; normalTitle = "검색"; ObjectID = "5nC-Wc-BHK"; */
-"5nC-Wc-BHK.normalTitle" = "검색";
+"5nC-Wc-BHK.normalTitle" = "Search";
 
 /* Class = "UILabel"; text = "상세"; ObjectID = "6PL-FO-GKl"; */
-"6PL-FO-GKl.text" = "상세";
+"6PL-FO-GKl.text" = "Detail";
 
 /* Class = "UILabel"; text = "구매주문번호"; ObjectID = "6ZN-2A-U7a"; */
-"6ZN-2A-U7a.text" = "구매주문번호";
+"6ZN-2A-U7a.text" = "P/O No.";
 
 /* Class = "UILabel"; text = "주문일"; ObjectID = "8o8-fM-Pod"; */
-"8o8-fM-Pod.text" = "주문일";
+"8o8-fM-Pod.text" = "P/O Date";
 
 /* Class = "UILabel"; text = "거점"; ObjectID = "9RX-mH-AxT"; */
-"9RX-mH-AxT.text" = "거점";
+"9RX-mH-AxT.text" = "Location";
 
 /* Class = "UILabel"; text = "선택"; ObjectID = "CEi-DE-l5b"; */
-"CEi-DE-l5b.text" = "선택";
+"CEi-DE-l5b.text" = "Select";
 
 /* Class = "UIButton"; normalTitle = "주문선택"; ObjectID = "DKg-6V-Lfy"; */
-"DKg-6V-Lfy.normalTitle" = "주문선택";
+"DKg-6V-Lfy.normalTitle" = "P/O Select";
 
 /* Class = "UILabel"; text = "품목"; ObjectID = "E54-OU-vOv"; */
-"E54-OU-vOv.text" = "품목";
+"E54-OU-vOv.text" = "Item No.";
 
 /* Class = "UIBarButtonItem"; title = "X"; ObjectID = "Jdp-LK-Xvg"; */
 "Jdp-LK-Xvg.title" = "X";
 
 /* Class = "UILabel"; text = "구매처"; ObjectID = "Ksl-Lc-G1Y"; */
-"Ksl-Lc-G1Y.text" = "구매처";
+"Ksl-Lc-G1Y.text" = "Buyer";
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "M7m-jg-NHq"; */
-"M7m-jg-NHq.text" = "처리량";
+"M7m-jg-NHq.text" = "Processing Qty.";
 
 /* Class = "UILabel"; text = "구매주문번호"; ObjectID = "MFg-ep-Wf4"; */
-"MFg-ep-Wf4.text" = "구매주문번호";
+"MFg-ep-Wf4.text" = "P/O No.";
 
 /* Class = "UILabel"; text = "주문수량"; ObjectID = "Nh0-mY-oI2"; */
-"Nh0-mY-oI2.text" = "주문수량";
+"Nh0-mY-oI2.text" = "P/O Qty";
 
 /* Class = "UILabel"; text = "유형"; ObjectID = "PSP-rI-j1q"; */
-"PSP-rI-j1q.text" = "유형";
+"PSP-rI-j1q.text" = "common_asset_type";
 
 /* Class = "UILabel"; text = "RRPP팀"; ObjectID = "Ql5-h4-QWc"; */
 "Ql5-h4-QWc.text" = "RRPP팀";
 
 /* Class = "UIButton"; normalTitle = "전송"; ObjectID = "TBA-eq-jGT"; */
-"TBA-eq-jGT.normalTitle" = "전송";
+"TBA-eq-jGT.normalTitle" = "Send";
 
 /* Class = "UILabel"; text = "유형"; ObjectID = "YXh-lR-oAb"; */
-"YXh-lR-oAb.text" = "유형";
+"YXh-lR-oAb.text" = "Item No.";
 
 /* Class = "UILabel"; text = "구매처"; ObjectID = "cFo-iH-hqJ"; */
-"cFo-iH-hqJ.text" = "구매처";
+"cFo-iH-hqJ.text" = "Buyer";
 
 /* Class = "UILabel"; text = "배송위치"; ObjectID = "dN2-DX-Nf3"; */
-"dN2-DX-Nf3.text" = "배송위치";
+"dN2-DX-Nf3.text" = "Dest. Address";
 
 /* Class = "UILabel"; text = "배송위치"; ObjectID = "fgD-yK-bDy"; */
-"fgD-yK-bDy.text" = "배송위치";
+"fgD-yK-bDy.text" = "Dest. Address";
 
 /* Class = "UILabel"; text = "주문수량"; ObjectID = "hys-C8-335"; */
-"hys-C8-335.text" = "주문수량";
+"hys-C8-335.text" = "P/O Qty";
 
 /* Class = "UIButton"; normalTitle = "초기화"; ObjectID = "jRS-7S-ylh"; */
-"jRS-7S-ylh.normalTitle" = "초기화";
+"jRS-7S-ylh.normalTitle" = "Clear";
 
 /* Class = "UILabel"; text = "모람씨앤티"; ObjectID = "jrq-1w-FyR"; */
 "jrq-1w-FyR.text" = "모람씨앤티";
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "juY-XC-BXO"; */
-"juY-XC-BXO.text" = "처리량";
+"juY-XC-BXO.text" = "Processing Qty.";
 
 /* Class = "UILabel"; text = "주문일"; ObjectID = "jx7-bz-QOF"; */
-"jx7-bz-QOF.text" = "주문일";
+"jx7-bz-QOF.text" = "P/O Date";
 
 /* Class = "UILabel"; text = "상세"; ObjectID = "l8w-xD-URl"; */
-"l8w-xD-URl.text" = "상세";
+"l8w-xD-URl.text" = "Detail";
 
 /* Class = "UILabel"; text = "품목"; ObjectID = "p52-1S-Uph"; */
-"p52-1S-Uph.text" = "품목";
+"p52-1S-Uph.text" = "Item No.";
 
 /* Class = "UILabel"; text = "Lot번호"; ObjectID = "pfj-cw-CKX"; */
-"pfj-cw-CKX.text" = "Lot번호";
+"pfj-cw-CKX.text" = "Lot No.";
 
 /* Class = "UIButton"; normalTitle = "연결"; ObjectID = "tvD-Va-na2"; */
-"tvD-Va-na2.normalTitle" = "연결";
+"tvD-Va-na2.normalTitle" = "Connect";
 
 /* Class = "UILabel"; text = "Swing U"; ObjectID = "w1J-cO-rN4"; */
 "w1J-cO-rN4.text" = "Swing U";
 
 /* Class = "UILabel"; text = "작업자"; ObjectID = "wAI-ue-Lv1"; */
-"wAI-ue-Lv1.text" = "작업자";
+"wAI-ue-Lv1.text" = "Worker";
 
 /* Class = "UILabel"; text = "주문일"; ObjectID = "zEv-Np-yJl"; */
-"zEv-Np-yJl.text" = "주문일";
+"zEv-Np-yJl.text" = "P/O Date";
