@@ -50,9 +50,14 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 		
 		//RFID를 처리할 델리게이트 지정
 		self.initRfid(self as ReaderResponseDelegate )
-		
 		initViewControl()
 	}
+    
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()         //키보드 숨기기
+    }
 	
 	override func viewDidAppear(_ animated: Bool)
 	{

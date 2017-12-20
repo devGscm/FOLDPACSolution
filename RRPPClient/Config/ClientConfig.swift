@@ -40,7 +40,11 @@ class ClientConfig : BaseTableViewController, DataProtocol
         initViewControl()
     }
     
-    
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()         //키보드 숨기기
+    }
     
     override func viewDidDisappear(_ animated: Bool)
     {
@@ -112,7 +116,7 @@ class ClientConfig : BaseTableViewController, DataProtocol
         self.btnRfidMask.setTitle(strRfidMask, for: .normal)
         
         // RFID Power
-        let strRfidPower = UserDefaults.standard.string(forKey: Constants.RFID_POWER_KEY) ?? "0"
+        let strRfidPower = UserDefaults.standard.string(forKey: Constants.RFID_POWER_KEY) ?? "100"
         self.btnRfidPower.setTitle(strRfidPower, for: .normal)
         //print("@@@@@@ RFID POWER:\(strRfidPower)")
     }
@@ -337,7 +341,7 @@ class ClientConfig : BaseTableViewController, DataProtocol
     @IBAction func onRfidPowerClicked(_ sender: Any)
     {
         let clsSliderDialog = SliderDialog()
-        let intRfidPower = Int(self.btnRfidPower.titleLabel?.text ?? "0")!
+        let intRfidPower = Int(self.btnRfidPower.titleLabel?.text ?? "100")!
         //print("@@@@@intRfidPower = \(intRfidPower)")
         clsSliderDialog.sliderValue = intRfidPower
         Dialog.show(container: self, viewController: clsSliderDialog, title: nil,

@@ -241,7 +241,7 @@ class WorkCustSearch: BaseViewController, UITableViewDataSource, UITableViewDele
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        tableView.allowsSelection = false           //셀 선택안되게 막음
+        //tableView.allowsSelection = false           //셀 선택안되게 막음
         
         let objCell:WorkCustSearchCell = tableView.dequeueReusableCell(withIdentifier: "tvcWorkCustSearch", for: indexPath) as! WorkCustSearchCell
 		let clsDataRow = arcDataRows[indexPath.row]

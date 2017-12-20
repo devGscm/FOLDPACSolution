@@ -32,6 +32,7 @@ class RfidTypeDialog: UITableViewController
     {
         super.viewDidLoad()
         self.preferredContentSize.height = 220
+        self.hideKeyboardWhenTappedAround()         //키보드 숨기기
     }
     
     override func didReceiveMemoryWarning()

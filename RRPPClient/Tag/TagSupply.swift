@@ -373,14 +373,6 @@ class TagSupply: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 		
 		for clsInfo in self.arrTagRows
 		{
-			if(self.strAssetEpc != clsInfo.getAssetEpc())
-			{
-				self.clsIndicator?.hide()
-				
-				Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("stock_can_not_processed_because_different_pallet", comment: "품목이 다른 파렛트가 있어 처리 할 수 없습니다."))
-				return
-			}
-			
 			let clsDataRow : DataRow = DataRow()
 			clsDataRow.State = DataRow.DATA_ROW_STATE_ADDED
 			clsDataRow.addRow(name:"epcCode", value: clsInfo.getEpcCode())
@@ -549,9 +541,17 @@ class TagSupply: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 			return
 		}
 		
+		for clsInfo in self.arrTagRows
+		{
+			if(self.strAssetEpc != clsInfo.getAssetEpc())
+			{
+				Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("stock_can_not_processed_because_different_pallet", comment: "품목이 다른 파렛트가 있어 처리 할 수 없습니다."))
+				return
+			}
+		}
+		
 		let intTagCount = 0
 		let intCurWorkCount = self.intOrderWorkCnt + intTagCount // 기제작수량과 현재 인식한 태그 수량
-		
 		// 발주수량보다 크면
 		if(intCurWorkCount > self.intOrderReqCnt)
 		{

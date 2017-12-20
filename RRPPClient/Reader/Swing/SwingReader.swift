@@ -212,8 +212,12 @@ public class SwingReader : NSObject, ReaderProtocol, SwingProtocolProtocol
 				AudioServicesPlaySystemSound (systemSoundID)
 			}
 			
-			//RFID Power
-			let powerRate = UserDefaults.standard.integer(forKey: Constants.RFID_POWER_KEY)
+			//RFID Power (설정정보가 없을경우  Default : 100)
+			var powerRate : Int = 100
+			if(UserDefaults.standard.object(forKey: Constants.RFID_POWER_KEY) != nil)
+			{
+				powerRate = UserDefaults.standard.integer(forKey: Constants.RFID_POWER_KEY)
+			}
 			let maxPower	= 30
 			var attenRfPower	= 30
 			attenRfPower =   Int(round(Double((maxPower * powerRate) / 100)))

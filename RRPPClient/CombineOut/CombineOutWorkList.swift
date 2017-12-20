@@ -194,7 +194,7 @@ class CombineOutWorkList: BaseViewController, UITableViewDataSource, UITableView
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         tableView.rowHeight = 70                     //셀 크기 조정
-        tableView.allowsSelection = false           //셀 선택안되게 막음
+        //tableView.allowsSelection = false           //셀 선택안되게 막음
         
         let objCell:CombineOutWorkListCell = tableView.dequeueReusableCell(withIdentifier: "tvcCombineOutWorkList", for: indexPath) as! CombineOutWorkListCell
         let clsDataRow = arcDataRows[indexPath.row]

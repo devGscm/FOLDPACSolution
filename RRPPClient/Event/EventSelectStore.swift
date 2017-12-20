@@ -48,6 +48,13 @@ class EventSelectStore : BaseRfidViewController, UITableViewDataSource, UITableV
 		initViewControl()
 	}
 	
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()         //키보드 숨기기
+    }
+    
+    
 	override func viewDidAppear(_ animated: Bool)
 	{
 		super.viewDidAppear(animated)

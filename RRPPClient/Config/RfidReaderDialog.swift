@@ -27,6 +27,7 @@ class RfidReaderDialog: UITableViewController, SwingProtocolProtocol
         self.swing = SwingProtocol.sharedInstace() as? SwingProtocol
         self.swing!.delegate = self as SwingProtocolProtocol
         self.swing?.swingapi.scan()
+        self.hideKeyboardWhenTappedAround()         //키보드 숨기기
     }
     
     override func didReceiveMemoryWarning()

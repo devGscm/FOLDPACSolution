@@ -29,6 +29,7 @@ class InSignDialog: BaseViewController, YPSignatureDelegate
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
 	}
 	
 	override func didReceiveMemoryWarning()

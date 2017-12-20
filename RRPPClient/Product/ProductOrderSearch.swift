@@ -35,6 +35,12 @@ class ProductOrderSearch: BaseViewController, UITableViewDataSource, UITableView
 		doInitSearch()
 	}
 	
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()         //키보드 숨기기
+    }
+    
 	
 	override func viewDidDisappear(_ animated: Bool)
 	{

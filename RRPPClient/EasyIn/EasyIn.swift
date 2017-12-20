@@ -396,7 +396,7 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 	
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
-        tableView.allowsSelection = false           //셀 선택안되게 막음
+        //tableView.allowsSelection = false           //셀 선택안되게 막음
 		let objCell:EasyInCell = tableView.dequeueReusableCell(withIdentifier: "tvcEasyIn", for: indexPath) as! EasyInCell
 		let clsTagInfo = arrAssetRows[indexPath.row]
 		
