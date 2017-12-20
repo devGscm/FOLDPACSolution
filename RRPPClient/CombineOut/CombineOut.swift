@@ -33,51 +33,27 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     @IBOutlet weak var lblProcCount: UILabel!           //처리량
     @IBOutlet weak var lblRemainCount: UILabel!         //미처리량
     @IBOutlet weak var tvCombineOut: UITableView!       //테이블뷰
-
     
     
     var mBoolWorkListSelected = false                    /**< 송장-선택 했는지 여부 */
     var mBoolNewTagInfoExist = false                    /**< 신규태그 - 신규태그가 있는지 여부 -전송용 */
     
-
-    
-    
     var clsIndicator : ProgressIndicator?
     var clsDataClient : DataClient!
     var clsBarcodeScanner: BarcodeScannerController?
-    
     
     var strTitle = ""
     var mStrSaleWorkId = String()                        //송장번호
     var mStrProdAssetEpc = String()                      //유형
     var mIntProcCount = Int()                            //처리량
     var mIntWorkAssignCount = Int()                      //출고량
-    var arrResultDataRows : Array<DataRow> = Array<DataRow>()
     
     var arrAssetRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
     var arrTagRows : Array<RfidUtil.TagInfo> = Array<RfidUtil.TagInfo>()
-    
-    var mIntSelectedWorkTypeIndex = 0
-    
-    
-    
-    
-    
     var tfCurControl : UITextField!
     var dpPicker : UIDatePicker!
-    
-    var intPageNo  = 0
-
-
     var arcSaleType : Array<ListViewDialog.ListViewItem> = Array<ListViewDialog.ListViewItem>()
     var mStrSaleType : String?
-    
-   
-    var strSearchCondtion = String()
-    
-    var intSelectedIndex = -1
-    var strRecvSaleOrderId = String()
-    
     
     //=======================================
     //=====  setTitle()
@@ -140,8 +116,15 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         print("*CombineOut.viewDidDisappear()")
         print("=========================================")
         
-        mBoolNewTagInfoExist = false
-       
+        self.mBoolNewTagInfoExist = false
+        self.mBoolWorkListSelected = false
+        self.strTitle  = ""
+        self.mStrSaleWorkId = ""
+        self.mStrProdAssetEpc = ""
+        self.mIntProcCount = 0
+        self.mIntWorkAssignCount = 0
+        self.mStrSaleType = ""
+        
         arrAssetRows.removeAll()
         arrTagRows.removeAll()
         
@@ -503,11 +486,6 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     {
         if(mBoolWorkListSelected == true)
         {
-            print("=============================================")
-            print("=============[RFID데이터수신]===================")
-            print("=============================================")
-            
-            
             let strCurReadTime = DateUtil.getDate(dateFormat: "yyyyMMddHHmmss")
             let strSerialNo = clsTagInfo.getSerialNo()
             let strAssetEpc = "\(clsTagInfo.getCorpEpc())\(clsTagInfo.getAssetEpc())"    // 회사EPC코드 + 자산EPC코드
@@ -528,7 +506,6 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
             clsTagInfo.setNewTag(true)
             clsTagInfo.setReadCount(1)
             clsTagInfo.setReadTime(strCurReadTime)
-
             
             //시스템에 등록된 AssetEpc 와 AssetEpc 비교
             for clsAssetInfo in super.getAssetList()
@@ -544,11 +521,6 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                     boolFindInvalidAssetEpc = true;
                 }
             }
-            
-            print("==================================")
-            print("===========세일타입: \(mStrSaleType)")
-            print("==================================")
-            
             
             //시스템에 동일한 자산코드가 있을때만 진행
             if(boolFindInvalidAssetEpc == false)
@@ -583,13 +555,13 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                     }
                 }
                 
-                //중복 자산 확인 - 그리드 리스에 내용 갱신
+                //중복 자산 확인 - 그리드 리스트에 내용 갱신
                 for clsTagInfo in arrAssetRows
                 {
-                    print("========== [1]처리량 증가/미처리량 감소 ==============")
-                    let strCheckAssetEpc  = clsTagInfo.getAssetEpc()
-                    print("===strAssetEpc: \(strAssetEpc) :: \(strCheckAssetEpc) ")
-                    print("================================================")
+                    //print("========== [1]처리량 증가/미처리량 감소 ==============")
+                    //let strCheckAssetEpc  = clsTagInfo.getAssetEpc()
+                    //print("===strAssetEpc: \(strAssetEpc) :: \(strCheckAssetEpc) ")
+                    //print("================================================")
                     
                     //같은 자산타입(Asset_type)이면 처리량증가,미처리량감소
                     if(strAssetEpc == clsTagInfo.getAssetEpc())
@@ -598,7 +570,6 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                         
                         if(boolFindAbnormal == false)
                         {
-                            
                             clsTagInfo.setReadCount((clsTagInfo.getReadCount() + 1))        //증복된것이 있다면 조회수를 업데이트한다.
                         }
                         break;
@@ -614,7 +585,7 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                     //전송용 리스트에 추가
                     arrTagRows.append(clsTagInfo)
                     
-                    //마스터용 배열에 추가
+                    //그리드 리스트에 추가
                     if(boolFindAssetTypeOverlap == false)
                     {
                         arrAssetRows.append(clsTagInfo)
@@ -643,7 +614,6 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                     }
                 }
             }
-             print("========== 화면 리스트 갱신 ==============")
             DispatchQueue.main.async { self.tvCombineOut?.reloadData() }
         }
     }
@@ -667,20 +637,18 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         
         if(clearScreen == true)
         {
-            
-                self.mStrSaleWorkId = ""
-                self.mStrProdAssetEpc = ""
-                self.mIntProcCount = 0
-                self.mIntWorkAssignCount = 0
-               
-                self.tfVehName.text = ""            //차량번호
-                self.lblOrderCustName.text = ""     //입고처
-                self.lblDeliBranchName.text = ""    //배송거점
-                self.lblAssetEpcName.text = ""      //유형
-                self.lblAssignCount.text = ""       //출고예정
-                self.lblProcCount.text = ""         //처리량
-                self.lblRemainCount.text = ""       //미처리량
-            
+            self.mStrSaleWorkId = ""
+            self.mStrProdAssetEpc = ""
+            self.mIntProcCount = 0
+            self.mIntWorkAssignCount = 0
+           
+            self.tfVehName.text = ""            //차량번호
+            self.lblOrderCustName.text = ""     //입고처
+            self.lblDeliBranchName.text = ""    //배송거점
+            self.lblAssetEpcName.text = ""      //유형
+            self.lblAssignCount.text = ""       //출고예정
+            self.lblProcCount.text = ""         //처리량
+            self.lblRemainCount.text = ""       //미처리량
         }
         
         //RFID리더기 초기화
@@ -909,11 +877,11 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                 
                 if(self.mStrSaleWorkId.isEmpty == false)
                 {
-                    self.doReloadTagList()    // 초기화
+                    self.doReloadTagList()      //초기화
                 }
                 else
                 {
-                    self.clearTagData(false)
+                    self.clearTagData(true)
                     super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
                 }
             },
@@ -926,10 +894,6 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     //======================================
     @IBAction func onWorkInitClick(_ sender: UIButton)
     {
-        print("==============================")
-        print("========== 작업초기화 ===========")
-        print("==============================")
-        
         if(mStrSaleWorkId.isEmpty == true)
         {
             Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("msg_select_sale_work_id", comment: "조회된 송장번호가 없습니다."))
@@ -981,7 +945,7 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
             }
         }
         
-        let strVehName       = self.tfVehName?.text ?? ""
+        let strVehName = self.tfVehName?.text ?? ""
 
         //DB로 데이터 전송 처리
         sendData(Constants.WORK_STATE_WORKING, mStrSaleWorkId, strVehName, "", "", "")
@@ -1205,8 +1169,7 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                 return
             }
             
-            print("===='작업초기화' 결과값 처리")
-            
+            //print("===='작업초기화' 결과값 처리")
             let clsResultDataRows = clsResultDataTable.getDataRows()
             if(clsResultDataRows.count > 0)
             {
