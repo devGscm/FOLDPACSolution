@@ -24,7 +24,6 @@ class UserLogin: UIViewController
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
-		
 		view.sendSubview(toBack: ivBackground)
 		
 		//let swAutoLogin = Switch(state: .off, style: .light, size: .small)

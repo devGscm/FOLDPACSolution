@@ -42,6 +42,7 @@ class CombineInSearch: BaseViewController, UITableViewDataSource, UITableViewDel
 		doInitSearch()
 	}
 	
+    
 	
 	override func viewDidDisappear(_ animated: Bool)
 	{

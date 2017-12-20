@@ -51,6 +51,12 @@ class EventOther : BaseRfidViewController, UITableViewDataSource, UITableViewDel
 		super.viewDidAppear(animated)
 	}
 	
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()         //키보드 숨기기
+    }
+    
 	override func viewDidDisappear(_ animated: Bool)
 	{
 		print("=========================================")
@@ -197,7 +203,7 @@ class EventOther : BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
-        tableView.allowsSelection = false           //셀 선택안되게 막음
+        //tableView.allowsSelection = false           //셀 선택안되게 막음
 		let objCell:EventOtherCell = tableView.dequeueReusableCell(withIdentifier: "tvcEventOther", for: indexPath) as! EventOtherCell
 		let clsTagInfo = arrAssetRows[indexPath.row]
 		

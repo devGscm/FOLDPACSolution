@@ -75,6 +75,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	{
 		super.viewDidLoad()
 		initBarcodeScanner()
+        self.hideKeyboardWhenTappedAround()         //키보드 숨기기        
 	}
 	
 	override func viewWillAppear(_ animated: Bool)
@@ -473,7 +474,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
-        tableView.allowsSelection = false           //셀 선택안되게 막음
+        //tableView.allowsSelection = false           //셀 선택안되게 막음
 		let objCell:CombineInCell = tableView.dequeueReusableCell(withIdentifier: "tvcCombineIn", for: indexPath) as! CombineInCell
 		let clsTagInfo = arrAssetRows[indexPath.row]
 		
