@@ -45,9 +45,6 @@ class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 		//RFID를 처리할 델리게이트 지정
 		self.initRfid(self as ReaderResponseDelegate )
 		initViewControl()
-		//tvRfidInspect.rowHeight = UITableViewAutomaticDimension
-		//테이블의 셀에대한 높이설정
-		tvRfidInspect.rowHeight = 70
 	}
 	
 	override func viewDidAppear(_ animated: Bool)
@@ -94,6 +91,9 @@ class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 		
 		let tgrResult = UITapGestureRecognizer(target: self, action: #selector((onResultClicked)))
 		self.lblResult.addGestureRecognizer(tgrResult)
+		
+		//테이블의 셀에대한 높이설정
+		self.tvRfidInspect.rowHeight = 70
 	}
 	
 	@objc func onAssetNameClicked(sender: UITapGestureRecognizer)
