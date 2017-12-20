@@ -1009,22 +1009,7 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
                 self.sendDataExistSaleWorkId(workState, self.mStrSaleWorkId, vehName, tradeChit, remark, signData)
             }
         })
-        
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
 
 
