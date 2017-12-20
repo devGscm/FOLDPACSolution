@@ -634,6 +634,8 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
+        tableView.allowsSelection = false           //셀 선택안되게 막음
+        
 		if(tableView == tvMappingRfid)
 		{
 			let objCell:MappingRfidCell = tableView.dequeueReusableCell(withIdentifier: "tvcMappingRfid", for: indexPath) as! MappingRfidCell

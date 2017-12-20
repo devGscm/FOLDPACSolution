@@ -221,7 +221,7 @@ class HistorySearch: BaseViewController, UITableViewDataSource, UITableViewDeleg
 //		print("* scrollViewDidEndDragging")
 //		let fltOffsetY = scrollView.contentOffset.y
 //		let fltContentHeight = scrollView.contentSize.height
-//		if (fltOffsetY >= fltContentHeight - scrollView.frame.size.height)
+//		if (fltOffsetY >= fltContentHeight - scrollView.frame.size.height)yyy
 //		{
 //			doSearch()
 //		}
@@ -234,6 +234,7 @@ class HistorySearch: BaseViewController, UITableViewDataSource, UITableViewDeleg
 	
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
+        tableView.allowsSelection = false           //셀 선택안되게 막음
 		let objCell:HistorySearchCell = tableView.dequeueReusableCell(withIdentifier: "tvcHistorySearchCell", for: indexPath) as! HistorySearchCell
 		let clsDataRow = arcDataRows[indexPath.row]
 		
