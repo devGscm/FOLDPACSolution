@@ -36,7 +36,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		mIvLogo.layer.masksToBounds = false
 		mIvLogo.layer.cornerRadius = mIvLogo.frame.height / 2
 		mIvLogo.clipsToBounds = true
-		
+
 		
 		// 옵져버 패턴 : 응답대기(왼쪽메뉴재생성)
 		NotificationCenter.default.addObserver(self, selector: #selector(doMakeLeftMenu), name: NSNotification.Name(rawValue: "doMakeLeftMenu"), object: nil)
@@ -48,6 +48,9 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	override func viewDidAppear(_ animated: Bool)
 	{
 		print(" LeftViewCOntroller.viewDidAppear")
+		
+
+		
 		doMakeLeftMenu()
 	}
 	
