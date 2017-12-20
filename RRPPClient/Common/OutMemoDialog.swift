@@ -15,14 +15,13 @@ class OutMemoDialog: BaseViewController
 {
     var ptcDataHandler : DataProtocol?
 
-    //@IBOutlet weak var tfRemark: UITextField!
-
     @IBOutlet weak var tfMemo: UITextField!
     
     override func viewDidLoad()
     {
-        print("##[OutMemoDialog]->viewDidLoad()")
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()         //키보드 숨기기
+
     }
     
     override func didReceiveMemoryWarning()
@@ -32,7 +31,6 @@ class OutMemoDialog: BaseViewController
     
     override func viewWillAppear(_ animated: Bool)
     {
-        print("##[OutMemoDialog]->viewWillAppear()")
         super.viewWillAppear(animated)
         super.initController()
     }

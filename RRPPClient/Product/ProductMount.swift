@@ -57,6 +57,12 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		super.viewDidAppear(animated)
 	}
 	
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()         //키보드 숨기기
+    }
+    
 	override func viewDidDisappear(_ animated: Bool)
 	{
 		print("=========================================")

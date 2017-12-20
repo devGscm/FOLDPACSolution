@@ -73,6 +73,7 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
         print("*InOutCancel.viewDidLoad()")
         print("=========================================")
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()         //키보드 숨기기
     }
 
     //=======================================
@@ -411,7 +412,7 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         tableView.rowHeight = 60                    //셀 크기 조정
-        tableView.allowsSelection = false           //셀 선택안되게 막음
+        //tableView.allowsSelection = false           //셀 선택안되게 막음
         
         let objCell:InOutCancelCell = tableView.dequeueReusableCell(withIdentifier: "tvcInOutCancel", for: indexPath) as! InOutCancelCell        
         let clsDataRow = arcDataRows[indexPath.row]

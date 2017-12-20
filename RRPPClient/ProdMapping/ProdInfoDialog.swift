@@ -26,6 +26,7 @@ class ProdInfoDialog: BaseViewController
     override func viewDidLoad()
 	{
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()         //키보드 숨기기
     }
 
     override func didReceiveMemoryWarning()

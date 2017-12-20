@@ -454,8 +454,7 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        tableView.allowsSelection = false           //셀 선택안되게 막음
-        
+        //tableView.allowsSelection = false           //셀 선택안되게 막음
         let objCell:EasyOutCell = tableView.dequeueReusableCell(withIdentifier: "tvcEasyOut", for: indexPath) as! EasyOutCell
         let clsTagInfo = arrAssetRows[indexPath.row]
         

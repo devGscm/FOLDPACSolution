@@ -265,7 +265,7 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //tableView.rowHeight = 65                    //셀 크기 조정
-        tableView.allowsSelection = false           //셀 선택안되게 막음
+        //tableView.allowsSelection = false           //셀 선택안되게 막음
         
         let objCell:CombineOutCell = tableView.dequeueReusableCell(withIdentifier: "tvcCombineOut", for: indexPath) as! CombineOutCell
         
