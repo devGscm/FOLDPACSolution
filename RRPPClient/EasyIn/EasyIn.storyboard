@@ -461,6 +461,10 @@
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="mWy-e7-HkS" id="FTu-XH-PsU"/>
+                                            <outlet property="delegate" destination="mWy-e7-HkS" id="1GT-ZS-ThV"/>
+                                        </connections>
                                     </tableView>
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -536,7 +540,6 @@
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="onSendClicked:" destination="mWy-e7-HkS" eventType="touchUpInside" id="l5v-Ft-cAW"/>
-                                                    <segue destination="xUt-kl-aAM" kind="presentation" identifier="segOutSignDialog" modalPresentationStyle="overCurrentContext" id="Njl-yp-lM7"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -568,6 +571,7 @@
                         <outlet property="tfTradeChit" destination="hXP-xR-TUU" id="G35-GB-mbu"/>
                         <outlet property="tfVehName" destination="TuU-P2-mtR" id="kiB-fl-iyT"/>
                         <outlet property="tvEasyIn" destination="p3b-0Q-wga" id="REz-Y4-3V4"/>
+                        <segue destination="xUt-kl-aAM" kind="presentation" identifier="segOutSignDialog" modalPresentationStyle="overCurrentContext" id="2pJ-w7-fX7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SUH-Td-QNV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -609,7 +613,7 @@
                 <viewControllerPlaceholder storyboardName="Common" referencedIdentifier="OutSignDialog" id="xUt-kl-aAM" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NXC-e5-Afx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7428" y="-3066"/>
+            <point key="canvasLocation" x="-7428" y="-3076"/>
         </scene>
         <!--WorkCustSearch-->
         <scene sceneID="S0O-zN-InJ">
