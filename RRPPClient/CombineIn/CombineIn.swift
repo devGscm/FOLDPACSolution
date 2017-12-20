@@ -359,6 +359,11 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	
 	func getRfidData( clsTagInfo : RfidUtil.TagInfo)
 	{
+        if(self.strResaleOrderId.isEmpty == true)
+        {
+           // TODO
+            return
+        }
 		let strCurReadTime = DateUtil.getDate(dateFormat: "yyyyMMddHHmmss")
 		let strSerialNo = clsTagInfo.getSerialNo()
 		let strAssetEpc = "\(clsTagInfo.getCorpEpc())\(clsTagInfo.getAssetEpc())"	// 회사EPC코드 + 자산EPC코드
@@ -468,6 +473,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
+        tableView.allowsSelection = false           //셀 선택안되게 막음
 		let objCell:CombineInCell = tableView.dequeueReusableCell(withIdentifier: "tvcCombineIn", for: indexPath) as! CombineInCell
 		let clsTagInfo = arrAssetRows[indexPath.row]
 		
