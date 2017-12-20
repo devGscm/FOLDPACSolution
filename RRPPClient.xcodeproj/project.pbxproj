@@ -231,6 +231,7 @@
 		55B302C51FCE32A600BDCCB1 /* RfidInspect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RfidInspect.swift; sourceTree = "<group>"; };
 		55B302C61FCE32A600BDCCB1 /* Tag.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tag.storyboard; sourceTree = "<group>"; };
 		55B302C91FCE339400BDCCB1 /* ProductMountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductMountCell.swift; sourceTree = "<group>"; };
+		55B85F501FE911E300A0D19D /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.otf; path = Carthage/Build/iOS/FontAwesome.framework/FontAwesome.otf; sourceTree = SOURCE_ROOT; };
 		55C00A911FCE96E400ED5165 /* TagDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagDetailCell.swift; sourceTree = "<group>"; };
 		55C1957D1FE743EC008299FE /* EasyIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EasyIn.storyboard; sourceTree = "<group>"; };
 		55C1957F1FE74405008299FE /* EasyIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyIn.swift; sourceTree = "<group>"; };
@@ -588,6 +589,7 @@
 		967A9C411FC3BE4E00B6A9D1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				55B85F501FE911E300A0D19D /* FontAwesome.otf */,
 				967A9C461FC3BE8D00B6A9D1 /* Localizable.strings */,
 			);
 			path = Resources;
