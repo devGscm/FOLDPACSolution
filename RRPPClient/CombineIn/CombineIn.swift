@@ -103,12 +103,10 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 		print("*CombineIn.viewDidDisappear()")
 		print("=========================================")
 		
-		boolNewTagInfoExist = false
-		
-		
+		boolWorkListSelected	= false
+		boolNewTagInfoExist		= false
 		
 		arcWorkType.removeAll()
-		
 		arrAssetRows.removeAll()
 		arrTagRows.removeAll()
 		clsIndicator = nil
@@ -129,6 +127,9 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 		lblReaderName.text = AppContext.sharedManager.getUserInfo().getReaderDevName()
 		
 		makeWorkTypeCodeList(userLang: AppContext.sharedManager.getUserInfo().getUserLang())
+		
+		// 송장 선택여부
+		boolWorkListSelected = false
 	}
 	
 	
@@ -253,8 +254,8 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 				self.btnSaleWorkId.setTitle(strSaleWorkId, for: .normal)									// 송장번호
 				self.lblOrderReqCount.text		= "\(intOrderReqCount)"									// 입고예정수량
 				self.lblProcCount.text			= "\(intProcCount)"										// 처리수량
-				self.tfVehName.text				= clsDataRow.getString(name: "vehName") ?? ""			// 차량번호
-				self.lblDriverName.text			= clsDataRow.getString(name: "driverName") ?? ""		// 납품자
+				self.tfVehName.text				= clsDataRow.getString(name: "resaleVehName") ?? ""			// 차량번호
+				self.lblDriverName.text			= clsDataRow.getString(name: "resaleDriverName") ?? ""		// 납품자
 				self.lblProdAssetEpcName.text 	= clsDataRow.getString(name: "prodAssetEpcName") ?? ""	// 유형
 				self.lblRemainCount.text		= "\(intRemainCnt)"										// 미처리량
 				
@@ -320,13 +321,16 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	// 데이터를 clear한다.
 	func clearTagData(clearScreen : Bool)
 	{
+		print("@@@@@@@@@@@@@@@@@@@@@@@@")
+		print("*clearTagData()")
+		print("@@@@@@@@@@@@@@@@@@@@@@@@")
 		self.boolNewTagInfoExist = false	// 신규태그 입력 체크, 전송용
 		arrTagRows.removeAll()
 		arrAssetRows.removeAll()
 		
 		DispatchQueue.main.async
-			{
-				self.tvCombineIn?.reloadData()
+		{
+			self.tvCombineIn?.reloadData()
 		}
 		
 		if(clearScreen == true)
@@ -360,9 +364,9 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	
 	func getRfidData( clsTagInfo : RfidUtil.TagInfo)
 	{
-        if(self.strResaleOrderId.isEmpty == true)
+		// 송장이 선택되어 진행
+        if(self.boolWorkListSelected == false)
         {
-           // TODO
             return
         }
 		let strCurReadTime = DateUtil.getDate(dateFormat: "yyyyMMddHHmmss")
@@ -440,6 +444,9 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 				
 				// 입력창 내용 갱신(처리량증가/미처리량감소)
 				var intRemainCount: Int = Int(lblRemainCount?.text ?? "0")! // 미처리량
+				
+				print(" @@@@@@@ intRemainCount:\(intRemainCount)")
+				
 				if intRemainCount > 0
 				{
 					intRemainCount = intRemainCount - 1
@@ -448,17 +455,26 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 				
 				
 				self.intProcCount = Int(lblProcCount?.text ?? "0")! + 1 // 처리량
+				
+				print(" @@@@@@@ self.intProcCount:\(self.intProcCount)")
+				
 				lblProcCount?.text = "\(self.intProcCount)"
 				
 				
 				//5)그리드 리스에 내용 갱신
-				for clsTagInfo in arrAssetRows
+				for clsGridInfo in arrAssetRows
 				{
 					// 같은 자산타입(Asset_type)이면 처리량증가,미처리량감소
-					if(strAssetEpc == clsTagInfo.getAssetEpc())
+					if(strAssetEpc == clsGridInfo.getAssetEpc())
 					{
-                        clsTagInfo.setProcCount((clsTagInfo.getProcCount() + 1)) // 처리량 증가
-                        clsTagInfo.setRemainCount((clsTagInfo.getRemainCount() - 1)) // 미처리량 감소
+						clsGridInfo.setProcCount((clsGridInfo.getProcCount() + 1)) // 처리량 증가
+						
+						var intGridRemainCount = clsGridInfo.getRemainCount()
+						if(intGridRemainCount > 0)
+						{
+							intGridRemainCount = intGridRemainCount - 1
+							clsGridInfo.setRemainCount(intGridRemainCount) // 미처리량 감소
+						}
 					}
 				}
 			}
@@ -728,6 +744,9 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	// 송장조회 상세
 	func doSearchWorkListDetail()
 	{
+		print("=========================================")
+		print("*doSearchWorkListDetail")
+		print("=========================================")
 		let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		clsDataClient.SelectUrl = "inOutService:selectCombineInWorkListDetail"
@@ -762,13 +781,18 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 				clsTagInfo.setProcCount(intProcCount)
 				clsTagInfo.setWorkAssignCount(intWorkAssignCount)
 				clsTagInfo.setRemainCount(intRemainCount)
+			
+				print("====================================")
+				print(" -ProdAssetEpc:\(strProdAssetEpc)")
+				print(" -ProdAssetEpcName:\(strProdAssetEpcName)")
+				print("====================================")
 				
 				//그리드 리스트에 추가
 				self.arrAssetRows.append(clsTagInfo)
 			}
 			DispatchQueue.main.async
-				{
-					self.tvCombineIn.reloadData()
+			{
+				self.tvCombineIn.reloadData()
 			}
 		})
 	}
@@ -777,6 +801,9 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	// 송장조회(번호)에 대한 상세 태그리스트
 	func doSearchTagList()
 	{
+		print("=========================================")
+		print("*doSearchTagList, strResaleOrderId:\(strResaleOrderId)")
+		print("=========================================")
 		let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		clsDataClient.SelectUrl = "supplyService:selectSaleInTagList"
@@ -1222,6 +1249,9 @@ extension CombineIn: BarcodeScannerCodeDelegate
 		{
 			if(strSaleWorkId.isEmpty == false)
 			{
+				// 새로운 발주번호가 들어오면 기존 데이터는 삭제한다.
+				clearTagData(clearScreen: true)
+				
 				if(strSaleWorkId != barcode)
 				{
 					doSearchBarcode(barcode: barcode)
@@ -1232,10 +1262,6 @@ extension CombineIn: BarcodeScannerCodeDelegate
 				doSearchBarcode(barcode: barcode)
 			}
 		}
-//		let delayTime = DispatchTime.now() + Double(Int64(6 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-//		DispatchQueue.main.asyncAfter(deadline: delayTime) {
-//			controller.resetWithError()
-//		}
 	}
 }
 
