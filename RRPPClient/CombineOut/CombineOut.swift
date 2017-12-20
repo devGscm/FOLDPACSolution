@@ -637,18 +637,24 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         
         if(clearScreen == true)
         {
-            self.mStrSaleWorkId = ""
-            self.mStrProdAssetEpc = ""
-            self.mIntProcCount = 0
-            self.mIntWorkAssignCount = 0
-           
-            self.tfVehName.text = ""            //차량번호
-            self.lblOrderCustName.text = ""     //입고처
-            self.lblDeliBranchName.text = ""    //배송거점
-            self.lblAssetEpcName.text = ""      //유형
-            self.lblAssignCount.text = ""       //출고예정
-            self.lblProcCount.text = ""         //처리량
-            self.lblRemainCount.text = ""       //미처리량
+            DispatchQueue.main.async
+            {
+                self.mStrSaleWorkId = ""
+                self.mStrProdAssetEpc = ""
+                self.mIntProcCount = 0
+                self.mIntWorkAssignCount = 0
+               
+                self.tfVehName.text = ""            //차량번호
+                self.lblOrderCustName.text = ""     //입고처
+                self.lblDeliBranchName.text = ""    //배송거점
+                self.lblAssetEpcName.text = ""      //유형
+                self.lblAssignCount.text = ""       //출고예정
+                self.lblProcCount.text = ""         //처리량
+                self.lblRemainCount.text = ""       //미처리량
+                
+                self.btnSaleWorkId.setTitle(NSLocalizedString("sale_work_id_selection", comment: "송장선택"), for: .normal)
+                self.btnBarcodeSearch.setTitle(NSLocalizedString("common_barcode_search", comment: "바코드"), for: .normal)
+            }
         }
         
         //RFID리더기 초기화
@@ -1236,7 +1242,7 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         }
         
         let clsDataTable : DataTable = DataTable()
-        clsDataTable.Id = "WORK_IN"
+        clsDataTable.Id = "WORK_OUT"
         clsDataTable.addDataColumn(dataColumn: DataColumn(id: "epcCode", type: "String", size: "0", keyColumn: false, updateColumn: true, autoIncrement: false, canXlsExport: false, title: ""))
         clsDataTable.addDataColumn(dataColumn: DataColumn(id: "traceDateTime", type: "String", size: "0", keyColumn: false, updateColumn: true, autoIncrement: false, canXlsExport: false, title: ""))
         
@@ -1265,7 +1271,7 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                 return
             }
             
-            print("####결과값 처리")
+            //print("####결과값 처리")
             let clsResultDataRows = clsResultDataTable.getDataRows()
             if(clsResultDataRows.count > 0)
             {

@@ -27,11 +27,12 @@ class BranchSearchDialog: BaseViewController, UITableViewDataSource, UITableView
     var arcDataRows : Array<DataRow> = Array<DataRow>()
     var ptcDataHandler : DataProtocol?
     var strSearchCondtion = ""
-	
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
-    }
+        self.hideKeyboardWhenTappedAround()         //키보드 숨기기
+    }    
 	
 	override func viewWillAppear(_ animated: Bool)
 	{

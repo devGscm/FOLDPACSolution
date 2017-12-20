@@ -25,7 +25,8 @@ class UserLogin: UIViewController
 	{
 		super.viewDidLoad()
 		view.sendSubview(toBack: ivBackground)
-		
+        self.hideKeyboardWhenTappedAround()         //키보드 숨기기
+        
 		//let swAutoLogin = Switch(state: .off, style: .light, size: .small)
 		//swAutoLogin.delegate = self
 		
@@ -125,8 +126,10 @@ class UserLogin: UIViewController
 							}
 						}
 						
-						clsUserInfo.setAutoLogin(boolAutoLogin: objMe.swAutoLogin.isOn)    // 자동로그인 여부
-						
+                        DispatchQueue.main.async
+                        {
+                            clsUserInfo.setAutoLogin(boolAutoLogin: objMe.swAutoLogin.isOn)    // 자동로그인 여부
+                        }
 						clsUserInfo.setCorpId(strCorpId: login.corpId!)
 						//clsUserInfo.setCustType(custType: login.corpType!)
 						clsUserInfo.setUserId(strUserId: strUserId!)

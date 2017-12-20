@@ -35,6 +35,7 @@ class TagDetailList: UIViewController, UITableViewDataSource, UITableViewDelegat
 	{
         super.viewDidLoad()
 		initViewControl()
+        self.hideKeyboardWhenTappedAround()
 	}
 	
 	func initViewControl()
