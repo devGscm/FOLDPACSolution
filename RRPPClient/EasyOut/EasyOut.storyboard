@@ -474,6 +474,9 @@
                                                         <real key="value" value="4"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="onSendClicked:" destination="ixd-SL-OWh" eventType="touchUpInside" id="ynd-QS-DZq"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
