@@ -105,8 +105,11 @@ public class ProgressIndicator: UIView
 	
 	public func show(message : String)
 	{
-		self.lblMessage?.text = message
-		self.show()
+        DispatchQueue.main.async
+        {
+            self.lblMessage?.text = message
+            self.show()
+        }
 	}
 	
 	public func show()
