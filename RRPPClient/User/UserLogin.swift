@@ -80,7 +80,7 @@ class UserLogin: UIViewController
 			return
 		}
 		
-		print("objMe.swAutoLogin.isOn:\(swAutoLogin.isOn)")
+		//print("objMe.swAutoLogin.isOn:\(swAutoLogin.isOn)")
 		let objMe = self
 		
 		let dataClient = Mosaic.DataClient(container:self, url: Constants.WEB_SVC_URL)
@@ -149,7 +149,6 @@ class UserLogin: UIViewController
 						// TODO:: 항목의 의미 업무파악
 						clsUserInfo.setPreCorpId(strCorpId : "")
 						clsUserInfo.setPreUserId(strPreUserId : "")
-						
 						clsUserInfo.setUserLang(strUserLang : login.userLang ?? "KR")
 						clsUserInfo.setUnitId(strUnitId : login.unitId ?? "")
 						clsUserInfo.setEventCode(strEventCode : login.eventCode ?? "")
@@ -161,6 +160,15 @@ class UserLogin: UIViewController
 						clsUserInfo.setBranchCustType(branchCustType : login.branchCustType ?? "")
 						
 						AppContext.sharedManager.setAuthenticated(boolAuthenticated: true)
+
+						
+						//UserDefaults.standard.set(["ko"], forKey: "AppleLanguages")
+						//UserDefaults.standard.synchronize()
+				
+						
+						print("@@@@@@@@@ 로그인 성공")
+		
+						
 						objMe.dismiss(animated: true, completion: nil)
 						//toolbarController?
 						return

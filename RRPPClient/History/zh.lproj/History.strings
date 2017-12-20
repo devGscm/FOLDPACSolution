@@ -1,0 +1,45 @@
+
+/* Class = "UILabel"; text = "이벤트"; ObjectID = "0jw-dh-cdy"; */
+"0jw-dh-cdy.text" = "이벤트";
+
+/* Class = "UILabel"; text = "수량"; ObjectID = "0vo-cM-SNo"; */
+"0vo-cM-SNo.text" = "수량";
+
+/* Class = "UILabel"; text = "유형"; ObjectID = "Czr-gS-NNp"; */
+"Czr-gS-NNp.text" = "유형";
+
+/* Class = "UILabel"; text = "작업자"; ObjectID = "Giq-NT-FKk"; */
+"Giq-NT-FKk.text" = "작업자";
+
+/* Class = "UILabel"; text = "거점"; ObjectID = "HIJ-7N-vJx"; */
+"HIJ-7N-vJx.text" = "거점";
+
+/* Class = "UILabel"; text = "거래처"; ObjectID = "LZo-aX-Cn2"; */
+"LZo-aX-Cn2.text" = "거래처";
+
+/* Class = "UIButton"; normalTitle = "이벤트구분"; ObjectID = "O8B-PQ-uMq"; */
+"O8B-PQ-uMq.normalTitle" = "이벤트구분";
+
+/* Class = "UILabel"; text = "거래처"; ObjectID = "PsO-Td-qdp"; */
+"PsO-Td-qdp.text" = "거래처";
+
+/* Class = "UIButton"; normalTitle = "검색"; ObjectID = "SWI-m2-jAW"; */
+"SWI-m2-jAW.normalTitle" = "검색";
+
+/* Class = "UILabel"; text = "유형"; ObjectID = "Tkq-eP-1Z5"; */
+"Tkq-eP-1Z5.text" = "유형";
+
+/* Class = "UILabel"; text = "이벤트일자"; ObjectID = "Tsj-BH-WpU"; */
+"Tsj-BH-WpU.text" = "이벤트일자";
+
+/* Class = "UILabel"; text = "이벤트일자"; ObjectID = "ajh-a2-pUN"; */
+"ajh-a2-pUN.text" = "이벤트일자";
+
+/* Class = "UILabel"; text = "기간"; ObjectID = "cxI-wi-JqB"; */
+"cxI-wi-JqB.text" = "기간";
+
+/* Class = "UILabel"; text = "수량"; ObjectID = "lVB-EO-aCp"; */
+"lVB-EO-aCp.text" = "수량";
+
+/* Class = "UILabel"; text = "이벤트"; ObjectID = "t52-Sw-LpM"; */
+"t52-Sw-LpM.text" = "이벤트";

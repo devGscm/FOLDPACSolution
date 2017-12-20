@@ -21,7 +21,9 @@ class RootViewController: BaseViewController
 	
 	override func viewDidAppear(_ animated: Bool)
 	{
-	
+		print("@@@@@@@@@@@@ RootView.viewDidAppear")
+//		UserDefaults.standard.set(["ko"], forKey: "AppleLanguages")
+//		UserDefaults.standard.synchronize()
 		if(AppContext.sharedManager.getUserInfo().getAutoLogin() == true || AppContext.sharedManager.getAuthenticated() == true)
 		{			
 //			showSnackbar(message: "스네이크바 테스트입니다.")
