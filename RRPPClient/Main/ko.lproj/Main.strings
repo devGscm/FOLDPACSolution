@@ -39,7 +39,7 @@
 "aIO-S3-54Z.text" = "루트";
 
 /* Class = "UIButton"; normalTitle = "Logout"; ObjectID = "cBC-nu-tFG"; */
-"cBC-nu-tFG.normalTitle" = "Logout";
+"cBC-nu-tFG.normalTitle" = "로그아웃";
 
 /* Class = "UITextField"; placeholder = "User ID"; ObjectID = "dSH-Ur-tIs"; */
 "dSH-Ur-tIs.placeholder" = "User ID";
