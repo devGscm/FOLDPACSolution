@@ -275,11 +275,11 @@
                                                     <segue destination="7xG-o7-uWh" kind="presentation" identifier="segCombineOutWorkList" modalPresentationStyle="overCurrentContext" id="SmG-1A-lWy"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sQU-rF-R6g">
-                                                <rect key="frame" x="303" y="4" width="61" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qnb-RS-eci">
+                                                <rect key="frame" x="304" y="4" width="61" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <state key="normal" title="바코드">
+                                                <state key="normal" image="ic_barcode_white">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
@@ -288,7 +288,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="onBarcodeSearchClicked:" destination="e3b-QS-QRM" eventType="touchDown" id="gr9-de-gls"/>
+                                                    <action selector="onBarcodeSearchClicked:" destination="e3b-QS-QRM" eventType="touchUpInside" id="9LP-SV-Od3"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -518,7 +518,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7KD-hI-OhB">
-                                                            <rect key="frame" x="312" y="6" width="40" height="28"/>
+                                                            <rect key="frame" x="312" y="5" width="40" height="28"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                             <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <state key="normal" title="선택">
@@ -650,7 +650,7 @@
                         <viewLayoutGuide key="safeArea" id="7ZL-HA-zkb"/>
                     </view>
                     <connections>
-                        <outlet property="btnBarcodeSearch" destination="sQU-rF-R6g" id="Dt2-xb-0RV"/>
+                        <outlet property="btnBarcodeSearch" destination="Qnb-RS-eci" id="nRU-NK-Tj0"/>
                         <outlet property="btnRfidReader" destination="ggP-mq-hxK" id="7Se-9A-fN0"/>
                         <outlet property="btnSaleWorkId" destination="ChN-ki-9OK" id="8Cu-rM-vTr"/>
                         <outlet property="btnSelectWorkType" destination="3VH-i4-nHA" id="bHN-L7-c1v"/>
@@ -1036,6 +1036,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ic_barcode_white" width="24" height="24"/>
         <image name="ic_close_white" width="24" height="24"/>
     </resources>
 </document>

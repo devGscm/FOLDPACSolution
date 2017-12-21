@@ -20,8 +20,8 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     
     @IBOutlet weak var btnSelectWorkType: UIButton!     //구분
     @IBOutlet weak var btnSaleWorkId: UIButton!         //송장선택
-    @IBOutlet weak var btnBarcodeSearch: UIButton!      //바코드
     
+    @IBOutlet weak var btnBarcodeSearch: UIButton!      //바코드
     @IBOutlet weak var tfVehName: UITextField!          //차량번호
     
     @IBOutlet weak var lblOrderCustName: UILabel!       //입고처
@@ -150,7 +150,6 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         lblReaderName.text = AppContext.sharedManager.getUserInfo().getReaderDevName()                          //리더기명
         
         btnSaleWorkId.setTitle(NSLocalizedString("sale_work_id_selection", comment: "송장선택"), for: .normal)
-        btnBarcodeSearch.setTitle(NSLocalizedString("common_barcode_search", comment: "바코드"), for: .normal)
         
         //공통코드 조회
         initCommonCodeList(userLang: AppContext.sharedManager.getUserInfo().getUserLang())
@@ -653,7 +652,6 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                 self.lblRemainCount.text = ""       //미처리량
                 
                 self.btnSaleWorkId.setTitle(NSLocalizedString("sale_work_id_selection", comment: "송장선택"), for: .normal)
-                self.btnBarcodeSearch.setTitle(NSLocalizedString("common_barcode_search", comment: "바코드"), for: .normal)
             }
         }
         
@@ -786,7 +784,6 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         clsBarcodeScanner?.dismissalDelegate = self
     }
     
-   
     //=======================================
     //===== '바코드' 버튼
     //=======================================

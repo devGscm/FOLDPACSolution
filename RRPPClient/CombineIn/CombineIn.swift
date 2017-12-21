@@ -353,7 +353,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 					self.lblProcCount.text			= ""	// 처리량
 					self.tfVehName.text				= ""	// 차량번호
 					self.lblProdAssetEpcName.text	= ""	// 유형
-					self.lblRemainCount.text			= ""	// 미처리량
+					self.lblRemainCount.text		= ""	// 미처리량
 					self.lblDriverName.text			= ""	// 납품자
 			}
 		}
