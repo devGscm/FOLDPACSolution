@@ -75,7 +75,7 @@
 "tet-N1-kmG.text" = "재고실사번호";
 
 /* Class = "UILabel"; text = "유형"; ObjectID = "tyF-Yp-h9P"; */
-"tyF-Yp-h9P.text" = "类型";
+"tyF-Yp-h9P.text" = "유형";
 
 /* Class = "UILabel"; text = "작업자"; ObjectID = "uMv-Oh-ZRN"; */
 "uMv-Oh-ZRN.text" = "작업자";
