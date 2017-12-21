@@ -445,16 +445,12 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		strMakeOrderId	= ""
 		strProdAssetEpc = ""
 		
-		//UI 변경은 Thread로 호출하여 변경한
-		
-		self.btnMakeOrderId.setTitle("", for: .normal)
+		self.btnMakeOrderId.setTitle(NSLocalizedString("make_order_id_selection", comment: "주문선택"), for: .normal)
 		self.lblOrderCustName.text = ""
 		self.lblOrderCount.text = ""
-		self.tfMakeLotId.text = ""
-	
+		self.tfMakeLotId.text = ""	
 	}
-	
-	
+		
 	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
 		return self.arrAssetRows.count
