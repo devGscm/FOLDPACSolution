@@ -1,45 +1,45 @@
 
 /* Class = "UILabel"; text = "이벤트"; ObjectID = "0jw-dh-cdy"; */
-"0jw-dh-cdy.text" = "이벤트";
+"0jw-dh-cdy.text" = "状态";
 
 /* Class = "UILabel"; text = "수량"; ObjectID = "0vo-cM-SNo"; */
-"0vo-cM-SNo.text" = "수량";
+"0vo-cM-SNo.text" = "数量";
 
 /* Class = "UILabel"; text = "유형"; ObjectID = "Czr-gS-NNp"; */
-"Czr-gS-NNp.text" = "유형";
+"Czr-gS-NNp.text" = "类型";
 
 /* Class = "UILabel"; text = "작업자"; ObjectID = "Giq-NT-FKk"; */
-"Giq-NT-FKk.text" = "작업자";
+"Giq-NT-FKk.text" = "作业人";
 
 /* Class = "UILabel"; text = "거점"; ObjectID = "HIJ-7N-vJx"; */
-"HIJ-7N-vJx.text" = "거점";
+"HIJ-7N-vJx.text" = "据点名";
 
 /* Class = "UILabel"; text = "거래처"; ObjectID = "LZo-aX-Cn2"; */
-"LZo-aX-Cn2.text" = "거래처";
+"LZo-aX-Cn2.text" = "客户";
 
 /* Class = "UIButton"; normalTitle = "이벤트구분"; ObjectID = "O8B-PQ-uMq"; */
-"O8B-PQ-uMq.normalTitle" = "이벤트구분";
+"O8B-PQ-uMq.normalTitle" = "活动类型";
 
 /* Class = "UILabel"; text = "거래처"; ObjectID = "PsO-Td-qdp"; */
-"PsO-Td-qdp.text" = "거래처";
+"PsO-Td-qdp.text" = "客户";
 
 /* Class = "UIButton"; normalTitle = "검색"; ObjectID = "SWI-m2-jAW"; */
-"SWI-m2-jAW.normalTitle" = "검색";
+"SWI-m2-jAW.normalTitle" = "搜索";
 
 /* Class = "UILabel"; text = "유형"; ObjectID = "Tkq-eP-1Z5"; */
-"Tkq-eP-1Z5.text" = "유형";
+"Tkq-eP-1Z5.text" = "类型";
 
 /* Class = "UILabel"; text = "이벤트일자"; ObjectID = "Tsj-BH-WpU"; */
-"Tsj-BH-WpU.text" = "이벤트일자";
+"Tsj-BH-WpU.text" = "状态日期";
 
 /* Class = "UILabel"; text = "이벤트일자"; ObjectID = "ajh-a2-pUN"; */
-"ajh-a2-pUN.text" = "이벤트일자";
+"ajh-a2-pUN.text" = "状态日期";
 
 /* Class = "UILabel"; text = "기간"; ObjectID = "cxI-wi-JqB"; */
-"cxI-wi-JqB.text" = "기간";
+"cxI-wi-JqB.text" = "期间";
 
 /* Class = "UILabel"; text = "수량"; ObjectID = "lVB-EO-aCp"; */
-"lVB-EO-aCp.text" = "수량";
+"lVB-EO-aCp.text" = "数量";
 
 /* Class = "UILabel"; text = "이벤트"; ObjectID = "t52-Sw-LpM"; */
-"t52-Sw-LpM.text" = "이벤트";
+"t52-Sw-LpM.text" = "状态";

@@ -152,7 +152,7 @@
 "rfid_reader_none" = "미설정";
 "rfid_reader_connect" = "연결";
 "rfid_reader_close" = "종료";
-"rfid_asset_name" = "품목";
+"rfid_asset_name" = "유형";
 "rfid_serial_no" = "시리얼";
 "rfid_epc_code" = "EPC Code";
 "rfid_epc_urn" = "EPC URN";

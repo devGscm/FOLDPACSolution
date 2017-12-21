@@ -1,0 +1,78 @@
+
+/* Class = "UILabel"; text = "상세"; ObjectID = "1LN-jq-mau"; */
+"1LN-jq-mau.text" = "상세";
+
+/* Class = "UILabel"; text = "량"; ObjectID = "7a9-P1-lhP"; */
+"7a9-P1-lhP.text" = "인식수량";
+
+/* Class = "UILabel"; text = "인식수량"; ObjectID = "CvI-uI-sc0"; */
+"CvI-uI-sc0.text" = "인식수량";
+
+/* Class = "UILabel"; text = "상세"; ObjectID = "F6i-fR-psg"; */
+"F6i-fR-psg.text" = "상세";
+
+/* Class = "UILabel"; text = "거점"; ObjectID = "GPQ-m8-6Wo"; */
+"GPQ-m8-6Wo.text" = "거점명";
+
+/* Class = "UILabel"; text = "인식수량"; ObjectID = "Hos-ca-SoR"; */
+"Hos-ca-SoR.text" = "인식수량";
+
+/* Class = "UIButton"; normalTitle = "연결"; ObjectID = "IYs-gK-CKf"; */
+"IYs-gK-CKf.normalTitle" = "연결";
+
+/* Class = "UILabel"; text = "작업자"; ObjectID = "LdM-vg-odR"; */
+"LdM-vg-odR.text" = "작업자";
+
+/* Class = "UIButton"; normalTitle = "상세"; ObjectID = "MAi-6l-6hT"; */
+"MAi-6l-6hT.normalTitle" = "상세";
+
+/* Class = "UILabel"; text = "유형"; ObjectID = "O7z-pm-fEG"; */
+"O7z-pm-fEG.text" = "유형";
+
+/* Class = "UILabel"; text = "유형"; ObjectID = "RZm-uh-SKU"; */
+"RZm-uh-SKU.text" = "유형";
+
+/* Class = "UILabel"; text = "Swing U"; ObjectID = "UYo-YT-kdw"; */
+"UYo-YT-kdw.text" = "Swing U";
+
+/* Class = "UILabel"; text = "등급"; ObjectID = "XmD-DD-0BO"; */
+"XmD-DD-0BO.text" = "등급";
+
+/* Class = "UIButton"; normalTitle = "선택"; ObjectID = "aYs-hS-3kv"; */
+"aYs-hS-3kv.normalTitle" = "선택";
+
+/* Class = "UILabel"; text = "거점"; ObjectID = "gXK-Is-fu4"; */
+"gXK-Is-fu4.text" = "거점";
+
+/* Class = "UIButton"; normalTitle = "연결"; ObjectID = "gkB-UA-wcY"; */
+"gkB-UA-wcY.normalTitle" = "연결";
+
+/* Class = "UIButton"; normalTitle = "상세"; ObjectID = "hP4-Mt-SE1"; */
+"hP4-Mt-SE1.normalTitle" = "상세";
+
+/* Class = "UILabel"; text = "유형"; ObjectID = "iD4-nN-aoV"; */
+"iD4-nN-aoV.text" = "유형";
+
+/* Class = "UILabel"; text = "Swing U"; ObjectID = "kZi-gW-4g2"; */
+"kZi-gW-4g2.text" = "Swing U";
+
+/* Class = "UIButton"; normalTitle = "전송"; ObjectID = "rHP-Lt-xUu"; */
+"rHP-Lt-xUu.normalTitle" = "전송";
+
+/* Class = "UIButton"; normalTitle = "전송"; ObjectID = "rdy-o8-RV1"; */
+"rdy-o8-RV1.normalTitle" = "전송";
+
+/* Class = "UILabel"; text = "유형"; ObjectID = "re9-4h-7Ll"; */
+"re9-4h-7Ll.text" = "유형";
+
+/* Class = "UILabel"; text = "작업자"; ObjectID = "vEe-ft-WqT"; */
+"vEe-ft-WqT.text" = "작업자";
+
+/* Class = "UIButton"; normalTitle = "초기화"; ObjectID = "wwC-0H-tjv"; */
+"wwC-0H-tjv.normalTitle" = "초기화";
+
+/* Class = "UIButton"; normalTitle = "초기화"; ObjectID = "xFt-pc-Q0O"; */
+"xFt-pc-Q0O.normalTitle" = "초기화";
+
+/* Class = "UILabel"; text = "인식수량"량 ObjectID = "xdm-NI-s2l"; */
+"xdm-NI-s2l.text" = "인식수량";
