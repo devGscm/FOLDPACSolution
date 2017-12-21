@@ -147,6 +147,10 @@ class ProductOrderSearch: BaseViewController, UITableViewDataSource, UITableView
 			{
 				self.tvProductOrderSearch?.reloadData()
 				self.tvProductOrderSearch?.hideIndicator()
+				if( self.arcDataRows.count == 0)
+				{
+					super.showSnackbar(message: NSLocalizedString("product_more_data", comment: "데이터가 없습니다."))
+				}
 			}
 		})
 

@@ -140,9 +140,13 @@ class TagOrderSearch: BaseViewController, UITableViewDataSource, UITableViewDele
 			}
 			self.arcDataRows.append(contentsOf: clsDataTable.getDataRows())
 			DispatchQueue.main.async
+			{
+				self.tvTagOrderSearch?.reloadData()
+				self.tvTagOrderSearch?.hideIndicator()
+				if( self.arcDataRows.count == 0)
 				{
-					self.tvTagOrderSearch?.reloadData()
-					self.tvTagOrderSearch?.hideIndicator()
+					super.showSnackbar(message: NSLocalizedString("product_more_data", comment: "데이터가 없습니다."))
+				}
 			}
 		})
 		
