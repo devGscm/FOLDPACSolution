@@ -243,6 +243,12 @@ class CombineInSearch: BaseViewController, UITableViewDataSource, UITableViewDel
 		
 		dpPicker.locale = Locale(identifier: "ko_KR")
 		dpPicker.datePickerMode = .date
+		let dfFormatter = DateFormatter()
+		dfFormatter.dateFormat = "yyyy-MM-dd"
+		if let selDate = dfFormatter.date(from: tfDateControl.text ?? "")
+		{
+			dpPicker.date = selDate
+		}
 		
 		let toolbar = UIToolbar()
 		toolbar.sizeToFit()
