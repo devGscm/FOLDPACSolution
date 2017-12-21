@@ -111,6 +111,7 @@
 		96999C641FE3915400A0565B /* TagSupplyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96999C631FE3915400A0565B /* TagSupplyCell.swift */; };
 		96D039DE1FEBA55A00B4C7CA /* EasyIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96D039E01FEBA55A00B4C7CA /* EasyIn.storyboard */; };
 		96D039E71FEBACD600B4C7CA /* Config.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96D039E91FEBACD600B4C7CA /* Config.storyboard */; };
+		96D039F01FEBB22D00B4C7CA /* CombineOut.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96D039F21FEBB22D00B4C7CA /* CombineOut.storyboard */; };
 		96D279C91FBE5E4D004B848F /* Mosaic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96D279C81FBE5E4D004B848F /* Mosaic.framework */; };
 		96D279CA1FBE5E4D004B848F /* Mosaic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 96D279C81FBE5E4D004B848F /* Mosaic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		96E494201FB1A78500D1E2C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E4941F1FB1A78500D1E2C1 /* AppDelegate.swift */; };
@@ -121,7 +122,6 @@
 		96F8BD4A1FEA3782001E3B64 /* Tag.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96F8BD481FEA3782001E3B64 /* Tag.storyboard */; };
 		B01C42051FE0CA8000404301 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01C42031FE0CA7F00404301 /* BaseViewController.swift */; };
 		B01C42081FE0CBD200404301 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01C42041FE0CA7F00404301 /* BaseTableViewController.swift */; };
-		B01C420B1FE0EEBA00404301 /* CombineOut.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B01C420A1FE0EEBA00404301 /* CombineOut.storyboard */; };
 		B01C420D1FE105BB00404301 /* CombineOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01C420C1FE105BB00404301 /* CombineOut.swift */; };
 		B01C420F1FE105E400404301 /* CombineOutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01C420E1FE105E400404301 /* CombineOutCell.swift */; };
 		B040785B1FE8B31C00F44FBE /* EasyOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = B040785A1FE8B31C00F44FBE /* EasyOut.swift */; };
@@ -310,6 +310,10 @@
 		96D039EB1FEBACDC00B4C7CA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Config.strings; sourceTree = "<group>"; };
 		96D039ED1FEBACDE00B4C7CA /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/Config.strings; sourceTree = "<group>"; };
 		96D039EF1FEBACE000B4C7CA /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Config.strings; sourceTree = "<group>"; };
+		96D039F11FEBB22D00B4C7CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/CombineOut.storyboard; sourceTree = "<group>"; };
+		96D039F41FEBB23300B4C7CA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CombineOut.strings; sourceTree = "<group>"; };
+		96D039F61FEBB23600B4C7CA /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/CombineOut.strings; sourceTree = "<group>"; };
+		96D039F81FEBB23900B4C7CA /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/CombineOut.strings; sourceTree = "<group>"; };
 		96D279C81FBE5E4D004B848F /* Mosaic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mosaic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E4941C1FB1A78500D1E2C1 /*  RRPPClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = " RRPPClient.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E4941F1FB1A78500D1E2C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -328,7 +332,6 @@
 		96F8BD4D1FEA379C001E3B64 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Tag.strings; sourceTree = "<group>"; };
 		B01C42031FE0CA7F00404301 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		B01C42041FE0CA7F00404301 /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
-		B01C420A1FE0EEBA00404301 /* CombineOut.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CombineOut.storyboard; sourceTree = "<group>"; };
 		B01C420C1FE105BB00404301 /* CombineOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineOut.swift; sourceTree = "<group>"; };
 		B01C420E1FE105E400404301 /* CombineOutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineOutCell.swift; sourceTree = "<group>"; };
 		B040785A1FE8B31C00F44FBE /* EasyOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyOut.swift; sourceTree = "<group>"; };
@@ -714,7 +717,7 @@
 				B0FD4EDB1FE3C24600EE976E /* CombineOutWorkList.swift */,
 				B0FD4EDC1FE3C24600EE976E /* CombineOutWorkListCell.swift */,
 				B01C420C1FE105BB00404301 /* CombineOut.swift */,
-				B01C420A1FE0EEBA00404301 /* CombineOut.storyboard */,
+				96D039F21FEBB22D00B4C7CA /* CombineOut.storyboard */,
 				B01C420E1FE105E400404301 /* CombineOutCell.swift */,
 			);
 			path = CombineOut;
@@ -854,7 +857,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B01C420B1FE0EEBA00404301 /* CombineOut.storyboard in Resources */,
+				96D039F01FEBB22D00B4C7CA /* CombineOut.storyboard in Resources */,
 				55FA78401FBDACFD00583A80 /* pallet.png in Resources */,
 				55D13A661FE348CC00099F50 /* CombineIn.storyboard in Resources */,
 				96E4942A1FB1A78500D1E2C1 /* LaunchScreen.storyboard in Resources */,
@@ -1126,6 +1129,17 @@
 				96D039EF1FEBACE000B4C7CA /* ko */,
 			);
 			name = Config.storyboard;
+			sourceTree = "<group>";
+		};
+		96D039F21FEBB22D00B4C7CA /* CombineOut.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				96D039F11FEBB22D00B4C7CA /* Base */,
+				96D039F41FEBB23300B4C7CA /* en */,
+				96D039F61FEBB23600B4C7CA /* zh */,
+				96D039F81FEBB23900B4C7CA /* ko */,
+			);
+			name = CombineOut.storyboard;
 			sourceTree = "<group>";
 		};
 		96E494281FB1A78500D1E2C1 /* LaunchScreen.storyboard */ = {
