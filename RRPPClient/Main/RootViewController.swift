@@ -1,13 +1,10 @@
 import UIKit
 import Material
 import Mosaic
+import Foundation
 
 class RootViewController: BaseViewController
 {
-	lazy var mClsRightController: RightViewController = {
-		return UIStoryboard.viewController(identifier: "RightViewController") as! RightViewController
-	}()
-	
     open override func viewDidLoad()
 	{
 		print("@@@@@@@@@@@@@@@@@@@@")
@@ -15,17 +12,14 @@ class RootViewController: BaseViewController
 		print("@@@@@@@@@@@@@@@@@@@@")
         super.viewDidLoad()
         view.backgroundColor = Color.grey.lighten5
-		
         prepareToolbar()
     }
 	
 	override func viewDidAppear(_ animated: Bool)
 	{
-	
 		if(AppContext.sharedManager.getUserInfo().getAutoLogin() == true || AppContext.sharedManager.getAuthenticated() == true)
-		{			
+		{
 //			showSnackbar(message: "스네이크바 테스트입니다.")
-			
 //			let dataClient = Mosaic.DataClient(url: Constants.WEB_SVC_URL)
 //			dataClient.UserInfo = "xxOxOsU93/PvK/NN7DZmZw=="
 //			dataClient.SelectUrl = "productService:selectProductOrderList"
