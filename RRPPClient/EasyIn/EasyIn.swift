@@ -135,6 +135,7 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 		lblUserName.text = AppContext.sharedManager.getUserInfo().getUserName()
 		lblBranchInfo.text = AppContext.sharedManager.getUserInfo().getBranchName()
 		lblReaderName.text = AppContext.sharedManager.getUserInfo().getReaderDevName()
+        lblProcCount.text  = "0"    //처리수량
 	}
 
 	
@@ -193,17 +194,16 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 	// 팝업 다이얼로그로 부터 데이터 수신
 	func recvData( returnData : ReturnData)
 	{
-		//송장번호가 있는경우, 새로운 입고처가 들어오면 기존 데이터를 삭제한다.
-		if(boolExistSavedInvoice == true)
-		{
-			clearTagData(clearScreen: true)
-		}
-		
 		if(returnData.returnType == "easyInSearch")
 		{
-			// 송장조회
+			//송장조회
 			if(returnData.returnRawData != nil)
 			{
+                //송장번호가 있는경우, 새로운 입고처가 들어오면 기존 데이터를 삭제한다.
+                if(boolExistSavedInvoice == true)
+                {
+                    clearTagData(clearScreen: true)
+                }
 				let clsDataRow = returnData.returnRawData as! DataRow
 
 				self.strResaleOrderId		= clsDataRow.getString(name: "resaleOrderId") ?? ""
@@ -219,9 +219,15 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 		}
 		if(returnData.returnType == "workCustSearch")
 		{
-			// 고객사 조회
+			//고객사 조회
 			if(returnData.returnRawData != nil)
 			{
+                //송장번호가 있는경우, 새로운 입고처가 들어오면 기존 데이터를 삭제한다.
+                if(boolExistSavedInvoice == true)
+                {
+                    clearTagData(clearScreen: true)
+                }
+                
 				let clsDataRow = returnData.returnRawData as! DataRow
 				let strCustName = clsDataRow.getString(name: "custName") ?? ""
 				self.strResaleBranchId	= clsDataRow.getString(name: "branchId") ?? ""
@@ -239,13 +245,14 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 				let strVehName		= tfVehName?.text ?? ""
 				let strTradeChit	= tfTradeChit?.text ?? ""
 				
-				if self.strResaleOrderId.isEmpty == false
+				if(self.strResaleOrderId.isEmpty == false)
 				{
 					//DB로 데이터 전송 처리
 					sendDataExistResaleOrderId(workState: Constants.WORK_STATE_COMPLETE, resaleOrderId: self.strResaleOrderId, vehName: strVehName, tradeChit: strTradeChit, remark: strRemark, signData: strSignData)
 				}
 				else
 				{
+                    print("self.strResaleOrderId ===>  \(self.strResaleOrderId)")
 					sendDataNoneResaleOrderId(workState: Constants.WORK_STATE_COMPLETE, resaleCustId: self.strResaleBranchId, vehName: strVehName, tradeChit: strTradeChit, remark: strRemark, signData: strSignData)
 				}
 			}
@@ -263,7 +270,7 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 	@IBAction func onWorkCustSearchClicked(_ sender: UIButton) {
 	}
 	
-	// 데이터를 clear한다.
+	//데이터를 clear한다.
 	func clearTagData(clearScreen : Bool)
 	{
 		self.boolNewTagInfoExist = false	// 신규태그 입력 체크, 전송용
@@ -522,8 +529,7 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 	func doReloadTagList(showInitMsg : Bool)
 	{
 		// 1) 태그리스트 초기화
-		clearTagData(clearScreen: false)
-		
+		clearTagData(clearScreen: false)		
 		
 		let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
@@ -909,8 +915,8 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 					//print("-서버로부터 받은 처리갯수: \(strSvrProcCount)")
 					//print("-서버로부터 받은 작업처리상태:  \(strSvrWorkState)")
 					
-					DispatchQueue.main.async
-					{
+					//DispatchQueue.main.async
+					//{
 						// 전송 성공인 경우
 						for clsInfo in self.arrTagRows
 						{
@@ -930,7 +936,7 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 						}
 						let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
 						self.showSnackbar(message: strMsg)
-					}
+					//}
 				}
 				else
 				{

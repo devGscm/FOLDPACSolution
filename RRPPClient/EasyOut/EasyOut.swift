@@ -176,15 +176,15 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
     //=======================================
     func recvData(returnData : ReturnData)
     {
-        //송장번호가 있는경우, 새로운 입고처가 들어오면 기존 데이터를 삭제한다.
-        if(mBoolExistSavedInvoice == true)
-        {
-            clearTagData(true)
-        }
         if(returnData.returnType == "workCustSearch")           //고객사 조회
         {
             if(returnData.returnRawData != nil)
             {
+                //송장번호가 있는경우, 새로운 입고처가 들어오면 기존 데이터를 삭제한다.
+                if(mBoolExistSavedInvoice == true)
+                {
+                    clearTagData(true)
+                }
                 let clsDataRow = returnData.returnRawData as! DataRow
                 let strCustName = clsDataRow.getString(name: "custName") ?? ""
                 self.mStrTransferCustId = clsDataRow.getString(name: "branchId") ?? ""
@@ -205,12 +205,12 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
                 if self.mStrSaleWorkId.isEmpty == false
                 {
                     //송장번호 O, DB로 데이터 전송 처리
-                    sendDataExistSaleWorkId(Constants.WORK_STATE_WORKING, mStrSaleWorkId, strVehName, strTradeChit, strRemark, strSignData)
+                    sendDataExistSaleWorkId(Constants.WORK_STATE_COMPLETE, mStrSaleWorkId, strVehName, strTradeChit, strRemark, strSignData)
                 }
                 else
                 {
                     //송장번호 X , 송장번호(SaleWorkId) 발급후 DB로 데이터 전송 처리
-                    sendDataNoneSaleWorkId(Constants.WORK_STATE_WORKING, mStrTransferCustId, strVehName, strTradeChit, strRemark, strSignData);
+                    sendDataNoneSaleWorkId(Constants.WORK_STATE_COMPLETE, mStrTransferCustId, strVehName, strTradeChit, strRemark, strSignData);
                 }
             }
         }
@@ -317,6 +317,7 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
                 //let strCheckAssetEpc  = clsTagInfo.getAssetEpc()
                 //print("===strAssetEpc: \(strAssetEpc) :: \(strCheckAssetEpc) ")
                 //print("================================================")
+                
                 
                 //같은 자산타입(Asset_type)이면 처리량증가,미처리량감소
                 if(strAssetEpc == clsTagInfo.getAssetEpc())
@@ -910,11 +911,11 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
                 {
                     let strSvrWorkState = clsDataRow.getString(name: "workState")
                     //print("-서버로부터 받은 처리갯수: \(strSvrProcCount)")
-                    //print("-서버로부터 받은 작업처리상태:  \(strSvrWorkState)")
+                    print("-서버로부터 받은 작업처리상태:  \(strSvrWorkState)")
                  
                     print("=========[4-1]DB로 데이터 전송처리 =====")
-                    DispatchQueue.main.async
-                    {
+                    //DispatchQueue.main.async
+                    //{
                         //전송 성공인 경우
                         for clsInfo in self.arrTagRows
                         {
@@ -926,6 +927,8 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
                         self.mBoolNewTagInfoExist = false
                         self.mBoolExistSavedInvoice = true      //송장번호 할당여부
                         
+                        print("=========완료전송인경우: \(strSvrWorkState)")
+                        
                         //현재 작업상태가 완료전송인경우
                         if(Constants.WORK_STATE_COMPLETE == strSvrWorkState)
                         {
@@ -936,7 +939,7 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
                         
                         print("=========[4-2]DB로 데이터 전송처리 =====")
                         self.showSnackbar(message: strMsg)
-                    }
+                    //}
                 }
                 else
                 {

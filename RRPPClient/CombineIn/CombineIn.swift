@@ -345,8 +345,8 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 			strWorkState				= ""
 			strNoReadCount				= "0"
 
-			DispatchQueue.main.async
-				{
+			//DispatchQueue.main.async
+			//	{
 					self.lblResaleBranchName.text	= ""	//출고처
 					self.btnSaleWorkId.setTitle(NSLocalizedString("sale_work_id_selection", comment: "송장선택"), for: .normal) //송장번호
 					self.lblOrderReqCount.text		= ""	// 입고예정수량
@@ -355,7 +355,7 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 					self.lblProdAssetEpcName.text	= ""	// 유형
 					self.lblRemainCount.text		= ""	// 미처리량
 					self.lblDriverName.text			= ""	// 납품자
-			}
+			//}
 		}
 		
 		// RFID리더기 초기화
@@ -715,14 +715,17 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 					intRemainCnt = 0										//미처리량 0이하는 0
 				}
 				
-				self.lblResaleBranchName.text	= clsDataRow.getString(name: "resaleBranchName") ?? ""	// 출고처
-				self.btnSaleWorkId.setTitle(self.strSaleWorkId, for: .normal)							// 송장번호
-				self.lblOrderReqCount.text		= "\(self.intOrderReqCount)"							// 입고예정수량
-				self.lblProcCount.text			= "\(self.intProcCount)"								// 처리량
-				//self.tfVehName.text				= clsDataRow.getString(name: "resaleVehName") ?? ""	// 차량번호
-				self.lblDriverName.text			= clsDataRow.getString(name: "resaleDriverName") ?? ""	// 납품자
-				self.lblProdAssetEpcName.text	= clsDataRow.getString(name: "prodAssetEpcName") ?? ""	// 유형명
-				self.lblRemainCount.text		= "\(intRemainCnt)"										// 미처리량
+                DispatchQueue.main.async
+                {
+                    self.lblResaleBranchName.text	= clsDataRow.getString(name: "resaleBranchName") ?? ""	// 출고처
+                    self.btnSaleWorkId.setTitle(self.strSaleWorkId, for: .normal)							// 송장번호
+                    self.lblOrderReqCount.text		= "\(self.intOrderReqCount)"							// 입고예정수량
+                    self.lblProcCount.text			= "\(self.intProcCount)"								// 처리량
+                    //self.tfVehName.text				= clsDataRow.getString(name: "resaleVehName") ?? ""	// 차량번호
+                    self.lblDriverName.text			= clsDataRow.getString(name: "resaleDriverName") ?? ""	// 납품자
+                    self.lblProdAssetEpcName.text	= clsDataRow.getString(name: "prodAssetEpcName") ?? ""	// 유형명
+                    self.lblRemainCount.text		= "\(intRemainCnt)"										// 미처리량
+                }
 				
 				//2) 태그데이터 초기화
 				self.clearTagData(clearScreen: false)
@@ -907,15 +910,15 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 				print(" -strResultCode:\(strResultCode!)")
 				if(Constants.PROC_RESULT_SUCCESS == strResultCode)
 				{
-					DispatchQueue.main.async
-						{
+					//DispatchQueue.main.async
+                    //{
 							// 초기화 처리
 							self.doReloadTagList()
 							
 							// self.doReloadTagList() 에서 하므로 주석처리
 							//let strMsg = NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다.")
 							//self.showSnackbar(message: strMsg)
-					}
+					//}
 				}
 				else
 				{

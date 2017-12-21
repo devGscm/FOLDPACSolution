@@ -356,6 +356,7 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                     //화면정보 초기화
                     clearTagData(true)
                     
+                    
                     let clsDataRow = returnData.returnRawData as! DataRow
                     
                     //팝업에서 넘어온 데이터를 넣는다.
@@ -369,15 +370,18 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                     let strProdAssetEpcName = clsDataRow.getString(name: "prodAssetEpcName") ?? ""
                     let intRemainCnt        = clsDataRow.getInt(name: "remainCnt") ?? 0
 
-                    //화면에 정보표시
-                    btnSaleWorkId.setTitle(mStrSaleWorkId, for: .normal)
-                    lblOrderCustName.text   = strOrderCustName
-                    lblDeliBranchName.text  = strDeliBranchName
-                    lblAssignCount.text     = String(mIntWorkAssignCount)
-                    lblProcCount.text       = String(mIntProcCount)
-                    tfVehName.text          = strVehName
-                    lblAssetEpcName.text    = strProdAssetEpcName
-                    lblRemainCount.text     = String(intRemainCnt)
+                    DispatchQueue.main.async
+                    {
+                        //화면에 정보표시
+                        self.btnSaleWorkId.setTitle(self.mStrSaleWorkId, for: .normal)
+                        self.lblOrderCustName.text   = strOrderCustName
+                        self.lblDeliBranchName.text  = strDeliBranchName
+                        self.lblAssignCount.text     = String(self.mIntWorkAssignCount)
+                        self.lblProcCount.text       = String(self.mIntProcCount)
+                        self.tfVehName.text          = strVehName
+                        self.lblAssetEpcName.text    = strProdAssetEpcName
+                        self.lblRemainCount.text     = String(intRemainCnt)
+                    }
                     
                     //선택된 '송장정보' 내용조회
                     doSearchWorkListDetail()
@@ -636,8 +640,8 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         
         if(clearScreen == true)
         {
-            DispatchQueue.main.async
-            {
+            //DispatchQueue.main.async
+            //{
                 self.mStrSaleWorkId = ""
                 self.mStrProdAssetEpc = ""
                 self.mIntProcCount = 0
@@ -652,7 +656,7 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                 self.lblRemainCount.text = ""       //미처리량
                 
                 self.btnSaleWorkId.setTitle(NSLocalizedString("sale_work_id_selection", comment: "송장선택"), for: .normal)
-            }
+            //}
         }
         
         //RFID리더기 초기화
@@ -1182,11 +1186,11 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                 print(" -strResultCode:\(strResultCode!)")
                 if(Constants.PROC_RESULT_SUCCESS == strResultCode)
                 {
-                    DispatchQueue.main.async
-                    {
+                    //DispatchQueue.main.async
+                    //{
                         //초기화 처리
                         self.doReloadTagList()
-                    }
+                    //}
                 }
                 else
                 {

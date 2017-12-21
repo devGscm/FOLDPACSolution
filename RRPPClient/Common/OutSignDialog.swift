@@ -77,9 +77,8 @@ class OutSignDialog: BaseViewController, YPSignatureDelegate
 			
 			self.vwSign.clear()
 		}
-        print("==== [1]onConfirmClicked ====")
 		let strtData = ReturnData(returnType: "outSignDialog", returnCode: nil, returnMesage: nil, returnRawData: clsDataRow)
-        print("==== [2]onConfirmClicked ====")
+
 		ptcDataHandler?.recvData(returnData: strtData)
 		self.dismiss(animated: true, completion: nil)
 	}
