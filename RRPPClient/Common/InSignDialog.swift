@@ -20,7 +20,8 @@ class InSignDialog: BaseViewController, YPSignatureDelegate
 	@IBOutlet weak var tfRemark: UITextField!
 	@IBOutlet weak var vwSign: YPDrawSignatureView!
 	
-	var clsDataRow : DataRow = DataRow()
+    var clsDataRow : DataRow? = DataRow()
+	
 	func loadData( dataRow: DataRow)
 	{
 		self.clsDataRow = dataRow
@@ -56,29 +57,34 @@ class InSignDialog: BaseViewController, YPSignatureDelegate
 	{
 		vwSign.delegate = self
 
-		tfNoReadCount?.text	= clsDataRow.getString(name: "noReadCount") ?? ""
-		tfWorkerName?.text	= clsDataRow.getString(name: "workerName") ?? ""
-		tfRemark?.text		= clsDataRow.getString(name: "remark") ?? ""
+        tfNoReadCount?.text    = clsDataRow?.getString(name: "noReadCount") ?? ""
+        tfWorkerName?.text    = clsDataRow?.getString(name: "workerName") ?? ""
+        tfRemark?.text        = clsDataRow?.getString(name: "remark") ?? ""
+        
+       
 	}
 	
 	@IBAction func onClearClicked(_ sender: UIButton)
 	{
 		self.vwSign.clear()
-        tfNoReadCount?.text = clsDataRow.getString(name: "noReadCount") ?? ""
-        tfWorkerName?.text  = clsDataRow.getString(name: "workerName") ?? ""
-        tfRemark?.text      = clsDataRow.getString(name: "remark") ?? ""
+        tfNoReadCount?.text = clsDataRow?.getString(name: "noReadCount") ?? ""
+        tfWorkerName?.text  = clsDataRow?.getString(name: "workerName") ?? ""
+        tfRemark?.text      = clsDataRow?.getString(name: "remark") ?? ""
 	}
+    
 	
 	@IBAction func onConfirmClicked(_ sender: UIButton)
 	{
-		clsDataRow.addRow(name: "noReadCount", value: tfNoReadCount.text ?? "")
-		clsDataRow.addRow(name: "workerName", value: tfWorkerName.text ?? "")
-		clsDataRow.addRow(name: "remark", value: tfRemark.text ?? "")
-		//if let imgSign = self.vwSign.getSignature(scale: 10)
+        clsDataRow = nil
+        clsDataRow  = DataRow()
+		clsDataRow?.addRow(name: "noReadCount", value: tfNoReadCount.text ?? "")
+		clsDataRow?.addRow(name: "workerName", value: tfWorkerName.text ?? "")
+		clsDataRow?.addRow(name: "remark", value: tfRemark.text ?? "")
+	
 		if let imgSign = self.vwSign.getSignature()
 		{
 			let strSignData = imgSign.base64(format: .png) ?? ""
-			clsDataRow.addRow(name: "signData", value: strSignData)
+			clsDataRow?.addRow(name: "signData", value: strSignData)
 			self.vwSign.clear()
 		}
 		let strtData = ReturnData(returnType: "inSignDialog", returnCode: nil, returnMesage: nil, returnRawData: clsDataRow)
