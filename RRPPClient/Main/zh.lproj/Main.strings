@@ -1,6 +1,6 @@
 
 /* Class = "UILabel"; text = "자동로그인"; ObjectID = "14w-fA-wng"; */
-"14w-fA-wng.text" = "자동로그인";
+"14w-fA-wng.text" = "自动登录";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "52V-w5-bUG"; */
 "52V-w5-bUG.text" = "Label";
@@ -15,7 +15,7 @@
 "BaM-pA-0xc.text" = "RRPP";
 
 /* Class = "UIViewController"; title = "로그인"; ObjectID = "DV3-pj-IDf"; */
-"DV3-pj-IDf.title" = "로그인";
+"DV3-pj-IDf.title" = "登录";
 
 /* Class = "UILabel"; text = "RFID 마스크"; ObjectID = "JVY-Ik-LGT"; */
 "JVY-Ik-LGT.text" = "RFID 마스크";
@@ -39,19 +39,19 @@
 "aIO-S3-54Z.text" = "루트";
 
 /* Class = "UIButton"; normalTitle = "Logout"; ObjectID = "cBC-nu-tFG"; */
-"cBC-nu-tFG.normalTitle" = "Logout";
+"cBC-nu-tFG.normalTitle" = "退出";
 
 /* Class = "UITextField"; placeholder = "User ID"; ObjectID = "dSH-Ur-tIs"; */
 "dSH-Ur-tIs.placeholder" = "User ID";
 
 /* Class = "UIButton"; normalTitle = "Login"; ObjectID = "hmt-6X-bkx"; */
-"hmt-6X-bkx.normalTitle" = "Login";
+"hmt-6X-bkx.normalTitle" = "登录";
 
 /* Class = "UITableViewController"; title = "오른쪽메뉴"; ObjectID = "nJr-NP-3rZ"; */
 "nJr-NP-3rZ.title" = "오른쪽메뉴";
 
 /* Class = "UITextField"; placeholder = "Password"; ObjectID = "nek-0T-h2J"; */
-"nek-0T-h2J.placeholder" = "Password";
+"nek-0T-h2J.placeholder" = "密码";
 
 /* Class = "UILabel"; text = "RFID 리더기"; ObjectID = "qg4-yk-QUn"; */
 "qg4-yk-QUn.text" = "RFID 리더기";
