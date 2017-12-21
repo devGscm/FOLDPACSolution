@@ -152,7 +152,8 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		
 		lblUserName.text = AppContext.sharedManager.getUserInfo().getUserName()
 		lblBranchInfo.text = AppContext.sharedManager.getUserInfo().getBranchName()
-		lblReaderName.text = UserDefaults.standard.string(forKey: Constants.RFID_READER_NAME_KEY)
+		//lblReaderName.text = UserDefaults.standard.string(forKey: Constants.RFID_READER_NAME_KEY)
+        lblReaderName.text = AppContext.sharedManager.getUserInfo().getReaderDevName()
         
         lblProcCount.text = "0"
 		
@@ -467,10 +468,14 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		if(clearScreen == true)
 		{
 			self.strWorkBranchId = ""
-			btnWorkCustSearch.setTitle(NSLocalizedString("title_easy_cust_selection", comment: "고객사 선택"), for: .normal)
-		
-			tfVehName.text			= ""	// 차량번호
-			tfTradeChit.text		= ""	// 전표번호
+            
+            DispatchQueue.main.async
+            {
+                self.btnWorkCustSearch.setTitle(NSLocalizedString("title_easy_cust_selection", comment: "고객사 선택"), for: .normal)
+            
+                self.tfVehName.text			= ""	// 차량번호
+                self.tfTradeChit.text		= ""	// 전표번호
+            }
 			strSaleWorkId			= ""
 			intProcCount			= 0
 			intSelectedProdIndex	= -1
@@ -480,9 +485,12 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 			boolNewTagInfoExist 	= false
 		}
 
-		lblSerialNo.text	= ""	// 시리얼 번호
-		lblAssetName.text	= ""	// 유형
-		lblProcCount.text	= "0"	// 처리수량
+        DispatchQueue.main.async
+        {
+            self.lblSerialNo.text	= ""	// 시리얼 번호
+            self.lblAssetName.text	= ""	// 유형
+            self.lblProcCount.text	= "0"	// 처리수량
+        }
 
 		// RFID리더기 초기화
 		clearInventory()
@@ -1087,73 +1095,66 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
     // 작업초기화 데이터를 전송한다.
     func sendWorkInitData(saleWorkId : String)
     {
-		do
-    	{
-            clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
-            
-            let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
-            clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
-            clsDataClient.ExecuteUrl = "inOutService:executeOutCancelData"
-            clsDataClient.removeServiceParam()
-            clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
-            clsDataClient.addServiceParam(paramName: "userId", value: AppContext.sharedManager.getUserInfo().getUserId())
-            clsDataClient.addServiceParam(paramName: "unitId", value: AppContext.sharedManager.getUserInfo().getUnitId())
-            clsDataClient.addServiceParam(paramName: "saleWorkId", value: saleWorkId)
-            clsDataClient.executeData(dataCompletionHandler: { (data, error) in
+		
+        clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
+        
+        let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
+        clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+        clsDataClient.ExecuteUrl = "inOutService:executeOutCancelData"
+        clsDataClient.removeServiceParam()
+        clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+        clsDataClient.addServiceParam(paramName: "userId", value: AppContext.sharedManager.getUserInfo().getUserId())
+        clsDataClient.addServiceParam(paramName: "unitId", value: AppContext.sharedManager.getUserInfo().getUnitId())
+        clsDataClient.addServiceParam(paramName: "saleWorkId", value: saleWorkId)
+        clsDataClient.executeData(dataCompletionHandler: { (data, error) in
 
-                self.clsIndicator?.hide()
+            self.clsIndicator?.hide()
+            
+            if let error = error {
+                // 에러처리
+                super.showSnackbar(message: error.localizedDescription)
+                return
+            }
+            guard let clsResultDataTable = data else {
+                print("에러 데이터가 없음")
+                return
+            }
+            
+            print("####결과값 처리")
+            let clsResultDataRows = clsResultDataTable.getDataRows()
+            if(clsResultDataRows.count > 0)
+            {
+                let clsDataRow = clsResultDataRows[0]
+                let strResultCode = clsDataRow.getString(name: "resultCode")
                 
-                if let error = error {
-                    // 에러처리
-                    super.showSnackbar(message: error.localizedDescription)
-                    return
-                }
-                guard let clsResultDataTable = data else {
-                    print("에러 데이터가 없음")
-                    return
-                }
-                
-                print("####결과값 처리")
-                let clsResultDataRows = clsResultDataTable.getDataRows()
-                if(clsResultDataRows.count > 0)
+                print(" -strResultCode:\(strResultCode!)")
+                if(Constants.PROC_RESULT_SUCCESS == strResultCode)
                 {
-                    let clsDataRow = clsResultDataRows[0]
-                    let strResultCode = clsDataRow.getString(name: "resultCode")
-                    
-                    print(" -strResultCode:\(strResultCode!)")
-                    if(Constants.PROC_RESULT_SUCCESS == strResultCode)
-                    {
-                        // 삭제성공
-                        //그리드 삭제 및 구조체 삭제
-                        DispatchQueue.main.async
-                    	{
-							self.clearTagData(clearScreen: true)
-							
-							if(super.getUnload() == true)
-							{
-                            	let strMsg = NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다.")
-                            	self.showSnackbar(message: strMsg)
-							}
+                    // 삭제성공
+                    //그리드 삭제 및 구조체 삭제
+                    //DispatchQueue.main.async
+                    //{
+                        self.clearTagData(clearScreen: true)
+                        
+                        if(super.getUnload() == true)
+                        {
+                            let strMsg = NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다.")
+                            self.showSnackbar(message: strMsg)
                         }
-                    }
-                    else
+                    //}
+                }
+                else
+                {
+                    if(super.getUnload() == true)
                     {
-						if(super.getUnload() == true)
-						{
-                        	let strMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
-                        	self.showSnackbar(message: strMsg)
-						}
+                        let strMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
+                        self.showSnackbar(message: strMsg)
                     }
                 }
-                
-            })
-        }
-        catch let error
-        {
-			clsIndicator?.hide()
-            super.showSnackbar(message: NSLocalizedString("srfid_save_error_try_again", comment: "에러로 인하여 RFID 데이터를 저장할수 없습니다. 잠시후 다시 시도하여 주십시오."))
-			print(error.localizedDescription)
-        }
+            }
+            
+        })
+    
     }
 	
 	func loadProdName(processType: String, prodCode:String, prodReadCnt: String)

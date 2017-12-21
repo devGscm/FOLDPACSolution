@@ -176,8 +176,7 @@ class UserLogin: UIViewController
 							})
 						}
 						else
-						{
-							print("@@@@@@@@@@  구녕 @@@@@@@@@@@@@@@@@")
+						{	
 							self.loginSuccess(login: login)
 						}
 					
@@ -234,19 +233,23 @@ class UserLogin: UIViewController
 				return
 			}
 		}
-		let strUserId = tfUserId.text;
-		let strPasswd = tfPasswd.text;
-		let clsUserInfo = AppContext.sharedManager.getUserInfo()
-		
-		DispatchQueue.main.async
-		{
+        
+        let clsUserInfo = AppContext.sharedManager.getUserInfo()
+        
+        DispatchQueue.main.async
+        {
+            let strUserId = self.tfUserId.text;
+            let strPasswd = self.tfPasswd.text;
+            
 			clsUserInfo.setAutoLogin(boolAutoLogin: self.swAutoLogin.isOn)    // 자동로그인 여부
+            clsUserInfo.setUserId(strUserId: strUserId!)
+            clsUserInfo.setPassword(strPassword: strPasswd!)
 		}
 		clsUserInfo.setCorpId(strCorpId: login.corpId!)
 		//clsUserInfo.setCustType(custType: login.corpType!)
-		clsUserInfo.setUserId(strUserId: strUserId!)
+
 		clsUserInfo.setUserName(strUserName: login.userName ?? "")
-		clsUserInfo.setPassword(strPassword: strPasswd!)
+
 		clsUserInfo.setCustId(strCustId: login.custId ?? "")
 		clsUserInfo.setCustType(custType: login.custType ?? "")
 		clsUserInfo.setEncryptId(strEncryptId: login.encryptId!)
