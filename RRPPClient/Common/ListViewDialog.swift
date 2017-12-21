@@ -70,6 +70,7 @@ class ListViewDialog: UITableViewController
         print("@@@@@@@@@@@")
 		super.viewDidLoad()
 		//self.preferredContentSize.height = 220
+        self.hideKeyboardWhenTappedAround()
 	}
     
     override func viewWillAppear(_ animated: Bool)

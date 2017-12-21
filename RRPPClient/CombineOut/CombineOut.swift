@@ -20,8 +20,8 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     
     @IBOutlet weak var btnSelectWorkType: UIButton!     //구분
     @IBOutlet weak var btnSaleWorkId: UIButton!         //송장선택
-    @IBOutlet weak var btnBarcodeSearch: UIButton!      //바코드
     
+    @IBOutlet weak var btnBarcodeSearch: UIButton!      //바코드
     @IBOutlet weak var tfVehName: UITextField!          //차량번호
     
     @IBOutlet weak var lblOrderCustName: UILabel!       //입고처
@@ -150,7 +150,6 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         lblReaderName.text = AppContext.sharedManager.getUserInfo().getReaderDevName()                          //리더기명
         
         btnSaleWorkId.setTitle(NSLocalizedString("sale_work_id_selection", comment: "송장선택"), for: .normal)
-        btnBarcodeSearch.setTitle(NSLocalizedString("common_barcode_search", comment: "바코드"), for: .normal)
         
         //공통코드 조회
         initCommonCodeList(userLang: AppContext.sharedManager.getUserInfo().getUserLang())
@@ -357,6 +356,7 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                     //화면정보 초기화
                     clearTagData(true)
                     
+                    
                     let clsDataRow = returnData.returnRawData as! DataRow
                     
                     //팝업에서 넘어온 데이터를 넣는다.
@@ -370,15 +370,18 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                     let strProdAssetEpcName = clsDataRow.getString(name: "prodAssetEpcName") ?? ""
                     let intRemainCnt        = clsDataRow.getInt(name: "remainCnt") ?? 0
 
-                    //화면에 정보표시
-                    btnSaleWorkId.setTitle(mStrSaleWorkId, for: .normal)
-                    lblOrderCustName.text   = strOrderCustName
-                    lblDeliBranchName.text  = strDeliBranchName
-                    lblAssignCount.text     = String(mIntWorkAssignCount)
-                    lblProcCount.text       = String(mIntProcCount)
-                    tfVehName.text          = strVehName
-                    lblAssetEpcName.text    = strProdAssetEpcName
-                    lblRemainCount.text     = String(intRemainCnt)
+                    DispatchQueue.main.async
+                    {
+                        //화면에 정보표시
+                        self.btnSaleWorkId.setTitle(self.mStrSaleWorkId, for: .normal)
+                        self.lblOrderCustName.text   = strOrderCustName
+                        self.lblDeliBranchName.text  = strDeliBranchName
+                        self.lblAssignCount.text     = String(self.mIntWorkAssignCount)
+                        self.lblProcCount.text       = String(self.mIntProcCount)
+                        self.tfVehName.text          = strVehName
+                        self.lblAssetEpcName.text    = strProdAssetEpcName
+                        self.lblRemainCount.text     = String(intRemainCnt)
+                    }
                     
                     //선택된 '송장정보' 내용조회
                     doSearchWorkListDetail()
@@ -637,18 +640,23 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         
         if(clearScreen == true)
         {
-            self.mStrSaleWorkId = ""
-            self.mStrProdAssetEpc = ""
-            self.mIntProcCount = 0
-            self.mIntWorkAssignCount = 0
-           
-            self.tfVehName.text = ""            //차량번호
-            self.lblOrderCustName.text = ""     //입고처
-            self.lblDeliBranchName.text = ""    //배송거점
-            self.lblAssetEpcName.text = ""      //유형
-            self.lblAssignCount.text = ""       //출고예정
-            self.lblProcCount.text = ""         //처리량
-            self.lblRemainCount.text = ""       //미처리량
+            //DispatchQueue.main.async
+            //{
+                self.mStrSaleWorkId = ""
+                self.mStrProdAssetEpc = ""
+                self.mIntProcCount = 0
+                self.mIntWorkAssignCount = 0
+               
+                self.tfVehName.text = ""            //차량번호
+                self.lblOrderCustName.text = ""     //입고처
+                self.lblDeliBranchName.text = ""    //배송거점
+                self.lblAssetEpcName.text = ""      //유형
+                self.lblAssignCount.text = ""       //출고예정
+                self.lblProcCount.text = ""         //처리량
+                self.lblRemainCount.text = ""       //미처리량
+                
+                self.btnSaleWorkId.setTitle(NSLocalizedString("sale_work_id_selection", comment: "송장선택"), for: .normal)
+            //}
         }
         
         //RFID리더기 초기화
@@ -780,7 +788,6 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         clsBarcodeScanner?.dismissalDelegate = self
     }
     
-   
     //=======================================
     //===== '바코드' 버튼
     //=======================================
@@ -1179,11 +1186,11 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                 print(" -strResultCode:\(strResultCode!)")
                 if(Constants.PROC_RESULT_SUCCESS == strResultCode)
                 {
-                    DispatchQueue.main.async
-                    {
+                    //DispatchQueue.main.async
+                    //{
                         //초기화 처리
                         self.doReloadTagList()
-                    }
+                    //}
                 }
                 else
                 {
@@ -1236,7 +1243,7 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         }
         
         let clsDataTable : DataTable = DataTable()
-        clsDataTable.Id = "WORK_IN"
+        clsDataTable.Id = "WORK_OUT"
         clsDataTable.addDataColumn(dataColumn: DataColumn(id: "epcCode", type: "String", size: "0", keyColumn: false, updateColumn: true, autoIncrement: false, canXlsExport: false, title: ""))
         clsDataTable.addDataColumn(dataColumn: DataColumn(id: "traceDateTime", type: "String", size: "0", keyColumn: false, updateColumn: true, autoIncrement: false, canXlsExport: false, title: ""))
         
@@ -1265,7 +1272,7 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                 return
             }
             
-            print("####결과값 처리")
+            //print("####결과값 처리")
             let clsResultDataRows = clsResultDataTable.getDataRows()
             if(clsResultDataRows.count > 0)
             {

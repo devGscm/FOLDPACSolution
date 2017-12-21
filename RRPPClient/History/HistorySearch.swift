@@ -51,9 +51,10 @@ class HistorySearch: BaseViewController, UITableViewDataSource, UITableViewDeleg
 	{
 		super.viewWillAppear(animated)
 		super.initController()
-		
+
 		initViewControl()
 		initDataClient()
+        prepareToolbar()
 		doInitSearch()
 	}
 	

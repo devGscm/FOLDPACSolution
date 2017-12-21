@@ -133,6 +133,7 @@
 "login_input_id" = "사용자ID를 입력하시기 바랍니다.";
 "login_input_passwd" = "비밀번호를 입력하시기 바랍니다.";
 "login_notify_network_cost" = "3G 및 LTE 네트워크 사용시 가입하신 요금제에 따라 비용이 과금됩니다.";
+"login_change_language" = "사용자 언어를 적용하려면 앱을 종료하고 다시 시작해야 합니다. 종료하시겠습니까?";
 /* 로그인 끝*/
 
 /* 리턴 메시지 시작 */
@@ -386,7 +387,7 @@
 "stock_review_req_date" = "재고실사요청일";
 "stock_prod_asset_epc_name" = "품목";
 "stock_old_stock_cnt" = "전산재고량";
-"stock_review_id_selection" = "실사번호 선택";
+"stock_review_id_selection" = "실사번호선택";
 "stock_real_stock_count" = "실재고량";
 "stock_old_stock_count" = "전산재고량";
 "stock_enter_your_review_id" = "재고실사번호를 입력하여 주십시오.";

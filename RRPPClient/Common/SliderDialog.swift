@@ -45,7 +45,7 @@ class SliderDialog : UIViewController
 		// 뷰 컨트롤러의 콘텐츠 사이즈 지정
 		self.preferredContentSize = CGSize(width: self.mSldSlider.frame.width,
 										   height: self.mLblValue.frame.height + self.mSldSlider.frame.height+10)
-		
+		self.hideKeyboardWhenTappedAround()
 	}
 	
 	override func viewWillAppear(_ animated: Bool)

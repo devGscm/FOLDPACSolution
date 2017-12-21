@@ -55,7 +55,7 @@ class EasyInSearch: BaseViewController, UITableViewDataSource, UITableViewDelega
 	{
 		if(AppContext.sharedManager.getUserInfo().getCustType() == Constants.CUST_TYPE_MGR)
 		{
-			strCustType = AppContext.sharedManager.getUserInfo().getBranchCustId()
+			strCustType = AppContext.sharedManager.getUserInfo().getBranchCustType()
 		}
 		else
 		{
@@ -75,6 +75,9 @@ class EasyInSearch: BaseViewController, UITableViewDataSource, UITableViewDelega
 		clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
 		
 		// 고객사 거점 타입에 따라 "이동", "반납", "회수"로 구분함
+		
+		print("@@@@@@@@@@@@@@@ strCustType:\(strCustType)")
+		
 		if(Constants.CUST_TYPE_RDC == strCustType)
 		{
 			clsDataClient.addServiceParam(paramName: "resaleType", value: Constants.RESALE_TYPE_GATHER) // 물류센터(RDC) - 회수입고

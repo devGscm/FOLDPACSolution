@@ -133,6 +133,7 @@
 "login_input_id" = "请输入使用者ID";
 "login_input_passwd" = "请输入密码";
 "login_notify_network_cost" = "使用3G和LTE网络时会产生通信费用";
+"login_change_language" = "To apply your language, you'll need to exit and restart your app. Are you sure you want to quit?";
 /* 로그인 끝*/
 
 /* 리턴 메시지 시작 */
