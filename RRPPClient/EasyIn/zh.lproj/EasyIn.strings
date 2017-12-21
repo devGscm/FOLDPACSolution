@@ -1,0 +1,108 @@
+
+/* Class = "UILabel"; text = "출고처"; ObjectID = "30e-Ll-tmV"; */
+"30e-Ll-tmV.text" = "返还地";
+
+/* Class = "UILabel"; text = "전표번호"; ObjectID = "3h3-ls-nTW"; */
+"3h3-ls-nTW.text" = "传票号";
+
+/* Class = "UIButton"; normalTitle = "초기화"; ObjectID = "4My-3K-E0m"; */
+"4My-3K-E0m.normalTitle" = "初始化";
+
+/* Class = "UILabel"; text = "처리량"; ObjectID = "4PJ-6F-rFu"; */
+"4PJ-6F-rFu.text" = "处理量";
+
+/* Class = "UILabel"; text = "입고예정량"; ObjectID = "83Q-p0-90H"; */
+"83Q-p0-90H.text" = "预计入库量";
+
+/* Class = "UIButton"; normalTitle = "완료전송"; ObjectID = "8r1-Ud-MZ8"; */
+"8r1-Ud-MZ8.normalTitle" = "传输完成";
+
+/* Class = "UIButton"; normalTitle = "선택"; ObjectID = "Aed-hj-n2o"; */
+"Aed-hj-n2o.normalTitle" = "选择";
+
+/* Class = "UILabel"; text = "송장조회"; ObjectID = "AsN-4k-7Xu"; */
+"AsN-4k-7Xu.text" = "货单查询";
+
+/* Class = "UILabel"; text = "출고처"; ObjectID = "B4I-pp-k4z"; */
+"B4I-pp-k4z.text" = "出库处";
+
+/* Class = "UILabel"; text = "출고처"; ObjectID = "C5a-ji-ghR"; */
+"C5a-ji-ghR.text" = "出库处";
+
+/* Class = "UILabel"; text = "유형"; ObjectID = "Edj-BK-tJy"; */
+"Edj-BK-tJy.text" = "类型";
+
+/* Class = "UILabel"; text = "유형"; ObjectID = "Esq-LD-hQn"; */
+"Esq-LD-hQn.text" = "类型";
+
+/* Class = "UILabel"; text = "차량번호"; ObjectID = "ILl-Ty-vvV"; */
+"ILl-Ty-vvV.text" = "车牌号";
+
+/* Class = "UILabel"; text = "상세"; ObjectID = "KJs-3Y-IkC"; */
+"KJs-3Y-IkC.text" = "明细";
+
+/* Class = "UIButton"; normalTitle = "고객사 선택"; ObjectID = "N2U-J7-zGb"; */
+"N2U-J7-zGb.normalTitle" = "客户选择";
+
+/* Class = "UILabel"; text = "상세"; ObjectID = "Ppu-hb-Xjc"; */
+"Ppu-hb-Xjc.text" = "明细";
+
+/* Class = "UIButton"; normalTitle = "연결"; ObjectID = "QfO-ZH-KpQ"; */
+"QfO-ZH-KpQ.normalTitle" = "连接";
+
+/* Class = "UILabel"; text = "송장번호"; ObjectID = "RXy-Fe-CI5"; */
+"RXy-Fe-CI5.text" = "货单号";
+
+/* Class = "UILabel"; text = "거점"; ObjectID = "VLt-Ca-WTt"; */
+"VLt-Ca-WTt.text" = "据点";
+
+/* Class = "UIButton"; normalTitle = "작업초기화"; ObjectID = "WJA-a5-Dkw"; */
+"WJA-a5-Dkw.normalTitle" = "作业初始化";
+
+/* Class = "UILabel"; text = "처리량"; ObjectID = "WwB-YB-09W"; */
+"WwB-YB-09W.text" = "处理量";
+
+/* Class = "UILabel"; text = "작업자"; ObjectID = "ZET-o9-ZsN"; */
+"ZET-o9-ZsN.text" = "作业人";
+
+/* Class = "UILabel"; text = "입고예정량"; ObjectID = "b1h-g0-LJv"; */
+"b1h-g0-LJv.text" = "预计入库量";
+
+/* Class = "UILabel"; text = "송장번호"; ObjectID = "dBX-rg-II4"; */
+"dBX-rg-II4.text" = "货单号";
+
+/* Class = "UIButton"; normalTitle = "임시저장"; ObjectID = "dSw-vd-jea"; */
+"dSw-vd-jea.normalTitle" = "临时保存";
+
+/* Class = "UILabel"; text = "유형"; ObjectID = "doh-JA-wAi"; */
+"doh-JA-wAi.text" = "类型";
+
+/* Class = "UILabel"; text = "선택"; ObjectID = "fDG-gX-0cQ"; */
+"fDG-gX-0cQ.text" = "选择";
+
+/* Class = "UILabel"; text = "처리량"; ObjectID = "gO5-jk-nGa"; */
+"gO5-jk-nGa.text" = "处理量";
+
+/* Class = "UIButton"; normalTitle = "송장선택"; ObjectID = "gtG-FE-qE5"; */
+"gtG-FE-qE5.normalTitle" = "选择货单";
+
+/* Class = "UIButton"; normalTitle = "검색"; ObjectID = "kSD-Xl-cMz"; */
+"kSD-Xl-cMz.normalTitle" = "搜索";
+
+/* Class = "UILabel"; text = "유형"; ObjectID = "l6J-Vi-TW2"; */
+"l6J-Vi-TW2.text" = "类型";
+
+/* Class = "UILabel"; text = "처리량"; ObjectID = "lgu-UY-Tgh"; */
+"lgu-UY-Tgh.text" = "处理量";
+
+/* Class = "UILabel"; text = "출고처"; ObjectID = "lw1-4a-yxf"; */
+"lw1-4a-yxf.text" = "出库处";
+
+/* Class = "UILabel"; text = "유형"; ObjectID = "oPl-TL-7pZ"; */
+"oPl-TL-7pZ.text" = "类型";
+
+/* Class = "UILabel"; text = "Swing U"; ObjectID = "ogk-c6-4B7"; */
+"ogk-c6-4B7.text" = "Swing U";
+
+/* Class = "UIButton"; normalTitle = "상세"; ObjectID = "ys9-Rq-b4n"; */
+"ys9-Rq-b4n.normalTitle" = "明细";
