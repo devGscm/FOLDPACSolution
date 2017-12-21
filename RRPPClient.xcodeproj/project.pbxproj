@@ -124,7 +124,6 @@
 		B01C420B1FE0EEBA00404301 /* CombineOut.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B01C420A1FE0EEBA00404301 /* CombineOut.storyboard */; };
 		B01C420D1FE105BB00404301 /* CombineOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01C420C1FE105BB00404301 /* CombineOut.swift */; };
 		B01C420F1FE105E400404301 /* CombineOutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01C420E1FE105E400404301 /* CombineOutCell.swift */; };
-		B04078591FE8A91300F44FBE /* EasyOut.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B04078581FE8A91300F44FBE /* EasyOut.storyboard */; };
 		B040785B1FE8B31C00F44FBE /* EasyOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = B040785A1FE8B31C00F44FBE /* EasyOut.swift */; };
 		B040785D1FE8D02600F44FBE /* EasyOutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B040785C1FE8D02600F44FBE /* EasyOutCell.swift */; };
 		B060131B1FD5088A00594CCD /* InOutCancel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B060131A1FD5088A00594CCD /* InOutCancel.storyboard */; };
@@ -133,6 +132,7 @@
 		B077DA1C1FDF990900616F3A /* OutMemoDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B077DA1B1FDF990900616F3A /* OutMemoDialog.swift */; };
 		B0A2357C1FDA5E7F00AD4925 /* InOutCancelDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A2357B1FDA5E7F00AD4925 /* InOutCancelDetailCell.swift */; };
 		B0A2357E1FDA6D4D00AD4925 /* InOutCancelDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A2357D1FDA6D4D00AD4925 /* InOutCancelDetail.swift */; };
+		B0B95D261FEA59A20044E34A /* EasyOut.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0B95D281FEA59A20044E34A /* EasyOut.storyboard */; };
 		B0FD4EDD1FE3C24700EE976E /* CombineOutWorkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FD4EDB1FE3C24600EE976E /* CombineOutWorkList.swift */; };
 		B0FD4EDE1FE3C24700EE976E /* CombineOutWorkListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FD4EDC1FE3C24600EE976E /* CombineOutWorkListCell.swift */; };
 /* End PBXBuildFile section */
@@ -319,7 +319,6 @@
 		B01C420A1FE0EEBA00404301 /* CombineOut.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CombineOut.storyboard; sourceTree = "<group>"; };
 		B01C420C1FE105BB00404301 /* CombineOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineOut.swift; sourceTree = "<group>"; };
 		B01C420E1FE105E400404301 /* CombineOutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineOutCell.swift; sourceTree = "<group>"; };
-		B04078581FE8A91300F44FBE /* EasyOut.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EasyOut.storyboard; sourceTree = "<group>"; };
 		B040785A1FE8B31C00F44FBE /* EasyOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyOut.swift; sourceTree = "<group>"; };
 		B040785C1FE8D02600F44FBE /* EasyOutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyOutCell.swift; sourceTree = "<group>"; };
 		B060131A1FD5088A00594CCD /* InOutCancel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InOutCancel.storyboard; sourceTree = "<group>"; };
@@ -328,6 +327,10 @@
 		B077DA1B1FDF990900616F3A /* OutMemoDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutMemoDialog.swift; sourceTree = "<group>"; };
 		B0A2357B1FDA5E7F00AD4925 /* InOutCancelDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InOutCancelDetailCell.swift; sourceTree = "<group>"; };
 		B0A2357D1FDA6D4D00AD4925 /* InOutCancelDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InOutCancelDetail.swift; sourceTree = "<group>"; };
+		B0B95D271FEA59A20044E34A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/EasyOut.storyboard; sourceTree = "<group>"; };
+		B0B95D2A1FEA59A80044E34A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/EasyOut.strings; sourceTree = "<group>"; };
+		B0B95D2C1FEA59AB0044E34A /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/EasyOut.strings; sourceTree = "<group>"; };
+		B0B95D2E1FEA59AE0044E34A /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/EasyOut.strings; sourceTree = "<group>"; };
 		B0FD4EDB1FE3C24600EE976E /* CombineOutWorkList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombineOutWorkList.swift; sourceTree = "<group>"; };
 		B0FD4EDC1FE3C24600EE976E /* CombineOutWorkListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombineOutWorkListCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -708,7 +711,7 @@
 		B04078571FE8A8E000F44FBE /* EasyOut */ = {
 			isa = PBXGroup;
 			children = (
-				B04078581FE8A91300F44FBE /* EasyOut.storyboard */,
+				B0B95D281FEA59A20044E34A /* EasyOut.storyboard */,
 				B040785A1FE8B31C00F44FBE /* EasyOut.swift */,
 				B040785C1FE8D02600F44FBE /* EasyOutCell.swift */,
 			);
@@ -850,7 +853,7 @@
 				5590A55F1FD4E1AE007571D5 /* ProdMapping.storyboard in Resources */,
 				967A9C4A1FC4003B00B6A9D1 /* Main.storyboard in Resources */,
 				5575BB481FE238FA00CACCC8 /* Event.storyboard in Resources */,
-				B04078591FE8A91300F44FBE /* EasyOut.storyboard in Resources */,
+				B0B95D261FEA59A20044E34A /* EasyOut.storyboard in Resources */,
 				967A9C441FC3BE8D00B6A9D1 /* Localizable.strings in Resources */,
 				96F8BD4A1FEA3782001E3B64 /* Tag.storyboard in Resources */,
 				55C9D5921FE8B5CF00DDD48E /* intro.png in Resources */,
@@ -1086,6 +1089,17 @@
 				96F8BD4D1FEA379C001E3B64 /* ko */,
 			);
 			name = Tag.storyboard;
+			sourceTree = "<group>";
+		};
+		B0B95D281FEA59A20044E34A /* EasyOut.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B0B95D271FEA59A20044E34A /* Base */,
+				B0B95D2A1FEA59A80044E34A /* en */,
+				B0B95D2C1FEA59AB0044E34A /* zh */,
+				B0B95D2E1FEA59AE0044E34A /* ko */,
+			);
+			name = EasyOut.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
