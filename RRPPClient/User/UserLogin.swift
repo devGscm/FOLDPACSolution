@@ -21,39 +21,13 @@ class UserLogin: UIViewController
 	@IBOutlet weak var tfPasswd: UITextField!
 	@IBOutlet weak var btnLogin: UIButton!
 	//@IBOutlet weak var vwAutoLogin: UIView!
-	
-	lazy var mClsLeftController: LeftViewController = {
-		return UIStoryboard.viewController(identifier: "LeftViewController") as! LeftViewController
-	}()
-	
-	lazy var mClsRootController: RootViewController = {
-		return UIStoryboard.viewController(identifier: "RootViewController") as! RootViewController
-	}()
-	
-	lazy var mClsRightController: RightViewController = {
-		return UIStoryboard.viewController(identifier: "RightViewController") as! RightViewController
-	}()
+
 	
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
 		view.sendSubview(toBack: ivBackground)
         self.hideKeyboardWhenTappedAround()         //키보드 숨기기
-        
-		//let swAutoLogin = Switch(state: .off, style: .light, size: .small)
-		//swAutoLogin.delegate = self
-		
-		//mClsProgressBar = ProgressDialog(delegate: self)
-		//mClsProgressBar.SetDialogBackground(UIColor.white)
-		//mClsProgressBar.SetDialogColor(UIColor.black)
-		//mClsProgressBar.Show(true, strMessage:"Loading...")
-		
-		//btnLogin.titleLabel?.font = UIFont.fontAwesome(ofSize:18)
-		//let strLogin:String? = String.fontAwesomeIcon(name:.lock) + " 로그인"
-		//btnLogin.setTitle(strLogin, for: .normal)
-		
-		//Dialog.show(viewController: self, title: "", message: "해보시다.", okTitle:"OK", okHandler: nil)
-
 	}
 	
 	override func didReceiveMemoryWarning()
@@ -64,17 +38,7 @@ class UserLogin: UIViewController
 	
 	@IBAction func onSwitchChanged(_ sender: UISwitch)
 	{
-//		if(sender.isOn)
-//		{
-//			self.view.backgroundColor = UIColor.red
-//		}
-//		else
-//		{
-//			self.view.backgroundColor = UIColor.black
-//		}
 	}
-	
-
 	
 	@IBAction func doLogin(_ sender: Any)
 	{
@@ -96,7 +60,7 @@ class UserLogin: UIViewController
 		}
 		
 		//print("objMe.swAutoLogin.isOn:\(swAutoLogin.isOn)")
-		let objMe = self
+		//let objMe = self
 		
 		let dataClient = Mosaic.DataClient(container:self, url: Constants.WEB_SVC_URL)
 		
@@ -213,12 +177,10 @@ class UserLogin: UIViewController
 					}
 				}
 		})
-		
 	}
 	
 	func loginSuccess(login : Login)
 	{
-		
 		if let unitId = login.unitId
 		{
 			if(unitId.isEmpty == true)
@@ -283,7 +245,7 @@ class UserLogin: UIViewController
 	private func showLoginErrorDialog(strTitle:String, strMessage:String)
 	{
 		let acController = UIAlertController(title: strTitle, message: strMessage, preferredStyle: UIAlertControllerStyle.alert)
-		let aaOkAction = UIAlertAction(title: "확인", style: UIAlertActionStyle.default, handler: nil)
+		let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: UIAlertActionStyle.default, handler: nil)
 		acController.addAction(aaOkAction)
 		self.present(acController, animated: true, completion: nil)
 	}

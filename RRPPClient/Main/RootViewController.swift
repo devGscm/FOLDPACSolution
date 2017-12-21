@@ -7,9 +7,6 @@ class RootViewController: BaseViewController
 {
     open override func viewDidLoad()
 	{
-		print("@@@@@@@@@@@@@@@@@@@@")
-		print(" RootViewController")
-		print("@@@@@@@@@@@@@@@@@@@@")
         super.viewDidLoad()
         view.backgroundColor = Color.grey.lighten5
         prepareToolbar()
