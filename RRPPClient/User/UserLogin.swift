@@ -10,6 +10,7 @@ import UIKit
 import Material
 import FontAwesome
 import Mosaic
+import Foundation
 
 class UserLogin: UIViewController
 {
@@ -20,6 +21,18 @@ class UserLogin: UIViewController
 	@IBOutlet weak var tfPasswd: UITextField!
 	@IBOutlet weak var btnLogin: UIButton!
 	//@IBOutlet weak var vwAutoLogin: UIView!
+	
+	lazy var mClsLeftController: LeftViewController = {
+		return UIStoryboard.viewController(identifier: "LeftViewController") as! LeftViewController
+	}()
+	
+	lazy var mClsRootController: RootViewController = {
+		return UIStoryboard.viewController(identifier: "RootViewController") as! RootViewController
+	}()
+	
+	lazy var mClsRightController: RightViewController = {
+		return UIStoryboard.viewController(identifier: "RightViewController") as! RightViewController
+	}()
 	
 	override func viewDidLoad()
 	{
@@ -60,6 +73,8 @@ class UserLogin: UIViewController
 //			self.view.backgroundColor = UIColor.black
 //		}
 	}
+	
+
 	
 	@IBAction func doLogin(_ sender: Any)
 	{
@@ -110,70 +125,62 @@ class UserLogin: UIViewController
 				{
 					if ( returnCode == Constants.RETURN_CODE_SUCCESS)
 					{
-						let clsUserInfo = AppContext.sharedManager.getUserInfo()
-						if let unitId = login.unitId
+						//let clsUserInfo = AppContext.sharedManager.getUserInfo()
+						
+						let arrLang = UserDefaults.standard.object(forKey: "AppleLanguages") as! Array<String>
+						var strCurAppleLang = arrLang.first ?? "en"
+						print(" - 현재 언어(Full):\(strCurAppleLang)" )
+						if(strCurAppleLang.length > 2)
 						{
-							if(unitId.isEmpty == true)
-							{
-								//여기가 호출이 안될것임. 웹서비스 소스상 사용자 unit가 설정이 없으면
-								//자체적으로 성공메새지를 안보내고 RETURN_CODE_NOT_ATTACH_UNIT 로 보냄
-								//안드로이드용 소스를 따라서 한것으로 향후 해당 루틴은 삭제해도 될것 같음.
-								DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // in half a second...
-									self.showLoginErrorDialog(strTitle: NSLocalizedString("common_error", comment: "에러"),
-															  strMessage: NSLocalizedString("rfid_no_selected_readers", comment: "선택된 리더기가 없습니다."))
-								}
-								return
-							}
+							strCurAppleLang = strCurAppleLang.substring(0, length: 2)
 						}
-						
-                        DispatchQueue.main.async
-                        {
-                            clsUserInfo.setAutoLogin(boolAutoLogin: objMe.swAutoLogin.isOn)    // 자동로그인 여부
-                        }
-						clsUserInfo.setCorpId(strCorpId: login.corpId!)
-						//clsUserInfo.setCustType(custType: login.corpType!)
-						clsUserInfo.setUserId(strUserId: strUserId!)
-						clsUserInfo.setUserName(strUserName: login.userName ?? "")
-						clsUserInfo.setPassword(strPassword: strPasswd!)
-						clsUserInfo.setCustId(strCustId: login.custId ?? "")
-						clsUserInfo.setCustType(custType: login.custType ?? "")
-						clsUserInfo.setEncryptId(strEncryptId: login.encryptId!)
-						if let version = login.version
-						{
-							if let intVersion = Int(version)
-							{
-								clsUserInfo.setVersion(intVersion: intVersion)
-							}
-						}
-						
-						clsUserInfo.setPushUseYn(strPushUseYn : login.pushUseYn ?? "N")
-						
-						// TODO:: 항목의 의미 업무파악
-						clsUserInfo.setPreCorpId(strCorpId : "")
-						clsUserInfo.setPreUserId(strPreUserId : "")
-						clsUserInfo.setUserLang(strUserLang : login.userLang ?? "KR")
-						clsUserInfo.setUnitId(strUnitId : login.unitId ?? "")
-						clsUserInfo.setEventCode(strEventCode : login.eventCode ?? "")
-						clsUserInfo.setBranchId(branchId : login.branchId ?? "")
-						clsUserInfo.setBranchName(branchName : login.branchName ?? "")
-						clsUserInfo.setBranchCustId(branchCustId : login.branchCustId ?? "")
-						clsUserInfo.setBranchCustName(branchCustName : login.branchCustName ?? "")
-						clsUserInfo.setParentCustId(strParentCustId : login.parentCustId ?? "")
-						clsUserInfo.setBranchCustType(branchCustType : login.branchCustType ?? "")
-						
-						AppContext.sharedManager.setAuthenticated(boolAuthenticated: true)
-
-						
-						//UserDefaults.standard.set(["ko"], forKey: "AppleLanguages")
-						//UserDefaults.standard.synchronize()
-				
-						
-						print("@@@@@@@@@ 로그인 성공")
+						print(" - 현재 언어:\(strCurAppleLang)" )
 		
+						var strUserLang = login.userLang ?? "EN"
+						if(strUserLang == "EN")
+						{
+							strUserLang = "en"
+						}
+						else if(strUserLang == "CH")
+						{
+							strUserLang = "zh"
+						}
+						else if(strUserLang == "KR")
+						{
+							strUserLang = "ko"
+						}
+						else if(strUserLang == "JA")
+						{
+							strUserLang = "ja"
+						}
 						
-						objMe.dismiss(animated: true, completion: nil)
-						//toolbarController?
-						return
+						// 시스템 언어와 서버에서 받은 사용자의 언어가 다르다면 시스템언어를 서버에서 받은언어로 대체하고 종료
+						if(strCurAppleLang != strUserLang)
+						{
+							Dialog.show(container: self, viewController: nil,
+								title: NSLocalizedString("common_confirm", comment: "확인"),
+								message: NSLocalizedString("login_change_language", comment: "사용자 언어를 적용하려면 앱을 종료하고 다시 시작해야 합니다. 종료하시겠습니까?"),
+								okTitle: NSLocalizedString("common_confirm", comment: "확인"),
+								okHandler: { (_) in
+									
+									// 시스템 언어 변경
+									UserDefaults.standard.removeObject(forKey: "AppleLanguages")
+									UserDefaults.standard.set([strUserLang], forKey: "AppleLanguages")
+									UserDefaults.standard.synchronize()
+									
+									// 종료
+									exit(0)
+							},
+							cancelTitle: NSLocalizedString("common_cancel", comment: "취소"), cancelHandler: { (_) in
+								self.loginSuccess(login: login)
+							})
+						}
+						else
+						{
+							print("@@@@@@@@@@  구녕 @@@@@@@@@@@@@@@@@")
+							self.loginSuccess(login: login)
+						}
+					
 					}
 					else
 					{
@@ -208,6 +215,66 @@ class UserLogin: UIViewController
 				}
 		})
 		
+	}
+	
+	func loginSuccess(login : Login)
+	{
+		
+		if let unitId = login.unitId
+		{
+			if(unitId.isEmpty == true)
+			{
+				//여기가 호출이 안될것임. 웹서비스 소스상 사용자 unit가 설정이 없으면
+				//자체적으로 성공메새지를 안보내고 RETURN_CODE_NOT_ATTACH_UNIT 로 보냄
+				//안드로이드용 소스를 따라서 한것으로 향후 해당 루틴은 삭제해도 될것 같음.
+				DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // in half a second...
+					self.showLoginErrorDialog(strTitle: NSLocalizedString("common_error", comment: "에러"),
+											  strMessage: NSLocalizedString("rfid_no_selected_readers", comment: "선택된 리더기가 없습니다."))
+				}
+				return
+			}
+		}
+		let strUserId = tfUserId.text;
+		let strPasswd = tfPasswd.text;
+		let clsUserInfo = AppContext.sharedManager.getUserInfo()
+		
+		DispatchQueue.main.async
+		{
+			clsUserInfo.setAutoLogin(boolAutoLogin: self.swAutoLogin.isOn)    // 자동로그인 여부
+		}
+		clsUserInfo.setCorpId(strCorpId: login.corpId!)
+		//clsUserInfo.setCustType(custType: login.corpType!)
+		clsUserInfo.setUserId(strUserId: strUserId!)
+		clsUserInfo.setUserName(strUserName: login.userName ?? "")
+		clsUserInfo.setPassword(strPassword: strPasswd!)
+		clsUserInfo.setCustId(strCustId: login.custId ?? "")
+		clsUserInfo.setCustType(custType: login.custType ?? "")
+		clsUserInfo.setEncryptId(strEncryptId: login.encryptId!)
+		if let version = login.version
+		{
+			if let intVersion = Int(version)
+			{
+				clsUserInfo.setVersion(intVersion: intVersion)
+			}
+		}
+		
+		clsUserInfo.setPushUseYn(strPushUseYn : login.pushUseYn ?? "N")
+		
+		// TODO:: 항목의 의미 업무파악
+		clsUserInfo.setPreCorpId(strCorpId : "")
+		clsUserInfo.setPreUserId(strPreUserId : "")
+		clsUserInfo.setUserLang(strUserLang : login.userLang ?? "KR")
+		clsUserInfo.setUnitId(strUnitId : login.unitId ?? "")
+		clsUserInfo.setEventCode(strEventCode : login.eventCode ?? "")
+		clsUserInfo.setBranchId(branchId : login.branchId ?? "")
+		clsUserInfo.setBranchName(branchName : login.branchName ?? "")
+		clsUserInfo.setBranchCustId(branchCustId : login.branchCustId ?? "")
+		clsUserInfo.setBranchCustName(branchCustName : login.branchCustName ?? "")
+		clsUserInfo.setParentCustId(strParentCustId : login.parentCustId ?? "")
+		clsUserInfo.setBranchCustType(branchCustType : login.branchCustType ?? "")
+		
+		AppContext.sharedManager.setAuthenticated(boolAuthenticated: true)
+		self.dismiss(animated: true, completion: nil)
 	}
 	
 	private func showLoginErrorDialog(strTitle:String, strMessage:String)
