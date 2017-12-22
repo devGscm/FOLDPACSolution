@@ -781,11 +781,7 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         //        BarcodeScanner.Info.loadingTint = UIColor.black
         //        BarcodeScanner.Info.notFoundTint = UIColor.red
         //
-        
-        clsBarcodeScanner = BarcodeScannerController()
-        clsBarcodeScanner?.codeDelegate = self
-        clsBarcodeScanner?.errorDelegate = self
-        clsBarcodeScanner?.dismissalDelegate = self
+
     }
     
     //=======================================
@@ -793,6 +789,11 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     //=======================================
     @IBAction func onBarcodeSearchClicked(_ sender: UIButton)
     {
+		clsBarcodeScanner = BarcodeScannerController()
+		clsBarcodeScanner?.codeDelegate = self
+		clsBarcodeScanner?.errorDelegate = self
+		clsBarcodeScanner?.dismissalDelegate = self
+		
         // 모달로 띄운다.
         clsBarcodeScanner?.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         present(clsBarcodeScanner!, animated: true, completion: nil)
