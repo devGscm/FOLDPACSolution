@@ -366,7 +366,7 @@
                                                                 <segue destination="r5R-U3-cA0" kind="presentation" identifier="segInOutCancelDetailCell" modalPresentationStyle="overCurrentContext" id="rcd-XH-rLT"/>
                                                             </connections>
                                                         </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="처리량" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sW6-P9-EBz">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="처리량" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sW6-P9-EBz">
                                                             <rect key="frame" x="115" y="31" width="70" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
