@@ -96,7 +96,7 @@
 "RSi-4W-Def.normalTitle" = "Send(Complete)";
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "WQV-0Q-nXg"; */
-"WQV-0Q-nXg.text" = Processing Qty.;
+"WQV-0Q-nXg.text" = "Processing Qty.";
 
 /* Class = "UILabel"; text = "입고처"; ObjectID = "alQ-Vh-Cvv"; */
 "alQ-Vh-Cvv.text" = "Dest. Com.";
