@@ -3,7 +3,7 @@
 "30e-Ll-tmV.text" = "Dprt. Com.";
 
 /* Class = "UILabel"; text = "Statement No."; ObjectID = "3h3-ls-nTW"; */
-"3h3-ls-nTW.text" = "传票号";
+"3h3-ls-nTW.text" = "Statement No.";
 
 /* Class = "UIButton"; normalTitle = "초기화"; ObjectID = "4My-3K-E0m"; */
 "4My-3K-E0m.normalTitle" = "Clear";
