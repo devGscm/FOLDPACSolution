@@ -45,6 +45,7 @@
 		55A579F01FD51A5700DBA188 /* WorkCustSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A579EF1FD51A5700DBA188 /* WorkCustSearch.swift */; };
 		55A579F21FD51A7400DBA188 /* WorkCustSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A579F11FD51A7400DBA188 /* WorkCustSearchCell.swift */; };
 		55A589AA1FEC7E2D0079A136 /* InOutCancel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55A589AC1FEC7E2D0079A136 /* InOutCancel.storyboard */; };
+		55A589B51FECA4150079A136 /* TransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A589B41FECA4150079A136 /* TransitionController.swift */; };
 		55ACD6771FC802BD00A2DC72 /* ProductOrderSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD6731FC802BC00A2DC72 /* ProductOrderSearch.swift */; };
 		55ACD67E1FC804F800A2DC72 /* ListViewDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD67C1FC804F800A2DC72 /* ListViewDialog.swift */; };
 		55ACD6801FC8051900A2DC72 /* DataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD67F1FC8051900A2DC72 /* DataProtocol.swift */; };
@@ -230,6 +231,7 @@
 		55A589AE1FEC7E2F0079A136 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InOutCancel.strings; sourceTree = "<group>"; };
 		55A589B01FEC7E310079A136 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/InOutCancel.strings; sourceTree = "<group>"; };
 		55A589B21FEC7E320079A136 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InOutCancel.strings; sourceTree = "<group>"; };
+		55A589B41FECA4150079A136 /* TransitionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionController.swift; sourceTree = "<group>"; };
 		55ACD6731FC802BC00A2DC72 /* ProductOrderSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductOrderSearch.swift; sourceTree = "<group>"; };
 		55ACD67C1FC804F800A2DC72 /* ListViewDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewDialog.swift; sourceTree = "<group>"; };
 		55ACD67F1FC8051900A2DC72 /* DataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProtocol.swift; sourceTree = "<group>"; };
@@ -441,6 +443,14 @@
 				559F39DD1FD7708A006E5C17 /* IdentificationSystemDialog.swift */,
 			);
 			path = Config;
+			sourceTree = "<group>";
+		};
+		55A589B31FECA3F60079A136 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				55A589B41FECA4150079A136 /* TransitionController.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		55ACD66C1FC801A900A2DC72 /* Recovered References */ = {
@@ -657,6 +667,7 @@
 		96E4941E1FB1A78500D1E2C1 /* RRPPClient */ = {
 			isa = PBXGroup;
 			children = (
+				55A589B31FECA3F60079A136 /* Extension */,
 				B04078571FE8A8E000F44FBE /* EasyOut */,
 				55C1957C1FE743DD008299FE /* EasyIn */,
 				55D13A641FE348A500099F50 /* CombineIn */,
@@ -992,6 +1003,7 @@
 				B0FD4EDD1FE3C24700EE976E /* CombineOutWorkList.swift in Sources */,
 				55ACD6771FC802BD00A2DC72 /* ProductOrderSearch.swift in Sources */,
 				960224441FD0F3E400DE7C65 /* AT288Reader.swift in Sources */,
+				55A589B51FECA4150079A136 /* TransitionController.swift in Sources */,
 				55ACD67E1FC804F800A2DC72 /* ListViewDialog.swift in Sources */,
 				55FA783B1FBDACE300583A80 /* UserInfo.swift in Sources */,
 				5575BB461FE238F000CACCC8 /* EventOther.swift in Sources */,
