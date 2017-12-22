@@ -24,7 +24,15 @@ class EasyInSearchCell: UITableViewCell
 	
 	override func setSelected(_ selected: Bool, animated: Bool)
 	{
-		super.setSelected(selected, animated: animated)
+		//super.setSelected(selected, animated: animated)
+		if(selected)
+		{
+			contentView.backgroundColor = UIColor.groupTableViewBackground
+		}
+		else
+		{
+			contentView.backgroundColor = UIColor.white
+		}
 	}
 }
 

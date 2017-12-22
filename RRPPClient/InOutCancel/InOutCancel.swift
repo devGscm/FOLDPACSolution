@@ -414,15 +414,13 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.arcDataRows.count
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+	
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+	{
         tableView.rowHeight = 60                    //셀 크기 조정
-        //tableView.allowsSelection = false           //셀 선택안되게 막음
-        
+		
         let objCell:InOutCancelCell = tableView.dequeueReusableCell(withIdentifier: "tvcInOutCancel", for: indexPath) as! InOutCancelCell        
         let clsDataRow = arcDataRows[indexPath.row]
-        
         let strUtcTraceDate = clsDataRow.getString(name:"workDate")
         let strLocaleTraceDate = DateUtil.utcToLocale(utcDate: strUtcTraceDate!, dateFormat: "yyyyMMddHHmmss")
 		let strTraceDate = DateUtil.getConvertFormatDate(date: strLocaleTraceDate, srcFormat: "yyyyMMddHHmmss", dstFormat:"MM-dd HH:mm")
