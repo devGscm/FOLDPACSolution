@@ -676,7 +676,7 @@ extension StockReview
 			return
 		}
 		tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
-		tc.toolbar.detail = NSLocalizedString("title_product_mount", comment: "자산등록")
+		tc.toolbar.detail = NSLocalizedString("title_stock_review", comment: "재고실사")
 	}
 }
 
