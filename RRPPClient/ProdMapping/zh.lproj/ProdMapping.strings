@@ -9,7 +9,7 @@
 "2RH-dN-FH6.normalTitle" = "商品增加";
 
 /* Class = "UILabel"; text = "Serial No."; ObjectID = "5rp-aL-pIt"; */
-"5rp-aL-pIt.text" = "Serial No.";
+"5rp-aL-pIt.text" = "序号";
 
 /* Class = "UILabel"; text = "인식수량"; ObjectID = "68g-ys-UAR"; */
 "68g-ys-UAR.text" = "识别数量";
@@ -18,7 +18,7 @@
 "6Wj-Cp-TPk.text" = "删除";
 
 /* Class = "UILabel"; text = "Serial No."; ObjectID = "AfH-TF-CXu"; */
-"AfH-TF-CXu.text" = "Serial No.";
+"AfH-TF-CXu.text" = "序号";
 
 /* Class = "UIButton"; normalTitle = "작업초기화"; ObjectID = "BR7-nY-f0a"; */
 "BR7-nY-f0a.normalTitle" = "作业初始化";
@@ -33,7 +33,7 @@
 "Lph-gd-3gX.text" = "作业人";
 
 /* Class = "UILabel"; text = "Serial No."; ObjectID = "Lw6-8a-AWh"; */
-"Lw6-8a-AWh.text" = "Serial No.";
+"Lw6-8a-AWh.text" = "序号";
 
 /* Class = "UILabel"; text = "선택"; ObjectID = "Ma4-ar-HGC"; */
 "Ma4-ar-HGC.text" = "选择";
