@@ -425,13 +425,11 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
         
         let strUtcTraceDate = clsDataRow.getString(name:"workDate")
         let strLocaleTraceDate = DateUtil.utcToLocale(utcDate: strUtcTraceDate!, dateFormat: "yyyyMMddHHmmss")
-        let strTraceDate = DateUtil.getConvertFormatDate(date: strLocaleTraceDate, srcFormat: "yyyyMMddHHmmss", dstFormat:"MM/dd")
-        let strTraceTime = DateUtil.getConvertFormatDate(date: strLocaleTraceDate, srcFormat: "yyyyMMddHHmmss", dstFormat:"HH:mm")
-
-        
-        objCell.lblRowNo?.text = clsDataRow.getString(name:"rowNo")
+		let strTraceDate = DateUtil.getConvertFormatDate(date: strLocaleTraceDate, srcFormat: "yyyyMMddHHmmss", dstFormat:"MM-dd HH:mm")
+		
+        //objCell.lblRowNo?.text = clsDataRow.getString(name:"rowNo")
         objCell.lblWorkDate?.text = strTraceDate
-        objCell.lblWorkTime?.text = strTraceTime
+		
         objCell.lblInoutCustName?.text = clsDataRow.getString(name:"inoutCustName")
         objCell.lblIoTypeName?.text = clsDataRow.getString(name:"ioTypeName")
         objCell.lblWorkId?.text = clsDataRow.getString(name:"workId")
