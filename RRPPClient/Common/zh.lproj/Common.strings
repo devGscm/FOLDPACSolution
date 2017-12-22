@@ -1,120 +1,120 @@
 
-/* Class = "UIButton"; normalTitle = "검색"; ObjectID = "0Cf-gp-aGn"; */
+/* Class = "UIButton"; normalTitle = "搜索"; ObjectID = "0Cf-gp-aGn"; */
 "0Cf-gp-aGn.normalTitle" = "搜索";
 
-/* Class = "UILabel"; text = "미인식량"; ObjectID = "1u1-Ov-pgK"; */
+/* Class = "UILabel"; text = "未识别数量"; ObjectID = "1u1-Ov-pgK"; */
 "1u1-Ov-pgK.text" = "未识别数量";
 
-/* Class = "UILabel"; text = "전송"; ObjectID = "2La-yj-dvG"; */
+/* Class = "UILabel"; text = "传输"; ObjectID = "2La-yj-dvG"; */
 "2La-yj-dvG.text" = "传输";
 
-/* Class = "UILabel"; text = "메모"; ObjectID = "Am8-yl-A2f"; */
+/* Class = "UILabel"; text = "记录"; ObjectID = "Am8-yl-A2f"; */
 "Am8-yl-A2f.text" = "记录";
 
-/* Class = "UILabel"; text = "검색조건"; ObjectID = "DLH-fX-6tp"; */
+/* Class = "UILabel"; text = "搜索조건"; ObjectID = "DLH-fX-6tp"; */
 "DLH-fX-6tp.text" = "搜索条件";
 
-/* Class = "UIButton"; normalTitle = "선택"; ObjectID = "G92-aR-K1h"; */
+/* Class = "UIButton"; normalTitle = "选择"; ObjectID = "G92-aR-K1h"; */
 "G92-aR-K1h.normalTitle" = "选择";
 
 /* Class = "UILabel"; text = "RB11"; ObjectID = "H59-Rm-LVj"; */
 "H59-Rm-LVj.text" = "RB11";
 
-/* Class = "UIButton"; normalTitle = "확인"; ObjectID = "IWM-Ua-6Sk"; */
+/* Class = "UIButton"; normalTitle = "确认"; ObjectID = "IWM-Ua-6Sk"; */
 "IWM-Ua-6Sk.normalTitle" = "确认";
 
-/* Class = "UILabel"; text = "법인"; ObjectID = "MPZ-al-u6a"; */
+/* Class = "UILabel"; text = "法人"; ObjectID = "MPZ-al-u6a"; */
 "MPZ-al-u6a.text" = "法人";
 
-/* Class = "UILabel"; text = "조회시간"; ObjectID = "Mzy-s3-ZZY"; */
+/* Class = "UILabel"; text = "查询时间"; ObjectID = "Mzy-s3-ZZY"; */
 "Mzy-s3-ZZY.text" = "查询时间";
 
-/* Class = "UILabel"; text = "확인"; ObjectID = "NZY-Ja-Vy1"; */
+/* Class = "UILabel"; text = "确认"; ObjectID = "NZY-Ja-Vy1"; */
 "NZY-Ja-Vy1.text" = "确认";
 
-/* Class = "UIButton"; normalTitle = "전체"; ObjectID = "NfV-3Z-pmJ"; */
+/* Class = "UIButton"; normalTitle = "全部"; ObjectID = "NfV-3Z-pmJ"; */
 "NfV-3Z-pmJ.normalTitle" = "全部";
 
-/* Class = "UILabel"; text = "전송"; ObjectID = "Oba-A4-fJB"; */
+/* Class = "UILabel"; text = "传输"; ObjectID = "Oba-A4-fJB"; */
 "Oba-A4-fJB.text" = "传输";
 
-/* Class = "UILabel"; text = "고객사명"; ObjectID = "RZQ-0w-NwF"; */
+/* Class = "UILabel"; text = "客户"; ObjectID = "RZQ-0w-NwF"; */
 "RZQ-0w-NwF.text" = "客户";
 
 /* Class = "UILabel"; text = "EPC URN"; ObjectID = "THJ-tO-mbm"; */
 "THJ-tO-mbm.text" = "EPC URN";
 
-/* Class = "UILabel"; text = "선택"; ObjectID = "TWd-gD-1aC"; */
+/* Class = "UILabel"; text = "选择"; ObjectID = "TWd-gD-1aC"; */
 "TWd-gD-1aC.text" = "选择";
 
-/* Class = "UILabel"; text = "법인"; ObjectID = "Tzx-bI-OzD"; */
+/* Class = "UILabel"; text = "法人"; ObjectID = "Tzx-bI-OzD"; */
 "Tzx-bI-OzD.text" = "法人";
 
-/* Class = "UIButton"; normalTitle = "확인"; ObjectID = "UnR-Tz-pap"; */
+/* Class = "UIButton"; normalTitle = "确认"; ObjectID = "UnR-Tz-pap"; */
 "UnR-Tz-pap.normalTitle" = "确认";
 
-/* Class = "UILabel"; text = "메모"; ObjectID = "ahg-fm-B3G"; */
+/* Class = "UILabel"; text = "记录"; ObjectID = "ahg-fm-B3G"; */
 "ahg-fm-B3G.text" = "记录";
 
-/* Class = "UILabel"; text = "고객사명"; ObjectID = "b8r-A1-rFv"; */
+/* Class = "UILabel"; text = "客户"; ObjectID = "b8r-A1-rFv"; */
 "b8r-A1-rFv.text" = "客户";
 
 /* Class = "UILabel"; text = "EPC URN"; ObjectID = "bRP-Jr-1ba"; */
 "bRP-Jr-1ba.text" = "EPC URN";
 
-/* Class = "UILabel"; text = "조회시간"; ObjectID = "bYE-ks-TnN"; */
+/* Class = "UILabel"; text = "查询时间"; ObjectID = "bYE-ks-TnN"; */
 "bYE-ks-TnN.text" = "查询时间";
 
-/* Class = "UILabel"; text = "고객사ID"; ObjectID = "bfV-K2-kgi"; */
+/* Class = "UILabel"; text = "客户ID"; ObjectID = "bfV-K2-kgi"; */
 "bfV-K2-kgi.text" = "客户ID";
 
-/* Class = "UILabel"; text = "구분"; ObjectID = "bfY-VD-Xhs"; */
+/* Class = "UILabel"; text = "区分"; ObjectID = "bfY-VD-Xhs"; */
 "bfY-VD-Xhs.text" = "区分";
 
 /* Class = "UILabel"; text = "161016"; ObjectID = "cDJ-Yu-pLh"; */
 "cDJ-Yu-pLh.text" = "161016";
 
-/* Class = "UILabel"; text = "Serial No."; ObjectID = "dvG-IL-nTz"; */
+/* Class = "UILabel"; text = "序号"; ObjectID = "dvG-IL-nTz"; */
 "dvG-IL-nTz.text" = "序号";
 
-/* Class = "UILabel"; text = "법인"; ObjectID = "erF-Qj-Hy8"; */
+/* Class = "UILabel"; text = "法人"; ObjectID = "erF-Qj-Hy8"; */
 "erF-Qj-Hy8.text" = "法人";
 
-/* Class = "UILabel"; text = "구분"; ObjectID = "hDf-l3-R2H"; */
+/* Class = "UILabel"; text = "区分"; ObjectID = "hDf-l3-R2H"; */
 "hDf-l3-R2H.text" = "区分";
 
-/* Class = "UIButton"; normalTitle = "전체"; ObjectID = "hFg-fr-MbB"; */
+/* Class = "UIButton"; normalTitle = "全部"; ObjectID = "hFg-fr-MbB"; */
 "hFg-fr-MbB.normalTitle" = "全部";
 
-/* Class = "UILabel"; text = "고객사조회"; ObjectID = "irh-fn-Whv"; */
+/* Class = "UILabel"; text = "客户查询"; ObjectID = "irh-fn-Whv"; */
 "irh-fn-Whv.text" = "客户查询";
 
-/* Class = "UIButton"; normalTitle = "초기화"; ObjectID = "jfP-bc-kuG"; */
+/* Class = "UIButton"; normalTitle = "初始化"; ObjectID = "jfP-bc-kuG"; */
 "jfP-bc-kuG.normalTitle" = "初始化";
 
-/* Class = "UIButton"; normalTitle = "고객사명"; ObjectID = "jsy-rc-1FT"; */
+/* Class = "UIButton"; normalTitle = "客户"; ObjectID = "jsy-rc-1FT"; */
 "jsy-rc-1FT.normalTitle" = "客户";
 
-/* Class = "UIButton"; normalTitle = "초기화"; ObjectID = "mX6-AS-FeT"; */
+/* Class = "UIButton"; normalTitle = "初始化"; ObjectID = "mX6-AS-FeT"; */
 "mX6-AS-FeT.normalTitle" = "初始化";
 
-/* Class = "UILabel"; text = "상세리스트"; ObjectID = "qAp-4S-96u"; */
+/* Class = "UILabel"; text = "详细明细"; ObjectID = "qAp-4S-96u"; */
 "qAp-4S-96u.text" = "详细明细";
 
-/* Class = "UILabel"; text = "구분"; ObjectID = "qcM-hk-Wsy"; */
+/* Class = "UILabel"; text = "区分"; ObjectID = "qcM-hk-Wsy"; */
 "qcM-hk-Wsy.text" = "区分";
 
-/* Class = "UILabel"; text = "고객사ID"; ObjectID = "rAq-NT-Dry"; */
+/* Class = "UILabel"; text = "客户ID"; ObjectID = "rAq-NT-Dry"; */
 "rAq-NT-Dry.text" = "客户ID";
 
-/* Class = "UILabel"; text = "유형"; ObjectID = "rI9-of-dQg"; */
+/* Class = "UILabel"; text = "类型"; ObjectID = "rI9-of-dQg"; */
 "rI9-of-dQg.text" = "类型";
 
-/* Class = "UIButton"; normalTitle = "확인"; ObjectID = "uca-Wz-oS6"; */
+/* Class = "UIButton"; normalTitle = "确认"; ObjectID = "uca-Wz-oS6"; */
 "uca-Wz-oS6.normalTitle" = "确认";
 
-/* Class = "UILabel"; text = "메모"; ObjectID = "vZ7-fI-3xa"; */
+/* Class = "UILabel"; text = "记录"; ObjectID = "vZ7-fI-3xa"; */
 "vZ7-fI-3xa.text" = "记录";
 
-/* Class = "UILabel"; text = "인수자"; ObjectID = "zvL-0y-b2y"; */
-"zvL-0y-b2y.text" = "交接人"";
+/* Class = "UILabel"; text = "交接人"; ObjectID = "zvL-0y-b2y"; */
+"zvL-0y-b2y.text" = "交接人";

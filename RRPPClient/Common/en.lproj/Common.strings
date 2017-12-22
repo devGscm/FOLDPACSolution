@@ -1,75 +1,75 @@
 
 /* Class = "UIButton"; normalTitle = "검색"; ObjectID = "0Cf-gp-aGn"; */
-"0Cf-gp-aGn.normalTitle" = "검색";
+"0Cf-gp-aGn.normalTitle" = "Search";
 
 /* Class = "UILabel"; text = "미인식량"; ObjectID = "1u1-Ov-pgK"; */
-"1u1-Ov-pgK.text" = "미인식량";
+"1u1-Ov-pgK.text" = "Non-Reading Qty";
 
 /* Class = "UILabel"; text = "전송"; ObjectID = "2La-yj-dvG"; */
-"2La-yj-dvG.text" = "전송";
+"2La-yj-dvG.text" = "Send";
 
-/* Class = "UILabel"; text = "메모"; ObjectID = "Am8-yl-A2f"; */
-"Am8-yl-A2f.text" = "메모";
+/* Class = "UILabel"; text = "Memo"; ObjectID = "Am8-yl-A2f"; */
+"Am8-yl-A2f.text" = "Memo";
 
-/* Class = "UILabel"; text = "검색조건"; ObjectID = "DLH-fX-6tp"; */
-"DLH-fX-6tp.text" = "검색조건";
+/* Class = "UILabel"; text = "Condition(Search)"; ObjectID = "DLH-fX-6tp"; */
+"DLH-fX-6tp.text" = "Condition(Search)";
 
-/* Class = "UIButton"; normalTitle = "선택"; ObjectID = "G92-aR-K1h"; */
-"G92-aR-K1h.normalTitle" = "선택";
+/* Class = "UIButton"; normalTitle = "Select"; ObjectID = "G92-aR-K1h"; */
+"G92-aR-K1h.normalTitle" = "Select";
 
 /* Class = "UILabel"; text = "RB11"; ObjectID = "H59-Rm-LVj"; */
 "H59-Rm-LVj.text" = "RB11";
 
-/* Class = "UIButton"; normalTitle = "확인"; ObjectID = "IWM-Ua-6Sk"; */
-"IWM-Ua-6Sk.normalTitle" = "확인";
+/* Class = "UIButton"; normalTitle = "Confirm"; ObjectID = "IWM-Ua-6Sk"; */
+"IWM-Ua-6Sk.normalTitle" = "Confirm";
 
-/* Class = "UILabel"; text = "법인"; ObjectID = "MPZ-al-u6a"; */
-"MPZ-al-u6a.text" = "법인";
+/* Class = "UILabel"; text = "Alliance Com."; ObjectID = "MPZ-al-u6a"; */
+"MPZ-al-u6a.text" = "Alliance Com.";
 
-/* Class = "UILabel"; text = "조회시간"; ObjectID = "Mzy-s3-ZZY"; */
-"Mzy-s3-ZZY.text" = "조회시간";
+/* Class = "UILabel"; text = "Time"; ObjectID = "Mzy-s3-ZZY"; */
+"Mzy-s3-ZZY.text" = "Time";
 
-/* Class = "UILabel"; text = "확인"; ObjectID = "NZY-Ja-Vy1"; */
-"NZY-Ja-Vy1.text" = "확인";
+/* Class = "UILabel"; text = "Confirm"; ObjectID = "NZY-Ja-Vy1"; */
+"NZY-Ja-Vy1.text" = "Confirm";
 
-/* Class = "UIButton"; normalTitle = "전체"; ObjectID = "NfV-3Z-pmJ"; */
-"NfV-3Z-pmJ.normalTitle" = "전체";
+/* Class = "UIButton"; normalTitle = "Total"; ObjectID = "NfV-3Z-pmJ"; */
+"NfV-3Z-pmJ.normalTitle" = "Total";
 
 /* Class = "UILabel"; text = "전송"; ObjectID = "Oba-A4-fJB"; */
-"Oba-A4-fJB.text" = "전송";
+"Oba-A4-fJB.text" = "Send";
 
-/* Class = "UILabel"; text = "고객사명"; ObjectID = "RZQ-0w-NwF"; */
-"RZQ-0w-NwF.text" = "고객사명";
+/* Class = "UILabel"; text = "Customer"; ObjectID = "RZQ-0w-NwF"; */
+"RZQ-0w-NwF.text" = "Customer";
 
 /* Class = "UILabel"; text = "EPC URN"; ObjectID = "THJ-tO-mbm"; */
 "THJ-tO-mbm.text" = "EPC URN";
 
-/* Class = "UILabel"; text = "선택"; ObjectID = "TWd-gD-1aC"; */
-"TWd-gD-1aC.text" = "선택";
+/* Class = "UILabel"; text = "Select"; ObjectID = "TWd-gD-1aC"; */
+"TWd-gD-1aC.text" = "Select";
 
-/* Class = "UILabel"; text = "법인"; ObjectID = "Tzx-bI-OzD"; */
-"Tzx-bI-OzD.text" = "법인";
+/* Class = "UILabel"; text = "Alliance Com."; ObjectID = "Tzx-bI-OzD"; */
+"Tzx-bI-OzD.text" = "Alliance Com.";
 
-/* Class = "UIButton"; normalTitle = "확인"; ObjectID = "UnR-Tz-pap"; */
-"UnR-Tz-pap.normalTitle" = "확인";
+/* Class = "UIButton"; normalTitle = "Confirm"; ObjectID = "UnR-Tz-pap"; */
+"UnR-Tz-pap.normalTitle" = "Confirm";
 
-/* Class = "UILabel"; text = "메모"; ObjectID = "ahg-fm-B3G"; */
-"ahg-fm-B3G.text" = "메모";
+/* Class = "UILabel"; text = "Memo"; ObjectID = "ahg-fm-B3G"; */
+"ahg-fm-B3G.text" = "Memo";
 
-/* Class = "UILabel"; text = "고객사명"; ObjectID = "b8r-A1-rFv"; */
-"b8r-A1-rFv.text" = "고객사명";
+/* Class = "UILabel"; text = "Customer"; ObjectID = "b8r-A1-rFv"; */
+"b8r-A1-rFv.text" = "Customer";
 
 /* Class = "UILabel"; text = "EPC URN"; ObjectID = "bRP-Jr-1ba"; */
 "bRP-Jr-1ba.text" = "EPC URN";
 
-/* Class = "UILabel"; text = "조회시간"; ObjectID = "bYE-ks-TnN"; */
-"bYE-ks-TnN.text" = "조회시간";
+/* Class = "UILabel"; text = "Time"; ObjectID = "bYE-ks-TnN"; */
+"bYE-ks-TnN.text" = "Time";
 
-/* Class = "UILabel"; text = "고객사ID"; ObjectID = "bfV-K2-kgi"; */
-"bfV-K2-kgi.text" = "고객사ID";
+/* Class = "UILabel"; text = "Customer ID"; ObjectID = "bfV-K2-kgi"; */
+"bfV-K2-kgi.text" = "Customer ID";
 
-/* Class = "UILabel"; text = "구분"; ObjectID = "bfY-VD-Xhs"; */
-"bfY-VD-Xhs.text" = "구분";
+/* Class = "UILabel"; text = "Type"; ObjectID = "bfY-VD-Xhs"; */
+"bfY-VD-Xhs.text" = "Type";
 
 /* Class = "UILabel"; text = "161016"; ObjectID = "cDJ-Yu-pLh"; */
 "cDJ-Yu-pLh.text" = "161016";
@@ -77,45 +77,44 @@
 /* Class = "UILabel"; text = "Serial No."; ObjectID = "dvG-IL-nTz"; */
 "dvG-IL-nTz.text" = "Serial No.";
 
-/* Class = "UILabel"; text = "법인"; ObjectID = "erF-Qj-Hy8"; */
-"erF-Qj-Hy8.text" = "법인";
+/* Class = "UILabel"; text = "Alliance Com."; ObjectID = "erF-Qj-Hy8"; */
+"erF-Qj-Hy8.text" = "Alliance Com.";
 
-/* Class = "UILabel"; text = "구분"; ObjectID = "hDf-l3-R2H"; */
-"hDf-l3-R2H.text" = "구분";
+/* Class = "UILabel"; text = "Type"; ObjectID = "hDf-l3-R2H"; */
+"hDf-l3-R2H.text" = "Type";
 
-/* Class = "UIButton"; normalTitle = "전체"; ObjectID = "hFg-fr-MbB"; */
-"hFg-fr-MbB.normalTitle" = "전체";
+/* Class = "UIButton"; normalTitle = "Total"; ObjectID = "hFg-fr-MbB"; */
+"hFg-fr-MbB.normalTitle" = "Total";
 
 /* Class = "UILabel"; text = "고객사조회"; ObjectID = "irh-fn-Whv"; */
-"irh-fn-Whv.text" = "고객사조회";
+"irh-fn-Whv.text" = "Client Com. List";
 
-/* Class = "UIButton"; normalTitle = "초기화"; ObjectID = "jfP-bc-kuG"; */
-"jfP-bc-kuG.normalTitle" = "초기화";
+/* Class = "UIButton"; normalTitle = "Clear(Reading)"; ObjectID = "jfP-bc-kuG"; */
+"jfP-bc-kuG.normalTitle" = "Clear(Reading)";
 
-/* Class = "UIButton"; normalTitle = "고객사명"; ObjectID = "jsy-rc-1FT"; */
-"jsy-rc-1FT.normalTitle" = "고객사명";
+/* Class = "UIButton"; normalTitle = "Customer"; ObjectID = "jsy-rc-1FT"; */
+"jsy-rc-1FT.normalTitle" = "Customer";
 
-/* Class = "UIButton"; normalTitle = "초기화"; ObjectID = "mX6-AS-FeT"; */
-"mX6-AS-FeT.normalTitle" = "초기화";
+/* Class = "UIButton"; normalTitle = "Clear(Reading)"; ObjectID = "mX6-AS-FeT"; */
+"mX6-AS-FeT.normalTitle" = "Clear(Reading)";
 
-/* Class = "UILabel"; text = "상세리스트"; ObjectID = "qAp-4S-96u"; */
-"qAp-4S-96u.text" = "상세리스트";
+/* Class = "UILabel"; text = "Detail View"; ObjectID = "qAp-4S-96u"; */
+"qAp-4S-96u.text" = "Detail View";
 
-/* Class = "UILabel"; text = "구분"; ObjectID = "qcM-hk-Wsy"; */
-"qcM-hk-Wsy.text" = "구분";
+/* Class = "UILabel"; text = "Type"; ObjectID = "qcM-hk-Wsy"; */
+"qcM-hk-Wsy.text" = "Type";
 
-/* Class = "UILabel"; text = "고객사ID"; ObjectID = "rAq-NT-Dry"; */
-"rAq-NT-Dry.text" = "고객사ID";
+/* Class = "UILabel"; text = "Customer ID"; ObjectID = "rAq-NT-Dry"; */
+"rAq-NT-Dry.text" = "Customer ID";
 
-/* Class = "UILabel"; text = "유형"; ObjectID = "rI9-of-dQg"; */
-"rI9-of-dQg.text" = "유형";
+/* Class = "UILabel"; text = "Item No."; ObjectID = "rI9-of-dQg"; */
+"rI9-of-dQg.text" = "Item No.";
 
-/* Class = "UIButton"; normalTitle = "확인"; ObjectID = "uca-Wz-oS6"; */
-"uca-Wz-oS6.normalTitle" = "확인";
+/* Class = "UIButton"; normalTitle = "Confirm"; ObjectID = "uca-Wz-oS6"; */
+"uca-Wz-oS6.normalTitle" = "Confirm";
 
-/* Class = "UILabel"; text = "메모"; ObjectID = "vZ7-fI-3xa"; */
-"vZ7-fI-3xa.text" = "메모";
+/* Class = "UILabel"; text = "Memo"; ObjectID = "vZ7-fI-3xa"; */
+"vZ7-fI-3xa.text" = "Memo";
 
-/* Class = "UILabel"; text = "인수자"; ObjectID = "zvL-0y-b2y"; */
-"zvL-0y-b2y.text" = "인수자";
-
+/* Class = "UILabel"; text = "Receiver Name"; ObjectID = "zvL-0y-b2y"; */
+"zvL-0y-b2y.text" = "Receiver Name";
