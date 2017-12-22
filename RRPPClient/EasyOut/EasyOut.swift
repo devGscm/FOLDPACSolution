@@ -479,8 +479,10 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     
-    
-    // 초기화 버튼 처리, 태그 리스트 재조회
+
+    //=======================================
+    //===== 초기화 버튼 처리, 태그 리스트 재조회
+    //=======================================
     func doReloadTagList()
     {
         // 1) 태그리스트 초기화
@@ -685,30 +687,28 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
                 let strResultCode = clsDataRow.getString(name: "resultCode")
                 
                 print(" -strResultCode:\(strResultCode!)")
-                print("=========[1]작업초기화 데이터를 전송한다 =====")
                 
                 if(Constants.PROC_RESULT_SUCCESS == strResultCode)
                 {
                     //그리드 삭제 및 구조체 삭제
-                    DispatchQueue.main.async
-                    {
+                    //DispatchQueue.main.async
+                    //{
                         self.clearTagData(true)
+                    
                         if(super.getUnload() == true)
                         {
                             if(showMessage == true)
                             {
-                                print("=========[2]작업초기화 데이터를 전송한다 =====")
                                 let strMsg = NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다.")
                                 self.showSnackbar(message: strMsg)
                             }
                         }
-                    }
+                    //}
                 }
                 else
                 {
                     if(super.getUnload() == true)
                     {
-                        print("=========[3]작업초기화 데이터를 전송한다 =====")
                         let strMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
                         self.showSnackbar(message: strMsg)
                     }
@@ -723,14 +723,12 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
     //======================================
     @IBAction func onTempSaveClick(_ sender: UIButton)
     {
-        print("====[1] 임시저장 ====")
         if(AppContext.sharedManager.getUserInfo().getUnitId().isEmpty == true)
         {
             Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("rfid_reader_no_device_id", comment: "리더기의 장치ID가 없습니다.웹화면의 리더기정보관리에서 모바일전화번호를  입력하여주십시오."))
             return
         }
-
-        print("====[2] 임시저장 ====")
+     
         //입고처 정보확인
         if(self.mStrTransferCustId.isEmpty == true)
         {
@@ -738,28 +736,23 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
             return
         }
 
-        print("====[3] 임시저장 ====")
         if(self.mBoolNewTagInfoExist == false)
         {
             Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("common_no_data_send", comment: "전송할 데이터가 없습니다."))
             return
         }
         
-        
-        print("====[4] 임시저장 ====")
+
         let strVehName      = self.tfVehName?.text ?? ""
         let strTradeChit    = self.tfTradeChit.text ?? ""
         
         if(self.mStrSaleWorkId.isEmpty == false)
         {
-            print("====[5] 임시저장 ====")
             //송장번호 O, DB로 데이터 전송 처리
             sendDataExistSaleWorkId(Constants.WORK_STATE_WORKING, mStrSaleWorkId, strVehName, strTradeChit, "", "")
-            
         }
         else
         {
-            print("====[6] 임시저장 ====")
             //송장번호 X , 송장번호(SaleWorkId) 발급후 DB로 데이터 전송 처리
             sendDataNoneSaleWorkId(Constants.WORK_STATE_WORKING, mStrTransferCustId, strVehName, strTradeChit, "", "");
         }
@@ -824,11 +817,7 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
     //======================================
     func sendDataExistSaleWorkId(_ workState: String,_ saleWorkId: String,_ vehName: String,_ tradeChit: String,_ remark : String,_ signData: String)
     {
-        print("=========[1]DB로 데이터 전송처리 =====")
-        
         clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
-        
-        print("=========[2]DB로 데이터 전송처리 =====")
         
         let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
         clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
@@ -844,9 +833,6 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
         clsDataClient.addServiceParam(paramName: "barcodeId",       value: "")                      //바코드ID
         clsDataClient.addServiceParam(paramName: "itemCode",        value: "")                      //제품 코드
         clsDataClient.addServiceParam(paramName: "prodCnt",         value: "")                      //제품 개수
-        
-        
-        print("=========[2]DB로 데이터 전송처리 =====")
         
         // 완료전송 및(강제)완료전송 경우
         if(Constants.WORK_STATE_COMPLETE == workState)
@@ -869,8 +855,6 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
         clsDataTable.Id = "WORK_OUT"
         clsDataTable.addDataColumn(dataColumn: DataColumn(id: "epcCode", type: "String", size: "0", keyColumn: false, updateColumn: true, autoIncrement: false, canXlsExport: false, title: ""))
         clsDataTable.addDataColumn(dataColumn: DataColumn(id: "traceDateTime", type: "String", size: "0", keyColumn: false, updateColumn: true, autoIncrement: false, canXlsExport: false, title: ""))
-        
-        print("=========[3]DB로 데이터 전송처리 =====")
         
         for clsInfo in self.arrTagRows
         {
@@ -911,9 +895,8 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
                 {
                     let strSvrWorkState = clsDataRow.getString(name: "workState")
                     //print("-서버로부터 받은 처리갯수: \(strSvrProcCount)")
-                    print("-서버로부터 받은 작업처리상태:  \(strSvrWorkState)")
-                 
-                    print("=========[4-1]DB로 데이터 전송처리 =====")
+                    //print("-서버로부터 받은 작업처리상태:  \(strSvrWorkState)!")
+
                     //DispatchQueue.main.async
                     //{
                         //전송 성공인 경우
@@ -926,9 +909,7 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
                         }
                         self.mBoolNewTagInfoExist = false
                         self.mBoolExistSavedInvoice = true      //송장번호 할당여부
-                        
-                        print("=========완료전송인경우: \(strSvrWorkState)")
-                        
+                    
                         //현재 작업상태가 완료전송인경우
                         if(Constants.WORK_STATE_COMPLETE == strSvrWorkState)
                         {
@@ -936,21 +917,16 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
                             self.clearTagData(true)
                         }
                         let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
-                        
-                        print("=========[4-2]DB로 데이터 전송처리 =====")
+                    
                         self.showSnackbar(message: strMsg)
                     //}
                 }
                 else
                 {
-                    print("=========[5]DB로 데이터 전송처리 =====")
-                    
                     let strMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
 
-                     print("=========[6]DB로 데이터 전송처리 =====")
                     if((Constants.PROC_RESULT_ERROR_NO_REGISTERED_READERS == strResultCode) || (Constants.PROC_RESULT_ERROR_NO_MATCH_BRANCH_CUST_INFO == strResultCode))
                     {
-                        print("=========[7]DB로 데이터 전송처리 =====")
                         //super.showSnackbar(message: NSLocalizedString("common_error", comment: "에러"))
                          self.showSnackbar(message: strMsg)
                     }
@@ -959,13 +935,10 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
                         self.showSnackbar(message: strMsg)
                     }
                     
-                    print("=========[8]DB로 데이터 전송처리 =====")
                     if(self.mStrSaleWorkId.isEmpty == false)
                     {
-                        print("=========[9]DB로 데이터 전송처리 =====")
                         //완료전송 처리중 오류시 발번받은 송장번호 초기화
                         self.sendWorkInitData(saleWorkId: self.mStrSaleWorkId, showMessage: false)       //초기화
-                        print("=========[10]DB로 데이터 전송처리 =====")
                     }
                 }
             }
@@ -978,8 +951,6 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
     //======================================
     func sendDataNoneSaleWorkId(_ workState: String,_ tansferCustId: String,_ vehName: String,_ tradeChit: String,_ remark: String,_ signData: String)
     {
-        print("=========[1]sendDataNoneSaleWorkId =====")
-        
         let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
         clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
         clsDataClient.SelectUrl = "inOutService:selectSaleWorkId"
@@ -988,8 +959,6 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
         clsDataClient.addServiceParam(paramName:"userId",       value: AppContext.sharedManager.getUserInfo().getUserId())
         clsDataClient.addServiceParam(paramName:"branchId",     value: AppContext.sharedManager.getUserInfo().getBranchId())
         clsDataClient.addServiceParam(paramName:"toBranchId",   value: tansferCustId)
-        
-        print("=========[2]sendDataNoneSaleWorkId =====")
         
         clsDataClient.selectData(dataCompletionHandler: {(data, error) in
             if let error = error {
@@ -1004,7 +973,6 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
             }
             if(clsDataTable.getDataRows().count > 0)
             {
-                print("=========[3]sendDataNoneSaleWorkId =====")
                 let clsDataRow = clsDataTable.getDataRows()[0]
                 self.mStrSaleWorkId = clsDataRow.getString(name: "resultSaleWorkId") ?? ""      //서버에서 발급받은 송장번호
                 

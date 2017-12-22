@@ -1,6 +1,6 @@
 import UIKit
 import Material
-
+import Mosaic
 import SwiftyJSON
 import FontAwesome
 
@@ -26,6 +26,8 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	var intMenuIndex = -1
 	var intOldMenuIndex = -1
+    var boolPaidServiced = false    //출고C(상품매핑) - 유료사용여부
+    
     
 	open override func viewDidLoad()
 	{
@@ -205,7 +207,8 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		
         let strtMenuItem  = arrMenuData[indexPath.row]
 		self.intMenuIndex = indexPath.row
-		
+		self.boolPaidServiced = false
+        
 		switch (strtMenuItem.menuId)
 		{
 			case "TagSupply" :
@@ -229,16 +232,10 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 				break
 			
 			case "ProductMount" :
-				// 자산등록 (장착)
+				//자산등록 (장착)
 				clsController = { () -> ProductMount in
 					return UIStoryboard.viewController(storyBoardName: "Product", identifier: "ProductMount") as! ProductMount
 				}()
-				
-//				let clsController: ProductMount = {
-//                    print("==== ProductMount ====")
-//					return UIStoryboard.viewController(storyBoardName: "Product", identifier: "ProductMount") as! ProductMount
-//				}()
-
 				break
 
 			
@@ -298,7 +295,13 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 				break
 			
 			case "ProdMappingOut" :
-                // 출고C(출하)
+                //출고C(출하)
+                
+                //이은미과장님만 비 활성화_20171221
+                //self.boolPaidServiced = true
+                //Dialog.show(container: self, title: NSLocalizedString("common_confirm", comment: "확인"), message: NSLocalizedString("msg_charged_service", comment: "유료 서비스입니다.서비스 사용계역여부를 확인 부탁드립니다."))
+                
+                //이은미과장님만 활성화_20171221
 				clsController = { () -> ProdMappingOut in
 					return UIStoryboard.viewController(storyBoardName: "ProdMapping", identifier: "ProdMappingOut") as! ProdMappingOut
 				}()
@@ -337,8 +340,12 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			default:
 				print("is selected");
 		}
-		toolbarController?.move(to: clsController!, completion: closeNavigationDrawer)
-		//toolbarController?.transition(to: clsController!, completion: closeNavigationDrawer)
+        //유료서비스가 아닌경우 진입.
+        if(boolPaidServiced == false)
+        {
+            toolbarController?.move(to: clsController!, completion: closeNavigationDrawer)
+            //toolbarController?.transition(to: clsController!, completion: closeNavigationDrawer)
+        }
 	}
 	
 	@IBAction func onLogoutClicked(_ sender: Any)
