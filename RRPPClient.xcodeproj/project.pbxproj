@@ -339,6 +339,9 @@
 		B01C42041FE0CA7F00404301 /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		B01C420C1FE105BB00404301 /* CombineOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineOut.swift; sourceTree = "<group>"; };
 		B01C420E1FE105E400404301 /* CombineOutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineOutCell.swift; sourceTree = "<group>"; };
+		B02C845B1FECBB31007F2558 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Common.strings; sourceTree = "<group>"; };
+		B02C845D1FECBB34007F2558 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/Common.strings; sourceTree = "<group>"; };
+		B02C845F1FECBB36007F2558 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Common.strings; sourceTree = "<group>"; };
 		B040785A1FE8B31C00F44FBE /* EasyOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyOut.swift; sourceTree = "<group>"; };
 		B040785C1FE8D02600F44FBE /* EasyOutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyOutCell.swift; sourceTree = "<group>"; };
 		B060131C1FD512B900594CCD /* InOutCancel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InOutCancel.swift; sourceTree = "<group>"; };
@@ -349,9 +352,6 @@
 		B0782B681FEC93D400C0422D /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/ProdMapping.strings; sourceTree = "<group>"; };
 		B0782B6A1FEC93D600C0422D /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/ProdMapping.strings; sourceTree = "<group>"; };
 		B0782B841FECA62700C0422D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Common.storyboard; sourceTree = "<group>"; };
-		B0782B871FECA62A00C0422D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Common.strings; sourceTree = "<group>"; };
-		B0782B891FECA62D00C0422D /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/Common.strings; sourceTree = "<group>"; };
-		B0782B8B1FECA62E00C0422D /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Common.strings; sourceTree = "<group>"; };
 		B0A2357B1FDA5E7F00AD4925 /* InOutCancelDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InOutCancelDetailCell.swift; sourceTree = "<group>"; };
 		B0A2357D1FDA6D4D00AD4925 /* InOutCancelDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InOutCancelDetail.swift; sourceTree = "<group>"; };
 		B0B95D271FEA59A20044E34A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/EasyOut.storyboard; sourceTree = "<group>"; };
@@ -1209,9 +1209,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				B0782B841FECA62700C0422D /* Base */,
-				B0782B871FECA62A00C0422D /* en */,
-				B0782B891FECA62D00C0422D /* zh */,
-				B0782B8B1FECA62E00C0422D /* ko */,
+				B02C845B1FECBB31007F2558 /* en */,
+				B02C845D1FECBB34007F2558 /* zh */,
+				B02C845F1FECBB36007F2558 /* ko */,
 			);
 			name = Common.storyboard;
 			sourceTree = "<group>";
@@ -1362,7 +1362,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "ROY DEBUG";
 				SWIFT_OBJC_BRIDGING_HEADER = "RRPPClient/RRPPClient-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
