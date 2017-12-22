@@ -147,6 +147,10 @@ class ProductOrderSearch: BaseViewController, UITableViewDataSource, UITableView
 			{
 				self.tvProductOrderSearch?.reloadData()
 				self.tvProductOrderSearch?.hideIndicator()
+				if( self.arcDataRows.count == 0)
+				{
+					super.showSnackbar(message: NSLocalizedString("product_more_data", comment: "데이터가 없습니다."))
+				}
 			}
 		})
 
@@ -233,6 +237,12 @@ class ProductOrderSearch: BaseViewController, UITableViewDataSource, UITableView
 
 		dpPicker.locale = Locale(identifier: "ko_KR")
 		dpPicker.datePickerMode = .date
+		let dfFormatter = DateFormatter()
+		dfFormatter.dateFormat = "yyyy-MM-dd"
+		if let selDate = dfFormatter.date(from: tfDateControl.text ?? "")
+		{
+			dpPicker.date = selDate
+		}
 		
 		let toolbar = UIToolbar()
 		toolbar.sizeToFit()

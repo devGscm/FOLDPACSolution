@@ -360,7 +360,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CxC-Or-B4Y">
-                                                        <rect key="frame" x="80" y="4" width="84" height="30"/>
+                                                        <rect key="frame" x="80" y="4" width="83" height="30"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <color key="backgroundColor" red="0.0" green="0.50196078430000002" blue="0.047058823530000002" alpha="1" colorSpace="calibratedRGB"/>
                                                         <state key="normal" title="고객사명">

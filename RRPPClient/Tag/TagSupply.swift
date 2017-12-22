@@ -147,9 +147,11 @@ class TagSupply: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 				print("@@@@@@@@strIssueOrderId=\(strIssueOrderId)")
 				print("@@@@@@@@intOrderWorkCnt=\(intOrderWorkCnt)")
 				
-				self.btnIssueOrderId.setTitle(strIssueOrderId, for: .normal)
-				self.lblOrderCustName.text = clsDataRow.getString(name: "orderCustName")
-				self.lblOrderCount.text = "\(intOrderWorkCnt)/\(intOrderReqCnt)"
+				DispatchQueue.main.async {
+					self.btnIssueOrderId.setTitle(self.strIssueOrderId, for: .normal)
+					self.lblOrderCustName.text = clsDataRow.getString(name: "orderCustName")
+					self.lblOrderCount.text = "\(self.intOrderWorkCnt)/\(self.intOrderReqCnt)"
+				}
 				
 				// 새로운 발주번호가 들어면 기존 데이터를 삭제한다.
 				clearTagData()
@@ -427,17 +429,15 @@ class TagSupply: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 		strIssueOrderId	= ""
 		strAssetEpc = ""
 		strTagCustId = ""
-		
-		//UI 변경은 Thread로 호출하여 변경한
-		
-		self.btnIssueOrderId.setTitle("", for: .normal)
+	
+		self.btnIssueOrderId.setTitle(NSLocalizedString("make_order_id_selection", comment: "주문선택"), for: .normal)
 		self.lblOrderCustName.text = ""
 		self.lblOrderCount.text = ""
 		
 		let dtCurDate = Date()
 		let dfFormat = DateFormatter()
 		dfFormat.dateFormat = "yyyy-MM-dd"
-		self.btnWorkDate.text = dfFormat.string(from: dtCurDate)
+		self.btnWorkDate.text = dfFormat.string(from: dtCurDate)		
 	}
 	
 	
@@ -475,6 +475,12 @@ class TagSupply: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 		
 		dpPicker.locale = Locale(identifier: "ko_KR")
 		dpPicker.datePickerMode = .date
+		let dfFormatter = DateFormatter()
+		dfFormatter.dateFormat = "yyyy-MM-dd"
+		if let selDate = dfFormatter.date(from: tfDateControl.text ?? "")
+		{
+			dpPicker.date = selDate
+		}
 		
 		let toolbar = UIToolbar()
 		toolbar.sizeToFit()

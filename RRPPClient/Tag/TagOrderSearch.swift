@@ -140,9 +140,13 @@ class TagOrderSearch: BaseViewController, UITableViewDataSource, UITableViewDele
 			}
 			self.arcDataRows.append(contentsOf: clsDataTable.getDataRows())
 			DispatchQueue.main.async
+			{
+				self.tvTagOrderSearch?.reloadData()
+				self.tvTagOrderSearch?.hideIndicator()
+				if( self.arcDataRows.count == 0)
 				{
-					self.tvTagOrderSearch?.reloadData()
-					self.tvTagOrderSearch?.hideIndicator()
+					super.showSnackbar(message: NSLocalizedString("product_more_data", comment: "데이터가 없습니다."))
+				}
 			}
 		})
 		
@@ -229,6 +233,12 @@ class TagOrderSearch: BaseViewController, UITableViewDataSource, UITableViewDele
 		
 		dpPicker.locale = Locale(identifier: "ko_KR")
 		dpPicker.datePickerMode = .date
+		let dfFormatter = DateFormatter()
+		dfFormatter.dateFormat = "yyyy-MM-dd"
+		if let selDate = dfFormatter.date(from: tfDateControl.text ?? "")
+		{
+			dpPicker.date = selDate
+		}
 		
 		let toolbar = UIToolbar()
 		toolbar.sizeToFit()

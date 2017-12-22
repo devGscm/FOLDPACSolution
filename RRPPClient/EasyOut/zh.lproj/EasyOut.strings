@@ -45,22 +45,22 @@
 "gZz-47-YUm.text" = "车牌号";
 
 /* Class = "UILabel"; text = "상세"; ObjectID = "h1S-Ib-Rgh"; */
-"h1S-Ib-Rgh.text" = "상세";
+"h1S-Ib-Rgh.text" = "明细";
 
 /* Class = "UILabel"; text = "Swing U"; ObjectID = "ihj-UC-R8S"; */
 "ihj-UC-R8S.text" = "Swing U";
 
 /* Class = "UIButton"; normalTitle = "연결"; ObjectID = "jT0-xM-V3x"; */
-"jT0-xM-V3x.normalTitle" = "연결";
+"jT0-xM-V3x.normalTitle" = "连接";
 
 /* Class = "UILabel"; text = "작업자"; ObjectID = "l13-sr-9B2"; */
-"l13-sr-9B2.text" = "작업자";
+"l13-sr-9B2.text" = "作业人";
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "nTS-Oj-lP1"; */
-"nTS-Oj-lP1.text" = "처리량";
+"nTS-Oj-lP1.text" = "处理量";
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "tbL-ze-LuU"; */
-"tbL-ze-LuU.text" = "처리량";
+"tbL-ze-LuU.text" = "处理量";
 
 /* Class = "UILabel"; text = "유형"; ObjectID = "vTb-F9-Ilm"; */
-"vTb-F9-Ilm.text" = "유형";
+"vTb-F9-Ilm.text" = "类型";

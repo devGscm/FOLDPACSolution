@@ -39,7 +39,7 @@
 "Nh0-mY-oI2.text" = "P/O Qty";
 
 /* Class = "UILabel"; text = "유형"; ObjectID = "PSP-rI-j1q"; */
-"PSP-rI-j1q.text" = "common_asset_type";
+"PSP-rI-j1q.text" = "Item No.";
 
 /* Class = "UILabel"; text = "RRPP팀"; ObjectID = "Ql5-h4-QWc"; */
 "Ql5-h4-QWc.text" = "RRPP팀";

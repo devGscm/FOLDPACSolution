@@ -1,0 +1,102 @@
+
+/* Class = "UILabel"; text = "No."; ObjectID = "2No-dS-Ffr"; */
+"2No-dS-Ffr.text" = "No.";
+
+/* Class = "UIButton"; normalTitle = "구분"; ObjectID = "32B-xb-3mE"; */
+"32B-xb-3mE.normalTitle" = "Type";
+
+/* Class = "UILabel"; text = "상세 리스트"; ObjectID = "4bf-qq-fhL"; */
+"4bf-qq-fhL.text" = "Detail View";
+
+/* Class = "UILabel"; text = "처리일시"; ObjectID = "7CW-3T-myV"; */
+"7CW-3T-myV.text" = "Reading Time";
+
+/* Class = "UIButton"; normalTitle = "취소"; ObjectID = "9n7-BF-pXc"; */
+"9n7-BF-pXc.normalTitle" = "Cancel";
+
+/* Class = "UILabel"; text = "작업자"; ObjectID = "E4X-pz-OfC"; */
+"E4X-pz-OfC.text" = "Worker";
+
+/* Class = "UILabel"; text = "처리시간"; ObjectID = "FaE-fX-qEe"; */
+"FaE-fX-qEe.text" = "처리시간";
+
+/* Class = "UILabel"; text = "처리량"; ObjectID = "HvB-zk-5cI"; */
+"HvB-zk-5cI.text" = "Processing Qty.";
+
+/* Class = "UILabel"; text = "지시번호"; ObjectID = "I9x-Xy-LVL"; */
+"I9x-Xy-LVL.text" = "지시번호";
+
+/* Class = "UILabel"; text = "유형"; ObjectID = "IVT-Uw-cLW"; */
+"IVT-Uw-cLW.text" = "Item No.";
+
+/* Class = "UILabel"; text = "입출고처"; ObjectID = "JjC-Mb-VmR"; */
+"JjC-Mb-VmR.text" = "Dest./Dprt. Com.";
+
+/* Class = "UILabel"; text = "미처리량"; ObjectID = "L1r-mu-ydf"; */
+"L1r-mu-ydf.text" = "Untreated Qty";
+
+/* Class = "UILabel"; text = "선택"; ObjectID = "RSP-fF-RUP"; */
+"RSP-fF-RUP.text" = "Selection";
+
+/* Class = "UILabel"; text = "처리량"; ObjectID = "Rha-e9-dfW"; */
+"Rha-e9-dfW.text" = "Processing Qty.";
+
+/* Class = "UILabel"; text = "입고예정량"; ObjectID = "Tvq-3Y-tWH"; */
+"Tvq-3Y-tWH.text" = "Received Schedule Qty";
+
+/* Class = "UILabel"; text = "미처리량"; ObjectID = "Ye4-yL-usF"; */
+"Ye4-yL-usF.text" = "Untreated Qty";
+
+/* Class = "UILabel"; text = "처리량"; ObjectID = "YnJ-Cd-5U2"; */
+"YnJ-Cd-5U2.text" = "Processing Qty.";
+
+/* Class = "UIButton"; normalTitle = "검색"; ObjectID = "Zd1-oG-PLY"; */
+"Zd1-oG-PLY.normalTitle" = "Search";
+
+/* Class = "UILabel"; text = "구분"; ObjectID = "a2V-vZ-rde"; */
+"a2V-vZ-rde.text" = "Type";
+
+/* Class = "UIButton"; normalTitle = "유형"; ObjectID = "bQv-WH-3Um"; */
+"bQv-WH-3Um.normalTitle" = "Item No.";
+
+/* Class = "UILabel"; text = "유형"; ObjectID = "cVz-KU-XzG"; */
+"cVz-KU-XzG.text" = "Item No.";
+
+/* Class = "UILabel"; text = "유형"; ObjectID = "d2r-7V-hTN"; */
+"d2r-7V-hTN.text" = "Item No.";
+
+/* Class = "UILabel"; text = "No."; ObjectID = "d6F-gp-VNm"; */
+"d6F-gp-VNm.text" = "No.";
+
+/* Class = "UILabel"; text = "거점"; ObjectID = "dpb-a7-gCl"; */
+"dpb-a7-gCl.text" = "Location";
+
+/* Class = "UILabel"; text = "입고예정량"; ObjectID = "jgU-NZ-Eqb"; */
+"jgU-NZ-Eqb.text" = "Received Schedule Qty";
+
+/* Class = "UILabel"; text = "No."; ObjectID = "nns-ux-lUq"; */
+"nns-ux-lUq.text" = "No.";
+
+/* Class = "UILabel"; text = "입출고처"; ObjectID = "ooJ-Bi-wPP"; */
+"ooJ-Bi-wPP.text" = "Dest./Dprt. Com.";
+
+/* Class = "UILabel"; text = "처리일시"; ObjectID = "qJL-oe-BYd"; */
+"qJL-oe-BYd.text" = "Reading Time";
+
+/* Class = "UILabel"; text = "구분"; ObjectID = "rBw-2d-mZa"; */
+"rBw-2d-mZa.text" = "Type";
+
+/* Class = "UILabel"; text = "No."; ObjectID = "rPX-60-Ii4"; */
+"rPX-60-Ii4.text" = "No.";
+
+/* Class = "UILabel"; text = "처리량"; ObjectID = "sW6-P9-EBz"; */
+"sW6-P9-EBz.text" = "Processing Qty.";
+
+/* Class = "UILabel"; text = "지시번호"; ObjectID = "tI6-7c-R90"; */
+"tI6-7c-R90.text" = "Instruction No.";
+
+/* Class = "UIButton"; normalTitle = "검색 조건"; ObjectID = "vf6-jh-PmQ"; */
+"vf6-jh-PmQ.normalTitle" = "Condition(Search)";
+
+/* Class = "UILabel"; text = "기간"; ObjectID = "xHZ-Gm-8tw"; */
+"xHZ-Gm-8tw.text" = "Term";

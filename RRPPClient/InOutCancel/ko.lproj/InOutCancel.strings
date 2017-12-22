@@ -1,0 +1,102 @@
+
+/* Class = "UILabel"; text = "No."; ObjectID = "2No-dS-Ffr"; */
+"2No-dS-Ffr.text" = "No.";
+
+/* Class = "UIButton"; normalTitle = "구분"; ObjectID = "32B-xb-3mE"; */
+"32B-xb-3mE.normalTitle" = "구분";
+
+/* Class = "UILabel"; text = "상세 리스트"; ObjectID = "4bf-qq-fhL"; */
+"4bf-qq-fhL.text" = "상세 리스트";
+
+/* Class = "UILabel"; text = "처리일시"; ObjectID = "7CW-3T-myV"; */
+"7CW-3T-myV.text" = "처리일시";
+
+/* Class = "UIButton"; normalTitle = "취소"; ObjectID = "9n7-BF-pXc"; */
+"9n7-BF-pXc.normalTitle" = "취소";
+
+/* Class = "UILabel"; text = "작업자"; ObjectID = "E4X-pz-OfC"; */
+"E4X-pz-OfC.text" = "작업자";
+
+/* Class = "UILabel"; text = "처리시간"; ObjectID = "FaE-fX-qEe"; */
+"FaE-fX-qEe.text" = "처리시간";
+
+/* Class = "UILabel"; text = "처리량"; ObjectID = "HvB-zk-5cI"; */
+"HvB-zk-5cI.text" = "처리량";
+
+/* Class = "UILabel"; text = "지시번호"; ObjectID = "I9x-Xy-LVL"; */
+"I9x-Xy-LVL.text" = "지시번호";
+
+/* Class = "UILabel"; text = "유형"; ObjectID = "IVT-Uw-cLW"; */
+"IVT-Uw-cLW.text" = "유형";
+
+/* Class = "UILabel"; text = "입출고처"; ObjectID = "JjC-Mb-VmR"; */
+"JjC-Mb-VmR.text" = "입출고처";
+
+/* Class = "UILabel"; text = "미처리량"; ObjectID = "L1r-mu-ydf"; */
+"L1r-mu-ydf.text" = "미처리량";
+
+/* Class = "UILabel"; text = "선택"; ObjectID = "RSP-fF-RUP"; */
+"RSP-fF-RUP.text" = "선택";
+
+/* Class = "UILabel"; text = "처리량"; ObjectID = "Rha-e9-dfW"; */
+"Rha-e9-dfW.text" = "처리량";
+
+/* Class = "UILabel"; text = "입고예정량"; ObjectID = "Tvq-3Y-tWH"; */
+"Tvq-3Y-tWH.text" = "입고예정량";
+
+/* Class = "UILabel"; text = "미처리량"; ObjectID = "Ye4-yL-usF"; */
+"Ye4-yL-usF.text" = "미처리량";
+
+/* Class = "UILabel"; text = "처리량"; ObjectID = "YnJ-Cd-5U2"; */
+"YnJ-Cd-5U2.text" = "처리량";
+
+/* Class = "UIButton"; normalTitle = "검색"; ObjectID = "Zd1-oG-PLY"; */
+"Zd1-oG-PLY.normalTitle" = "검색";
+
+/* Class = "UILabel"; text = "구분"; ObjectID = "a2V-vZ-rde"; */
+"a2V-vZ-rde.text" = "구분";
+
+/* Class = "UIButton"; normalTitle = "유형"; ObjectID = "bQv-WH-3Um"; */
+"bQv-WH-3Um.normalTitle" = "유형";
+
+/* Class = "UILabel"; text = "유형"; ObjectID = "cVz-KU-XzG"; */
+"cVz-KU-XzG.text" = "유형";
+
+/* Class = "UILabel"; text = "유형"; ObjectID = "d2r-7V-hTN"; */
+"d2r-7V-hTN.text" = "유형";
+
+/* Class = "UILabel"; text = "No."; ObjectID = "d6F-gp-VNm"; */
+"d6F-gp-VNm.text" = "No.";
+
+/* Class = "UILabel"; text = "거점"; ObjectID = "dpb-a7-gCl"; */
+"dpb-a7-gCl.text" = "거점";
+
+/* Class = "UILabel"; text = "입고예정량"; ObjectID = "jgU-NZ-Eqb"; */
+"jgU-NZ-Eqb.text" = "입고예정량";
+
+/* Class = "UILabel"; text = "No."; ObjectID = "nns-ux-lUq"; */
+"nns-ux-lUq.text" = "No.";
+
+/* Class = "UILabel"; text = "입출고처"; ObjectID = "ooJ-Bi-wPP"; */
+"ooJ-Bi-wPP.text" = "입출고처";
+
+/* Class = "UILabel"; text = "처리일시"; ObjectID = "qJL-oe-BYd"; */
+"qJL-oe-BYd.text" = "처리일시";
+
+/* Class = "UILabel"; text = "구분"; ObjectID = "rBw-2d-mZa"; */
+"rBw-2d-mZa.text" = "구분";
+
+/* Class = "UILabel"; text = "No."; ObjectID = "rPX-60-Ii4"; */
+"rPX-60-Ii4.text" = "No.";
+
+/* Class = "UILabel"; text = "처리량"; ObjectID = "sW6-P9-EBz"; */
+"sW6-P9-EBz.text" = "처리량";
+
+/* Class = "UILabel"; text = "지시번호"; ObjectID = "tI6-7c-R90"; */
+"tI6-7c-R90.text" = "지시번호";
+
+/* Class = "UIButton"; normalTitle = "검색 조건"; ObjectID = "vf6-jh-PmQ"; */
+"vf6-jh-PmQ.normalTitle" = "검색 조건";
+
+/* Class = "UILabel"; text = "기간"; ObjectID = "xHZ-Gm-8tw"; */
+"xHZ-Gm-8tw.text" = "기간";

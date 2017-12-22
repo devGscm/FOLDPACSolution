@@ -1,0 +1,129 @@
+
+/* Class = "UIButton"; normalTitle = "임시저장"; ObjectID = "2h9-w3-Mbt"; */
+"2h9-w3-Mbt.normalTitle" = "임시저장";
+
+/* Class = "UILabel"; text = "미처리량"; ObjectID = "3I5-9o-rzw"; */
+"3I5-9o-rzw.text" = "미처리량";
+
+/* Class = "UILabel"; text = "입고예정일"; ObjectID = "3RS-c2-PZ9"; */
+"3RS-c2-PZ9.text" = "입고예정일";
+
+/* Class = "UILabel"; text = "입고예정일"; ObjectID = "5Ag-n5-I2F"; */
+"5Ag-n5-I2F.text" = "입고예정일";
+
+/* Class = "UIButton"; normalTitle = "초기화"; ObjectID = "5Wq-kk-kNB"; */
+"5Wq-kk-kNB.normalTitle" = "초기화";
+
+/* Class = "UILabel"; text = "출고처"; ObjectID = "72h-wZ-cxj"; */
+"72h-wZ-cxj.text" = "출고처";
+
+/* Class = "UIButton"; normalTitle = "구분"; ObjectID = "9GQ-nP-Vub"; */
+"9GQ-nP-Vub.normalTitle" = "구분";
+
+/* Class = "UIButton"; normalTitle = "송장선택"; ObjectID = "9wU-xw-vgu"; */
+"9wU-xw-vgu.normalTitle" = "송장선택";
+
+/* Class = "UILabel"; text = "유형"; ObjectID = "BlN-Kh-BX1"; */
+"BlN-Kh-BX1.text" = "유형";
+
+/* Class = "UILabel"; text = "상세"; ObjectID = "Cat-vf-Fa6"; */
+"Cat-vf-Fa6.text" = "상세";
+
+/* Class = "UILabel"; text = "입고예정량"; ObjectID = "Cfd-xc-t09"; */
+"Cfd-xc-t09.text" = "입고예정량";
+
+/* Class = "UILabel"; text = "유형"; ObjectID = "E5T-Pe-swu"; */
+"E5T-Pe-swu.text" = "유형";
+
+/* Class = "UILabel"; text = "송장조회"; ObjectID = "GUe-ta-z2m"; */
+"GUe-ta-z2m.text" = "송장조회";
+
+/* Class = "UILabel"; text = "송장번호"; ObjectID = "H8o-8y-SDE"; */
+"H8o-8y-SDE.text" = "송장번호";
+
+/* Class = "UIButton"; normalTitle = "상세"; ObjectID = "IDr-Ll-rQa"; */
+"IDr-Ll-rQa.normalTitle" = "상세";
+
+/* Class = "UILabel"; text = "출고처"; ObjectID = "IJL-SR-SF2"; */
+"IJL-SR-SF2.text" = "출고처";
+
+/* Class = "UILabel"; text = "유형"; ObjectID = "JHh-0c-A46"; */
+"JHh-0c-A46.text" = "유형";
+
+/* Class = "UILabel"; text = "처리량"; ObjectID = "JWp-rn-mbm"; */
+"JWp-rn-mbm.text" = "처리량";
+
+/* Class = "UILabel"; text = "미처리량"; ObjectID = "LbV-Bn-ZGu"; */
+"LbV-Bn-ZGu.text" = "미처리량";
+
+/* Class = "UILabel"; text = "차량번호"; ObjectID = "PP1-uj-oJJ"; */
+"PP1-uj-oJJ.text" = "차량번호";
+
+/* Class = "UILabel"; text = "선택"; ObjectID = "Rrt-eL-xNr"; */
+"Rrt-eL-xNr.text" = "선택";
+
+/* Class = "UILabel"; text = "납품자"; ObjectID = "Sgn-MJ-Vwu"; */
+"Sgn-MJ-Vwu.text" = "납품자";
+
+/* Class = "UIButton"; normalTitle = "작업초기화"; ObjectID = "Tv6-gq-trm"; */
+"Tv6-gq-trm.normalTitle" = "작업초기화";
+
+/* Class = "UILabel"; text = "처리량"; ObjectID = "VBN-Ts-BoA"; */
+"VBN-Ts-BoA.text" = "처리량";
+
+/* Class = "UILabel"; text = "유형"; ObjectID = "VFg-1r-DRg"; */
+"VFg-1r-DRg.text" = "유형";
+
+/* Class = "UIButton"; normalTitle = "연결"; ObjectID = "XRq-cz-8Uk"; */
+"XRq-cz-8Uk.normalTitle" = "연결";
+
+/* Class = "UILabel"; text = "거점"; ObjectID = "bEf-sa-y5i"; */
+"bEf-sa-y5i.text" = "거점";
+
+/* Class = "UILabel"; text = "입고예정량"; ObjectID = "buT-MJ-65j"; */
+"buT-MJ-65j.text" = "입고예정량";
+
+/* Class = "UILabel"; text = "출고처"; ObjectID = "cbV-xO-ruJ"; */
+"cbV-xO-ruJ.text" = "출고처";
+
+/* Class = "UIButton"; normalTitle = "검색"; ObjectID = "cvX-38-Twg"; */
+"cvX-38-Twg.normalTitle" = "검색";
+
+/* Class = "UIButton"; normalTitle = "완료전송"; ObjectID = "eQ1-Z8-4C4"; */
+"eQ1-Z8-4C4.normalTitle" = "완료전송";
+
+/* Class = "UILabel"; text = "입고예정"; ObjectID = "ebz-Oq-f1g"; */
+"ebz-Oq-f1g.text" = "입고예정";
+
+/* Class = "UILabel"; text = "작업자"; ObjectID = "gdE-By-fpZ"; */
+"gdE-By-fpZ.text" = "작업자";
+
+/* Class = "UILabel"; text = "처리량"; ObjectID = "gqI-uS-Wdg"; */
+"gqI-uS-Wdg.text" = "처리량";
+
+/* Class = "UILabel"; text = "입고예정"; ObjectID = "hR6-zy-5kn"; */
+"hR6-zy-5kn.text" = "입고예정";
+
+/* Class = "UILabel"; text = "송장번호"; ObjectID = "i57-b3-ZUQ"; */
+"i57-b3-ZUQ.text" = "송장번호";
+
+/* Class = "UILabel"; text = "미처리량"; ObjectID = "jDO-He-0kp"; */
+"jDO-He-0kp.text" = "미처리량";
+
+/* Class = "UILabel"; text = "유형"; ObjectID = "kpy-uw-Nu9"; */
+"kpy-uw-Nu9.text" = "유형";
+
+/* Class = "UILabel"; text = "출고처"; ObjectID = "llg-vY-esg"; */
+"llg-vY-esg.text" = "출고처";
+
+/* Class = "UILabel"; text = "Swing U"; ObjectID = "vNd-KE-Kn5"; */
+"vNd-KE-Kn5.text" = "Swing U";
+
+/* Class = "UILabel"; text = "입고예정일"; ObjectID = "x77-eS-Rjr"; */
+"x77-eS-Rjr.text" = "입고예정일";
+
+/* Class = "UILabel"; text = "입고예정"; ObjectID = "xvS-KT-m3v"; */
+"xvS-KT-m3v.text" = "입고예정";
+
+/* Class = "UIButton"; normalTitle = "선택"; ObjectID = "y3a-sG-Hw5"; */
+"y3a-sG-Hw5.normalTitle" = "선택";

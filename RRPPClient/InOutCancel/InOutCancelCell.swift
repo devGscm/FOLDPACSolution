@@ -10,14 +10,12 @@ import UIKit
 
 class InOutCancelCell: UITableViewCell
 {
-    @IBOutlet weak var lblRowNo: UILabel!
     @IBOutlet weak var lblWorkDate: UILabel!
     @IBOutlet weak var lblInoutCustName: UILabel!
     @IBOutlet weak var lblIoTypeName: UILabel!
     @IBOutlet weak var lblWorkId: UILabel!
     @IBOutlet weak var lblCompleteWorkCnt: UILabel!
     @IBOutlet weak var btnSelection: UIButton!
-    @IBOutlet weak var lblWorkTime: UILabel!
     @IBOutlet weak var btnAssetEpcName: UIButton!
     
     

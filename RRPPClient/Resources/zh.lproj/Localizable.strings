@@ -152,7 +152,7 @@
 "rfid_reader_none" = "未说明";
 "rfid_reader_connect" = "连接";
 "rfid_reader_close" = "结束";
-"rfid_asset_name" = "品目";
+"rfid_asset_name" = "类型";
 "rfid_serial_no" = "序号";
 "rfid_epc_code" = "EPC Code";
 "rfid_epc_urn" = "EPC URN";
