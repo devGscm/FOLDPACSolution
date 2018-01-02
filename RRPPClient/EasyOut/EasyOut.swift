@@ -526,8 +526,8 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
                     let strUtcTraceDate         = clsDataRow.getString(name: "utcTraceDate") ?? ""
                     let strProdAssetEpcName     = clsDataRow.getString(name: "prodAssetEpcName") ?? ""
                     let strProdAssetEpc         = clsDataRow.getString(name: "prodAssetEpc") ?? ""
-                    let strTradeChit            = clsDataRow.getString(name: "tradeChit") ?? ""
-                    let strVehName              = clsDataRow.getString(name: "vehName") ?? ""
+                    _let strTradeChit            = clsDataRow.getString(name: "tradeChit") ?? ""
+                    _let strVehName              = clsDataRow.getString(name: "vehName") ?? ""
                     
                     
                     //DB에서 조회된 태그 데이터 전달용 리스트에 저장

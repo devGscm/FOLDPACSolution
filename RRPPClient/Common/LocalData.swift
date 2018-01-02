@@ -30,7 +30,7 @@ struct CodeInfo {
 		return """
 		corpId:\(corpId), fieldValue:\(fieldValue),
 		commCode:\(commCode), commNameKr:\(commNameKr),
-		commNameEn:\(commNameEn), commNameCh:\(commNameCh),
+		commNameEn:\(commNameEn), commNameCh:\(commNameCh), commNameJp:\(commNameJp),
 		commRef1:\(commRef1), commRef2:\(commRef2), commRef3:\(commRef3),
 		commOrder:\(commOrder), viewYn:\(viewYn),
 		remark:\(remark)
@@ -130,6 +130,7 @@ class LocalData {
 	let mColCommNameKr : Expression<String?>
 	let mColCommNameEn : Expression<String?>
 	let mColCommNameCh : Expression<String?>
+    let mColCommNameJp : Expression<String?>
 	let mColCommRef1 : Expression<String?>
 	let mColCommRef2 : Expression<String?>
 	let mColCommRef3 : Expression<String?>
@@ -189,6 +190,7 @@ class LocalData {
 		self.mColCommNameKr = Expression<String?>("COMM_NAME_KR")
 		self.mColCommNameEn = Expression<String?>("COMM_NAME_EN")
 		self.mColCommNameCh = Expression<String?>("COMM_NAME_CH")
+        self.mColCommNameJp = Expression<String?>("COMM_NAME_JP")
 		self.mColCommRef1 = Expression<String?>("COMM_REF1")
 		self.mColCommRef2 = Expression<String?>("COMM_REF2")
 		self.mColCommRef3 = Expression<String?>("COMM_REF3")
@@ -280,6 +282,7 @@ class LocalData {
 				table.column(mColCommNameKr)
 				table.column(mColCommNameEn)
 				table.column(mColCommNameCh)
+                table.column(mColCommNameJp)
 				table.column(mColCommRef1)
 				table.column(mColCommRef2)
 				table.column(mColCommRef3)
@@ -296,6 +299,7 @@ class LocalData {
 				table.column(mColCommNameKr)
 				table.column(mColCommNameEn)
 				table.column(mColCommNameCh)
+                table.column(mColCommNameJp)
 				table.column(mColCommRef1)
 				table.column(mColCommRef2)
 				table.column(mColCommRef3)
@@ -493,6 +497,7 @@ class LocalData {
 																	  objMe.mColCommNameKr <- dataRow.getString(name:"commNameKr")!,
 																	  objMe.mColCommNameEn <- dataRow.getString(name:"commNameEn")!,
 																	  objMe.mColCommNameCh <- dataRow.getString(name:"commNameCh")!,
+                                                                      objMe.mColCommNameJp <- dataRow.getString(name:"commNameJp")!,
 																	  objMe.mColCommRef1 <- dataRow.getString(name:"commRef1")!,
 																	  objMe.mColCommRef2 <- dataRow.getString(name:"commRef2")!,
 																	  objMe.mColCommRef3 <- dataRow.getString(name:"commRef3")!,
@@ -518,7 +523,8 @@ class LocalData {
 //										print("""
 //											mColFieldValue: \(rows[self.mColFieldValue]), mColCommCode: \(rows[self.mColCommCode]),
 //											mColCommNameKr: \(rows[self.mColCommNameKr]!),mColCommNameEn: \(rows[self.mColCommNameEn]!),
-//											mColCommNameCh: \(rows[self.mColCommNameCh]!), mColCommRef1: \(rows[self.mColCommRef1]!)
+//											mColCommNameCh: \(rows[self.mColCommNameCh]!),
+//                                          mColCommNameJp: \(rows[self.mColCommNameJp]!), mColCommRef1: \(rows[self.mColCommRef1]!)
 //											mColCommRef2: \(rows[self.mColCommRef2]!), mColCommRef3: \(rows[self.mColCommRef3]!),
 //											mColCommOrder: \(rows[self.mColCommOrder]!), mColViewYn: \(rows[self.mColViewYn]!)
 //											""")
@@ -580,6 +586,7 @@ class LocalData {
 																	  objMe.mColCommNameKr <- dataRow.getString(name:"commNameKr")!,
 																	  objMe.mColCommNameEn <- dataRow.getString(name:"commNameEn")!,
 																	  objMe.mColCommNameCh <- dataRow.getString(name:"commNameCh")!,
+                                                                      objMe.mColCommNameJp <- dataRow.getString(name:"commNameJp")!,
 																	  objMe.mColCommRef1 <- dataRow.getString(name:"commRef1")!,
 																	  objMe.mColCommRef2 <- dataRow.getString(name:"commRef2") ?? "",
 																	  objMe.mColCommRef3 <- dataRow.getString(name:"commRef3") ?? "",
@@ -593,7 +600,8 @@ class LocalData {
 	//										mColCorpId: \(rows[self.mColCorpId])
 	//										mColFieldValue: \(rows[self.mColFieldValue]), mColCommCode: \(rows[self.mColCommCode]),
 	//										mColCommNameKr: \(rows[self.mColCommNameKr]!),mColCommNameEn: \(rows[self.mColCommNameEn]!),
-	//										mColCommNameCh: \(rows[self.mColCommNameCh]!), mColCommRef1: \(rows[self.mColCommRef1]!),
+    //										mColCommNameCh: \(rows[self.mColCommNameCh]!), mColCommNameJp: \(rows[s;elf.mColCommNameJp]!),
+    //                                      mColCommRef1: \(rows[self.mColCommRef1]!),
 	//										mColCommRef2: \(rows[self.mColCommRef2]!), mColCommRef3: \(rows[self.mColCommRef3]!),
 	//										mColCommOrder: \(rows[self.mColCommOrder]!)
 	//										""")
@@ -985,8 +993,8 @@ class LocalData {
 			{
 				let codeInfo = CodeInfo(corpId: "", fieldValue: "", commCode: "",
 										commNameKr: initCodeName!, commNameEn: initCodeName!,
-										commNameCh: initCodeName!, commRef1: "",
-										commRef2: "", commRef3: "",
+										commNameCh: initCodeName!, commNameJp: initCodeName!,
+                                        commRef1: "", commRef2: "", commRef3: "",
 										remark: "",commOrder: 0,
 										viewYn: "Y")
 				codeInfos.append(codeInfo)
@@ -996,7 +1004,8 @@ class LocalData {
 			{
 				let codeInfo = CodeInfo(corpId: "", fieldValue: dbCode[self.mColFieldValue], commCode: dbCode[self.mColCommCode] ,
 							  commNameKr: dbCode[self.mColCommNameKr] ?? "", commNameEn: dbCode[self.mColCommNameEn] ?? "",
-							  commNameCh: dbCode[self.mColCommNameCh] ?? "", commRef1: dbCode[self.mColCommRef1] ?? "",
+							  commNameCh: dbCode[self.mColCommNameCh] ?? "", commNameJp: dbCode[self.mColCommNameJp] ?? "",
+                              commRef1: dbCode[self.mColCommRef1] ?? "",
 							  commRef2: dbCode[self.mColCommRef2] ?? "", commRef3: dbCode[self.mColCommRef3] ?? "",
 							  remark: "",commOrder: Int(dbCode[self.mColCommOrder] ?? 0),
 							  viewYn: dbCode[self.mColViewYn] ?? "Y")
@@ -1065,8 +1074,8 @@ class LocalData {
 			{
 				let codeInfo = CodeInfo(corpId: corpId, fieldValue: "", commCode: "",
 										commNameKr: initCodeName!, commNameEn: initCodeName!,
-										commNameCh: initCodeName!, commRef1: "",
-										commRef2: "", commRef3: "",
+										commNameCh: initCodeName!, commNameJp: initCodeName!,
+                                        commRef1: "", commRef2: "", commRef3: "",
 										remark: "",commOrder: 0,
 										viewYn: "Y")
 				codeInfos.append(codeInfo)
@@ -1076,8 +1085,8 @@ class LocalData {
 			{
 				let codeInfo = CodeInfo(corpId: dbCode[self.mColCorpId], fieldValue: dbCode[self.mColFieldValue], commCode: dbCode[self.mColCommCode] ,
 										commNameKr: dbCode[self.mColCommNameKr] ?? "", commNameEn: dbCode[self.mColCommNameEn] ?? "",
-										commNameCh: dbCode[self.mColCommNameCh] ?? "", commRef1: dbCode[self.mColCommRef1] ?? "",
-										commRef2: dbCode[self.mColCommRef2] ?? "", commRef3: dbCode[self.mColCommRef3] ?? "",
+										commNameCh: dbCode[self.mColCommNameCh] ?? "", commNameJp: dbCode[self.mColCommNameJp] ?? "",
+                                        commRef1: dbCode[self.mColCommRef1] ?? "", commRef2: dbCode[self.mColCommRef2] ?? "", commRef3: dbCode[self.mColCommRef3] ?? "",
 										remark: "",commOrder: Int(dbCode[self.mColCommOrder] ?? 0),
 										viewYn: dbCode[self.mColViewYn] ?? "Y")
 				codeInfos.append(codeInfo)
@@ -1279,8 +1288,8 @@ class LocalData {
 			{
 				let codeInfo = CodeInfo(corpId: "", fieldValue: "", commCode: "",
 										commNameKr: initCodeName!, commNameEn: initCodeName!,
-										commNameCh: initCodeName!, commRef1: "",
-										commRef2: "", commRef3: "",
+										commNameCh: initCodeName!, commNameJp: initCodeName!,
+                                        commRef1: "", commRef2: "", commRef3: "",
 										remark: "",commOrder: 0,
 										viewYn: "Y")
 				codeInfos.append(codeInfo)
@@ -1290,7 +1299,8 @@ class LocalData {
 			{
 				let codeInfo = CodeInfo(corpId: "", fieldValue: dbCode[self.mColFieldValue], commCode: dbCode[self.mColCommCode] ,
 										commNameKr: dbCode[self.mColCommNameKr] ?? "", commNameEn: dbCode[self.mColCommNameEn] ?? "",
-										commNameCh: dbCode[self.mColCommNameCh] ?? "", commRef1: dbCode[self.mColCommRef1] ?? "",
+										commNameCh: dbCode[self.mColCommNameCh] ?? "", commNameJp: dbCode[self.mColCommNameJp] ?? "",
+                                        commRef1: dbCode[self.mColCommRef1] ?? "",
 										commRef2: dbCode[self.mColCommRef2] ?? "", commRef3: dbCode[self.mColCommRef3] ?? "",
 										remark: "",commOrder: Int(dbCode[self.mColCommOrder] ?? 0),
 										viewYn: dbCode[self.mColViewYn] ?? "Y")

@@ -160,7 +160,7 @@ class Constants
 	static let USER_LANG_KR											= "KR"		/**< 한국어	*/
 	static let USER_LANG_EN											= "EN"		/**< 영어		*/
 	static let USER_LANG_CH											= "CH"		/**< 중국어	*/
-    static let USER_LANG_JP                                         = "JP"      /**< 일본어    */
+    static let USER_LANG_JP                                         = "JP"      /**< 일본어   */
     
 	//=====================================================================================
 	
