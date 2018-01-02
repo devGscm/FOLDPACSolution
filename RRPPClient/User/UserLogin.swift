@@ -113,7 +113,7 @@ class UserLogin: UIViewController
 						{
 							strUserLang = "ko"
 						}
-						else if(strUserLang == "JA")
+						else if(strUserLang == "JP")
 						{
 							strUserLang = "ja"
 						}

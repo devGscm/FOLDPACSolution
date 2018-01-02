@@ -18,6 +18,7 @@ struct CodeInfo {
 	let commNameKr : String		/**< 공통코드명(한) **/
 	let commNameEn : String		/**< 공통코드명(영) **/
 	let commNameCh : String		/**< 공통코드명(중) **/
+    let commNameJp : String     /**< 공통코드명(일) **/
 	let commRef1 : String		/**< 참조값1 **/
 	let commRef2 : String		/**< 참조값2 **/
 	let commRef3 : String		/**< 참조값3 **/

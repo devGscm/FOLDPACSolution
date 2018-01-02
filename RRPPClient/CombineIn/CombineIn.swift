@@ -157,6 +157,10 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 			{
 				strCommName = clsInfo.commNameEn
 			}
+            else if(Constants.USER_LANG_JP == userLang)
+            {
+                strCommName = clsInfo.commNameJp
+            }
 			else
 			{
 				strCommName = clsInfo.commNameKr
