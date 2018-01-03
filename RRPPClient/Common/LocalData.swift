@@ -600,7 +600,7 @@ class LocalData {
 	//										mColCorpId: \(rows[self.mColCorpId])
 	//										mColFieldValue: \(rows[self.mColFieldValue]), mColCommCode: \(rows[self.mColCommCode]),
 	//										mColCommNameKr: \(rows[self.mColCommNameKr]!),mColCommNameEn: \(rows[self.mColCommNameEn]!),
-    //										mColCommNameCh: \(rows[self.mColCommNameCh]!), mColCommNameJp: \(rows[s;elf.mColCommNameJp]!),
+            //										mColCommNameCh: \(rows[self.mColCommNameCh]!), mColCommNameJp: \(rows[s;elf.mColCommNameJp]!),
     //                                      mColCommRef1: \(rows[self.mColCommRef1]!),
 	//										mColCommRef2: \(rows[self.mColCommRef2]!), mColCommRef3: \(rows[self.mColCommRef3]!),
 	//										mColCommOrder: \(rows[self.mColCommOrder]!)

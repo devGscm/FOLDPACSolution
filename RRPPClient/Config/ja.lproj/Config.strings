@@ -1,0 +1,87 @@
+
+/* Class = "UILabel"; text = "選択"; ObjectID = "424-uk-Yrz"; */
+"424-uk-Yrz.text" = "選択";
+
+/* Class = "UIButton"; normalTitle = "選択"; ObjectID = "4KC-yp-giO"; */
+"4KC-yp-giO.normalTitle" = "選択";
+
+/* Class = "UIButton"; normalTitle = "検索"; ObjectID = "5CP-y9-fDm"; */
+"5CP-y9-fDm.normalTitle" = "検索";
+
+/* Class = "UIButton"; normalTitle = "選択"; ObjectID = "9p2-BO-kMU"; */
+"9p2-BO-kMU.normalTitle" = "選択";
+
+/* Class = "UILabel"; text = "효과음"; ObjectID = "AIK-Gr-zw6"; */
+"AIK-Gr-zw6.text" = "効果音";
+
+/* Class = "UILabel"; text = "거점명"; ObjectID = "Bls-1g-T1R"; */
+"Bls-1g-T1R.text" = "拠点名";
+
+/* Class = "UIButton"; normalTitle = "고객사명"; ObjectID = "CxC-Or-B4Y"; */
+"CxC-Or-B4Y.normalTitle" = "顧客社名";
+
+/* Class = "UIButton"; normalTitle = "選択"; ObjectID = "FMw-CW-bMQ"; */
+"FMw-CW-bMQ.normalTitle" = "選択";
+
+/* Class = "UITableViewSection"; headerTitle = "거점 설정"; ObjectID = "Kiw-oP-cli"; */
+"Kiw-oP-cli.headerTitle" = "拠点 設定";
+
+/* Class = "UILabel"; text = "RFID Power"; ObjectID = "L4B-U6-QDA"; */
+"L4B-U6-QDA.text" = "RFID Power";
+
+/* Class = "UITableViewSection"; headerTitle = "RFID 설정"; ObjectID = "Ri2-fl-MSW"; */
+"Ri2-fl-MSW.headerTitle" = "RFID 設定";
+
+/* Class = "UILabel"; text = "거점 選択"; ObjectID = "TU2-VO-BcP"; */
+"TU2-VO-BcP.text" = "拠点 選択";
+
+/* Class = "UILabel"; text = "検索조건"; ObjectID = "Y5I-Ax-48d"; */
+"Y5I-Ax-48d.text" = "検索条件";
+
+/* Class = "UIButton"; normalTitle = "選択"; ObjectID = "Za3-CU-dxb"; */
+"Za3-CU-dxb.normalTitle" = "選択";
+
+/* Class = "UITableViewController"; title = "환경설정"; ObjectID = "f3A-cm-569"; */
+"f3A-cm-569.title" = "環境設定";
+
+/* Class = "UIButton"; normalTitle = "選択"; ObjectID = "fIG-BD-sXI"; */
+"fIG-BD-sXI.normalTitle" = "選択";
+
+/* Class = "UILabel"; text = "区分"; ObjectID = "gVg-AE-Slo"; */
+"gVg-AE-Slo.text" = "区分";
+
+/* Class = "UIButton"; normalTitle = "選択"; ObjectID = "jCG-zK-fLU"; */
+"jCG-zK-fLU.normalTitle" = "選択";
+
+/* Class = "UILabel"; text = "거점명"; ObjectID = "kaF-6r-F0W"; */
+"kaF-6r-F0W.text" = "拠点名";
+
+/* Class = "UILabel"; text = "拠点検索"; ObjectID = "m8a-gT-pbz"; */
+"m8a-gT-pbz.text" = "拠点検索";
+
+/* Class = "UILabel"; text = "거점ID"; ObjectID = "n8N-E2-4aD"; */
+"n8N-E2-4aD.text" = "拠点ID";
+
+/* Class = "UILabel"; text = "블루투스 장치選択"; ObjectID = "nAq-G7-lnY"; */
+"nAq-G7-lnY.text" = "ブルートゥース装置選択";
+
+/* Class = "UILabel"; text = "RFID 리더기"; ObjectID = "nVa-9a-VZq"; */
+"nVa-9a-VZq.text" = "RFID リーダー";
+
+/* Class = "UITableViewSection"; headerTitle = "식별체계 설정"; ObjectID = "nfy-Rn-ZQs"; */
+"nfy-Rn-ZQs.headerTitle" = "識別体系設定";
+
+/* Class = "UILabel"; text = "상품식별체계"; ObjectID = "nns-oo-B2m"; */
+"nns-oo-B2m.text" = "商品識別体系";
+
+/* Class = "UILabel"; text = "区分"; ObjectID = "ttW-Nu-Z9g"; */
+"ttW-Nu-Z9g.text" = "区分";
+
+/* Class = "UILabel"; text = "거점ID"; ObjectID = "uYb-BR-juq"; */
+"uYb-BR-juq.text" = "拠点ID";
+
+/* Class = "UILabel"; text = "RFID 마스크"; ObjectID = "xGW-hd-4rw"; */
+"xGW-hd-4rw.text" = "RFID マスク";
+
+/* Class = "UIButton"; normalTitle = "選択"; ObjectID = "zGu-dF-qqi"; */
+"zGu-dF-qqi.normalTitle" = "選択";

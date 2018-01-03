@@ -1,0 +1,556 @@
+/* 
+  Localizable.strings
+  RRPPClient
+
+  Created by MORAMCNT on 2017. 11. 21..
+  Copyright © 2017년 MORAMCNT. All rights reserved.
+*/
+
+
+/* 어플설정 시작 */
+"app_name" = "RRPP";
+"app_title" = "RRPP TRA";
+/* 어플설정 끝*/
+
+/*액티비티 제목 시작 */
+"title_root" = "RRPP Trade @ Tracking @ Traceability Platform";
+"title_user_login" = "ログイン";
+"title_client_config" = "環境設定";
+"title_device_scan_dialog" = "装置検索";
+"title_branch_search_dialog" = "拠点検索";
+"title_tag_supply" = "納品登録(RFID)";
+"title_tag_supply_detail_view" = "納品登録詳細一覧";
+"title_tag_order_search" = "納品内訳照会(RFID)";
+"title_product_mount" = "資産登録";
+"title_product_package" = "Batch登録";
+"title_product_package_cancel" = "Batch取消";
+"title_product_order_search" = "購買注文照会";
+"title_product_package_search" = "Batch照会";
+"title_sale_in" = "販売入庫";
+"title_sale_in_exp" = "納品入庫";
+"title_sale_out" = "販売出庫";
+"title_sale_out_rdc" = "納品出庫";
+"title_common_sale_out" = "出庫";
+
+"title_move_in" = "移動入庫";
+"title_move_out" = "移動出庫";
+"title_resale_in" = "返却入庫";
+"title_out_cancel" = "出庫取消";
+"title_in_cancel" = "入庫取消";
+"title_easy_shipment" = "ユニットロード出庫";
+"title_easy_shipment_exp" = "出荷";
+
+"title_easy_ship_cust_search" = "購買先照会";
+"title_sale_out_search" = "送り状照会";
+"title_sale_in_search" = "送り状照会";
+"title_resale_in_search" = "返却注文照会";
+"title_rfid_inspect" = "RFIDタグ検収";
+"title_rfid_reader" = "RFID リーダー";
+"title_stock_review" = "在庫棚卸";
+"title_stock_review_search" = "在庫棚卸照会";
+"title_event_clean" = "洗浄";
+"title_event_select_store" = "選別/保管";
+"title_event_destory" = "廃棄";
+"title_event_noread" = "未認識廃棄";
+"title_rfid_tracking_service" = "履歴追跡";
+/*액티비티 제목 끝 */
+
+/*옵션메뉴 시작 */
+"omenu_main_menu" = "メインメニュー";
+"omenu_client_config" = "環境設定";
+"omenu_logout" = "ログアウト";
+"omenu_new_login" = "新ログイン";
+/*옵션메뉴 끝 */
+
+
+/* 공통 시작 */
+"common_error" = "エラー";
+"common_confirm" = "確認";
+"common_cancel" = "取消";
+"common_close" = "閉じる";
+"common_clear_all" = "初期化";
+"common_task_init" = "作業初期化";
+"common_find" = "検索";
+"common_search" = "検索";
+"common_search_condition" = "検索条件";
+"common_check_all" = "全体選択";
+"common_delete" = "削除";
+"common_send" = "転送";
+"common_complete_send" = "完了転送";
+"common_save" = "臨時保存";
+"common_selection" = "選択";
+"common_barcode_search" = "バーコード";
+"common_confirm_work_Init" = "作業内容を初期化してもよろしいですか？";
+"common_confirm_delete" = "全てのデータを削除してもよろしいですか？";
+"common_success_delete" = "正常的に削除しました。";
+"common_no_data_delete" = "削除するデータがありません。";
+"common_no_data_send" = "転送するデータがありません。";
+"common_check_data_transferred" = "転送するデータをチェックしてください。";
+"common_no_data_send_try_again" = "転送するデータがありません。しばらく後、もう一度行ってください。";
+"common_success_sent" = "転送処理が正常的に完了しました。";
+"common_success_modified" = "修正処理が正常的に完了しました。";
+"common_error_occur_modification_try_again" = "修正処理中、エラーが発生しました。しばらくしたら、もう一度処理を行ってください。";
+"common_not_connect_server_try_again" = "サーバへ接続できません。しばらくしたら、もう一度処理を行ってください。";
+"common_checksum_error" = "checksumエラーによって、伝送処理に失敗しました。";
+"common_data_length_error" = "データ長さが正しくないので、伝送処理に失敗しました。";
+"common_unknown_error" = "分からないエラーにより、伝送が失敗しました。";
+"common_connection_timed_out" = "接続時間を超過しました。";
+"common_server_connection_timed_out" = "通信サーバとの接続制限時間を超過しました。";
+"common_select_data_deleted" = "削除するデータを選択してください。";
+"common_error_occurred_data_search" = "データ検索処理中、エラーが発生しました。";
+"common_no_code_inform" = "コード情報なし";
+"common_update" = "アップデート";
+"common_update_version" = "APPの最新バージョンがリリースされて、業務を続けるためにはAPPをアップデートしなければ行けません。今、アップデートしますか？";
+"common_not_load_data_from_server" = "サーバーからのデータ取込み処理中、エラーが発生しました。しばらくしたら、もう一度処理を行ってください。";
+"common_auth_error" = "認証エラー";
+"common_auth_fail_check_id_passwd" = "認証処理に失敗しました。\n使っているＩＤとパスワードを確認してください。";
+"common_want_quit" = "終了してもよろしいですか？";
+"common_login_diff_user_id" = "他のユーザでログインしますか？";
+"common_not_able_communicate" = "通信できない環境です。";
+"common_progressbar_init" = "初期化中です。";
+"common_progressbar_loading" = "ローディング中です。";
+"common_progressbar_rfid_connecting" = "リーダーに接続中です。";
+"common_progressbar_sending" = "伝送中です。";
+"common_progressbar_loading_basedata" = "サーバーから基礎データを取込んでいます。";
+"common_user_name" = "作業者";
+"common_branch" = "拠点";
+"common_customer" = "顧客社名";
+"common_check_the_date" = "日付を確認してください。";
+"common_remark" = "処理メモ";
+"common_no_data_for_barcode" = "該当バーコードに合致するデータがありません。";
+"common_sign" = "サイン";
+"common_color_picker" = "色相";
+"common_clear" = "初期化";
+"common_eraser" = "消しゴム";
+/* 공통 끝 */
+
+/* 로그인 시작 */
+"login_mobile_id" = "リーダーID";
+"login_user_id" = "User ID";
+"login_password" = "パスワード";
+"login_autologin" = "自動ログイン";
+"login_button" = "ログイン";
+"login_input_id" = "ユーザＩＤを入力してください。";
+"login_input_passwd" = "パスワードを入力してください。";
+"login_notify_network_cost" = "3Ｇ及びＬＴＥネットワークの使用時、加入した料金制によって費用が課金されます。";
+"login_change_language" = "To apply your language, you'll need to exit and restart your app. Are you sure you want to quit?";
+/* 로그인 끝*/
+
+/* 리턴 메시지 시작 */
+"return_message_enter_your_user_id" = "ユーザＩＤを入力してください。";
+"return_message_enter_your_password" = "パスワードを入力してください。";
+"return_message_verify_login_info" = "ログイン情報をもう一度確認してください。";
+"return_message_disabled_user" = "使用停止或は解約されたユーザです。管理者へ問い合わせてください。";
+"return_message_upis_user_not_able_use" = "UPISユーザは使えません。";
+/* 리턴 메시지 끝 */
+
+
+/* RFID 시작 */
+"rfid_reader_swing_u" = "Swing U";
+"rfid_reader_at288" = "AT288";
+"rfid_reader_ajantech" = "AjanTech";
+"rfid_reader_arete" = "AretePop(Audio)";
+"rfid_reader_none" = "未設定";
+"rfid_reader_connect" = "連結";
+"rfid_reader_close" = "終了";
+"rfid_asset_name" = "類型";
+"rfid_serial_no" = "Serial No.";
+"rfid_epc_code" = "EPC Code";
+"rfid_epc_urn" = "EPC URN";
+"rfid_read_count" = "照会数";
+"rfid_read_time" = "照会時間";
+"rfid_result" = "処理結果";
+"rfid_tag_count" = "認識数量";
+"rfid_tag_quantity" = "個";
+"rfid_event_code" = "イベント区分";
+"rfid_reader_no_device_id" = "リーダーIDがありません。ＷＥＢシステムのリーダー管理画面からリーダー情報を登録してください。";
+"rfid_send" = "RFID 伝送";
+"rfid_save" = "RFID 保存";
+"rfid_inspect" = "検収";
+"rfid_pallet_mount" = "パレット生産登録";
+"rfid_send_error_try_again" = "エラーが発生してRFIDデータを転送できません。しばらく後、もう一度行ってください。";
+"rfid_save_error_try_again" = "エラーが発生してRFIDデータを保存できません。しばらく後、もう一度行ってください。";
+"rfid_no_selected_bluetooth_select_config" = "ブルートゥース装置が選択されていません。環境設定からブルートゥース装置を選択してください。";
+"rfid_no_selected_bluetooth" = "ブルートゥース装置が選択されていません。";
+"rfid_please_enable_bluetooth" = "ブルートゥース設定が非活性化になっています。ブルートゥースを活性化してください。";
+"rfid_connected_reader" = "RFIDリーダーに接続されました。";
+"raid_connecting_reader" = "RFIDリーダーに接続中です。";
+"rfid_not_connect_reader" = "RFIDリーダーに接続できません。";
+"rfid_reader_not_connected" = "RFIDリーダーが接続されていません。";
+"rfid_connection_terminated" = "接続が終了されました。";
+"rfid_unregistered_unit" = "登録されていないリーダーです。ウェブシステムのリーダー情報管理画面から該当リーダー情報を登録してください。";
+"rfid_event_not_set_select_config" = "RFIDイベントが設定されていませんでした。 環境設定からＲＦＩＤイベントを選択してください。";
+"rfid_no_selected_readers" = "選択されたリーダー情報がありません。ウェブシステムのユーザー管理画面からリーダー情報を選択してください。";
+/* RFID 종료 */
+
+
+/* RFID 최종이력 시작 */
+"location_unit_id" = "リーダーＩD";
+"location_unit_name" = "リーダー名";
+"location_trace_date" = "イベント日時";
+"location_epc_urn" = "EPC URN";
+"location_epc_code" = "EPC Code";
+"location_tag_id" = "TID";
+"location_event_type" = "イベントタイプ";
+"location_total_cnt" = "総照会件数";
+"location_cnt" = "件";
+"location_search_condition" = "検索条件";
+"location_search" = "検索";
+/* RFID 최종이력 종료 */
+
+/* 생산정보 시작 */
+"product_year_month_day" = "年/月/日";
+"product_attach_date" = "生産登録日時";
+"product_maker_name" = "生産会社";
+"product_count" = "数量";
+"product_percent" = "稼働率";
+"product_graph" = "グラフ";
+"product_chart" = "チャート基準";
+"product_start_year" = "開始年度";
+"product_end_year" = "終了年度";
+"product_start_month" = "開始月";
+"product_end_month" = "終了月";
+"product_date" = "日付";
+"product_year_error" = "開始年度は終了年度よりより未来ではありません。";
+"product_month_error" = "開始月は終了月より未来ではありません。";
+"product_day_error" = "開始日は終了日より未来ではありません。";
+"product_more_data" = "データが存在しません。";
+/* 생산정보 끝 */
+
+
+
+/*환경설정 시작 */
+"preference_basic_settings" = "基本設定";
+"preference_landscape_screen_enabled_title" = "横に見る(Landscape Mode)モード";
+"preference_landscape_screen_enabled_summaryOn" = "フォンを動かした時、横に見る(Landscape Mode)モードで画面を変更します。";
+"preference_landscape_screen_enabled_summaryOff" = "フォンを動かした時、横に見る(Landscape Mode)モードで画面を変更しません。";
+"preference_rfid_reader_setting" = "RFID設定";
+"preference_report_settings" = "RFID伝送";
+"preference_rfid_reader" = "RFIDリーダー";
+"preference_rfid_reader_summary" = "RFIDリーダーを選択します。";
+"preference_bluetooth_selection" = "ブルートゥース装置選択";
+"preference_bluetooth_selection_summary" = "ブルートゥース装置を選択します。";
+"preference_rfid_event" = "RFID イベント";
+"preference_rfid_event_summary" = "RFIDイベントを選択します。";
+"preference_rfid_mask" = "RFIDマスク";
+"preference_rfid_mask_summary" = "該当マスクのEPCコードのみを読込みます。";
+"preference_rfid_beep_enabled_title" = "効果音";
+"preference_rfid_beep_enabled_soundOn" = "RFIDタグを読込む際、効果音が発生します。";
+"preference_rfid_beep_enabled_soundOff" = "RFIDタグを読込む際、効果音が発生しません。";
+"preference_not_support_bluetooth" = "ブルートゥースをサポートしない端末であるので、この機能を使えません。";
+"preference_failure_not_stored_event_code" = "エラーによって、イベントコードを保存できません。";
+"preference_device_scanning" = "装置スキャン中...";
+"preference_select_device" = "接続する装置を選択してください。";
+"preference_none_paired" = "ペアリングされた装置がありません。";
+"preference_none_found" = "発見された装置がありません。";
+"preference_paired_devices" = "ペアリング済み装置";
+"preference_other_devices" = "その他装置";
+"preference_button_scan" = "装置スキャン";
+"preference_branch_key" = "拠点ID";
+"preference_branch_name" = "拠点名";
+"preference_branch_cust_name" = "顧客社名";
+"preference_branch_selection" = "拠点選択";
+"preference_branch_selection_summary" = "拠点を選択します。";
+"preference_barcode_setting" = "バーコード設定";
+"preference_rfid_power" = "RFID Power";
+"preference_rfid_power_summary" = "RF Powerを設定します。";
+/* 환경설정 끝 */
+
+/* 처리결과 시작*/
+/*
+ "proc_result_error_not_exist_tag" = "生産登録されていないパレットがあるので、処理できません。";
+ "proc_result_error_tag_already_processed" = "既に処理が終わったパレットです。";
+ "proc_result_error_unknown_exception" = "エラーが発生して、処理できません。";
+ 
+ "proc_result_error_already_mounted_tag" = "既に生産登録されたパレットが存在するので、、処理できません。";
+ "proc_result_error_abnormal_tag" = "非正常タグ情報が存在するので、処理できません。 パレットのタグ情報を確認してください。";
+ "proc_result_error_not_exist_tag_location_seq" = "存在していないタグ位置番号です。";
+ "proc_result_error_not_mounted" = "生産登録されていないパレットです。";
+ "proc_result_error_duplicated_within_a_day" = "24時間以内に同一拠点で同一処理が重複して発生しました。";
+ */
+
+"proc_result_error_inspect_tag_issue" = "発給しているタグであるので、検収処理を行うことができません。";
+"proc_result_error_inspect_tag_encoding_fail" = "エンコーディングが失敗したタグであるので、検収処理を行うことができません。";
+"proc_result_error_inspect_tag_insert_success" = "正常的に生産登録されたパレットです。";
+"proc_result_error_inspect_tag_insert_fail" = "パレットに挿入が失敗されたタグであるので、検収処理を行うことができません。";
+"proc_result_error_inspect_tag_discard" = "既に廃棄登録されたパレットであるので、検収処理を行うことができません。";
+"proc_result_error_inspect_unknown_exception" = "原因を分からないエラーが発生したので、検収処理を行うことができません。";
+"proc_result_error_inspect_not_registered_data" = "サーバに登録されていないタグ情報です。";
+
+/* 처리결과 끝*/
+
+/* 추적서비스 시작*/
+"track_branch_name" = "拠点名";
+"track_process_date" = "処理日時";
+"track_event_name" = "イベント";
+"track_prev_trace_date" = "開始日時";
+"track_next_trace_date" = "終了日時";
+"track_diff_trace_date" = "滞留時間";
+"track_move_trace_date" = "運送時間";
+"track_recycle_cnt" = "Trip";
+/* 추적서비스 종료  */
+
+
+
+/* RFID 구매 시작*/
+"rfid_order_id" = "購買注文番号";
+"rfid_order_id_selection" = "注文選択";
+"rfid_order_date" = "注文日";
+"rfid_order_req_cnt" = "注文数量";
+"rfid_order_cust_name" = "購買先";
+"rfid_asset_epc_name" = "類型";
+"rfid_prod_cust_name" = "供給先";
+"rfid_order_branch_name" = "配送先";
+"rfid_order_addr" = "配送位置";
+"rfid_work_date" = "納品日";
+"rfid_work_remark" = "メモ";
+"rfid_enter_your_order_no" = "発注番号を入力してください。";
+"rfid_enter_your_delivery_date" = "納品日を入力してください";
+"rfid_order_state_name" = "注文状態";
+/* RFID 구매 끝*/
+
+/* 제작 시작 */
+"make_order_id" = "購買注文番号";
+"make_order_id_selection" = "注文選択";
+"make_lot_id" = "Lot番号";
+"make_remark" = "メモ";
+"make_enter_your_order_no" = "発注番号を入力してください。";
+"make_enter_your_lot_no" = "ＬＯＴ番号を入力してください。";
+"make_cannot_handle_amount_greater_qty" = "認識数量が発注数量を超過できません。";
+"make_asset_type" = "類型";
+"make_prod_grade" = "グレード";
+"make_pack_name" = "Batch名";
+"make_select_asset_Type" = "類型を選択してください。";
+"make_select_product_grade" = "グレードを選択してください。";
+"make_enter_the_package_no" = "Batch番号を入力してください。";
+"make_enter_the_package_name" = "Batch名を入力してください。";
+"make_pack_date" = "Batch日";
+"make_pack_id" = "Batch番号";
+"make_pack_id_selection" = "Batch選択";
+"make_prod_grade_name" = "グレード";
+"make_prod_asset_epc_name" = "類型";
+/* 제작 끝 */
+
+/* 주문 시작 */
+"sale_work_id" = "送り状番号";
+"sale_work_id_selection" = "送り状選択";
+"sale_deli_date" = "配送予定日";
+"sale_assign_count" = "出庫量";
+"sale_deli_branch_name" = "配送拠点";
+"sale_order_addr" = "配送注所";
+"sale_prod_asset_epc_name" = "類型";
+"sale_prod_grade_name" = "グレード";
+"sale_order_cust_name" = "販売拠点";
+"sale_in_cust_name" = "入庫拠点";
+"sale_out_cancel_order_cust_name" = "販売拠点";
+"sale_move_cust_sname" = "配送先";
+"sale_move_cust_name" = "移動注文先";
+"sale_driver_name" = "納品者";
+"sale_veh_name" = "車両番号";
+"sale_proc_count" = "作業量";
+"sale_enter_your_work_id" = "送り状番号を入力してください。";
+"sale_can_not_processed_because_completed_assigned_quantity" = "割当て数量を完了したので、処理することはできません。";
+"sale_same_processing_qty_work_assing_qty" = "予定数量と処理数量が合致していないので、完了処理を行うことはできません。";
+"sale_same_processing_qty_work_require_qty" = "予定数量と処理数量が合致していないので、完了処理を行うことはできません。";
+"sale_order_req_date" = "入庫予定日";
+"sale_release_cust_name" = "出庫先";
+"sale_release_branch_name" = "出庫拠点";
+"sale_order_req_count" = "出庫量";
+"sale_worker_name" = "引取り手";
+"sale_expected_count" = "入庫量";
+"sale_noread_count" = "未認識量";
+"sale_unrecognized_qty_can_enter_ony_numbers" = "未認識数量は数値のみ入力できます。";
+"resale_order_id" = "入庫番号";
+"resale_order_req_count" = "入庫量";
+"resale_cust_name" = "返却注文先";
+/* "resale_driver_name" = "納品者"; */
+"resale_worker_name" = "引取り手";
+"sale_enter_your_resale_order_id" = "入庫番号を入力してください。";
+"sale_work_date" = "出庫日";
+"resale_work_date" = "入庫日";
+"sale_type_name" = "区分";
+"resale_type_name" = "区分";
+"easy_transfer_date" = "出庫日";
+"easy_transfer_cust_id" = "出庫先";
+"easy_transfer_type" = "出庫区分";
+"easy_cust_key" = "顧客社ID";
+"easy_parent_cust_name" = "法人";
+"easy_cust_name" = "顧客社名";
+"easy_cust_selection" = "顧客社選択";
+"easy_prod_asset" = "資産";
+"easy_select_transfer_type" = "出庫区分を 選択してください。";
+"easy_select_transfer_cust_id" = "出庫先を選択してください。";
+"easy_to_branch_selection" = "配送先選択";
+"easy_select_to_branch_id" = "配送先を選択してください。";
+/* 주문 끝 */
+
+/* 재고 시작 */
+"stock_review_id" = "在庫棚卸番号";
+"stock_review_req_date" = "在庫棚卸要請日";
+"stock_prod_asset_epc_name" = "類型";
+"stock_old_stock_cnt" = "電算在庫量";
+"stock_review_id_selection" = "棚卸選択";
+"stock_real_stock_count" = "実在庫量";
+"stock_old_stock_count" = "電算在庫量";
+"stock_enter_your_review_id" = "在庫棚卸番号を入力してください。";
+"stock_can_not_processed_because_different_pallet" = "類型が異なるパレットがあるので、処理を続けることができません。";
+/* 재고 끝 */
+
+/* 이벤트 시작 */
+"event_select_grade" = "グレードを選択してください。";
+/* 이벤트 끝 */
+
+/* 바코드 시작 */
+"button_ok" = "確認";
+"button_restart" = "再スキャン";
+"button_selection" = "選択";
+"msg_bulk_mode_scanned" = "一括スキャンモード：バーコードが読込まれて保存されます。";
+"msg_camera_framework_bug" = "カメラ装置の誤動作のため、機器を再起動しなければならないかもしれません。";
+"msg_default_format" = "フォーマット";
+"msg_default_meta" = "メタデータ";
+"msg_default_mms_subject" = "ようこそ";
+"msg_default_status" = "バーコードを四角形の中に入れてください。";
+"msg_default_time" = "時間";
+"msg_default_type" = "種類";
+"msg_intent_failed" = "アプリケーションの実行に失敗しました。バーコード状態を確認してください。";
+"preferences_auto_focus_title" = "自動ピント使用";
+"preferences_front_light_auto" = "自動";
+"preferences_front_light_off" = "OFF";
+"preferences_front_light_on" = "ON";
+"preferences_front_light_summary" = "特定な機器では暗い環境でのスキャン機能を向上させるが、あまり明るいこともあります。 全ての機器での作動を保障できません。";
+"preferences_front_light_title" = "フラッシュ使用";
+"preferences_play_beep_title" = "電子音";
+"preferences_vibrate_title" = "振動";
+"result_text" = "短文を見つけました。";
+/* 바코드 끝 */
+
+
+/* Ver2.0.0 */
+/* 통합 화면 시작 */
+"return_message_not_attach_unit" = "リーダー情報登録有無を確認してください。";
+
+"title_combine_out_search" = "送り状照会";
+"title_combine_in_search" = "送り状照会";
+"title_work_process_detail_view" = "詳細一覧";
+
+"title_easy_cust_search" = "顧客社照会";
+"title_easy_cust_selection" = "顧客社選択";
+
+"title_work_out_delivery" = "出庫";
+"title_work_out_release" = "出荷";
+
+"title_work_in_warehouse" = "入庫";
+
+"title_work_in_move_return" = "移動/返却入庫";
+"title_work_in_delivery" = "納品入庫";
+"title_work_in_gather" = "回収入庫";
+
+"title_work_in_cust_search" = "出庫先";
+"title_work_out_cust_search" = "入庫先";
+
+"title_work_out_product" = "商品情報結合";
+
+"combine_work_type" = "区分";
+"combine_work_type_out" = "納品";/* 販売 */
+"combine_work_type_move" = "移動";
+"combine_assign_out" = "出庫予定";
+"combine_assign_out_count" = "出庫予定量";
+"combine_process_count" = "処理数量";
+"combine_remain_count" = "未処理数量";
+"combine_select_work_type" = "区分を選択してください。";
+"combine_out_date" = "出庫予定日";
+"combine_cust_out_addr" = "入庫先注所";
+
+"common_detail_view" = "詳細";
+"resale_release_cust_name" = "返却先";
+"resale_driver_name" = "返却者";
+"combine_assign_in_count" = "入庫予定量";
+"combine_cust_in_addr" = "出庫拠点注所";
+"combine_assign_in" = "入庫予定";
+
+"easy_process_exist_message" = "保存されているデータが初期化されます。終了してもよろしいですか？";
+
+"common_temporarily_save" = "保存";
+"common_branch_name" = "拠点名";
+"preference_branch_id" = "拠点ID";
+
+"msg_select_sale_work_id" = "照会された送り状情報がありません。";
+"msg_no_selected_branch_cust_type" = "選択された拠点がありません。環境設定から拠点を選択してください。";
+"msg_no_selected_out_cust" = "入庫拠点を選択してください。";
+"msg_no_selected_in_cust" = "出庫拠点を選択してください。";
+
+"msg_no_temporary_saved_data" = "保存されたデータがありません。";
+"msg_exist_temporary_saved_data" = "保存されたデータがあります。";
+
+"common_search_period" = "期間";
+"common_grid_no" = "No.";
+"common_order_number" = "指示番号";
+"common_asset_type" = "類型";
+"title_work_inout_cancel" = "入出庫取消";
+"common_select_all" = "全体";
+"easy_process_trade_chit" = "伝票番号";
+
+"easy_cust_company_all" = "全ての法人";
+"easy_cust_company_except_logisall" = "LogisAll除外";
+"easy_cust_division_pmk" = "生産会社";
+"easy_cust_division_rpc" = "物流センター";
+"easy_cust_division_exp" = "契約先";
+"easy_cust_division_imp" = "実需要先";
+"title_easy_in_search" = "送り状照会";
+
+"msg_search_date_difference_between" = "検索期間は３日以内で指定してください。";
+"msg_search_date_exceeded_limit" = "検索期間は７日以内で指定してください";
+"msg_search_date_error" = "検索期間を確認してください。";
+
+"combine_cancel_base_branch_name" = "拠点";
+"combine_cancel_inout_branch_name" = "入出庫先";
+
+"title_work_history_search" = "作業内訳照会";
+
+/* 작업내역 시작-->
+ "work_history_trace_date" = "イベント発生日";
+ "work_history_asset_epc_name" = "類型";
+ "work_history_event_name" = "イベント";
+ "work_history_event_count" = "数量";
+ "work_history_branch_name" = "拠点";
+ "work_history_select_envent_code" = "イベントタイプを選択してください。";
+ /* 작업내역 종료  */
+
+
+"title_work_sale_a" = "出庫A";
+"title_work_sale_b" = "出庫B";
+"title_work_sale_c" = "出庫C";
+"title_work_resale_a" = "入庫A";
+"title_work_resale_b" = "入庫B";
+
+"preference_identification_system_setting" = "識別体系設定";
+"preference_identification_system_summary" = "識別体系を選択します。";
+"preference_identification_system" = "商品識別体系";
+
+"identification_system_itf14" = "ITF-14 バーコード";
+"identification_system_agqr" = "QRコード（農産物）";
+
+"common_read_itf14" = "バーコード";
+"common_read_aqgr" = "QRコード";
+"common_read_rfid" = "RFIDタグ";
+
+"common_product_code" = "商品コード";
+"common_product_name" = "商品名";
+
+"msg_no_selected_serial_no" = "Serial No.を選択してください。";
+"msg_inspect_prod_name_error_try_again" = "エラーが発生して商品名を照会できません。 しばらく後、もう一度行ってください。";
+"msg_enter_vehicle_number" = "車両番号を入力してください。";
+"title_prod_mapping_info" = "商品情報";
+"title_prod_insert_direct" = "商品追加";
+"msg_enter_product_code" = "商品コードを入力してください。";
+"msg_error_product_code" = "商品コードエラー";
+"msg_processing_qty_work_require_qty" = "処理数量は予定数量を超すことはできません。もう一度、確認してください。";
+"msg_error_need_work_complete_force" = "入庫対象パレットの中に、既に当該拠点に入庫されているパレットが存在するので、該当パレットを除いて入庫処理されます。処理を継続しますか？";
+"msg_error_unregistered_product" = "商品情報なし";
+"msg_charged_service" = "有料サービスです。サービスの使用契約有無を確認してください。";
+
+
+/* 통합 화면 끝 */
+
+
+

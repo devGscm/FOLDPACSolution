@@ -1,0 +1,42 @@
+
+/* Class = "UITextField"; placeholder = "User ID"; ObjectID = "0ta-Yr-G4p"; */
+"0ta-Yr-G4p.placeholder" = "User ID";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "52V-w5-bUG"; */
+"52V-w5-bUG.text" = "Label";
+
+/* Class = "UILabel"; text = "RRPP"; ObjectID = "BaM-pA-0xc"; */
+"BaM-pA-0xc.text" = "RRPP";
+
+/* Class = "UIViewController"; title = "로그인"; ObjectID = "DV3-pj-IDf"; */
+"DV3-pj-IDf.title" = "ログイン";
+
+/* Class = "UIViewController"; title = "좌측메뉴"; ObjectID = "L1y-RK-ShF"; */
+"L1y-RK-ShF.title" = "좌측메뉴";
+
+/* Class = "UIButton"; normalTitle = "Login"; ObjectID = "MPs-9P-Xkh"; */
+"MPs-9P-Xkh.normalTitle" = "Login";
+
+/* Class = "UILabel"; text = "자동로그인"; ObjectID = "OSR-am-YdZ"; */
+"OSR-am-YdZ.text" = "自動ログイン";
+
+/* Class = "UILabel"; text = "RRPP Trade & Tracking & Traceability Platform"; ObjectID = "Vrw-qa-6Mu"; */
+"Vrw-qa-6Mu.text" = "RRPP Trade & Tracking & Traceability Platform";
+
+/* Class = "UILabel"; text = "RRPP"; ObjectID = "Yy0-h7-Y4L"; */
+"Yy0-h7-Y4L.text" = "RRPP";
+
+/* Class = "UIButton"; normalTitle = "로그아웃"; ObjectID = "cBC-nu-tFG"; */
+"cBC-nu-tFG.normalTitle" = "ログアウト";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "cmA-D7-5CD"; */
+"cmA-D7-5CD.placeholder" = "Password";
+
+/* Class = "UITableViewController"; title = "오른쪽메뉴"; ObjectID = "nJr-NP-3rZ"; */
+"nJr-NP-3rZ.title" = "오른쪽메뉴";
+
+/* Class = "UILabel"; text = "Copyright 2016 ULOGISNET Co., LTD."; ObjectID = "nrL-mY-qmb"; */
+"nrL-mY-qmb.text" = "Copyright 2016 ULOGISNET Co., LTD.";
+
+/* Class = "UILabel"; text = "TRA"; ObjectID = "oo5-Yd-z0i"; */
+"oo5-Yd-z0i.text" = "TRA";
