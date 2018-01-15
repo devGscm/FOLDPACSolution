@@ -351,14 +351,14 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	@IBAction func onLogoutClicked(_ sender: Any)
 	{
 		print(" LeftViewCOntroller.onLogoutClicked")
-		AppContext.sharedManager.doLogout();
-		self.navigationDrawerController?.closeLeftView()
-		
-		// 로그아웃전에 루트뷰로 전환하여 로그인후 루트뷰가 나오도록 수정
-		self.toolbarController?.transition(to: self.clsRootController, completion: self.closeNavigationDrawer)
-		//self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
-		
-		self.performSegue(withIdentifier: "segLogout", sender: self)
+		DispatchQueue.main.async
+		{
+			AppContext.sharedManager.doLogout();
+			self.navigationDrawerController?.closeLeftView()
+			// 로그아웃전에 루트뷰로 전환하여 로그인후 루트뷰가 나오도록 수정
+			self.toolbarController?.transition(to: self.clsRootController, completion: self.closeNavigationDrawer)
+			self.performSegue(withIdentifier: "segLogout", sender: self)
+		}
 	}
 	
 	@objc public func doLogoutNewLogin()
