@@ -346,6 +346,10 @@ class BaseRfidViewController : BaseViewController, UITextFieldDelegate
 				{
 					strProcMsgName = clsInfo.commNameEn
 				}
+                else if(Constants.USER_LANG_JP == userLang)
+                {
+                    strProcMsgName = clsInfo.commNameJp
+                }
 				else
 				{
 					strProcMsgName = clsInfo.commNameKr
@@ -371,6 +375,10 @@ class BaseRfidViewController : BaseViewController, UITextFieldDelegate
 				{
 					strSaleTypeName = clsInfo.commNameEn
 				}
+                else if(Constants.USER_LANG_JP == userLang)
+                {
+                    strSaleTypeName = clsInfo.commNameJp
+                }
 				else
 				{
 					strSaleTypeName = clsInfo.commNameKr
@@ -396,6 +404,10 @@ class BaseRfidViewController : BaseViewController, UITextFieldDelegate
 				{
 					strReSaleTypeName = clsInfo.commNameEn
 				}
+                else if(Constants.USER_LANG_JP == userLang)
+                {
+                    strReSaleTypeName = clsInfo.commNameJp
+                }
 				else
 				{
 					strReSaleTypeName = clsInfo.commNameKr

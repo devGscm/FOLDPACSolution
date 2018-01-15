@@ -1,0 +1,135 @@
+
+/* Class = "UILabel"; text = "出庫予定日"; ObjectID = "02S-mu-cjE"; */
+"02S-mu-cjE.text" = "出庫予定日";
+
+/* Class = "UILabel"; text = "作業者"; ObjectID = "0Xt-kO-Gr2"; */
+"0Xt-kO-Gr2.text" = "作業者";
+
+/* Class = "UILabel"; text = "出庫予定量"; ObjectID = "21p-KU-dLa"; */
+"21p-KU-dLa.text" = "出庫予定量";
+
+/* Class = "UILabel"; text = "入庫拠点"; ObjectID = "2Ry-OZ-w22"; */
+"2Ry-OZ-w22.text" = "入庫拠点";
+
+/* Class = "UILabel"; text = "入庫拠点"; ObjectID = "3US-Wy-tL5"; */
+"3US-Wy-tL5.text" = "入庫拠点";
+
+/* Class = "UIButton"; normalTitle = "구분"; ObjectID = "3VH-i4-nHA"; */
+"3VH-i4-nHA.normalTitle" = "区分";
+
+/* Class = "UIButton"; normalTitle = "초기화"; ObjectID = "4Fd-1A-jCs"; */
+"4Fd-1A-jCs.normalTitle" = "初期化";
+
+/* Class = "UILabel"; text = "배송거점"; ObjectID = "5IL-zN-x3Y"; */
+"5IL-zN-x3Y.text" = "配送拠点";
+
+/* Class = "UILabel"; text = "Swing U"; ObjectID = "5UB-z4-plh"; */
+"5UB-z4-plh.text" = "Swing U";
+
+/* Class = "UILabel"; text = "송장조회"; ObjectID = "6fK-Qt-417"; */
+"6fK-Qt-417.text" = "送り状照会";
+
+/* Class = "UILabel"; text = "入庫拠点주소"; ObjectID = "7Ii-Ba-por"; */
+"7Ii-Ba-por.text" = "入庫先注所";
+
+/* Class = "UILabel"; text = "処理数量"; ObjectID = "7In-Zc-mtI"; */
+"7In-Zc-mtI.text" = "処理数量";
+
+/* Class = "UIButton"; normalTitle = "選択"; ObjectID = "7KD-hI-OhB"; */
+"7KD-hI-OhB.normalTitle" = "選択";
+
+/* Class = "UILabel"; text = "出庫予定"; ObjectID = "7KT-bn-wrI"; */
+"7KT-bn-wrI.text" = "出庫予定";
+
+/* Class = "UILabel"; text = "出庫予定量"; ObjectID = "8Ol-t6-Snn"; */
+"8Ol-t6-Snn.text" = "出庫予定量";
+
+/* Class = "UILabel"; text = "送り状番号"; ObjectID = "9F1-WZ-xSw"; */
+"9F1-WZ-xSw.text" = "送り状番号";
+
+/* Class = "UIButton"; normalTitle = "送り状選択"; ObjectID = "ChN-ki-9OK"; */
+"ChN-ki-9OK.normalTitle" = "送り状選択";
+
+/* Class = "UILabel"; text = "入庫拠点주소"; ObjectID = "FBH-6R-dBj"; */
+"FBH-6R-dBj.text" = "入庫先注所";
+
+/* Class = "UILabel"; text = "未処理数量"; ObjectID = "FYU-HN-1mn"; */
+"FYU-HN-1mn.text" = "未処理数量";
+
+/* Class = "UILabel"; text = "類型"; ObjectID = "HVx-C8-zqS"; */
+"HVx-C8-zqS.text" = "類型";
+
+/* Class = "UILabel"; text = "入庫拠点"; ObjectID = "HY2-8N-UAI"; */
+"HY2-8N-UAI.text" = "入庫拠点";
+
+/* Class = "UILabel"; text = "選択"; ObjectID = "Igv-6z-oTy"; */
+"Igv-6z-oTy.text" = "選択";
+
+/* Class = "UIButton"; normalTitle = "검색"; ObjectID = "J0F-Y6-uUj"; */
+"J0F-Y6-uUj.normalTitle" = "検索";
+
+/* Class = "UILabel"; text = "거점"; ObjectID = "JI6-qA-2d7"; */
+"JI6-qA-2d7.text" = "拠点";
+
+/* Class = "UIButton"; normalTitle = "임시저장"; ObjectID = "JNL-53-esW"; */
+"JNL-53-esW.normalTitle" = "保存";
+
+/* Class = "UILabel"; text = "차량번호"; ObjectID = "JZv-rp-tDr"; */
+"JZv-rp-tDr.text" = "車両番号";
+
+/* Class = "UILabel"; text = "類型"; ObjectID = "Jzm-Gm-nO8"; */
+"Jzm-Gm-nO8.text" = "類型";
+
+/* Class = "UILabel"; text = "選択"; ObjectID = "NRR-Cq-1XJ"; */
+"NRR-Cq-1XJ.text" = "選択";
+
+/* Class = "UILabel"; text = "未処理数量"; ObjectID = "Q9B-3T-8DK"; */
+"Q9B-3T-8DK.text" = "未処理数量";
+
+/* Class = "UILabel"; text = "出庫予定"; ObjectID = "QW6-Rj-bcR"; */
+"QW6-Rj-bcR.text" = "出庫予定";
+
+/* Class = "UILabel"; text = "未処理数量"; ObjectID = "RSK-DY-C0o"; */
+"RSK-DY-C0o.text" = "未処理数量";
+
+/* Class = "UIButton"; normalTitle = "完了転送"; ObjectID = "RSi-4W-Def"; */
+"RSi-4W-Def.normalTitle" = "完了転送";
+
+/* Class = "UILabel"; text = "処理数量"; ObjectID = "WQV-0Q-nXg"; */
+"WQV-0Q-nXg.text" = "処理数量";
+
+/* Class = "UILabel"; text = "入庫拠点"; ObjectID = "alQ-Vh-Cvv"; */
+"alQ-Vh-Cvv.text" = "入庫拠点";
+
+/* Class = "UILabel"; text = "類型"; ObjectID = "bUi-ZK-AoJ"; */
+"bUi-ZK-AoJ.text" = "類型";
+
+/* Class = "UILabel"; text = "出庫予定"; ObjectID = "eMX-3d-tUb"; */
+"eMX-3d-tUb.text" = "出庫予定";
+
+/* Class = "UILabel"; text = "類型"; ObjectID = "f8n-k0-it2"; */
+"f8n-k0-it2.text" = "類型";
+
+/* Class = "UIButton"; normalTitle = "연결"; ObjectID = "ggP-mq-hxK"; */
+"ggP-mq-hxK.normalTitle" = "連結";
+
+/* Class = "UILabel"; text = "出庫予定日"; ObjectID = "hn2-w7-4m6"; */
+"hn2-w7-4m6.text" = "出庫予定日";
+
+/* Class = "UILabel"; text = "出庫予定"; ObjectID = "iSv-Sj-wdh"; */
+"iSv-Sj-wdh.text" = "出庫予定";
+
+/* Class = "UIButton"; normalTitle = "選択"; ObjectID = "nCn-6j-5F2"; */
+"nCn-6j-5F2.normalTitle" = "選択";
+
+/* Class = "UILabel"; text = "処理数量"; ObjectID = "ocF-oJ-EDz"; */
+"ocF-oJ-EDz.text" = "処理数量";
+
+/* Class = "UILabel"; text = "類型"; ObjectID = "pd9-9Y-4Io"; */
+"pd9-9Y-4Io.text" = "類型";
+
+/* Class = "UIButton"; normalTitle = "作業初期化"; ObjectID = "taI-HS-pdw"; */
+"taI-HS-pdw.normalTitle" = "作業初期化";
+
+/* Class = "UILabel"; text = "送り状番号"; ObjectID = "xIC-kZ-T5I"; */
+"xIC-kZ-T5I.text" = "送り状番号";

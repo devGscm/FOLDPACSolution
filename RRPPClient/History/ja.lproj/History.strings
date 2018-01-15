@@ -1,0 +1,45 @@
+
+/* Class = "UILabel"; text = "イベント"; ObjectID = "0jw-dh-cdy"; */
+"0jw-dh-cdy.text" = "イベント";
+
+/* Class = "UILabel"; text = "数量"; ObjectID = "0vo-cM-SNo"; */
+"0vo-cM-SNo.text" = "数量";
+
+/* Class = "UILabel"; text = "類型"; ObjectID = "Czr-gS-NNp"; */
+"Czr-gS-NNp.text" = "類型";
+
+/* Class = "UILabel"; text = "作業者"; ObjectID = "Giq-NT-FKk"; */
+"Giq-NT-FKk.text" = "作業者";
+
+/* Class = "UILabel"; text = "거점"; ObjectID = "HIJ-7N-vJx"; */
+"HIJ-7N-vJx.text" = "拠点";
+
+/* Class = "UILabel"; text = "拠点"; ObjectID = "LZo-aX-Cn2"; */
+"LZo-aX-Cn2.text" = "拠点";
+
+/* Class = "UIButton"; normalTitle = "イベント구분"; ObjectID = "O8B-PQ-uMq"; */
+"O8B-PQ-uMq.normalTitle" = "イベント区分";
+
+/* Class = "UILabel"; text = "拠点"; ObjectID = "PsO-Td-qdp"; */
+"PsO-Td-qdp.text" = "拠点";
+
+/* Class = "UIButton"; normalTitle = "검색"; ObjectID = "SWI-m2-jAW"; */
+"SWI-m2-jAW.normalTitle" = "検索";
+
+/* Class = "UILabel"; text = "類型"; ObjectID = "Tkq-eP-1Z5"; */
+"Tkq-eP-1Z5.text" = "類型";
+
+/* Class = "UILabel"; text = "イベント発生日"; ObjectID = "Tsj-BH-WpU"; */
+"Tsj-BH-WpU.text" = "イベント発生日";
+
+/* Class = "UILabel"; text = "イベント発生日"; ObjectID = "ajh-a2-pUN"; */
+"ajh-a2-pUN.text" = "イベント発生日";
+
+/* Class = "UILabel"; text = "기간"; ObjectID = "cxI-wi-JqB"; */
+"cxI-wi-JqB.text" = "期間";
+
+/* Class = "UILabel"; text = "数量"; ObjectID = "lVB-EO-aCp"; */
+"lVB-EO-aCp.text" = "数量";
+
+/* Class = "UILabel"; text = "イベント"; ObjectID = "t52-Sw-LpM"; */
+"t52-Sw-LpM.text" = "イベント";
