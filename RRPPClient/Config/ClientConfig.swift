@@ -114,6 +114,10 @@ class ClientConfig : BaseTableViewController, DataProtocol
         let strRfidMask = UserDefaults.standard.string(forKey: Constants.RFID_MASK_KEY) ?? "3312"
         //print("@@@@@@ RFID MASK:\(strRfidMask)")
         self.btnRfidMask.setTitle(strRfidMask, for: .normal)
+		
+		// 비활성 상태로 해달라고 함, 2018.01.15
+		self.btnRfidMask.isEnabled = false
+		
         
         // RFID Power
         let strRfidPower = UserDefaults.standard.string(forKey: Constants.RFID_POWER_KEY) ?? "100"
