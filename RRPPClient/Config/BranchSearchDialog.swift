@@ -88,6 +88,13 @@ class BranchSearchDialog: BaseViewController, UITableViewDataSource, UITableView
     
     func initDataClient()
     {
+		
+//		print("============================================")
+//		print("*initDataClient")
+//		print(" corpType:\(AppContext.sharedManager.getUserInfo().getCorpType())")
+//		print(" custType:\(AppContext.sharedManager.getUserInfo().getCustType())")
+//		print("============================================")
+		
 		clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
         clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
         clsDataClient.UserData = "redis.selectBranchList"
