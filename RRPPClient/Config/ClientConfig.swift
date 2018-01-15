@@ -371,7 +371,7 @@ extension ClientConfig
             return
         }
         tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
-        tc.toolbar.detail = NSLocalizedString("title_client_config", comment: "자산등록")
+        tc.toolbar.detail = NSLocalizedString("title_client_config", comment: "환경설정")
     }
 }
 
