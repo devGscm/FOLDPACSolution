@@ -208,8 +208,7 @@ class UserLogin: UIViewController
             clsUserInfo.setPassword(strPassword: strPasswd!)
 		}
 		clsUserInfo.setCorpId(strCorpId: login.corpId!)
-		//clsUserInfo.setCustType(custType: login.corpType!)
-
+		clsUserInfo.setCorpType(strCorpType: login.corpType ?? "")
 		clsUserInfo.setUserName(strUserName: login.userName ?? "")
 
 		clsUserInfo.setCustId(strCustId: login.custId ?? "")
