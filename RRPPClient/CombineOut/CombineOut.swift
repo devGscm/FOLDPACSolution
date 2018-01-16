@@ -78,8 +78,6 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         //다른 화면 터치시 키보드 숨기기
         self.hideKeyboardWhenTappedAround()
 
-        //테이블뷰 셀표시 지우기
-        tvCombineOut.tableFooterView = UIView(frame: CGRect.zero)
     }
     
     //=======================================
@@ -158,6 +156,8 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         initCommonCodeList(userLang: AppContext.sharedManager.getUserInfo().getUserLang())
         self.mStrSaleType = ""
         
+        //테이블뷰 셀표시 지우기
+        tvCombineOut.tableFooterView = UIView(frame: CGRect.zero)
     }
     
     
