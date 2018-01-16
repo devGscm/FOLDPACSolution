@@ -35,8 +35,8 @@
 /* Class = "UILabel"; text = "処理数量"; ObjectID = "Rha-e9-dfW"; */
 "Rha-e9-dfW.text" = "処理数量";
 
-/* Class = "UILabel"; text = "입고예정량"; ObjectID = "Tvq-3Y-tWH"; */
-"Tvq-3Y-tWH.text" = "入庫予定量";
+/* Class = "UILabel"; text = "예정량"; ObjectID = "Tvq-3Y-tWH"; */
+"Tvq-3Y-tWH.text" = "予定量";
 
 /* Class = "UILabel"; text = "未処理数量"; ObjectID = "Ye4-yL-usF"; */
 "Ye4-yL-usF.text" = "未処理数量";
