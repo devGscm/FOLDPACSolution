@@ -56,16 +56,15 @@ class InOutCancelDetail: BaseViewController, UITableViewDataSource, UITableViewD
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		if(strIoType == Constants.INOUT_TYPE_INPUT)
 		{
-			print(" - 입고")
 			clsDataClient.SelectUrl = "inOutService:selectCombineInWorkListDetail"
 		}
 		else
 		{
-			print(" - 출고")
 			clsDataClient.SelectUrl = "inOutService:selectCombineOutWorkListDetail"
 		}
 		clsDataClient.removeServiceParam()
 		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+		clsDataClient.addServiceParam(paramName: "ioType", value: strIoType)
 		clsDataClient.addServiceParam(paramName: "saleWorkId", value: strSaleWorkId)
 		clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
 	}
@@ -154,10 +153,6 @@ class InOutCancelDetail: BaseViewController, UITableViewDataSource, UITableViewD
     @IBAction func onCloseClicked(_ sender: UIButton)
     {
         self.dismiss(animated: true, completion: nil)
-    }
-    
-    
-    
-    
+    }   
 }
 
