@@ -267,7 +267,7 @@ class EventOther : BaseRfidViewController, UITableViewDataSource, UITableViewDel
 		clsDataClient.addServiceParam(paramName: "unitId", value: AppContext.sharedManager.getUserInfo().getUnitId())
 		clsDataClient.addServiceParam(paramName: "branchId", value: AppContext.sharedManager.getUserInfo().getBranchId())
 		clsDataClient.addServiceParam(paramName: "branchCustId", value: AppContext.sharedManager.getUserInfo().getBranchCustId())
-		clsDataClient.addServiceParam(paramName: "evenCode", value: eventType)
+		clsDataClient.addServiceParam(paramName: "eventCode", value: eventType)
 
 		let clsDataTable : DataTable = DataTable()
 		clsDataTable.Id = "EVENT"
