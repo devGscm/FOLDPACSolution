@@ -251,7 +251,12 @@ class RfidTrackingService: BaseRfidViewController, UITableViewDataSource, UITabl
 	func clearTagData()
 	{
 		arrTrackingRows.removeAll()
-		tvRfidTrackingService?.reloadData()
+		DispatchQueue.main.async
+		{
+			self.lblAssetName.text = ""
+			self.lblSerialNo.text = ""
+			self.tvRfidTrackingService?.reloadData()
+		}
 		super.clearInventory()
 	}
 	
