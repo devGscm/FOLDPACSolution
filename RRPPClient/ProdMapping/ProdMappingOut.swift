@@ -66,6 +66,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	
 	var strSegueType			= ""	/**< 세그웨이 타임 */
 	
+
 	override func viewWillAppear(_ animated: Bool)
 	{
 		//print("=========================================")
@@ -86,6 +87,10 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
     {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()         //키보드 숨기기
+		
+		
+		// 옵져버 패턴 : 응답대기(왼쪽메뉴재생성)
+		NotificationCenter.default.addObserver(self, selector: #selector(onAppTerminate), name: NSNotification.Name(rawValue: "onAppTerminate"), object: nil)
     }
     
 	override func viewDidAppear(_ animated: Bool)
@@ -97,8 +102,25 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		//initTestProcess()
 	}
 	
+	
+	@objc public func onAppTerminate()
+	{
+		print("=========================================")
+		print("*ProdMappingOut.onAppTerminate()")
+		print("=========================================")
+
+		// 작업 취소처리
+		if(self.strSaleWorkId.isEmpty == false)
+		{
+			self.sendWorkInitDataSync(saleWorkId: self.strSaleWorkId)
+		}
+	}
+	
 	override func didUnload(to viewController: UIViewController, completion: ((Bool) -> Void)? = nil)
 	{
+		print("=========================================")
+		print("*ProdMappingOut.didUnload(),self.strSaleWorkId:\(self.strSaleWorkId)")
+		print("=========================================")
 		if(self.strSaleWorkId.isEmpty == false)
 		{
 			// TransitionController에서 다른화면으로 이동못하도록 false 처리를 한다.
@@ -147,6 +169,8 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		super.destoryRfid()
 		super.viewDidDisappear(animated)
 	}
+	
+
 	
 	
 	// View관련 컨트롤을 초기화한다.
@@ -1101,9 +1125,11 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
     // 작업초기화 데이터를 전송한다.
     func sendWorkInitData(saleWorkId : String)
     {
-		
+		print("=========================================")
+		print("*ProdMappingOut.sendWorkInitData")
+		print("=========================================")
         clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
-        
+		
         let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
         clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
         clsDataClient.ExecuteUrl = "inOutService:executeOutCancelData"
@@ -1113,9 +1139,9 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
         clsDataClient.addServiceParam(paramName: "unitId", value: AppContext.sharedManager.getUserInfo().getUnitId())
         clsDataClient.addServiceParam(paramName: "saleWorkId", value: saleWorkId)
         clsDataClient.executeData(dataCompletionHandler: { (data, error) in
-
+			print("*ProdMappingOut.executeData1")
             self.clsIndicator?.hide()
-            
+            print("*ProdMappingOut.executeData2")
             if let error = error {
                 // 에러처리
                 super.showSnackbar(message: error.localizedDescription)
@@ -1126,7 +1152,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
                 return
             }
             
-            //print("####결과값 처리")
+            print("####결과값 처리")
             let clsResultDataRows = clsResultDataTable.getDataRows()
             if(clsResultDataRows.count > 0)
             {
@@ -1137,17 +1163,14 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
                 if(Constants.PROC_RESULT_SUCCESS == strResultCode)
                 {
                     // 삭제성공
-                    //그리드 삭제 및 구조체 삭제
-                    //DispatchQueue.main.async
-                    //{
-                        self.clearTagData(clearScreen: true)
-                        
-                        if(super.getUnload() == true)
-                        {
-                            let strMsg = NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다.")
-                            self.showSnackbar(message: strMsg)
-                        }
-                    //}
+			
+						self.clearTagData(clearScreen: true)
+						if(super.getUnload() == true)
+						{
+							let strMsg = NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다.")
+							self.showSnackbar(message: strMsg)
+						}
+					
                 }
                 else
                 {
@@ -1162,6 +1185,46 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
         })
     
     }
+	
+	
+	func sendWorkInitDataSync(saleWorkId : String)
+	{
+		let dsSemaphore = DispatchSemaphore(value: 0)
+		let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
+		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+		clsDataClient.ExecuteUrl = "inOutService:executeOutCancelData"
+		clsDataClient.removeServiceParam()
+		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+		clsDataClient.addServiceParam(paramName: "userId", value: AppContext.sharedManager.getUserInfo().getUserId())
+		clsDataClient.addServiceParam(paramName: "unitId", value: AppContext.sharedManager.getUserInfo().getUnitId())
+		clsDataClient.addServiceParam(paramName: "saleWorkId", value: saleWorkId)
+		clsDataClient.executeData(dataCompletionHandler: { (data, error) in
+			self.clsIndicator?.hide()
+			if let error = error {
+				// 에러처리
+				super.showSnackbar(message: error.localizedDescription)
+				dsSemaphore.signal()
+				return
+			}
+			guard let clsResultDataTable = data else {
+				print("에러 데이터가 없음")
+				dsSemaphore.signal()
+				return
+			}
+			
+			print("####결과값 처리")
+			let clsResultDataRows = clsResultDataTable.getDataRows()
+			if(clsResultDataRows.count > 0)
+			{
+				let clsDataRow = clsResultDataRows[0]
+				let strResultCode = clsDataRow.getString(name: "resultCode")
+				print(" -strResultCode:\(strResultCode!)")
+				dsSemaphore.signal()
+			}
+		})
+		dsSemaphore.wait(timeout: .distantFuture)
+		
+	}
 	
 	func loadProdName(processType: String, prodCode:String, prodReadCnt: String)
 	{

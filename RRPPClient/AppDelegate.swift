@@ -73,6 +73,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 //		window!.makeKeyAndVisible()
 		
 	}
+	
+
+	
+	func applicationWillResignActive(_ application: UIApplication)
+	{
+		print("=========================================")
+		print("@@@@@@@@@applicationWillResignActive @@@@@@@")
+		print("=========================================")
+	}
+	
+	func applicationWillTerminate(_ application: UIApplication)
+	{
+		print("=========================================")
+		print("@@@@@@@@@applicationWillTerminate @@@@@@@")
+		print("=========================================")
+		
+		// 옵져버 전달 : 왼쪽메뉴 재생성
+		NotificationCenter.default.post(name: NSNotification.Name(rawValue: "onAppTerminate"), object: nil)
+	}
 }
 
 
