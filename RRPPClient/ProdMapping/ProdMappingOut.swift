@@ -88,7 +88,6 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()         //키보드 숨기기
 		
-		
 		// 옵져버 패턴 : 응답대기(AppDelegate.swift의 applicationWillTerminate에서 전송)
 		NotificationCenter.default.addObserver(self, selector: #selector(onAppTerminate), name: NSNotification.Name(rawValue: "onAppTerminate"), object: nil)
     }
@@ -176,6 +175,9 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	// View관련 컨트롤을 초기화한다.
 	func initViewControl()
 	{
+		tvMappingRfid.tableFooterView = UIView(frame: CGRect.zero)
+		tvMappingProd.tableFooterView = UIView(frame: CGRect.zero)
+		
 		clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray, indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.")
 		
 		self.lblUserName.text = AppContext.sharedManager.getUserInfo().getUserName()
