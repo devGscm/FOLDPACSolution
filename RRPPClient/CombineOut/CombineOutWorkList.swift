@@ -132,8 +132,8 @@ class CombineOutWorkList: BaseViewController, UITableViewDataSource, UITableView
         let strLocaleStDate = StrUtil.replace(sourceText: (btnStDate?.text)!, findText: "-", replaceText: "") + "000000"
         let strLocaleEnDate = StrUtil.replace(sourceText: (btnEnDate?.text)!, findText: "-", replaceText: "") + "235959"
         
-        print("strLocaleStDate:\(strLocaleStDate)")
-        print("strLocaleEnDate:\(strLocaleEnDate)")
+        //print("strLocaleStDate:\(strLocaleStDate)")
+        //print("strLocaleEnDate:\(strLocaleEnDate)")
         
         
         let dtLocaleStDate = DateUtil.getFormatDate(date: strLocaleStDate, dateFormat:"yyyyMMddHHmmss")
@@ -153,6 +153,7 @@ class CombineOutWorkList: BaseViewController, UITableViewDataSource, UITableView
         clsDataClient.addServiceParam(paramName: "pageNo", value: intPageNo)
         clsDataClient.addServiceParam(paramName: "rowsPerPage", value: Constants.ROWS_PER_PAGE)
 
+        /*
         print("=========================================")
         print("== strtDelidate:\(strLocaleStDate)")
         print("== endDeliDate:\(strLocaleEnDate)")
@@ -160,6 +161,7 @@ class CombineOutWorkList: BaseViewController, UITableViewDataSource, UITableView
         print("== rowPerPage:\(Constants.ROWS_PER_PAGE)")
         print("== strSearchValue:\(strSearchValue)")
         print("=========================================")
+        */
         
         clsDataClient.selectData(dataCompletionHandler: {(data, error) in
             if let error = error {
@@ -229,7 +231,7 @@ class CombineOutWorkList: BaseViewController, UITableViewDataSource, UITableView
         let clsDataRow = arcDataRows[sender.tag]
         let strtData = ReturnData(returnType: "CombineOutWorkList", returnCode: nil, returnMesage: nil, returnRawData: clsDataRow)
         
-        print("===========onSelectionClick: \(strtData)")
+        //print("===========onSelectionClick: \(strtData)")
         
         ptcDataHandler?.recvData(returnData: strtData)
         self.dismiss(animated: true, completion: nil)
