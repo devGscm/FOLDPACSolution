@@ -24,7 +24,7 @@
 "HvB-zk-5cI.text" = "Processing Qty.";
 
 /* Class = "UILabel"; text = "지시번호"; ObjectID = "I9x-Xy-LVL"; */
-"I9x-Xy-LVL.text" = "지시번호";
+"I9x-Xy-LVL.text" = "Instruction No.";
 
 /* Class = "UILabel"; text = "유형"; ObjectID = "IVT-Uw-cLW"; */
 "IVT-Uw-cLW.text" = "Item No.";
