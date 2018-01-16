@@ -172,8 +172,8 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         acDialog.setValue(clsDialog, forKeyPath: "contentViewController")
         
         let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
-            self.mStrSaleType = clsDialog.selectedRow.itemCode
-            let strItemName = clsDialog.selectedRow.itemName
+            self.mStrSaleType = clsDialog.selectedRow?.itemCode ?? ""
+            let strItemName = clsDialog.selectedRow?.itemName ?? ""
            
             
             self.btnSelectWorkType.setTitle(strItemName, for: .normal)
