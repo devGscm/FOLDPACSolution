@@ -149,11 +149,12 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
         //셀렉트박스-검색조건
     	arcSearchCondition.append(ListViewDialog.ListViewItem(itemCode: "0", itemName: NSLocalizedString("combine_cancel_inout_branch_name", comment: "입출고처")))
 		arcSearchCondition.append(ListViewDialog.ListViewItem(itemCode: "1", itemName: NSLocalizedString("common_order_number", comment: "지시번호")))
-		
-		
+				
         strSearchCondtion = "0"
         btnSearchCondition.setTitle(NSLocalizedString("easy_cust_name", comment: "고객사명"), for: .normal)
         
+        //테이블뷰 셀표시 지우기
+        tvInOutCancel.tableFooterView = UIView(frame: CGRect.zero)
     }
 
     
