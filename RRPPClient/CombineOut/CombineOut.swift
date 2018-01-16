@@ -172,11 +172,17 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         acDialog.setValue(clsDialog, forKeyPath: "contentViewController")
         
         let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
-            self.mStrSaleType = clsDialog.selectedRow.itemCode
-            let strItemName = clsDialog.selectedRow.itemName
-           
             
-            self.btnSelectWorkType.setTitle(strItemName, for: .normal)
+            if(self.mStrSaleType != clsDialog.selectedRow.itemCode)
+            {
+                //화면정보 초기화
+                self.clearTagData(true)
+
+                self.mStrSaleType = clsDialog.selectedRow.itemCode
+                let strItemName = clsDialog.selectedRow.itemName
+                
+                self.btnSelectWorkType.setTitle(strItemName, for: .normal)
+            }
         }
         acDialog.addAction(aaOkAction)
         self.present(acDialog, animated: true)
