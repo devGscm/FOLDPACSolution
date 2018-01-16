@@ -72,8 +72,8 @@ class BranchSearchDialog: BaseViewController, UITableViewDataSource, UITableView
         acDialog.setValue(clsDialog, forKeyPath: "contentViewController")
         
         let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
-            self.strSearchCondtion = clsDialog.selectedRow.itemCode
-            let strItemName = clsDialog.selectedRow.itemName
+			self.strSearchCondtion = clsDialog.selectedRow?.itemCode ?? ""
+			let strItemName = clsDialog.selectedRow?.itemName ?? ""
             self.btnSearchCondition.setTitle(strItemName, for: .normal)
         }
         acDialog.addAction(aaOkAction)

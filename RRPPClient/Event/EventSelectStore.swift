@@ -95,7 +95,10 @@ class EventSelectStore : BaseRfidViewController, UITableViewDataSource, UITableV
 	{
 		self.strProdGrade = ""
 		//arcProdGrade.append(ListViewDialog.ListViewItem(itemCode: "", itemName: NSLocalizedString("common_select_all", comment: "전체")))
-		let arrCodeInfo: Array<CodeInfo> = LocalData.shared.getCodeDetail(fieldValue:"PROD_GRADE", commCode:nil, viewYn:"Y", initCodeName:nil)
+		let arrCodeInfo: Array<CodeInfo> = LocalData.shared.getCodeDetail(fieldValue:"PROD_GRADE", commCode:"nil", viewYn:"Y", initCodeName:nil)
+		
+		print("@@@@@@@@ arrCodeInfo.count:\(arrCodeInfo.count)")
+		
 		for clsInfo in arrCodeInfo
 		{
 			var strCommName = ""
@@ -130,8 +133,8 @@ class EventSelectStore : BaseRfidViewController, UITableViewDataSource, UITableV
 		acDialog.setValue(clsDialog, forKeyPath: "contentViewController")
 		
 		let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
-			self.strProdGrade = clsDialog.selectedRow.itemCode
-			let strItemName = clsDialog.selectedRow.itemName
+			self.strProdGrade = clsDialog.selectedRow?.itemCode ?? ""
+			let strItemName = clsDialog.selectedRow?.itemName ?? ""
 			self.btnProdGrade.setTitle(strItemName, for: .normal)
 		}
 		acDialog.addAction(aaOkAction)

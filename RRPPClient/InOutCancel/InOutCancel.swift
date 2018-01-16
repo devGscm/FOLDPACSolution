@@ -147,8 +147,10 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
         self.strSaleType = ""
         
         //셀렉트박스-검색조건
-        arcSearchCondition.append(ListViewDialog.ListViewItem(itemCode: "0", itemName: NSLocalizedString("easy_cust_name", comment: "고객사명")))
-        arcSearchCondition.append(ListViewDialog.ListViewItem(itemCode: "1", itemName: NSLocalizedString("easy_cust_key", comment: "고객사ID")))
+    	arcSearchCondition.append(ListViewDialog.ListViewItem(itemCode: "0", itemName: NSLocalizedString("combine_cancel_inout_branch_name", comment: "입출고처")))
+		arcSearchCondition.append(ListViewDialog.ListViewItem(itemCode: "1", itemName: NSLocalizedString("common_order_number", comment: "지시번호")))
+		
+		
         strSearchCondtion = "0"
         btnSearchCondition.setTitle(NSLocalizedString("easy_cust_name", comment: "고객사명"), for: .normal)
         
@@ -330,8 +332,8 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
         acDialog.setValue(clsDialog, forKeyPath: "contentViewController")
         
         let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
-            self.strSaleType = clsDialog.selectedRow.itemCode
-            let strItemName = clsDialog.selectedRow.itemName
+            self.strSaleType = clsDialog.selectedRow?.itemCode ?? ""
+            let strItemName = clsDialog.selectedRow?.itemName ?? ""
             self.btnSaleTypeCondition.setTitle(strItemName, for: .normal)
         }
         acDialog.addAction(aaOkAction)
@@ -351,8 +353,8 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
         acDialog.setValue(clsDialog, forKeyPath: "contentViewController")
         
         let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
-            self.strSearchCondtion = clsDialog.selectedRow.itemCode
-            let strItemName = clsDialog.selectedRow.itemName
+            self.strSearchCondtion = clsDialog.selectedRow?.itemCode ?? ""
+            let strItemName = clsDialog.selectedRow?.itemName ?? ""
             self.btnSearchCondition.setTitle(strItemName, for: .normal)
         }
         

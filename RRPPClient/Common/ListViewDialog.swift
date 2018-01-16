@@ -17,9 +17,13 @@ class ListViewDialog: UITableViewController
 		let itemName : String
 	}
 	
-	var selectedRow : ListViewItem {
+	var selectedRow : ListViewItem? {
 		let intSelectedIndex = self.tableView.indexPathForSelectedRow?.row ?? 0
-		return arcData[intSelectedIndex]
+		if(arcData.count > 0)
+		{
+			return arcData[intSelectedIndex]
+		}
+		return nil
 	}
 
 	

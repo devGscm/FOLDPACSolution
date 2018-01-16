@@ -140,8 +140,8 @@ class HistorySearch: BaseViewController, UITableViewDataSource, UITableViewDeleg
 		acDialog.setValue(clsDialog, forKeyPath: "contentViewController")
 		
 		let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
-			self.strEventCode = clsDialog.selectedRow.itemCode
-			let strItemName = clsDialog.selectedRow.itemName
+			self.strEventCode = clsDialog.selectedRow?.itemCode ?? ""
+			let strItemName = clsDialog.selectedRow?.itemName ?? ""
 			self.btnEventCode.setTitle(strItemName, for: .normal)
 		}
 		acDialog.addAction(aaOkAction)

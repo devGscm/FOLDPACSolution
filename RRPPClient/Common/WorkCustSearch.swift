@@ -170,8 +170,8 @@ class WorkCustSearch: BaseViewController, UITableViewDataSource, UITableViewDele
         acDialog.setValue(clsDialog, forKeyPath: "contentViewController")
         
         let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
-            self.strParentCustId = clsDialog.selectedRow.itemCode
-            let strItemName = clsDialog.selectedRow.itemName
+            self.strParentCustId = clsDialog.selectedRow?.itemCode ?? ""
+            let strItemName = clsDialog.selectedRow?.itemName ?? ""
             self.btnParentCust.setTitle(strItemName, for: .normal)
         }
         acDialog.addAction(aaOkAction)
@@ -189,8 +189,8 @@ class WorkCustSearch: BaseViewController, UITableViewDataSource, UITableViewDele
         acDialog.setValue(clsDialog, forKeyPath: "contentViewController")
         
         let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
-            self.strCustTypeId = clsDialog.selectedRow.itemCode
-            let strItemName = clsDialog.selectedRow.itemName
+            self.strCustTypeId = clsDialog.selectedRow?.itemCode ?? ""
+            let strItemName = clsDialog.selectedRow?.itemName ?? ""
             self.btnCustType.setTitle(strItemName, for: .normal)
         }
         acDialog.addAction(aaOkAction)
@@ -207,8 +207,8 @@ class WorkCustSearch: BaseViewController, UITableViewDataSource, UITableViewDele
         acDialog.setValue(clsDialog, forKeyPath: "contentViewController")
         
         let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
-            self.strSearchCondtion = clsDialog.selectedRow.itemCode
-            let strItemName = clsDialog.selectedRow.itemName
+            self.strSearchCondtion = clsDialog.selectedRow?.itemCode ?? ""
+            let strItemName = clsDialog.selectedRow?.itemName ?? ""
             self.btnSearchCondition.setTitle(strItemName, for: .normal)
         }
         acDialog.addAction(aaOkAction)
