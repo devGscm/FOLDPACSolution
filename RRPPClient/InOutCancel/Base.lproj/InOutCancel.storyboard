@@ -363,7 +363,7 @@
                                                             </accessibility>
                                                             <state key="normal" title="유형"/>
                                                             <connections>
-                                                                <segue destination="r5R-U3-cA0" kind="presentation" identifier="segInOutCancelDetailCell" modalPresentationStyle="overCurrentContext" id="rcd-XH-rLT"/>
+                                                                <segue destination="r5R-U3-cA0" kind="presentation" identifier="segInOutCancelDetail" modalPresentationStyle="overCurrentContext" id="rcd-XH-rLT"/>
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="처리량" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sW6-P9-EBz">
