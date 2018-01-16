@@ -845,8 +845,6 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 		print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 		print("sendWorkInitDataSync\(resaleOrderId)")
 		print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-		
-		clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
 		let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
 		clsDataClient.ExecuteUrl = "inOutService:executeInCancelData"
@@ -857,8 +855,6 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 		clsDataClient.addServiceParam(paramName: "resaleOrderId", value: resaleOrderId)
 		
 		clsDataClient.executeData(dataCompletionHandler: { (data, error) in
-			self.clsIndicator?.hide()
-			
 			if let error = error {
 				// 에러처리
 				super.showSnackbar(message: error.localizedDescription)

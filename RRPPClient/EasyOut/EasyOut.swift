@@ -56,6 +56,8 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
     {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()         //키보드 숨기기
+		// 옵져버 패턴 : 응답대기(AppDelegate.swift의 applicationWillTerminate에서 전송)
+		NotificationCenter.default.addObserver(self, selector: #selector(onAppTerminate), name: NSNotification.Name(rawValue: "onAppTerminate"), object: nil)
     }
     
     
@@ -84,6 +86,51 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
     {
         super.viewDidAppear(animated)
     }
+	
+	
+	@objc public func onAppTerminate()
+	{
+		print("=========================================")
+		print("*EasyIn.onAppTerminate()")
+		print("=========================================")
+		
+		// 작업 취소처리
+		if(self.mStrSaleWorkId.isEmpty == false)
+		{
+			self.sendWorkInitDataSync(saleWorkId: self.mStrSaleWorkId)
+		}
+	}
+	
+	override func didUnload(to viewController: UIViewController, completion: ((Bool) -> Void)? = nil)
+	{
+		print("=========================================")
+		print("*EasyIn.didUnload()")
+		print("=========================================")
+		
+		if(self.mStrSaleWorkId.isEmpty == false)
+		{
+			// TransitionController에서 다른화면으로 이동못하도록 false 처리를 한다.
+			super.setUnload(unload: false)
+			
+			Dialog.show(container: self, viewController: nil,
+						title: NSLocalizedString("common_confirm", comment: "확인"),
+						message: NSLocalizedString("easy_process_exist_message", comment: "임시 저장된 데이터가 지워집니다. 종료 하시겠습니까?"),
+						okTitle: NSLocalizedString("common_confirm", comment: "확인"),
+						okHandler: { (_) in
+							
+							// 작업 취소처리
+							self.sendWorkInitData(saleWorkId: self.mStrSaleWorkId, showMessage: true)
+							
+							// 확인이 끝나면 다른 화면으로 이동한다.
+							self.toolbarController?.transition(to: viewController, completion: completion)
+							return
+			},
+						cancelTitle: NSLocalizedString("common_cancel", comment: "취소"), cancelHandler: { (_) in
+							completion!(false)
+			}
+			)
+		}
+	}
     
     
     //=======================================
@@ -717,7 +764,44 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
         })
     }
     
-    
+
+	func sendWorkInitDataSync(saleWorkId: String)
+	{
+		let dsSemaphore = DispatchSemaphore(value: 0)
+		let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
+		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+		clsDataClient.ExecuteUrl = "inOutService:executeOutCancelData"
+		clsDataClient.removeServiceParam()
+		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+		clsDataClient.addServiceParam(paramName: "userId", value: AppContext.sharedManager.getUserInfo().getUserId())
+		clsDataClient.addServiceParam(paramName: "unitId", value: AppContext.sharedManager.getUserInfo().getUnitId())
+		clsDataClient.addServiceParam(paramName: "saleWorkId", value: saleWorkId)
+		clsDataClient.executeData(dataCompletionHandler: { (data, error) in
+			if let error = error {
+				// 에러처리
+				super.showSnackbar(message: error.localizedDescription)
+				dsSemaphore.signal()
+				return
+			}
+			guard let clsResultDataTable = data else {
+				print("에러 데이터가 없음")
+				dsSemaphore.signal()
+				return
+			}
+			
+			let clsResultDataRows = clsResultDataTable.getDataRows()
+			if(clsResultDataRows.count > 0)
+			{
+				let clsDataRow = clsResultDataRows[0]
+				let strResultCode = clsDataRow.getString(name: "resultCode")
+				
+				print(" -strResultCode:\(strResultCode!)")
+				dsSemaphore.signal()
+			}
+		})
+		_ = dsSemaphore.wait(timeout: .distantFuture)
+	}
+	
     //======================================
     //===== '임시저장'버튼
     //======================================
