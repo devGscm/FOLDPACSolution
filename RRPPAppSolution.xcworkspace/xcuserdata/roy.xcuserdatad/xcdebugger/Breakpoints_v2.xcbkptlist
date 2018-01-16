@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RRPPClient/CombineOut/CombineOut.swift"
-            timestampString = "537754343.9078439"
+            timestampString = "537775883.577521"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "393"
-            endingLineNumber = "393"
+            startingLineNumber = "398"
+            endingLineNumber = "398"
             landmarkName = "recvData(returnData:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,13 +26,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RRPPClient/CombineOut/CombineOut.swift"
-            timestampString = "537754343.9081531"
+            timestampString = "537775883.57813"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "680"
-            endingLineNumber = "680"
-            landmarkName = "CombineOut"
-            landmarkType = "3">
+            startingLineNumber = "709"
+            endingLineNumber = "709"
+            landmarkName = "onRfidReaderClicked(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RRPPClient/CombineOut/CombineOut.swift"
-            timestampString = "537754343.908363"
+            timestampString = "537775883.578403"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "664"
-            endingLineNumber = "664"
-            landmarkName = "clearTagData(_:)"
+            startingLineNumber = "693"
+            endingLineNumber = "693"
+            landmarkName = "onSaleWorkIdClicked(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RRPPClient/CombineOut/CombineOut.swift"
-            timestampString = "537754343.908558"
+            timestampString = "537775883.578728"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "838"
-            endingLineNumber = "838"
+            startingLineNumber = "867"
+            endingLineNumber = "867"
             landmarkName = "doSearchBarcode(barcode:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -186,7 +186,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RRPPClient/CombineIn/CombineIn.swift"
-            timestampString = "537754343.908789"
+            timestampString = "537775883.57903"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "278"
@@ -202,7 +202,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RRPPClient/CombineIn/CombineIn.swift"
-            timestampString = "537754343.908824"
+            timestampString = "537775883.57919"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "279"
@@ -218,7 +218,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RRPPClient/CombineIn/CombineIn.swift"
-            timestampString = "537754343.908856"
+            timestampString = "537775883.57923"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "284"
@@ -266,7 +266,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RRPPClient/CombineIn/CombineIn.swift"
-            timestampString = "537754343.908898"
+            timestampString = "537775883.579265"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "283"
