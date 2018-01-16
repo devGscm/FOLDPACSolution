@@ -460,7 +460,7 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
     @objc func onItemSelectionClicked(_ sender: UIButton)
     {
         self.intSelectedIndex = sender.tag
-        self.performSegue(withIdentifier: "segInOutCancelDetailCell", sender: self)
+        self.performSegue(withIdentifier: "segInOutCancelDetail", sender: self)
     }
     
     
@@ -468,7 +468,7 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         //'유형'그리드 버튼
-        if(segue.identifier == "segInOutCancelDetailCell")
+        if(segue.identifier == "segInOutCancelDetail")
         {
             if let clsDialog = segue.destination as? InOutCancelDetail
             {
@@ -476,10 +476,12 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
                 {
                     //print("==btnAssetEpcName: \(btnAssetEpcName.tag)")
                     let clsAssetEpc = self.arcDataRows[btnAssetEpcName.tag]
-                    let saleOrderId = clsAssetEpc.getString(name:"workId")
+					let strIoType = clsAssetEpc.getString(name:"ioType")
+					let strSaleWorkId = clsAssetEpc.getString(name:"workId")
                     
                     //print("==saleOrderId: \(saleOrderId!)")
-                    clsDialog.strSaleWorkId = saleOrderId!      //상세리스트에 표출할 ResaleOrderId 전달
+					clsDialog.strIoType = strIoType ?? ""
+                    clsDialog.strSaleWorkId = strSaleWorkId ?? ""      //상세리스트에 표출할 ResaleOrderId 전달
                 }
             }
         }

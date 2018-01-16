@@ -178,6 +178,9 @@
                                                                     <real key="value" value="0.0"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
+                                                            <connections>
+                                                                <segue destination="vgK-MQ-sf4" kind="presentation" identifier="segTagDetailList" modalPresentationStyle="overCurrentContext" id="2Ax-za-OEc"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                 </tableViewCellContentView>
@@ -255,7 +258,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vvI-vP-0SK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-6772" y="-3429.5352323838083"/>
+            <point key="canvasLocation" x="-7471" y="-2741"/>
+        </scene>
+        <!--TagDetailList-->
+        <scene sceneID="M9Z-x0-0bd">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Common" referencedIdentifier="TagDetailList" id="vgK-MQ-sf4" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Ab-zq-6T1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-6682" y="-3299"/>
         </scene>
         <!--Event Select Store-->
         <scene sceneID="mHQ-tc-imE">
@@ -479,6 +490,9 @@
                                                                     <real key="value" value="0.0"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
+                                                            <connections>
+                                                                <segue destination="vgK-MQ-sf4" kind="presentation" identifier="segTagDetailList" modalPresentationStyle="overCurrentContext" id="t7b-CG-GwF"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                 </tableViewCellContentView>
@@ -560,4 +574,7 @@
             <point key="canvasLocation" x="-7471.1999999999998" y="-3430.434782608696"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="2Ax-za-OEc"/>
+    </inferredMetricsTieBreakers>
 </document>

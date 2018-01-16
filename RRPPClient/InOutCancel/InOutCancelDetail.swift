@@ -14,8 +14,8 @@ class InOutCancelDetail: BaseViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var tvInOutCancelDetail: UITableView!
 
     var arcDataRows : Array<DataRow> = Array<DataRow>()
-    var intA : Int      = 0
-    var strSaleWorkId   = String()                 //넘겨받은 resaleOrderId
+	var strIoType		= ""
+    var strSaleWorkId   = ""                 //넘겨받은 resaleOrderId
     var boolSortAsc     = true
     var intPageNo       = 0
     var clsDataClient : DataClient!
@@ -54,9 +54,17 @@ class InOutCancelDetail: BaseViewController, UITableViewDataSource, UITableViewD
 	{
 		clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
-		clsDataClient.SelectUrl = "inOutService:selectCombineInWorkListDetail"
+		if(strIoType == Constants.INOUT_TYPE_INPUT)
+		{
+			clsDataClient.SelectUrl = "inOutService:selectCombineInWorkListDetail"
+		}
+		else
+		{
+			clsDataClient.SelectUrl = "inOutService:selectCombineOutWorkListDetail"
+		}
 		clsDataClient.removeServiceParam()
 		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+		clsDataClient.addServiceParam(paramName: "ioType", value: strIoType)
 		clsDataClient.addServiceParam(paramName: "saleWorkId", value: strSaleWorkId)
 		clsDataClient.addServiceParam(paramName: "userLang", value: AppContext.sharedManager.getUserInfo().getUserLang())
 	}
@@ -145,10 +153,6 @@ class InOutCancelDetail: BaseViewController, UITableViewDataSource, UITableViewD
     @IBAction func onCloseClicked(_ sender: UIButton)
     {
         self.dismiss(animated: true, completion: nil)
-    }
-    
-    
-    
-    
+    }   
 }
 
