@@ -75,7 +75,9 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	{
 		super.viewDidLoad()
 		initBarcodeScanner()
-        self.hideKeyboardWhenTappedAround()         //키보드 숨기기        
+        self.hideKeyboardWhenTappedAround()         //키보드 숨기기
+        //테이블뷰 셀표시 지우기
+        tvCombineIn.tableFooterView = UIView(frame: CGRect.zero)
 	}
 	
 	override func viewWillAppear(_ animated: Bool)
