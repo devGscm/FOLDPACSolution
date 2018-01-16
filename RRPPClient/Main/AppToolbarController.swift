@@ -97,6 +97,7 @@ extension AppToolbarController
 		// yomile toolbar.rightViews = [ moreButton]
 		toolbar.backgroundColor = Color.blue.base
 		toolbar.titleLabel.textColor = Color.white
+		//toolbar.detailLabel.font = UIFont.systemFont(ofSize: 18)
     }
 }
 

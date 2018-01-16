@@ -36,6 +36,25 @@ public enum BackendError: Error {
 	case objectSerialization(reason: String)
 }
 
+extension BackendError: LocalizedError {
+	public var errorDescription: String? {
+		switch self {
+		case .paramError(let reason):
+			print(reason)
+			return NSLocalizedString("common_check_data_transferred.", comment: "전송할 데이터를 체크하여 주십시오.")
+		case .urlError(let reason):
+			print(reason)
+			return NSLocalizedString("common_check_data_transferred.", comment: "전송할 데이터를 체크하여 주십시오.")
+		case .sessionError(let reason):
+			print(reason)
+			return NSLocalizedString("common_not_connect_server_try_again", comment: "서버에 접속할수 없습니다. 잠시후 다시 시도하여 주십시오.")
+		case .objectSerialization(let reason):
+			print(reason)
+			return NSLocalizedString("common_unknown_error", comment: "알수 없는 오류로 인하여  전송이 실패되었습니다.")
+		}
+	}
+}
+
 public struct Login: Codable {
 	//var userId: String
 	public var userName: String?
@@ -491,7 +510,7 @@ public class DataClient
 		
 		let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
 			guard error == nil else {
-				let error = BackendError.sessionError(reason: error.debugDescription)
+				let error = BackendError.sessionError(reason: (error?.localizedDescription)!)
 				dataCompletionHandler(nil, error)
 				return
 			}

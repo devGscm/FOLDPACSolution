@@ -1397,6 +1397,7 @@ extension CombineOut
         }
         tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
         tc.toolbar.detail = NSLocalizedString("title_work_out_delivery", comment: "출고")
+		//tc.toolbar.detailLabel.font 
     }
 }
 
