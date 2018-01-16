@@ -173,13 +173,13 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         
         let aaOkAction = UIAlertAction(title: NSLocalizedString("common_confirm", comment: "확인"), style: .default) { (_) in
             
-            if(self.mStrSaleType != clsDialog.selectedRow.itemCode)
+            if(self.mStrSaleType != clsDialog.selectedRow?.itemCode)
             {
                 //화면정보 초기화
                 self.clearTagData(true)
-
-                self.mStrSaleType = clsDialog.selectedRow.itemCode
-                let strItemName = clsDialog.selectedRow.itemName
+                
+                self.mStrSaleType = clsDialog.selectedRow?.itemCode
+                let strItemName = clsDialog.selectedRow?.itemName
                 
                 self.btnSelectWorkType.setTitle(strItemName, for: .normal)
             }
@@ -366,7 +366,6 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                     //화면정보 초기화
                     clearTagData(true)
                     
-                    
                     let clsDataRow = returnData.returnRawData as! DataRow
                     
                     //팝업에서 넘어온 데이터를 넣는다.
@@ -378,7 +377,11 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                     let strVehName          = clsDataRow.getString(name: "vehName") ?? ""
                     mStrProdAssetEpc        = clsDataRow.getString(name: "prodAssetEpc") ?? ""
                     let strProdAssetEpcName = clsDataRow.getString(name: "prodAssetEpcName") ?? ""
-                    let intRemainCnt        = clsDataRow.getInt(name: "remainCnt") ?? 0
+                    
+                    var intRemainCnt        = mIntWorkAssignCount - mIntProcCount
+                    if(intRemainCnt < 0)    {   intRemainCnt = 0; }
+                    
+                    //let intRemainCnt        = clsDataRow.getInt(name: "remainCnt") ?? 0
 
                     DispatchQueue.main.async
                     {
@@ -413,9 +416,9 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                 let strSignData     = clsDataRow.getString(name: "signData") ?? ""
                 let strVehName      = tfVehName?.text ?? ""
 
-                print("=================================")
-                print("=========[ 완료전송 데이터 ] ========")
-                print("=================================")
+                //print("=================================")
+                //print("=========[ 완료전송 데이터 ] ========")
+                //print("=================================")
                 
                 //DB서버로 전송
                 sendData(Constants.WORK_STATE_COMPLETE, mStrSaleWorkId, strVehName, "", strRemark, strSignData);
@@ -431,9 +434,9 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     //=======================================
     func doSearchWorkListDetail()
     {
-        print("===============================")
-        print("===doSearchWorkListDetail: \(doSearchWorkListDetail)")
-        print("===============================")
+        //print("===============================")
+        //print("===doSearchWorkListDetail: \(doSearchWorkListDetail)")
+        //print("===============================")
             
         clsDataClient = DataClient(container: self, url: Constants.WEB_SVC_URL)
         clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
@@ -476,9 +479,9 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                 clsTagInfo.setAssetEpc(strProdAssetEpc)
                 clsTagInfo.setAssetName(strProdAssetEpcName)
                 
-                print("===============================")
-                print("===strProdAssetEpc: \(strProdAssetEpc)")
-                print("===============================")
+                //print("===============================")
+                //print("===strProdAssetEpc: \(strProdAssetEpc)")
+                //print("===============================")
                 
                 //그리드 리스트에 추가
                 self.arrAssetRows.append(clsTagInfo)
@@ -622,7 +625,11 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                         if(strAssetEpc == clsTagInfo.getAssetEpc())
                         {
                             clsTagInfo.setProcCount((clsTagInfo.getProcCount() + 1)) // 처리량 증가
-                            clsTagInfo.setRemainCount((clsTagInfo.getRemainCount() - 1)) // 미처리량 감소
+                            
+                            if(clsTagInfo.getRemainCount() > 0)
+                            {
+                                clsTagInfo.setRemainCount((clsTagInfo.getRemainCount() - 1)) // 미처리량 감소
+                            }
                         }
                     }
                 }
