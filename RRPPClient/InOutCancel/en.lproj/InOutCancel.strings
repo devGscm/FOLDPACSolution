@@ -41,7 +41,7 @@
 /* Class = "UILabel"; text = "처리량"; ObjectID = "Rha-e9-dfW"; */
 "Rha-e9-dfW.text" = "Processing Qty.";
 
-/* Class = "UILabel"; text = "입고예정량"; ObjectID = "Tvq-3Y-tWH"; */
+/* Class = "UILabel"; text = "예정량"; ObjectID = "Tvq-3Y-tWH"; */
 "Tvq-3Y-tWH.text" = "Received Schedule Qty";
 
 /* Class = "UILabel"; text = "미처리량"; ObjectID = "Ye4-yL-usF"; */
