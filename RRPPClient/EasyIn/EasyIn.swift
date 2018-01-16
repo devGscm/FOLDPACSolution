@@ -56,7 +56,9 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 	{
 		super.viewDidLoad()
 		initBarcodeScanner()
-         self.hideKeyboardWhenTappedAround()         //키보드 숨기기
+		self.hideKeyboardWhenTappedAround()         //키보드 숨기기
+		// 옵져버 패턴 : 응답대기(AppDelegate.swift의 applicationWillTerminate에서 전송)
+		NotificationCenter.default.addObserver(self, selector: #selector(onAppTerminate), name: NSNotification.Name(rawValue: "onAppTerminate"), object: nil)
 	}
 	
 	override func viewWillAppear(_ animated: Bool)
@@ -78,10 +80,23 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 		super.viewDidAppear(animated)
 	}
 	
+	@objc public func onAppTerminate()
+	{
+		print("=========================================")
+		print("*EasyIn.onAppTerminate()")
+		print("=========================================")
+		
+		// 작업 취소처리
+		if(self.strSaleWorkId.isEmpty == false)
+		{
+			self.sendWorkInitDataSync(resaleOrderId: self.strResaleOrderId)
+		}
+	}
+	
 	override func didUnload(to viewController: UIViewController, completion: ((Bool) -> Void)? = nil)
 	{
 		print("=========================================")
-		print("*ProdMappingOut.didUnload()")
+		print("*EasyIn.didUnload()")
 		print("=========================================")
 		
 		if(self.strResaleOrderId.isEmpty == false)
@@ -822,6 +837,52 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 		})
 	}
 	
+	
+	// 작업초기화 데이터를 전송한다
+	func sendWorkInitDataSync(resaleOrderId: String)
+	{
+		let dsSemaphore = DispatchSemaphore(value: 0)
+		print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+		print("sendWorkInitDataSync\(resaleOrderId)")
+		print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+		
+		clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
+		let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
+		clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
+		clsDataClient.ExecuteUrl = "inOutService:executeInCancelData"
+		clsDataClient.removeServiceParam()
+		clsDataClient.addServiceParam(paramName: "corpId", value: AppContext.sharedManager.getUserInfo().getCorpId())
+		clsDataClient.addServiceParam(paramName: "userId", value: AppContext.sharedManager.getUserInfo().getUserId())
+		clsDataClient.addServiceParam(paramName: "unitId", value: AppContext.sharedManager.getUserInfo().getUnitId())
+		clsDataClient.addServiceParam(paramName: "resaleOrderId", value: resaleOrderId)
+		
+		clsDataClient.executeData(dataCompletionHandler: { (data, error) in
+			self.clsIndicator?.hide()
+			
+			if let error = error {
+				// 에러처리
+				super.showSnackbar(message: error.localizedDescription)
+				dsSemaphore.signal()
+				return
+			}
+			guard let clsResultDataTable = data else {
+				print("에러 데이터가 없음")
+				dsSemaphore.signal()
+				return
+			}
+			
+			print("####결과값 처리")
+			let clsResultDataRows = clsResultDataTable.getDataRows()
+			if(clsResultDataRows.count > 0)
+			{
+				let clsDataRow = clsResultDataRows[0]
+				let strResultCode = clsDataRow.getString(name: "resultCode")
+				print(" -strResultCode:\(strResultCode!)")
+				dsSemaphore.signal()
+			}
+		})
+		_ = dsSemaphore.wait(timeout: .distantFuture)
+	}
 	
 	
 	/**

@@ -89,7 +89,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
         self.hideKeyboardWhenTappedAround()         //키보드 숨기기
 		
 		
-		// 옵져버 패턴 : 응답대기(왼쪽메뉴재생성)
+		// 옵져버 패턴 : 응답대기(AppDelegate.swift의 applicationWillTerminate에서 전송)
 		NotificationCenter.default.addObserver(self, selector: #selector(onAppTerminate), name: NSNotification.Name(rawValue: "onAppTerminate"), object: nil)
     }
     
@@ -1222,7 +1222,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 				dsSemaphore.signal()
 			}
 		})
-		dsSemaphore.wait(timeout: .distantFuture)
+		_ = dsSemaphore.wait(timeout: .distantFuture)
 		
 	}
 	
