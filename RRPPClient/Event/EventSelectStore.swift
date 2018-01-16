@@ -95,7 +95,9 @@ class EventSelectStore : BaseRfidViewController, UITableViewDataSource, UITableV
 	{
 		self.strProdGrade = ""
 		//arcProdGrade.append(ListViewDialog.ListViewItem(itemCode: "", itemName: NSLocalizedString("common_select_all", comment: "전체")))
-		let arrCodeInfo: Array<CodeInfo> = LocalData.shared.getCodeDetail(fieldValue:"PROD_GRADE", commCode:"nil", viewYn:"Y", initCodeName:nil)
+		let arrCodeInfo: Array<CodeInfo> = LocalData.shared.getCodeDetail(fieldValue:"PROD_GRADE", commCode:nil, viewYn:"Y", initCodeName:nil)
+		
+//		let arrCodeInfo: Array<CodeInfo> = LocalData.shared.getCodeDetail(fieldValue: "PROD_GRADE", initCodeName: nil)
 		
 		print("@@@@@@@@ arrCodeInfo.count:\(arrCodeInfo.count)")
 		

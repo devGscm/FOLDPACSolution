@@ -494,15 +494,15 @@ class LocalData {
 							{
 								try db.run(self.mTblCodeDetail.insert(objMe.mColFieldValue <- dataRow.getString(name:"fieldValue")!,
 																	  objMe.mColCommCode <- dataRow.getString(name:"commCode")!,
-																	  objMe.mColCommNameKr <- dataRow.getString(name:"commNameKr")!,
-																	  objMe.mColCommNameEn <- dataRow.getString(name:"commNameEn")!,
-																	  objMe.mColCommNameCh <- dataRow.getString(name:"commNameCh")!,
-                                                                      objMe.mColCommNameJp <- dataRow.getString(name:"commNameJp")!,
-																	  objMe.mColCommRef1 <- dataRow.getString(name:"commRef1")!,
-																	  objMe.mColCommRef2 <- dataRow.getString(name:"commRef2")!,
-																	  objMe.mColCommRef3 <- dataRow.getString(name:"commRef3")!,
+																	  objMe.mColCommNameKr <- dataRow.getString(name:"commNameKr") ?? "",
+																	  objMe.mColCommNameEn <- dataRow.getString(name:"commNameEn") ?? "",
+																	  objMe.mColCommNameCh <- dataRow.getString(name:"commNameCh") ?? "",
+                                                                      objMe.mColCommNameJp <- dataRow.getString(name:"commNameJp") ?? "",
+																	  objMe.mColCommRef1 <- dataRow.getString(name:"commRef1") ?? "",
+																	  objMe.mColCommRef2 <- dataRow.getString(name:"commRef2") ?? "",
+																	  objMe.mColCommRef3 <- dataRow.getString(name:"commRef3") ?? "",
 																	  objMe.mColCommOrder <- Int64((dataRow.getInt(name:"commOrder") ?? 0)!),
-																	  objMe.mColViewYn <- dataRow.getString(name:"viewYn")!
+																	  objMe.mColViewYn <- dataRow.getString(name:"viewYn") ?? "N"
 																)
 												)
 								
@@ -524,12 +524,13 @@ class LocalData {
 //											mColFieldValue: \(rows[self.mColFieldValue]), mColCommCode: \(rows[self.mColCommCode]),
 //											mColCommNameKr: \(rows[self.mColCommNameKr]!),mColCommNameEn: \(rows[self.mColCommNameEn]!),
 //											mColCommNameCh: \(rows[self.mColCommNameCh]!),
-//                                          mColCommNameJp: \(rows[self.mColCommNameJp]!), mColCommRef1: \(rows[self.mColCommRef1]!)
+//											mColCommNameJp: \(rows[self.mColCommNameJp]!),
+//											mColCommRef1: \(rows[self.mColCommRef1]!),
 //											mColCommRef2: \(rows[self.mColCommRef2]!), mColCommRef3: \(rows[self.mColCommRef3]!),
 //											mColCommOrder: \(rows[self.mColCommOrder]!), mColViewYn: \(rows[self.mColViewYn]!)
 //											""")
 //
-//										if(rows[objMe.mColCommCode] == "RS4030")
+//										if(rows[objMe.mColFieldValue] == "PROD_GRADE")
 //										{
 //											if let testName = rows[objMe.mColCommNameKr]
 //											{
@@ -583,11 +584,11 @@ class LocalData {
 								try db.run(objMe.mTblCodeDetailCorp.insert(objMe.mColCorpId <- dataRow.getString(name:"corpId")!,
 																	 objMe.mColFieldValue <- dataRow.getString(name:"fieldValue")!,
 																	  objMe.mColCommCode <- dataRow.getString(name:"commCode")!,
-																	  objMe.mColCommNameKr <- dataRow.getString(name:"commNameKr")!,
-																	  objMe.mColCommNameEn <- dataRow.getString(name:"commNameEn")!,
-																	  objMe.mColCommNameCh <- dataRow.getString(name:"commNameCh")!,
-                                                                      objMe.mColCommNameJp <- dataRow.getString(name:"commNameJp")!,
-																	  objMe.mColCommRef1 <- dataRow.getString(name:"commRef1")!,
+																	  objMe.mColCommNameKr <- dataRow.getString(name:"commNameKr") ?? "",
+																	  objMe.mColCommNameEn <- dataRow.getString(name:"commNameEn") ?? "",
+																	  objMe.mColCommNameCh <- dataRow.getString(name:"commNameCh") ?? "",
+                                                                      objMe.mColCommNameJp <- dataRow.getString(name:"commNameJp") ?? "",
+																	  objMe.mColCommRef1 <- dataRow.getString(name:"commRef1") ?? "",
 																	  objMe.mColCommRef2 <- dataRow.getString(name:"commRef2") ?? "",
 																	  objMe.mColCommRef3 <- dataRow.getString(name:"commRef3") ?? "",
 																	  objMe.mColCommOrder <- Int64((dataRow.getInt(name:"commOrder") ?? 0))
