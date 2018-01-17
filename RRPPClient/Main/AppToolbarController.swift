@@ -36,13 +36,19 @@ class AppToolbarController: ToolbarController
     fileprivate var menuButton: IconButton!
     fileprivate var switchControl: Switch!
     fileprivate var moreButton: IconButton!
-    
+	fileprivate var ibHome: IconButton!
+	
+	lazy var clsRootController: RootViewController = {
+		return UIStoryboard.viewController(identifier: "RootViewController") as! RootViewController
+	}()
+	
     override func prepare()
 	{
         super.prepare()
         prepareMenuButton()
       // yomile, prepareSwitch()
-      //  prepareMoreButton()
+		//prepareMoreButton()
+		prepareHomeButton()
         prepareStatusBar()
         prepareToolbar()
     }
@@ -68,10 +74,20 @@ extension AppToolbarController
     fileprivate func prepareMoreButton()
 	{
         //moreButton = IconButton(image: Icon.cm.moreVertical)
-		moreButton = IconButton(image: Icon.cm.settings)
+		moreButton = IconButton(image: Icon.home)
 		moreButton.tintColor = Color.white
         moreButton.addTarget(self, action: #selector(handleMoreButton), for: .touchUpInside)
     }
+	
+	
+	fileprivate func prepareHomeButton()
+	{
+		//ibHome = IconButton(image: Icon.cm.moreVertical)
+		ibHome = IconButton(image: Icon.home)
+		ibHome.tintColor = Color.white
+		ibHome.addTarget(self, action: #selector(handleHomeButton), for: .touchUpInside)
+	}
+
     
     fileprivate func prepareStatusBar()
 	{
@@ -94,7 +110,7 @@ extension AppToolbarController
 	{
 		toolbar.leftViews = [menuButton]
 		// yomile toolbar.rightViews = [switchControl, moreButton]
-		// yomile toolbar.rightViews = [ moreButton]
+		toolbar.rightViews = [ ibHome]
 		toolbar.backgroundColor = Color.blue.base
 		toolbar.titleLabel.textColor = Color.white
 		//toolbar.detailLabel.font = UIFont.systemFont(ofSize: 18)
@@ -129,4 +145,11 @@ extension AppToolbarController {
     fileprivate func handleMoreButton() {
         navigationDrawerController?.toggleRightView()
     }
+	
+	@objc
+	fileprivate func handleHomeButton()
+	{
+		// 옵져버 전달
+		NotificationCenter.default.post(name: NSNotification.Name(rawValue: "doMoveHome"), object: nil)
+	}
 }
