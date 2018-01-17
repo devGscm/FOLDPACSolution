@@ -224,10 +224,12 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 				self.strResaleOrderId		= clsDataRow.getString(name: "resaleOrderId") ?? ""
 				self.strSaleWorkId 			= clsDataRow.getString(name: "saleWorkId") ?? ""
 				let strResaleBranchName		= clsDataRow.getString(name: "resaleBranchName") ?? ""	// 출고처명
-				
+                self.tfVehName?.text        = clsDataRow.getString(name: "vehName") ?? ""       //차량번호
+				self.tfTradeChit?.text      = clsDataRow.getString(name: "tradeChit") ?? ""     //전표번호
+                
 				self.btnWorkCustSearch.setTitle(strResaleBranchName, for: UIControlState.normal)			// 출고처
 				self.btnResaleWorkId.setTitle(strSaleWorkId, for: UIControlState.normal)					// 송장번호
-				
+                
 				// 태그리스트 재조회
 				doReloadTagList(showInitMsg: false)
 			}
