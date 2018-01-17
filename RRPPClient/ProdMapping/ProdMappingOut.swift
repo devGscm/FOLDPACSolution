@@ -733,10 +733,10 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
     {
         let clsDataRow = arrRfidRows[sender.tag]
         
-        //DispatchQueue.main.async
-        //{
-        //    self.tvMappingRfid.selectRow(at: IndexPath(row: sender.tag, section: 0), animated: true, scrollPosition: .none)
-        //}
+		DispatchQueue.main.async
+		{
+			self.tvMappingRfid.selectRow(at: IndexPath(row: sender.tag, section: 0), animated: true, scrollPosition: .none)
+		}
         
         
         if(lblSerialNo.text != clsDataRow.getSerialNo())
