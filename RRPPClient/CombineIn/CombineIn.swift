@@ -256,7 +256,10 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 				self.intNoreadCnt				= clsDataRow.getInt(name: "noreadCnt") ?? 0				//미인식
 				self.strWorkerName				= clsDataRow.getString(name: "workerName") ?? ""		//반납-인수자
 				self.strProdAssetEpc			= clsDataRow.getString(name: "prodAssetEpc") ?? ""		//유형
-				let intRemainCnt				= clsDataRow.getInt(name: "remainCnt") ?? 0				//미처리량
+				//let intRemainCnt				= clsDataRow.getInt(name: "remainCnt") ?? 0				//미처리량
+                var intRemainCnt                = self.intOrderReqCount - self.intProcCount             //미처리량
+                if(intRemainCnt < 0)    { intRemainCnt = 0 }
+                
 				
 				self.lblResaleBranchName.text	= clsDataRow.getString(name: "resaleBranchName") ?? ""		// 출고처
 				self.btnSaleWorkId.setTitle(strSaleWorkId, for: .normal)									// 송장번호

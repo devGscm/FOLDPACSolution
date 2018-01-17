@@ -382,7 +382,7 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                     let strProdAssetEpcName = clsDataRow.getString(name: "prodAssetEpcName") ?? ""
                     
                     var intRemainCnt        = mIntWorkAssignCount - mIntProcCount
-                    if(intRemainCnt < 0)    {   intRemainCnt = 0; }
+                    if(intRemainCnt < 0)    {   intRemainCnt = 0 }
                     
                     //let intRemainCnt        = clsDataRow.getInt(name: "remainCnt") ?? 0
 
