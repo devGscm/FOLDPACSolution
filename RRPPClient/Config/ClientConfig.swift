@@ -370,8 +370,8 @@ extension ClientConfig
         guard let tc = toolbarController else {
             return
         }
-        tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
-        tc.toolbar.detail = NSLocalizedString("title_client_config", comment: "환경설정")
+		tc.toolbar.title = NSLocalizedString("title_client_config", comment: "환경설정")
+		//tc.toolbar.detail = NSLocalizedString("app_title", comment: "RRPP TRA")
     }
 }
 
