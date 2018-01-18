@@ -36,6 +36,8 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var lblAssetName: UILabel!               //유형
     @IBOutlet weak var lblSerialNo: UILabel!                //Serial No.
     
+    @IBOutlet weak var lblMastSerialNo: UILabel!
+    
 	@IBOutlet weak var btnProductAdd: UIButton!
 	
 	@IBOutlet weak var btnProdBarcode: UIButton!
@@ -188,7 +190,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
         self.tfVehName.text = ""
         self.tfTradeChit.text = ""
         self.lblAssetName.text = ""
-        self.lblSerialNo.text = ""
+        self.lblMastSerialNo.text = ""
         
 		intIDSystem = UserDefaults.standard.integer(forKey: Constants.IDENTIFICATION_SYSTEM_LIST_KEY)
 		if(intIDSystem == Constants.IDENTIFICATION_SYSTEM_GTIN14)
@@ -394,7 +396,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
     // 상품추가
     @IBAction func onProductAddClicked(_ sender: UIButton)
     {
-        if(self.lblSerialNo.text?.isEmpty == true)
+        if(self.lblMastSerialNo.text?.isEmpty == true)
         {
             super.showSnackbar(message: NSLocalizedString("msg_no_selected_serial_no", comment: "시리얼번호를 선택하여 주십시오."))
             return
@@ -414,7 +416,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
     @IBAction func onProdBarcodeClicked(_ sender: UIButton)
     {
 		// 마스터 그리드에서 상품이 선택된 경우만 진입.
-		if(lblSerialNo.text?.isEmpty == false)
+        if(self.lblMastSerialNo.text?.isEmpty == false)
 		{
 			//리더기 읽기 중지
 			if(isConnected() == true)
@@ -532,7 +534,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 
         DispatchQueue.main.async
         {
-            self.lblSerialNo.text	= ""	// 시리얼 번호
+            self.lblMastSerialNo.text	= ""	// 시리얼 번호
             self.lblAssetName.text	= ""	// 유형
             self.lblProcCount.text	= "0"	// 처리수량
         }
@@ -627,7 +629,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		//let strAssetEpc = "\(clsTagInfo.getCorpEpc())\(clsTagInfo.getAssetEpc())"    // 회사EPC코드 + 자산EPC코드
 	
 		// 바코드(ITF-14)/QR코드(농산물) 처리
-		let strSelectedSerialNo = lblSerialNo.text ?? ""
+		let strSelectedSerialNo = lblMastSerialNo.text ?? ""
 		
 		var boolFindProdCodeOverlap = false
 		
@@ -781,11 +783,10 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		{
 			self.tvMappingRfid.selectRow(at: IndexPath(row: sender.tag, section: 0), animated: true, scrollPosition: .none)
 		}
-        
-        
-        if(lblSerialNo.text != clsDataRow.getSerialNo())
+
+        if(lblMastSerialNo.text != clsDataRow.getSerialNo())
         {
-            lblSerialNo.text = clsDataRow.getSerialNo()
+            lblMastSerialNo.text = clsDataRow.getSerialNo()
             lblAssetName.text = clsDataRow.getAssetName()
             strSelectedEpcCode = clsDataRow.getEpcCode()
             
@@ -793,7 +794,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
             arrProdRows.removeAll()
             
             //선택된 RFID태그에 대한 바코드리스트
-            if(self.lblSerialNo.text?.isEmpty == false)
+            if(self.lblMastSerialNo.text?.isEmpty == false)
             {
                 let arrProds = clsProdContainer.getItemes(epcCode: strSelectedEpcCode)
                 if(arrProds.count > 0)
@@ -878,13 +879,11 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 						
 						if(self.strSaleWorkId.isEmpty == true)
 						{
-                            print("====[1]초기화====")
 							self.clearTagData(clearScreen: true)
 							super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
 						}
 						else
 						{
-                            print("====[2]초기화====")
 							self.doReloadTagList(reoadStatus: Constants.RELOAD_STATE_DEFAULT)
 						}
 					},
@@ -997,7 +996,8 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		var strEpcCode				= ""
 		var strProdAssetEpcName 	= ""
 		var strSerialNo 			= ""
-	
+
+        
 		//1) 태그데이터 초기화
 		clearTagData(clearScreen: false)
 		
@@ -1077,35 +1077,48 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 				{
 					// #1-1.구조체 수정
 					self.clsProdContainer.loadProdEpc(epcCode: strEpcCode)
-					
+                    
 					// #1-2.마스터 그리스 저장
 					self.arrRfidRows.append(clsMastItemInfo)
 				}
-				
+
 				//#2.아이템 생성-바코드ID가 있는경우
 				if(strBarcodeId.isEmpty == false)
 				{
 					self.clsProdContainer.addItem(epcCode: strEpcCode, itemInfo: clsSlaveItemInfo)
-					
-					//#3.서브 그리드 저장
-					self.arrProdRows.append(clsSlaveItemInfo)
 				}
 			}
-			
+
+            
             DispatchQueue.main.async
             {
+                //1)첫번째 태그의 상품(바코드)정보를 선택하도록함.
+                let clsDataRow = self.arrRfidRows[0]
+                self.tvMappingRfid.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .none)
+                
+                self.lblMastSerialNo.text = clsDataRow.getSerialNo()
+                self.lblAssetName.text = clsDataRow.getAssetName()
+                self.strSelectedEpcCode = clsDataRow.getEpcCode()
+            
+                //슬래이브-그리드 초기화
+                self.arrProdRows.removeAll()
+                
+                //2)선택된 RFID태그에 대한 바코드리스트
+                if(self.lblMastSerialNo.text?.isEmpty == false)
+                {
+                    let arrProds = self.clsProdContainer.getItemes(epcCode: self.strSelectedEpcCode)
+                    if(arrProds.count > 0)
+                    {
+                        self.arrProdRows.append(contentsOf: arrProds)
+                    }
+                }
+                
                 //3)'처리량' 텍스트박스에 표시
                 self.lblProcCount.text = "\(self.arrRfidRows.count)"
                 
                 //4)그리드 업데이트
                 self.tvMappingRfid?.reloadData()
                 self.tvMappingProd?.reloadData()
-                
-                //5)마지막 마스터 그리드가 선택되게 만들기
-                self.strSelectedEpcCode = strEpcCode
-                
-                self.lblSerialNo?.text = strSerialNo
-                self.lblAssetName?.text = strProdAssetEpcName
             }
 			
 			super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
