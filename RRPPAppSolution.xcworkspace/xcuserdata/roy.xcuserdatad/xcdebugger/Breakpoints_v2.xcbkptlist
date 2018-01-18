@@ -410,7 +410,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RRPPClient/EasyIn/EasyIn.swift"
-            timestampString = "537931022.800751"
+            timestampString = "537946811.396841"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "252"
@@ -426,7 +426,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RRPPClient/EasyIn/EasyIn.swift"
-            timestampString = "537931022.801113"
+            timestampString = "537946811.396892"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "257"
@@ -442,7 +442,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RRPPClient/EasyIn/EasyIn.swift"
-            timestampString = "537931022.8013"
+            timestampString = "537946811.3969311"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "297"
@@ -458,7 +458,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RRPPClient/EasyIn/EasyIn.swift"
-            timestampString = "537931022.801489"
+            timestampString = "537946811.396966"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "298"
@@ -474,11 +474,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RRPPClient/EasyIn/EasyIn.swift"
-            timestampString = "537931022.801672"
+            timestampString = "537946811.397001"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "947"
-            endingLineNumber = "947"
+            startingLineNumber = "945"
+            endingLineNumber = "945"
             landmarkName = "sendDataExistResaleOrderId(workState:resaleOrderId:vehName:tradeChit:remark:signData:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -490,11 +490,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RRPPClient/EasyIn/EasyIn.swift"
-            timestampString = "537931022.8018661"
+            timestampString = "537946811.397034"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "956"
-            endingLineNumber = "956"
+            startingLineNumber = "954"
+            endingLineNumber = "954"
             landmarkName = "sendDataExistResaleOrderId(workState:resaleOrderId:vehName:tradeChit:remark:signData:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -528,6 +528,22 @@
             startingLineNumber = "162"
             endingLineNumber = "162"
             landmarkName = "recvData(returnData:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RRPPClient/Reader/Swing/SwingProtocol.m"
+            timestampString = "537942041.891578"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "221"
+            endingLineNumber = "221"
+            landmarkName = "-parseSwing:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
