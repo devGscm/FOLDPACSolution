@@ -1278,7 +1278,7 @@ class LocalData {
 				case .RDC:
 					searchQuery = searchQuery.filter(["02", "03", "04"].contains(self.mColCommCode) )
 				case .EXP :
-					searchQuery = searchQuery.filter(["01", "05"].contains(self.mColCommCode) )
+					searchQuery = searchQuery.filter(["01"].contains(self.mColCommCode) )
 				case .IMP :
 					searchQuery = searchQuery.filter(["05"].contains(self.mColCommCode) )
 				}
