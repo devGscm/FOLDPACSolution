@@ -382,7 +382,7 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                     let strProdAssetEpcName = clsDataRow.getString(name: "prodAssetEpcName") ?? ""
                     
                     var intRemainCnt        = mIntWorkAssignCount - mIntProcCount
-                    if(intRemainCnt < 0)    {   intRemainCnt = 0; }
+                    if(intRemainCnt < 0)    {   intRemainCnt = 0 }
                     
                     //let intRemainCnt        = clsDataRow.getInt(name: "remainCnt") ?? 0
 
@@ -962,7 +962,7 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
             return
         }
         
-        // 납품(지서서O) 입고 처리
+        //납품(지서서O) 입고 처리
         if(self.mStrSaleType == Constants.SALE_TYPE_DELIVERY)
         {
             if(self.mIntProcCount > self.mIntWorkAssignCount)
@@ -1315,11 +1315,15 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                         {
                             clsInfo.setNewTag(false)    // 태그상태 NEW -> OLD로 변경
                         }
+                        
+                        //print("[임]전송성공:\(self.mBoolNewTagInfoExist)")
+                        
                         self.mBoolNewTagInfoExist = false
                         
                         //현재 작업상태가 완료전송인경우
                         if(Constants.WORK_STATE_COMPLETE == strSvrWorkState)
                         {
+                            //print("[완]전송성공:\(self.mBoolNewTagInfoExist)")
                             //송장정보관련 UI객체를 초기화한다.
                             self.clearTagData(true)
                         }
@@ -1395,8 +1399,9 @@ extension CombineOut
         guard let tc = toolbarController else {
             return
         }
-        tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
-        tc.toolbar.detail = NSLocalizedString("title_work_out_delivery", comment: "출고")
+        //tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
+        tc.toolbar.title = NSLocalizedString("title_work_out_delivery", comment: "출고")
+		//tc.toolbar.detailLabel.font 
     }
 }
 

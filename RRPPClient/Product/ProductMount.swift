@@ -13,8 +13,8 @@ import Mosaic
 class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, DataProtocol, ReaderResponseDelegate
 {
 	
-	@IBOutlet weak var lblUserName: UILabel!
-	@IBOutlet weak var lblBranchInfo: UILabel!
+	//@IBOutlet weak var lblUserName: UILabel!
+	//@IBOutlet weak var lblBranchInfo: UILabel!
 	@IBOutlet weak var lblReaderName: UILabel!
 	@IBOutlet weak var btnRfidReader: UIButton!
 	@IBOutlet weak var btnMakeOrderId: UIButton!
@@ -98,8 +98,8 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		}
 		*/
 		
-		lblUserName.text = AppContext.sharedManager.getUserInfo().getUserName()
-		lblBranchInfo.text = AppContext.sharedManager.getUserInfo().getBranchName()
+		//lblUserName.text = AppContext.sharedManager.getUserInfo().getUserName()
+		//lblBranchInfo.text = AppContext.sharedManager.getUserInfo().getBranchName()
 		lblReaderName.text = AppContext.sharedManager.getUserInfo().getReaderDevName()
 	}
 	
@@ -541,9 +541,9 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 			
 			let strMakeOrderId = self.btnMakeOrderId?.titleLabel?.text
 			let strMakeLotId = self.tfMakeLotId?.text
-			let strWorkerName = self.lblUserName?.text
+			let strWorkerName = AppContext.sharedManager.getUserInfo().getUserName()
 			let strRemark = acDialog.textFields?[0].text
-			self.sendData(makeOrderId: strMakeOrderId!, makeLotId: strMakeLotId!, workerName: strWorkerName!, remark: strRemark!)
+			self.sendData(makeOrderId: strMakeOrderId!, makeLotId: strMakeLotId!, workerName: strWorkerName, remark: strRemark!)
 		})
 		self.present(acDialog, animated: true, completion: nil)
 		
@@ -558,7 +558,7 @@ extension ProductMount
 		guard let tc = toolbarController else {
 			return
 		}
-		tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
-		tc.toolbar.detail = NSLocalizedString("title_product_mount", comment: "자산등록")
+		//tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
+		tc.toolbar.title = NSLocalizedString("title_product_mount", comment: "자산등록")
 	}
 }

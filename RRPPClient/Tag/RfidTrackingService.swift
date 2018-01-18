@@ -18,8 +18,6 @@ class RfidTrackingService: BaseRfidViewController, UITableViewDataSource, UITabl
 		let recycleCnt : String			/**< Trip건수 **/
 	}
 	
-	@IBOutlet weak var lblUserName: UILabel!
-	@IBOutlet weak var lblBranchInfo: UILabel!
 	@IBOutlet weak var lblReaderName: UILabel!
 	@IBOutlet weak var btnRfidReader: UIButton!
 	
@@ -79,8 +77,6 @@ class RfidTrackingService: BaseRfidViewController, UITableViewDataSource, UITabl
 	{
 		clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
 										 indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.")
-		lblUserName.text = AppContext.sharedManager.getUserInfo().getUserName()
-		lblBranchInfo.text = AppContext.sharedManager.getUserInfo().getBranchName()
 		lblReaderName.text = AppContext.sharedManager.getUserInfo().getReaderDevName()
 		
 		
@@ -460,8 +456,8 @@ extension RfidTrackingService
 		{
 			return
 		}
-		tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
-		tc.toolbar.detail = NSLocalizedString("title_rfid_tracking_service", comment: "이력추적")
+		//tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
+		tc.toolbar.title = NSLocalizedString("title_rfid_tracking_service", comment: "이력추적")
 	}
 }
 

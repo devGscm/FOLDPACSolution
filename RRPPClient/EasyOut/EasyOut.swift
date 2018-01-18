@@ -382,7 +382,7 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
             //이상이 없다면 삽입한다.
             if(boolFindAbnormal == false)
             {
-                print("======== 태그 이상없음!! =========")
+                //print("======== 태그 이상없음!! =========")
                 
                 //신규태그 입력 체크
                 self.mBoolNewTagInfoExist = true
@@ -417,7 +417,19 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
         DispatchQueue.main.async { self.tvEasyOut?.reloadData() }
     }
     
-    
+    //'고객사 선택'버튼
+    @IBAction func onWorkCustSearchClicked(_ sender: UIButton)
+    {
+        if(mBoolExistSavedInvoice == true)
+        {
+            Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("msg_exist_temporary_saved_data", comment: "임시저장된 데이터가 있습니다."))
+            return
+        }
+        else
+        {
+            self.performSegue(withIdentifier: "segWorkCustSearch", sender: self)
+        }
+    }
     
     //=========================== [리더기 관련 이벤트및 처리 시작] ================================
 
@@ -820,6 +832,10 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
             return
         }
 
+        //print("=========================================")
+        //print("==self.mBoolNewTagInfoExist: \(self.mBoolNewTagInfoExist)")
+        //print("=========================================")
+        
         if(self.mBoolNewTagInfoExist == false)
         {
             Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("common_no_data_send", comment: "전송할 데이터가 없습니다."))
@@ -986,17 +1002,18 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
                         //전송 성공인 경우
                         for clsInfo in self.arrTagRows
                         {
-                            if(clsInfo.getNewTag() == true)
-                            {
-                                clsInfo.setNewTag(false)        //태그상태 NEW -> OLD로 변경
-                            }
+                            clsInfo.setNewTag(false)        //태그상태 NEW -> OLD로 변경
                         }
                         self.mBoolNewTagInfoExist = false
                         self.mBoolExistSavedInvoice = true      //송장번호 할당여부
                     
+                        //print("[임]전송성공:\(self.mBoolNewTagInfoExist)")
+                    
                         //현재 작업상태가 완료전송인경우
                         if(Constants.WORK_STATE_COMPLETE == strSvrWorkState)
                         {
+                            //print("[완]전송성공:\(self.mBoolNewTagInfoExist)")
+                            
                             //송장정보관련 UI객체를 초기화한다.
                             self.clearTagData(true)
                         }
@@ -1075,14 +1092,14 @@ extension EasyOut
         guard let tc = toolbarController else {
             return
         }
-        tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
+        //tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
         if(self.strTitle.isEmpty == false)
         {
-            tc.toolbar.detail = strTitle
+            tc.toolbar.title = strTitle
         }
         else
         {
-            tc.toolbar.detail = NSLocalizedString("title_work_out_delivery", comment: "출고")
+            tc.toolbar.title = NSLocalizedString("title_work_out_delivery", comment: "출고")
         }
     }
 }

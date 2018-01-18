@@ -72,7 +72,7 @@
 "dpb-a7-gCl.text" = "Location";
 
 /* Class = "UILabel"; text = "입고예정량"; ObjectID = "jgU-NZ-Eqb"; */
-"jgU-NZ-Eqb.text" = "Received Schedule Qty";
+"jgU-NZ-Eqb.text" = "Schedule Qty";
 
 /* Class = "UILabel"; text = "No."; ObjectID = "nns-ux-lUq"; */
 "nns-ux-lUq.text" = "No.";

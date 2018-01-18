@@ -653,8 +653,8 @@ extension InOutCancel
         guard let tc = toolbarController else {
             return
         }
-        tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
-        tc.toolbar.detail = NSLocalizedString("title_work_inout_cancel", comment: "입출고취소")
+        //tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
+        tc.toolbar.title = NSLocalizedString("title_work_inout_cancel", comment: "입출고취소")
     }
 }
 

@@ -12,6 +12,9 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		let menuName : String
 	}
 	
+	@IBOutlet weak var lblUserName: UILabel!
+	@IBOutlet weak var lblBranchName: UILabel!
+	
 	@IBOutlet weak var tvMenu: UITableView!
 	@IBOutlet weak var mIvLogo: UIImageView!
 	
@@ -26,8 +29,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	var intMenuIndex = -1
 	var intOldMenuIndex = -1
-    var boolPaidServiced = false    //출고C(상품매핑) - 유료사용여부
-    
+	
     
 	open override func viewDidLoad()
 	{
@@ -35,23 +37,56 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		//view.backgroundColor = Color.blue.base
 		
 		//mIvLogo.layer.borderWidth = 1
-		mIvLogo.layer.masksToBounds = false
-		mIvLogo.layer.cornerRadius = mIvLogo.frame.height / 2
-		mIvLogo.clipsToBounds = true
+		self.mIvLogo.layer.masksToBounds = false
+		self.mIvLogo.layer.cornerRadius = mIvLogo.frame.height / 2
+		self.mIvLogo.clipsToBounds = true
+		let tgrLogo = UITapGestureRecognizer(target: self, action: #selector((onLogoClicked)))
+		self.mIvLogo.addGestureRecognizer(tgrLogo)
+		self.mIvLogo.isUserInteractionEnabled = true
 		
-
 		
 		// 옵져버 패턴 : 응답대기(왼쪽메뉴재생성)
 		NotificationCenter.default.addObserver(self, selector: #selector(doMakeLeftMenu), name: NSNotification.Name(rawValue: "doMakeLeftMenu"), object: nil)
 		
 		// 옵져버 패턴 : 응답대기(로그아웃처리)
 		NotificationCenter.default.addObserver(self, selector: #selector(doLogoutNewLogin), name: NSNotification.Name(rawValue: "doLogoutNewLogin"), object: nil)
+		
+		// 옵져버 패턴 : 응답대기(Home 이동)
+		NotificationCenter.default.addObserver(self, selector: #selector(doMoveHome), name: NSNotification.Name(rawValue: "doMoveHome"), object: nil)
 	}
+	
+	
+	@objc func onLogoClicked(sender: UITapGestureRecognizer)
+	{
+		doMoveHome()
+//		DispatchQueue.main.async
+//		{
+//			// 메뉴선택이 안되도록 한다.
+//			self.tvMenu.selectRow(at: IndexPath(row: -1, section: 0), animated: true, scrollPosition: .none)
+//			self.navigationDrawerController?.closeLeftView()
+//			self.toolbarController?.transition(to: self.clsRootController, completion: self.closeNavigationDrawer)
+//		}
+	}
+	
+	
+	@objc public func doMoveHome()
+	{
+		DispatchQueue.main.async
+		{
+			// 메뉴선택이 안되도록 한다.
+			self.tvMenu.selectRow(at: IndexPath(row: -1, section: 0), animated: true, scrollPosition: .none)
+			self.navigationDrawerController?.closeLeftView()
+			self.toolbarController?.transition(to: self.clsRootController, completion: self.closeNavigationDrawer)
+		}
+	}
+	
+	
 	
 	override func viewDidAppear(_ animated: Bool)
 	{
 		print(" LeftViewCOntroller.viewDidAppear")
-		
+		lblUserName?.text = AppContext.sharedManager.getUserInfo().getUserName()
+		lblBranchName?.text = AppContext.sharedManager.getUserInfo().getBranchName()
 		doMakeLeftMenu()
 	}
 	
@@ -173,12 +208,14 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			arrMenuData.append(MenuItem(menuId: "EventSelectStore", menuName: NSLocalizedString("title_event_select_store", comment: "선별/보관")))
 			arrMenuData.append(MenuItem(menuId: "RfidInspect", menuName: NSLocalizedString("title_rfid_inspect", comment: "RFID태그검수")))
 		}
-		
 
         arrMenuData.append(MenuItem(menuId: "ClientConfig", menuName: NSLocalizedString("title_client_config", comment: "환경설정")))
 		
 		DispatchQueue.main.async
 		{
+			// 거점명도 바꾼다.
+			self.lblBranchName?.text = AppContext.sharedManager.getUserInfo().getBranchName()
+			
 			self.tvMenu?.reloadData()
 		}
 	}
@@ -193,7 +230,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	{
 		let objCell:LeftMenuItem = tableView.dequeueReusableCell(withIdentifier: "tvcMenuItem", for: indexPath) as! LeftMenuItem
 		let strtMenuItem = arrMenuData[indexPath.row]
-		objCell.lblMenuName.font = UIFont.fontAwesome(ofSize: 14)
+		objCell.lblMenuName.font = UIFont.fontAwesome(ofSize: 16)
 		objCell.lblMenuName.text = "\(String.fontAwesomeIcon(name: .chevronCircleRight)) \(strtMenuItem.menuName )"
 		return objCell
 	}
@@ -207,8 +244,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		
         let strtMenuItem  = arrMenuData[indexPath.row]
 		self.intMenuIndex = indexPath.row
-		self.boolPaidServiced = false
-        
+		
 		switch (strtMenuItem.menuId)
 		{
 			case "TagSupply" :
@@ -296,16 +332,9 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			
 			case "ProdMappingOut" :
                 //출고C(출하)
-                
-                //이은미과장님만 비 활성화_20171221
-                //self.boolPaidServiced = true
-                //Dialog.show(container: self, title: NSLocalizedString("common_confirm", comment: "확인"), message: NSLocalizedString("msg_charged_service", comment: "유료 서비스입니다.서비스 사용계역여부를 확인 부탁드립니다."))
-                
-                //이은미과장님만 활성화_20171221
 				clsController = { () -> ProdMappingOut in
 					return UIStoryboard.viewController(storyBoardName: "ProdMapping", identifier: "ProdMappingOut") as! ProdMappingOut
 				}()
-
 				break
 			
 			case "WorkHistorySearch" :
@@ -341,7 +370,11 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 				print("is selected");
 		}
         //유료서비스가 아닌경우 진입.
-        if(boolPaidServiced == false)
+		if(strtMenuItem.menuId == "ProdMappingOut" && AppContext.sharedManager.getUserInfo().getBranchUltravisYn() == "N")
+		{
+			Dialog.show(container: self, title: NSLocalizedString("common_confirm", comment: "확인"), message: NSLocalizedString("msg_charged_service", comment: "유료 서비스입니다.서비스 사용계역여부를 확인 부탁드립니다."))
+		}
+		else
         {
             toolbarController?.move(to: clsController!, completion: closeNavigationDrawer)
             //toolbarController?.transition(to: clsController!, completion: closeNavigationDrawer)
@@ -395,5 +428,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		}
 		navigationDrawerController?.closeLeftView()
 	}
+	
+	
 }
 

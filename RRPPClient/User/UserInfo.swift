@@ -155,6 +155,12 @@ class UserInfo
 	*/
 	func getBranchCustType() -> String		{ return UserDefaults.standard.string(forKey: "branchCustType")  ?? ""}
 	
+	/**
+	* 거점의 Ultravis 사용여부를 리턴한다.
+	* @return Ultravis 사용여부
+	*/
+	func getBranchUltravisYn() -> String		{ return UserDefaults.standard.string(forKey: "branchUltravisYn")  ?? ""}
+	
 	
 	/**
 	* 공통코드 정보 업데이트 일자를 리턴한다.
@@ -460,6 +466,17 @@ class UserInfo
 	{
 		UserDefaults.standard.set(branchCustType, forKey: "branchCustType")
 	}
+	
+	/**
+	* 거점의 Ultravis 사용여부를 설정한다.
+	* @param branchUltravisYn 거점의 Ultravis 사용여부
+	*/
+	func setBranchUltravisYn(branchUltravisYn : String)
+	{
+		UserDefaults.standard.set(branchUltravisYn, forKey: "branchUltravisYn")
+	}
+	
+	
 	
 	/**
 	* 공통코드정보 업데이트일자를 설정한다.

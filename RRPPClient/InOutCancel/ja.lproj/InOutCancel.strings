@@ -66,7 +66,7 @@
 "dpb-a7-gCl.text" = "拠点";
 
 /* Class = "UILabel"; text = "입고예정량"; ObjectID = "jgU-NZ-Eqb"; */
-"jgU-NZ-Eqb.text" = "入庫予定量";
+"jgU-NZ-Eqb.text" = "予定量";
 
 /* Class = "UILabel"; text = "No."; ObjectID = "nns-ux-lUq"; */
 "nns-ux-lUq.text" = "No.";

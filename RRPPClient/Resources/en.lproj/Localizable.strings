@@ -134,6 +134,8 @@
 "login_input_passwd" = "Please enter your user Passward.";
 "login_notify_network_cost" = "This cost will be charged according to the network using your subscription plan.";
 "login_change_language" = "To apply your language, you'll need to exit and restart your app. Are you sure you want to quit?";
+"login_change_language_confirm" = "Confirm";
+"login_change_language_cancel" = "Cancel";
 /* 로그인 끝*/	
 
 /* 리턴 메시지 시작 */

@@ -22,7 +22,7 @@ class EasyInSearch: BaseViewController, UITableViewDataSource, UITableViewDelega
 	var intPageNo  = 0
 	var clsDataClient : DataClient!
 	var arcDataRows : Array<DataRow> = Array<DataRow>()
-	
+    
 	override func viewWillAppear(_ animated: Bool)
 	{
 		super.viewWillAppear(animated)
@@ -80,7 +80,7 @@ class EasyInSearch: BaseViewController, UITableViewDataSource, UITableViewDelega
 		
 		if(Constants.CUST_TYPE_RDC == strCustType)
 		{
-			clsDataClient.addServiceParam(paramName: "resaleType", value: Constants.RESALE_TYPE_GATHER) // 물류센터(RDC) - 회수입고
+			clsDataClient.addServiceParam(paramName: "resaleType", value: Constants.RESALE_TYPE_WAREHOUSING) // 물류센터(RDC) - 회수입고
 		}
 		else if(Constants.CUST_TYPE_EXP == strCustType)
 		{
@@ -127,7 +127,9 @@ class EasyInSearch: BaseViewController, UITableViewDataSource, UITableViewDelega
 				print("에러 데이터가 없음")
 				return
 			}
-			self.arcDataRows.append(contentsOf: clsDataTable.getDataRows())
+			
+            self.arcDataRows.append(contentsOf: clsDataTable.getDataRows())
+            
 			DispatchQueue.main.async
 			{
 				self.tvEasyInSearch?.reloadData()
@@ -169,13 +171,12 @@ class EasyInSearch: BaseViewController, UITableViewDataSource, UITableViewDelega
 		let objCell:EasyInSearchCell = tableView.dequeueReusableCell(withIdentifier: "tvcEasyInSearch", for: indexPath) as! EasyInSearchCell
 		let clsDataRow = arcDataRows[indexPath.row]
 		
-
 		//objCell.lblOrderDate.text = "\(indexPath.row + 1)
-		objCell.lblSaleWorkId.text = clsDataRow.getString(name: "saleWorkId")
+		objCell.lblSaleWorkId.text          = clsDataRow.getString(name: "saleWorkId")
 		objCell.lblResaleBranchName.text	= clsDataRow.getString(name:"resaleBranchName")
 		objCell.lblProdAssetEpcName.text	= clsDataRow.getString(name:"prodAssetEpcName")
 		objCell.lblOrderReqCnt.text			= clsDataRow.getString(name:"orderReqCnt")
-
+       
 		objCell.btnSelection.titleLabel?.font = UIFont.fontAwesome(ofSize: 14)
 		objCell.btnSelection.setTitle(String.fontAwesomeIcon(name:.arrowDown), for: .normal)
 		objCell.btnSelection.tag = indexPath.row
@@ -185,7 +186,12 @@ class EasyInSearch: BaseViewController, UITableViewDataSource, UITableViewDelega
 	
 	@objc func onSelectionClicked(_ sender: UIButton)
 	{
+        
 		let clsDataRow = arcDataRows[sender.tag]
+        
+        clsDataRow.addRow(name: "tradeChit", value: clsDataRow.getString(name:"tradeChit") ?? "")         //전표번호
+        clsDataRow.addRow(name: "vehName", value: clsDataRow.getString(name:"resaleVehName") ?? "")       //차량번호
+
 		let strtData = ReturnData(returnType: "easyInSearch", returnCode: nil, returnMesage: nil, returnRawData: clsDataRow)
 		ptcDataHandler?.recvData(returnData: strtData)
 		self.dismiss(animated: true, completion: nil)

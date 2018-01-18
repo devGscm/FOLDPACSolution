@@ -2,11 +2,23 @@
 /* Class = "UITextField"; placeholder = "User ID"; ObjectID = "0ta-Yr-G4p"; */
 "0ta-Yr-G4p.placeholder" = "User ID";
 
+/* Class = "UILabel"; text = "유형"; ObjectID = "1UX-xq-fp6"; */
+"1UX-xq-fp6.text" = "类型";
+
+/* Class = "UILabel"; text = "출고가능"; ObjectID = "3jm-pC-8wD"; */
+"3jm-pC-8wD.text" = "可出库";
+
 /* Class = "UILabel"; text = "Label"; ObjectID = "52V-w5-bUG"; */
 "52V-w5-bUG.text" = "Label";
 
-/* Class = "UILabel"; text = "RRPP"; ObjectID = "BaM-pA-0xc"; */
-"BaM-pA-0xc.text" = "RRPP";
+/* Class = "UILabel"; text = "입고예정"; ObjectID = "ALa-Mh-QMA"; */
+"ALa-Mh-QMA.text" = "预计入库";
+
+/* Class = "UILabel"; text = "작업자"; ObjectID = "BaM-pA-0xc"; */
+"BaM-pA-0xc.text" = "작업자";
+
+/* Class = "UILabel"; text = "재고"; ObjectID = "D0s-Jm-iPR"; */
+"D0s-Jm-iPR.text" = "在库";
 
 /* Class = "UIViewController"; title = "로그인"; ObjectID = "DV3-pj-IDf"; */
 "DV3-pj-IDf.title" = "登录";
@@ -20,11 +32,23 @@
 /* Class = "UILabel"; text = "자동로그인"; ObjectID = "OSR-am-YdZ"; */
 "OSR-am-YdZ.text" = "自动登录";
 
-/* Class = "UILabel"; text = "RRPP Trade & Tracking & Traceability Platform"; ObjectID = "Vrw-qa-6Mu"; */
-"Vrw-qa-6Mu.text" = "RRPP Trade & Tracking & Traceability Platform";
+/* Class = "UILabel"; text = "입고예정"; ObjectID = "PlW-jx-ytv"; */
+"PlW-jx-ytv.text" = "预计入库";
+
+/* Class = "UILabel"; text = "출고가능"; ObjectID = "U6V-cg-fn0"; */
+"U6V-cg-fn0.text" = "可出库";
+
+/* Class = "UILabel"; text = "거점"; ObjectID = "Vrw-qa-6Mu"; */
+"Vrw-qa-6Mu.text" = "거점";
 
 /* Class = "UILabel"; text = "RRPP"; ObjectID = "Yy0-h7-Y4L"; */
 "Yy0-h7-Y4L.text" = "RRPP";
+
+/* Class = "UILabel"; text = "재고"; ObjectID = "Z5Y-A8-x3Y"; */
+"Z5Y-A8-x3Y.text" = "在库";
+
+/* Class = "UILabel"; text = "유형"; ObjectID = "ZFb-Iw-rux"; */
+"ZFb-Iw-rux.text" = "类型";
 
 /* Class = "UIButton"; normalTitle = "로그아웃"; ObjectID = "cBC-nu-tFG"; */
 "cBC-nu-tFG.normalTitle" = "退出";
