@@ -598,8 +598,8 @@ extension TagSupply
 		guard let tc = toolbarController else {
 			return
 		}
-		tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
-		tc.toolbar.detail = NSLocalizedString("title_tag_supply", comment: "납품등록(RFID)")
+		//tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
+		tc.toolbar.title = NSLocalizedString("title_tag_supply", comment: "납품등록(RFID)")
 	}
 }
 

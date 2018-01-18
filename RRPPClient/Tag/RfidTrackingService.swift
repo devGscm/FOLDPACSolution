@@ -460,8 +460,8 @@ extension RfidTrackingService
 		{
 			return
 		}
-		tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
-		tc.toolbar.detail = NSLocalizedString("title_rfid_tracking_service", comment: "이력추적")
+		//tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
+		tc.toolbar.title = NSLocalizedString("title_rfid_tracking_service", comment: "이력추적")
 	}
 }
 

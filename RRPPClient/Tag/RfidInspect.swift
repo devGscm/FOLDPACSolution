@@ -543,8 +543,8 @@ extension RfidInspect
 		{
 			return
 		}
-		tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
-		tc.toolbar.detail = NSLocalizedString("title_rfid_inspect", comment: "RFID태그검수")
+		//tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
+		tc.toolbar.title = NSLocalizedString("title_rfid_inspect", comment: "RFID태그검수")
 	}
 }
 
