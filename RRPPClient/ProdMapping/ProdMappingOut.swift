@@ -615,9 +615,13 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		
 	}
 	
-	
+	//==== 바코드 데이터 수신
 	func getBarcodeData(clsTagInfo : RfidUtil.TagInfo)
 	{
+        print("=============================")
+        print("====바코드 데이터 수신")
+        print("=============================")
+        
 		//let strCurReadTime = DateUtil.getDate(dateFormat: "yyyyMMddHHmmss")
 		//let strSerialNo = clsTagInfo.getSerialNo()
 		//let strAssetEpc = "\(clsTagInfo.getCorpEpc())\(clsTagInfo.getAssetEpc())"    // 회사EPC코드 + 자산EPC코드
@@ -630,33 +634,73 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		if(strSelectedSerialNo.isEmpty == false)
 		{
 			let strProdCode = clsTagInfo.getEpcCode()
-			//print("=============================")
-			//print(" - 입력상품_코드: \(strProdCode)")
-			//print("=============================")
+			print("=============================")
+			print(" - 입력상품_코드: \(strProdCode)")
+			print("=============================")
 		
 			
-			//슬래이브-그리드용 태그 리스트
-			for clsInfo in arrProdRows
-			{
-				//같은 상품코드가 있다면
-				if(clsInfo.getProdCode() == strProdCode)
-				{
-					//print("*중복 상품코드 : \(strProdCode)")
-					//Logger.i("=============================");
-					
-					boolFindProdCodeOverlap = true
-					break
-				}
-			}
+            intIDSystem = UserDefaults.standard.integer(forKey: Constants.IDENTIFICATION_SYSTEM_LIST_KEY)
+            if(intIDSystem == Constants.IDENTIFICATION_SYSTEM_GTIN14)
+            {
+                //바코드
+                if(Constants.READING_LANGTH_BARCODE == strProdCode.length)
+                {
+                    //슬래이브-그리드용 태그 리스트
+                    for clsInfo in arrProdRows
+                    {
+                        //같은 상품코드가 있다면
+                        if(clsInfo.getProdCode() == strProdCode)
+                        {
+                            //print("*중복 상품코드 : \(strProdCode)")
+                            //Logger.i("=============================");
+                            
+                            boolFindProdCodeOverlap = true
+                            break
+                        }
+                    }
+                    
+                    if(boolFindProdCodeOverlap == false)
+                    {
+                        //1)신규태그 입력 체크
+                        boolNewTagInfoExist = true
+                        
+                        //2)DB에서 상품명 조회
+                        loadProdName(processType: "barcode", prodCode: strProdCode, prodReadCnt: "")
+                    }
+                }
+            }
+            else
+            {
+                //QR코드
+                if(Constants.READING_LANGTH_QRCODE == strProdCode.length)
+                {
+                    //슬래이브-그리드용 태그 리스트
+                    for clsInfo in arrProdRows
+                    {
+                        //같은 상품코드가 있다면
+                        if(clsInfo.getProdCode() == strProdCode)
+                        {
+                            //print("*중복 상품코드 : \(strProdCode)")
+                            //Logger.i("=============================");
+                            boolFindProdCodeOverlap = true
+                            break
+                        }
+                    }
+                    
+                    if(boolFindProdCodeOverlap == false)
+                    {
+                        //1)신규태그 입력 체크
+                        boolNewTagInfoExist = true
+                        
+                        //2)DB에서 상품명 조회
+                        loadProdName(processType: "barcode", prodCode: strProdCode, prodReadCnt: "")
+                    }
+                }
+            }
+            
+            
+            
 			
-			if(boolFindProdCodeOverlap == false)
-			{
-				//1)신규태그 입력 체크
-				boolNewTagInfoExist = true
-				
-				//2)DB에서 상품명 조회
-				loadProdName(processType: "barcode", prodCode: strProdCode, prodReadCnt: "")
-			}
 		}
 	}
 	
@@ -823,7 +867,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		self.performSegue(withIdentifier: "segTagDetailList", sender: self)
 	}
 	
-	//초기화
+	//'초기화'버튼
 	@IBAction func onClearAllClicked(_ sender: UIButton)
 	{
 		Dialog.show(container: self, viewController: nil,
@@ -834,11 +878,13 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 						
 						if(self.strSaleWorkId.isEmpty == true)
 						{
+                            print("====[1]초기화====")
 							self.clearTagData(clearScreen: true)
 							super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
 						}
 						else
 						{
+                            print("====[2]초기화====")
 							self.doReloadTagList(reoadStatus: Constants.RELOAD_STATE_DEFAULT)
 						}
 					},
