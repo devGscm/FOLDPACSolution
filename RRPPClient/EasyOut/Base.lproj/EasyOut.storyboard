@@ -131,7 +131,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <segue destination="zJa-Sv-2lT" kind="presentation" identifier="segWorkCustSearch" modalPresentationStyle="overCurrentContext" id="dHa-lT-CSO"/>
+                                                    <action selector="onWorkCustSearchClicked:" destination="ixd-SL-OWh" eventType="touchUpInside" id="vgQ-jd-ykg"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -506,6 +506,7 @@
                         <outlet property="tfVehName" destination="79I-8Y-PxL" id="xEK-X6-UUQ"/>
                         <outlet property="tvEasyOut" destination="fPc-Q2-skp" id="DUb-5x-28O"/>
                         <segue destination="JOw-vS-vSN" kind="presentation" identifier="segOutSignDialog" modalPresentationStyle="overCurrentContext" id="AAN-2d-rwm"/>
+                        <segue destination="zJa-Sv-2lT" kind="presentation" identifier="segWorkCustSearch" modalPresentationStyle="overCurrentContext" id="c9m-nS-QeG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h1u-Ll-iVE" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -956,10 +956,6 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
             return
         }
         
-        print("=========================================")
-        print("==self.mBoolNewTagInfoExist: \(self.mBoolNewTagInfoExist)")
-        print("=========================================")
-        
         if(self.mBoolNewTagInfoExist == false)
         {
             Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("common_no_data_send", comment: "전송할 데이터가 없습니다."))
@@ -1320,14 +1316,14 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                             clsInfo.setNewTag(false)    // 태그상태 NEW -> OLD로 변경
                         }
                         
-                        print("[임]전송성공:\(self.mBoolNewTagInfoExist)")
+                        //print("[임]전송성공:\(self.mBoolNewTagInfoExist)")
                         
                         self.mBoolNewTagInfoExist = false
                         
                         //현재 작업상태가 완료전송인경우
                         if(Constants.WORK_STATE_COMPLETE == strSvrWorkState)
                         {
-                            print("[완]전송성공:\(self.mBoolNewTagInfoExist)")
+                            //print("[완]전송성공:\(self.mBoolNewTagInfoExist)")
                             //송장정보관련 UI객체를 초기화한다.
                             self.clearTagData(true)
                         }

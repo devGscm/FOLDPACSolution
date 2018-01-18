@@ -136,6 +136,9 @@ class WorkCustSearch: BaseViewController, UITableViewDataSource, UITableViewDele
     func doSearch()
     {
         intPageNo += 1
+        
+        tvWorkCustSearch?.showIndicator()
+        
         let strSearchValue = tfSearchValue?.text ?? "";
 
         clsDataClient.addServiceParam(paramName: "parentCustId", value: strParentCustId)
@@ -147,15 +150,22 @@ class WorkCustSearch: BaseViewController, UITableViewDataSource, UITableViewDele
         clsDataClient.selectData(dataCompletionHandler: {(data, error) in
             if let error = error {
                 // 에러처리
+                DispatchQueue.main.async { self.tvWorkCustSearch?.hideIndicator() }
                 super.showSnackbar(message: error.localizedDescription)
                 return
             }
             guard let clsDataTable = data else {
+                DispatchQueue.main.async { self.tvWorkCustSearch?.hideIndicator() }
                 print("에러 데이터가 없음")
                 return
             }
             self.arcDataRows.append(contentsOf: clsDataTable.getDataRows())
-            DispatchQueue.main.async { self.tvWorkCustSearch?.reloadData() }
+            
+            DispatchQueue.main.async
+            {
+                self.tvWorkCustSearch?.reloadData()
+                self.tvWorkCustSearch?.hideIndicator()
+            }
         })
     }
     
@@ -223,16 +233,28 @@ class WorkCustSearch: BaseViewController, UITableViewDataSource, UITableViewDele
     }
     
     
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
+    func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
-        print("* scrollViewDidEndDragging")
-        let fltOffsetY = scrollView.contentOffset.y
-        let fltContentHeight = scrollView.contentSize.height
-        if (fltOffsetY >= fltContentHeight - scrollView.frame.size.height)
+        let boolLargeContent = (scrollView.contentSize.height > scrollView.frame.size.height)
+        let fltViewableHeight = boolLargeContent ? scrollView.frame.size.height : scrollView.contentSize.height
+        let boolBottom = (scrollView.contentOffset.y >= scrollView.contentSize.height - fltViewableHeight + 50)
+        if boolBottom == true && tvWorkCustSearch.isIndicatorShowing() == false
         {
+            print("===1===")
             doSearch()
         }
     }
+    
+//    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
+//    {
+//        print("* scrollViewDidEndDragging")
+//        let fltOffsetY = scrollView.contentOffset.y
+//        let fltContentHeight = scrollView.contentSize.height
+//        if (fltOffsetY >= fltContentHeight - scrollView.frame.size.height)
+//        {
+//            doSearch()
+//        }
+//    }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
