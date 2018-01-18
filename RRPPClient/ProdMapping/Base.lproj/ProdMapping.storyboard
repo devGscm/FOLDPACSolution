@@ -647,9 +647,9 @@
                         <outlet property="btnWorkCustSearch" destination="Xey-Ec-Ymm" id="md8-Ue-OkL"/>
                         <outlet property="lblAssetName" destination="yS3-et-Umo" id="OgB-JF-YDc"/>
                         <outlet property="lblBranchInfo" destination="oCd-73-slB" id="Tuc-EW-llZ"/>
+                        <outlet property="lblMastSerialNo" destination="Lvw-IG-0D0" id="xab-nt-rSD"/>
                         <outlet property="lblProcCount" destination="hcl-oU-1eW" id="sD6-O3-HD5"/>
                         <outlet property="lblReaderName" destination="OMh-XZ-dkz" id="56j-WT-2o0"/>
-                        <outlet property="lblSerialNo" destination="Lvw-IG-0D0" id="m7v-o0-e6W"/>
                         <outlet property="lblUserName" destination="hMu-RY-dUc" id="jIC-4x-lp9"/>
                         <outlet property="tfTradeChit" destination="9W7-po-sN4" id="mO4-wc-0ze"/>
                         <outlet property="tfVehName" destination="75B-p8-rYp" id="udy-qN-Tq2"/>
