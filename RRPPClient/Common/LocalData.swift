@@ -115,7 +115,7 @@ class LocalData {
 	let mTblMobUpdateInfo : Table
 	let mColUcd : Expression<String>
 	let mColUdt : Expression<Int64>
-	let mColRef : Expression<Int64>
+	let mColRef : Expression<String>
 	
 	let mTblCodeMast : Table
 	let mColFieldValue : Expression<String>
@@ -175,7 +175,7 @@ class LocalData {
 		self.mTblMobUpdateInfo = Table("MOB_UPDATE_INFO")
 		self.mColUcd = Expression<String>("UCD")
 		self.mColUdt = Expression<Int64>("UDT")
-		self.mColRef = Expression<Int64>("REF")
+		self.mColRef = Expression<String>("REF")
 		
 		self.mTblCodeMast = Table("CODE_MAST")
 		self.mColFieldValue = Expression<String>("FIELD_VALUE")
@@ -356,7 +356,7 @@ class LocalData {
 	///   - updateDate: <#updateDate description#>
 	///   - ref: <#ref description#>
 	///   - bIsInsert: <#bIsInsert description#>
-	private func changeNewVersion(container: UIViewController, remoteDbUserInfo: String, corpId: String, db: Connection, updateCode: String, updateDate: Int, ref : Int, bIsInsert : Bool, disPatchGrp : DispatchGroup ) -> Void
+	private func changeNewVersion(container: UIViewController, remoteDbUserInfo: String, corpId: String, db: Connection, updateCode: String, updateDate: Int, ref : String, bIsInsert : Bool, disPatchGrp : DispatchGroup ) -> Void
 	{
 		
 		let dataClient = Mosaic.DataClient(container: container, url: Constants.WEB_SVC_URL)
@@ -403,13 +403,13 @@ class LocalData {
 							{
 								print("insert mobUpdateInfo")
 								try db.run(objMe.mTblMobUpdateInfo.insert(objMe.mColUcd <- updateCode, objMe.mColUdt <- Int64(updateDate),
-																		 objMe.mColRef <- Int64(ref)))
+																		 objMe.mColRef <- ref))
 							}
 							else{
 								print("update mobUpdateInfo")
 								// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
 								let updateState = objMe.mTblMobUpdateInfo.where(objMe.mColUcd == updateCode)
-								try db.run(updateState.update(objMe.mColUdt <- Int64(updateDate), objMe.mColRef <- Int64(ref)))
+								try db.run(updateState.update(objMe.mColUdt <- Int64(updateDate), objMe.mColRef <- ref))
 							}
 						} catch {
 							print("local mobUpdateInfo fail: \(error)")
@@ -456,13 +456,13 @@ class LocalData {
 						{
 							print("insert mobUpdateInfo")
 							try db.run(objMe.mTblMobUpdateInfo.insert(objMe.mColUcd <- updateCode, objMe.mColUdt <- Int64(updateDate),
-																	 objMe.mColRef <- Int64(ref)))
+																	 objMe.mColRef <- ref))
 						}
 						else{
 							print("update mobUpdateInfo")
 							// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
 							let updateState = objMe.mTblMobUpdateInfo.where(objMe.mColUcd == updateCode)
-							try db.run(updateState.update(objMe.mColUdt <- Int64(updateDate), objMe.mColRef <- Int64(ref)))
+							try db.run(updateState.update(objMe.mColUdt <- Int64(updateDate), objMe.mColRef <- ref))
 						}
 					} catch {
 						print("local mobUpdateInfo fail: \(error)")
@@ -544,13 +544,13 @@ class LocalData {
 							{
 								print("insert mobUpdateInfo")
 								try db.run(objMe.mTblMobUpdateInfo.insert(objMe.mColUcd <- updateCode, objMe.mColUdt <- Int64(updateDate),
-																		 objMe.mColRef <- Int64(ref)))
+																		 objMe.mColRef <- ref))
 							}
 							else{
 								print("update mobUpdateInfo")
 								// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
 								let updateState = objMe.mTblMobUpdateInfo.where(objMe.mColUcd == updateCode)
-								try db.run(updateState.update(objMe.mColUdt <- Int64(updateDate), objMe.mColRef <- Int64(ref)))
+								try db.run(updateState.update(objMe.mColUdt <- Int64(updateDate), objMe.mColRef <- ref))
 							}
 						} catch {
 							print("local mobUpdateInfo fail: \(error)")
@@ -613,13 +613,13 @@ class LocalData {
 							{
 								print("insert mobUpdateInfo")
 								try db.run(objMe.mTblMobUpdateInfo.insert(objMe.mColUcd <- updateCode, objMe.mColUdt <- Int64(updateDate),
-																		 objMe.mColRef <- Int64(ref)))
+																		 objMe.mColRef <- ref))
 							}
 							else{
 								print("update mobUpdateInfo")
 								// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
 								let updateState = objMe.mTblMobUpdateInfo.where(objMe.mColUcd == updateCode)
-								try db.run(updateState.update(objMe.mColUdt <- Int64(updateDate), objMe.mColRef <- Int64(ref)))
+								try db.run(updateState.update(objMe.mColUdt <- Int64(updateDate), objMe.mColRef <- ref))
 							}
 							
 						} catch {
@@ -676,13 +676,13 @@ class LocalData {
 							{
 								print("insert mobUpdateInfo")
 								try db.run(objMe.mTblMobUpdateInfo.insert(objMe.mColUcd <- updateCode, objMe.mColUdt <- Int64(updateDate),
-																		 objMe.mColRef <- Int64(ref)))
+																		 objMe.mColRef <- ref))
 							}
 							else{
 								print("update mobUpdateInfo")
 								// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
 								let updateState = objMe.mTblMobUpdateInfo.where(objMe.mColUcd == updateCode)
-								try db.run(updateState.update(objMe.mColUdt <- Int64(updateDate), objMe.mColRef <- Int64(ref)))
+								try db.run(updateState.update(objMe.mColUdt <- Int64(updateDate), objMe.mColRef <- ref))
 							}
 						} catch {
 							print("local mobUpdateInfo fail: \(error)")
@@ -736,13 +736,13 @@ class LocalData {
 							{
 								print("insert mobUpdateInfo")
 								try db.run(objMe.mTblMobUpdateInfo.insert(objMe.mColUcd <- updateCode, objMe.mColUdt <- Int64(updateDate),
-																		 objMe.mColRef <- Int64(ref)))
+																		 objMe.mColRef <- ref))
 							}
 							else{
 								print("update mobUpdateInfo")
 								// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
 								let updateState = objMe.mTblMobUpdateInfo.where(objMe.mColUcd == updateCode)
-								try db.run(updateState.update(objMe.mColUdt <- Int64(updateDate), objMe.mColRef <- Int64(ref)))
+								try db.run(updateState.update(objMe.mColUdt <- Int64(updateDate), objMe.mColRef <- ref))
 							}
 							
 						} catch {
@@ -802,13 +802,13 @@ class LocalData {
 							{
 								print("insert mobUpdateInfo")
 								try db.run(objMe.mTblMobUpdateInfo.insert(objMe.mColUcd <- updateCode, objMe.mColUdt <- Int64(updateDate),
-																		 objMe.mColRef <- Int64(ref)))
+																		 objMe.mColRef <- ref))
 							}
 							else{
 								print("update mobUpdateInfo")
 								// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
 								let updateState = objMe.mTblMobUpdateInfo.where(objMe.mColUcd == updateCode)
-								try db.run(updateState.update(objMe.mColUdt <- Int64(updateDate), objMe.mColRef <- Int64(ref)))
+								try db.run(updateState.update(objMe.mColUdt <- Int64(updateDate), objMe.mColRef <- ref))
 							}
 						} catch {
 							print("local mobUpdateInfo fail: \(error)")
@@ -817,7 +817,29 @@ class LocalData {
 						//왼료처리를 위하여 디스페쳐를 나간다.
 						disPatchGrp.leave()
 				})
-			default:
+			
+		case "APP_VERSION_IOS" :
+			do
+			{
+				if(bIsInsert)
+				{
+					print("insert mobUpdateInfo")
+					try db.run(objMe.mTblMobUpdateInfo.insert(objMe.mColUcd <- updateCode, objMe.mColUdt <- Int64(updateDate),
+															  objMe.mColRef <- ref))
+				}
+				else{
+					print("update mobUpdateInfo")
+					// filter문을 사용하면 적요잉 안됨. filter 대신에 where 구문을 사용해야됨
+					let updateState = objMe.mTblMobUpdateInfo.where(objMe.mColUcd == updateCode)
+					try db.run(updateState.update(objMe.mColUdt <- Int64(updateDate), objMe.mColRef <- ref))
+				}
+			} catch {
+				print("local mobUpdateInfo fail: \(error)")
+			}
+			//왼료처리를 위하여 디스페쳐를 나간다.
+			disPatchGrp.leave()
+			
+		default:
 				print(" 업데이트 항목에 대한 구현이 없음. 코드: \(updateCode)")
 				disPatchGrp.leave()
 		}
@@ -854,7 +876,7 @@ class LocalData {
 					DispatchQueue.main.async {
 						indicator.show(message:error.localizedDescription)
 					}
-					sleep(5)
+					sleep(10)
 					indicator.hide()
 					return
 				}
@@ -879,7 +901,7 @@ class LocalData {
 					{
 						let updateCode = dataRow.getString(name:"ucd")!
 						let updateDate = dataRow.getInt(name:"udt")!
-						let ref = dataRow.getInt(name:"ref")!
+						let ref = dataRow.getString(name:"ref")!
 						
 						let localUpdateInfoQuery = self.mTblMobUpdateInfo.select(self.mColUdt).filter(self.mColUcd == updateCode )
 						if let localRow = try db.pluck(localUpdateInfoQuery)
@@ -900,12 +922,73 @@ class LocalData {
 					print("local mobUpdateInfo fail: \(error)")
 				}
 				
-				//모든데이터가 다 받을수 있도록 대기한다
-				clsDispatchGrp.notify(queue: .main) {
-					indicator.hide()
-					navigation?.isEnabled = true
+				//App의 빌드버전을 구한다 버전체크 후, Update
+				let nsObject: AnyObject? = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as AnyObject
+				let appVersion = nsObject as! String
+				//print(appVersion)
+				let remoteAppVersion = self.getIOSAppVersion()
+				if(remoteAppVersion > appVersion)
+				{
+					print(remoteAppVersion)
+					
+					//버전체크후 차이가 있을경우 여부에 따른 처리
+					//모든데이터가 다 받을수 있도록 대기한다
+					clsDispatchGrp.notify(queue: .main) {
+							indicator.hide()
+						
+							Dialog.show(container: container, viewController: nil,
+								title: NSLocalizedString("common_confirm", comment: "확인"),
+								message: NSLocalizedString("common_update_version", comment: "최신버전이 나왔습니다. 지금 업데이트 하시겠습니까?"),
+								okTitle: NSLocalizedString("common_confirm", comment: "확인"),
+								okHandler: { (_) in
+									if let url = URL(string: "itms-apps://itunes.apple.com/us/app/magento2-mobikul-mobile-app/id" + Constants.RRPP_APP_MARKET_ID),
+										UIApplication.shared.canOpenURL(url){
+										if #available(iOS 10.0, *) {
+											UIApplication.shared.open(url, options: [:], completionHandler: nil)
+										} else {
+											UIApplication.shared.openURL(url)
+										}
+									}
+									
+									// 종료									
+									//exit(0)
+							},
+									cancelTitle: NSLocalizedString("common_cancel", comment: "취소"), cancelHandler: { (_) in
+									navigation?.isEnabled = false
+							})
+					}
 				}
+				else
+				{
+					//모든데이터가 다 받을수 있도록 대기한다
+					clsDispatchGrp.notify(queue: .main) {
+						indicator.hide()
+						navigation?.isEnabled = true
+					}
+				}
+								
+				
 		})
+	}
+	
+	public func getIOSAppVersion() -> String
+	{
+		var strResult = ""
+		do
+		{
+			let db = try Connection(self.dbPath)
+			var searchQuery = self.mTblMobUpdateInfo.select(mTblMobUpdateInfo[*])
+			searchQuery = searchQuery.filter(mColUcd == "APP_VERSION_IOS" )
+			for dbCode in try db.prepare(searchQuery)
+			{
+				strResult = dbCode[self.mColRef] 
+			}
+		}
+		catch
+		{
+			print("local getIOSAppVersion fail: \(error)")
+		}
+		return strResult
 	}
 	
 	/// 공통코드 가져오기
