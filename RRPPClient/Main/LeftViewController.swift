@@ -19,6 +19,9 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	@IBOutlet weak var mIvLogo: UIImageView!
 	
 	@IBOutlet weak var btnLogout: UIButton!
+	
+	@IBOutlet weak var lblVersion: UILabel!	// 현재 앱버전
+	
 	var arrMenuData:Array<MenuItem> = Array<MenuItem>()
    
     lazy var clsRootController: RootViewController = {
@@ -59,15 +62,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	@objc func onLogoClicked(sender: UITapGestureRecognizer)
 	{
 		doMoveHome()
-//		DispatchQueue.main.async
-//		{
-//			// 메뉴선택이 안되도록 한다.
-//			self.tvMenu.selectRow(at: IndexPath(row: -1, section: 0), animated: true, scrollPosition: .none)
-//			self.navigationDrawerController?.closeLeftView()
-//			self.toolbarController?.transition(to: self.clsRootController, completion: self.closeNavigationDrawer)
-//		}
 	}
-	
 	
 	@objc public func doMoveHome()
 	{
@@ -87,6 +82,10 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		print(" LeftViewCOntroller.viewDidAppear")
 		lblUserName?.text = AppContext.sharedManager.getUserInfo().getUserName()
 		lblBranchName?.text = AppContext.sharedManager.getUserInfo().getBranchName()
+		
+		let nsObject: AnyObject? = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as AnyObject
+		let appVersion = nsObject as! String
+		lblVersion?.text = appVersion
 		doMakeLeftMenu()
 	}
 	

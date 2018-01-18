@@ -147,8 +147,13 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 			strCustType = AppContext.sharedManager.getUserInfo().getBranchCustType()
 		}
 		
+		print("@@@@@@@@@ strCustType:\(strCustType)")
+		
 		let enuCustType = LocalData.CustType(rawValue: strCustType)
 		let arrCodeInfo: Array<CodeInfo> = LocalData.shared.getSaleTypeCodeDetail(fieldValue: "RESALE_TYPE", saleResale: LocalData.SaleResaleType.Resale, custType: enuCustType!, initCodeName: nil)
+		
+		print("@@@@@@@@@ arrCodeInfo.count:\(arrCodeInfo.count)")
+		
 		
 		for (intIndex, clsInfo) in arrCodeInfo.enumerated()
 		{
