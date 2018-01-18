@@ -15,7 +15,14 @@ class RfidReaderDialog: UITableViewController, SwingProtocolProtocol
     
     var selectedRow : ReaderDevInfo? {
         let intSelectedIndex = self.tableView.indexPathForSelectedRow?.row ?? 0
-        return mLstRfidReader[intSelectedIndex]
+		if ( mLstRfidReader.count > 0)
+		{
+			return mLstRfidReader[intSelectedIndex]
+		}
+		else
+		{
+			return nil
+		}
     }
     var mLstRfidReader = Array<ReaderDevInfo>()
     
