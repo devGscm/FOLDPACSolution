@@ -86,6 +86,8 @@ class EventSelectStore : BaseRfidViewController, UITableViewDataSource, UITableV
 		lblBranchInfo.text = AppContext.sharedManager.getUserInfo().getBranchName()
 		lblReaderName.text = AppContext.sharedManager.getUserInfo().getReaderDevName()
 		
+		// 테이블뷰 셀표시 지우기
+		tvSelectStore.tableFooterView = UIView(frame: CGRect.zero)
 		
 		makeProdGradeCodeList(userLang: AppContext.sharedManager.getUserInfo().getUserLang())
 		

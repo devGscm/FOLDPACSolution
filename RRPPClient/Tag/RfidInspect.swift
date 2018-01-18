@@ -90,6 +90,9 @@ class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 		
 		//테이블의 셀에대한 높이설정
 		self.tvRfidInspect.rowHeight = 70
+		
+		// 테이블뷰 셀표시 지우기
+		tvRfidInspect.tableFooterView = UIView(frame: CGRect.zero)
 	}
 	
 	@objc func onAssetNameClicked(sender: UITapGestureRecognizer)

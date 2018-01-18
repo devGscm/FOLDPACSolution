@@ -61,6 +61,9 @@ class EasyInSearch: BaseViewController, UITableViewDataSource, UITableViewDelega
 		{
 			strCustType = AppContext.sharedManager.getUserInfo().getCustType()
 		}
+		
+		// 테이블뷰 셀표시 지우기
+		tvEasyInSearch.tableFooterView = UIView(frame: CGRect.zero)		
 	}
 	
 	func initDataClient()

@@ -91,6 +91,8 @@ class WorkCustSearch: BaseViewController, UITableViewDataSource, UITableViewDele
         strSearchCondtion = "0"
         btnSearchCondition.setTitle(NSLocalizedString("easy_cust_name", comment: "고객사명"), for: .normal)
 
+		// 테이블뷰 셀표시 지우기
+		tvWorkCustSearch.tableFooterView = UIView(frame: CGRect.zero)
     }
     
     func initCustMastList()

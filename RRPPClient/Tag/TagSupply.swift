@@ -87,6 +87,9 @@ class TagSupply: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 		let dfFormat = DateFormatter()
 		dfFormat.dateFormat = "yyyy-MM-dd"
 		btnWorkDate.text = dfFormat.string(from: dtCurDate)
+		
+		// 테이블뷰 셀표시 지우기
+		tvTagSupply.tableFooterView = UIView(frame: CGRect.zero)
 	}
 	
 	

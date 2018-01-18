@@ -93,7 +93,10 @@ class RfidTrackingService: BaseRfidViewController, UITableViewDataSource, UITabl
 		let tgrRecycleCnt = UITapGestureRecognizer(target: self, action: #selector((onRecycleCntClicked)))
 		self.lblRecycleCnt.addGestureRecognizer(tgrRecycleCnt)
 		
-		 self.tvRfidTrackingService.rowHeight = 70
+		self.tvRfidTrackingService.rowHeight = 70
+		
+		// 테이블뷰 셀표시 지우기
+		tvRfidTrackingService.tableFooterView = UIView(frame: CGRect.zero)
 	}
 	
 	@objc func onRecycleCntClicked(sender: UITapGestureRecognizer)

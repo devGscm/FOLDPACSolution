@@ -51,6 +51,9 @@ class TagDetailList: UIViewController, UITableViewDataSource, UITableViewDelegat
 		
 		let tgrReadTime = UITapGestureRecognizer(target: self, action: #selector((onReadTimeClicked)))
 		self.lblReadTime.addGestureRecognizer(tgrReadTime)
+		
+		// 테이블뷰 셀표시 지우기
+		tvTagDetailList.tableFooterView = UIView(frame: CGRect.zero)
 	}
 
 	@objc func onAssetNameClicked(sender: UITapGestureRecognizer)
