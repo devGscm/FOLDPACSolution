@@ -417,7 +417,19 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
         DispatchQueue.main.async { self.tvEasyOut?.reloadData() }
     }
     
-    
+    //'고객사 선택'버튼
+    @IBAction func onWorkCustSearchClicked(_ sender: UIButton)
+    {
+        if(mBoolExistSavedInvoice == true)
+        {
+            Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("msg_exist_temporary_saved_data", comment: "임시저장된 데이터가 있습니다."))
+            return
+        }
+        else
+        {
+            self.performSegue(withIdentifier: "segWorkCustSearch", sender: self)
+        }
+    }
     
     //=========================== [리더기 관련 이벤트및 처리 시작] ================================
 

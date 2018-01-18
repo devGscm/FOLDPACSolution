@@ -80,7 +80,7 @@ class EasyInSearch: BaseViewController, UITableViewDataSource, UITableViewDelega
 		
 		if(Constants.CUST_TYPE_RDC == strCustType)
 		{
-			clsDataClient.addServiceParam(paramName: "resaleType", value: Constants.RESALE_TYPE_GATHER) // 물류센터(RDC) - 회수입고
+			clsDataClient.addServiceParam(paramName: "resaleType", value: Constants.RESALE_TYPE_WAREHOUSING) // 물류센터(RDC) - 회수입고
 		}
 		else if(Constants.CUST_TYPE_EXP == strCustType)
 		{

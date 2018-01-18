@@ -165,15 +165,14 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 				clsDialog.ptcDataHandler = self
 			}
 		}
-			
 		else if(segue.identifier == "segWorkCustSearch")
 		{
-			// 고객사 조회
-			if let clsDialog = segue.destination as? WorkCustSearch
-			{
-				clsDialog.inOutType = Constants.INOUT_TYPE_INPUT
-				clsDialog.ptcDataHandler = self
-			}
+            //고객사 선택
+            if let clsDialog = segue.destination as? WorkCustSearch
+            {
+                clsDialog.inOutType = Constants.INOUT_TYPE_INPUT
+                clsDialog.ptcDataHandler = self
+            }
 		}
 			
 		else if(segue.identifier == "segOutSignDialog")
@@ -276,15 +275,24 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 		}
 	}
 	
-
 	
 	@IBAction func onResaleWorkIdClicked(_ sender: UIButton)
 	{
 		self.performSegue(withIdentifier: "segEasyInSearch", sender: self)
 	}
 	
-	
-	@IBAction func onWorkCustSearchClicked(_ sender: UIButton) {
+    //'고객사 선택'버튼
+	@IBAction func onWorkCustSearchClicked(_ sender: UIButton)
+    {
+        if(boolExistSavedInvoice == true)
+        {
+            Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("msg_exist_temporary_saved_data", comment: "임시저장된 데이터가 있습니다."))
+            return
+        }
+        else
+        {
+            self.performSegue(withIdentifier: "segWorkCustSearch", sender: self)
+        }
 	}
 	
 	//데이터를 clear한다.
@@ -974,44 +982,45 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 					//print("-서버로부터 받은 처리갯수: \(strSvrProcCount)")
 					//print("-서버로부터 받은 작업처리상태:  \(strSvrWorkState)")
 					
-					//DispatchQueue.main.async
-					//{
-						// 전송 성공인 경우
-						for clsInfo in self.arrTagRows
-						{
-							if(clsInfo.getNewTag() == true)
-							{
-								clsInfo.setNewTag(false)	// 태그상태 NEW -> OLD로 변경
-							}
-						}
-						self.boolNewTagInfoExist = false
-						self.boolExistSavedInvoice = true	// 송장번호 할당여부
-						
-						// 현재 작업상태가 완료전송인경우
-						if(Constants.WORK_STATE_COMPLETE == strSvrWorkState || Constants.WORK_STATE_COMPLETE_FORCE == strSvrWorkState)
-						{
-							// 송장정보관련 UI객체를 초기화한다.
-							self.clearTagData(clearScreen: true)
-						}
-						let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
-						self.showSnackbar(message: strMsg)
-					//}
+                    // 전송 성공인 경우
+                    for clsInfo in self.arrTagRows
+                    {
+                        if(clsInfo.getNewTag() == true)
+                        {
+                            clsInfo.setNewTag(false)	// 태그상태 NEW -> OLD로 변경
+                        }
+                    }
+                    self.boolNewTagInfoExist = false
+                    self.boolExistSavedInvoice = true	// 송장번호 할당여부
+                    
+                    // 현재 작업상태가 완료전송인경우
+                    if(Constants.WORK_STATE_COMPLETE == strSvrWorkState || Constants.WORK_STATE_COMPLETE_FORCE == strSvrWorkState)
+                    {
+                        // 송장정보관련 UI객체를 초기화한다.
+                        self.clearTagData(clearScreen: true)
+                    }
+                    let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
+                    self.showSnackbar(message: strMsg)
 				}
 				else
 				{
 					// 전송실패
 					let strMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
 					print("-strMsg:  \(strMsg)")
+                    
 					if(Constants.PROC_RESULT_ERROR_NEED_WORK_COMPLETE_FORCE == strResultCode)
 					{
 						// TAGID가 해당거점에 이미 입고처리가 되어져 있습니다. 그래도 입고처리하겠습니까?
-						// TODO
-						var strDialogMessage = strMsg
-						if(strMsg.isEmpty == true)
-						{
-							strDialogMessage = NSLocalizedString("msg_error_need_work_complete_force", comment: "입고처리 하고자 하는 파렛트 중, 해당 거점에 이미 입고되어 있는 파렛트가 존재합니다. 해당 파렛트를 제외하고 입고처리됩니다. 계속하시겠습니까?")
-						}
-						
+                        /*
+                        var strDialogMessage = strMsg
+                        if(strMsg.isEmpty == true)
+                        {
+                            strDialogMessage = NSLocalizedString("msg_error_need_work_complete_force", comment: "입고처리 하고자 하는 파렛트 중, 해당 거점에 이미 입고되어 있는 파렛트가 존재합니다. 해당 파렛트를 제외하고 입고처리됩니다. 계속하시겠습니까?")
+                        }
+                        */
+                        
+                        let strDialogMessage = NSLocalizedString("msg_error_need_work_complete_force", comment: "입고처리 하고자 하는 파렛트 중, 해당 거점에 이미 입고되어 있는 파렛트가 존재합니다. 해당 파렛트를 제외하고 입고처리됩니다. 계속하시겠습니까?")
+                        
 						Dialog.show(container: self, viewController: nil,
 							title: NSLocalizedString("common_confirm", comment: "확인"),
 							message: strDialogMessage,
@@ -1021,7 +1030,6 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 								let strTradeChit	= self.tfTradeChit.text ?? ""
 								// 서버 전송 처리
 								self.sendDataExistResaleOrderId(workState: Constants.WORK_STATE_COMPLETE_FORCE, resaleOrderId: self.strResaleOrderId, vehName: strVehName, tradeChit: strTradeChit, remark: remark, signData: signData)
-					
 							},
 							cancelTitle: NSLocalizedString("common_cancel", comment: "취소"), cancelHandler: nil)
 						
@@ -1029,22 +1037,30 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 					else if((Constants.PROC_RESULT_ERROR_NO_REGISTERED_READERS == strResultCode) || (Constants.PROC_RESULT_ERROR_NO_MATCH_BRANCH_CUST_INFO == strResultCode))
 					{
 						self.showSnackbar(message: strMsg)
+                        
+                        if(self.strResaleOrderId.isEmpty == false)
+                        {
+                            // 완료전송 처리중 오류시 발번받은 송장번호 초기화
+                            self.sendWorkInitData(resaleOrderId: self.strResaleOrderId)    // 초기화
+                            self.boolNewTagInfoExist = false
+                            self.boolExistSavedInvoice = true
+                            
+                            self.clearTagData(clearScreen: true)
+                        }
 					}
 					else
 					{
 						super.showSnackbar(message: NSLocalizedString("common_error", comment: "에러"))
+                        if(self.strResaleOrderId.isEmpty == false)
+                        {
+                            // 완료전송 처리중 오류시 발번받은 송장번호 초기화
+                            self.sendWorkInitData(resaleOrderId: self.strResaleOrderId)    // 초기화
+                            self.boolNewTagInfoExist = false
+                            self.boolExistSavedInvoice = true
+                            
+                            self.clearTagData(clearScreen: true)
+                        }
 					}
-					
-					if(self.strResaleOrderId.isEmpty == false)
-					{
-						// 완료전송 처리중 오류시 발번받은 송장번호 초기화
-						self.sendWorkInitData(resaleOrderId: self.strResaleOrderId)	// 초기화
-						self.boolNewTagInfoExist = false
-						self.boolExistSavedInvoice = true
-						
-						self.clearTagData(clearScreen: true)
-					}
-					
 				}
 			}
 		})
