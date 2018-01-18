@@ -469,7 +469,7 @@ class UserInfo
 	
 	/**
 	* 거점의 Ultravis 사용여부를 설정한다.
-	* @param strBranchCustType 거점의 Ultravis 사용여부
+	* @param branchUltravisYn 거점의 Ultravis 사용여부
 	*/
 	func setBranchUltravisYn(branchUltravisYn : String)
 	{
