@@ -147,8 +147,13 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 			strCustType = AppContext.sharedManager.getUserInfo().getBranchCustType()
 		}
 		
+		print("@@@@@@@@@ strCustType:\(strCustType)")
+		
 		let enuCustType = LocalData.CustType(rawValue: strCustType)
 		let arrCodeInfo: Array<CodeInfo> = LocalData.shared.getSaleTypeCodeDetail(fieldValue: "RESALE_TYPE", saleResale: LocalData.SaleResaleType.Resale, custType: enuCustType!, initCodeName: nil)
+		
+		print("@@@@@@@@@ arrCodeInfo.count:\(arrCodeInfo.count)")
+		
 		
 		for (intIndex, clsInfo) in arrCodeInfo.enumerated()
 		{
@@ -1302,14 +1307,14 @@ extension CombineIn
 		guard let tc = toolbarController else {
 			return
 		}
-		tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
+		//tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
 		if(self.strTitle.isEmpty == false)
 		{
-			tc.toolbar.detail = strTitle
+			tc.toolbar.title = strTitle
 		}
 		else
 		{
-			tc.toolbar.detail = NSLocalizedString("title_work_in_warehouse", comment: "입고")
+			tc.toolbar.title = NSLocalizedString("title_work_in_warehouse", comment: "입고")
 		}
 	}
 }

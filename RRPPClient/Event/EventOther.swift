@@ -401,15 +401,15 @@ extension EventOther
 		guard let tc = toolbarController else {
 			return
 		}
-		tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
+		//tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
 		
 		if(self.strEventType == Constants.EVENT_CODE_CLEAN)
 		{
-			tc.toolbar.detail = NSLocalizedString("title_event_clean", comment: "세척")
+			tc.toolbar.title = NSLocalizedString("title_event_clean", comment: "세척")
 		}
 		else if(self.strEventType == Constants.EVENT_CODE_DESTORY)
 		{
-			tc.toolbar.detail = NSLocalizedString("title_event_destory", comment: "폐기")
+			tc.toolbar.title = NSLocalizedString("title_event_destory", comment: "폐기")
 		}
 	}
 }

@@ -1352,14 +1352,14 @@ extension EasyIn
 		guard let tc = toolbarController else {
 			return
 		}
-		tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
+		//tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
 		if(self.strTitle.isEmpty == false)
 		{
-			tc.toolbar.detail = strTitle
+			tc.toolbar.title = strTitle
 		}
 		else
 		{
-			tc.toolbar.detail = NSLocalizedString("title_work_in_warehouse", comment: "입고")
+			tc.toolbar.title = NSLocalizedString("title_work_in_warehouse", comment: "입고")
 		}
 	}
 }

@@ -675,8 +675,8 @@ extension StockReview
 		guard let tc = toolbarController else {
 			return
 		}
-		tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
-		tc.toolbar.detail = NSLocalizedString("title_stock_review", comment: "재고실사")
+		//tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
+		tc.toolbar.title = NSLocalizedString("title_stock_review", comment: "재고실사")
 	}
 }
 

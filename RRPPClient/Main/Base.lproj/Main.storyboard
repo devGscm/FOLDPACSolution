@@ -369,7 +369,7 @@ CA
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cBC-nu-tFG">
-                                        <rect key="frame" x="250" y="15" width="115" height="30"/>
+                                        <rect key="frame" x="233" y="12" width="134" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -425,6 +425,22 @@ CA
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Ol-Bs-8NL">
                                 <rect key="frame" x="0.0" y="608" width="375" height="59"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="App Version :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DBg-bn-Idh">
+                                        <rect key="frame" x="10" y="20" width="95" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0R-IU-OTi">
+                                        <rect key="frame" x="108" y="20" width="78" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </view>
                         </subviews>
@@ -434,6 +450,7 @@ CA
                         <outlet property="btnLogout" destination="cBC-nu-tFG" id="Yz7-EZ-cTt"/>
                         <outlet property="lblBranchName" destination="Vrw-qa-6Mu" id="m8W-hD-Bop"/>
                         <outlet property="lblUserName" destination="BaM-pA-0xc" id="N3r-MI-EHp"/>
+                        <outlet property="lblVersion" destination="W0R-IU-OTi" id="ZJH-QW-664"/>
                         <outlet property="mIvLogo" destination="abJ-Y7-x4v" id="Ofn-So-BR4"/>
                         <outlet property="tvMenu" destination="Up6-cU-vQB" id="sLk-ro-dkl"/>
                     </connections>
@@ -459,6 +476,6 @@ CA
         <image name="pallet.png" width="600" height="366"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Kyx-m7-K39"/>
+        <segue reference="UEE-4x-1jJ"/>
     </inferredMetricsTieBreakers>
 </document>

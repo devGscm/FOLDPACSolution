@@ -477,7 +477,7 @@ extension EventSelectStore
 		guard let tc = toolbarController else {
 			return
 		}
-		tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
-		tc.toolbar.detail = NSLocalizedString("title_event_select_store", comment: "선별/보관")
+		//tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
+		tc.toolbar.title = NSLocalizedString("title_event_select_store", comment: "선별/보관")
 	}
 }
