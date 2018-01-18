@@ -268,6 +268,7 @@ class UserLogin: UIViewController
 		clsUserInfo.setBranchCustName(branchCustName : login.branchCustName ?? "")
 		clsUserInfo.setParentCustId(strParentCustId : login.parentCustId ?? "")
 		clsUserInfo.setBranchCustType(branchCustType : login.branchCustType ?? "")
+		clsUserInfo.setBranchUltravisYn(branchUltravisYn: login.branchUltravisYn ?? "")
 		
 		AppContext.sharedManager.setAuthenticated(boolAuthenticated: true)
 		self.dismiss(animated: true, completion: nil)

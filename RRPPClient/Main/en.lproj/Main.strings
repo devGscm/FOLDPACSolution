@@ -30,7 +30,7 @@
 "MPs-9P-Xkh.normalTitle" = "Login";
 
 /* Class = "UILabel"; text = "자동로그인"; ObjectID = "OSR-am-YdZ"; */
-"OSR-am-YdZ.text" = "login(Auto";
+"OSR-am-YdZ.text" = "login(Auto)";
 
 /* Class = "UILabel"; text = "입고예정"; ObjectID = "PlW-jx-ytv"; */
 "PlW-jx-ytv.text" = "Recv. Scheduled";

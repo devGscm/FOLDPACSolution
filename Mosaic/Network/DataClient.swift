@@ -75,11 +75,14 @@ public struct Login: Codable {
 	public var corpType: String?
 	public var corpId: String?
 	public var branchCustName: String?
+	public var branchUltravisYn : String?
 	public var unitId: String?
 	public var version: String?
 	public var pushUseYn: String?
 	public var returnMessage: String?
 	public var returnCode: Int?
+	
+	
 	//
 	//  ["custEpc": 95100027, "pushUseYn": N, "encryptId": xxOxOsU93/PvK/NN7DZmZw==, "corpEpc": <null>, "branchId": 161220000122, "custType": MGR,
 	//  "custId": 160530000070, "returnCode": 1, "inAgreeYn": Y, "userName": RRPP팀, "epcLock": 36697577, "branchName": 가락 물류센터(간이), "userLang": KR,
@@ -109,6 +112,7 @@ public struct Login: Codable {
 		let corpType = json["corpType"] as? String ?? ""
 		let corpId = json["corpId"] as? String ?? ""
 		let branchCustName = json["branchCustName"] as? String ?? ""
+		let branchUltravisYn = json["branchUltravisYn"] as? String ?? ""
 		let unitId = json["unitId"] as? String ?? ""
 		let version = json["version"] as? String ?? ""
 		let pushUseYn = json["pushUseYn"] as? String ?? ""
@@ -134,6 +138,7 @@ public struct Login: Codable {
 		self.corpType = corpType
 		self.corpId = corpId
 		self.branchCustName = branchCustName
+		self.branchUltravisYn = branchUltravisYn
 		self.unitId = unitId
 		self.version = version
 		self.pushUseYn = pushUseYn
