@@ -138,7 +138,8 @@ class ClientConfig : BaseTableViewController, DataProtocol
                 let strBranchCustId = clsDataRow.getString(name:"branchCustId") ?? ""
                 let strBranchCustType = clsDataRow.getString(name:"branchCustType") ?? ""
                 let strBranchCustName = clsDataRow.getString(name:"branchCustName") ?? ""
-                let strInAgreeYn = clsDataRow.getString(name:"inAgreeYn") ?? ""
+                let strBranchUltravisYn = clsDataRow.getString(name:"branchUltravisYn") ?? ""
+				let strInAgreeYn = clsDataRow.getString(name:"inAgreeYn") ?? ""
                 
                 let clsUserInfo = AppContext.sharedManager.getUserInfo()
                 clsUserInfo.setBranchId(branchId: strBranchId)
@@ -146,6 +147,7 @@ class ClientConfig : BaseTableViewController, DataProtocol
                 clsUserInfo.setBranchCustId(branchCustId: strBranchCustId)
                 clsUserInfo.setBranchCustType(branchCustType: strBranchCustType)
                 clsUserInfo.setBranchCustName(branchCustName: strBranchCustName)
+				clsUserInfo.setBranchUltravisYn(branchUltravisYn: strBranchUltravisYn)	// 울트라비스 YN
                 clsUserInfo.setInAgreeYn(inAgreeYn: strInAgreeYn)
 				
 				

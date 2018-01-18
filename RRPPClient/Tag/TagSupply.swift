@@ -12,9 +12,6 @@ import Mosaic
 
 class TagSupply: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, DataProtocol, ReaderResponseDelegate
 {
-	
-	@IBOutlet weak var lblUserName: UILabel!
-	@IBOutlet weak var lblBranchInfo: UILabel!
 	@IBOutlet weak var lblReaderName: UILabel!
 	@IBOutlet weak var btnRfidReader: UIButton!
 	@IBOutlet weak var btnIssueOrderId: UIButton!
@@ -80,8 +77,6 @@ class TagSupply: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	{
 		clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
 										 indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.")
-		lblUserName.text = AppContext.sharedManager.getUserInfo().getUserName()
-		lblBranchInfo.text = AppContext.sharedManager.getUserInfo().getBranchName()
 		lblReaderName.text = AppContext.sharedManager.getUserInfo().getReaderDevName()
 		
 		lblOrderCustName.text = ""
@@ -581,9 +576,9 @@ class TagSupply: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 			let strCurTime = dfFormat.string(from: dtCurDate)
 			strWorkDate = StrUtil.replace(sourceText: strWorkDate,  findText: "-", replaceText: "") + strCurTime
 			
-			let strWorkerName = self.lblUserName?.text
+			let strWorkerName = AppContext.sharedManager.getUserInfo().getUserName()
 			let strRemark = acDialog.textFields?[0].text
-			self.sendData(issueOrderId: strIssueOrderId!, workData: strWorkDate, workerName: strWorkerName!, remark: strRemark!)
+			self.sendData(issueOrderId: strIssueOrderId!, workData: strWorkDate, workerName: strWorkerName, remark: strRemark!)
 		})
 		self.present(acDialog, animated: true, completion: nil)
 		
@@ -598,8 +593,8 @@ extension TagSupply
 		guard let tc = toolbarController else {
 			return
 		}
-		tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
-		tc.toolbar.detail = NSLocalizedString("title_tag_supply", comment: "납품등록(RFID)")
+		//tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
+		tc.toolbar.title = NSLocalizedString("title_tag_supply", comment: "납품등록(RFID)")
 	}
 }
 

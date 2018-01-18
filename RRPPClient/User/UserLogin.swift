@@ -87,44 +87,46 @@ class UserLogin: UIViewController
 				// 성공
 				if let returnCode = login.returnCode
 				{
+					
+					// 언어체크
+					let arrLang = UserDefaults.standard.object(forKey: "AppleLanguages") as! Array<String>
+					var strCurAppleLang = arrLang.first ?? "en"
+					print(" - 현재 언어(Full):\(strCurAppleLang)" )
+					if(strCurAppleLang.length > 2)
+					{
+						strCurAppleLang = strCurAppleLang.substring(0, length: 2)
+					}
+					print(" - 현재 언어:\(strCurAppleLang)" )
+					
+					var strUserLang = login.userLang ?? "EN"
+					if(strUserLang == "EN")
+					{
+						strUserLang = "en"
+					}
+					else if(strUserLang == "CH")
+					{
+						strUserLang = "zh"
+					}
+					else if(strUserLang == "KR")
+					{
+						strUserLang = "ko"
+					}
+					else if(strUserLang == "JP")
+					{
+						strUserLang = "ja"
+					}
+					
+
 					if ( returnCode == Constants.RETURN_CODE_SUCCESS)
 					{
-						//let clsUserInfo = AppContext.sharedManager.getUserInfo()
-						
-						let arrLang = UserDefaults.standard.object(forKey: "AppleLanguages") as! Array<String>
-						var strCurAppleLang = arrLang.first ?? "en"
-						print(" - 현재 언어(Full):\(strCurAppleLang)" )
-						if(strCurAppleLang.length > 2)
-						{
-							strCurAppleLang = strCurAppleLang.substring(0, length: 2)
-						}
-						print(" - 현재 언어:\(strCurAppleLang)" )
-		
-						var strUserLang = login.userLang ?? "EN"
-						if(strUserLang == "EN")
-						{
-							strUserLang = "en"
-						}
-						else if(strUserLang == "CH")
-						{
-							strUserLang = "zh"
-						}
-						else if(strUserLang == "KR")
-						{
-							strUserLang = "ko"
-						}
-						else if(strUserLang == "JP")
-						{
-							strUserLang = "ja"
-						}
 						
 						// 시스템 언어와 서버에서 받은 사용자의 언어가 다르다면 시스템언어를 서버에서 받은언어로 대체하고 종료
 						if(strCurAppleLang != strUserLang)
 						{
 							Dialog.show(container: self, viewController: nil,
-								title: NSLocalizedString("common_confirm", comment: "확인"),
+								title: NSLocalizedString("login_change_language_confirm", comment: "확인"),
 								message: NSLocalizedString("login_change_language", comment: "사용자 언어를 적용하려면 앱을 종료하고 다시 시작해야 합니다. 종료하시겠습니까?"),
-								okTitle: NSLocalizedString("common_confirm", comment: "확인"),
+								okTitle: NSLocalizedString("login_change_language_confirm", comment: "확인"),
 								okHandler: { (_) in
 									
 									// 시스템 언어 변경
@@ -135,7 +137,7 @@ class UserLogin: UIViewController
 									// 종료
 									exit(0)
 							},
-							cancelTitle: NSLocalizedString("common_cancel", comment: "취소"), cancelHandler: { (_) in
+							cancelTitle: NSLocalizedString("login_change_language_cancel", comment: "취소"), cancelHandler: { (_) in
 								self.loginSuccess(login: login)
 							})
 						}
@@ -147,36 +149,66 @@ class UserLogin: UIViewController
 					}
 					else
 					{
-						//TODO 다국어 처리되면 메세지에 따라서 처리
-						var rtnMessage : String = ""
-						switch returnCode
+						// 시스템 언어와 서버에서 받은 사용자의 언어가 다르다면 시스템언어를 서버에서 받은언어로 대체하고 종료
+						if(strCurAppleLang != strUserLang)
 						{
-							case ReturnCodeType.RETURN_CODE_NOT_ATTACH_UNIT.rawValue :
-								rtnMessage = NSLocalizedString("return_message_not_attach_unit", comment: "사용가능한 리더기정보 등록여부를 확인하여 주십시오. ")
-							case ReturnCodeType.RETURN_CODE_ENTER_USER_ID.rawValue :
-								rtnMessage = NSLocalizedString("return_message_enter_your_user_id", comment: "아이디를 입력하여 주십시오. ")
-							case ReturnCodeType.RETURN_CODE_ENTER_PASSWORD.rawValue :
-								rtnMessage = NSLocalizedString("return_message_enter_your_password", comment: "패스워드를 입력하여 주십시오. ")
-							case ReturnCodeType.RETURN_CODE_VERIFY_LOGIN_INFO.rawValue :
-								rtnMessage = NSLocalizedString("return_message_verify_login_info", comment: "로그인 정보를 다시 확인하여 주십시오.")
-							case ReturnCodeType.RETURN_CODE_DISABLED_USER.rawValue :
-								rtnMessage = NSLocalizedString("return_message_disabled_user", comment: "사용 중지된 사용자입니다. ")
-							case ReturnCodeType.RETURN_CODE_NOT_RRPP_USER.rawValue :
-								rtnMessage = NSLocalizedString("return_message_upis_user_not_able_use", comment: "RRPP 사용자가 아님 ")
-							case ReturnCodeType.RETURN_CODE_PK_VIOLATION.rawValue :
-								//TODO: 다국어 정의
-								rtnMessage = "중복키 오류"
-							default :
-								rtnMessage = "알수없는 오류코드발생"
+							Dialog.show(container: self, viewController: nil,
+										title: NSLocalizedString("login_change_language_confirm", comment: "확인"),
+										message: NSLocalizedString("login_change_language", comment: "사용자 언어를 적용하려면 앱을 종료하고 다시 시작해야 합니다. 종료하시겠습니까?"),
+										okTitle: NSLocalizedString("login_change_language_confirm", comment: "확인"),
+										okHandler: { (_) in
+											
+											// 시스템 언어 변경
+											UserDefaults.standard.removeObject(forKey: "AppleLanguages")
+											UserDefaults.standard.set([strUserLang], forKey: "AppleLanguages")
+											UserDefaults.standard.synchronize()
+											
+											// 종료
+											exit(0)
+							},
+										cancelTitle: NSLocalizedString("login_change_language_cancel", comment: "취소"), cancelHandler: { (_) in
+											self.loginFail(returnCode: returnCode)
+							})
 						}
-						DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // in half a second...
-							self.showLoginErrorDialog(strTitle: NSLocalizedString("common_error", comment: "에러"),
-													  strMessage: rtnMessage)
+						else
+						{
+							self.loginFail(returnCode: returnCode)
 						}
-						return
+						
+						
 					}
 				}
 		})
+	}
+	
+	func loginFail(returnCode: Int)
+	{
+		
+		//TODO 다국어 처리되면 메세지에 따라서 처리
+		var rtnMessage : String = ""
+		switch returnCode
+		{
+			case ReturnCodeType.RETURN_CODE_NOT_ATTACH_UNIT.rawValue :
+				rtnMessage = NSLocalizedString("return_message_not_attach_unit", comment: "사용가능한 리더기정보 등록여부를 확인하여 주십시오. ")
+			case ReturnCodeType.RETURN_CODE_ENTER_USER_ID.rawValue :
+				rtnMessage = NSLocalizedString("return_message_enter_your_user_id", comment: "아이디를 입력하여 주십시오. ")
+			case ReturnCodeType.RETURN_CODE_ENTER_PASSWORD.rawValue :
+				rtnMessage = NSLocalizedString("return_message_enter_your_password", comment: "패스워드를 입력하여 주십시오. ")
+			case ReturnCodeType.RETURN_CODE_VERIFY_LOGIN_INFO.rawValue :
+				rtnMessage = NSLocalizedString("return_message_verify_login_info", comment: "로그인 정보를 다시 확인하여 주십시오.")
+			case ReturnCodeType.RETURN_CODE_DISABLED_USER.rawValue :
+				rtnMessage = NSLocalizedString("return_message_disabled_user", comment: "사용 중지된 사용자입니다. ")
+			case ReturnCodeType.RETURN_CODE_NOT_RRPP_USER.rawValue :
+				rtnMessage = NSLocalizedString("return_message_upis_user_not_able_use", comment: "RRPP 사용자가 아님 ")
+			case ReturnCodeType.RETURN_CODE_PK_VIOLATION.rawValue :
+				//TODO: 다국어 정의
+				rtnMessage = "중복키 오류"
+			default :
+				rtnMessage = "알수없는 오류코드발생"
+		}
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // in half a second...
+			self.showLoginErrorDialog(strTitle: NSLocalizedString("common_error", comment: "에러"), strMessage: rtnMessage)
+		}
 	}
 	
 	func loginSuccess(login : Login)
@@ -236,6 +268,7 @@ class UserLogin: UIViewController
 		clsUserInfo.setBranchCustName(branchCustName : login.branchCustName ?? "")
 		clsUserInfo.setParentCustId(strParentCustId : login.parentCustId ?? "")
 		clsUserInfo.setBranchCustType(branchCustType : login.branchCustType ?? "")
+		clsUserInfo.setBranchUltravisYn(branchUltravisYn: login.branchUltravisYn ?? "")
 		
 		AppContext.sharedManager.setAuthenticated(boolAuthenticated: true)
 		self.dismiss(animated: true, completion: nil)
