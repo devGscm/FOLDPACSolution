@@ -45,9 +45,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 		return UIStoryboard.viewController(identifier: "RootViewController") as! RootViewController
 	}()
 	
-	lazy var mClsRightController: RightViewController = {
-		return UIStoryboard.viewController(identifier: "RightViewController") as! RightViewController
-	}()
+//    lazy var mClsRightController: RightViewController = {
+//        return UIStoryboard.viewController(identifier: "RightViewController") as! RightViewController
+//    }()
 	
 	
 	func applicationDidFinishLaunching(_ application: UIApplication)
@@ -60,7 +60,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 		let clsAppSnackbarController = AppSnackbarController(rootViewController: clsAppToolbarController)
 		
 		window = UIWindow(frame: Screen.bounds)
-		window!.rootViewController = AppNavigationDrawerController(rootViewController: clsAppSnackbarController, leftViewController: mClsLeftController, rightViewController: mClsRightController)
+//		window!.rootViewController = AppNavigationDrawerController(rootViewController: clsAppSnackbarController, leftViewController: mClsLeftController, rightViewController: mClsRightController)
+        window!.rootViewController = AppNavigationDrawerController(rootViewController: clsAppSnackbarController, leftViewController: mClsLeftController)
 		window!.makeKeyAndVisible()
 		
 		
