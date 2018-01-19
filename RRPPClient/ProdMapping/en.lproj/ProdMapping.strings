@@ -21,7 +21,7 @@
 "AfH-TF-CXu.text" = "Serial No.";
 
 /* Class = "UIButton"; normalTitle = "작업초기화"; ObjectID = "BR7-nY-f0a"; */
-"BR7-nY-f0a.normalTitle" = "Clear(Task)";
+"BR7-nY-f0a.normalTitle" = "Cancel";
 
 /* Class = "UIButton"; normalTitle = "선택"; ObjectID = "CHM-ZO-YWb"; */
 "CHM-ZO-YWb.normalTitle" = "Select";
@@ -84,7 +84,7 @@
 "fQu-Y7-fow.text" = "Goods Code";
 
 /* Class = "UIButton"; normalTitle = "임시저장"; ObjectID = "jNg-Db-S50"; */
-"jNg-Db-S50.normalTitle" = "Temporary Save";
+"jNg-Db-S50.normalTitle" = "Save";
 
 /* Class = "UIButton"; normalTitle = "연결"; ObjectID = "nfF-7s-QnA"; */
 "nfF-7s-QnA.normalTitle" = "Connect";
@@ -105,7 +105,7 @@
 "tbG-G9-3gP.text" = "Item No.";
 
 /* Class = "UIButton"; normalTitle = "초기화"; ObjectID = "x75-Pg-2Sq"; */
-"x75-Pg-2Sq.normalTitle" = "Clear(Reading)";
+"x75-Pg-2Sq.normalTitle" = "Clear";
 
 /* Class = "UILabel"; text = "RP11"; ObjectID = "yS3-et-Umo"; */
 "yS3-et-Umo.text" = "RP11";
