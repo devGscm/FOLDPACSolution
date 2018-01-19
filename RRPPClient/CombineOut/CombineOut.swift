@@ -666,23 +666,20 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         
         if(clearScreen == true)
         {
-            //DispatchQueue.main.async
-            //{
-                self.mStrSaleWorkId = ""
-                self.mStrProdAssetEpc = ""
-                self.mIntProcCount = 0
-                self.mIntWorkAssignCount = 0
-               
-                self.tfVehName.text = ""            //차량번호
-                self.lblOrderCustName.text = ""     //입고처
-                self.lblDeliBranchName.text = ""    //배송거점
-                self.lblAssetEpcName.text = ""      //유형
-                self.lblAssignCount.text = "0"       //출고예정
-                self.lblProcCount.text = "0"         //처리량
-                self.lblRemainCount.text = "0"       //미처리량
-                
-                self.btnSaleWorkId.setTitle(NSLocalizedString("sale_work_id_selection", comment: "송장선택"), for: .normal)
-            //}
+            self.mStrSaleWorkId = ""
+            self.mStrProdAssetEpc = ""
+            self.mIntProcCount = 0
+            self.mIntWorkAssignCount = 0
+           
+            self.tfVehName.text = ""            //차량번호
+            self.lblOrderCustName.text = ""     //입고처
+            self.lblDeliBranchName.text = ""    //배송거점
+            self.lblAssetEpcName.text = ""      //유형
+            self.lblAssignCount.text = "0"      //출고예정
+            self.lblProcCount.text = "0"        //처리량
+            self.lblRemainCount.text = "0"      //미처리량
+            mBoolWorkListSelected = false       //송장선택 유무
+            self.btnSaleWorkId.setTitle(NSLocalizedString("sale_work_id_selection", comment: "송장선택"), for: .normal)
         }
         
         //RFID리더기 초기화

@@ -355,18 +355,18 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 			boolWorkCompleteBtn			= false
 			strWorkState				= ""
 			strNoReadCount				= "0"
-
-			//DispatchQueue.main.async
-			//	{
-					self.lblResaleBranchName.text	= ""	//출고처
-					self.btnSaleWorkId.setTitle(NSLocalizedString("sale_work_id_selection", comment: "송장선택"), for: .normal) //송장번호
-					self.lblOrderReqCount.text		= "0"	// 입고예정수량
-					self.lblProcCount.text			= "0"	// 처리량
-					self.tfVehName.text				= ""	// 차량번호
-					self.lblProdAssetEpcName.text	= ""	// 유형
-					self.lblRemainCount.text		= "0"	// 미처리량
-					self.lblDriverName.text			= ""	// 납품자
-			//}
+            boolWorkListSelected        = false     //송장선택 유무
+            
+            
+            self.lblResaleBranchName.text	= ""	//출고처
+            self.btnSaleWorkId.setTitle(NSLocalizedString("sale_work_id_selection", comment: "송장선택"), for: .normal) //송장번호
+            self.lblOrderReqCount.text		= "0"	// 입고예정수량
+            self.lblProcCount.text			= "0"	// 처리량
+            self.tfVehName.text				= ""	// 차량번호
+            self.lblProdAssetEpcName.text	= ""	// 유형
+            self.lblRemainCount.text		= "0"	// 미처리량
+            self.lblDriverName.text			= ""	// 납품자
+		
 		}
 		
 		// RFID리더기 초기화
