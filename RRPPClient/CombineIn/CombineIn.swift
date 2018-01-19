@@ -135,14 +135,15 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 	func makeWorkTypeCodeList(userLang : String)
 	{
 		var strCustType = AppContext.sharedManager.getUserInfo().getCustType()
-		
+		print("@@@@@@@@@ strCustType0:\(strCustType)")
 		// 고객사 타입
 		if(AppContext.sharedManager.getUserInfo().getCustType() == Constants.CUST_TYPE_MGR)
 		{
 			strCustType = AppContext.sharedManager.getUserInfo().getBranchCustType()
+			print("@@@@@@@@@ strCustType1:\(strCustType)")
 		}
 		
-		print("@@@@@@@@@ strCustType:\(strCustType)")
+		print("@@@@@@@@@ strCustType2:\(strCustType)")
 		
 		let enuCustType = LocalData.CustType(rawValue: strCustType)
 		let arrCodeInfo: Array<CodeInfo> = LocalData.shared.getSaleTypeCodeDetail(fieldValue: "RESALE_TYPE", saleResale: LocalData.SaleResaleType.Resale, custType: enuCustType!, initCodeName: nil)
