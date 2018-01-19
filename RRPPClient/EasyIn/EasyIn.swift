@@ -13,9 +13,6 @@ import BarcodeScanner
 
 class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, DataProtocol, ReaderResponseDelegate
 {
-
-	@IBOutlet weak var lblUserName: UILabel!
-	@IBOutlet weak var lblBranchInfo: UILabel!
 	@IBOutlet weak var lblReaderName: UILabel!
 	@IBOutlet weak var btnRfidReader: UIButton!
 	@IBOutlet weak var btnResaleWorkId: UIButton!
@@ -147,8 +144,6 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 		clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
 										 indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.")
 		
-		lblUserName.text = AppContext.sharedManager.getUserInfo().getUserName()
-		lblBranchInfo.text = AppContext.sharedManager.getUserInfo().getBranchName()
 		lblReaderName.text = AppContext.sharedManager.getUserInfo().getReaderDevName()
         lblProcCount.text  = "0"    //처리수량
 		
