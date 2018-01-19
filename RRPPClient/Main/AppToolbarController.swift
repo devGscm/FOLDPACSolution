@@ -110,7 +110,7 @@ extension AppToolbarController
 	{
 		toolbar.leftViews = [menuButton]
 		// yomile toolbar.rightViews = [switchControl, moreButton]
-		//toolbar.rightViews = [ ibHome]
+		toolbar.rightViews = [ ibHome]
 		toolbar.backgroundColor = Color.blue.base
 		toolbar.titleLabel.textColor = Color.white
 		//toolbar.detailLabel.font = UIFont.systemFont(ofSize: 18)
@@ -143,7 +143,7 @@ extension AppToolbarController {
     
     @objc
     fileprivate func handleMoreButton() {
-        //navigationDrawerController?.toggleRightView()
+        navigationDrawerController?.toggleRightView()
     }
 	
 	@objc
