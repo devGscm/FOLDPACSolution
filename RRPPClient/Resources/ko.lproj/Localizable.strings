@@ -1,10 +1,10 @@
-/* 
-  Localizable.strings
-  RRPPClient
-
-  Created by MORAMCNT on 2017. 11. 21..
-  Copyright © 2017년 MORAMCNT. All rights reserved.
-*/
+/*
+ Localizable.strings
+ RRPPClient
+ 
+ Created by MORAMCNT on 2017. 11. 21..
+ Copyright © 2017년 MORAMCNT. All rights reserved.
+ */
 
 
 /* 어플설정 시작 */
@@ -13,7 +13,7 @@
 /* 어플설정 끝*/
 
 /*액티비티 제목 시작 */
-"title_root" = "RRPP Trade @ Tracking @ Traceability Platform";
+"title_root" = "RRPP Trade & Tracking & Traceability Platform";
 "title_user_login" = "로그인";
 "title_client_config" = "환경설정";
 "title_device_scan_dialog" = "장치검색";
@@ -76,7 +76,7 @@
 "common_check_all" = "전체선택";
 "common_delete" = "삭제";
 "common_send" = "전송";
-"common_complete_send" = "완료전송";
+"common_complete_send" = "전송";
 "common_save" = "저장";
 "common_selection" = "선택";
 "common_barcode_search" = "바코드";
@@ -100,7 +100,7 @@
 "common_error_occurred_data_search" = "데이터 검색중 에러가 발생하였습니다.";
 "common_no_code_inform" = "코드정보없음";
 "common_update" = "업데이트";
-"common_update_version" = "최신버전이 나왔습니다. 지금 업데이트 하시겠습니까?";
+"common_update_version" = "앱 최신버전이 출시되어, 업무를 계속하기 위해서는 업데이트가 필요합니다. 지금 업데이트 하시겠습니까?";
 "common_not_load_data_from_server" = "서버로 부터 데이터를 가져올 수 없습니다. 잠시 후 다시 시도하여 주십시요.";
 "common_auth_error" = "인증오류";
 "common_auth_fail_check_id_passwd" = "인증에 실패하였습니다.\n사용중인 ID와 비밀번호를 확인하여 주십시요.";
@@ -155,7 +155,7 @@
 "rfid_reader_connect" = "연결";
 "rfid_reader_close" = "종료";
 "rfid_asset_name" = "유형";
-"rfid_serial_no" = "시리얼";
+"rfid_serial_no" = " Serial No.";
 "rfid_epc_code" = "EPC Code";
 "rfid_epc_urn" = "EPC URN";
 "rfid_read_count" = "조회수";
@@ -350,8 +350,8 @@
 "sale_proc_count" = "작업량";
 "sale_enter_your_work_id" = "송장번호를 입력하여 주십시오.";
 "sale_can_not_processed_because_completed_assigned_quantity" = "할당한 수량을 완료하였기 때문에 처리할수 없습니다.";
-"sale_same_processing_qty_work_assing_qty" = "완료전송을 하기 위해서는 출고수량과 작업량이 동일해야 합니다.";
-"sale_same_processing_qty_work_require_qty" = "완료전송을 하기 위해서는 예정수량과 처리수량이 동일해야 합니다.";
+"sale_same_processing_qty_work_assing_qty" = "전송을 하기 위해서는 출고수량과 작업량이 동일해야 합니다.";
+"sale_same_processing_qty_work_require_qty" = "전송을 하기 위해서는 예정수량과 처리수량이 동일해야 합니다.";
 "sale_order_req_date" = "입고예정일";
 "sale_release_cust_name" = "출고처";
 "sale_release_branch_name" = "출고거점";
@@ -468,9 +468,9 @@
 "combine_cust_in_addr" = "출고처주소";
 "combine_assign_in" = "입고예정";
 
-"easy_process_exist_message" = "임시 저장된 데이터가 지워집니다. 종료 하시겠습니까?";
+"easy_process_exist_message" = "저장된 데이터가 지워집니다. 종료 하시겠습니까?";
 
-"common_temporarily_save" = "임시저장";
+"common_temporarily_save" = "저장";
 "common_branch_name" = "거점명";
 "preference_branch_id" = "거점ID";
 
@@ -479,8 +479,8 @@
 "msg_no_selected_out_cust" = "입고처를 선택하여 주십시오.";
 "msg_no_selected_in_cust" = "출고처를 선택하여 주십시오.";
 
-"msg_no_temporary_saved_data" = "임시 저장된 데이터가 없습니다.";
-"msg_exist_temporary_saved_data" = "임시 저장된 데이터가 있습니다.";
+"msg_no_temporary_saved_data" = "저장된 데이터가 없습니다.";
+"msg_exist_temporary_saved_data" = "저장된 데이터가 있습니다.";
 
 "common_search_period" = "기간";
 "common_grid_no" = "No.";
