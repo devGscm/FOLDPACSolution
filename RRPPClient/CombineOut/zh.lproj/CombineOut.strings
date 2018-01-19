@@ -39,22 +39,22 @@
 "7KD-hI-OhB.normalTitle" = "选择";
 
 /* Class = "UILabel"; text = "출고예정"; ObjectID = "7KT-bn-wrI"; */
-"7KT-bn-wrI.text" = "출고예정";
+"7KT-bn-wrI.text" = "预计出库";
 
 /* Class = "UILabel"; text = "출고예정량"; ObjectID = "8Ol-t6-Snn"; */
-"8Ol-t6-Snn.text" = "출고예정량";
+"8Ol-t6-Snn.text" = "预计出库量";
 
 /* Class = "UILabel"; text = "송장번호"; ObjectID = "9F1-WZ-xSw"; */
-"9F1-WZ-xSw.text" = "송장번호";
+"9F1-WZ-xSw.text" = "货单号";
 
 /* Class = "UIButton"; normalTitle = "송장선택"; ObjectID = "ChN-ki-9OK"; */
-"ChN-ki-9OK.normalTitle" = "송장선택";
+"ChN-ki-9OK.normalTitle" = "选择货单";
 
 /* Class = "UILabel"; text = "입고처주소"; ObjectID = "FBH-6R-dBj"; */
-"FBH-6R-dBj.text" = "입고처주소";
+"FBH-6R-dBj.text" = "入库处地址";
 
 /* Class = "UILabel"; text = "미처리량"; ObjectID = "FYU-HN-1mn"; */
-"FYU-HN-1mn.text" = "미처리량";
+"FYU-HN-1mn.text" = "未处理量";
 
 /* Class = "UILabel"; text = "유형"; ObjectID = "HVx-C8-zqS"; */
 "HVx-C8-zqS.text" = "类型";

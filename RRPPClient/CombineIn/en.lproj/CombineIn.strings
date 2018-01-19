@@ -1,6 +1,6 @@
 
 /* Class = "UIButton"; normalTitle = "임시저장"; ObjectID = "2h9-w3-Mbt"; */
-"2h9-w3-Mbt.normalTitle" = "Temporary Save";
+"2h9-w3-Mbt.normalTitle" = "Save";
 
 /* Class = "UILabel"; text = "미처리량"; ObjectID = "3I5-9o-rzw"; */
 "3I5-9o-rzw.text" = "Untreated Qty";
@@ -12,7 +12,7 @@
 "5Ag-n5-I2F.text" = "ETA";
 
 /* Class = "UIButton"; normalTitle = "초기화"; ObjectID = "5Wq-kk-kNB"; */
-"5Wq-kk-kNB.normalTitle" = "Clear(Reading)";
+"5Wq-kk-kNB.normalTitle" = "Clear";
 
 /* Class = "UILabel"; text = "출고처"; ObjectID = "72h-wZ-cxj"; */
 "72h-wZ-cxj.text" = "Dprt. Com.";
@@ -66,7 +66,7 @@
 "Sgn-MJ-Vwu.text" = "Deliv. Man";
 
 /* Class = "UIButton"; normalTitle = "작업초기화"; ObjectID = "Tv6-gq-trm"; */
-"Tv6-gq-trm.normalTitle" = "Clear(Task)";
+"Tv6-gq-trm.normalTitle" = "Cancel";
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "VBN-Ts-BoA"; */
 "VBN-Ts-BoA.text" = "Processing Qty.";
@@ -90,7 +90,7 @@
 "cvX-38-Twg.normalTitle" = "Search";
 
 /* Class = "UIButton"; normalTitle = "완료전송"; ObjectID = "eQ1-Z8-4C4"; */
-"eQ1-Z8-4C4.normalTitle" = "Send(Complete)";
+"eQ1-Z8-4C4.normalTitle" = "Send";
 
 /* Class = "UILabel"; text = "입고예정"; ObjectID = "ebz-Oq-f1g"; */
 "ebz-Oq-f1g.text" = "Received Schedule";

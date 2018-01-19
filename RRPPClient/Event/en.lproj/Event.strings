@@ -69,10 +69,10 @@
 "vEe-ft-WqT.text" = "Worker";
 
 /* Class = "UIButton"; normalTitle = "초기화"; ObjectID = "wwC-0H-tjv"; */
-"wwC-0H-tjv.normalTitle" = "Clear(Reading)";
+"wwC-0H-tjv.normalTitle" = "Clear";
 
 /* Class = "UIButton"; normalTitle = "초기화"; ObjectID = "xFt-pc-Q0O"; */
-"xFt-pc-Q0O.normalTitle" = "Clear(Reading)";
+"xFt-pc-Q0O.normalTitle" = "Clear";
 
 /* Class = "UILabel"; text = "인식수량"; ObjectID = "xdm-NI-s2l"; */
 "xdm-NI-s2l.text" = "Reading Qty";
