@@ -15,13 +15,16 @@ class RootViewController: BaseViewController, UITableViewDataSource, UITableView
 	{
         super.viewDidLoad()
         view.backgroundColor = Color.grey.lighten5
-        prepareToolbar()
+		//prepareToolbar()
     }
 	
 	override func viewWillAppear(_ animated: Bool)
 	{
 		super.viewWillAppear(animated)
 		super.initController()
+		
+		// 메인화면에서 툴바 타이틀이 항상 바뀌도록 viewDidLoad에 있던것을 viewWillAppear에서 하도록 조정함
+		prepareToolbar()
 		initViewControll()
 		initDataClient()
 	}
@@ -155,7 +158,7 @@ extension RootViewController
         }
 		
         tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
-        tc.toolbar.detail = NSLocalizedString("title_root", comment: "RRPP Trade & Tracking & Traceability Platform") 
+        tc.toolbar.detail = NSLocalizedString("title_root", comment: "RRPP Trade & Tracking & Traceability Platform")
     }
 }
 
