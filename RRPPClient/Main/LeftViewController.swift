@@ -74,7 +74,11 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			// 메뉴선택이 안되도록 한다.
 			self.tvMenu.selectRow(at: IndexPath(row: -1, section: 0), animated: true, scrollPosition: .none)
 			self.navigationDrawerController?.closeLeftView()
-			self.toolbarController?.transition(to: self.clsRootController, completion: self.closeNavigationDrawer)
+			//self.toolbarController?.transition(to: self.clsRootController, completion: self.closeNavigationDrawer)
+			self.toolbarController?.move(to: self.clsRootController, completion: self.closeNavigationDrawer)
+			
+			// 화면 종료처리
+			//NotificationCenter.default.post(name: NSNotification.Name(rawValue: "onAppTerminate"), object: nil)
 		}
 	}
 	
