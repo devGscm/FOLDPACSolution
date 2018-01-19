@@ -19,10 +19,6 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		var indexNo: Int = -1
 	}
 	
-
-	
-	@IBOutlet weak var lblUserName: UILabel!
-	@IBOutlet weak var lblBranchInfo: UILabel!
 	@IBOutlet weak var lblReaderName: UILabel!
 	@IBOutlet weak var btnRfidReader: UIButton!
 	
@@ -181,9 +177,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		tvMappingProd.tableFooterView = UIView(frame: CGRect.zero)
 		
 		clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray, indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.")
-		
-		self.lblUserName.text = AppContext.sharedManager.getUserInfo().getUserName()
-		self.lblBranchInfo.text = AppContext.sharedManager.getUserInfo().getBranchName()
+
         self.lblReaderName.text = AppContext.sharedManager.getUserInfo().getReaderDevName()
         
         self.lblProcCount.text = "0"
