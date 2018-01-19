@@ -3,7 +3,7 @@
 "4Ko-3U-mR4.text" = "Location";
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "4v9-4K-GmG"; */
-"4v9-4K-GmG.text" = "Processing Qty.";
+"4v9-4K-GmG.text" = "Read Qty.";
 
 /* Class = "UIButton"; normalTitle = "임시저장"; ObjectID = "7tC-aZ-Oqu"; */
 "7tC-aZ-Oqu.normalTitle" = "Save";
@@ -27,7 +27,7 @@
 "K7r-Tr-k8U.normalTitle" = "Select Client Com.";
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "O2W-b7-4vp"; */
-"O2W-b7-4vp.text" = "Processing Qty.";
+"O2W-b7-4vp.text" = "Read Qty.";
 
 /* Class = "UILabel"; text = "입고처"; ObjectID = "RN3-Wj-vzr"; */
 "RN3-Wj-vzr.text" = "Dest. Com.";
@@ -57,10 +57,10 @@
 "l13-sr-9B2.text" = "Worker";
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "nTS-Oj-lP1"; */
-"nTS-Oj-lP1.text" = "Processing Qty.";
+"nTS-Oj-lP1.text" = "Read Qty.";
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "tbL-ze-LuU"; */
-"tbL-ze-LuU.text" = "Processing Qty.";
+"tbL-ze-LuU.text" = "Read Qty.";
 
 /* Class = "UILabel"; text = "유형"; ObjectID = "vTb-F9-Ilm"; */
 "vTb-F9-Ilm.text" = "Item No.";
