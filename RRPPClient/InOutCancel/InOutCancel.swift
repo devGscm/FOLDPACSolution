@@ -15,9 +15,6 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
     //== ReaderRespnseDelegate
     func didReadTagid(_ tagid: String) { }
     
-    
-    @IBOutlet weak var lblUserName: UILabel!
-    @IBOutlet weak var lblBranchInfo: UILabel!
     @IBOutlet weak var tfStDate: UITextField!
     @IBOutlet weak var tfEnDate: UITextField!
     @IBOutlet weak var btnSaleTypeCondition: UIButton!
@@ -130,9 +127,6 @@ class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDel
         
         clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
                                          indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.")
-        
-        lblUserName.text = AppContext.sharedManager.getUserInfo().getUserName()
-        lblBranchInfo.text = AppContext.sharedManager.getUserInfo().getBranchName()
         
         dpPicker = UIDatePicker()
         let dtCurDate = Date()
