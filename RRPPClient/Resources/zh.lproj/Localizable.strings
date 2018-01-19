@@ -1,10 +1,10 @@
-/* 
-  Localizable.strings
-  RRPPClient
-
-  Created by MORAMCNT on 2017. 11. 21..
-  Copyright © 2017년 MORAMCNT. All rights reserved.
-*/
+/*
+ Localizable.strings
+ RRPPClient
+ 
+ Created by MORAMCNT on 2017. 11. 21..
+ Copyright © 2017년 MORAMCNT. All rights reserved.
+ */
 
 
 /* 어플설정 시작 */
@@ -13,7 +13,7 @@
 /* 어플설정 끝*/
 
 /*액티비티 제목 시작 */
-"title_root" = "RRPP Trade @ Tracking @ Traceability Platform";
+"title_root" = "RRPP Trade & Tracking & Traceability Platform";
 "title_user_login" = "登录";
 "title_client_config" = "环境设定";
 "title_device_scan_dialog" = "搜索装置";
@@ -76,7 +76,7 @@
 "common_check_all" = "全选";
 "common_delete" = "删除";
 "common_send" = "传输";
-"common_complete_send" = "传输完成";
+"common_complete_send" = "传输";
 "common_save" = "保存";
 "common_selection" = "选择";
 "common_barcode_search" = "二维码";
@@ -100,7 +100,7 @@
 "common_error_occurred_data_search" = "搜索数据中发生错误";
 "common_no_code_inform" = "没有编码信息";
 "common_update" = "更新";
-"common_update_version" = "不能从处理器得到数据，请稍后重试。";
+"common_update_version" = "检测到APP最新版本，为了业务的顺利进行需要更新。现在要移动到可下载APP的页面吗？";
 "common_not_load_data_from_server" = "不能从处理器得到数据，请稍后重试。";
 "common_auth_error" = "认证错误";
 "common_auth_fail_check_id_passwd" = "认证失败。\n请确认使用中的ID和密码";
@@ -469,9 +469,9 @@
 "resale_release_cust_name" = "返还地";
 "resale_driver_name" = "返还者";
 
-"easy_process_exist_message" = "临时保存的数据会清除，是否终止？";
+"easy_process_exist_message" = "保存的数据会清除，是否终止？";
 "common_detail_view" = "明细";
-"common_temporarily_save" = "临时保存";
+"common_temporarily_save" = "保存";
 
 
 "common_branch_name" = "据点名";
@@ -482,8 +482,8 @@
 "msg_no_selected_out_cust" = "请选择入库地";
 "msg_no_selected_in_cust" = "请选择出库地";
 
-"msg_no_temporary_saved_data" = "没有临时保存的数据";
-"msg_exist_temporary_saved_data" = "有临时保存的数据";
+"msg_no_temporary_saved_data" = "没有保存的数据";
+"msg_exist_temporary_saved_data" = "有保存的数据";
 
 "common_search_period" = "期间";
 "common_grid_no" = "No.";
