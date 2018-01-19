@@ -145,8 +145,8 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
                                          indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.")
         
-        lblUserName.text = AppContext.sharedManager.getUserInfo().getUserName()                                 //작업자
-        lblBranchInfo.text = AppContext.sharedManager.getUserInfo().getBranchName()                             //거점
+        //lblUserName.text = AppContext.sharedManager.getUserInfo().getUserName()                                 //작업자
+        //lblBranchInfo.text = AppContext.sharedManager.getUserInfo().getBranchName()                             //거점
         //lblReaderName.text = UserDefaults.standard.string(forKey: Constants.RFID_READER_NAME_KEY)             //리더기명
         lblReaderName.text = AppContext.sharedManager.getUserInfo().getReaderDevName()                          //리더기명
         
@@ -178,6 +178,8 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
             
             if(self.mStrSaleType != clsDialog.selectedRow?.itemCode)
             {
+                print(" ====구분변경==== ")
+                
                 //화면정보 초기화
                 self.clearTagData(true)
                 
@@ -611,8 +613,8 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                     }
                     
                     //입력창 내용 갱신(처리량증가/미처리량감소)
-                    var intRemainCount: Int = Int(lblRemainCount?.text ?? "0")! // 미처리량
-                    if intRemainCount > 0
+                    var intRemainCount: Int = Int(self.lblRemainCount?.text ?? "0")! // 미처리량
+                    if (intRemainCount > 0)
                     {
                         intRemainCount = intRemainCount - 1
                         lblRemainCount.text = String(intRemainCount)
@@ -649,6 +651,10 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     //=======================================
     func clearTagData(_ clearScreen: Bool )
     {
+        print("@@@@@@@@@@@@@@@@@@@@@@@@")
+        print("*clearTagData()")
+        print("@@@@@@@@@@@@@@@@@@@@@@@@")
+        
         mBoolNewTagInfoExist = false
         arrTagRows.removeAll()
         arrAssetRows.removeAll()
@@ -671,9 +677,9 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                 self.lblOrderCustName.text = ""     //입고처
                 self.lblDeliBranchName.text = ""    //배송거점
                 self.lblAssetEpcName.text = ""      //유형
-                self.lblAssignCount.text = ""       //출고예정
-                self.lblProcCount.text = ""         //처리량
-                self.lblRemainCount.text = ""       //미처리량
+                self.lblAssignCount.text = "0"       //출고예정
+                self.lblProcCount.text = "0"         //처리량
+                self.lblRemainCount.text = "0"       //미처리량
                 
                 self.btnSaleWorkId.setTitle(NSLocalizedString("sale_work_id_selection", comment: "송장선택"), for: .normal)
             //}

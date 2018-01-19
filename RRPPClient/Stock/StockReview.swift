@@ -79,6 +79,9 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	func initViewControl()
 	{
 		clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray, indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.")
+		
+		//lblUserName.text = AppContext.sharedManager.getUserInfo().getUserName()
+		//lblBranchInfo.text = AppContext.sharedManager.getUserInfo().getBranchName()
 		lblReaderName.text = AppContext.sharedManager.getUserInfo().getReaderDevName()
 		
 		// 테이블뷰 셀표시 지우기
@@ -169,7 +172,10 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 				let strRemark			= clsDataRow.getString(name: "remark") ?? ""
 				let strSignData			= clsDataRow.getString(name: "signData") ?? ""
 				let strStockReviewId	= btnStockReviewId.titleLabel?.text ?? ""
-				let strWorkerName		= AppContext.sharedManager.getUserInfo().getUserName()
+				//let strWorkerName		= lblUserName.text ?? ""
+                let strWorkerName       = AppContext.sharedManager.getUserInfo().getUserName()
+                
+                
 				
 				sendData(workState: Constants.WORK_STATE_COMPLETE, stockReviewId: strStockReviewId, workerName: strWorkerName, remark: strRemark, signData: strSignData)
 			}
