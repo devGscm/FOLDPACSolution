@@ -78,6 +78,9 @@ class CombineInSearch: BaseViewController, UITableViewDataSource, UITableViewDel
 			lblSearchValue.text			= NSLocalizedString("sale_release_cust_name", comment: "출고처")
 			lblResaleBranchName.text	= NSLocalizedString("sale_release_cust_name", comment: "출고처")
 		}
+		
+		// 테이블뷰 셀표시 지우기
+		tvCombineInSearch.tableFooterView = UIView(frame: CGRect.zero)
 	}
 	
 	func initDataClient()

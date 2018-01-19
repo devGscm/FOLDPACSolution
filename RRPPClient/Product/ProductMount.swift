@@ -101,6 +101,9 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		//lblUserName.text = AppContext.sharedManager.getUserInfo().getUserName()
 		//lblBranchInfo.text = AppContext.sharedManager.getUserInfo().getBranchName()
 		lblReaderName.text = AppContext.sharedManager.getUserInfo().getReaderDevName()
+		
+		// 테이블뷰 셀표시 지우기
+		tvProductMount.tableFooterView = UIView(frame: CGRect.zero)
 	}
 	
 	

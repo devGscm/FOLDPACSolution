@@ -1815,7 +1815,7 @@ extension ProdMappingOut
 		guard let tc = toolbarController else {
 			return
 		}
-		tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
+		//tc.toolbar.title = NSLocalizedString("app_title", comment: "RRPP TRA")
 
         var strType = ""
         let intIdentificationSystem = UserDefaults.standard.integer(forKey: Constants.IDENTIFICATION_SYSTEM_LIST_KEY)
@@ -1831,11 +1831,11 @@ extension ProdMappingOut
         if(AppContext.sharedManager.getUserInfo().getCustType() == "MGR")
         {
             //tc.toolbar.detail = "\(NSLocalizedString("title_work_sale_c", comment: "출고C")) (\(strType))"
-            tc.toolbar.detail = "\(NSLocalizedString("title_work_out_release", comment: "출하")) (\(strType))"
+            tc.toolbar.title = "\(NSLocalizedString("title_work_out_release", comment: "출하")) (\(strType))"
         }
         else
         {
-            tc.toolbar.detail = "\(NSLocalizedString("title_work_out_release", comment: "출하")) (\(strType))"
+            tc.toolbar.title = "\(NSLocalizedString("title_work_out_release", comment: "출하")) (\(strType))"
         }
         
 	}

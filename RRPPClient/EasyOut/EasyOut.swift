@@ -170,6 +170,9 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
         lblBranchInfo.text = AppContext.sharedManager.getUserInfo().getBranchName()
         lblReaderName.text = AppContext.sharedManager.getUserInfo().getReaderDevName()
         lblProcCount.text = String(mIntProcCount)
+		
+		// 테이블뷰 셀표시 지우기
+		tvEasyOut.tableFooterView = UIView(frame: CGRect.zero)
     }
     
     

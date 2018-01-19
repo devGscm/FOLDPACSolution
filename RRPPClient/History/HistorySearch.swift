@@ -87,6 +87,9 @@ class HistorySearch: BaseViewController, UITableViewDataSource, UITableViewDeleg
 		makeEventCodeList(userLang: AppContext.sharedManager.getUserInfo().getUserLang())
 		self.strEventCode = ""	
 		//self.btnEventCode.setTitle(NSLocalizedString("common_select_all", comment: "전체"), for: .normal)
+		
+		// 테이블뷰 셀표시 지우기
+		tvHistorySearch.tableFooterView = UIView(frame: CGRect.zero)
 	}
 	
 	func makeEventCodeList(userLang : String)

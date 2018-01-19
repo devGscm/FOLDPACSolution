@@ -65,6 +65,9 @@ class ProductOrderSearch: BaseViewController, UITableViewDataSource, UITableView
 		let intDateDistance = AppContext.sharedManager.getUserInfo().getDateDistance()
 		let dtStDate = Calendar.current.date(byAdding: .day, value: -intDateDistance, to: dtCurDate)
 		btnStDate.text = dfFormat.string(from: dtStDate!)
+		
+		// 테이블뷰 셀표시 지우기
+		tvProductOrderSearch.tableFooterView = UIView(frame: CGRect.zero)
 	}
 	
 	func initDataClient()

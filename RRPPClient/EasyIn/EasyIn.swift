@@ -151,6 +151,9 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 		lblBranchInfo.text = AppContext.sharedManager.getUserInfo().getBranchName()
 		lblReaderName.text = AppContext.sharedManager.getUserInfo().getReaderDevName()
         lblProcCount.text  = "0"    //처리수량
+		
+		// 테이블뷰 셀표시 지우기
+		tvEasyIn.tableFooterView = UIView(frame: CGRect.zero)
 	}
 
 	

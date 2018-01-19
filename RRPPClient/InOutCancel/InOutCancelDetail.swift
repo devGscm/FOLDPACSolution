@@ -48,8 +48,10 @@ class InOutCancelDetail: BaseViewController, UITableViewDataSource, UITableViewD
 	
 	func initViewControl()
 	{
-		
+		// 테이블뷰 셀표시 지우기
+		tvInOutCancelDetail.tableFooterView = UIView(frame: CGRect.zero)
 	}
+	
 	func initDataClient()
 	{
 		clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)

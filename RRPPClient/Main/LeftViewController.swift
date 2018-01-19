@@ -56,6 +56,9 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		
 		// 옵져버 패턴 : 응답대기(Home 이동)
 		NotificationCenter.default.addObserver(self, selector: #selector(doMoveHome), name: NSNotification.Name(rawValue: "doMoveHome"), object: nil)
+		
+		// 테이블뷰 셀표시 지우기
+		tvMenu.tableFooterView = UIView(frame: CGRect.zero)
 	}
 	
 	

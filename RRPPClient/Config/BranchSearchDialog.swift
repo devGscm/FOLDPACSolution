@@ -59,6 +59,9 @@ class BranchSearchDialog: BaseViewController, UITableViewDataSource, UITableView
         arcSearchCondition.append(ListViewDialog.ListViewItem(itemCode: "1", itemName: "거점ID"))
         strSearchCondtion = "0"
         self.btnSearchCondition.setTitle("거점명", for: .normal)
+		
+		// 테이블뷰 셀표시 지우기
+		tvBranch.tableFooterView = UIView(frame: CGRect.zero)
     }
     
     
