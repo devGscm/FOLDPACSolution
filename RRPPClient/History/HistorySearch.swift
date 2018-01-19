@@ -12,10 +12,6 @@ import Mosaic
 
 class HistorySearch: BaseViewController, UITableViewDataSource, UITableViewDelegate
 {
-	
-	@IBOutlet weak var lblUserName: UILabel!
-	@IBOutlet weak var lblBranchInfo: UILabel!
-
 	@IBOutlet weak var tfStDate: UITextField!
 	@IBOutlet weak var tfEnDate: UITextField!
 
@@ -71,9 +67,6 @@ class HistorySearch: BaseViewController, UITableViewDataSource, UITableViewDeleg
 	
 	func initViewControl()
 	{
-		lblUserName.text = AppContext.sharedManager.getUserInfo().getUserName()
-		lblBranchInfo.text = AppContext.sharedManager.getUserInfo().getBranchName()
-		
 		dpPicker = UIDatePicker()
 		let dtCurDate = Date()
 		let dfFormat = DateFormatter()

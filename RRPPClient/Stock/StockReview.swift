@@ -12,9 +12,6 @@ import Mosaic
 
 class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, DataProtocol, ReaderResponseDelegate
 {
-	
-	@IBOutlet weak var lblUserName: UILabel!
-	@IBOutlet weak var lblBranchInfo: UILabel!
 	@IBOutlet weak var lblReaderName: UILabel!
 	@IBOutlet weak var btnRfidReader: UIButton!
 	@IBOutlet weak var btnStockReviewId: UIButton!

@@ -56,7 +56,8 @@ class RootViewController: BaseViewController, UITableViewDataSource, UITableView
 //			{
 //				print(remoteAppVersion)
 //			}
-
+			
+			doProductStockSearch()
 		}
 		else
 		{

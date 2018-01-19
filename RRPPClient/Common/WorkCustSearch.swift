@@ -88,8 +88,8 @@ class WorkCustSearch: BaseViewController, UITableViewDataSource, UITableViewDele
         
         arcSearchCondition.append(ListViewDialog.ListViewItem(itemCode: "0", itemName: NSLocalizedString("easy_cust_name", comment: "고객사명")))
         arcSearchCondition.append(ListViewDialog.ListViewItem(itemCode: "1", itemName: NSLocalizedString("easy_cust_key", comment: "고객사ID")))
-        strSearchCondtion = "0"
-        btnSearchCondition.setTitle(NSLocalizedString("easy_cust_name", comment: "고객사명"), for: .normal)
+        strSearchCondtion = ""
+        //btnSearchCondition.setTitle(NSLocalizedString("easy_cust_name", comment: "고객사명"), for: .normal)
 
 		// 테이블뷰 셀표시 지우기
 		tvWorkCustSearch.tableFooterView = UIView(frame: CGRect.zero)
