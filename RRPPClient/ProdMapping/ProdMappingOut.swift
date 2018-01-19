@@ -96,6 +96,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		//print("*ProdMappingOut.viewDidAppear()")
 		//print("=========================================")
 		super.viewDidAppear(animated)
+		
 		//initTestProcess()
 	}
 	
@@ -1632,8 +1633,8 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		strWorkBranchId = "170316000142";
 		btnWorkCustSearch.setTitle("농협물류센터(안성)", for: UIControlState.normal)
 		tfVehName.text = "붕붕이 3호"
-		tfTradeChit.text = "TR1234"
-		lblSerialNo.text = "161028"
+		tfTradeChit?.text = "TR1234"
+		lblSerialNo?.text = "161028"
 		strSelectedEpcCode = "3312D58E3D8100C000027504"
 		lblProcCount.text = "2"
 
