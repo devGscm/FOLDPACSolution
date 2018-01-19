@@ -134,18 +134,6 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.08235294118" green="0.39607843139999999" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Psm-In-A5Q">
-                                        <rect key="frame" x="307" y="238" width="36" height="18"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <state key="normal">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onRefreshClicked:" destination="8FU-Ku-gwW" eventType="touchUpInside" id="F35-cC-BVJ"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -168,7 +156,6 @@
                         <viewLayoutGuide key="safeArea" id="1zp-c6-HPt"/>
                     </view>
                     <connections>
-                        <outlet property="btnRefresh" destination="Psm-In-A5Q" id="gwD-if-8mj"/>
                         <outlet property="tvProductStock" destination="1cZ-7L-SoM" id="AMv-B5-Nzb"/>
                         <segue destination="DV3-pj-IDf" kind="presentation" identifier="segLogin" id="Kyx-m7-K39"/>
                     </connections>

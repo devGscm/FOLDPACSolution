@@ -5,7 +5,7 @@ import Foundation
 
 class RootViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate
 {
-	@IBOutlet weak var btnRefresh: UIButton!
+//	@IBOutlet weak var btnRefresh: UIButton!
 	@IBOutlet weak var tvProductStock: UITableView!
 	
 	var clsDataClient : DataClient!
@@ -28,8 +28,8 @@ class RootViewController: BaseViewController, UITableViewDataSource, UITableView
 	
 	override func viewDidAppear(_ animated: Bool)
 	{
-		btnRefresh.titleLabel?.font = UIFont.fontAwesome(ofSize: 10)
-		btnRefresh.setTitle(String.fontAwesomeIcon(name: .refresh), for: .normal)
+		//btnRefresh.titleLabel?.font = UIFont.fontAwesome(ofSize: 10)
+		//btnRefresh.setTitle(String.fontAwesomeIcon(name: .refresh), for: .normal)
 		
 		if(AppContext.sharedManager.getUserInfo().getAutoLogin() == true || AppContext.sharedManager.getAuthenticated() == true)
 		{
