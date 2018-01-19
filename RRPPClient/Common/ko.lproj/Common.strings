@@ -92,8 +92,8 @@
 /* Class = "UIButton"; normalTitle = "초기화"; ObjectID = "jfP-bc-kuG"; */
 "jfP-bc-kuG.normalTitle" = "초기화";
 
-/* Class = "UIButton"; normalTitle = "고객사명"; ObjectID = "jsy-rc-1FT"; */
-"jsy-rc-1FT.normalTitle" = "고객사명";
+/* Class = "UIButton"; normalTitle = "검색조건"; ObjectID = "jsy-rc-1FT"; */
+"jsy-rc-1FT.normalTitle" = "검색조건";
 
 /* Class = "UIButton"; normalTitle = "초기화"; ObjectID = "mX6-AS-FeT"; */
 "mX6-AS-FeT.normalTitle" = "초기화";
