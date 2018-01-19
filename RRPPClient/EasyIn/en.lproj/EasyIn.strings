@@ -15,7 +15,7 @@
 "83Q-p0-90H.text" = "Received Schedule Qty";
 
 /* Class = "UIButton"; normalTitle = "완료전송"; ObjectID = "8r1-Ud-MZ8"; */
-"8r1-Ud-MZ8.normalTitle" = "Send(Complete)";
+"8r1-Ud-MZ8.normalTitle" = "Send";
 
 /* Class = "UIButton"; normalTitle = "선택"; ObjectID = "Aed-hj-n2o"; */
 "Aed-hj-n2o.normalTitle" = "Select";
@@ -57,7 +57,7 @@
 "VLt-Ca-WTt.text" = "Location";
 
 /* Class = "UIButton"; normalTitle = "작업초기화"; ObjectID = "WJA-a5-Dkw"; */
-"WJA-a5-Dkw.normalTitle" = "Clear(Task)";
+"WJA-a5-Dkw.normalTitle" = "Cancel";
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "WwB-YB-09W"; */
 "WwB-YB-09W.text" = "Processing Qty.";
@@ -72,7 +72,7 @@
 "dBX-rg-II4.text" = "Invoice No.";
 
 /* Class = "UIButton"; normalTitle = "임시저장"; ObjectID = "dSw-vd-jea"; */
-"dSw-vd-jea.normalTitle" = "Temporary Save";
+"dSw-vd-jea.normalTitle" = "Save";
 
 /* Class = "UILabel"; text = "유형"; ObjectID = "doh-JA-wAi"; */
 "doh-JA-wAi.text" = "Item No.";

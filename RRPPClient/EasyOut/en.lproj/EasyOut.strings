@@ -6,7 +6,7 @@
 "4v9-4K-GmG.text" = "Processing Qty.";
 
 /* Class = "UIButton"; normalTitle = "임시저장"; ObjectID = "7tC-aZ-Oqu"; */
-"7tC-aZ-Oqu.normalTitle" = "Temporary Save";
+"7tC-aZ-Oqu.normalTitle" = "Save";
 
 /* Class = "UIButton"; normalTitle = "상세"; ObjectID = "8SH-fE-LTU"; */
 "8SH-fE-LTU.normalTitle" = "Detail";
@@ -15,13 +15,13 @@
 "9xG-1g-0zA.text" = "Detail";
 
 /* Class = "UIButton"; normalTitle = "초기화"; ObjectID = "BCZ-Tk-VXe"; */
-"BCZ-Tk-VXe.normalTitle" = "Clear(Reading)";
+"BCZ-Tk-VXe.normalTitle" = "Clear";
 
 /* Class = "UIButton"; normalTitle = "작업초기화"; ObjectID = "FYZ-rE-7rX"; */
-"FYZ-rE-7rX.normalTitle" = "Clear(Task)";
+"FYZ-rE-7rX.normalTitle" = "Cancel";
 
 /* Class = "UIButton"; normalTitle = "완료전송"; ObjectID = "GT6-ax-3F4"; */
-"GT6-ax-3F4.normalTitle" = "Send(Complete)";
+"GT6-ax-3F4.normalTitle" = "Send";
 
 /* Class = "UIButton"; normalTitle = "고객사 선택"; ObjectID = "K7r-Tr-k8U"; */
 "K7r-Tr-k8U.normalTitle" = "Select Client Com.";

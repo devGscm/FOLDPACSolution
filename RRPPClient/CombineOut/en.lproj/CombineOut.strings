@@ -1,12 +1,12 @@
 
 /* Class = "UILabel"; text = "출고예정일"; ObjectID = "02S-mu-cjE"; */
-"02S-mu-cjE.text" = "Shipped Schedule Date";
+"02S-mu-cjE.text" = "Ship Date";
 
 /* Class = "UILabel"; text = "작업자"; ObjectID = "0Xt-kO-Gr2"; */
 "0Xt-kO-Gr2.text" = "Worker";
 
 /* Class = "UILabel"; text = "출고예정량"; ObjectID = "21p-KU-dLa"; */
-"21p-KU-dLa.text" = "Shipped Schedule Qty";
+"21p-KU-dLa.text" = "I/V Qty";
 
 /* Class = "UILabel"; text = "입고처"; ObjectID = "2Ry-OZ-w22"; */
 "2Ry-OZ-w22.text" = "Dest. Com.";
@@ -18,7 +18,7 @@
 "3VH-i4-nHA.normalTitle" = "Type";
 
 /* Class = "UIButton"; normalTitle = "초기화"; ObjectID = "4Fd-1A-jCs"; */
-"4Fd-1A-jCs.normalTitle" = "Clear(Reading)";
+"4Fd-1A-jCs.normalTitle" = "Clear";
 
 /* Class = "UILabel"; text = "배송거점"; ObjectID = "5IL-zN-x3Y"; */
 "5IL-zN-x3Y.text" = "Dest. Loc.";
@@ -33,16 +33,16 @@
 "7Ii-Ba-por.text" = "Dest. Com. Address";
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "7In-Zc-mtI"; */
-"7In-Zc-mtI.text" = "Processing Qty.";
+"7In-Zc-mtI.text" = "Read Qty";
 
 /* Class = "UIButton"; normalTitle = "선택"; ObjectID = "7KD-hI-OhB"; */
 "7KD-hI-OhB.normalTitle" = "Select";
 
 /* Class = "UILabel"; text = "출고예정"; ObjectID = "7KT-bn-wrI"; */
-"7KT-bn-wrI.text" = "Shipped Schedule";
+"7KT-bn-wrI.text" = "I/V Qty";
 
 /* Class = "UILabel"; text = "출고예정량"; ObjectID = "8Ol-t6-Snn"; */
-"8Ol-t6-Snn.text" = "Shipped Schedule Qty";
+"8Ol-t6-Snn.text" = "I/V Qty";
 
 /* Class = "UILabel"; text = "송장번호"; ObjectID = "9F1-WZ-xSw"; */
 "9F1-WZ-xSw.text" = "Invoice No.";
@@ -54,7 +54,7 @@
 "FBH-6R-dBj.text" = "Dest. Com. Address";
 
 /* Class = "UILabel"; text = "미처리량"; ObjectID = "FYU-HN-1mn"; */
-"FYU-HN-1mn.text" = "Untreated Qty";
+"FYU-HN-1mn.text" = "No-Read Qty";
 
 /* Class = "UILabel"; text = "유형"; ObjectID = "HVx-C8-zqS"; */
 "HVx-C8-zqS.text" = "Item No.";
@@ -72,7 +72,7 @@
 "JI6-qA-2d7.text" = "Location";
 
 /* Class = "UIButton"; normalTitle = "임시저장"; ObjectID = "JNL-53-esW"; */
-"JNL-53-esW.normalTitle" = "Temporary Save";
+"JNL-53-esW.normalTitle" = "Save";
 
 /* Class = "UILabel"; text = "차량번호"; ObjectID = "JZv-rp-tDr"; */
 "JZv-rp-tDr.text" = "Vehicle No.";
@@ -84,19 +84,19 @@
 "NRR-Cq-1XJ.text" = "Select";
 
 /* Class = "UILabel"; text = "미처리량"; ObjectID = "Q9B-3T-8DK"; */
-"Q9B-3T-8DK.text" = "Untreated Qty";
+"Q9B-3T-8DK.text" = "No-Read Qty";
 
 /* Class = "UILabel"; text = "출고예정"; ObjectID = "QW6-Rj-bcR"; */
-"QW6-Rj-bcR.text" = "Shipped Schedule";
+"QW6-Rj-bcR.text" = "I/V Qty";
 
 /* Class = "UILabel"; text = "미처리량"; ObjectID = "RSK-DY-C0o"; */
-"RSK-DY-C0o.text" = "Untreated Qty";
+"RSK-DY-C0o.text" = "No-Read Qty";
 
 /* Class = "UIButton"; normalTitle = "완료전송"; ObjectID = "RSi-4W-Def"; */
-"RSi-4W-Def.normalTitle" = "Send(Complete)";
+"RSi-4W-Def.normalTitle" = "Send";
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "WQV-0Q-nXg"; */
-"WQV-0Q-nXg.text" = "Processing Qty.";
+"WQV-0Q-nXg.text" = "Read Qty";
 
 /* Class = "UILabel"; text = "입고처"; ObjectID = "alQ-Vh-Cvv"; */
 "alQ-Vh-Cvv.text" = "Dest. Com.";
@@ -105,7 +105,7 @@
 "bUi-ZK-AoJ.text" = "Item No.";
 
 /* Class = "UILabel"; text = "출고예정"; ObjectID = "eMX-3d-tUb"; */
-"eMX-3d-tUb.text" = "Shipped Schedule";
+"eMX-3d-tUb.text" = "Ship Date";
 
 /* Class = "UILabel"; text = "유형"; ObjectID = "f8n-k0-it2"; */
 "f8n-k0-it2.text" = "Item No.";
@@ -114,22 +114,22 @@
 "ggP-mq-hxK.normalTitle" = "Connect";
 
 /* Class = "UILabel"; text = "출고예정일"; ObjectID = "hn2-w7-4m6"; */
-"hn2-w7-4m6.text" = "Shipped Schedule Date";
+"hn2-w7-4m6.text" = "Ship Date";
 
 /* Class = "UILabel"; text = "출고예정"; ObjectID = "iSv-Sj-wdh"; */
-"iSv-Sj-wdh.text" = "Shipped Schedule";
+"iSv-Sj-wdh.text" = "I/V Qty";
 
 /* Class = "UIButton"; normalTitle = "선택"; ObjectID = "nCn-6j-5F2"; */
 "nCn-6j-5F2.normalTitle" = "Select";
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "ocF-oJ-EDz"; */
-"ocF-oJ-EDz.text" = "Processing Qty.";
+"ocF-oJ-EDz.text" = "Read Qty";
 
 /* Class = "UILabel"; text = "유형"; ObjectID = "pd9-9Y-4Io"; */
 "pd9-9Y-4Io.text" = "Item No.";
 
 /* Class = "UIButton"; normalTitle = "작업초기화"; ObjectID = "taI-HS-pdw"; */
-"taI-HS-pdw.normalTitle" = "Clear(Task)";
+"taI-HS-pdw.normalTitle" = "Cancel";
 
 /* Class = "UILabel"; text = "송장번호"; ObjectID = "xIC-kZ-T5I"; */
 "xIC-kZ-T5I.text" = "Invoice No.";
