@@ -13,9 +13,6 @@ import BarcodeScanner
 
 class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, DataProtocol, ReaderResponseDelegate
 {
-	
-	@IBOutlet weak var lblUserName: UILabel!
-	@IBOutlet weak var lblBranchInfo: UILabel!
 	@IBOutlet weak var lblReaderName: UILabel!
 	@IBOutlet weak var btnRfidReader: UIButton!
 	
@@ -123,8 +120,6 @@ class CombineIn: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 		clsIndicator = ProgressIndicator(view: self.view, backgroundColor: UIColor.gray,
 										 indicatorColor: ProgressIndicator.INDICATOR_COLOR_WHITE, message: "로딩중입니다.")
 		
-		lblUserName.text = AppContext.sharedManager.getUserInfo().getUserName()
-		lblBranchInfo.text = AppContext.sharedManager.getUserInfo().getBranchName()
 		lblReaderName.text = AppContext.sharedManager.getUserInfo().getReaderDevName()
 		
 		makeWorkTypeCodeList(userLang: AppContext.sharedManager.getUserInfo().getUserLang())
