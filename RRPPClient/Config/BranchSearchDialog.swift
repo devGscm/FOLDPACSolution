@@ -55,10 +55,12 @@ class BranchSearchDialog: BaseViewController, UITableViewDataSource, UITableView
     
     func initViewControl()
     {
-        arcSearchCondition.append(ListViewDialog.ListViewItem(itemCode: "0", itemName: "거점명"))
-        arcSearchCondition.append(ListViewDialog.ListViewItem(itemCode: "1", itemName: "거점ID"))
+		
+		
+        arcSearchCondition.append(ListViewDialog.ListViewItem(itemCode: "0", itemName: NSLocalizedString("preference_branch_name", comment: "거점명")))
+        arcSearchCondition.append(ListViewDialog.ListViewItem(itemCode: "1", itemName: NSLocalizedString("preference_branch_key", comment: "거점ID")))
         strSearchCondtion = "0"
-        self.btnSearchCondition.setTitle("거점명", for: .normal)
+        self.btnSearchCondition.setTitle(NSLocalizedString("preference_branch_name", comment: "거점명"), for: .normal)
 		
 		// 테이블뷰 셀표시 지우기
 		tvBranch.tableFooterView = UIView(frame: CGRect.zero)
