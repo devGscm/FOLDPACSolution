@@ -9,7 +9,7 @@
 "4bf-qq-fhL.text" = "Detail View";
 
 /* Class = "UILabel"; text = "처리일시"; ObjectID = "7CW-3T-myV"; */
-"7CW-3T-myV.text" = "Reading Time";
+"7CW-3T-myV.text" = "Event date";
 
 /* Class = "UIButton"; normalTitle = "취소"; ObjectID = "9n7-BF-pXc"; */
 "9n7-BF-pXc.normalTitle" = "Cancel";
@@ -21,10 +21,10 @@
 "FaE-fX-qEe.text" = "처리시간";
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "HvB-zk-5cI"; */
-"HvB-zk-5cI.text" = "Processing Qty.";
+"HvB-zk-5cI.text" = "Read Qty.";
 
 /* Class = "UILabel"; text = "지시번호"; ObjectID = "I9x-Xy-LVL"; */
-"I9x-Xy-LVL.text" = "Instruction No.";
+"I9x-Xy-LVL.text" = "Invoice No.";
 
 /* Class = "UILabel"; text = "유형"; ObjectID = "IVT-Uw-cLW"; */
 "IVT-Uw-cLW.text" = "Item No.";
@@ -39,7 +39,7 @@
 "RSP-fF-RUP.text" = "Selection";
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "Rha-e9-dfW"; */
-"Rha-e9-dfW.text" = "Processing Qty.";
+"Rha-e9-dfW.text" = "Read Qty.";
 
 /* Class = "UILabel"; text = "예정량"; ObjectID = "Tvq-3Y-tWH"; */
 "Tvq-3Y-tWH.text" = "Received Schedule Qty";
@@ -48,7 +48,7 @@
 "Ye4-yL-usF.text" = "Untreated Qty";
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "YnJ-Cd-5U2"; */
-"YnJ-Cd-5U2.text" = "Processing Qty.";
+"YnJ-Cd-5U2.text" = "Read Qty.";
 
 /* Class = "UIButton"; normalTitle = "검색"; ObjectID = "Zd1-oG-PLY"; */
 "Zd1-oG-PLY.normalTitle" = "Search";
@@ -81,7 +81,7 @@
 "ooJ-Bi-wPP.text" = "Dest./Dprt. Com.";
 
 /* Class = "UILabel"; text = "처리일시"; ObjectID = "qJL-oe-BYd"; */
-"qJL-oe-BYd.text" = "Reading Time";
+"qJL-oe-BYd.text" = "Event date";
 
 /* Class = "UILabel"; text = "구분"; ObjectID = "rBw-2d-mZa"; */
 "rBw-2d-mZa.text" = "Type";
@@ -90,10 +90,10 @@
 "rPX-60-Ii4.text" = "No.";
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "sW6-P9-EBz"; */
-"sW6-P9-EBz.text" = "Processing Qty.";
+"sW6-P9-EBz.text" = "Read Qty.";
 
 /* Class = "UILabel"; text = "지시번호"; ObjectID = "tI6-7c-R90"; */
-"tI6-7c-R90.text" = "Instruction No.";
+"tI6-7c-R90.text" = "Invoice No.";
 
 /* Class = "UIButton"; normalTitle = "검색 조건"; ObjectID = "vf6-jh-PmQ"; */
 "vf6-jh-PmQ.normalTitle" = "Condition(Search)";

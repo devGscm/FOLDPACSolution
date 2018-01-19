@@ -18,10 +18,10 @@
 "FvU-OO-xsj.normalTitle" = "Detail";
 
 /* Class = "UIButton"; normalTitle = "임시저장"; ObjectID = "FyQ-O5-hsb"; */
-"FyQ-O5-hsb.normalTitle" = "Temporary Save";
+"FyQ-O5-hsb.normalTitle" = "Save";
 
 /* Class = "UILabel"; text = "인식수량"; ObjectID = "I8P-Ox-DH0"; */
-"I8P-Ox-DH0.text" = "Reading Qty";
+"I8P-Ox-DH0.text" = "Read Qty";
 
 /* Class = "UILabel"; text = "유형"; ObjectID = "Jf1-aq-kFy"; */
 "Jf1-aq-kFy.text" = "Item No.";
@@ -33,7 +33,7 @@
 "K6M-RI-fDp.text" = "Physical Count List";
 
 /* Class = "UIButton"; normalTitle = "초기화"; ObjectID = "KsA-Nu-deJ"; */
-"KsA-Nu-deJ.normalTitle" = "Clear(Reading)";
+"KsA-Nu-deJ.normalTitle" = "Clear";
 
 /* Class = "UIButton"; normalTitle = "선택"; ObjectID = "LiT-yN-fg5"; */
 "LiT-yN-fg5.normalTitle" = "Selection";
@@ -42,7 +42,7 @@
 "LuF-6u-bx2.text" = "Swing U";
 
 /* Class = "UILabel"; text = "인식수량"; ObjectID = "QKD-g5-RVE"; */
-"QKD-g5-RVE.text" = "Reading Qty";
+"QKD-g5-RVE.text" = "Read Qty";
 
 /* Class = "UILabel"; text = "재고실사요청일"; ObjectID = "QpB-3C-maz"; */
 "QpB-3C-maz.text" = "Count Req. Date";
@@ -81,4 +81,4 @@
 "uMv-Oh-ZRN.text" = "Worker";
 
 /* Class = "UIButton"; normalTitle = "완료전송"; ObjectID = "w7g-kY-y9R"; */
-"w7g-kY-y9R.normalTitle" = "Send(Complete)";
+"w7g-kY-y9R.normalTitle" = "Send";
