@@ -1087,33 +1087,36 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
             
             DispatchQueue.main.async
             {
-                //1)첫번째 태그의 상품(바코드)정보를 선택하도록함.
-                let clsDataRow = self.arrRfidRows[0]
-                self.tvMappingRfid.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .none)
-                
-                self.lblMastSerialNo.text = clsDataRow.getSerialNo()
-                self.lblAssetName.text = clsDataRow.getAssetName()
-                self.strSelectedEpcCode = clsDataRow.getEpcCode()
-            
-                //슬래이브-그리드 초기화
-                self.arrProdRows.removeAll()
-                
-                //2)선택된 RFID태그에 대한 바코드리스트
-                if(self.lblMastSerialNo.text?.isEmpty == false)
+                if(self.arrRfidRows.count > 0)
                 {
-                    let arrProds = self.clsProdContainer.getItemes(epcCode: self.strSelectedEpcCode)
-                    if(arrProds.count > 0)
+                    //1)첫번째 태그의 상품(바코드)정보를 선택하도록함.
+                    let clsDataRow = self.arrRfidRows[0]
+                    self.tvMappingRfid.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .none)
+                    
+                    self.lblMastSerialNo.text = clsDataRow.getSerialNo()
+                    self.lblAssetName.text = clsDataRow.getAssetName()
+                    self.strSelectedEpcCode = clsDataRow.getEpcCode()
+                
+                    //슬래이브-그리드 초기화
+                    self.arrProdRows.removeAll()
+                    
+                    //2)선택된 RFID태그에 대한 바코드리스트
+                    if(self.lblMastSerialNo.text?.isEmpty == false)
                     {
-                        self.arrProdRows.append(contentsOf: arrProds)
+                        let arrProds = self.clsProdContainer.getItemes(epcCode: self.strSelectedEpcCode)
+                        if(arrProds.count > 0)
+                        {
+                            self.arrProdRows.append(contentsOf: arrProds)
+                        }
                     }
+                    
+                    //3)'처리량' 텍스트박스에 표시
+                    self.lblProcCount.text = "\(self.arrRfidRows.count)"
+                    
+                    //4)그리드 업데이트
+                    self.tvMappingRfid?.reloadData()
+                    self.tvMappingProd?.reloadData()
                 }
-                
-                //3)'처리량' 텍스트박스에 표시
-                self.lblProcCount.text = "\(self.arrRfidRows.count)"
-                
-                //4)그리드 업데이트
-                self.tvMappingRfid?.reloadData()
-                self.tvMappingProd?.reloadData()
             }
 			
 			super.showSnackbar(message: NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다."))
@@ -1474,6 +1477,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	*/
 	func sendDataExistSaleWorkId(workState: String, saleWorkId: String, vehName: String, tradeChit: String, remark: String, signData: String)
 	{
+        print("====sendDataExistSaleWorkId:[송장-O]")
         clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
         
         let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
@@ -1525,7 +1529,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
                 return
             }
             
-            //print("####결과값 처리")
+            print("####결과값 처리[2]")
             
             let clsResultDataRows = clsResultDataTable.getDataRows()
             if(clsResultDataRows.count > 0)
@@ -1533,7 +1537,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
                 let clsDataRow = clsResultDataRows[0]
                 let strResultCode = clsDataRow.getString(name: "resultCode")
                 
-                print(" -strResultCode:\(strResultCode!)")
+                print("====strResultCode:\(strResultCode!)")
                 if(Constants.PROC_RESULT_SUCCESS == strResultCode)
                 {
                     
@@ -1572,7 +1576,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
                     
                     let strErrorMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
                     
-                    print("@@@@@@@@@ 에러메시지:\(strErrorMsg)")
+                    print("====에러메시지:\(strErrorMsg)")
                 
                     self.showSnackbar(message: strErrorMsg)
                 
@@ -1596,6 +1600,8 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	*/
 	func sendDataNoneSaleWorkId(workState: String, workBranchId: String, vehName: String, tradeChit: String, remark: String, signData: String)
 	{
+        print("====sendDataNoneSaleWorkId:(송장-X)")
+        
         let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
         clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
         clsDataClient.SelectUrl = "inOutService:selectSaleWorkId"
