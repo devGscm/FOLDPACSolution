@@ -343,7 +343,6 @@
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="onSendClicked:" destination="AVF-YF-1cO" eventType="touchUpInside" id="Tp9-o6-ImQ"/>
-                                                    <segue destination="oaM-px-M2S" kind="presentation" identifier="segOutSignDialog" modalPresentationStyle="overCurrentContext" id="Wnk-oe-gjA"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -370,6 +369,7 @@
                         <outlet property="lblReaderName" destination="LuF-6u-bx2" id="sNU-dX-2Zb"/>
                         <outlet property="lblRealStockCount" destination="FWA-Aa-LdO" id="Xmi-2M-K7h"/>
                         <outlet property="tvStockReview" destination="fQS-2i-n2G" id="4Lq-bP-sc6"/>
+                        <segue destination="oaM-px-M2S" kind="presentation" identifier="segOutSignDialog" modalPresentationStyle="overCurrentContext" id="9rv-ec-L4y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SgN-Ro-IsZ" userLabel="First Responder" sceneMemberID="firstResponder"/>

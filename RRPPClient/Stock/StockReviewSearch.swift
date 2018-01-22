@@ -193,14 +193,18 @@ class StockReviewSearch: BaseViewController, UITableViewDataSource, UITableViewD
 		return objCell
 	}
 	
+    //==== 재고실사번호 선택
 	@objc func onSelectionClicked(_ sender: UIButton)
 	{
 		let clsDataRow = arcDataRows[sender.tag]
 		
-		let strStockReviewId	= clsDataRow.getString(name:"stockReviewId") ?? ""	// 재고조사ID
-		let strStockReviewState	= clsDataRow.getString(name:"stockReviewState") ?? ""	// 재고조사 상태값
+		let strStockReviewId	= clsDataRow.getString(name:"화") ?? ""	    //재고조사ID
+		let strStockReviewState	= clsDataRow.getString(name:"stockReviewState") ?? ""	//재고조사 상태값
 		print("@@@@strStockReviewState:\(strStockReviewState) @@@@@@@@@@@@@@")
-		// 재고조사 초기화
+		
+        //20180122-이은미과장님 요청으로 '수정2안'로 변경
+        /*
+        //재고조사 초기화
 		if(Constants.STOCK_REVIEW_STATE_WORKING == strStockReviewState)
 		{
 			sendStockReviewInitData(stockReviewId: strStockReviewId, dataRow: clsDataRow)
@@ -211,9 +215,17 @@ class StockReviewSearch: BaseViewController, UITableViewDataSource, UITableViewD
 			ptcDataHandler?.recvData(returnData: strtData)
 			self.dismiss(animated: true, completion: nil)
 		}
+        */
+        
+        //수정2안
+        let strtData = ReturnData(returnType: "stockReviewSearch", returnCode: nil, returnMesage: nil, returnRawData: clsDataRow)
+        ptcDataHandler?.recvData(returnData: strtData)
+        self.dismiss(animated: true, completion: nil)
 	}
 	
-	func sendStockReviewInitData(stockReviewId: String, dataRow: DataRow)
+    
+    //==== 재고조사 초기화
+	func send화tockReviewInitData(stockReviewId: String, dataRow: DataRow)
 	{
 		print("@@@@sendStockReviewInitData @@@@@@@@@@@@@@")
 		
