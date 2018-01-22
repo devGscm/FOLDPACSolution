@@ -28,10 +28,10 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	var strProdAssetEpc		: String = ""	/**< 장착제품 자산 EPC 코드 */
 	var strProdAssetEpcName	: String = ""	/**< 장착제품 자산 EPC 명 */
 	
-	var intOldStockCount	= 0		/**< 전산재고수량 */
-	var intRealStockCount 	= 0		/**< 실재고수량 */
-	var intCurProcCount 	= 0		/**< 현재처리량 */
-
+	var intOldStockCount	    = 0		/**< 전산재고수량 */
+	var intRealStockCount 	    = 0		/**< 실재고수량 */
+	var intCurProcCount 	    = 0		/**< 현재처리량 */
+    var intStockReviewListCnt   = 0     /**< 실재고량 */
 	
 	var clsIndicator : ProgressIndicator?
 	var clsDataClient : DataClient!
@@ -140,26 +140,30 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 			if(returnData.returnRawData != nil)
 			{
 				clearUserInterfaceData()
-				
+
+                //새로운 발주번호가 들어면 기존 데이터를 삭제한다.
+                clearTagData()
+
 				let clsDataRow = returnData.returnRawData as! DataRow
-				strStockReviewId	= clsDataRow.getString(name: "stockReviewId") ?? ""
-				strProdAssetEpc		= clsDataRow.getString(name: "prodAssetEpc") ?? ""
-				strProdAssetEpcName	= clsDataRow.getString(name: "prodAssetEpcName") ?? ""
+				strStockReviewId	    = clsDataRow.getString(name: "stockReviewId") ?? ""
+				strProdAssetEpc		    = clsDataRow.getString(name: "prodAssetEpc") ?? ""
+				strProdAssetEpcName	    = clsDataRow.getString(name: "prodAssetEpcName") ?? ""
 				
-				intOldStockCount	= clsDataRow.getInt(name: "oldStockCnt") ?? 0
-				intRealStockCount	= clsDataRow.getInt(name: "orderWorkCnt") ?? 0
-				intCurProcCount		= intRealStockCount	// 현 처리량
-				
+				intOldStockCount	    = clsDataRow.getInt(name: "oldStockCnt") ?? 0
+				intRealStockCount	    = clsDataRow.getInt(name: "orderWorkCnt") ?? 0
+                intStockReviewListCnt   = clsDataRow.getInt(name: "stockReviewListCnt") ?? 0    //20180122-현추가
+                
+                //20180122-이은매과장님 용청으로 '수정2안'으로 변경
+				//intCurProcCount		= intRealStockCount	        //현재 처리량
+				intCurProcCount         = intStockReviewListCnt     //현재 처리량
+                
                 DispatchQueue.main.async
                 {
                     self.btnStockReviewId.setTitle(self.strStockReviewId, for: .normal)
-                    self.lblProdAssetEpcName.text = self.strProdAssetEpcName	// 장착제품자산EPC코드명
-                    self.lblRealStockCount.text = "\(self.intCurProcCount)"	// 실재고수량
+                    self.lblProdAssetEpcName.text = self.strProdAssetEpcName	//장착제품자산EPC코드명
+                    self.lblRealStockCount.text = "\(self.intCurProcCount)"	    //실재고수량
                 }
 				//if(mTvOldStockCount		!= null) mTvOldStockCount.setText(String.valueOf(mIntOldStockCount));	// 전산재고수량
-				
-				// 새로운 발주번호가 들어면 기존 데이터를 삭제한다.
-				clearTagData()
 			}
 		}
 		
@@ -194,11 +198,12 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 	{
 		arrTagRows.removeAll()
 		arrAssetRows.removeAll()
-		self.intCurProcCount = self.intRealStockCount
+		
+        //self.intCurProcCount = self.intRealStockCount
 		DispatchQueue.main.async
         {
             self.tvStockReview?.reloadData()
-            self.lblRealStockCount?.text = "\(self.intCurProcCount)"
+        //    self.lblRealStockCount?.text = "\(self.intCurProcCount)"
         }
 		super.clearInventory()
 	}
@@ -284,7 +289,13 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 					arrAssetRows.append(clsTagInfo)
 				}
 
-				intCurProcCount = intRealStockCount + arrTagRows.count
+                //20180122-이은미과장님 요청으로 '수정2안'으로 변경
+				//intCurProcCount = intRealStockCount + arrTagRows.count
+                
+                //수정2안
+                intCurProcCount = intStockReviewListCnt + arrTagRows.count
+                
+                
 				lblRealStockCount.text = "\(intCurProcCount)"
 			}
 		}
@@ -380,13 +391,15 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 //
 //    }
 	
+    //==== 유저인터페이스 초기화
 	func clearUserInterfaceData()
 	{
-		intOldStockCount	= 0	/**< 전산재고수량 */
-		intCurProcCount 	= 0	/**< 현재 처리량 */
-		intRealStockCount	= 0	/**< 실재고수량 */
-		strStockReviewId	= ""
-		strProdAssetEpc		= ""
+		intOldStockCount	    = 0	/**< 전산재고수량 */
+		intCurProcCount 	    = 0	/**< 현재 처리량 */
+		intRealStockCount	    = 0	/**< 실재고수량 */
+        intStockReviewListCnt   = 0 /**< 실재고량 */
+		strStockReviewId	    = ""
+		strProdAssetEpc		    = ""
 		
         DispatchQueue.main.async
         {
@@ -576,13 +589,15 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 					
 					
 					//비동기 처리 결과에대한  UI에한 처리는 반드시 쓰레드로 처리되어야 한다.
-					//DispatchQueue.main.async {
+					DispatchQueue.main.async {
+                        self.lblRealStockCount.text = strSvrProcCount ?? "0"
+                    }
                     if(workState == Constants.WORK_STATE_COMPLETE)
                     {
                         self.clearUserInterfaceData()
                         self.clearTagData()
                     }
-					//}
+					
 					let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
 					self.showSnackbar(message: strMsg)
 
