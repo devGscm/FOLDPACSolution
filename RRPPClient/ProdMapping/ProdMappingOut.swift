@@ -729,7 +729,6 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
         //tableView.allowsSelection = false           //셀 선택안되게 막음
-        
 		if(tableView == tvMappingRfid)
 		{
 			let objCell:MappingRfidCell = tableView.dequeueReusableCell(withIdentifier: "tvcMappingRfid", for: indexPath) as! MappingRfidCell
@@ -737,10 +736,10 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
             
             objCell.lblAssetName.text = clsTagInfo.getAssetName()
             objCell.lblSerialNo.text = clsTagInfo.getSerialNo()
-            objCell.btnSelection.titleLabel?.font = UIFont.fontAwesome(ofSize: 14)
-            objCell.btnSelection.setTitle(String.fontAwesomeIcon(name:.arrowDown), for: .normal)
-            objCell.btnSelection.tag = indexPath.row
-            objCell.btnSelection.addTarget(self, action: #selector(onTagSelectionClicked(_:)), for: .touchUpInside)
+//            objCell.btnSelection.titleLabel?.font = UIFont.fontAwesome(ofSize: 14)
+//            objCell.btnSelection.setTitle(String.fontAwesomeIcon(name:.arrowDown), for: .normal)
+//            objCell.btnSelection.tag = indexPath.row
+//            objCell.btnSelection.addTarget(self, action: #selector(onTagSelectionClicked(_:)), for: .touchUpInside)
 			return objCell
 		}
 		else
@@ -769,6 +768,45 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 			return objCell
 		}
 	}
+	
+	// Row가 선택되었을때 이벤트
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+	{
+		if(tableView == tvMappingRfid)
+		{
+			let objCell:MappingRfidCell = tableView.dequeueReusableCell(withIdentifier: "tvcMappingRfid", for: indexPath) as! MappingRfidCell
+			let clsDataRow = arrRfidRows[indexPath.row]
+			if(lblMastSerialNo.text != clsDataRow.getSerialNo())
+			{
+				lblMastSerialNo.text = clsDataRow.getSerialNo()
+				lblAssetName.text = clsDataRow.getAssetName()
+				strSelectedEpcCode = clsDataRow.getEpcCode()
+				
+				//슬래이브-그리드 초기화
+				arrProdRows.removeAll()
+				
+				//선택된 RFID태그에 대한 바코드리스트
+				if(self.lblMastSerialNo.text?.isEmpty == false)
+				{
+					let arrProds = clsProdContainer.getItemes(epcCode: strSelectedEpcCode)
+					if(arrProds.count > 0)
+					{
+						arrProdRows.append(contentsOf: arrProds)
+					}
+				}
+				
+				DispatchQueue.main.async
+				{
+					//슬래이브-그리드 업데이트
+					self.tvMappingProd.reloadData()
+				}
+			}
+			
+		}
+
+	}
+	
+
 	
     @objc func onTagSelectionClicked(_ sender: UIButton)
     {

@@ -14,7 +14,6 @@ class MappingRfidCell: UITableViewCell
 {
 	@IBOutlet weak var lblAssetName: UILabel!
 	@IBOutlet weak var lblSerialNo: UILabel!
-	@IBOutlet weak var btnSelection: UIButton!
 	
     override func awakeFromNib()
 	{
