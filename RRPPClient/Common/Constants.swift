@@ -44,8 +44,7 @@ class Constants
 	#elseif YOMILE
 	static let WEB_SVC_URL                              = "http://192.168.0.240:8080"       /**< 서비스 URL-용민 */
 	#else
-    static let WEB_SVC_URL                              = "http://192.168.0.218:8080"       /**< 서비스 URL-현님 */
-	//static let WEB_SVC_URL 	    					    = "http://upis.moramcnt.com"	    /**< 서비스 URL     */
+	static let WEB_SVC_URL 	    					    = "http://upis.moramcnt.com"	    /**< 서비스 URL     */
 	#endif
 	
 	static let ROWS_PER_PAGE							= 20	/**< 기본 페이지 크기 */
