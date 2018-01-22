@@ -172,15 +172,13 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 			// 상품정보 수정
 			if(returnData.returnRawData != nil)
 			{
-				let clsDataRow = returnData.returnRawData as! DataRow
+				let clsDataRow          = returnData.returnRawData as! DataRow
 				let strRemark			= clsDataRow.getString(name: "remark") ?? ""
 				let strSignData			= clsDataRow.getString(name: "signData") ?? ""
 				let strStockReviewId	= btnStockReviewId.titleLabel?.text ?? ""
 				//let strWorkerName		= lblUserName.text ?? ""
                 let strWorkerName       = AppContext.sharedManager.getUserInfo().getUserName()
                 
-                
-				
 				sendData(workState: Constants.WORK_STATE_COMPLETE, stockReviewId: strStockReviewId, workerName: strWorkerName, remark: strRemark, signData: strSignData)
 			}
 		}
@@ -503,7 +501,16 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("stock_enter_your_review_id", comment: "재고실사번호를 입력하여 주십시오."))
 			return
 		}
+     
+        //20180122-이은미과장님 요청으로 추가
+        //전송할 데이터가 없을경우, 전송안함.
+        if(intCurProcCount <= 0)
+        {            
+            Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("common_no_data_send", comment: "전송할 데이터가 없습니다."))
+            return
+        }
 		
+        
 		self.performSegue(withIdentifier: "segOutSignDialog", sender: self)
 	}
 	
