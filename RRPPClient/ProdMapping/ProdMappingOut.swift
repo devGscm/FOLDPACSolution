@@ -775,9 +775,33 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		if(tableView == tvMappingRfid)
 		{
 			let objCell:MappingRfidCell = tableView.dequeueReusableCell(withIdentifier: "tvcMappingRfid", for: indexPath) as! MappingRfidCell
-			let clsTagInfo = arrRfidRows[indexPath.row]
+			let clsDataRow = arrRfidRows[indexPath.row]
+			if(lblMastSerialNo.text != clsDataRow.getSerialNo())
+			{
+				lblMastSerialNo.text = clsDataRow.getSerialNo()
+				lblAssetName.text = clsDataRow.getAssetName()
+				strSelectedEpcCode = clsDataRow.getEpcCode()
+				
+				//슬래이브-그리드 초기화
+				arrProdRows.removeAll()
+				
+				//선택된 RFID태그에 대한 바코드리스트
+				if(self.lblMastSerialNo.text?.isEmpty == false)
+				{
+					let arrProds = clsProdContainer.getItemes(epcCode: strSelectedEpcCode)
+					if(arrProds.count > 0)
+					{
+						arrProdRows.append(contentsOf: arrProds)
+					}
+				}
+				
+				DispatchQueue.main.async
+				{
+					//슬래이브-그리드 업데이트
+					self.tvMappingProd.reloadData()
+				}
+			}
 			
-		
 		}
 
 	}
