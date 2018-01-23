@@ -48,7 +48,7 @@
 "QpB-3C-maz.text" = "Count Req. Date";
 
 /* Class = "UILabel"; text = "선택"; ObjectID = "UVA-VR-EoE"; */
-"UVA-VR-EoE.text" = "Selection";
+"UVA-VR-EoE.text" = "Select";
 
 /* Class = "UIButton"; normalTitle = "실사번호선택"; ObjectID = "V48-EO-njk"; */
 "V48-EO-njk.normalTitle" = "Count No. Select";
