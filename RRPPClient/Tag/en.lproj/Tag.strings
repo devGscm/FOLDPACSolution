@@ -12,7 +12,7 @@
 "1GP-C8-DZ3.text" = "Worker";
 
 /* Class = "UIButton"; normalTitle = "초기화"; ObjectID = "2IS-Wq-Mbu"; */
-"2IS-Wq-Mbu.normalTitle" = "Clear(Reading)";
+"2IS-Wq-Mbu.normalTitle" = "Clear";
 
 /* Class = "UILabel"; text = "조회시간"; ObjectID = "2JP-Fo-2C8"; */
 "2JP-Fo-2C8.text" = "Time";
@@ -30,7 +30,7 @@
 "5C0-qh-gE7.text" = "Location";
 
 /* Class = "UIButton"; normalTitle = "초기화"; ObjectID = "5ZT-Qc-Kl5"; */
-"5ZT-Qc-Kl5.normalTitle" = "Clear(Reading)";
+"5ZT-Qc-Kl5.normalTitle" = "Clear";
 
 /* Class = "UILabel"; text = "2017-06-26 10:01:50"; ObjectID = "6wy-fo-z7h"; */
 "6wy-fo-z7h.text" = "2017-06-26 10:01:50";
