@@ -1,6 +1,6 @@
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "0IA-wa-04k"; */
-"0IA-wa-04k.text" = "Processing Qty.";
+"0IA-wa-04k.text" = "Read Qty.";
 
 /* Class = "UILabel"; text = "유형"; ObjectID = "0J5-Ur-yFn"; */
 "0J5-Ur-yFn.text" = "Item No.";
@@ -12,7 +12,7 @@
 "5rp-aL-pIt.text" = "Serial No.";
 
 /* Class = "UILabel"; text = "인식수량"; ObjectID = "68g-ys-UAR"; */
-"68g-ys-UAR.text" = "Reading Qty";
+"68g-ys-UAR.text" = "Read Qty";
 
 /* Class = "UILabel"; text = "삭제"; ObjectID = "6Wj-Cp-TPk"; */
 "6Wj-Cp-TPk.text" = "Delete";
@@ -54,7 +54,7 @@
 "URB-eZ-LMW.normalTitle" = "OK";
 
 /* Class = "UIButton"; normalTitle = "고객사선택"; ObjectID = "Xey-Ec-Ymm"; */
-"Xey-Ec-Ymm.normalTitle" = "Select Client Com.";
+"Xey-Ec-Ymm.normalTitle" = "Select";
 
 /* Class = "UILabel"; text = "전표번호"; ObjectID = "YwX-O0-AqO"; */
 "YwX-O0-AqO.text" = "Statement No.";
@@ -96,7 +96,7 @@
 "qCd-WL-IXY.normalTitle" = "Barcode";
 
 /* Class = "UILabel"; text = "인식수량"; ObjectID = "rFn-RA-QOv"; */
-"rFn-RA-QOv.text" = "Reading Qty";
+"rFn-RA-QOv.text" = "Read Qty";
 
 /* Class = "UILabel"; text = "상품명"; ObjectID = "s5s-Sl-dpT"; */
 "s5s-Sl-dpT.text" = "Goods Name";

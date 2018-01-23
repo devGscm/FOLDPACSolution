@@ -9,7 +9,7 @@
 "4My-3K-E0m.normalTitle" = "Clear";
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "4PJ-6F-rFu"; */
-"4PJ-6F-rFu.text" = "Processing Qty.";
+"4PJ-6F-rFu.text" = "Read Qty.";
 
 /* Class = "UILabel"; text = "입고예정량"; ObjectID = "83Q-p0-90H"; */
 "83Q-p0-90H.text" = "Received Schedule Qty";
@@ -60,7 +60,7 @@
 "WJA-a5-Dkw.normalTitle" = "Cancel";
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "WwB-YB-09W"; */
-"WwB-YB-09W.text" = "Processing Qty.";
+"WwB-YB-09W.text" = "Read Qty.";
 
 /* Class = "UILabel"; text = "작업자"; ObjectID = "ZET-o9-ZsN"; */
 "ZET-o9-ZsN.text" = "Worker";
@@ -81,7 +81,7 @@
 "fDG-gX-0cQ.text" = "Select";
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "gO5-jk-nGa"; */
-"gO5-jk-nGa.text" = "Processing Qty.";
+"gO5-jk-nGa.text" = "Read Qty.";
 
 /* Class = "UIButton"; normalTitle = "송장선택"; ObjectID = "gtG-FE-qE5"; */
 "gtG-FE-qE5.normalTitle" = "Invoice Select";
@@ -93,7 +93,7 @@
 "l6J-Vi-TW2.text" = "Item No.";
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "lgu-UY-Tgh"; */
-"lgu-UY-Tgh.text" = "Processing Qty.";
+"lgu-UY-Tgh.text" = "Read Qty.";
 
 /* Class = "UILabel"; text = "출고처"; ObjectID = "lw1-4a-yxf"; */
 "lw1-4a-yxf.text" = "Dprt. Com.";

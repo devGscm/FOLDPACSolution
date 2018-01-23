@@ -36,7 +36,7 @@
 "KsA-Nu-deJ.normalTitle" = "Clear";
 
 /* Class = "UIButton"; normalTitle = "선택"; ObjectID = "LiT-yN-fg5"; */
-"LiT-yN-fg5.normalTitle" = "Selection";
+"LiT-yN-fg5.normalTitle" = "Select";
 
 /* Class = "UILabel"; text = "Swing U"; ObjectID = "LuF-6u-bx2"; */
 "LuF-6u-bx2.text" = "Swing U";
