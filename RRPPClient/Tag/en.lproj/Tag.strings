@@ -72,7 +72,7 @@
 "CdQ-18-idc.text" = "EPC URN";
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "DDC-ZL-mta"; */
-"DDC-ZL-mta.text" = "Processing Qty.";
+"DDC-ZL-mta.text" = "Read Qty.";
 
 /* Class = "UILabel"; text = "거점"; ObjectID = "EGH-I5-onP"; */
 "EGH-I5-onP.text" = "Location";
@@ -96,7 +96,7 @@
 "MdP-Do-tfT.normalTitle" = "Search";
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "Ncv-M9-xhI"; */
-"Ncv-M9-xhI.text" = "Processing Qty.";
+"Ncv-M9-xhI.text" = "Read Qty.";
 
 /* Class = "UILabel"; text = "선별/보관"; ObjectID = "Ntn-qW-5c1"; */
 "Ntn-qW-5c1.text" = "Grading/Storaging";
