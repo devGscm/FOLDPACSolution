@@ -60,7 +60,7 @@
 "BAa-mf-Zex.text" = "Item No.";
 
 /* Class = "UILabel"; text = "인식수량"; ObjectID = "C9g-0T-DjS"; */
-"C9g-0T-DjS.text" = "Count";
+"C9g-0T-DjS.text" = "Read Qty";
 
 /* Class = "UIButton"; normalTitle = "전체선택"; ObjectID = "CP4-hD-KPC"; */
 "CP4-hD-KPC.normalTitle" = "All(Check)";
