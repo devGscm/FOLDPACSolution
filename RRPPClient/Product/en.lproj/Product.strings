@@ -42,7 +42,7 @@
 "PSP-rI-j1q.text" = "Item No.";
 
 /* Class = "UILabel"; text = "RRPP팀"; ObjectID = "Ql5-h4-QWc"; */
-"Ql5-h4-QWc.text" = "RRPP팀";
+"Ql5-h4-QWc.text" = "RRPPTeam";
 
 /* Class = "UIButton"; normalTitle = "전송"; ObjectID = "TBA-eq-jGT"; */
 "TBA-eq-jGT.normalTitle" = "Send";
@@ -94,3 +94,7 @@
 
 /* Class = "UILabel"; text = "주문일"; ObjectID = "zEv-Np-yJl"; */
 "zEv-Np-yJl.text" = "P/O Date";
+
+/* Class = "UILabel"; text = "구매주문조회"; ObjectID = "rfq-9s-OpH"; */
+"rfq-9s-OpH.text" = "P/O List (RRPP)";
+

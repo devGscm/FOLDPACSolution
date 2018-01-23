@@ -93,7 +93,7 @@
 "RSK-DY-C0o.text" = "未処理数量";
 
 /* Class = "UIButton"; normalTitle = "完了転送"; ObjectID = "RSi-4W-Def"; */
-"RSi-4W-Def.normalTitle" = "完了転送";
+"RSi-4W-Def.normalTitle" = "送信";
 
 /* Class = "UILabel"; text = "処理数量"; ObjectID = "WQV-0Q-nXg"; */
 "WQV-0Q-nXg.text" = "処理数量";

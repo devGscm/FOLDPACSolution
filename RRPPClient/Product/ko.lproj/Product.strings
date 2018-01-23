@@ -94,3 +94,6 @@
 
 /* Class = "UILabel"; text = "주문일"; ObjectID = "zEv-Np-yJl"; */
 "zEv-Np-yJl.text" = "주문일";
+
+/* Class = "UILabel"; text = "구매주문조회"; ObjectID = "rfq-9s-OpH"; */
+"rfq-9s-OpH.text" = "구매주문조회";

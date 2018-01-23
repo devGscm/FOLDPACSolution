@@ -284,7 +284,7 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
     {
         if(boolExistSavedInvoice == true)
         {
-            Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("msg_exist_temporary_saved_data", comment: "임시저장된 데이터가 있습니다."))
+            Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("msg_exist_temporary_saved_data", comment: "저장된 데이터가 있습니다."))
             return
         }
         else

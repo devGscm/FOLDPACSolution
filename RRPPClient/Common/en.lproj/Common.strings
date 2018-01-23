@@ -90,13 +90,13 @@
 "irh-fn-Whv.text" = "Client Com. List";
 
 /* Class = "UIButton"; normalTitle = "Clear(Reading)"; ObjectID = "jfP-bc-kuG"; */
-"jfP-bc-kuG.normalTitle" = "Clear(Reading)";
+"jfP-bc-kuG.normalTitle" = "Clear";
 
 /* Class = "UIButton"; normalTitle = "Customer"; ObjectID = "jsy-rc-1FT"; */
 "jsy-rc-1FT.normalTitle" = "Condition(Search)";
 
 /* Class = "UIButton"; normalTitle = "Clear(Reading)"; ObjectID = "mX6-AS-FeT"; */
-"mX6-AS-FeT.normalTitle" = "Clear(Reading)";
+"mX6-AS-FeT.normalTitle" = "Clear";
 
 /* Class = "UILabel"; text = "Detail View"; ObjectID = "qAp-4S-96u"; */
 "qAp-4S-96u.text" = "Detail View";
