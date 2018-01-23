@@ -153,7 +153,7 @@
 "bi2-1n-pK3.text" = "Select";
 
 /* Class = "UILabel"; text = "처리일시"; ObjectID = "cU0-Yk-g8N"; */
-"cU0-Yk-g8N.text" = "Reading Time";
+"cU0-Yk-g8N.text" = "Event Date";
 
 /* Class = "UILabel"; text = "유형"; ObjectID = "dlK-tB-Mwj"; */
 "dlK-tB-Mwj.text" = "Item No.";
@@ -183,7 +183,7 @@
 "kNp-HQ-kGt.text" = "Result";
 
 /* Class = "UIButton"; normalTitle = "초기화"; ObjectID = "pTJ-GB-71J"; */
-"pTJ-GB-71J.normalTitle" = "Reset";
+"pTJ-GB-71J.normalTitle" = "Clear";
 
 /* Class = "UILabel"; text = "EPC URN"; ObjectID = "sDN-Hz-O4h"; */
 "sDN-Hz-O4h.text" = "EPC URN";

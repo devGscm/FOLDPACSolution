@@ -260,7 +260,7 @@
 
 /* 추적서비스 시작*/
 "track_branch_name" = "Location";
-"track_process_date" = "Reading Time";
+"track_process_date" = "Event Date";
 "track_event_name" = "Event";
 "track_prev_trace_date" = "Start Time";
 "track_next_trace_date" = "End Time";
