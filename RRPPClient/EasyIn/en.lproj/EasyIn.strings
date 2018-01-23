@@ -12,7 +12,7 @@
 "4PJ-6F-rFu.text" = "Read Qty.";
 
 /* Class = "UILabel"; text = "입고예정량"; ObjectID = "83Q-p0-90H"; */
-"83Q-p0-90H.text" = "Received Schedule Qty";
+"83Q-p0-90H.text" = "I/V Qty";
 
 /* Class = "UIButton"; normalTitle = "완료전송"; ObjectID = "8r1-Ud-MZ8"; */
 "8r1-Ud-MZ8.normalTitle" = "Send";
@@ -66,7 +66,7 @@
 "ZET-o9-ZsN.text" = "Worker";
 
 /* Class = "UILabel"; text = "입고예정량"; ObjectID = "b1h-g0-LJv"; */
-"b1h-g0-LJv.text" = "Received Schedule Qty";
+"b1h-g0-LJv.text" = "I/V Qty";
 
 /* Class = "UILabel"; text = "송장번호"; ObjectID = "dBX-rg-II4"; */
 "dBX-rg-II4.text" = "Invoice No.";

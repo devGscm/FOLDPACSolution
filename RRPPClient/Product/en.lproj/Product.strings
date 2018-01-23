@@ -30,7 +30,7 @@
 "Ksl-Lc-G1Y.text" = "Buyer";
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "M7m-jg-NHq"; */
-"M7m-jg-NHq.text" = "Processing Qty.";
+"M7m-jg-NHq.text" = "Read Qty.";
 
 /* Class = "UILabel"; text = "구매주문번호"; ObjectID = "MFg-ep-Wf4"; */
 "MFg-ep-Wf4.text" = "P/O No.";
@@ -69,7 +69,7 @@
 "jrq-1w-FyR.text" = "모람씨앤티";
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "juY-XC-BXO"; */
-"juY-XC-BXO.text" = "Processing Qty.";
+"juY-XC-BXO.text" = "Read Qty.";
 
 /* Class = "UILabel"; text = "주문일"; ObjectID = "jx7-bz-QOF"; */
 "jx7-bz-QOF.text" = "P/O Date";
