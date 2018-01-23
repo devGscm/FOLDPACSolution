@@ -15,7 +15,7 @@
 "83Q-p0-90H.text" = "预计入库量";
 
 /* Class = "UIButton"; normalTitle = "완료전송"; ObjectID = "8r1-Ud-MZ8"; */
-"8r1-Ud-MZ8.normalTitle" = "传输完成";
+"8r1-Ud-MZ8.normalTitle" = "传输";
 
 /* Class = "UIButton"; normalTitle = "선택"; ObjectID = "Aed-hj-n2o"; */
 "Aed-hj-n2o.normalTitle" = "选择";
@@ -72,7 +72,7 @@
 "dBX-rg-II4.text" = "货单号";
 
 /* Class = "UIButton"; normalTitle = "임시저장"; ObjectID = "dSw-vd-jea"; */
-"dSw-vd-jea.normalTitle" = "临时保存";
+"dSw-vd-jea.normalTitle" = "保存";
 
 /* Class = "UILabel"; text = "유형"; ObjectID = "doh-JA-wAi"; */
 "doh-JA-wAi.text" = "类型";

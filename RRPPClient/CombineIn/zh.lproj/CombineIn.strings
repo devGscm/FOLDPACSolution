@@ -1,6 +1,6 @@
 
 /* Class = "UIButton"; normalTitle = "임시저장"; ObjectID = "2h9-w3-Mbt"; */
-"2h9-w3-Mbt.normalTitle" = "临时保存";
+"2h9-w3-Mbt.normalTitle" = "保存";
 
 /* Class = "UILabel"; text = "미처리량"; ObjectID = "3I5-9o-rzw"; */
 "3I5-9o-rzw.text" = "未处理量";
@@ -90,7 +90,7 @@
 "cvX-38-Twg.normalTitle" = "搜索";
 
 /* Class = "UIButton"; normalTitle = "완료전송"; ObjectID = "eQ1-Z8-4C4"; */
-"eQ1-Z8-4C4.normalTitle" = "传输完成";
+"eQ1-Z8-4C4.normalTitle" = "传输";
 
 /* Class = "UILabel"; text = "입고예정"; ObjectID = "ebz-Oq-f1g"; */
 "ebz-Oq-f1g.text" = "预计入库";

@@ -15,7 +15,7 @@
 "83Q-p0-90H.text" = "入庫予定量";
 
 /* Class = "UIButton"; normalTitle = "完了転送"; ObjectID = "8r1-Ud-MZ8"; */
-"8r1-Ud-MZ8.normalTitle" = "完了転送";
+"8r1-Ud-MZ8.normalTitle" = "送信";
 
 /* Class = "UIButton"; normalTitle = "선택"; ObjectID = "Aed-hj-n2o"; */
 "Aed-hj-n2o.normalTitle" = "選択";

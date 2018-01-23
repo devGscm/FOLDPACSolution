@@ -15,7 +15,7 @@
 "83Q-p0-90H.text" = "입고예정량";
 
 /* Class = "UIButton"; normalTitle = "완료전송"; ObjectID = "8r1-Ud-MZ8"; */
-"8r1-Ud-MZ8.normalTitle" = "완료전송";
+"8r1-Ud-MZ8.normalTitle" = "전송";
 
 /* Class = "UIButton"; normalTitle = "선택"; ObjectID = "Aed-hj-n2o"; */
 "Aed-hj-n2o.normalTitle" = "선택";
@@ -72,7 +72,7 @@
 "dBX-rg-II4.text" = "송장번호";
 
 /* Class = "UIButton"; normalTitle = "임시저장"; ObjectID = "dSw-vd-jea"; */
-"dSw-vd-jea.normalTitle" = "임시저장";
+"dSw-vd-jea.normalTitle" = "저장";
 
 /* Class = "UILabel"; text = "유형"; ObjectID = "doh-JA-wAi"; */
 "doh-JA-wAi.text" = "유형";

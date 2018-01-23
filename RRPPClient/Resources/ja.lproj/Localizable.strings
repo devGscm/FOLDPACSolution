@@ -76,7 +76,7 @@
 "common_check_all" = "全体選択";
 "common_delete" = "削除";
 "common_send" = "転送";
-"common_complete_send" = "完了転送";
+"common_complete_send" = "送信";
 "common_save" = "臨時保存";
 "common_selection" = "選択";
 "common_barcode_search" = "バーコード";

@@ -18,7 +18,7 @@
 "FvU-OO-xsj.normalTitle" = "상세";
 
 /* Class = "UIButton"; normalTitle = "임시저장"; ObjectID = "FyQ-O5-hsb"; */
-"FyQ-O5-hsb.normalTitle" = "임시저장";
+"FyQ-O5-hsb.normalTitle" = "저장";
 
 /* Class = "UILabel"; text = "인식수량"; ObjectID = "I8P-Ox-DH0"; */
 "I8P-Ox-DH0.text" = "인식수량";
@@ -81,4 +81,4 @@
 "uMv-Oh-ZRN.text" = "작업자";
 
 /* Class = "UIButton"; normalTitle = "완료전송"; ObjectID = "w7g-kY-y9R"; */
-"w7g-kY-y9R.normalTitle" = "완료전송";
+"w7g-kY-y9R.normalTitle" = "전송";

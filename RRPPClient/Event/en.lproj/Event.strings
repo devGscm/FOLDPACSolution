@@ -3,10 +3,10 @@
 "1LN-jq-mau.text" = "Detail";
 
 /* Class = "UILabel"; text = "인식수량"; ObjectID = "7a9-P1-lhP"; */
-"7a9-P1-lhP.text" = "Reading Qty";
+"7a9-P1-lhP.text" = "Read Qty";
 
 /* Class = "UILabel"; text = "인식수량"; ObjectID = "CvI-uI-sc0"; */
-"CvI-uI-sc0.text" = "Reading Qty";
+"CvI-uI-sc0.text" = "Read Qty";
 
 /* Class = "UILabel"; text = "상세"; ObjectID = "F6i-fR-psg"; */
 "F6i-fR-psg.text" = "Detail";
@@ -15,7 +15,7 @@
 "GPQ-m8-6Wo.text" = "Location";
 
 /* Class = "UILabel"; text = "인식수량"; ObjectID = "Hos-ca-SoR"; */
-"Hos-ca-SoR.text" = "Reading Qty";
+"Hos-ca-SoR.text" = "Read Qty";
 
 /* Class = "UIButton"; normalTitle = "연결"; ObjectID = "IYs-gK-CKf"; */
 "IYs-gK-CKf.normalTitle" = "Connect";
@@ -75,4 +75,4 @@
 "xFt-pc-Q0O.normalTitle" = "Clear";
 
 /* Class = "UILabel"; text = "인식수량"; ObjectID = "xdm-NI-s2l"; */
-"xdm-NI-s2l.text" = "Reading Qty";
+"xdm-NI-s2l.text" = "Read Qty";

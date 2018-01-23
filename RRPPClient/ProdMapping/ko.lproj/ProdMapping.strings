@@ -84,7 +84,7 @@
 "fQu-Y7-fow.text" = "상품코드";
 
 /* Class = "UIButton"; normalTitle = "임시저장"; ObjectID = "jNg-Db-S50"; */
-"jNg-Db-S50.normalTitle" = "임시저장";
+"jNg-Db-S50.normalTitle" = "저장";
 
 /* Class = "UIButton"; normalTitle = "연결"; ObjectID = "nfF-7s-QnA"; */
 "nfF-7s-QnA.normalTitle" = "연결";

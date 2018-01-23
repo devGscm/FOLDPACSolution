@@ -72,7 +72,7 @@
 "JI6-qA-2d7.text" = "据点";
 
 /* Class = "UIButton"; normalTitle = "임시저장"; ObjectID = "JNL-53-esW"; */
-"JNL-53-esW.normalTitle" = "临时保存";
+"JNL-53-esW.normalTitle" = "保存";
 
 /* Class = "UILabel"; text = "차량번호"; ObjectID = "JZv-rp-tDr"; */
 "JZv-rp-tDr.text" = "车牌号";
@@ -93,7 +93,7 @@
 "RSK-DY-C0o.text" = "未处理量";
 
 /* Class = "UIButton"; normalTitle = "완료전송"; ObjectID = "RSi-4W-Def"; */
-"RSi-4W-Def.normalTitle" = "传输完成";
+"RSi-4W-Def.normalTitle" = "传输";
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "WQV-0Q-nXg"; */
 "WQV-0Q-nXg.text" = "处理量";

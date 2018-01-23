@@ -21,7 +21,7 @@
 "FYZ-rE-7rX.normalTitle" = "作業初期化";
 
 /* Class = "UIButton"; normalTitle = "완료전송"; ObjectID = "GT6-ax-3F4"; */
-"GT6-ax-3F4.normalTitle" = "完了転送";
+"GT6-ax-3F4.normalTitle" = "送信";
 
 /* Class = "UIButton"; normalTitle = "고객사 선택"; ObjectID = "K7r-Tr-k8U"; */
 "K7r-Tr-k8U.normalTitle" = "顧客社選択";

@@ -52,7 +52,7 @@
 "title_event_select_store" = "Grade ";
 "title_event_destory" = "Disposal";
 "title_event_noread" = "Disposal(Non-Reading)";
-"title_rfid_tracking_service" = "RFID Tracking Service";
+"title_rfid_tracking_service" = "RFID Tracking";
 /*액티비티 제목 끝 */
 
 /*옵션메뉴 시작 */

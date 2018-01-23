@@ -90,7 +90,7 @@
 "cvX-38-Twg.normalTitle" = "検索";
 
 /* Class = "UIButton"; normalTitle = "완료전송"; ObjectID = "eQ1-Z8-4C4"; */
-"eQ1-Z8-4C4.normalTitle" = "完了転送";
+"eQ1-Z8-4C4.normalTitle" = "送信";
 
 /* Class = "UILabel"; text = "入庫予定"; ObjectID = "ebz-Oq-f1g"; */
 "ebz-Oq-f1g.text" = "入庫予定";

@@ -6,7 +6,7 @@
 "4v9-4K-GmG.text" = "处理量";
 
 /* Class = "UIButton"; normalTitle = "임시저장"; ObjectID = "7tC-aZ-Oqu"; */
-"7tC-aZ-Oqu.normalTitle" = "临时保存";
+"7tC-aZ-Oqu.normalTitle" = "保存";
 
 /* Class = "UIButton"; normalTitle = "상세"; ObjectID = "8SH-fE-LTU"; */
 "8SH-fE-LTU.normalTitle" = "明细";
@@ -21,7 +21,7 @@
 "FYZ-rE-7rX.normalTitle" = "作业初始化";
 
 /* Class = "UIButton"; normalTitle = "완료전송"; ObjectID = "GT6-ax-3F4"; */
-"GT6-ax-3F4.normalTitle" = "传输完成";
+"GT6-ax-3F4.normalTitle" = "传输";
 
 /* Class = "UIButton"; normalTitle = "고객사 선택"; ObjectID = "K7r-Tr-k8U"; */
 "K7r-Tr-k8U.normalTitle" = "客户选择";
