@@ -78,7 +78,7 @@
 "common_send" = "Send";
 "common_complete_send" = "Send";
 "common_save" = "Save";
-"common_selection" = "Selection";
+"common_selection" = "Select";
 "common_barcode_search" = "Barcode";
 "common_confirm_work_Init" = "Do you want to clear this work?";
 "common_confirm_delete" = "Do you want to delete all data?";

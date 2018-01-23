@@ -36,7 +36,7 @@
 "L1r-mu-ydf.text" = "Untreated Qty";
 
 /* Class = "UILabel"; text = "선택"; ObjectID = "RSP-fF-RUP"; */
-"RSP-fF-RUP.text" = "Selection";
+"RSP-fF-RUP.text" = "Select";
 
 /* Class = "UILabel"; text = "처리량"; ObjectID = "Rha-e9-dfW"; */
 "Rha-e9-dfW.text" = "Read Qty.";

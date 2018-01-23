@@ -60,7 +60,7 @@
 "PP1-uj-oJJ.text" = "Vehicle No.";
 
 /* Class = "UILabel"; text = "선택"; ObjectID = "Rrt-eL-xNr"; */
-"Rrt-eL-xNr.text" = "Selection";
+"Rrt-eL-xNr.text" = "Select";
 
 /* Class = "UILabel"; text = "납품자"; ObjectID = "Sgn-MJ-Vwu"; */
 "Sgn-MJ-Vwu.text" = "Deliv. Man";
@@ -126,4 +126,4 @@
 "xvS-KT-m3v.text" = "I/V Qty";
 
 /* Class = "UIButton"; normalTitle = "선택"; ObjectID = "y3a-sG-Hw5"; */
-"y3a-sG-Hw5.normalTitle" = "Selection";
+"y3a-sG-Hw5.normalTitle" = "Select";

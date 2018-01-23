@@ -39,7 +39,7 @@
 "XmD-DD-0BO.text" = "Grade";
 
 /* Class = "UIButton"; normalTitle = "선택"; ObjectID = "aYs-hS-3kv"; */
-"aYs-hS-3kv.normalTitle" = "Selection";
+"aYs-hS-3kv.normalTitle" = "Select";
 
 /* Class = "UILabel"; text = "거점"; ObjectID = "gXK-Is-fu4"; */
 "gXK-Is-fu4.text" = "Location";
