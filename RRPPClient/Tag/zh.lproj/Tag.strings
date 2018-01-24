@@ -18,7 +18,7 @@
 "2JP-Fo-2C8.text" = "查询时间";
 
 /* Class = "UIButton"; normalTitle = "주문선택"; ObjectID = "2Kh-wf-eYK"; */
-"2Kh-wf-eYK.normalTitle" = "选择订单";
+"2Kh-wf-eYK.normalTitle" = "订购选择";
 
 /* Class = "UILabel"; text = "유형"; ObjectID = "2tD-sV-R88"; */
 "2tD-sV-R88.text" = "类型";
