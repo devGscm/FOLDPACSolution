@@ -181,7 +181,10 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			//입고 (입고B : 지시서 없는 입고)
 			arrMenuData.append(MenuItem(menuId: "EasyIn", menuName: NSLocalizedString("title_work_in_warehouse", comment: "입고")))
 			
-			arrMenuData.append(MenuItem(menuId: "ProdMappingOut", menuName: NSLocalizedString("title_work_out_product", comment: "상품매핑")))
+			
+			
+			
+			arrMenuData.append(MenuItem(menuId: "ProdMappingOut", menuName: NSLocalizedString("title_work_out_release", comment: "상품매핑")))
 			arrMenuData.append(MenuItem(menuId: "WorkHistorySearch", menuName: NSLocalizedString("title_work_history_search", comment: "작업내역조회")))
 			arrMenuData.append(MenuItem(menuId: "StockReview", menuName: NSLocalizedString("title_stock_review", comment: "재고실사")))
 			arrMenuData.append(MenuItem(menuId: "InOutCancel", menuName: NSLocalizedString("title_work_inout_cancel", comment: "입출고취소")))
