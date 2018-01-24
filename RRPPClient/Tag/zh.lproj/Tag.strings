@@ -192,7 +192,7 @@
 "shN-eG-WVi.text" = "KEB/KEB";
 
 /* Class = "UILabel"; text = "품목"; ObjectID = "soj-CS-fWg"; */
-"soj-CS-fWg.text" = "品目";
+"soj-CS-fWg.text" = "類型";
 
 /* Class = "UILabel"; text = "상세"; ObjectID = "soz-WG-kW1"; */
 "soz-WG-kW1.text" = "明细";
