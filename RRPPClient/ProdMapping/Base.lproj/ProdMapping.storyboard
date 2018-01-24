@@ -326,7 +326,6 @@
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="onProductAddClicked:" destination="H5O-z6-Ftf" eventType="touchUpInside" id="heg-j8-wB5"/>
-                                                    <segue destination="rTb-sY-FkP" kind="presentation" identifier="segProdInfoDialog" modalPresentationStyle="overCurrentContext" id="JwG-Li-R1b"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="RP11" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yS3-et-Umo">
@@ -602,6 +601,7 @@
                         <outlet property="tfVehName" destination="75B-p8-rYp" id="udy-qN-Tq2"/>
                         <outlet property="tvMappingProd" destination="ENK-kJ-Fea" id="ytN-0a-FgV"/>
                         <outlet property="tvMappingRfid" destination="lgk-nd-C7l" id="xZr-fE-1xB"/>
+                        <segue destination="rTb-sY-FkP" kind="presentation" identifier="segProdInfoDialog" modalPresentationStyle="overCurrentContext" id="wFs-a8-mRV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BkM-Xc-j6C" userLabel="First Responder" sceneMemberID="firstResponder"/>
