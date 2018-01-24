@@ -22,7 +22,8 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 	@IBOutlet weak var tfTradeChit: UITextField!
 	@IBOutlet weak var lblProcCount: UILabel!
 	@IBOutlet weak var tvEasyIn: UITableView!
-	
+    @IBOutlet weak var btnTempSave: UIButton!
+    
 	var strResaleBranchId		= ""
 	var strResaleBranchName		= ""
 	
@@ -490,9 +491,11 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 	}
 	
 	
-	// 임시저장
+	//임시저장
 	@IBAction func onTempSaveClick(_ sender: UIButton)
 	{
+        
+        
 		if(AppContext.sharedManager.getUserInfo().getUnitId().isEmpty == true)
 		{
 			Dialog.show(container: self, title: NSLocalizedString("common_error", comment: "에러"), message: NSLocalizedString("rfid_reader_no_device_id", comment: "리더기의 장치ID가 없습니다.웹화면의 리더기정보관리에서 모바일전화번호를  입력하여주십시오."))
@@ -507,15 +510,21 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 		
 		let strVehName		= self.tfVehName?.text ?? ""
 		let strTradeChit	= self.tfTradeChit.text ?? ""
-		
+        
+        DispatchQueue.main.async
+        {
+            self.btnTempSave.isEnabled = false      //'임시전송'활성화
+        }
+
+        
 		if(self.strResaleOrderId.isEmpty == false)
 		{
-			// 송장번호 O, DB로 데이터 전송 처리
+			//송장번호 O, DB로 데이터 전송 처리
 			sendDataExistResaleOrderId(workState: Constants.WORK_STATE_WORKING, resaleOrderId: self.strResaleOrderId, vehName: strVehName, tradeChit: strTradeChit, remark: "", signData: "")
 		}
 		else
 		{
-			// 송장번호 X , 송장번호(ResaleOrderId) 발급후 DB로 데이터 전송 처리
+			//송장번호 X , 송장번호(ResaleOrderId) 발급후 DB로 데이터 전송 처리
 			sendDataNoneResaleOrderId(workState: Constants.WORK_STATE_WORKING, resaleCustId: self.strResaleBranchId, vehName: strVehName, tradeChit: strTradeChit, remark: "", signData: "")
 		}
 	}
@@ -965,7 +974,7 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 				return
 			}
 			
-			print("####결과값 처리")
+			//print("####결과값 처리")
 			let clsResultDataRows = clsResultDataTable.getDataRows()
 			if(clsResultDataRows.count > 0)
 			{
@@ -1004,7 +1013,7 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 				{
 					// 전송실패
 					let strMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
-					print("-strMsg:  \(strMsg)")
+					//print("-strMsg:  \(strMsg)")
                     
 					if(Constants.PROC_RESULT_ERROR_NEED_WORK_COMPLETE_FORCE == strResultCode)
 					{
@@ -1035,32 +1044,32 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 					else if((Constants.PROC_RESULT_ERROR_NO_REGISTERED_READERS == strResultCode) || (Constants.PROC_RESULT_ERROR_NO_MATCH_BRANCH_CUST_INFO == strResultCode))
 					{
 						self.showSnackbar(message: strMsg)
-                        
-                        if(self.strResaleOrderId.isEmpty == false)
-                        {
-                            // 완료전송 처리중 오류시 발번받은 송장번호 초기화
-                            self.sendWorkInitData(resaleOrderId: self.strResaleOrderId)    // 초기화
-                            self.boolNewTagInfoExist = false
-                            self.boolExistSavedInvoice = true
-                            
-                            self.clearTagData(clearScreen: true)
-                        }
 					}
 					else
 					{
 						super.showSnackbar(message: NSLocalizedString("common_error", comment: "에러"))
-                        if(self.strResaleOrderId.isEmpty == false)
-                        {
-                            // 완료전송 처리중 오류시 발번받은 송장번호 초기화
-                            self.sendWorkInitData(resaleOrderId: self.strResaleOrderId)    // 초기화
-                            self.boolNewTagInfoExist = false
-                            self.boolExistSavedInvoice = true
-                            
-                            self.clearTagData(clearScreen: true)
-                        }
 					}
+                    
+                    /*
+                    //20180124-이은미과장님 요청으로 제거
+                    if(self.strResaleOrderId.isEmpty == false)
+                    {
+                        // 완료전송 처리중 오류시 발번받은 송장번호 초기화
+                        self.sendWorkInitData(resaleOrderId: self.strResaleOrderId)    // 초기화
+                        self.boolNewTagInfoExist = false
+                        self.boolExistSavedInvoice = true
+                        self.clearTagData(clearScreen: true)
+                    }
+                    */
 				}
 			}
+            DispatchQueue.main.async
+            {
+                if(self.btnTempSave.isEnabled == false)
+                {
+                    self.btnTempSave.isEnabled = true   //'임시전송'버튼 활성화
+                }
+            }
 		})
 	}
 	

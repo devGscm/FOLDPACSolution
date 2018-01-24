@@ -21,7 +21,7 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
     @IBOutlet weak var tfTradeChit: UITextField!
     @IBOutlet weak var lblProcCount: UILabel!
     @IBOutlet weak var tvEasyOut: UITableView!
-    
+    @IBOutlet weak var btnTempSave: UIButton!
     
     var mIntProcCount               = 0            /**< 처리량 */
     var mBoolNewTagInfoExist        = false        /**< 신규태그 - 신규태그가 있는지 여부 -전소용 */
@@ -316,7 +316,7 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
         {
             let strAssetName = super.getAssetName(assetEpc: strAssetEpc)
             clsTagInfo.setAssetName(strAssetName)
-            print("@@@@@@@@ AssetName2:\(clsTagInfo.getAssetName() )")
+            //print("@@@@@@@@ AssetName2:\(clsTagInfo.getAssetName() )")
         }
         clsTagInfo.setNewTag(true)
         clsTagInfo.setReadCount(1)
@@ -325,7 +325,7 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
         //시스템에 등록된 AssetEpc 와 AssetEpc 비교
         for clsAssetInfo in super.getAssetList()
         {
-            print("====== [1]자산코드: \(strAssetEpc) :: \(clsAssetInfo.assetEpc)")
+            //print("====== [1]자산코드: \(strAssetEpc) :: \(clsAssetInfo.assetEpc)")
             if(clsAssetInfo.assetEpc == strAssetEpc)
             {
                 boolFindInvalidAssetEpc = false;
@@ -335,7 +335,7 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
             {
                 //자산코드 없음
                 boolFindInvalidAssetEpc = true;
-                print("====== [2]자산코드 없음 ======")
+                //print("====== [2]자산코드 없음 ======")
             }
         }
         
@@ -437,7 +437,7 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
     //=======================================
     @IBAction func onRfidReaderClicked(_ sender: UIButton)
     {
-        print("====[onRfidReaderClicked]====")
+        //print("====[onRfidReaderClicked]====")
         if(sender.isSelected == false)
         {
             showSnackbar(message: NSLocalizedString("rfid_connecting_reader", comment: "RFID 리더기에 연결하는 중 입니다."))
@@ -452,7 +452,7 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
     //리더기에서 읽어드린 태그에 대한 이벤트 발생처리
     func didReadTagid(_ tagid: String)
     {
-        print("====[didReadTagid]====")
+        //print("====[didReadTagid]====")
         let clsTagInfo = RfidUtil.parse(strData: tagid)
         getRfidData(clsTagInfo: clsTagInfo)
     }
@@ -460,7 +460,7 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
     //리더기 연결성공
     func didReaderConnected()
     {
-        print("====[didReaderConnected]====")
+        //print("====[didReaderConnected]====")
         showSnackbar(message: NSLocalizedString("rfid_connected_reader", comment: "RFID 리더기에 연결되었습니다."))
         changeBtnRfidReader(true)
     }
@@ -468,7 +468,7 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
     //리더기 연결종로
     func didReaderDisConnected()
     {
-        print("====[didReaderDisConnected]====")
+        //print("====[didReaderDisConnected]====")
         showSnackbar(message: NSLocalizedString("rfid_connection_terminated", comment: "연결이 종료되었습니다."))
         changeBtnRfidReader(false)
     }
@@ -476,7 +476,7 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
     //리더기 연결 타임오바
     func didRederConnectTimeOver()
     {
-        print("====[didRederConnectTimeOver]====")
+        //print("====[didRederConnectTimeOver]====")
         showSnackbar(message: NSLocalizedString("rfid_not_connect_reader", comment: "RFID 리더기에 연결할수 없습니다."))
         changeBtnRfidReader(false)
     }
@@ -484,7 +484,7 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
     //리더기 연결 여부에 따른 버튼에대한 상태값 변경
     func changeBtnRfidReader(_ isConnected : Bool)
     {
-        print("====[changeBtnRfidReader]====")
+        //print("====[changeBtnRfidReader]====")
         if(isConnected )
         {
             self.btnRfidReader.isSelected = true
@@ -584,8 +584,8 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
                     let strUtcTraceDate         = clsDataRow.getString(name: "utcTraceDate") ?? ""
                     let strProdAssetEpcName     = clsDataRow.getString(name: "prodAssetEpcName") ?? ""
                     let strProdAssetEpc         = clsDataRow.getString(name: "prodAssetEpc") ?? ""
-                    let strTradeChit            = clsDataRow.getString(name: "tradeChit") ?? ""
-                    let strVehName              = clsDataRow.getString(name: "vehName") ?? ""
+                    //let strTradeChit            = clsDataRow.getString(name: "tradeChit") ?? ""
+                    //let strVehName              = clsDataRow.getString(name: "vehName") ?? ""
                     
                     
                     //DB에서 조회된 태그 데이터 전달용 리스트에 저장
@@ -749,19 +749,16 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
                 if(Constants.PROC_RESULT_SUCCESS == strResultCode)
                 {
                     //그리드 삭제 및 구조체 삭제
-                    //DispatchQueue.main.async
-                    //{
-                        self.clearTagData(true)
-                    
-                        if(super.getUnload() == true)
+                    self.clearTagData(true)
+                
+                    if(super.getUnload() == true)
+                    {
+                        if(showMessage == true)
                         {
-                            if(showMessage == true)
-                            {
-                                let strMsg = NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다.")
-                                self.showSnackbar(message: strMsg)
-                            }
+                            let strMsg = NSLocalizedString("common_success_delete", comment: "성공적으로 삭제되었습니다.")
+                            self.showSnackbar(message: strMsg)
                         }
-                    //}
+                    }
                 }
                 else
                 {
@@ -841,9 +838,13 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
             return
         }
         
-
         let strVehName      = self.tfVehName?.text ?? ""
         let strTradeChit    = self.tfTradeChit.text ?? ""
+        
+        DispatchQueue.main.async
+        {
+            self.btnTempSave.isEnabled = false      //'임시전송' 비활성화
+        }
         
         if(self.mStrSaleWorkId.isEmpty == false)
         {
@@ -896,18 +897,6 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
         
         self.performSegue(withIdentifier: "segOutSignDialog", sender: self)
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -981,8 +970,8 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
                 return
             }
             
-            print("####결과값 처리")
-            print("=========[4]DB로 데이터 전송처리 =====")
+            //print("####결과값 처리")
+            //print("=========[4]DB로 데이터 전송처리 =====")
             let clsResultDataRows = clsResultDataTable.getDataRows()
             if(clsResultDataRows.count > 0)
             {
@@ -996,30 +985,27 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
                     //print("-서버로부터 받은 처리갯수: \(strSvrProcCount)")
                     //print("-서버로부터 받은 작업처리상태:  \(strSvrWorkState)!")
 
-                    //DispatchQueue.main.async
-                    //{
-                        //전송 성공인 경우
-                        for clsInfo in self.arrTagRows
-                        {
-                            clsInfo.setNewTag(false)        //태그상태 NEW -> OLD로 변경
-                        }
-                        self.mBoolNewTagInfoExist = false
-                        self.mBoolExistSavedInvoice = true      //송장번호 할당여부
-                    
-                        //print("[임]전송성공:\(self.mBoolNewTagInfoExist)")
-                    
-                        //현재 작업상태가 완료전송인경우
-                        if(Constants.WORK_STATE_COMPLETE == strSvrWorkState)
-                        {
-                            //print("[완]전송성공:\(self.mBoolNewTagInfoExist)")
-                            
-                            //송장정보관련 UI객체를 초기화한다.
-                            self.clearTagData(true)
-                        }
-                        let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
-                    
-                        self.showSnackbar(message: strMsg)
-                    //}
+                    //전송 성공인 경우
+                    for clsInfo in self.arrTagRows
+                    {
+                        clsInfo.setNewTag(false)        //태그상태 NEW -> OLD로 변경
+                    }
+                    self.mBoolNewTagInfoExist = false
+                    self.mBoolExistSavedInvoice = true      //송장번호 할당여부
+                
+                    //print("[임]전송성공:\(self.mBoolNewTagInfoExist)")
+                
+                    //현재 작업상태가 완료전송인경우
+                    if(Constants.WORK_STATE_COMPLETE == strSvrWorkState)
+                    {
+                        //print("[완]전송성공:\(self.mBoolNewTagInfoExist)")
+                        
+                        //송장정보관련 UI객체를 초기화한다.
+                        self.clearTagData(true)
+                    }
+                    let strMsg = NSLocalizedString("common_success_sent", comment: "성공적으로 전송하였습니다.")
+                
+                    self.showSnackbar(message: strMsg)
                 }
                 else
                 {
@@ -1035,13 +1021,25 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
                         self.showSnackbar(message: strMsg)
                     }
                     
+                    /*
+                     //20180124-이은미과장님 요청으로 제거
                     if(self.mStrSaleWorkId.isEmpty == false)
                     {
                         //완료전송 처리중 오류시 발번받은 송장번호 초기화
                         self.sendWorkInitData(saleWorkId: self.mStrSaleWorkId, showMessage: false)       //초기화
                     }
+                    */
                 }
             }
+            
+            DispatchQueue.main.async
+            {
+                if(self.btnTempSave.isEnabled == false)
+                {
+                    self.btnTempSave.isEnabled = true   //'임시전송'버튼 활성화
+                }
+            }
+            
         })
     }
     

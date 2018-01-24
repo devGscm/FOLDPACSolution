@@ -314,11 +314,11 @@ class BaseRfidViewController : BaseViewController, UITextFieldDelegate
 		{
 			for clsAssetInfo in arrAssetInfo
 			{
-				print("----- asetEpc:\(clsAssetInfo.assetEpc)")
+				//print("----- asetEpc:\(clsAssetInfo.assetEpc)")
 				if(clsAssetInfo.assetEpc == assetEpc)
 				{
 					strAssetName = clsAssetInfo.assetName
-					print("----- strAssetName:\(strAssetName)")
+					//print("----- strAssetName:\(strAssetName)")
 					break;
 				}
 			}
