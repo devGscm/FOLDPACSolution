@@ -30,7 +30,7 @@
 "O2W-b7-4vp.text" = "処理数量";
 
 /* Class = "UILabel"; text = "입고처"; ObjectID = "RN3-Wj-vzr"; */
-"RN3-Wj-vzr.text" = "入庫先";
+"RN3-Wj-vzr.text" = "入庫拠点";
 
 /* Class = "UILabel"; text = "유형"; ObjectID = "ZR6-a2-uaU"; */
 "ZR6-a2-uaU.text" = "類型";
