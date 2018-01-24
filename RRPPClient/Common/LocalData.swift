@@ -103,7 +103,7 @@ class LocalData {
 	
 	enum CustType : String
 	{
-		case PMK = "PMK", RDC = "RDC", EXP = "EXP", IMP = "IMP", MGR = "MGR"
+		case PMK = "PMK", RDC = "RDC", EXP = "EXP", IMP = "IMP", MGR = "MGR", ISS = "ISS"
 	}
 	
 	static let shared = LocalData()
@@ -1350,6 +1350,8 @@ class LocalData {
 						searchQuery = searchQuery.filter(["05"].contains(self.mColCommCode) )
 					case .IMP :
 						searchQuery = searchQuery.filter(["05"].contains(self.mColCommCode) )
+					case .ISS :
+						break
 					case .MGR:
 						break
 				}
@@ -1366,6 +1368,8 @@ class LocalData {
 					searchQuery = searchQuery.filter(["01"].contains(self.mColCommCode) )
 				case .IMP :
 					searchQuery = searchQuery.filter(["05"].contains(self.mColCommCode) )
+				case .ISS :
+					break
 				case .MGR:
 					break
 				}

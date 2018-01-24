@@ -27,7 +27,7 @@
 "L1y-RK-ShF.title" = "좌측메뉴";
 
 /* Class = "UIButton"; normalTitle = "Login"; ObjectID = "MPs-9P-Xkh"; */
-"MPs-9P-Xkh.normalTitle" = "Login";
+"MPs-9P-Xkh.normalTitle" = "ログイン";
 
 /* Class = "UILabel"; text = "자동로그인"; ObjectID = "OSR-am-YdZ"; */
 "OSR-am-YdZ.text" = "自動ログイン";
@@ -54,7 +54,7 @@
 "cBC-nu-tFG.normalTitle" = "ログアウト";
 
 /* Class = "UITextField"; placeholder = "Password"; ObjectID = "cmA-D7-5CD"; */
-"cmA-D7-5CD.placeholder" = "Password";
+"cmA-D7-5CD.placeholder" = "パスワード";
 
 /* Class = "UITableViewController"; title = "오른쪽메뉴"; ObjectID = "nJr-NP-3rZ"; */
 "nJr-NP-3rZ.title" = "오른쪽메뉴";

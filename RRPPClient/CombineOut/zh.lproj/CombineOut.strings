@@ -105,7 +105,7 @@
 "bUi-ZK-AoJ.text" = "类型";
 
 /* Class = "UILabel"; text = "출고예정"; ObjectID = "eMX-3d-tUb"; */
-"eMX-3d-tUb.text" = "预计出库";
+"eMX-3d-tUb.text" = "预计出库日";
 
 /* Class = "UILabel"; text = "유형"; ObjectID = "f8n-k0-it2"; */
 "f8n-k0-it2.text" = "类型";

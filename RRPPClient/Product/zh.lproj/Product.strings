@@ -18,7 +18,7 @@
 "CEi-DE-l5b.text" = "选择";
 
 /* Class = "UIButton"; normalTitle = "주문선택"; ObjectID = "DKg-6V-Lfy"; */
-"DKg-6V-Lfy.normalTitle" = "订购选择";
+"DKg-6V-Lfy.normalTitle" = "选择订单";
 
 /* Class = "UILabel"; text = "품목"; ObjectID = "E54-OU-vOv"; */
 "E54-OU-vOv.text" = "品目";

@@ -27,7 +27,7 @@
 "L1y-RK-ShF.title" = "좌측메뉴";
 
 /* Class = "UIButton"; normalTitle = "Login"; ObjectID = "MPs-9P-Xkh"; */
-"MPs-9P-Xkh.normalTitle" = "Login";
+"MPs-9P-Xkh.normalTitle" = "登录";
 
 /* Class = "UILabel"; text = "자동로그인"; ObjectID = "OSR-am-YdZ"; */
 "OSR-am-YdZ.text" = "自动登录";

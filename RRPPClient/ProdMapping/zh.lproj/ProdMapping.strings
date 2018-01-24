@@ -48,7 +48,7 @@
 "PgW-iU-DZM.normalTitle" = "删除";
 
 /* Class = "UILabel"; text = "입고처"; ObjectID = "T0t-sX-z7y"; */
-"T0t-sX-z7y.text" = "入库";
+"T0t-sX-z7y.text" = "入库处";
 
 /* Class = "UIButton"; normalTitle = "확인"; ObjectID = "URB-eZ-LMW"; */
 "URB-eZ-LMW.normalTitle" = "确认";
