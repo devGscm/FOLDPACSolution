@@ -1,6 +1,6 @@
 
 /* Class = "UILabel"; text = "Serial No"; ObjectID = "02F-ln-SjD"; */
-"02F-ln-SjD.text" = "Serial No";
+"02F-ln-SjD.text" = "序号";
 
 /* Class = "UILabel"; text = "한국파렛트풀"; ObjectID = "0Yx-E3-Ivz"; */
 "0Yx-E3-Ivz.text" = "한국파렛트풀";
@@ -168,7 +168,7 @@
 "gVy-Nl-F4e.text" = "类型";
 
 /* Class = "UILabel"; text = "Serial No."; ObjectID = "h0I-qy-Zki"; */
-"h0I-qy-Zki.text" = "Serial No.";
+"h0I-qy-Zki.text" = "序号";
 
 /* Class = "UIButton"; normalTitle = "상세"; ObjectID = "i97-mS-EhQ"; */
 "i97-mS-EhQ.normalTitle" = "明细";
@@ -198,7 +198,7 @@
 "soz-WG-kW1.text" = "明细";
 
 /* Class = "UILabel"; text = "Serial No"; ObjectID = "t9o-mO-ljz"; */
-"t9o-mO-ljz.text" = "Serial No";
+"t9o-mO-ljz.text" = "序号";
 
 /* Class = "UILabel"; text = "납품일"; ObjectID = "uNp-tJ-nfw"; */
 "uNp-tJ-nfw.text" = "交货日";
