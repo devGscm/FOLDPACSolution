@@ -6,7 +6,7 @@
 "1u1-Ov-pgK.text" = "未認識量";
 
 /* Class = "UILabel"; text = "전송"; ObjectID = "2La-yj-dvG"; */
-"2La-yj-dvG.text" = "転送";
+"2La-yj-dvG.text" = "送信";
 
 /* Class = "UILabel"; text = "메모"; ObjectID = "Am8-yl-A2f"; */
 "Am8-yl-A2f.text" = "メモ";
@@ -36,7 +36,7 @@
 "NfV-3Z-pmJ.normalTitle" = "全体";
 
 /* Class = "UILabel"; text = "전송"; ObjectID = "Oba-A4-fJB"; */
-"Oba-A4-fJB.text" = "전송";
+"Oba-A4-fJB.text" = "送信";
 
 /* Class = "UILabel"; text = "顧客社名"; ObjectID = "RZQ-0w-NwF"; */
 "RZQ-0w-NwF.text" = "顧客社名";

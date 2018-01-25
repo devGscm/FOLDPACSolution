@@ -36,7 +36,7 @@
 "PSP-rI-j1q.text" = "類型";
 
 /* Class = "UIButton"; normalTitle = "전송"; ObjectID = "TBA-eq-jGT"; */
-"TBA-eq-jGT.normalTitle" = "転送";
+"TBA-eq-jGT.normalTitle" = "送信";
 
 /* Class = "UILabel"; text = "類型"; ObjectID = "YXh-lR-oAb"; */
 "YXh-lR-oAb.text" = "類型";

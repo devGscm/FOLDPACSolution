@@ -72,7 +72,7 @@
 "dYj-0M-y16.text" = "商品情報";
 
 /* Class = "UIButton"; normalTitle = "전송"; ObjectID = "diZ-7W-8mM"; */
-"diZ-7W-8mM.normalTitle" = "転送";
+"diZ-7W-8mM.normalTitle" = "送信";
 
 /* Class = "UILabel"; text = "상품명"; ObjectID = "eV4-yU-UXg"; */
 "eV4-yU-UXg.text" = "商品名";

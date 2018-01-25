@@ -57,10 +57,10 @@
 "kZi-gW-4g2.text" = "Swing U";
 
 /* Class = "UIButton"; normalTitle = "전송"; ObjectID = "rHP-Lt-xUu"; */
-"rHP-Lt-xUu.normalTitle" = "転送";
+"rHP-Lt-xUu.normalTitle" = "送信";
 
 /* Class = "UIButton"; normalTitle = "전송"; ObjectID = "rdy-o8-RV1"; */
-"rdy-o8-RV1.normalTitle" = "転送";
+"rdy-o8-RV1.normalTitle" = "送信";
 
 /* Class = "UILabel"; text = "유형"; ObjectID = "re9-4h-7Ll"; */
 "re9-4h-7Ll.text" = "類型";

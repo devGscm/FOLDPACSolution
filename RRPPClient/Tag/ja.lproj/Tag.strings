@@ -54,7 +54,7 @@
 "9Gk-2g-HFU.text" = "購買先";
 
 /* Class = "UIButton"; normalTitle = "전송"; ObjectID = "9yK-Ve-dOn"; */
-"9yK-Ve-dOn.normalTitle" = "転送";
+"9yK-Ve-dOn.normalTitle" = "送信";
 
 /* Class = "UILabel"; text = "類型"; ObjectID = "BAa-mf-Zex"; */
 "BAa-mf-Zex.text" = "類型";
