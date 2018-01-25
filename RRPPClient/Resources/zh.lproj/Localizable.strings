@@ -21,7 +21,7 @@
 "title_tag_supply" = "交货登陆(RFID)";
 "title_tag_supply_detail_view" = "交货登陆名单";
 "title_tag_order_search" = "交货明细查询(RFID)";
-"title_product_mount" = "品目登陆";
+"title_product_mount" = "资产录入";
 "title_product_package" = "Batch登录";
 "title_product_package_cancel" = "Batch取消";
 "title_product_order_search" = "购买订单查询";

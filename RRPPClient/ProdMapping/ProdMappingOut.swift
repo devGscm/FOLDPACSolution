@@ -39,8 +39,8 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	@IBOutlet weak var btnProdBarcode: UIButton!
 	@IBOutlet weak var tvMappingRfid: UITableView!
 	@IBOutlet weak var tvMappingProd: UITableView!
-
-
+    @IBOutlet weak var btnTempSave: UIButton!
+    
 	
 	var clsIndicator : ProgressIndicator?
 	var clsDataClient : DataClient!
@@ -427,6 +427,8 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 					setRederMode(ReaderSenssorMode.BARCODE)
                     DispatchQueue.main.async
                     {
+                        self.btnProdBarcode.backgroundColor = Color.blue.base
+                        self.btnProdBarcode.tintColor = Color.blue.base
                         self.btnProdBarcode.setTitle(NSLocalizedString("common_read_rfid", comment: "RFID태그"), for: .normal)
                     }
 				}
@@ -436,6 +438,8 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 					setRederMode(ReaderSenssorMode.RFID)
                     DispatchQueue.main.async
                     {
+                        self.btnProdBarcode.backgroundColor = UIColor(red: 58/255, green: 140/255, blue: 42/255, alpha: 1.0)
+                        self.btnProdBarcode.tintColor = UIColor(red: 58/255, green: 140/255, blue: 42/255, alpha: 1.0)
                         self.btnProdBarcode.setTitle(NSLocalizedString("common_read_itf14", comment: "바코드"), for: .normal)
                     }
 				}
@@ -448,6 +452,8 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 					setRederMode(ReaderSenssorMode.BARCODE)
                     DispatchQueue.main.async
                     {
+                        self.btnProdBarcode.backgroundColor = Color.blue.base
+                        self.btnProdBarcode.tintColor = Color.blue.base
                         self.btnProdBarcode.setTitle(NSLocalizedString("common_read_rfid", comment: "RFID태그"), for: .normal)
                     }
 				}
@@ -457,6 +463,8 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 					setRederMode(ReaderSenssorMode.RFID)
                     DispatchQueue.main.async
                     {
+                        self.btnProdBarcode.backgroundColor = UIColor(red: 58/255, green: 140/255, blue: 42/255, alpha: 1.0)
+                        self.btnProdBarcode.tintColor = UIColor(red: 58/255, green: 140/255, blue: 42/255, alpha: 1.0)
                         self.btnProdBarcode.setTitle(NSLocalizedString("common_read_aqgr", comment: "QR코드"), for: .normal)
                     }
 				}
@@ -948,7 +956,9 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	}
 	
 	
-	// 임시저장
+    //=======================================
+	//==== 임시저장
+    //=======================================
 	@IBAction func onTempSaveClick(_ sender: UIButton)
 	{
 		if(AppContext.sharedManager.getUserInfo().getUnitId().isEmpty == true)
@@ -972,6 +982,12 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		let strVehName		= tfVehName?.text ?? ""
 		let strTradeChit	= tfTradeChit?.text ?? ""
 		
+        
+        DispatchQueue.main.async
+        {
+                self.btnTempSave.isEnabled = false      //'임시전송'버튼 비활성화
+        }
+
 		if(strSaleWorkId.isEmpty == false)
 		{
 			//DB로 데이터 전송 처리
@@ -1129,7 +1145,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
                 {
                     //1)첫번째 태그의 상품(바코드)정보를 선택하도록함.
                     let clsDataRow = self.arrRfidRows[0]
-                    self.tvMappingRfid.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .none)
+                    
                     
                     self.lblMastSerialNo.text = clsDataRow.getSerialNo()
                     self.lblAssetName.text = clsDataRow.getAssetName()
@@ -1154,6 +1170,8 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
                     //4)그리드 업데이트
                     self.tvMappingRfid?.reloadData()
                     self.tvMappingProd?.reloadData()
+                    
+                    self.tvMappingRfid.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .none)
                 }
             }
 			
@@ -1515,7 +1533,6 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	*/
 	func sendDataExistSaleWorkId(workState: String, saleWorkId: String, vehName: String, tradeChit: String, remark: String, signData: String)
 	{
-        print("====sendDataExistSaleWorkId:[송장-O]")
         clsIndicator?.show(message: NSLocalizedString("common_progressbar_sending", comment: "전송중 입니다."))
         
         let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
@@ -1567,15 +1584,14 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
                 return
             }
             
-            print("####결과값 처리[2]")
+            //print("####결과값 처리[2]")
             
             let clsResultDataRows = clsResultDataTable.getDataRows()
             if(clsResultDataRows.count > 0)
             {
                 let clsDataRow = clsResultDataRows[0]
                 let strResultCode = clsDataRow.getString(name: "resultCode")
-                
-                print("====strResultCode:\(strResultCode!)")
+               
                 if(Constants.PROC_RESULT_SUCCESS == strResultCode)
                 {
                     
@@ -1613,15 +1629,17 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
                 {
                     
                     let strErrorMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
-                    
-                    print("====에러메시지:\(strErrorMsg)")
-                
+                   
                     self.showSnackbar(message: strErrorMsg)
-                
-                    
                 }
             }
-            
+            DispatchQueue.main.async
+            {
+                if(self.btnTempSave.isEnabled == false)
+                {
+                    self.btnTempSave.isEnabled = true   //'임시전송'버튼 활성화
+                }
+            }
         })
 
 	}
@@ -1638,7 +1656,6 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 	*/
 	func sendDataNoneSaleWorkId(workState: String, workBranchId: String, vehName: String, tradeChit: String, remark: String, signData: String)
 	{
-        print("====sendDataNoneSaleWorkId:(송장-X)")
         
         let clsDataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
         clsDataClient.UserInfo = AppContext.sharedManager.getUserInfo().getEncryptId()
@@ -1748,6 +1765,8 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 
 		//슬래이브 그리드 - 업데이트
 		tvMappingProd.reloadData()
+        
+        //self.tvMappingRfid.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .none)
 	}
 	
 	//========================================================================
@@ -1829,6 +1848,7 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 			self.btnRfidReader.backgroundColor = Color.orange.base
 			self.btnRfidReader.tintColor = Color.orange.base
 			self.btnRfidReader.setTitle(NSLocalizedString("rfid_reader_close", comment: "종료"), for: .normal)
+
 		}
 		else
 		{

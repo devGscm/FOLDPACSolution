@@ -471,6 +471,7 @@
                     </view>
                     <connections>
                         <outlet property="btnRfidReader" destination="jT0-xM-V3x" id="atD-xt-8xo"/>
+                        <outlet property="btnTempSave" destination="7tC-aZ-Oqu" id="qUi-CT-fzc"/>
                         <outlet property="btnWorkCustSearch" destination="K7r-Tr-k8U" id="L2c-EF-EKh"/>
                         <outlet property="lblProcCount" destination="K4X-D4-avj" id="yRp-un-iuk"/>
                         <outlet property="lblReaderName" destination="ihj-UC-R8S" id="qlw-k0-VlO"/>

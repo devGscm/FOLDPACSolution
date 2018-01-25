@@ -538,6 +538,7 @@
                         <outlet property="btnBarcodeSearch" destination="huY-7q-NDL" id="wN2-f8-rNw"/>
                         <outlet property="btnResaleWorkId" destination="gtG-FE-qE5" id="dIx-Zk-uMv"/>
                         <outlet property="btnRfidReader" destination="QfO-ZH-KpQ" id="QWn-TE-STg"/>
+                        <outlet property="btnTempSave" destination="dSw-vd-jea" id="dGA-6L-duZ"/>
                         <outlet property="btnWorkCustSearch" destination="N2U-J7-zGb" id="kkq-7Y-5Ea"/>
                         <outlet property="lblProcCount" destination="mf9-kZ-hoT" id="fY1-23-LxC"/>
                         <outlet property="lblReaderName" destination="ogk-c6-4B7" id="rYQ-Xq-QBu"/>
