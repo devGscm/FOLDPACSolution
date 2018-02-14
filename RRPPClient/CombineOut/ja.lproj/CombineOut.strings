@@ -63,7 +63,7 @@
 "HY2-8N-UAI.text" = "入庫拠点";
 
 /* Class = "UILabel"; text = "選択"; ObjectID = "Igv-6z-oTy"; */
-"Igv-6z-oTy.text" = "選択";
+"Igv-6z-oTy.text" = "詳細";
 
 /* Class = "UIButton"; normalTitle = "검색"; ObjectID = "J0F-Y6-uUj"; */
 "J0F-Y6-uUj.normalTitle" = "検索";

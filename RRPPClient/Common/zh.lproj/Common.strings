@@ -57,7 +57,7 @@
 "ahg-fm-B3G.text" = "记录";
 
 /* Class = "UILabel"; text = "客户"; ObjectID = "b8r-A1-rFv"; */
-"b8r-A1-rFv.text" = "客户";
+"b8r-A1-rFv.text" = "客户名";
 
 /* Class = "UILabel"; text = "EPC URN"; ObjectID = "bRP-Jr-1ba"; */
 "bRP-Jr-1ba.text" = "EPC URN";

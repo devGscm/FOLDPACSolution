@@ -48,7 +48,7 @@
 "PgW-iU-DZM.normalTitle" = "削除";
 
 /* Class = "UILabel"; text = "입고처"; ObjectID = "T0t-sX-z7y"; */
-"T0t-sX-z7y.text" = "入庫先";
+"T0t-sX-z7y.text" = "入庫拠点";
 
 /* Class = "UIButton"; normalTitle = "확인"; ObjectID = "URB-eZ-LMW"; */
 "URB-eZ-LMW.normalTitle" = "確認";
@@ -72,7 +72,7 @@
 "dYj-0M-y16.text" = "商品情報";
 
 /* Class = "UIButton"; normalTitle = "전송"; ObjectID = "diZ-7W-8mM"; */
-"diZ-7W-8mM.normalTitle" = "転送";
+"diZ-7W-8mM.normalTitle" = "送信";
 
 /* Class = "UILabel"; text = "상품명"; ObjectID = "eV4-yU-UXg"; */
 "eV4-yU-UXg.text" = "商品名";
