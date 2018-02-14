@@ -323,16 +323,16 @@
 		96D039F61FEBB23600B4C7CA /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/CombineOut.strings; sourceTree = "<group>"; };
 		96D039F81FEBB23900B4C7CA /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/CombineOut.strings; sourceTree = "<group>"; };
 		96D279C81FBE5E4D004B848F /* Mosaic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mosaic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		96E4941C1FB1A78500D1E2C1 /*  RRPPClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = " RRPPClient.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		96E4941C1FB1A78500D1E2C1 /* RRPPClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RRPPClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E4941F1FB1A78500D1E2C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96E494211FB1A78500D1E2C1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		96E494261FB1A78500D1E2C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		96E494291FB1A78500D1E2C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		96E4942B1FB1A78500D1E2C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		96E494301FB1A78500D1E2C1 /*  RRPPClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = " RRPPClientTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		96E494301FB1A78500D1E2C1 /* RRPPClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RRPPClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E494341FB1A78500D1E2C1 /* RRPPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RRPPClientTests.swift; sourceTree = "<group>"; };
 		96E494361FB1A78500D1E2C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		96E4943B1FB1A78500D1E2C1 /*  RRPPClientUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = " RRPPClientUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		96E4943B1FB1A78500D1E2C1 /* RRPPClientUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RRPPClientUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E4944F1FB1A81F00D1E2C1 /* moramframework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = moramframework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96F8BD491FEA3782001E3B64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Tag.storyboard; sourceTree = "<group>"; };
 		96F8BD4B1FEA3794001E3B64 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Tag.strings; sourceTree = "<group>"; };
@@ -676,9 +676,9 @@
 		96E4941D1FB1A78500D1E2C1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				96E4941C1FB1A78500D1E2C1 /*  RRPPClient.app */,
-				96E494301FB1A78500D1E2C1 /*  RRPPClientTests.xctest */,
-				96E4943B1FB1A78500D1E2C1 /*  RRPPClientUITests.xctest */,
+				96E4941C1FB1A78500D1E2C1 /* RRPPClient.app */,
+				96E494301FB1A78500D1E2C1 /* RRPPClientTests.xctest */,
+				96E4943B1FB1A78500D1E2C1 /* RRPPClientUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -778,9 +778,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		96E4941B1FB1A78500D1E2C1 /*  RRPPClient */ = {
+		96E4941B1FB1A78500D1E2C1 /* RRPPClient */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 96E494441FB1A78500D1E2C1 /* Build configuration list for PBXNativeTarget " RRPPClient" */;
+			buildConfigurationList = 96E494441FB1A78500D1E2C1 /* Build configuration list for PBXNativeTarget "RRPPClient" */;
 			buildPhases = (
 				96E494181FB1A78500D1E2C1 /* Sources */,
 				96E494191FB1A78500D1E2C1 /* Frameworks */,
@@ -792,14 +792,14 @@
 			);
 			dependencies = (
 			);
-			name = " RRPPClient";
+			name = RRPPClient;
 			productName = RRPPClient;
-			productReference = 96E4941C1FB1A78500D1E2C1 /*  RRPPClient.app */;
+			productReference = 96E4941C1FB1A78500D1E2C1 /* RRPPClient.app */;
 			productType = "com.apple.product-type.application";
 		};
-		96E4942F1FB1A78500D1E2C1 /*  RRPPClientTests */ = {
+		96E4942F1FB1A78500D1E2C1 /* RRPPClientTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 96E494471FB1A78500D1E2C1 /* Build configuration list for PBXNativeTarget " RRPPClientTests" */;
+			buildConfigurationList = 96E494471FB1A78500D1E2C1 /* Build configuration list for PBXNativeTarget "RRPPClientTests" */;
 			buildPhases = (
 				96E4942C1FB1A78500D1E2C1 /* Sources */,
 				96E4942D1FB1A78500D1E2C1 /* Frameworks */,
@@ -810,14 +810,14 @@
 			dependencies = (
 				96E494321FB1A78500D1E2C1 /* PBXTargetDependency */,
 			);
-			name = " RRPPClientTests";
+			name = RRPPClientTests;
 			productName = RRPPClientTests;
-			productReference = 96E494301FB1A78500D1E2C1 /*  RRPPClientTests.xctest */;
+			productReference = 96E494301FB1A78500D1E2C1 /* RRPPClientTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		96E4943A1FB1A78500D1E2C1 /*  RRPPClientUITests */ = {
+		96E4943A1FB1A78500D1E2C1 /* RRPPClientUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 96E4944A1FB1A78500D1E2C1 /* Build configuration list for PBXNativeTarget " RRPPClientUITests" */;
+			buildConfigurationList = 96E4944A1FB1A78500D1E2C1 /* Build configuration list for PBXNativeTarget "RRPPClientUITests" */;
 			buildPhases = (
 				96E494371FB1A78500D1E2C1 /* Sources */,
 				96E494381FB1A78500D1E2C1 /* Frameworks */,
@@ -828,9 +828,9 @@
 			dependencies = (
 				96E4943D1FB1A78500D1E2C1 /* PBXTargetDependency */,
 			);
-			name = " RRPPClientUITests";
+			name = RRPPClientUITests;
 			productName = RRPPClientUITests;
-			productReference = 96E4943B1FB1A78500D1E2C1 /*  RRPPClientUITests.xctest */;
+			productReference = 96E4943B1FB1A78500D1E2C1 /* RRPPClientUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -876,9 +876,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				96E4941B1FB1A78500D1E2C1 /*  RRPPClient */,
-				96E4942F1FB1A78500D1E2C1 /*  RRPPClientTests */,
-				96E4943A1FB1A78500D1E2C1 /*  RRPPClientUITests */,
+				96E4941B1FB1A78500D1E2C1 /* RRPPClient */,
+				96E4942F1FB1A78500D1E2C1 /* RRPPClientTests */,
+				96E4943A1FB1A78500D1E2C1 /* RRPPClientUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1067,12 +1067,12 @@
 /* Begin PBXTargetDependency section */
 		96E494321FB1A78500D1E2C1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 96E4941B1FB1A78500D1E2C1 /*  RRPPClient */;
+			target = 96E4941B1FB1A78500D1E2C1 /* RRPPClient */;
 			targetProxy = 96E494311FB1A78500D1E2C1 /* PBXContainerItemProxy */;
 		};
 		96E4943D1FB1A78500D1E2C1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 96E4941B1FB1A78500D1E2C1 /*  RRPPClient */;
+			target = 96E4941B1FB1A78500D1E2C1 /* RRPPClient */;
 			targetProxy = 96E4943C1FB1A78500D1E2C1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1520,7 +1520,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		96E494441FB1A78500D1E2C1 /* Build configuration list for PBXNativeTarget " RRPPClient" */ = {
+		96E494441FB1A78500D1E2C1 /* Build configuration list for PBXNativeTarget "RRPPClient" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				96E494451FB1A78500D1E2C1 /* Debug */,
@@ -1529,7 +1529,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		96E494471FB1A78500D1E2C1 /* Build configuration list for PBXNativeTarget " RRPPClientTests" */ = {
+		96E494471FB1A78500D1E2C1 /* Build configuration list for PBXNativeTarget "RRPPClientTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				96E494481FB1A78500D1E2C1 /* Debug */,
@@ -1538,7 +1538,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		96E4944A1FB1A78500D1E2C1 /* Build configuration list for PBXNativeTarget " RRPPClientUITests" */ = {
+		96E4944A1FB1A78500D1E2C1 /* Build configuration list for PBXNativeTarget "RRPPClientUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				96E4944B1FB1A78500D1E2C1 /* Debug */,

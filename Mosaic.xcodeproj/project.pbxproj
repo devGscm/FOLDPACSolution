@@ -215,7 +215,7 @@
 				96E494861FB1B5ED00D1E2C1 /* Frameworks */,
 				96E494871FB1B5ED00D1E2C1 /* Headers */,
 				96E494881FB1B5ED00D1E2C1 /* Resources */,
-				96C23CDA1FBD1D2600744ADC /* ShellScript */,
+				96C23CDA1FBD1D2600744ADC /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -301,7 +301,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		96C23CDA1FBD1D2600744ADC /* ShellScript */ = {
+		96C23CDA1FBD1D2600744ADC /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -309,11 +309,12 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SWXMLHash.framework",
 			);
+			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
