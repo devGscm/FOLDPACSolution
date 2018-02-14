@@ -1395,7 +1395,7 @@
 				INFOPLIST_FILE = RRPPClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.logisall.rrpp.RRPPClient;
+				PRODUCT_BUNDLE_IDENTIFIER = com.moramcnt.rrpp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1424,7 +1424,7 @@
 				INFOPLIST_FILE = RRPPClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.logisall.rrpp.RRPPClient;
+				PRODUCT_BUNDLE_IDENTIFIER = com.moramcnt.rrpp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
