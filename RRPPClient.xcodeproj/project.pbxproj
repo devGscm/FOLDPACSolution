@@ -111,6 +111,7 @@
 		9654ECAC203AA60800D56380 /* DataColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9654ECA7203AA60700D56380 /* DataColumn.swift */; };
 		9654ECAD203AA60800D56380 /* DataTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9654ECA8203AA60700D56380 /* DataTable.swift */; };
 		9654ECAE203AA60800D56380 /* DataSourceMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9654ECA9203AA60800D56380 /* DataSourceMgr.swift */; };
+		966A2A9C203AAAAC00410C52 /* lipo.sh in Resources */ = {isa = PBXBuildFile; fileRef = 966A2A9B203AAAAB00410C52 /* lipo.sh */; };
 		96779DEE1FE27CE4009A4708 /* RfidInspectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96779DED1FE27CE4009A4708 /* RfidInspectCell.swift */; };
 		967A9C441FC3BE8D00B6A9D1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 967A9C461FC3BE8D00B6A9D1 /* Localizable.strings */; };
 		967A9C4A1FC4003B00B6A9D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 967A9C4C1FC4003B00B6A9D1 /* Main.storyboard */; };
@@ -316,6 +317,7 @@
 		9654ECA7203AA60700D56380 /* DataColumn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataColumn.swift; sourceTree = "<group>"; };
 		9654ECA8203AA60700D56380 /* DataTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTable.swift; sourceTree = "<group>"; };
 		9654ECA9203AA60800D56380 /* DataSourceMgr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceMgr.swift; sourceTree = "<group>"; };
+		966A2A9B203AAAAB00410C52 /* lipo.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = lipo.sh; sourceTree = "<group>"; };
 		96779DED1FE27CE4009A4708 /* RfidInspectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RfidInspectCell.swift; sourceTree = "<group>"; };
 		967A9C451FC3BE8D00B6A9D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		967A9C471FC3BE9500B6A9D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; usesTabs = 0; };
@@ -736,6 +738,7 @@
 		96E494131FB1A78500D1E2C1 = {
 			isa = PBXGroup;
 			children = (
+				966A2A9B203AAAAB00410C52 /* lipo.sh */,
 				96D279C81FBE5E4D004B848F /* Mosaic.framework */,
 				96E4941E1FB1A78500D1E2C1 /* RRPPClient */,
 				96E494331FB1A78500D1E2C1 /* RRPPClientTests */,
@@ -982,6 +985,7 @@
 				96D039E71FEBACD600B4C7CA /* Config.storyboard in Resources */,
 				550A2ADD1FE9FC9400E56067 /* main.png in Resources */,
 				96E494271FB1A78500D1E2C1 /* Assets.xcassets in Resources */,
+				966A2A9C203AAAAC00410C52 /* lipo.sh in Resources */,
 				55A589AA1FEC7E2D0079A136 /* InOutCancel.storyboard in Resources */,
 				555D420F1FEB890E00E33F13 /* Stock.storyboard in Resources */,
 			);
