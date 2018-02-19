@@ -31,7 +31,6 @@
 		5575BB511FE26C2E00CACCC8 /* BarcodeScanner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5575BB4F1FE26C2100CACCC8 /* BarcodeScanner.framework */; };
 		5575BB521FE26C2E00CACCC8 /* BarcodeScanner.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5575BB4F1FE26C2100CACCC8 /* BarcodeScanner.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		558E89E720102AFB00A88551 /* ProductStockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558E89E620102AFB00A88551 /* ProductStockCell.swift */; };
-		5590980720340C70000F5964 /* lipo.sh in Resources */ = {isa = PBXBuildFile; fileRef = 5590980620340C70000F5964 /* lipo.sh */; };
 		5590A55D1FD4E194007571D5 /* ProdMappingOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590A55C1FD4E194007571D5 /* ProdMappingOut.swift */; };
 		5590A5611FD4E7C1007571D5 /* ProdMappingOutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5590A5601FD4E7C1007571D5 /* ProdMappingOutCell.swift */; };
 		559A6FC81FE9F8F3006E48D6 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96994C4C1FC5453A00B3A726 /* SQLite.framework */; };
