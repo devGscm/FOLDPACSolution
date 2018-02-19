@@ -8,8 +8,6 @@
 
 import UIKit
 import Material
-import Mosaic
-
 
 class OutMemoDialog: BaseViewController
 {

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Mosaic
 
 public class ProdContainer
 {

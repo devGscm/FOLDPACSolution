@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Mosaic
 
 class EasyInSearch: BaseViewController, UITableViewDataSource, UITableViewDelegate
 {

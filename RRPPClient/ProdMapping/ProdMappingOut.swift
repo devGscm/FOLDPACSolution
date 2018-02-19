@@ -8,7 +8,6 @@
 
 import UIKit
 import Material
-import Mosaic
 import Foundation
 
 class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, DataProtocol, ReaderResponseDelegate

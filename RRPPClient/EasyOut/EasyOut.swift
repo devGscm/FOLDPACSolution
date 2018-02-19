@@ -8,7 +8,7 @@
 
 import UIKit
 import Material
-import Mosaic
+
 import BarcodeScanner
 
 class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, DataProtocol, ReaderResponseDelegate

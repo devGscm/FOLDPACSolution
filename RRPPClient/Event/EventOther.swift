@@ -8,7 +8,6 @@
 
 import UIKit
 import Material
-import Mosaic
 
 class EventOther : BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, ReaderResponseDelegate
 {
