@@ -13,7 +13,7 @@
         <!--Root View Controller-->
         <scene sceneID="oKH-yD-3Db">
             <objects>
-                <viewController storyboardIdentifier="RootViewController" id="8FU-Ku-gwW" customClass="RootViewController" customModule="_RRPPClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RootViewController" id="8FU-Ku-gwW" customClass="RootViewController" customModule="RRPPClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MLT-uH-cDf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -81,7 +81,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tvcProductStock" id="FkB-fl-Z5K" customClass="ProductStockCell" customModule="_RRPPClient" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tvcProductStock" id="FkB-fl-Z5K" customClass="ProductStockCell" customModule="RRPPClient" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="339" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FkB-fl-Z5K" id="0m7-yf-jLD">
@@ -167,7 +167,7 @@
         <!--로그인-->
         <scene sceneID="LM4-TV-X01">
             <objects>
-                <viewController title="로그인" id="DV3-pj-IDf" customClass="UserLogin" customModule="_RRPPClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="로그인" id="DV3-pj-IDf" customClass="UserLogin" customModule="RRPPClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NNY-0V-gbU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -294,21 +294,10 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="RRPP" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yy0-h7-Y4L">
-                                <rect key="frame" x="25" y="20" width="95" height="34"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="intro_title.png" translatesAutoresizingMaskIntoConstraints="NO" id="qTA-xe-PND">
+                                <rect key="frame" x="-12" y="20" width="176" height="47"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="35"/>
-                                <color key="textColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TRA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oo5-Yd-z0i">
-                                <rect key="frame" x="120" y="21" width="55" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="25"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                                <size key="shadowOffset" width="0.0" height="0.0"/>
-                            </label>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <viewLayoutGuide key="safeArea" id="cYJ-x9-ngm"/>
@@ -328,7 +317,7 @@
         <!--좌측메뉴-->
         <scene sceneID="MD5-Qn-Sxr">
             <objects>
-                <viewController storyboardIdentifier="LeftViewController" title="좌측메뉴" id="L1y-RK-ShF" customClass="LeftViewController" customModule="_RRPPClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LeftViewController" title="좌측메뉴" id="L1y-RK-ShF" customClass="LeftViewController" customModule="RRPPClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yiJ-Qi-luS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -337,7 +326,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="113"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pallet.png" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="abJ-Y7-x4v">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="rrpp_icon.png" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="abJ-Y7-x4v">
                                         <rect key="frame" x="8" y="21" width="70" height="70"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -389,7 +378,7 @@ CA
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tvcMenuItem" id="rJ5-0H-hMm" customClass="LeftMenuItem" customModule="_RRPPClient" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tvcMenuItem" id="rJ5-0H-hMm" customClass="LeftMenuItem" customModule="RRPPClient" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="366" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rJ5-0H-hMm" id="RWh-tk-A5M">
@@ -456,7 +445,7 @@ CA
         <!--오른쪽메뉴-->
         <scene sceneID="26Q-rz-bPd">
             <objects>
-                <tableViewController storyboardIdentifier="RightViewController" title="오른쪽메뉴" id="nJr-NP-3rZ" customClass="RightViewController" customModule="_RRPPClient" customModuleProvider="target" sceneMemberID="viewController"/>
+                <tableViewController storyboardIdentifier="RightViewController" title="오른쪽메뉴" id="nJr-NP-3rZ" customClass="RightViewController" customModule="RRPPClient" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fEG-Vc-wz7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="222" y="-984"/>
@@ -466,10 +455,11 @@ CA
         <image name="ic_lock_white" width="24" height="24"/>
         <image name="ic_logout_white" width="24" height="24"/>
         <image name="intro.png" width="1590" height="894"/>
+        <image name="intro_title.png" width="2658" height="646"/>
         <image name="main.png" width="1600" height="900"/>
-        <image name="pallet.png" width="600" height="366"/>
+        <image name="rrpp_icon.png" width="357" height="357"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Kyx-m7-K39"/>
+        <segue reference="UEE-4x-1jJ"/>
     </inferredMetricsTieBreakers>
 </document>
