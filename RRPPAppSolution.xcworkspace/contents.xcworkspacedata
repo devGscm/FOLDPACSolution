@@ -4,7 +4,4 @@
    <FileRef
       location = "group:RRPPClient.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:Mosaic.xcodeproj">
-   </FileRef>
 </Workspace>

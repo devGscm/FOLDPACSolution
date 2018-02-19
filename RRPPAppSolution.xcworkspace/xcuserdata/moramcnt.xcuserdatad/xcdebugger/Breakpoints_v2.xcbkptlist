@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "672"
             endingLineNumber = "672"
-            landmarkName = "changeNewVersiion(remoteDbUserInfo:corpId:db:updateCode:updateDate:ref:bIsInsert:disPatchGrp:)"
+            landmarkName = "changeNewVersion(container:remoteDbUserInfo:corpId:db:updateCode:updateDate:ref:bIsInsert:disPatchGrp:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -31,7 +31,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "711"
             endingLineNumber = "711"
-            landmarkName = "changeNewVersiion(remoteDbUserInfo:corpId:db:updateCode:updateDate:ref:bIsInsert:disPatchGrp:)"
+            landmarkName = "changeNewVersion(container:remoteDbUserInfo:corpId:db:updateCode:updateDate:ref:bIsInsert:disPatchGrp:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -47,7 +47,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "729"
             endingLineNumber = "729"
-            landmarkName = "changeNewVersiion(remoteDbUserInfo:corpId:db:updateCode:updateDate:ref:bIsInsert:disPatchGrp:)"
+            landmarkName = "changeNewVersion(container:remoteDbUserInfo:corpId:db:updateCode:updateDate:ref:bIsInsert:disPatchGrp:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -175,7 +175,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "695"
             endingLineNumber = "695"
-            landmarkName = "changeNewVersiion(remoteDbUserInfo:corpId:db:updateCode:updateDate:ref:bIsInsert:disPatchGrp:)"
+            landmarkName = "changeNewVersion(container:remoteDbUserInfo:corpId:db:updateCode:updateDate:ref:bIsInsert:disPatchGrp:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -191,7 +191,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "144"
             endingLineNumber = "144"
-            landmarkName = "viewDidAppear(_:)"
+            landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -207,7 +207,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "146"
             endingLineNumber = "146"
-            landmarkName = "viewDidAppear(_:)"
+            landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -223,8 +223,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "153"
             endingLineNumber = "153"
-            landmarkName = "RootViewController"
-            landmarkType = "21">
+            landmarkName = "prepareToolbar()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -239,7 +239,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "985"
             endingLineNumber = "985"
-            landmarkName = "getCodeDetail(_:_:_:_:_:_:_:)"
+            landmarkName = "getIOSAppVersion()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -731,7 +731,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "348"
             endingLineNumber = "348"
-            landmarkName = "sendData(makeOrderId:makeLotId:workerName:remark:)"
+            landmarkName = "getRfidData(clsTagInfo:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -763,7 +763,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "344"
             endingLineNumber = "344"
-            landmarkName = "parse(strData:)"
+            landmarkName = "checkHeader(strData:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -779,7 +779,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "731"
             endingLineNumber = "731"
-            landmarkName = "parseGrai96(enuEncoding:strData:)"
+            landmarkName = "parseSgln96(enuEncoding:strData:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -795,7 +795,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "739"
             endingLineNumber = "739"
-            landmarkName = "parseGrai96(enuEncoding:strData:)"
+            landmarkName = "parseSgln96(enuEncoding:strData:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -827,7 +827,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "771"
             endingLineNumber = "771"
-            landmarkName = "parseGrai96(enuEncoding:strData:)"
+            landmarkName = "parseSgln96(enuEncoding:strData:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -907,7 +907,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "359"
             endingLineNumber = "359"
-            landmarkName = "circleBoxValueChanged(sender:)"
+            landmarkName = "sendData()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -923,7 +923,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "356"
             endingLineNumber = "356"
-            landmarkName = "circleBoxValueChanged(sender:)"
+            landmarkName = "sendData()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -939,7 +939,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "357"
             endingLineNumber = "357"
-            landmarkName = "circleBoxValueChanged(sender:)"
+            landmarkName = "sendData()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -955,7 +955,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "376"
             endingLineNumber = "376"
-            landmarkName = "onSelectedDelClicked(_:)"
+            landmarkName = "sendData()"
             landmarkType = "7">
             <Locations>
                <Location
@@ -1003,7 +1003,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "248"
             endingLineNumber = "248"
-            landmarkName = "sendData()"
+            landmarkName = "changeBtnRfidReader(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1019,7 +1019,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "268"
             endingLineNumber = "268"
-            landmarkName = "sendData()"
+            landmarkName = "clearTagData()"
             landmarkType = "7">
             <Locations>
                <Location
@@ -1067,7 +1067,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "254"
             endingLineNumber = "254"
-            landmarkName = "sendData()"
+            landmarkName = "changeBtnRfidReader(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1083,8 +1083,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "263"
             endingLineNumber = "263"
-            landmarkName = "sendData()"
-            landmarkType = "7">
+            landmarkName = "RfidInspect"
+            landmarkType = "3">
             <Locations>
                <Location
                   shouldBeEnabled = "No"

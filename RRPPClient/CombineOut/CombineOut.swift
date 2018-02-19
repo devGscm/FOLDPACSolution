@@ -8,7 +8,6 @@
 
 import UIKit
 import Material
-import Mosaic
 import BarcodeScanner
 
 class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, DataProtocol, ReaderResponseDelegate

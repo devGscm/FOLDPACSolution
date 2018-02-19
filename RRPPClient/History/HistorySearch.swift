@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Mosaic
-
 
 class HistorySearch: BaseViewController, UITableViewDataSource, UITableViewDelegate
 {

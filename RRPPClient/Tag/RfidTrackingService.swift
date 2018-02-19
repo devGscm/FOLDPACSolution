@@ -7,7 +7,6 @@
 //
 import UIKit
 import Material
-import Mosaic
 
 class RfidTrackingService: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, ReaderResponseDelegate
 {
