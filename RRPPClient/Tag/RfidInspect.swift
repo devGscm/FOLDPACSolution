@@ -7,7 +7,6 @@
 //
 import UIKit
 import Material
-import Mosaic
 
 class RfidInspect: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, ReaderResponseDelegate
 {

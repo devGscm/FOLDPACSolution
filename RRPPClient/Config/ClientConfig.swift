@@ -11,7 +11,6 @@ import Foundation
 
 import UIKit
 import Material
-import Mosaic
 
 //class ClientConfig : UITableViewController, DataProtocol
 class ClientConfig : BaseTableViewController, DataProtocol

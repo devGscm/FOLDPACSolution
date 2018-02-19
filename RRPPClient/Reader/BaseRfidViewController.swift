@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Mosaic
 
 //UserDefaults 에 넣기 위하여  구조체대신 클래스 Array로 선언
 //또한 NSCoding 에대한 프로토콜을 구현해야 된다.

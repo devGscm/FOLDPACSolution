@@ -1,6 +1,5 @@
 import UIKit
 import Material
-import Mosaic
 
 class RightViewController: UITableViewController, DataProtocol
 {

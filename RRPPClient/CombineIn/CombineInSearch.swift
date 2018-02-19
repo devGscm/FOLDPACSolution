@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Mosaic
 
 class CombineInSearch: BaseViewController, UITableViewDataSource, UITableViewDelegate
 {

@@ -9,7 +9,6 @@
 import UIKit
 import Material
 import FontAwesome
-import Mosaic
 import Foundation
 
 class UserLogin: UIViewController
@@ -62,7 +61,7 @@ class UserLogin: UIViewController
 		//print("objMe.swAutoLogin.isOn:\(swAutoLogin.isOn)")
 		//let objMe = self
 		
-		let dataClient = Mosaic.DataClient(container:self, url: Constants.WEB_SVC_URL)
+		let dataClient = DataClient(container:self, url: Constants.WEB_SVC_URL)
 		
 		//IOS 에서는 사용자의 전화번호를 얻는것이 보안상 금지되어 있다 따라서 항상
 		//임시 번호인 99999999999 만 입력

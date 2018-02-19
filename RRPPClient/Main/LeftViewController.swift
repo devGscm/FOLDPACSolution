@@ -1,6 +1,5 @@
 import UIKit
 import Material
-import Mosaic
 import FontAwesome
 
 class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
