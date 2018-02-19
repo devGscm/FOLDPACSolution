@@ -1,5 +1,12 @@
 import UIKit
 import Material
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+import Mosaic
+>>>>>>> 3b0ab5f70232410f89a3a627a68beeb5ed6f8a09
+>>>>>>> 92836999bbaa40458f24ed789320b7d13c5eec21
 import FontAwesome
 
 class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDelegate

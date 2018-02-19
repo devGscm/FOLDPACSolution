@@ -2,6 +2,10 @@
 <Workspace
    version = "1.0">
    <FileRef
+<<<<<<< HEAD
       location = "group:/Users/moramcnt/Projects/RRPPSolutions/02.Solutions/RRPPSolution/RRPPClient.xcodeproj">
+=======
+      location = "group:RRPPClient.xcodeproj">
+>>>>>>> 92836999bbaa40458f24ed789320b7d13c5eec21
    </FileRef>
 </Workspace>
