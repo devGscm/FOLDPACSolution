@@ -76,8 +76,6 @@
 		55FA782D1FBDAB6C00583A80 /* Motion.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA78261FBDAB4700583A80 /* Motion.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		55FA782E1FBDAB7300583A80 /* FontAwesome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA78201FBDAAA800583A80 /* FontAwesome.framework */; };
 		55FA782F1FBDAB7300583A80 /* FontAwesome.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA78201FBDAAA800583A80 /* FontAwesome.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		55FA78301FBDAB7800583A80 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA78281FBDAB5800583A80 /* SwiftyJSON.framework */; };
-		55FA78311FBDAB7800583A80 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA78281FBDAB5800583A80 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		55FA78351FBDACC600583A80 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78331FBDACC600583A80 /* Constants.swift */; };
 		55FA783A1FBDACE300583A80 /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78381FBDACE300583A80 /* UserLogin.swift */; };
 		55FA783B1FBDACE300583A80 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA78391FBDACE300583A80 /* UserInfo.swift */; };
@@ -178,7 +176,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				968611ED1FBD585C000FE288 /* SWXMLHash.framework in Embed Frameworks */,
-				55FA78311FBDAB7800583A80 /* SwiftyJSON.framework in Embed Frameworks */,
 				55FA782D1FBDAB6C00583A80 /* Motion.framework in Embed Frameworks */,
 				55FA782B1FBDAB6700583A80 /* Material.framework in Embed Frameworks */,
 				5575BB521FE26C2E00CACCC8 /* BarcodeScanner.framework in Embed Frameworks */,
@@ -418,7 +415,6 @@
 			files = (
 				968611EC1FBD585C000FE288 /* SWXMLHash.framework in Frameworks */,
 				5575BB511FE26C2E00CACCC8 /* BarcodeScanner.framework in Frameworks */,
-				55FA78301FBDAB7800583A80 /* SwiftyJSON.framework in Frameworks */,
 				55FA782C1FBDAB6C00583A80 /* Motion.framework in Frameworks */,
 				55FA782A1FBDAB6700583A80 /* Material.framework in Frameworks */,
 				559A6FC81FE9F8F3006E48D6 /* SQLite.framework in Frameworks */,
