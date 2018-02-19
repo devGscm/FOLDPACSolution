@@ -115,7 +115,6 @@
 		96D279CA1FBE5E4D004B848F /* Mosaic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 96D279C81FBE5E4D004B848F /* Mosaic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		96E494201FB1A78500D1E2C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E4941F1FB1A78500D1E2C1 /* AppDelegate.swift */; };
 		96E494221FB1A78500D1E2C1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E494211FB1A78500D1E2C1 /* ViewController.swift */; };
-		96E494271FB1A78500D1E2C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96E494261FB1A78500D1E2C1 /* Assets.xcassets */; };
 		96E4942A1FB1A78500D1E2C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96E494281FB1A78500D1E2C1 /* LaunchScreen.storyboard */; };
 		96E494351FB1A78500D1E2C1 /* RRPPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E494341FB1A78500D1E2C1 /* RRPPClientTests.swift */; };
 		96F8BD4A1FEA3782001E3B64 /* Tag.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96F8BD481FEA3782001E3B64 /* Tag.storyboard */; };
@@ -130,6 +129,9 @@
 		B077DA1C1FDF990900616F3A /* OutMemoDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B077DA1B1FDF990900616F3A /* OutMemoDialog.swift */; };
 		B0782B621FEC93C700C0422D /* ProdMapping.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0782B641FEC93C700C0422D /* ProdMapping.storyboard */; };
 		B0782B831FECA62700C0422D /* Common.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0782B851FECA62700C0422D /* Common.storyboard */; };
+		B088CFFA203A56B0003DC1AC /* intro_title.png in Resources */ = {isa = PBXBuildFile; fileRef = B088CFF9203A56B0003DC1AC /* intro_title.png */; };
+		B088CFFC203A5763003DC1AC /* rrpp_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B088CFFB203A5763003DC1AC /* rrpp_icon.png */; };
+		B088CFFD203A58C0003DC1AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96E494261FB1A78500D1E2C1 /* Assets.xcassets */; };
 		B0A2357C1FDA5E7F00AD4925 /* InOutCancelDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A2357B1FDA5E7F00AD4925 /* InOutCancelDetailCell.swift */; };
 		B0A2357E1FDA6D4D00AD4925 /* InOutCancelDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A2357D1FDA6D4D00AD4925 /* InOutCancelDetail.swift */; };
 		B0B95D261FEA59A20044E34A /* EasyOut.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0B95D281FEA59A20044E34A /* EasyOut.storyboard */; };
@@ -353,6 +355,8 @@
 		B0782B681FEC93D400C0422D /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/ProdMapping.strings; sourceTree = "<group>"; };
 		B0782B6A1FEC93D600C0422D /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/ProdMapping.strings; sourceTree = "<group>"; };
 		B0782B841FECA62700C0422D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Common.storyboard; sourceTree = "<group>"; };
+		B088CFF9203A56B0003DC1AC /* intro_title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro_title.png; sourceTree = "<group>"; };
+		B088CFFB203A5763003DC1AC /* rrpp_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rrpp_icon.png; sourceTree = "<group>"; };
 		B0891ABD1FFC960B000B21CC /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/EasyOut.strings; sourceTree = "<group>"; };
 		B0891ABE1FFC960C000B21CC /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/EasyIn.strings; sourceTree = "<group>"; };
 		B0891ABF1FFC960C000B21CC /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/CombineIn.strings; sourceTree = "<group>"; };
@@ -581,6 +585,8 @@
 		55FA783C1FBDACFC00583A80 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				B088CFFB203A5763003DC1AC /* rrpp_icon.png */,
+				B088CFF9203A56B0003DC1AC /* intro_title.png */,
 				550A2ADC1FE9FC9400E56067 /* main.png */,
 				55C9D5911FE8B5CF00DDD48E /* intro.png */,
 				55FA783E1FBDACFC00583A80 /* pallet.png */,
@@ -887,6 +893,7 @@
 			files = (
 				96D039F01FEBB22D00B4C7CA /* CombineOut.storyboard in Resources */,
 				55FA78401FBDACFD00583A80 /* pallet.png in Resources */,
+				B088CFFD203A58C0003DC1AC /* Assets.xcassets in Resources */,
 				55161D301FEBBAA20045F268 /* CombineIn.storyboard in Resources */,
 				96E4942A1FB1A78500D1E2C1 /* LaunchScreen.storyboard in Resources */,
 				96D039DE1FEBA55A00B4C7CA /* EasyIn.storyboard in Resources */,
@@ -899,11 +906,12 @@
 				967A9C441FC3BE8D00B6A9D1 /* Localizable.strings in Resources */,
 				96F8BD4A1FEA3782001E3B64 /* Tag.storyboard in Resources */,
 				B0782B831FECA62700C0422D /* Common.storyboard in Resources */,
+				B088CFFC203A5763003DC1AC /* rrpp_icon.png in Resources */,
 				55C9D5921FE8B5CF00DDD48E /* intro.png in Resources */,
 				96D039E71FEBACD600B4C7CA /* Config.storyboard in Resources */,
 				550A2ADD1FE9FC9400E56067 /* main.png in Resources */,
-				96E494271FB1A78500D1E2C1 /* Assets.xcassets in Resources */,
 				55A589AA1FEC7E2D0079A136 /* InOutCancel.storyboard in Resources */,
+				B088CFFA203A56B0003DC1AC /* intro_title.png in Resources */,
 				555D420F1FEB890E00E33F13 /* Stock.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1382,6 +1390,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -1412,6 +1421,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
