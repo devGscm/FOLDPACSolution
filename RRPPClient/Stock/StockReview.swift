@@ -8,6 +8,7 @@
 
 import UIKit
 import Material
+import Mosaic
 
 class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, DataProtocol, ReaderResponseDelegate
 {

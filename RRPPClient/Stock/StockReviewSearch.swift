@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Mosaic
 
 class StockReviewSearch: BaseViewController, UITableViewDataSource, UITableViewDelegate
 {

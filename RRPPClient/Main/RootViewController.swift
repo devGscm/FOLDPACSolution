@@ -1,5 +1,6 @@
 import UIKit
 import Material
+import Mosaic
 import Foundation
 
 class RootViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate

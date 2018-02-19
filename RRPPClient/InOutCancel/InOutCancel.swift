@@ -8,6 +8,7 @@
 
 import UIKit
 import Material
+import Mosaic
 
 class InOutCancel: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, DataProtocol, ReaderResponseDelegate
 {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Mosaic
 import Material
 
 class BranchSearchDialog: BaseViewController, UITableViewDataSource, UITableViewDelegate

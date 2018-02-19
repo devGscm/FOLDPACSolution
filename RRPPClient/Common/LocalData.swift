@@ -8,8 +8,8 @@
 
 import Foundation
 import Material
+import Mosaic
 import SQLite
-import UIKit
 
 struct CodeInfo {
 	let corpId : String			/**< 회사ID **/
@@ -359,7 +359,7 @@ class LocalData {
 	private func changeNewVersion(container: UIViewController, remoteDbUserInfo: String, corpId: String, db: Connection, updateCode: String, updateDate: Int, ref : String, bIsInsert : Bool, disPatchGrp : DispatchGroup ) -> Void
 	{
 		
-		let dataClient = DataClient(container: container, url: Constants.WEB_SVC_URL)
+		let dataClient = Mosaic.DataClient(container: container, url: Constants.WEB_SVC_URL)
 		
 		//TODO:: 아라의 코드중 self를 objMe로 대체
 		let objMe = self
@@ -863,7 +863,7 @@ class LocalData {
 		//모든 Dispatch 쓰레드가 종료되기를 기다린다.
 		let clsDispatchGrp = DispatchGroup()
 		
-		let dataClient = DataClient(container: container, url: Constants.WEB_SVC_URL)
+		let dataClient = Mosaic.DataClient(container: container, url: Constants.WEB_SVC_URL)
 		dataClient.UserInfo = self.mRemoteDbEnncryptId
 		dataClient.UserData = "app.update.selectUpdateItemList"
 		dataClient.removeServiceParam()

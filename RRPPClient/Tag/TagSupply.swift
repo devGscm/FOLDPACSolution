@@ -8,6 +8,7 @@
 
 import UIKit
 import Material
+import Mosaic
 
 class TagSupply: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, DataProtocol, ReaderResponseDelegate
 {

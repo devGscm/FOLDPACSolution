@@ -8,6 +8,8 @@
 
 import UIKit
 import Material
+import Mosaic
+
 
 class OutSignDialog: BaseViewController, YPSignatureDelegate
 {

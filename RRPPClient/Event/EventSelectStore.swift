@@ -8,6 +8,9 @@
 
 import UIKit
 import Material
+import Mosaic
+
+
 
 class EventSelectStore : BaseRfidViewController, UITableViewDataSource, UITableViewDelegate, ReaderResponseDelegate
 {

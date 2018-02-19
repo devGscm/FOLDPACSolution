@@ -8,6 +8,8 @@
 
 import UIKit
 import Material
+import Mosaic
+
 
 class InSignDialog: BaseViewController, YPSignatureDelegate
 {
