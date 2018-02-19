@@ -18,5 +18,3 @@ lipo -remove x86_64 ./Carthage/Build/iOS/SQLite.framework/SQLite -o ./Carthage/B
 lipo -remove i386 ./Carthage/Build/iOS/SWXMLHash.framework/SWXMLHash -o ./Carthage/Build/iOS/SWXMLHash.framework/SWXMLHash
 lipo -remove x86_64 ./Carthage/Build/iOS/SWXMLHash.framework/SWXMLHash -o ./Carthage/Build/iOS/SWXMLHash.framework/SWXMLHash
 
-lipo -remove i386 ./Carthage/Build/iOS/SwiftyJSON.framework/SwiftyJSON -o ./Carthage/Build/iOS/SwiftyJSON.framework/SwiftyJSON
-lipo -remove x86_64 ./Carthage/Build/iOS/SwiftyJSON.framework/SwiftyJSON -o ./Carthage/Build/iOS/SwiftyJSON.framework/SwiftyJSON
