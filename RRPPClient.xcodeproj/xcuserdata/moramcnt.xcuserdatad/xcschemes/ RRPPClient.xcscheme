@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "96E4941B1FB1A78500D1E2C1"
-               BuildableName = " RRPPClient.app"
-               BlueprintName = " RRPPClient"
+               BuildableName = "RRPPClient.app"
+               BlueprintName = "RRPPClient"
                ReferencedContainer = "container:RRPPClient.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -34,8 +34,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "96E4942F1FB1A78500D1E2C1"
-               BuildableName = " RRPPClientTests.xctest"
-               BlueprintName = " RRPPClientTests"
+               BuildableName = "RRPPClientTests.xctest"
+               BlueprintName = "RRPPClientTests"
                ReferencedContainer = "container:RRPPClient.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -44,8 +44,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "96E4943A1FB1A78500D1E2C1"
-               BuildableName = " RRPPClientUITests.xctest"
-               BlueprintName = " RRPPClientUITests"
+               BuildableName = "RRPPClientUITests.xctest"
+               BlueprintName = "RRPPClientUITests"
                ReferencedContainer = "container:RRPPClient.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -54,8 +54,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "96E4941B1FB1A78500D1E2C1"
-            BuildableName = " RRPPClient.app"
-            BlueprintName = " RRPPClient"
+            BuildableName = "RRPPClient.app"
+            BlueprintName = "RRPPClient"
             ReferencedContainer = "container:RRPPClient.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -78,8 +78,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "96E4941B1FB1A78500D1E2C1"
-            BuildableName = " RRPPClient.app"
-            BlueprintName = " RRPPClient"
+            BuildableName = "RRPPClient.app"
+            BlueprintName = "RRPPClient"
             ReferencedContainer = "container:RRPPClient.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -97,8 +97,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "96E4941B1FB1A78500D1E2C1"
-            BuildableName = " RRPPClient.app"
-            BlueprintName = " RRPPClient"
+            BuildableName = "RRPPClient.app"
+            BlueprintName = "RRPPClient"
             ReferencedContainer = "container:RRPPClient.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
