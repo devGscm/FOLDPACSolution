@@ -53,7 +53,7 @@ class RfidReaderDialog: UITableViewController, SwingProtocolProtocol
         let tvcCell = UITableViewCell()
         let strtReaderDevInfo = mLstRfidReader[indexPath.row]
         tvcCell.textLabel?.font = UIFont.fontAwesome(ofSize: 13)
-        tvcCell.textLabel!.text = "\(String.fontAwesomeIcon(name: .bolt)) \(strtReaderDevInfo.name) [\(strtReaderDevInfo.macAddr)]"
+        tvcCell.textLabel!.text = "\(String.fontAwesomeIcon(name: .bolt)) \(strtReaderDevInfo.name)"
         return tvcCell
     }
     

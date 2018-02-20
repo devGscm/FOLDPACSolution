@@ -11,7 +11,7 @@ import Foundation
 class Constants
 {
 	//아이튠즈 앱 마켓아이디
-	static let RRPP_APP_MARKET_ID = "472616032"
+	static let RRPP_APP_MARKET_ID = "1348224769"
 	
 	static let DATE_SEARCH_DISTANCE = 7
 	
