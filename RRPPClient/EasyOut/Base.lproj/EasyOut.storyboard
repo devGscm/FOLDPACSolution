@@ -13,7 +13,7 @@
         <!--Easy Out-->
         <scene sceneID="viH-EO-Dpy">
             <objects>
-                <viewController storyboardIdentifier="EasyOut" id="ixd-SL-OWh" customClass="EasyOut" customModule="_RRPPClient" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EasyOut" id="ixd-SL-OWh" customClass="EasyOut" customModule="RRPPClient" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h7a-nc-7MS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
