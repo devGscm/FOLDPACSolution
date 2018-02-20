@@ -102,7 +102,7 @@ class ClientConfig : BaseTableViewController, DataProtocol
                 for rederInfo in rederInfoList
                 {
                     //self.btnRfidReader.setTitle(rederInfo.name, for: .normal)
-                    self.btnRfidReader.setTitle(rederInfo.macAddr, for: .normal)
+                    self.btnRfidReader.setTitle(rederInfo.name, for: .normal)
                     //반드시 한건만 있기 때문에 나감
                     break
                 }
@@ -305,7 +305,7 @@ class ClientConfig : BaseTableViewController, DataProtocol
                 let encodedData = NSKeyedArchiver.archivedData(withRootObject: rederInfos)
                 UserDefaults.standard.set(encodedData, forKey: Constants.RFID_READER_INFO_KEY)
                 UserDefaults.standard.synchronize()
-                self.btnRfidReader.setTitle(rederInfo.macAddr, for: .normal)
+                self.btnRfidReader.setTitle(rederInfo.name, for: .normal)
             }
             clsReaderDialog.discoverStop()
         }
