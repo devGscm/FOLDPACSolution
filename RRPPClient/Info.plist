@@ -31,8 +31,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>This app wants to access Bluetooth RFID Unit</string>
 	<key>NSCameraUsageDescription</key>
-	<string></string>
+	<string>This app wants to access Camera</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
