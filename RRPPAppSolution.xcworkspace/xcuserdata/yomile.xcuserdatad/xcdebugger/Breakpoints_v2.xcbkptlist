@@ -33,6 +33,68 @@
             endingLineNumber = "19"
             landmarkName = "InOutCancelDetailCell"
             landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RRPPClient.InOutCancelDetailCell.lblRemainCnt.getter : weak Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.UILabel&gt;"
+                  moduleName = "RRPPClient"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yomile/Desktop/Projects/32.RRPPSolutions/02.Solutions/RRPPSolution/RRPPClient/InOutCancel/InOutCancelDetailCell.swift"
+                  timestampString = "540803250.362657"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "92">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RRPPClient.InOutCancelDetailCell.lblRemainCnt.setter : weak Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.UILabel&gt;"
+                  moduleName = "RRPPClient"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yomile/Desktop/Projects/32.RRPPSolutions/02.Solutions/RRPPSolution/RRPPClient/InOutCancel/InOutCancelDetailCell.swift"
+                  timestampString = "540803250.36463"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "96">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RRPPClient.InOutCancelDetailCell.init(style: __C.UITableViewCellStyle, reuseIdentifier: Swift.Optional&lt;Swift.String&gt;) -&gt; RRPPClient.InOutCancelDetailCell"
+                  moduleName = "RRPPClient"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yomile/Desktop/Projects/32.RRPPSolutions/02.Solutions/RRPPSolution/RRPPClient/InOutCancel/InOutCancelDetailCell.swift"
+                  timestampString = "540803250.366358"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "460">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RRPPClient.InOutCancelDetailCell.init(coder: __ObjC.NSCoder) -&gt; Swift.Optional&lt;RRPPClient.InOutCancelDetailCell&gt;"
+                  moduleName = "RRPPClient"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yomile/Desktop/Projects/32.RRPPSolutions/02.Solutions/RRPPSolution/RRPPClient/InOutCancel/InOutCancelDetailCell.swift"
+                  timestampString = "540803250.3679399"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "416">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
