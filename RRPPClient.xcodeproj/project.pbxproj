@@ -920,7 +920,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0910;
 				LastUpgradeCheck = 0910;
-				ORGANIZATIONNAME = MORAMCNT;
+				ORGANIZATIONNAME = LOGISALL;
 				TargetAttributes = {
 					96E4941B1FB1A78500D1E2C1 = {
 						CreatedOnToolsVersion = 9.1;
