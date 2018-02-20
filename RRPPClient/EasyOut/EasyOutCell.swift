@@ -10,9 +10,10 @@ import UIKit
 
 class EasyOutCell: UITableViewCell
 {
+    
     @IBOutlet weak var lblAssetName: UILabel!
     @IBOutlet weak var lblReadCount: UILabel!
-    @IBOutlet weak var btnDetail: UIButton!
+    @IBOutlet weak var btnDetail: UIButton!    
     
     override func awakeFromNib()
     {
@@ -21,15 +22,17 @@ class EasyOutCell: UITableViewCell
     
     override func setSelected(_ selected: Bool, animated: Bool)
     {
-		//super.setSelected(selected, animated: animated)
-		if(selected)
-		{
-			contentView.backgroundColor = UIColor.groupTableViewBackground
-		}
-		else
-		{
-			contentView.backgroundColor = UIColor.white
-		}
+        //super.setSelected(selected, animated: animated)
+        if(selected)
+        {
+            contentView.backgroundColor = UIColor.groupTableViewBackground
+        }
+        else
+        {
+            contentView.backgroundColor = UIColor.white
+        }
     }
-}
+ 
 
+    
+}

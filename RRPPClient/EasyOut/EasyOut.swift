@@ -514,6 +514,7 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
     {
         //tableView.allowsSelection = false           //셀 선택안되게 막음
         let objCell:EasyOutCell = tableView.dequeueReusableCell(withIdentifier: "tvcEasyOut", for: indexPath) as! EasyOutCell
+        
         let clsTagInfo = arrAssetRows[indexPath.row]
         
         objCell.lblAssetName.text = clsTagInfo.getAssetName()
@@ -523,6 +524,8 @@ class EasyOut: BaseRfidViewController, UITableViewDataSource, UITableViewDelegat
         objCell.btnDetail.setTitle(String.fontAwesomeIcon(name: .listAlt), for: .normal)
         objCell.btnDetail.tag = indexPath.row
         objCell.btnDetail.addTarget(self, action: #selector(onTagListClicked(_:)), for: .touchUpInside)
+        
+ 
         return objCell
     }
 
