@@ -13,7 +13,7 @@
         <!--Easy In-->
         <scene sceneID="8to-JS-XLS">
             <objects>
-                <viewController storyboardIdentifier="EasyIn" id="mWy-e7-HkS" customClass="EasyIn" customModule="_RRPPClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EasyIn" id="mWy-e7-HkS" customClass="EasyIn" customModule="RRPPClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Uk-CE-xEm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -379,7 +379,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tvcEasyIn" id="cfA-Go-Irl" customClass="EasyInCell" customModule="_RRPPClient" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tvcEasyIn" id="cfA-Go-Irl" customClass="EasyInCell" customModule="RRPPClient" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="367" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cfA-Go-Irl" id="uVz-qT-KQ8">
@@ -609,7 +609,7 @@
         <!--Easy In Search-->
         <scene sceneID="dbw-hG-5Z1">
             <objects>
-                <viewController storyboardIdentifier="EasyInSearch" id="sac-ed-Mbe" customClass="EasyInSearch" customModule="_RRPPClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EasyInSearch" id="sac-ed-Mbe" customClass="EasyInSearch" customModule="RRPPClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RkE-Cy-sxl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -769,7 +769,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tvcEasyInSearch" id="rAA-ly-i5C" customClass="EasyInSearchCell" customModule="_RRPPClient" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tvcEasyInSearch" id="rAA-ly-i5C" customClass="EasyInSearchCell" customModule="RRPPClient" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="352" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rAA-ly-i5C" id="ybc-3E-PbD">

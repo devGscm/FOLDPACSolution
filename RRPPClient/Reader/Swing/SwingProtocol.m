@@ -289,8 +289,9 @@
             case 'T':	// 'T', tag report mode
             	if ([((NSObject*)_delegate) respondsToSelector:@selector(Swing_Response_TagList:)])
    				{
+                    NSLog(@"##[SwingProtocol] -> SwingProtocol ::TAG 1번");
                  	[_delegate Swing_Response_TagList:tempresult];
-                   
+                    NSLog(@"##[SwingProtocol] -> SwingProtocol ::TAG 2번");
         		}
                 break;
                 
