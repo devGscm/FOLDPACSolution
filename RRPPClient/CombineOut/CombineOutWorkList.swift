@@ -148,7 +148,7 @@ class CombineOutWorkList: BaseViewController, UITableViewDataSource, UITableView
         }
         
         tvCombineOutWorkList.showIndicator()
-        clsDataClient.addServiceParam(paramName: "strtDelidate", value: strLocaleStDate)
+        clsDataClient.addServiceParam(paramName: "startDeliDate", value: strLocaleStDate)
         clsDataClient.addServiceParam(paramName: "endDeliDate", value: strLocaleEnDate)
         clsDataClient.addServiceParam(paramName: "searchCondition", value: "1")
         clsDataClient.addServiceParam(paramName: "searchValue", value: strSearchValue)
