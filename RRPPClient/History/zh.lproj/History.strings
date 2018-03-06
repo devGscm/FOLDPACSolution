@@ -43,3 +43,6 @@
 
 /* Class = "UILabel"; text = "이벤트"; ObjectID = "t52-Sw-LpM"; */
 "t52-Sw-LpM.text" = "状态";
+
+/* Class = "UILabel"; text = "입출고처"; ObjectID = "Fd4-Pl-cVQ"; */
+"Fd4-Pl-cVQ.text" = "出入库地";

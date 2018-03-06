@@ -15,8 +15,9 @@ class HistorySearchCell: UITableViewCell
 	@IBOutlet weak var lblEventName: UILabel!
 	@IBOutlet weak var lblEventCount: UILabel!
 	@IBOutlet weak var lblBranchName: UILabel!
-	
-	override func awakeFromNib()
+    @IBOutlet weak var lblToFromBranchName: UILabel!
+    
+    override func awakeFromNib()
 	{
         super.awakeFromNib()
     }

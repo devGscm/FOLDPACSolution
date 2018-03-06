@@ -242,11 +242,32 @@ class HistorySearch: BaseViewController, UITableViewDataSource, UITableViewDeleg
 		let strLocaleTraceDate = DateUtil.utcToLocale(utcDate: strUtcTraceDate!, dateFormat: "yyyyMMddHHmmss")
 		let strTraceDate = DateUtil.getConvertFormatDate(date: strLocaleTraceDate, srcFormat: "yyyyMMddHHmmss", dstFormat:"MM-dd HH:mm")
 
+        //이은미과장님 요청 20180306 - '입출고처' 처리
+        let strEventCode = clsDataRow.getString(name:"eventCode")  ?? ""
+        let strFromBranchName = clsDataRow.getString(name:"fromBranchName")  ?? ""
+        let strToBranchName = clsDataRow.getString(name:"toBranchName")  ?? ""
+        var strToFromBranchName = "-"
+        
+        if(strEventCode == Constants.EVENT_CODE_IN) //10:입고
+        {
+            strToFromBranchName = strFromBranchName
+        }
+        else if(strEventCode == Constants.EVENT_CODE_OUT) //90:출고
+        {
+            strToFromBranchName = strToBranchName
+        }
+        else
+        {
+            strToFromBranchName = "-"
+        }
+        
 		objCell.lblTraceDate?.text = strTraceDate
 		objCell.lblAssetEpcName?.text = clsDataRow.getString(name:"assetEpcName")
 		objCell.lblEventName?.text = clsDataRow.getString(name:"eventName")
 		objCell.lblEventCount?.text = clsDataRow.getString(name:"eventCnt")
 		objCell.lblBranchName?.text = clsDataRow.getString(name:"branchName")
+        //objCell.lblToFromBranchName?.text = clsDataRow.getString(name:"toFromBranchName")
+        objCell.lblToFromBranchName?.text = strToFromBranchName
 		return objCell
 	}
 	
