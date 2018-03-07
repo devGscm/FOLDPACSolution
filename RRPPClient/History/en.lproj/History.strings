@@ -44,7 +44,7 @@
 /* Class = "UILabel"; text = "이벤트"; ObjectID = "t52-Sw-LpM"; */
 "t52-Sw-LpM.text" = "Event";
 
-/* Class = "UILabel"; text = "입출고처"; ObjectID = "Fd4-Pl-cVQ"; */
-"Fd4-Pl-cVQ.text" = "Dest./Dprt. Com.";
+/* Class = "UILabel"; text = "입출고처"; ObjectID = "eIp-JK-2GD"; */
+"eIp-JK-2GD.text" = "Dest./Dprt. Com.";
 
 
