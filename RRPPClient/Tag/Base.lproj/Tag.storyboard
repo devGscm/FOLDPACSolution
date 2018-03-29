@@ -13,7 +13,7 @@
         <!--Rfid Inspect-->
         <scene sceneID="2Gn-ss-YvB">
             <objects>
-                <viewController storyboardIdentifier="RfidInspect" id="dqF-ZO-tK1" customClass="RfidInspect" customModule="_RRPPClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RfidInspect" id="dqF-ZO-tK1" customClass="RfidInspect" customModule="RRPPClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UCM-D0-txw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -193,7 +193,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tvcRfidInspect" rowHeight="54" id="FZh-58-Xqg" customClass="RfidInspectCell" customModule="_RRPPClient" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tvcRfidInspect" rowHeight="54" id="FZh-58-Xqg" customClass="RfidInspectCell" customModule="RRPPClient" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="367" height="54"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FZh-58-Xqg" id="QQM-7O-p9J">
@@ -351,7 +351,7 @@
         <!--Tag Supply-->
         <scene sceneID="K4m-ck-CvA">
             <objects>
-                <viewController storyboardIdentifier="TagSupply" id="FtR-ua-8ef" customClass="TagSupply" customModule="_RRPPClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TagSupply" id="FtR-ua-8ef" customClass="TagSupply" customModule="RRPPClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="S8r-fb-rPY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -566,7 +566,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tvcTagSupply" id="Tde-ks-0g8" customClass="TagSupplyCell" customModule="_RRPPClient" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tvcTagSupply" id="Tde-ks-0g8" customClass="TagSupplyCell" customModule="RRPPClient" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="367" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Tde-ks-0g8" id="Uqe-UY-6NB">
@@ -695,7 +695,7 @@
         <!--Tag Order Search-->
         <scene sceneID="1EN-cc-Tud">
             <objects>
-                <viewController storyboardIdentifier="ProductOrderSearch" id="EY5-lc-Oqn" customClass="TagOrderSearch" customModule="_RRPPClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProductOrderSearch" id="EY5-lc-Oqn" customClass="TagOrderSearch" customModule="RRPPClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="djJ-9z-laG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -882,7 +882,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tvcTagOrderSearchCell" id="NjB-v3-rVF" customClass="TagOrderSearchCell" customModule="_RRPPClient" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tvcTagOrderSearchCell" id="NjB-v3-rVF" customClass="TagOrderSearchCell" customModule="RRPPClient" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="352" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NjB-v3-rVF" id="rPB-l2-DSz">
@@ -1009,7 +1009,7 @@
         <!--Rfid Tracking Service-->
         <scene sceneID="tmZ-Az-mVT">
             <objects>
-                <viewController storyboardIdentifier="RfidTrackingService" id="YaI-Dp-hZU" customClass="RfidTrackingService" customModule="_RRPPClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RfidTrackingService" id="YaI-Dp-hZU" customClass="RfidTrackingService" customModule="RRPPClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Urf-MG-I23">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1215,7 +1215,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tvcRfidTrackingService" rowHeight="52" id="iQ7-kp-Z94" customClass="RfidTrackingServiceCell" customModule="_RRPPClient" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tvcRfidTrackingService" rowHeight="52" id="iQ7-kp-Z94" customClass="RfidTrackingServiceCell" customModule="RRPPClient" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="367" height="52"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iQ7-kp-Z94" id="Kkr-2a-trn">
