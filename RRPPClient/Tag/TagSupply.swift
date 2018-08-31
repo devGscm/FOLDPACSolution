@@ -50,6 +50,9 @@ class TagSupply: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 		self.initRfid(self as ReaderResponseDelegate )
 		
 		initViewControl()
+        
+        // 2018 0807 bhkim, 화면 꺼짐 방지 설정 = ON
+        UIApplication.shared.isIdleTimerDisabled = true
 	}
 	
 	override func viewDidAppear(_ animated: Bool)
@@ -66,6 +69,9 @@ class TagSupply: BaseRfidViewController, UITableViewDataSource, UITableViewDeleg
 		arrTagRows.removeAll()
 		clsIndicator = nil
 		clsDataClient = nil
+        
+        // 2018 0807 bhkim, 화면 꺼짐 방지 설정 = OFF
+        //UIApplication.shared.isIdleTimerDisabled = false
 		
 		super.destoryRfid()
 		super.viewDidDisappear(animated)
