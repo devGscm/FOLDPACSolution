@@ -235,11 +235,16 @@ class BaseRfidViewController : BaseViewController, UITextFieldDelegate
 		#else
 			guard let devId  = AppContext.sharedManager.getUserInfo().getReaderDevId() else
 			{
-				Dialog.show(container: self, title: nil, message: NSLocalizedString("rfid_no_selected_bluetooth_select_config", comment: "선택된 블루투스 장비가 없습니다."))
-				let clsController: ClientConfig = {
-					return UIStoryboard.viewController(storyBoardName: "Config", identifier: "ClientConfig") as! ClientConfig
-				}()
-				self.toolbarController?.transition(to: clsController, completion:	nil)
+                // 2018 0725 동기 > 비동기로 수정
+                DispatchQueue.main.async
+                {
+                    Dialog.show(container: self, title: nil, message: NSLocalizedString("rfid_no_selected_bluetooth_select_config", comment: "선택된 블루투스 장비가 없습니다."))
+                    
+                    let clsController: ClientConfig = {
+                        return UIStoryboard.viewController(storyBoardName: "Config", identifier: "ClientConfig") as! ClientConfig
+                    }()
+                    self.toolbarController?.transition(to: clsController, completion:    nil)
+                }
 				return
 			}
 		#endif
