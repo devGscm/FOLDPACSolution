@@ -39,7 +39,7 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     
     var clsIndicator : ProgressIndicator?
     var clsDataClient : DataClient!
-    var clsBarcodeScanner: BarcodeScannerController?
+    var clsBarcodeScanner: BarcodeScannerViewController?
     
     var strTitle = ""
     var mStrSaleWorkId = String()                        //송장번호
@@ -72,11 +72,17 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         print("*CombineOut.viewDidLoad()")
         print("=========================================")
         super.viewDidLoad()
-        initBarcodeScanner()
+        //initBarcodeScanner()
         
         //다른 화면 터치시 키보드 숨기기
         self.hideKeyboardWhenTappedAround()
 
+    }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        
     }
     
     //=======================================
@@ -104,6 +110,9 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         
         //RFID를 처리할 델리게이트 지정
         self.initRfid(self as ReaderResponseDelegate )
+        
+        // 2018 0807 bhkim, 화면 꺼짐 방지 설정 = ON
+        UIApplication.shared.isIdleTimerDisabled = true
     }
     
     
@@ -131,8 +140,17 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         clsIndicator = nil
         clsDataClient = nil
         
+        
         super.destoryRfid()
         super.viewDidDisappear(animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool)
+    {
+        super.viewWillDisappear(animated)
+        
+        // 2018 0807 bhkim, 화면 꺼짐 방지 설정 = OFF
+        //UIApplication.shared.isIdleTimerDisabled = false
     }
     
     
@@ -391,8 +409,8 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
                     {
                         //화면에 정보표시
                         self.btnSaleWorkId.setTitle(self.mStrSaleWorkId, for: .normal)
-                        self.lblOrderCustName.text   = strOrderCustName
-                        self.lblDeliBranchName.text  = strDeliBranchName
+                        self.lblOrderCustName.text   = strDeliBranchName // 2018 0803 bhkim 입고처 정보로 표시 strOrderCustName > strDeliBranchName
+                        self.lblDeliBranchName.text  = strOrderCustName // 2018 0803 bhkim 주문처 정보로 표시 strDeliBranchName > strOrderCustName
                         self.lblAssignCount.text     = String(self.mIntWorkAssignCount)
                         self.lblProcCount.text       = String(self.mIntProcCount)
                         self.tfVehName.text          = strVehName
@@ -778,13 +796,37 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     //=======================================
     func initBarcodeScanner()
     {
-        BarcodeScanner.Title.text = NSLocalizedString("common_barcode_search", comment: "바코드")
-        BarcodeScanner.CloseButton.text = NSLocalizedString("common_close", comment: "닫기")
-        BarcodeScanner.SettingsButton.text = "설정"
-        BarcodeScanner.Info.text = NSLocalizedString("msg_default_status", comment: "바코드를 사각형 안으로 넣어주세요.")
-        BarcodeScanner.Info.notFoundText = NSLocalizedString("common_no_data_for_barcode", comment: "해당 바코드에 해당하는 데이터가 없습니다.")
+        // 2018 0725 bhkim barcode.framework update에 따라 수정함
+        clsBarcodeScanner?.headerViewController.titleLabel.text = NSLocalizedString("common_barcode_search", comment: "바코드")
+        clsBarcodeScanner?.headerViewController.closeButton.setTitle(NSLocalizedString("common_close", comment: "닫기"), for: .normal)
         
-        BarcodeScanner.Info.loadingText = NSLocalizedString("common_progressbar_loading", comment: "로딩 중 입니다.")
+        clsBarcodeScanner?.cameraViewController.settingsButton.setTitle("설정", for: .normal)
+        
+        //20180801 bhkim 메세지 추가
+        clsBarcodeScanner?.messageViewController.textLabel.text = NSLocalizedString("msg_default_status", comment: "바코드를 사각형 안으로 넣어주세요.")
+        
+        //clsBarcodeScanner?.messageViewController.messages.scanningText = NSLocalizedString("msg_default_status", comment: "바코드를 사각형 안으로 넣어주세요.")
+        clsBarcodeScanner?.messageViewController.messages.notFoundText = NSLocalizedString("common_no_data_for_barcode", comment: "해당 바코드에 해당하는 데이터가 없습니다.")
+        clsBarcodeScanner?.messageViewController.messages.processingText = NSLocalizedString("common_progressbar_loading", comment: "로딩 중 입니다.")
+        
+        //var HeaderViewController: HeaderViewController = .init()
+        //HeaderViewController.title = NSLocalizedString("common_barcode_search", comment: "바코드")
+        //HeaderViewController.closeButton.titleLabel?.text = NSLocalizedString("common_close", comment: "닫기")
+        
+        //var CameraViewController: CameraViewController = .init()
+        //CameraViewController.settingsButton.titleLabel?.text = "설정"
+        
+        //var MessageViewController: MessageViewController = .init()
+        //MessageViewController.messages.scanningText = NSLocalizedString("msg_default_status", comment: "바코드를 사각형 안으로 넣어주세요.")
+        //MessageViewController.messages.notFoundText = NSLocalizedString("common_no_data_for_barcode", comment: "해당 바코드에 해당하는 데이터가 없습니다.")
+        //MessageViewController.messages.processingText = NSLocalizedString("common_progressbar_loading", comment: "로딩 중 입니다.")
+        //BarcodeScanner.Title.text = NSLocalizedString("common_barcode_search", comment: "바코드")
+        //BarcodeScanner.CloseButton.text = NSLocalizedString("common_close", comment: "닫기")
+        //BarcodeScanner.SettingsButton.text = "설정"
+        //BarcodeScanner.Info.text = NSLocalizedString("msg_default_status", comment: "바코드를 사각형 안으로 넣어주세요.")
+        //BarcodeScanner.Info.notFoundText = NSLocalizedString("common_no_data_for_barcode", comment: "해당 바코드에 해당하는 데이터가 없습니다.")
+        
+        //BarcodeScanner.Info.loadingText = NSLocalizedString("common_progressbar_loading", comment: "로딩 중 입니다.")
         //        BarcodeScanner.Info.settingsText = NSLocalizedString("In order to scan barcodes you have to allow camera under your settings.", comment: "")
         
         //        // Fonts
@@ -811,7 +853,7 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
     //=======================================
     @IBAction func onBarcodeSearchClicked(_ sender: UIButton)
     {
-		clsBarcodeScanner = BarcodeScannerController()
+		clsBarcodeScanner = BarcodeScannerViewController()
 		clsBarcodeScanner?.codeDelegate = self
 		clsBarcodeScanner?.errorDelegate = self
 		clsBarcodeScanner?.dismissalDelegate = self
@@ -819,6 +861,9 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         // 모달로 띄운다.
         clsBarcodeScanner?.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         present(clsBarcodeScanner!, animated: true, completion: nil)
+        
+        //2018 0725 barcode 초기화 동작 시점을 바코드 클릭으로 변경
+        initBarcodeScanner()
     }
     
     func doSearchBarcode(barcode: String)
@@ -1249,6 +1294,10 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
         clsDataClient.addServiceParam(paramName: "barcodeId",       value: "")      //바코드ID
         clsDataClient.addServiceParam(paramName: "itemCode",        value: "")      //제품코드
         clsDataClient.addServiceParam(paramName: "prodCnt",         value: "")      //제품개수
+        
+        //2018 0803 bhkim 데이터 전송시 Log에 남겨질 정보 추가 >> 공통정보로 한번에 보내도록 수정 예정
+        //clsDataClient.addServiceParam(paramName: "deviceOs",        value: "iOS " + UIDevice.current.systemVersion)
+        //clsDataClient.addServiceParam(paramName: "appVersion",      value: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.00")
                 
         //완료전송 및(강제)완료전송, 처리진행인경우
         if(Constants.WORK_STATE_COMPLETE == workState)
@@ -1350,7 +1399,7 @@ class CombineOut: BaseRfidViewController, UITableViewDataSource, UITableViewDele
 
 extension CombineOut: BarcodeScannerCodeDelegate
 {
-    func barcodeScanner(_ controller: BarcodeScannerController, didCaptureCode barcode: String, type: String)
+    func scanner(_ controller: BarcodeScannerViewController, didCaptureCode barcode: String, type: String)
     {
         print("================================")
         print(" - Barcode Data: \(barcode)")
@@ -1377,7 +1426,7 @@ extension CombineOut: BarcodeScannerCodeDelegate
 
 extension CombineOut: BarcodeScannerErrorDelegate
 {
-    func barcodeScanner(_ controller: BarcodeScannerController, didReceiveError error: Error)
+    func scanner(_ controller: BarcodeScannerViewController, didReceiveError error: Error)
     {
         print(error)
     }
@@ -1385,7 +1434,7 @@ extension CombineOut: BarcodeScannerErrorDelegate
 
 extension CombineOut: BarcodeScannerDismissalDelegate
 {
-    func barcodeScannerDidDismiss(_ controller: BarcodeScannerController) {
+    func scannerDidDismiss(_ controller: BarcodeScannerViewController) {
         controller.dismiss(animated: true, completion: nil)
     }
 }
@@ -1406,5 +1455,3 @@ extension CombineOut
 		//tc.toolbar.detailLabel.font 
     }
 }
-
-
