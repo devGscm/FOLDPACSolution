@@ -40,11 +40,15 @@ class EventOther : BaseRfidViewController, UITableViewDataSource, UITableViewDel
 		self.initRfid(self as ReaderResponseDelegate )
 		
 		initViewControl()
+        
+        // 2018 0807 bhkim, 화면 꺼짐 방지 설정 = ON
+        UIApplication.shared.isIdleTimerDisabled = true
 	}
 	
 	override func viewDidAppear(_ animated: Bool)
 	{
 		super.viewDidAppear(animated)
+        
 	}
 	
     override func viewDidLoad()
@@ -62,6 +66,9 @@ class EventOther : BaseRfidViewController, UITableViewDataSource, UITableViewDel
 		arrTagRows.removeAll()
 		clsIndicator = nil
 		clsDataClient = nil
+        
+        // 2018 0807 bhkim, 화면 꺼짐 방지 설정 = OFF
+        //UIApplication.shared.isIdleTimerDisabled = false
 		
 		super.destoryRfid()
 		super.viewDidDisappear(animated)
@@ -265,6 +272,10 @@ class EventOther : BaseRfidViewController, UITableViewDataSource, UITableViewDel
 		clsDataClient.addServiceParam(paramName: "branchId", value: AppContext.sharedManager.getUserInfo().getBranchId())
 		clsDataClient.addServiceParam(paramName: "branchCustId", value: AppContext.sharedManager.getUserInfo().getBranchCustId())
 		clsDataClient.addServiceParam(paramName: "eventCode", value: eventType)
+        
+        //2018 0803 bhkim 데이터 전송시 Log에 남겨질 정보 추가 >> 공통정보로 한번에 보내도록 수정 예정
+        //clsDataClient.addServiceParam(paramName: "deviceOs",        value: "iOS " + UIDevice.current.systemVersion)
+        //clsDataClient.addServiceParam(paramName: "appVersion",      value: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.00")
 
 		let clsDataTable : DataTable = DataTable()
 		clsDataTable.Id = "EVENT"

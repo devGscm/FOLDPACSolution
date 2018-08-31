@@ -47,12 +47,16 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 		//RFID를 처리할 델리게이트 지정
 		self.initRfid(self as ReaderResponseDelegate )
 		initViewControl()
+        
+        // 2018 0807 bhkim, 화면 꺼짐 방지 설정 = ON
+        UIApplication.shared.isIdleTimerDisabled = true
 	}
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()         //키보드 숨기기
+        
     }
 	
 	override func viewDidAppear(_ animated: Bool)
@@ -69,6 +73,9 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 		arrTagRows.removeAll()
 		clsIndicator = nil
 		clsDataClient = nil
+        
+        // 2018 0807 bhkim, 화면 꺼짐 방지 설정 = OFF
+        //UIApplication.shared.isIdleTimerDisabled = false
 		
 		super.destoryRfid()
 		super.viewDidDisappear(animated)
@@ -530,6 +537,10 @@ class StockReview: BaseRfidViewController, UITableViewDataSource, UITableViewDel
 		
 		clsDataClient.addServiceParam(paramName: "workState", value: workState)
 		clsDataClient.addServiceParam(paramName: "stockReviewId", value: stockReviewId)
+        
+        //2018 0803 bhkim 데이터 전송시 Log에 남겨질 정보 추가 >> 공통정보로 한번에 보내도록 수정 예정
+        //clsDataClient.addServiceParam(paramName: "deviceOs",        value: "iOS " + UIDevice.current.systemVersion)
+        //clsDataClient.addServiceParam(paramName: "appVersion",      value: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.00")
 		
 		// 완료전송인경우
 		if(Constants.WORK_STATE_COMPLETE == workState)
@@ -703,4 +714,3 @@ extension StockReview
 		tc.toolbar.title = NSLocalizedString("title_stock_review", comment: "재고실사")
 	}
 }
-

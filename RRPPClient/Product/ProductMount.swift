@@ -54,6 +54,9 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 	override func viewDidAppear(_ animated: Bool)
 	{
 		super.viewDidAppear(animated)
+        
+        // 2018 0807 bhkim, 화면 꺼짐 방지 설정 = ON
+        UIApplication.shared.isIdleTimerDisabled = true
 	}
 	
     override func viewDidLoad()
@@ -71,6 +74,9 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		arrTagRows.removeAll()
 		clsIndicator = nil
 		clsDataClient = nil
+        
+        // 2018 0807 bhkim, 화면 꺼짐 방지 설정 = OFF
+        //UIApplication.shared.isIdleTimerDisabled = false
 		
 		super.destoryRfid()
 		super.viewDidDisappear(animated)
@@ -376,6 +382,10 @@ class ProductMount: BaseRfidViewController, UITableViewDataSource, UITableViewDe
 		clsDataClient.addServiceParam(paramName: "makeLotId", value: makeLotId)
 		clsDataClient.addServiceParam(paramName: "workerName", value: workerName)
 		clsDataClient.addServiceParam(paramName: "remark", value: remark)
+        
+        //2018 0803 bhkim 데이터 전송시 Log에 남겨질 정보 추가 >> 공통정보로 한번에 보내도록 수정 예정
+        //clsDataClient.addServiceParam(paramName: "deviceOs",        value: "iOS " + UIDevice.current.systemVersion)
+        //clsDataClient.addServiceParam(paramName: "appVersion",      value: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.00")
 		
 		let clsDataTable : DataTable = DataTable()
 		clsDataTable.Id = "TAG_MOUNT"

@@ -21,6 +21,8 @@ class RootViewController: BaseViewController, UITableViewDataSource, UITableView
 	{
 		super.viewWillAppear(animated)
 		super.initController()
+        
+        UIApplication.shared.isIdleTimerDisabled = false
 		
 		// 메인화면에서 툴바 타이틀이 항상 바뀌도록 viewDidLoad에 있던것을 viewWillAppear에서 하도록 조정함
 		prepareToolbar()
@@ -33,6 +35,7 @@ class RootViewController: BaseViewController, UITableViewDataSource, UITableView
 		//btnRefresh.titleLabel?.font = UIFont.fontAwesome(ofSize: 10)
 		//btnRefresh.setTitle(String.fontAwesomeIcon(name: .refresh), for: .normal)
 		
+        
 		if(AppContext.sharedManager.getUserInfo().getAutoLogin() == true || AppContext.sharedManager.getAuthenticated() == true)
 		{
 			
@@ -65,6 +68,7 @@ class RootViewController: BaseViewController, UITableViewDataSource, UITableView
 		{
 			self.performSegue(withIdentifier: "segLogin", sender: self)
 		}
+        
 	}
 
 	

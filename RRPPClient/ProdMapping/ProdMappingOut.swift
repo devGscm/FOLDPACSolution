@@ -97,6 +97,9 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
 		super.viewDidAppear(animated)
 		
 		//initTestProcess()
+        
+        // 2018 0807 bhkim, 화면 꺼짐 방지 설정 = ON
+        UIApplication.shared.isIdleTimerDisabled = true
 	}
 	
 	
@@ -162,6 +165,9 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
         
 		clsIndicator = nil
 		clsDataClient = nil
+        
+        // 2018 0807 bhkim, 화면 꺼짐 방지 설정 = OFF
+        //UIApplication.shared.isIdleTimerDisabled = false
 		
 		super.destoryRfid()
 		super.viewDidDisappear(animated)
@@ -1549,6 +1555,10 @@ class ProdMappingOut: BaseRfidViewController, UITableViewDataSource, UITableView
         clsDataClient.addServiceParam(paramName: "barcodeId", value: "")	// 바코드ID
         clsDataClient.addServiceParam(paramName: "itemCode", value: "")		// 제품 코드
         clsDataClient.addServiceParam(paramName: "prodCnt", value: "")		// 제품 개수
+        
+        //2018 0803 bhkim 데이터 전송시 Log에 남겨질 정보 추가 >> 공통정보로 한번에 보내도록 수정 예정
+        //clsDataClient.addServiceParam(paramName: "정",        value: "iOS " + UIDevice.current.systemVersion)
+        //clsDataClient.addServiceParam(paramName: "appVersion",      value: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.00")
 
 
         // 완료전송인경우
