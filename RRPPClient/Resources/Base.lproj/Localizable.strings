@@ -340,7 +340,8 @@
 "sale_order_addr" = "배송지주소";
 "sale_prod_asset_epc_name" = "품목";
 "sale_prod_grade_name" = "등급";
-"sale_order_cust_name" = "판매처";
+//"sale_order_cust_name" = "판매처"; /* 2018 0802 bhkim 변경*/
+"sale_order_cust_name" = "주문처";
 "sale_in_cust_name" = "입고처";
 "sale_out_cancel_order_cust_name" = "판매처";
 "sale_move_cust_sname" = "배송처";
@@ -550,6 +551,5 @@
 "msg_charged_service" = "유료 서비스입니다. 서비스 사용계약여부를 확인 부탁드립니다.";
 
 /* 통합 화면 끝 */
-
 
 

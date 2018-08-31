@@ -340,7 +340,8 @@
 "sale_order_addr" = "配送地地址";
 "sale_prod_asset_epc_name" = "品目";
 "sale_prod_grade_name" = "等级";
-"sale_order_cust_name" = "销售处";
+//"sale_order_cust_name" = "销售处"; /* 2018 0802 bhkim 변경*/
+"sale_order_cust_name" = "订购处";
 "sale_in_cust_name" = "入库处";
 "sale_out_cancel_order_cust_name" = "销售处";
 "sale_move_cust_sname" = "配送放

@@ -342,7 +342,8 @@
 "sale_order_addr" = "配送注所";
 "sale_prod_asset_epc_name" = "類型";
 "sale_prod_grade_name" = "グレード";
-"sale_order_cust_name" = "販売拠点";
+//"sale_order_cust_name" = "販売拠点"; /* 2018 0802 bhkim 변경*/
+"sale_order_cust_name" = "注文先";
 "sale_in_cust_name" = "入庫拠点";
 "sale_out_cancel_order_cust_name" = "販売拠点";
 "sale_move_cust_sname" = "配送先";
