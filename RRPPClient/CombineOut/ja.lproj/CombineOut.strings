@@ -21,7 +21,7 @@
 "4Fd-1A-jCs.normalTitle" = "初期化";
 
 /* Class = "UILabel"; text = "배송거점"; ObjectID = "5IL-zN-x3Y"; */
-"5IL-zN-x3Y.text" = "配送拠点";
+"5IL-zN-x3Y.text" = "注文先";
 
 /* Class = "UILabel"; text = "Swing U"; ObjectID = "5UB-z4-plh"; */
 "5UB-z4-plh.text" = "Swing U";
