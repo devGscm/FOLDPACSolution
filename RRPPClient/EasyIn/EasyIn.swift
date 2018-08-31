@@ -42,7 +42,7 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 	
 	var clsIndicator : ProgressIndicator?
 	var clsDataClient : DataClient!
-	var clsBarcodeScanner: BarcodeScannerController?
+	var clsBarcodeScanner: BarcodeScannerViewController?
 	
 	func setTitle(title: String)
 	{
@@ -52,10 +52,13 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
-		initBarcodeScanner()
+		//initBarcodeScanner()
 		self.hideKeyboardWhenTappedAround()         //키보드 숨기기
 		// 옵져버 패턴 : 응답대기(AppDelegate.swift의 applicationWillTerminate에서 전송)
 		NotificationCenter.default.addObserver(self, selector: #selector(onAppTerminate), name: NSNotification.Name(rawValue: "onAppTerminate"), object: nil)
+        
+        //let barcodeViewController = BarcodeScannerViewController()
+    
 	}
 	
 	override func viewWillAppear(_ animated: Bool)
@@ -70,11 +73,18 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 		self.initRfid(self as ReaderResponseDelegate )
 		
 		initViewControl()
+        
+        // 2018 0807 bhkim, 화면 꺼짐 방지 설정 = ON
+        UIApplication.shared.isIdleTimerDisabled = true
 	}
 	
+    //=======================================
+    //=====  viewDidAppear()
+    //=======================================
 	override func viewDidAppear(_ animated: Bool)
 	{
 		super.viewDidAppear(animated)
+        
 	}
 	
 	@objc public func onAppTerminate()
@@ -133,10 +143,18 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 		arrTagRows.removeAll()
 		clsIndicator = nil
 		clsDataClient = nil
-		
+        
 		super.destoryRfid()
 		super.viewDidDisappear(animated)
 	}
+    
+    override func viewWillDisappear(_ animated: Bool)
+    {
+        super.viewWillDisappear(animated)
+        
+        // 2018 0807 bhkim, 화면 꺼짐 방지 설정 = OFF
+        //UIApplication.shared.isIdleTimerDisabled = false
+    }
 	
 	// View관련 컨트롤을 초기화한다.
 	func initViewControl()
@@ -150,7 +168,7 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 		// 테이블뷰 셀표시 지우기
 		tvEasyIn.tableFooterView = UIView(frame: CGRect.zero)
 	}
-
+    
 	
 	// Segue로 파라미터 넘기면 반드시 prepare를 타기 때문에 여기서 DataProtocol을 세팅하는걸로 함
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -925,6 +943,9 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 		clsDataClient.addServiceParam(paramName: "itemCode",		value: "")	// 제품 코드
 		clsDataClient.addServiceParam(paramName: "prodCnt",			value: "")	// 제품 개수
 	
+        //2018 0803 bhkim 데이터 전송시 Log에 남겨질 정보 추가 >> 공통정보로 한번에 보내도록 수정 예정
+        //clsDataClient.addServiceParam(paramName: "deviceOs",        value: "iOS " + UIDevice.current.systemVersion)
+        //clsDataClient.addServiceParam(paramName: "appVersion",      value: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.00")
 	
 		// 완료전송 및(강제)완료전송 경우
 		if(Constants.WORK_STATE_COMPLETE == workState || Constants.WORK_STATE_COMPLETE_FORCE == workState)
@@ -1012,7 +1033,7 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 				{
 					// 전송실패
 					let strMsg = super.getProcMsgName(userLang: AppContext.sharedManager.getUserInfo().getUserLang(), commCode: strResultCode!)
-					//print("-strMsg:  \(strMsg)")
+					self.showSnackbar(message: strMsg)
                     
 					if(Constants.PROC_RESULT_ERROR_NEED_WORK_COMPLETE_FORCE == strResultCode)
 					{
@@ -1046,7 +1067,9 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 					}
 					else
 					{
-						super.showSnackbar(message: NSLocalizedString("common_error", comment: "에러"))
+                        //2018 0829 bhkim 에러메세지 표시 안되는 문제 수정 : self.showSnackbar(message: strMsg) 코드로 수정함
+                        //'에러' 메세지만 출력됨 : super.showSnackbar(message: NSLocalizedString("common_error", comment: "에러"))
+                        self.showSnackbar(message: strMsg)
 					}
                     
                     /*
@@ -1189,19 +1212,41 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 	// 리더기 관련 이벤트및 처리 끝
 	//========================================================================
 	
-	
+    
 	//========================================================================
 	// 바코드 관련 이벤트및 처리 시작
 	//------------------------------------------------------------------------
-	func initBarcodeScanner()
+    func initBarcodeScanner()
 	{
-		BarcodeScanner.Title.text = NSLocalizedString("common_barcode_search", comment: "바코드")
-		BarcodeScanner.CloseButton.text = NSLocalizedString("common_close", comment: "닫기")
-		BarcodeScanner.SettingsButton.text = "설정"
-		BarcodeScanner.Info.text = NSLocalizedString("msg_default_status", comment: "바코드를 사각형 안으로 넣어주세요.")
-		BarcodeScanner.Info.notFoundText = NSLocalizedString("common_no_data_for_barcode", comment: "해당 바코드에 해당하는 데이터가 없습니다.")
+    
+        //2018 0725 bhkim barcode.framework update에 따라 수정함
+        clsBarcodeScanner?.headerViewController.titleLabel.text = NSLocalizedString("common_barcode_search", comment: "바코드")
+        clsBarcodeScanner?.headerViewController.closeButton.setTitle(NSLocalizedString("common_close", comment: "닫기"), for: .normal)
+        
+        clsBarcodeScanner?.cameraViewController.settingsButton.setTitle("설정", for: .normal)
+        
+
+        //20180801 bhkim 메세지 추가
+        clsBarcodeScanner?.messageViewController.textLabel.text = NSLocalizedString("msg_default_status", comment: "바코드를 사각형 안으로 넣어주세요.")
+        
+        //clsBarcodeScanner?.messageViewController.messages.scanningText = NSLocalizedString("msg_default_status", comment: "바코드를 사각형 안으로 넣어주세요.")
+        clsBarcodeScanner?.messageViewController.messages.notFoundText = NSLocalizedString("common_no_data_for_barcode", comment: "해당 바코드에 해당하는 데이터가 없습니다.")
+        clsBarcodeScanner?.messageViewController.messages.processingText = NSLocalizedString("common_progressbar_loading", comment: "로딩 중 입니다.")
+
+
+        
+       // var messageViewController: MessageViewController = self.init()
+       // messageViewController.messages.scanningText = NSLocalizedString("msg_default_status", comment: "바코드를 사각형 안으로 넣어주세요.")
+       // messageViewController.messages.notFoundText = NSLocalizedString("common_no_data_for_barcode", comment: "해당 바코드에 해당하는 데이터가 없습니다.")
+        //messageViewController.messages.processingText = NSLocalizedString("common_progressbar_loading", comment: "로딩 중 입니다.")
+        
+		//BarcodeScanner.Title.text = NSLocalizedString("common_barcode_search", comment: "바코드")
+		//BarcodeScanner.CloseButton.text = NSLocalizedString("common_close", comment: "닫기")
+		//BarcodeScanner.SettingsButton.text = "설정"
+		//BarcodeScanner.Info.text = NSLocalizedString("msg_default_status", comment: "바코드를 사각형 안으로 넣어주세요.")
+		//BarcodeScanner.Info.notFoundText = NSLocalizedString("common_no_data_for_barcode", comment: "해당 바코드에 해당하는 데이터가 없습니다.")
 		
-		BarcodeScanner.Info.loadingText = NSLocalizedString("common_progressbar_loading", comment: "로딩 중 입니다.")
+		//BarcodeScanner.Info.loadingText = NSLocalizedString("common_progressbar_loading", comment: "로딩 중 입니다.")
 		//		BarcodeScanner.Info.settingsText = NSLocalizedString("In order to scan barcodes you have to allow camera under your settings.", comment: "")
 		
 		//		// Fonts
@@ -1223,17 +1268,21 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 
 	}
 	
-	
 	@IBAction func onBarcodeSearchClicked(_ sender: UIButton)
 	{
-		clsBarcodeScanner = BarcodeScannerController()
+		clsBarcodeScanner = BarcodeScannerViewController()
 		clsBarcodeScanner?.codeDelegate = self
 		clsBarcodeScanner?.errorDelegate = self
 		clsBarcodeScanner?.dismissalDelegate = self
-		
+        
 		// 모달로 띄운다.
 		clsBarcodeScanner?.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
 		present(clsBarcodeScanner!, animated: true, completion: nil)
+        
+        navigationController?.pushViewController(clsBarcodeScanner!, animated: true)
+        
+        //2018 0725 barcode 초기화 동작 시점을 바코드 클릭으로 변경
+        initBarcodeScanner()
 	}
 	
 	func doSearchBarcode(barcode: String)
@@ -1305,13 +1354,14 @@ class EasyIn: BaseRfidViewController, UITableViewDataSource, UITableViewDelegate
 
 extension EasyIn: BarcodeScannerCodeDelegate
 {
-	func barcodeScanner(_ controller: BarcodeScannerController, didCaptureCode barcode: String, type: String)
+	func scanner(_ controller: BarcodeScannerViewController, didCaptureCode barcode: String, type: String)
 	{
 		print("================================")
 		print(" - Barcode Data: \(barcode)")
 		print(" - Symbology Type: \(type)")
 		print("================================")
 		controller.dismiss(animated: true, completion: nil)
+        
 		if(barcode.isEmpty == false)
 		{
 			if(strSaleWorkId.isEmpty == false)
@@ -1337,15 +1387,17 @@ extension EasyIn: BarcodeScannerCodeDelegate
 
 extension EasyIn: BarcodeScannerErrorDelegate {
 	
-	func barcodeScanner(_ controller: BarcodeScannerController, didReceiveError error: Error)
+	func scanner(_ controller: BarcodeScannerViewController, didReceiveError error: Error)
 	{
+        //20180801 bhkim
+        //controller.resetWithError(message: "Error message")
 		print(error)
 	}
 }
 
 extension EasyIn: BarcodeScannerDismissalDelegate {
 	
-	func barcodeScannerDidDismiss(_ controller: BarcodeScannerController) {
+	func scannerDidDismiss(_ controller: BarcodeScannerViewController) {
 		controller.dismiss(animated: true, completion: nil)
 	}
 }
@@ -1369,5 +1421,4 @@ extension EasyIn
 		}
 	}
 }
-
 
